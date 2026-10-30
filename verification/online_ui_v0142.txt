@@ -1,0 +1,7 @@
+00:00 +0: loading /workspace/scratch/f581f54b4d3f/game_v0142/carwece/test/online_ui_test.dart
+00:00 +0: (setUpAll)
+00:00 +0: online login and map selection fit Size(1280.0, 720.0) and preserve offline progress
+00:02 +1: online login and map selection fit Size(800.0, 360.0) and preserve offline progress
+00:03 +2: home opens online and credits include Marcos Nascimento Sage Corp
+00:03 +3: (tearDownAll)
+00:03 +3: All tests passed!

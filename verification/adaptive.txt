@@ -1,0 +1,15 @@
+ic_launcher res/BW.xml
+N: android=http://schemas.android.com/apk/res/android
+  E: adaptive-icon (line=2)
+    E: background (line=3)
+      A: android:drawable(0x01010199)=@0x7f0a0001
+    E: foreground (line=4)
+      A: android:drawable(0x01010199)=@0x7f0a0002
+
+ic_launcher_round res/0K.xml
+N: android=http://schemas.android.com/apk/res/android
+  E: adaptive-icon (line=2)
+    E: background (line=3)
+      A: android:drawable(0x01010199)=@0x7f0a0001
+    E: foreground (line=4)
+      A: android:drawable(0x01010199)=@0x7f0a0002

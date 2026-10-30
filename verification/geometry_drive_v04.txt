@@ -1,0 +1,6 @@
+bedroom: length=4891 finished=true t=67.9 gate=0 floor=302/1224 upMin=-1.0
+minEdgeY=0.15999999999999998 postLoopMinUp=0.9967059146719636
+garage: length=4603 finished=true t=63.7 gate=0 floor=195/552 upMin=0.9961695829058741
+minEdgeY=0.15999999999999998 postLoopMinUp=1.0
+arcade: length=4629 finished=true t=62.5 gate=0 floor=189/528 upMin=0.9910508280436054
+minEdgeY=0.15999999999999998 postLoopMinUp=1.0

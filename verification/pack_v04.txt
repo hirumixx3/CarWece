@@ -1,0 +1,18 @@
+bedroom: human finished=true place=1 time=67.9
+NOVA progress=95.6% gate=31 speed=73.6
+BOLT progress=95.4% gate=31 speed=73.6
+RAVEN progress=95.3% gate=31 speed=73.7
+REX progress=93.7% gate=30 speed=72.2
+PIXEL progress=93.5% gate=30 speed=72.2
+garage: human finished=true place=1 time=63.7
+NOVA progress=93.5% gate=30 speed=73.1
+BOLT progress=94.4% gate=31 speed=73.9
+RAVEN progress=94.3% gate=31 speed=74.1
+REX progress=91.8% gate=30 speed=71.9
+PIXEL progress=91.7% gate=30 speed=72.1
+arcade: human finished=true place=1 time=62.5
+NOVA progress=95.3% gate=31 speed=73.2
+BOLT progress=94.6% gate=31 speed=74.3
+RAVEN progress=94.5% gate=31 speed=74.3
+REX progress=93.2% gate=30 speed=72.2
+PIXEL progress=93.0% gate=30 speed=72.3

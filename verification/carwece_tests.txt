@@ -1,0 +1,71 @@
+00:00 +0: loading /workspace/scratch/f581f54b4d3f/pocket_rush/test/regression_v03_test.dart
+00:00 +0: /workspace/scratch/f581f54b4d3f/pocket_rush/test/regression_v03_test.dart: Manual is the default, including migration of old automatic settings
+00:00 +1: /workspace/scratch/f581f54b4d3f/pocket_rush/test/regression_v03_test.dart: Throttle, coasting and brakes change momentum; steering has inertia
+00:00 +2: /workspace/scratch/f581f54b4d3f/pocket_rush/test/regression_v03_test.dart: Rear collision exchanges momentum and never allows an overtake through a car
+00:00 +3: /workspace/scratch/f581f54b4d3f/pocket_rush/test/regression_v03_test.dart: Side contact next to a barrier separates the whole pack
+00:00 +4: /workspace/scratch/f581f54b4d3f/pocket_rush/test/regression_v03_test.dart: Collisions also detect a lapped car across the course seam
+00:00 +5: /workspace/scratch/f581f54b4d3f/pocket_rush/test/regression_v03_test.dart: Cars can jump over a rival without an invisible collision
+00:00 +6: /workspace/scratch/f581f54b4d3f/pocket_rush/test/regression_v03_test.dart: All road ribbons are wider than six car bodies and do not fold inside corners
+00:00 +7: /workspace/scratch/f581f54b4d3f/pocket_rush/test/regression_v03_test.dart: Loop entry and exit have separate lanes and clear vertical and lateral space
+00:00 +8: /workspace/scratch/f581f54b4d3f/pocket_rush/test/expansion_v05_test.dart: Eight real-name models have distinct silhouettes and four free starters
+00:00 +9: /workspace/scratch/f581f54b4d3f/pocket_rush/test/expansion_v05_test.dart: Eight real-name models have distinct silhouettes and four free starters
+00:00 +10: /workspace/scratch/f581f54b4d3f/pocket_rush/test/expansion_v05_test.dart: Eight real-name models have distinct silhouettes and four free starters
+00:00 +11: /workspace/scratch/f581f54b4d3f/pocket_rush/test/expansion_v05_test.dart: Eight real-name models have distinct silhouettes and four free starters
+00:00 +12: /workspace/scratch/f581f54b4d3f/pocket_rush/test/expansion_v05_test.dart: Eight real-name models have distinct silhouettes and four free starters
+00:00 +13: /workspace/scratch/f581f54b4d3f/pocket_rush/test/expansion_v05_test.dart: Eight real-name models have distinct silhouettes and four free starters
+00:00 +14: /workspace/scratch/f581f54b4d3f/pocket_rush/test/expansion_v05_test.dart: Eight real-name models have distinct silhouettes and four free starters
+00:01 +15: /workspace/scratch/f581f54b4d3f/pocket_rush/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:01 +16: /workspace/scratch/f581f54b4d3f/pocket_rush/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:01 +17: /workspace/scratch/f581f54b4d3f/pocket_rush/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:01 +18: /workspace/scratch/f581f54b4d3f/pocket_rush/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:01 +19: /workspace/scratch/f581f54b4d3f/pocket_rush/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:01 +20: /workspace/scratch/f581f54b4d3f/pocket_rush/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:01 +21: /workspace/scratch/f581f54b4d3f/pocket_rush/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:01 +22: /workspace/scratch/f581f54b4d3f/pocket_rush/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:02 +23: /workspace/scratch/f581f54b4d3f/pocket_rush/test/flow_test.dart: Menu, garage purchase, settings, multi-touch driving, pause and finish (variant: TargetPlatform.linux)
+00:02 +24: /workspace/scratch/f581f54b4d3f/pocket_rush/test/flow_test.dart: Menu, garage purchase, settings, multi-touch driving, pause and finish (variant: TargetPlatform.linux)
+00:02 +25: /workspace/scratch/f581f54b4d3f/pocket_rush/test/flow_test.dart: Menu, garage purchase, settings, multi-touch driving, pause and finish (variant: TargetPlatform.linux)
+00:03 +26: /workspace/scratch/f581f54b4d3f/pocket_rush/test/regression_v03_test.dart: All twelve circuits are finishable using steering, throttle and brakes
+00:03 +27: /workspace/scratch/f581f54b4d3f/pocket_rush/test/regression_v03_test.dart: All twelve circuits are finishable using steering, throttle and brakes
+00:03 +28: /workspace/scratch/f581f54b4d3f/pocket_rush/test/regression_v03_test.dart: All twelve circuits are finishable using steering, throttle and brakes
+00:03 +29: /workspace/scratch/f581f54b4d3f/pocket_rush/test/regression_v03_test.dart: All twelve circuits are finishable using steering, throttle and brakes
+00:03 +30: /workspace/scratch/f581f54b4d3f/pocket_rush/test/regression_v03_test.dart: All twelve circuits are finishable using steering, throttle and brakes
+00:03 +31: /workspace/scratch/f581f54b4d3f/pocket_rush/test/regression_v03_test.dart: All twelve circuits are finishable using steering, throttle and brakes
+00:03 +32: /workspace/scratch/f581f54b4d3f/pocket_rush/test/regression_v03_test.dart: All twelve circuits are finishable using steering, throttle and brakes
+00:03 +33: /workspace/scratch/f581f54b4d3f/pocket_rush/test/regression_v03_test.dart: All twelve circuits are finishable using steering, throttle and brakes
+00:03 +34: /workspace/scratch/f581f54b4d3f/pocket_rush/test/regression_v03_test.dart: All twelve circuits are finishable using steering, throttle and brakes
+00:03 +35: /workspace/scratch/f581f54b4d3f/pocket_rush/test/regression_v03_test.dart: All twelve circuits are finishable using steering, throttle and brakes
+00:04 +36: /workspace/scratch/f581f54b4d3f/pocket_rush/test/regression_v03_test.dart: All twelve circuits are finishable using steering, throttle and brakes
+00:04 +37: /workspace/scratch/f581f54b4d3f/pocket_rush/test/regression_v03_test.dart: All twelve circuits are finishable using steering, throttle and brakes
+00:04 +38: /workspace/scratch/f581f54b4d3f/pocket_rush/test/regression_v03_test.dart: All twelve circuits are finishable using steering, throttle and brakes
+00:04 +39: /workspace/scratch/f581f54b4d3f/pocket_rush/test/regression_v03_test.dart: All twelve circuits are finishable using steering, throttle and brakes
+00:04 +40: /workspace/scratch/f581f54b4d3f/pocket_rush/test/regression_v03_test.dart: All twelve circuits are finishable using steering, throttle and brakes
+00:04 +41: /workspace/scratch/f581f54b4d3f/pocket_rush/test/regression_v03_test.dart: All twelve circuits are finishable using steering, throttle and brakes
+00:04 +42: /workspace/scratch/f581f54b4d3f/pocket_rush/test/regression_v03_test.dart: All twelve circuits are finishable using steering, throttle and brakes
+00:04 +43: /workspace/scratch/f581f54b4d3f/pocket_rush/test/regression_v03_test.dart: All twelve circuits are finishable using steering, throttle and brakes
+00:04 +44: /workspace/scratch/f581f54b4d3f/pocket_rush/test/regression_v03_test.dart: All twelve circuits are finishable using steering, throttle and brakes
+00:04 +45: /workspace/scratch/f581f54b4d3f/pocket_rush/test/regression_v03_test.dart: All twelve circuits are finishable using steering, throttle and brakes
+00:04 +46: /workspace/scratch/f581f54b4d3f/pocket_rush/test/regression_v03_test.dart: All twelve circuits are finishable using steering, throttle and brakes
+00:04 +47: /workspace/scratch/f581f54b4d3f/pocket_rush/test/regression_v03_test.dart: All twelve circuits are finishable using steering, throttle and brakes
+00:04 +48: /workspace/scratch/f581f54b4d3f/pocket_rush/test/regression_v03_test.dart: All twelve circuits are finishable using steering, throttle and brakes
+00:05 +49: /workspace/scratch/f581f54b4d3f/pocket_rush/test/regression_v03_test.dart: All twelve circuits are finishable using steering, throttle and brakes
+00:05 +50: /workspace/scratch/f581f54b4d3f/pocket_rush/test/regression_v03_test.dart: All twelve circuits are finishable using steering, throttle and brakes
+00:05 +51: /workspace/scratch/f581f54b4d3f/pocket_rush/test/regression_v03_test.dart: All twelve circuits are finishable using steering, throttle and brakes
+00:05 +52: /workspace/scratch/f581f54b4d3f/pocket_rush/test/engine_test.dart: Physics gives the same result at 30, 60 and 120 FPS
+00:05 +53: /workspace/scratch/f581f54b4d3f/pocket_rush/test/engine_test.dart: Physics gives the same result at 30, 60 and 120 FPS
+00:06 +54: /workspace/scratch/f581f54b4d3f/pocket_rush/test/engine_test.dart: Physics gives the same result at 30, 60 and 120 FPS
+00:06 +55: /workspace/scratch/f581f54b4d3f/pocket_rush/test/engine_test.dart: Physics gives the same result at 30, 60 and 120 FPS
+00:07 +56: /workspace/scratch/f581f54b4d3f/pocket_rush/test/engine_test.dart: Physics gives the same result at 30, 60 and 120 FPS
+00:07 +57: /workspace/scratch/f581f54b4d3f/pocket_rush/test/graphics_backend_test.dart: A later GPU failure releases the previous texture before retrying (variant: TargetPlatform.android)
+00:07 +58: /workspace/scratch/f581f54b4d3f/pocket_rush/test/graphics_backend_test.dart: A later GPU failure releases the previous texture before retrying (variant: TargetPlatform.android)
+00:07 +59: /workspace/scratch/f581f54b4d3f/pocket_rush/test/engine_test.dart: Manual acceleration, braking, walls, nitro and drift affect driving
+00:07 +60: /workspace/scratch/f581f54b4d3f/pocket_rush/test/engine_test.dart: Items are collected once per pickup per lap
+00:07 +61: /workspace/scratch/f581f54b4d3f/pocket_rush/test/engine_test.dart: All four items have functional effects and consume inventory
+00:07 +62: /workspace/scratch/f581f54b4d3f/pocket_rush/test/engine_test.dart: Time trial excludes bots and weapons
+00:07 +63: /workspace/scratch/f581f54b4d3f/pocket_rush/test/engine_test.dart: Finishing records exactly three laps and a finite reward
+00:08 +64: /workspace/scratch/f581f54b4d3f/pocket_rush/test/engine_test.dart: A bot that finished earlier still ranks ahead at the finish line
+00:08 +65: /workspace/scratch/f581f54b4d3f/pocket_rush/test/engine_test.dart: Visible boost pads provide an actual velocity impulse
+00:08 +66: /workspace/scratch/f581f54b4d3f/pocket_rush/test/engine_test.dart: Settings restore clamps invalid input; records and car purchases persist in the store model
+00:08 +67: /workspace/scratch/f581f54b4d3f/pocket_rush/test/engine_test.dart: Hitch cap prevents a paused app from fast-forwarding physics
+00:08 +68: /workspace/scratch/f581f54b4d3f/pocket_rush/test/engine_test.dart: Time formatting and vector rotation preserve useful invariants
+00:08 +69: All tests passed!

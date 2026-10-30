@@ -1,0 +1,8 @@
+{
+  "action": "Move only the unreadable generated Gradle transform out of the cache so Gradle can regenerate it",
+  "transform": "6e3ef1e9b5601aad3137bf6ac019d12a",
+  "quarantined": "/workspace/scratch/f581f54b4d3f/toolchain/transform_quarantine_v0111/6e3ef1e9b5601aad3137bf6ac019d12a",
+  "additional_failed_transforms": [
+    "1d78d8e7b3085bc2251c92d1af77e4da"
+  ]
+}

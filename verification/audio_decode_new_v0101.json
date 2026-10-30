@@ -1,0 +1,82 @@
+[
+  {
+    "sourceName": "01 Charlie Puth - Marvin Gaye.mp3",
+    "sha256": "fe21e380dcad18ca660a48ab0f7defd323d45aea54bc77f2d28d4e87cf6f5ef5",
+    "bytes": 7599070,
+    "fullDecode": true,
+    "seconds": 0.62,
+    "errors": ""
+  },
+  {
+    "sourceName": "02 Phil Collins - Do You Remember.mp3",
+    "sha256": "360e288d2a6de70a21a62ad699c03fba93cbbcd2a9fa6db0f1fdc7470e090d73",
+    "bytes": 11260594,
+    "fullDecode": true,
+    "seconds": 1.03,
+    "errors": ""
+  },
+  {
+    "sourceName": "02 Radiohead - Creep.mp3",
+    "sha256": "f53167d91c06bfa0d2a9a3d7cc06664420da5a4aa6d13a282c59e466c1536663",
+    "bytes": 9800918,
+    "fullDecode": true,
+    "seconds": 0.71,
+    "errors": ""
+  },
+  {
+    "sourceName": "02 The Ronettes - Be My Baby.mp3",
+    "sha256": "3f243107f6655ec715541dbb6e65d388a1e187bec551b9596fc553298653d52c",
+    "bytes": 6627467,
+    "fullDecode": true,
+    "seconds": 0.55,
+    "errors": ""
+  },
+  {
+    "sourceName": "02 Tones and I - Dance Monkey.mp3",
+    "sha256": "088b6dd78e4455a2a394fef728a6451bdacf05aaa7941843166fad532670a0fc",
+    "bytes": 8578631,
+    "fullDecode": true,
+    "seconds": 0.61,
+    "errors": ""
+  },
+  {
+    "sourceName": "03 The Cranberries - When You re Gone.mp3",
+    "sha256": "93e10182bb59473a9924ca446ba2fa55a73ee2648dfb0a59a3fbf0e70f9d7a02",
+    "bytes": 11968674,
+    "fullDecode": true,
+    "seconds": 0.85,
+    "errors": ""
+  },
+  {
+    "sourceName": "05 Radiohead - Let Down.mp3",
+    "sha256": "6e761d1d09341c7e25d8d52a614a0d7030f91cb221be9888a6d50e2b61f15a3a",
+    "bytes": 12150524,
+    "fullDecode": true,
+    "seconds": 0.87,
+    "errors": ""
+  },
+  {
+    "sourceName": "07 Bruno Mars - Talking to the Moon.mp3",
+    "sha256": "a5a9277e10733f17ca5534801bcff3a18eb73bcd562086c91a055c7c52744cca",
+    "bytes": 8801739,
+    "fullDecode": true,
+    "seconds": 0.76,
+    "errors": ""
+  },
+  {
+    "sourceName": "13 Billie Eilish - i love you.mp3",
+    "sha256": "a6aa9083b46c7eda1e626c02560b60c216871cb29e47ce0e2533537be66ff4a7",
+    "bytes": 11736942,
+    "fullDecode": true,
+    "seconds": 0.87,
+    "errors": ""
+  },
+  {
+    "sourceName": "15 Rod Stewart - Young Turks (2008 Remaster).mp3",
+    "sha256": "3afe910b654aa46a9c647e2a3c34551412f6e94e2618f7f59ff59fefc5b45cca",
+    "bytes": 12272434,
+    "fullDecode": true,
+    "seconds": 1.31,
+    "errors": ""
+  }
+]

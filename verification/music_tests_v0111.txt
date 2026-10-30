@@ -1,0 +1,10 @@
+00:00 +0: loading /workspace/scratch/f581f54b4d3f/game/carwece/test/music_test.dart
+00:00 +0: (setUpAll)
+00:00 +0: Twenty original assets and both platform catalogs agree, with nineteen race songs
+00:00 +1: Existing saves default to shuffle and music preferences retain HUD and progress
+00:00 +2: Controller accepts native automatic track changes and ignores unknown track requests
+00:00 +3: Audio transport distinguishes a paused race from the menu and keeps volume independent
+00:00 +4: Pause music selection, skip, volume and close keep physics paused at Size(1280.0, 720.0) (variant: TargetPlatform.android)
+00:05 +5: Pause music selection, skip, volume and close keep physics paused at Size(800.0, 360.0) (variant: TargetPlatform.android)
+00:06 +6: (tearDownAll)
+00:07 +6: All tests passed!

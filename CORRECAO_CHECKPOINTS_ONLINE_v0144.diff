@@ -1,0 +1,417 @@
+--- a/lib/game/course_mesh.dart
++++ b/lib/game/course_mesh.dart
+@@ -118,15 +118,5 @@
+         f: g.forward,
+       );
+     }
+-    for (var s = 20.0; s < path.length - 10; s += 28) {
+-      final f = path.at(s), p = f.point(0, .035);
+-      m.triangle(
+-        p + f.forward * 4,
+-        p - f.forward * 2 - f.right * 2.2,
+-        p - f.forward * 2 + f.right * 2.2,
+-        0xff72cba6,
+-        Material3.decal,
+-      );
+-    }
+   }
+ }
+--- a/lib/game/engine.dart
++++ b/lib/game/engine.dart
+@@ -1255,30 +1255,52 @@
+     }
+   }
+ 
+-  bool _crossPortal(V3 before, V3 after, TrackFrame f, double halfWidth) =>
+-      (before - f.p).dot(f.forward) < 0 &&
+-      (after - f.p).dot(f.forward) >= 0 &&
+-      (after - f.p).dot(f.right).abs() < halfWidth &&
+-      (after - f.p).dot(f.up).abs() < 9;
++  double? _portalCrossing(
++    V3 before,
++    V3 after,
++    TrackFrame f,
++    double halfWidth, {
++    double halfHeight = 9,
++    double? minHeight,
++  }) {
++    final a = (before - f.p).dot(f.forward),
++        b = (after - f.p).dot(f.forward),
++        advance = b - a;
++    // Sample the actual intersection, not the end of the physics step. Cars
++    // can also start exactly on a plane after a contact or a stopped wheel.
++    if (a > .02 || b < 0 || advance <= .000001) return null;
++    final fraction = (-a / advance).clamp(0.0, 1.0);
++    final hit = before.lerp(after, fraction) - f.p;
++    final height = hit.dot(f.up);
++    if (hit.dot(f.right).abs() > halfWidth ||
++        height > halfHeight ||
++        height < (minHeight ?? -halfHeight))
++      return null;
++    return fraction;
++  }
+ 
+   bool _shortcutProgress(Driver d, V3 before) {
+     if (d.activeShortcut == null) {
+       for (final path in track.shortcuts) {
+         if ((networked || d == player || brokenGates.contains(path.id)) &&
+-            d.nextCheckpoint == path.entryCheckpoint + 1 &&
+-            _crossPortal(
+-              before,
+-              d.position!,
+-              path.entrance,
+-              path.width / 2 + 1,
+-            )) {
++            d.nextCheckpoint >= path.entryCheckpoint &&
++            d.nextCheckpoint <= path.exitCheckpoint &&
++            _portalCrossing(
++                  before,
++                  d.position!,
++                  path.entrance,
++                  path.width / 2 + Driver.halfWidth + 3,
++                  halfHeight: 24,
++                  minHeight: -3,
++                ) !=
++                null) {
+           d.activeShortcut = path;
+           d.shortcutStage = 1;
+           d.plannedShortcut = path;
+           if (d == player)
+             tell(
+               brokenGates.contains(path.id)
+-                  ? 'ATALHO • SIGA AS SETAS VERDES'
++                  ? 'ATALHO ABERTO'
+                   : 'ATALHO • DESTRUA O PORTÃO-ALVO',
+             );
+           break;
+@@ -1293,20 +1315,26 @@
+       d.plannedShortcut = null;
+       return false;
+     }
+-    // Entry may precede destruction: the gate is halfway along the branch.
+-    // Portals after the panel still require it to be open, even if airborne.
+-    if ((d.shortcutStage < 2 || brokenGates.contains(path.id)) &&
+-        _crossPortal(
+-          before,
+-          d.position!,
+-          path.portal(d.shortcutStage),
+-          d.shortcutStage == 3
+-              ? track.widthAt(path.exitS) / 2 + 3
+-              : path.width / 2 + 3,
+-        )) {
++    // Once the entrance is proven, validate forward travel through the branch
++    // corridor. A jump or a wide line must not leave an invisible portal behind
++    // the car forever. The closed panel still blocks the second half.
++    final forward = (d.position! - before).dot(p.frame.forward) > .000001;
++    final inCorridor =
++        p.lateral.abs() <= path.width / 2 + Driver.halfWidth + 3 &&
++        p.height >= -3 &&
++        p.height <= 24;
++    while (forward && inCorridor && d.shortcutStage < 4) {
++      if (d.shortcutStage >= 2 && !brokenGates.contains(path.id)) break;
++      // Branch and main road overlap at the merge. Rejoining within the last
++      // car length counts even if the car never intersects the exact end plane.
++      final threshold = d.shortcutStage == 3
++          ? path.length - math.min(8.0, Driver.halfLength * 2 + 1)
++          : path.portal(d.shortcutStage).s;
++      if (p.frame.s < threshold) break;
+       d.shortcutStage++;
+       if (d.shortcutStage >= 4) {
+-        d.nextCheckpoint = path.exitCheckpoint + 1;
++        d.nextCheckpoint =
++            (path.exitCheckpoint + 1) % TrackSpec.checkpointCount;
+         d.activeShortcut = null;
+         d.plannedShortcut = null;
+         if (d == player) {
+@@ -1330,15 +1358,17 @@
+     d.routeS = p.frame.s;
+     d.lane = p.lateral / (track.width / 2);
+     final gate = track.checkpoint(d.nextCheckpoint);
+-    final a = (before - gate.p).dot(gate.forward),
+-        b = (d.position! - gate.p).dot(gate.forward);
+-    final delta = d.position! - gate.p;
+-    if (a < 0 &&
+-        b >= 0 &&
+-        delta.dot(gate.right).abs() < track.widthAt(gate.s) / 2 + 3 &&
+-        delta.dot(gate.up).abs() < 9) {
+-      final crossTime =
+-          start + dt * ((-a) / math.max(.000001, b - a)).clamp(0, 1);
++    final floor = track.isFloor(gate.s);
++    final crossing = _portalCrossing(
++      before,
++      d.position!,
++      gate,
++      track.widthAt(gate.s) / 2 + 3,
++      halfHeight: floor ? 24 : 9,
++      minHeight: floor ? -3 : -9,
++    );
++    if (crossing != null) {
++      final crossTime = start + dt * crossing;
+       if (d.nextCheckpoint == 0) {
+         if (d.started) {
+           d.completedLaps++;
+--- a/lib/main.dart
++++ b/lib/main.dart
+@@ -371,14 +371,7 @@
+     children: [
+       Row(
+         children: [
+-          const RushBadge('VERSÃO 0.13 • 3D', color: orange),
+-          const SizedBox(width: 12),
+-          TextButton.icon(
+-            key: const ValueKey('enter-online'),
+-            onPressed: () => go('online'),
+-            icon: const Icon(Icons.wifi, color: cyan, size: 20),
+-            label: Text('ONLINE • TESTE', style: body(11, color: cyan)),
+-          ),
++          const RushBadge('VERSÃO 0.14.4 • 3D', color: orange),
+           const Spacer(),
+           Text('PILOTO 01', style: body(11, color: muted, spacing: 2)),
+           const SizedBox(width: 18),
+@@ -418,6 +411,18 @@
+                       icon: Icons.sports_motorsports_rounded,
+                       primary: true,
+                       onTap: () => go('select'),
++                    ),
++                  ),
++                  const SizedBox(height: 10),
++                  SizedBox(
++                    width: 300,
++                    child: RushButton(
++                      'JOGAR ONLINE',
++                      key: const ValueKey('enter-online'),
++                      icon: Icons.wifi_rounded,
++                      primary: true,
++                      color: cyan,
++                      onTap: () => go('online'),
+                     ),
+                   ),
+                   const SizedBox(height: 10),
+@@ -1212,7 +1217,7 @@
+                     hint(
+                       Icons.alt_route_rounded,
+                       'CHÃO DO QUARTO',
+-                      'Siga as setas no piso e passe pelos checkpoints. Use FREIO nas curvas fechadas e entre no loop com velocidade.',
++                      'Siga o traçado e passe pelos checkpoints. Use FREIO nas curvas fechadas e entre no loop com velocidade.',
+                     ),
+                     hint(
+                       Icons.sports_score_rounded,
+@@ -1270,7 +1275,7 @@
+                 ),
+                 const SizedBox(height: 25),
+                 Text(
+-                  'Versão 0.14.3 • ${cars.length} carros • ${tracks.length} pistas • Android',
++                  'Versão 0.14.4 • ${cars.length} carros • ${tracks.length} pistas • Android',
+                   style: body(16),
+                 ),
+                 const SizedBox(height: 10),
+@@ -1284,7 +1289,7 @@
+                   style: body(12, color: muted),
+                 ),
+                 const SizedBox(height: 25),
+-                const RushBadge('OFFLINE + ONLINE EM TESTE • SEM ANÚNCIOS'),
++                const RushBadge('OFFLINE + ONLINE • SEM ANÚNCIOS'),
+               ],
+             ),
+           ),
+--- a/lib/ui/widgets.dart
++++ b/lib/ui/widgets.dart
+@@ -61,7 +61,9 @@
+               borderRadius: BorderRadius.circular(9),
+               border: Border.all(
+                 color: primary
+-                    ? const Color(0xffffb46a)
++                    ? color == null
++                          ? const Color(0xffffb46a)
++                          : Color.lerp(color, cream, .35)!
+                     : const Color(0xff34435d),
+               ),
+             ),
+--- a/pubspec.yaml
++++ b/pubspec.yaml
+@@ -1,7 +1,7 @@
+ name: carwece
+ description: CarWece, corrida arcade de miniaturas em pistas de brinquedo, por hirumisu.
+ publish_to: none
+-version: 0.14.3+26
++version: 0.14.4+27
+ environment:
+   sdk: '>=3.8.0 <4.0.0'
+ dependencies:
+--- /dev/null
++++ b/test/checkpoint_shortcut_regression_test.dart
+@@ -0,0 +1,134 @@
++import 'package:flutter_test/flutter_test.dart';
++import 'package:carwece/game/content.dart';
++import 'package:carwece/game/engine.dart';
++import 'package:carwece/game/math3d.dart';
++
++void main() {
++  final tracks = createTracks();
++  final track = tracks.firstWhere((t) => t.shortcuts.isNotEmpty);
++
++  RaceEngine race(TrackSpec t) =>
++      RaceEngine(track: t, car: cars.first, mode: RaceMode.timeTrial)
++        ..countdown = 0;
++
++  bool driveShortcut(RaceEngine e, ShortcutSpec path, {bool jump = false}) {
++    var lifted = false;
++    for (var i = 0; i < 120 * 35; i++) {
++      final c = e.aiControls(e.player);
++      e.steering = c.$1;
++      e.accelerating = c.$2;
++      e.brake = c.$3;
++      final s = path.project(e.player.position!).frame.s;
++      if (jump &&
++          !lifted &&
++          e.shortcut &&
++          s >= path.portal(1).s - 3 &&
++          s < path.portal(1).s) {
++        e.player.position = e.player.position! + const V3(0, 12, 0);
++        e.player.airborne = true;
++        lifted = true;
++      }
++      e.update(1 / 120);
++      if (e.player.nextCheckpoint == path.exitCheckpoint + 1 && !e.shortcut)
++        return !jump || lifted;
++    }
++    return false;
++  }
++
++  test(
++    'A car starting on a checkpoint plane advances when it drives forward',
++    () {
++      final e = race(track), gate = track.checkpoint(1);
++      e.player.speed = 40;
++      e.placeDriver(e.player, gate.s, 0);
++      e.player.nextCheckpoint = 1;
++      e.accelerating = true;
++      e.update(1 / 120);
++      expect(e.player.nextCheckpoint, 2);
++    },
++  );
++
++  test(
++    'A shortcut accepts an already credited overlapping main checkpoint',
++    () {
++      final e = race(track), path = track.shortcuts.single;
++      e.breakGate(path.id);
++      e.player.speed = 40;
++      e.placeDriver(e.player, path.entryS + 1, 0);
++      e.player.nextCheckpoint = path.entryCheckpoint + 2;
++      e.player.plannedShortcut = path;
++      expect(driveShortcut(e, path), isTrue);
++      expect(e.player.completedLaps, 0);
++    },
++  );
++
++  test(
++    'A legal jump inside the shortcut does not lose its checkpoint sequence',
++    () {
++      final e = race(track), path = track.shortcuts.single;
++      e.breakGate(path.id);
++      e.player.speed = 40;
++      e.placeDriver(e.player, path.entryS - 15, 0);
++      e.player.plannedShortcut = path;
++      expect(driveShortcut(e, path, jump: true), isTrue);
++      expect(e.player.completedLaps, 0);
++    },
++  );
++
++  test(
++    'A missed entry plane does not invalidate a correctly driven shortcut',
++    () {
++      final e = race(track), path = track.shortcuts.single;
++      e.breakGate(path.id);
++      e.player.speed = 40;
++      e.placeDriver(e.player, path.entryS + 1, 0);
++      e.player.nextCheckpoint = path.entryCheckpoint;
++      e.player.plannedShortcut = path;
++      expect(driveShortcut(e, path), isTrue);
++    },
++  );
++
++  test('Crossing a checkpoint backwards does not grant progress', () {
++    final e = race(track), gate = track.checkpoint(1);
++    e.player.speed = -35;
++    e.placeDriver(e.player, gate.s + .05, 0);
++    e.player.nextCheckpoint = 1;
++    for (var i = 0; i < 12; i++) {
++      e.update(1 / 120);
++    }
++    expect(e.player.nextCheckpoint, 1);
++    expect(e.player.completedLaps, 0);
++  });
++
++  test(
++    'Every shortcut rejoins and completes the current lap without an extra lap',
++    () {
++      for (final t in tracks) {
++        for (final path in t.shortcuts) {
++          final e = race(t);
++          e.breakGate(path.id);
++          e.player.speed = 40;
++          e.placeDriver(e.player, path.entryS - 15, 0);
++          e.player.plannedShortcut = path;
++          expect(driveShortcut(e, path), isTrue, reason: t.id);
++          var traveled = 0.0;
++          for (var i = 0; i < 120 * 180 && e.player.completedLaps == 0; i++) {
++            final c = e.aiControls(e.player), before = e.player.position!;
++            e.steering = c.$1;
++            e.accelerating = c.$2;
++            e.brake = c.$3;
++            e.update(1 / 120);
++            traveled += (e.player.position! - before).length;
++          }
++          expect(e.player.completedLaps, 1, reason: t.id);
++          expect(
++            traveled,
++            lessThan(t.length - path.exitS + t.length * .20),
++            reason: '${t.id} required an extra circuit after the shortcut',
++          );
++          expect(e.player.aiRecoveries, 0, reason: t.id);
++        }
++      }
++    },
++  );
++}
+--- a/test/online_ui_test.dart
++++ b/test/online_ui_test.dart
+@@ -62,7 +62,7 @@
+                   as RenderRepaintBoundary)
+               .toImage();
+       final bytes = await image.toByteData(format: ui.ImageByteFormat.png);
+-      final f = File('previews/online_v0142/$name.png');
++      final f = File('previews/online_v0144/$name.png');
+       await f.parent.create(recursive: true);
+       await f.writeAsBytes(bytes!.buffer.asUint8List());
+       image.dispose();
+@@ -171,6 +171,7 @@
+       );
+       await tester.pump();
+       expect(find.byKey(const ValueKey('enter-online')), findsOneWidget);
++      await capture(tester, boundary, 'home');
+       await tester.tap(find.text('CRÉDITOS'));
+       await tester.pump();
+       expect(find.text('Marcos Nascimento (Sage Corp.)'), findsOneWidget);
+--- a/tools/build_android.sh
++++ b/tools/build_android.sh
+@@ -5,4 +5,4 @@
+ flutter analyze
+ flutter test --dart-define=EXPORT_GRAPHICS_WIRE=true
+ (cd android && ./gradlew :app:testReleaseUnitTest)
+-flutter build apk --release --target-platform android-arm,android-arm64,android-x64 --build-name=0.14.3 --build-number=26
++flutter build apk --release --target-platform android-arm,android-arm64,android-x64 --build-name=0.14.4 --build-number=27
+--- a/tools/verify_apk.py
++++ b/tools/verify_apk.py
+@@ -39,8 +39,8 @@
+         return result.stdout
+ 
+     badging = run('manifest.txt', [str(build_tools / 'aapt'), 'dump', 'badging', str(apk)])
+-    for expected in ["name='com.hirumisu.carwece'", "versionCode='26'",
+-                     "versionName='0.14.3'", "application-label:'CarWece'",
++    for expected in ["name='com.hirumisu.carwece'", "versionCode='27'",
++                     "versionName='0.14.4'", "application-label:'CarWece'",
+                      "sdkVersion:'24'", "targetSdkVersion:'35'",
+                      "name='com.hirumisu.carwece.MainActivity'"]:
+         assert expected in badging, expected

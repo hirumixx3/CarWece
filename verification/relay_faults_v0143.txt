@@ -1,0 +1,80 @@
+Host stop: closing game server
+Host stop: closing internet transport
+Host stop: transport closed
+Host stop: closing game server
+Host stop: closing internet transport
+Host stop: transport closed
+Public TLS probe failed: HandshakeException: Handshake error in client (OS Error: 
+	WRONG_VERSION_NUMBER(tls_record.cc:127))
+#0      _SecureFilterImpl._handshake (dart:io-patch/secure_socket_patch.dart:101:46)
+#1      _SecureFilterImpl.handshake (dart:io-patch/secure_socket_patch.dart:146:25)
+#2      _RawSecureSocket._secureHandshake (dart:io/secure_socket.dart:1009:54)
+#3      _RawSecureSocket._tryFilter (dart:io/secure_socket.dart:1139:19)
+<asynchronous suspension>
+#4      _RawSecureSocket._secureHandshake (dart:io/secure_socket.dart:1017:9)
+<asynchronous suspension>
+
+Public TLS probe failed: HandshakeException: Handshake error in client (OS Error: 
+	WRONG_VERSION_NUMBER(tls_record.cc:127))
+#0      _SecureFilterImpl._handshake (dart:io-patch/secure_socket_patch.dart:101:46)
+#1      _SecureFilterImpl.handshake (dart:io-patch/secure_socket_patch.dart:146:25)
+#2      _RawSecureSocket._secureHandshake (dart:io/secure_socket.dart:1009:54)
+#3      _RawSecureSocket._tryFilter (dart:io/secure_socket.dart:1139:19)
+<asynchronous suspension>
+
+Public TLS probe failed: HandshakeException: Handshake error in client (OS Error: 
+	WRONG_VERSION_NUMBER(tls_record.cc:127))
+#0      _SecureFilterImpl._handshake (dart:io-patch/secure_socket_patch.dart:101:46)
+#1      _SecureFilterImpl.handshake (dart:io-patch/secure_socket_patch.dart:146:25)
+#2      _RawSecureSocket._secureHandshake (dart:io/secure_socket.dart:1009:54)
+#3      _RawSecureSocket._tryFilter (dart:io/secure_socket.dart:1139:19)
+<asynchronous suspension>
+#4      _RawSecureSocket._secureHandshake (dart:io/secure_socket.dart:1017:9)
+<asynchronous suspension>
+
+Public TLS probe failed: HandshakeException: Handshake error in client (OS Error: 
+	WRONG_VERSION_NUMBER(tls_record.cc:127))
+#0      _SecureFilterImpl._handshake (dart:io-patch/secure_socket_patch.dart:101:46)
+#1      _SecureFilterImpl.handshake (dart:io-patch/secure_socket_patch.dart:146:25)
+#2      _RawSecureSocket._secureHandshake (dart:io/secure_socket.dart:1009:54)
+#3      _RawSecureSocket._tryFilter (dart:io/secure_socket.dart:1139:19)
+<asynchronous suspension>
+#4      _RawSecureSocket._secureHandshake (dart:io/secure_socket.dart:1017:9)
+<asynchronous suspension>
+
+Public TLS probe failed: HandshakeException: Handshake error in client (OS Error: 
+	WRONG_VERSION_NUMBER(tls_record.cc:127))
+#0      _SecureFilterImpl._handshake (dart:io-patch/secure_socket_patch.dart:101:46)
+#1      _SecureFilterImpl.handshake (dart:io-patch/secure_socket_patch.dart:146:25)
+#2      _RawSecureSocket._secureHandshake (dart:io/secure_socket.dart:1009:54)
+#3      _RawSecureSocket._tryFilter (dart:io/secure_socket.dart:1139:19)
+<asynchronous suspension>
+#4      _RawSecureSocket._secureHandshake (dart:io/secure_socket.dart:1017:9)
+<asynchronous suspension>
+
+Public TLS probe failed: HandshakeException: Handshake error in client (OS Error: 
+	WRONG_VERSION_NUMBER(tls_record.cc:127))
+#0      _SecureFilterImpl._handshake (dart:io-patch/secure_socket_patch.dart:101:46)
+#1      _SecureFilterImpl.handshake (dart:io-patch/secure_socket_patch.dart:146:25)
+#2      _RawSecureSocket._secureHandshake (dart:io/secure_socket.dart:1009:54)
+#3      _RawSecureSocket._tryFilter (dart:io/secure_socket.dart:1139:19)
+<asynchronous suspension>
+#4      _RawSecureSocket._secureHandshake (dart:io/secure_socket.dart:1017:9)
+<asynchronous suspension>
+
+Host stop: closing game server
+Host stop: closing internet transport
+Host stop: transport closed
+Host stop: closing game server
+Host stop: closing internet transport
+Host stop: transport closed
+{
+  "transport": "actual local SSH inside TLS, with independent Paramiko relay",
+  "publicInternetVerified": false,
+  "forwardRefusalPreserved": true,
+  "untrustedAddressRejected": true,
+  "brokenPublicRouteRejectedBeforeInvite": true,
+  "wrongControlTLSRejected": true,
+  "internetInvitesRestrictedToProviderDomains": true,
+  "result": "PASS"
+}

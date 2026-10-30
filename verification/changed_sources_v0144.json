@@ -1,0 +1,11 @@
+[
+  "lib/game/course_mesh.dart",
+  "lib/game/engine.dart",
+  "lib/main.dart",
+  "lib/ui/widgets.dart",
+  "pubspec.yaml",
+  "test/checkpoint_shortcut_regression_test.dart",
+  "test/online_ui_test.dart",
+  "tools/build_android.sh",
+  "tools/verify_apk.py"
+]

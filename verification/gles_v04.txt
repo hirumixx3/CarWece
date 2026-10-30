@@ -1,0 +1,23 @@
+GLES: OpenGL ES 3.2 Mesa 25.2.8-0ubuntu0.24.04.2 renderer: llvmpipe (LLVM 20.1.2, 256 bits)
+Triangle counts: {'bedroom': 38344, 'garage': 18448, 'arcade': 18482, 'showroom': 940} car: [5892, 6050, 6062, 6058]
+Rendered bedroom_1
+Rendered bedroom_2
+Rendered garage_1
+Rendered garage_2
+Rendered arcade_1
+Rendered arcade_2
+Rendered car_1
+Rendered car_2
+Rendered car_3
+Rendered car_4
+Rendered vertical_loop
+Rendered effects
+Rendered loop_entry
+Rendered loop_exit
+Rendered loop_overview
+Rendered missile_flight
+Rendered missile_impact
+Rendered floor_slalom
+Rendered floor_free
+Rendered floor_jump
+Both shader programs compiled; all frames rendered without GLES errors.

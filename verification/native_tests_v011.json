@@ -1,0 +1,26 @@
+[
+  {
+    "name": "com.hirumisu.carwece.BattleGraphicsContractTest",
+    "tests": "6",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0",
+    "time": "0.381"
+  },
+  {
+    "name": "com.hirumisu.carwece.GraphicsContractTest",
+    "tests": "7",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0",
+    "time": "1.496"
+  },
+  {
+    "name": "com.hirumisu.carwece.MusicDirectorTest",
+    "tests": "19",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0",
+    "time": "0.018"
+  }
+]

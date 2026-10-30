@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.hirumisu.carwece.GraphicsContractTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2026-10-28T08:29:29" hostname="54c79c3a000d" time="2.493">
+  <properties/>
+  <testcase name="refusesTruncatedInstancePacket" classname="com.hirumisu.carwece.GraphicsContractTest" time="0.644"/>
+  <testcase name="refusesMissingMeshIndex" classname="com.hirumisu.carwece.GraphicsContractTest" time="0.207"/>
+  <testcase name="refusesNonFiniteTransforms" classname="com.hirumisu.carwece.GraphicsContractTest" time="0.176"/>
+  <testcase name="acceptsActualFlutterPayloadWithAllCarAndWheelModels" classname="com.hirumisu.carwece.GraphicsContractTest" time="0.178"/>
+  <testcase name="wheelMaterialsAreOpaqueAndShieldSmokeAndIceUseBlending" classname="com.hirumisu.carwece.GraphicsContractTest" time="0.16"/>
+  <testcase name="acceptsAdditionalEffectsWithinBudget" classname="com.hirumisu.carwece.GraphicsContractTest" time="0.166"/>
+  <testcase name="refusesIncompleteMeshWithSpecificReason" classname="com.hirumisu.carwece.GraphicsContractTest" time="0.957"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -1,0 +1,32 @@
+Resolving dependencies...
+Downloading packages...
+  characters 1.4.0 (1.4.1 available)
+  clock 1.1.2 (1.1.3 available)
+  matcher 0.12.17 (0.12.20 available)
+  material_color_utilities 0.11.1 (0.13.1 available)
+  meta 1.16.0 (1.19.0 available)
+  stack_trace 1.12.1 (1.12.2 available)
+  test_api 0.7.6 (0.7.15 available)
+  vector_math 2.2.0 (2.4.3 available)
+Got dependencies!
+8 packages have newer versions incompatible with dependency constraints.
+Try `flutter pub outdated` for more information.
+00:00 +0: loading /workspace/scratch/f581f54b4d3f/game/carwece/test/expansion_v07_test.dart
+00:00 +0: (setUpAll)
+00:00 +0: Faster rivals leave a common line and physically overtake a slower leader
+00:00 +1: Object boundary stops sustained outward steering with a matching rotated collider
+00:00 +2: Missile destroys an actual blocking gate; ice and ramming leave it solid
+00:00 +3: All ten alternate routes validate their portals and rejoin the right main checkpoint
+00:00 +4: Entering each closed shortcut, shooting inside and rejoining counts without returning to its entrance
+00:01 +5: Jumping directly to an open shortcut exit never awards the skipped checkpoints
+00:01 +6: Nine-power shuffle bag covers every type and avoids immediate repeats across refills
+00:01 +7: Three rocket charges fire separately and supercharge requires the full power bar
+00:01 +8: EMP clears nearby ordnance and blocks weapons temporarily
+00:01 +9: Ice shot freezes its target, renders a shell and thaws without clearing held controls
+00:01 +10: Tesla has a visible beam and temporary motor failure; shield intercepts it
+00:01 +11: Armed mines detonate visibly, and smoke only blinds cars inside its cloud
+00:01 +12: Trackside props and barriers add detail without blocking alternate routes
+00:01 +13: Power charging HUD keeps the pedal and steering independent at Size(1280.0, 720.0) (variant: TargetPlatform.linux)
+00:02 +14: Power charging HUD keeps the pedal and steering independent at Size(800.0, 360.0) (variant: TargetPlatform.linux)
+00:02 +15: (tearDownAll)
+00:02 +15: All tests passed!

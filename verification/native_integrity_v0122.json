@@ -1,0 +1,47 @@
+{
+  "no_temporary_apk_entries": true,
+  "libraries": [
+    {
+      "name": "lib/arm64-v8a/libapp.so",
+      "size": 5964720,
+      "elf_tables_inside_file": true,
+      "sha256": "709b76d65912a951339d3cc8e82f06f101bda14c4bbdc079785bacaa61e5a924",
+      "trusted_engine_matches_previous": null
+    },
+    {
+      "name": "lib/arm64-v8a/libflutter.so",
+      "size": 11037032,
+      "elf_tables_inside_file": true,
+      "sha256": "ee37eb8be8e01a0d840558f75e0a09c4ca135d721c2ca6145c050e4f89785129",
+      "trusted_engine_matches_previous": true
+    },
+    {
+      "name": "lib/armeabi-v7a/libapp.so",
+      "size": 6734428,
+      "elf_tables_inside_file": true,
+      "sha256": "cbcdee1a14909be780a2484ce87e13d0d26e405dba61f7ce00658cc26ebb01c1",
+      "trusted_engine_matches_previous": null
+    },
+    {
+      "name": "lib/armeabi-v7a/libflutter.so",
+      "size": 7926848,
+      "elf_tables_inside_file": true,
+      "sha256": "3b01cb3751800beb7b64c09a572216c6d36707ccea927f39f29ce475a0e176c5",
+      "trusted_engine_matches_previous": true
+    },
+    {
+      "name": "lib/x86_64/libapp.so",
+      "size": 6095792,
+      "elf_tables_inside_file": true,
+      "sha256": "3c5f5b02461571b7a03a5c808545ec19300fd683954c28d5c0ab3a87e02904c9",
+      "trusted_engine_matches_previous": null
+    },
+    {
+      "name": "lib/x86_64/libflutter.so",
+      "size": 12143760,
+      "elf_tables_inside_file": true,
+      "sha256": "94a457f1f2de2ed4831460f9426a8e7bd3424b9a398564415bbf14349afc29e4",
+      "trusted_engine_matches_previous": true
+    }
+  ]
+}

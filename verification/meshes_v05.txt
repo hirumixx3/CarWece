@@ -1,0 +1,7 @@
+00:00 +0: loading /workspace/scratch/f581f54b4d3f/pocket_rush/test/gpu_mesh_test.dart
+00:00 +0: /workspace/scratch/f581f54b4d3f/pocket_rush/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:01 +1: /workspace/scratch/f581f54b4d3f/pocket_rush/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:01 +2: /workspace/scratch/f581f54b4d3f/pocket_rush/test/gpu_mesh_test.dart: Car winding agrees with normals, preventing inverted lighting
+00:02 +3: /workspace/scratch/f581f54b4d3f/pocket_rush/test/gpu_mesh_test.dart: Camera and model packets remain finite throughout the vertical loop
+00:02 +4: /workspace/scratch/f581f54b4d3f/pocket_rush/test/gpu_mesh_test.dart: GLES instance packets include shield, missiles, oil and turbo effects
+00:02 +5: All tests passed!

@@ -1,0 +1,8 @@
+analyzer:
+  exclude:
+    - third_party/**
+    - build/**
+linter:
+  rules:
+    avoid_print: true
+    prefer_final_locals: true

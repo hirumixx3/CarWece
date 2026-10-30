@@ -1,0 +1,17 @@
+00:00 +0: loading /workspace/scratch/22726e8756c2/carwece_work/carwece/test/online_ui_test.dart
+00:00 +0: /workspace/scratch/22726e8756c2/carwece_work/carwece/test/online_ui_test.dart: (setUpAll)
+00:00 +0: /workspace/scratch/22726e8756c2/carwece_work/carwece/test/online_ui_test.dart: online login and map selection fit Size(1280.0, 720.0) and preserve offline progress
+00:00 +1: /workspace/scratch/22726e8756c2/carwece_work/carwece/test/online_ui_test.dart: online login and map selection fit Size(1280.0, 720.0) and preserve offline progress
+00:00 +2: /workspace/scratch/22726e8756c2/carwece_work/carwece/test/online_ui_test.dart: online login and map selection fit Size(1280.0, 720.0) and preserve offline progress
+00:00 +3: /workspace/scratch/22726e8756c2/carwece_work/carwece/test/online_ui_test.dart: online login and map selection fit Size(1280.0, 720.0) and preserve offline progress
+00:00 +4: /workspace/scratch/22726e8756c2/carwece_work/carwece/test/online_ui_test.dart: online login and map selection fit Size(1280.0, 720.0) and preserve offline progress
+00:01 +5: /workspace/scratch/22726e8756c2/carwece_work/carwece/test/online_ui_test.dart: online login and map selection fit Size(1280.0, 720.0) and preserve offline progress
+00:02 +6: /workspace/scratch/22726e8756c2/carwece_work/carwece/test/battle_graphics_channel_test.dart: Battle GPU uploads all 44 weapon models, life bars and active projectile (variant: TargetPlatform.android)
+00:03 +7: /workspace/scratch/22726e8756c2/carwece_work/carwece/test/battle_graphics_channel_test.dart: Battle GPU uploads all 44 weapon models, life bars and active projectile (variant: TargetPlatform.android)
+00:03 +8: /workspace/scratch/22726e8756c2/carwece_work/carwece/test/online_ui_test.dart: online login and map selection fit Size(800.0, 360.0) and preserve offline progress
+00:03 +9: /workspace/scratch/22726e8756c2/carwece_work/carwece/test/battle_ui_test.dart: Battle difficulty can be chosen before launch at Size(800.0, 360.0) (variant: TargetPlatform.android)
+00:04 +10: /workspace/scratch/22726e8756c2/carwece_work/carwece/test/online_ui_test.dart: home opens online and credits include Marcos Nascimento Sage Corp
+00:04 +11: /workspace/scratch/22726e8756c2/carwece_work/carwece/test/battle_ui_test.dart: Home to arenas, free exploration, multitouch firing, arsenal and HUD remain usable at Size(1280.0, 720.0) (variant: TargetPlatform.android)
+00:08 +12: /workspace/scratch/22726e8756c2/carwece_work/carwece/test/battle_ui_test.dart: Home to arenas, free exploration, multitouch firing, arsenal and HUD remain usable at Size(800.0, 360.0) (variant: TargetPlatform.android)
+00:09 +13: /workspace/scratch/22726e8756c2/carwece_work/carwece/test/battle_ui_test.dart: (tearDownAll)
+00:09 +13: All tests passed!

@@ -1,0 +1,32 @@
+[
+  {
+    "file": "lib/arm64-v8a/libapp.so",
+    "bytes": 4785072,
+    "valid_elf_headers_and_segments": true
+  },
+  {
+    "file": "lib/arm64-v8a/libflutter.so",
+    "bytes": 11037032,
+    "valid_elf_headers_and_segments": true
+  },
+  {
+    "file": "lib/armeabi-v7a/libapp.so",
+    "bytes": 5309020,
+    "valid_elf_headers_and_segments": true
+  },
+  {
+    "file": "lib/armeabi-v7a/libflutter.so",
+    "bytes": 7926848,
+    "valid_elf_headers_and_segments": true
+  },
+  {
+    "file": "lib/x86_64/libapp.so",
+    "bytes": 4785072,
+    "valid_elf_headers_and_segments": true
+  },
+  {
+    "file": "lib/x86_64/libflutter.so",
+    "bytes": 12143760,
+    "valid_elf_headers_and_segments": true
+  }
+]

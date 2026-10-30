@@ -1,0 +1,268 @@
+{
+  "transport": "HTTP + WebSocket reais em loopback",
+  "maps": [
+    {
+      "id": "bedroom",
+      "mode": "race",
+      "positions": [
+        1,
+        2
+      ]
+    },
+    {
+      "id": "garage",
+      "mode": "race",
+      "positions": [
+        1,
+        2
+      ]
+    },
+    {
+      "id": "arcade",
+      "mode": "race",
+      "positions": [
+        2,
+        1
+      ]
+    },
+    {
+      "id": "bedroom_sprint",
+      "mode": "race",
+      "positions": [
+        2,
+        1
+      ]
+    },
+    {
+      "id": "garage_drift",
+      "mode": "race",
+      "positions": [
+        2,
+        1
+      ]
+    },
+    {
+      "id": "arcade_neon",
+      "mode": "race",
+      "positions": [
+        1,
+        2
+      ]
+    },
+    {
+      "id": "bathroom",
+      "mode": "race",
+      "positions": [
+        2,
+        1
+      ]
+    },
+    {
+      "id": "bathroom_hairpin",
+      "mode": "race",
+      "positions": [
+        1,
+        2
+      ]
+    },
+    {
+      "id": "kitchen",
+      "mode": "race",
+      "positions": [
+        1,
+        2
+      ]
+    },
+    {
+      "id": "kitchen_chicane",
+      "mode": "race",
+      "positions": [
+        1,
+        2
+      ]
+    },
+    {
+      "id": "living",
+      "mode": "race",
+      "positions": [
+        2,
+        1
+      ]
+    },
+    {
+      "id": "living_grand",
+      "mode": "race",
+      "positions": [
+        1,
+        2
+      ]
+    },
+    {
+      "id": "bedroom_library",
+      "mode": "race",
+      "positions": [
+        2,
+        1
+      ]
+    },
+    {
+      "id": "garage_switchyard",
+      "mode": "race",
+      "positions": [
+        2,
+        1
+      ]
+    },
+    {
+      "id": "bathroom_aqueduct",
+      "mode": "race",
+      "positions": [
+        1,
+        2
+      ]
+    },
+    {
+      "id": "kitchen_island",
+      "mode": "race",
+      "positions": [
+        2,
+        1
+      ]
+    },
+    {
+      "id": "living_slalom",
+      "mode": "race",
+      "positions": [
+        1,
+        2
+      ]
+    },
+    {
+      "id": "arcade_technical",
+      "mode": "race",
+      "positions": [
+        1,
+        2
+      ]
+    },
+    {
+      "id": "bedroom_spiral",
+      "mode": "race",
+      "positions": [
+        1,
+        2
+      ]
+    },
+    {
+      "id": "bedroom_dual",
+      "mode": "race",
+      "positions": [
+        1,
+        2
+      ]
+    },
+    {
+      "id": "garage_piston",
+      "mode": "race",
+      "positions": [
+        1,
+        2
+      ]
+    },
+    {
+      "id": "garage_dual",
+      "mode": "race",
+      "positions": [
+        2,
+        1
+      ]
+    },
+    {
+      "id": "bathroom_vortex",
+      "mode": "race",
+      "positions": [
+        2,
+        1
+      ]
+    },
+    {
+      "id": "kitchen_dual",
+      "mode": "race",
+      "positions": [
+        1,
+        2
+      ]
+    },
+    {
+      "id": "living_orbit",
+      "mode": "race",
+      "positions": [
+        1,
+        2
+      ]
+    },
+    {
+      "id": "arcade_dual",
+      "mode": "race",
+      "positions": [
+        2,
+        1
+      ]
+    },
+    {
+      "id": "arena_1",
+      "mode": "battle",
+      "positions": [
+        2,
+        1
+      ]
+    },
+    {
+      "id": "arena_2",
+      "mode": "battle",
+      "positions": [
+        2,
+        1
+      ]
+    },
+    {
+      "id": "arena_3",
+      "mode": "battle",
+      "positions": [
+        1,
+        2
+      ]
+    },
+    {
+      "id": "arena_4",
+      "mode": "battle",
+      "positions": [
+        2,
+        1
+      ]
+    },
+    {
+      "id": "arena_5",
+      "mode": "battle",
+      "positions": [
+        1,
+        2
+      ]
+    },
+    {
+      "id": "arena_6",
+      "mode": "battle",
+      "positions": [
+        2,
+        1
+      ]
+    }
+  ],
+  "accounts": 2,
+  "mapCount": 32,
+  "coins": [
+    24500,
+    23500
+  ],
+  "ok": true
+}

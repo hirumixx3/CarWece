@@ -1,0 +1,215 @@
+00:00 +0: loading /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/difficulty_v08_test.dart
+00:00 +0: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/difficulty_v08_test.dart: Normal and hard select a competitive car class and keep the player unchanged
+00:00 +1: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/difficulty_v08_test.dart: Rival turbo uses finite energy and actual motion, with no boost on easy
+00:00 +2: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/difficulty_v08_test.dart: Difficulty never reduces the player acceleration, steering or wheel dynamics
+00:00 +3: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/podium_rewards_test.dart: Every race difficulty pays exactly the podium, without hit bonuses
+00:01 +4: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/intro_test.dart: Production launch waits beyond video duration and enters menu only on decoder completion
+00:01 +5: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/intro_test.dart: Production launch waits beyond video duration and enters menu only on decoder completion
+00:01 +6: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/intro_test.dart: Production launch waits beyond video duration and enters menu only on decoder completion
+00:02 +7: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/expansion_v05_test.dart: Thirty-one real-name models have distinct silhouettes and a starter RX7
+00:03 +8: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/expansion_v05_test.dart: Thirty-one real-name models have distinct silhouettes and a starter RX7
+00:03 +9: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/expansion_v05_test.dart: Thirty-one real-name models have distinct silhouettes and a starter RX7
+00:03 +10: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/expansion_v05_test.dart: Thirty-one real-name models have distinct silhouettes and a starter RX7
+00:03 +11: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/expansion_v05_test.dart: Thirty-one real-name models have distinct silhouettes and a starter RX7
+00:03 +12: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/expansion_v05_test.dart: Thirty-one real-name models have distinct silhouettes and a starter RX7
+00:03 +13: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/expansion_v05_test.dart: Thirty-one real-name models have distinct silhouettes and a starter RX7
+00:04 +14: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/expansion_v05_test.dart: Thirty-one real-name models have distinct silhouettes and a starter RX7
+00:04 +15: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/expansion_v05_test.dart: Thirty-one real-name models have distinct silhouettes and a starter RX7
+00:04 +16: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/online_ui_test.dart: online login and map selection fit Size(800.0, 360.0) and preserve offline progress
+00:04 +17: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/online_ui_test.dart: online login and map selection fit Size(800.0, 360.0) and preserve offline progress
+00:04 +18: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/graphics_backend_test.dart: Changing garage cars reloads their own meshes and releases the old texture (variant: TargetPlatform.android)
+00:04 +19: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/graphics_backend_test.dart: Changing garage cars reloads their own meshes and releases the old texture (variant: TargetPlatform.android)
+00:04 +20: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/graphics_backend_test.dart: Changing garage cars reloads their own meshes and releases the old texture (variant: TargetPlatform.android)
+00:04 +21: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/graphics_backend_test.dart: Changing garage cars reloads their own meshes and releases the old texture (variant: TargetPlatform.android)
+00:04 +22: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/graphics_backend_test.dart: Changing garage cars reloads their own meshes and releases the old texture (variant: TargetPlatform.android)
+00:04 +23: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/graphics_backend_test.dart: Changing garage cars reloads their own meshes and releases the old texture (variant: TargetPlatform.android)
+00:04 +24: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/graphics_backend_test.dart: Changing garage cars reloads their own meshes and releases the old texture (variant: TargetPlatform.android)
+00:04 +25: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/online_ui_test.dart: home opens online and credits include Marcos Nascimento Sage Corp
+00:05 +26: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/expansion_v05_test.dart: Room filters and slide-to-drift controls fit Size(1280.0, 720.0) (variant: TargetPlatform.linux)
+00:05 +27: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/expansion_v05_test.dart: Room filters and slide-to-drift controls fit Size(1280.0, 720.0) (variant: TargetPlatform.linux)
+00:05 +28: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/expansion_v05_test.dart: Room filters and slide-to-drift controls fit Size(1280.0, 720.0) (variant: TargetPlatform.linux)
+00:05 +29: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/expansion_v05_test.dart: Room filters and slide-to-drift controls fit Size(1280.0, 720.0) (variant: TargetPlatform.linux)
+00:05 +30: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/expansion_v05_test.dart: Room filters and slide-to-drift controls fit Size(1280.0, 720.0) (variant: TargetPlatform.linux)
+00:05 +31: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/expansion_v05_test.dart: Room filters and slide-to-drift controls fit Size(1280.0, 720.0) (variant: TargetPlatform.linux)
+00:05 +32: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/expansion_v05_test.dart: Room filters and slide-to-drift controls fit Size(1280.0, 720.0) (variant: TargetPlatform.linux)
+00:05 +33: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/expansion_v05_test.dart: Room filters and slide-to-drift controls fit Size(1280.0, 720.0) (variant: TargetPlatform.linux)
+00:05 +34: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/expansion_v05_test.dart: Room filters and slide-to-drift controls fit Size(1280.0, 720.0) (variant: TargetPlatform.linux)
+00:05 +35: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/expansion_v05_test.dart: Room filters and slide-to-drift controls fit Size(1280.0, 720.0) (variant: TargetPlatform.linux)
+00:05 +36: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/expansion_v05_test.dart: Room filters and slide-to-drift controls fit Size(1280.0, 720.0) (variant: TargetPlatform.linux)
+00:05 +37: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/expansion_v05_test.dart: Room filters and slide-to-drift controls fit Size(1280.0, 720.0) (variant: TargetPlatform.linux)
+00:05 +38: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/expansion_v05_test.dart: Room filters and slide-to-drift controls fit Size(1280.0, 720.0) (variant: TargetPlatform.linux)
+00:05 +39: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/expansion_v05_test.dart: Room filters and slide-to-drift controls fit Size(1280.0, 720.0) (variant: TargetPlatform.linux)
+00:05 +40: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/expansion_v05_test.dart: Room filters and slide-to-drift controls fit Size(1280.0, 720.0) (variant: TargetPlatform.linux)
+00:06 +41: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/expansion_v05_test.dart: Room filters and slide-to-drift controls fit Size(1280.0, 720.0) (variant: TargetPlatform.linux)
+00:06 +42: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/expansion_v06_test.dart: Locked circuit is previewable but cannot launch at Size(1280.0, 720.0) (variant: TargetPlatform.linux)
+00:07 +43: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/expansion_v06_test.dart: Locked circuit is previewable but cannot launch at Size(1280.0, 720.0) (variant: TargetPlatform.linux)
+00:07 +44: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/expansion_v06_test.dart: Locked circuit is previewable but cannot launch at Size(1280.0, 720.0) (variant: TargetPlatform.linux)
+00:07 +45: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/battle_ui_test.dart: Battle difficulty can be chosen before launch at Size(1280.0, 720.0) (variant: TargetPlatform.android)
+00:08 +46: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/battle_ui_test.dart: Battle difficulty can be chosen before launch at Size(1280.0, 720.0) (variant: TargetPlatform.android)
+00:08 +47: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/battle_ui_test.dart: Battle difficulty can be chosen before launch at Size(1280.0, 720.0) (variant: TargetPlatform.android)
+00:08 +48: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/battle_ui_test.dart: Battle difficulty can be chosen before launch at Size(1280.0, 720.0) (variant: TargetPlatform.android)
+00:08 +49: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/stationary_regression_test.dart: Stopped cars on offset curved plastic surfaces do not creep to a rail
+00:09 +50: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/stationary_regression_test.dart: Stopped cars on offset curved plastic surfaces do not creep to a rail
+00:09 +51: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/stationary_regression_test.dart: Stopped cars on offset curved plastic surfaces do not creep to a rail
+00:09 +52: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/stationary_regression_test.dart: Stopped cars on offset curved plastic surfaces do not creep to a rail
+00:09 +53: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/stationary_regression_test.dart: Stopped cars on offset curved plastic surfaces do not creep to a rail
+00:09 +54: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/stationary_regression_test.dart: Stopped cars on offset curved plastic surfaces do not creep to a rail
+00:09 +55: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/stationary_regression_test.dart: Stopped cars on offset curved plastic surfaces do not creep to a rail
+00:09 +56: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/stationary_regression_test.dart: Stopped cars on offset curved plastic surfaces do not creep to a rail
+00:09 +57: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/battle_ui_test.dart: Battle difficulty can be chosen before launch at Size(800.0, 360.0) (variant: TargetPlatform.android)
+00:09 +58: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/battle_ui_test.dart: Battle difficulty can be chosen before launch at Size(800.0, 360.0) (variant: TargetPlatform.android)
+00:09 +59: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/battle_ui_test.dart: Battle difficulty can be chosen before launch at Size(800.0, 360.0) (variant: TargetPlatform.android)
+00:09 +60: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/battle_ui_test.dart: Battle difficulty can be chosen before launch at Size(800.0, 360.0) (variant: TargetPlatform.android)
+00:09 +61: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/battle_ui_test.dart: Battle difficulty can be chosen before launch at Size(800.0, 360.0) (variant: TargetPlatform.android)
+00:09 +62: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/battle_ui_test.dart: Battle difficulty can be chosen before launch at Size(800.0, 360.0) (variant: TargetPlatform.android)
+00:09 +63: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/loading_start_test.dart: The entire countdown waits for the first native 3D frame (variant: TargetPlatform.android)
+00:11 +64: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/loading_start_test.dart: The entire countdown waits for the first native 3D frame (variant: TargetPlatform.android)
+00:11 +65: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/loading_start_test.dart: The entire countdown waits for the first native 3D frame (variant: TargetPlatform.android)
+00:12 +66: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/music_test.dart: Pause music selection, skip, volume and close keep physics paused at Size(1280.0, 720.0) (variant: TargetPlatform.android)
+00:14 +67: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/music_test.dart: Pause music selection, skip, volume and close keep physics paused at Size(1280.0, 720.0) (variant: TargetPlatform.android)
+00:14 +68: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/music_test.dart: Pause music selection, skip, volume and close keep physics paused at Size(1280.0, 720.0) (variant: TargetPlatform.android)
+00:14 +69: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/music_test.dart: Pause music selection, skip, volume and close keep physics paused at Size(1280.0, 720.0) (variant: TargetPlatform.android)
+00:14 +70: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/music_test.dart: Pause music selection, skip, volume and close keep physics paused at Size(1280.0, 720.0) (variant: TargetPlatform.android)
+00:14 +71: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/music_test.dart: Pause music selection, skip, volume and close keep physics paused at Size(1280.0, 720.0) (variant: TargetPlatform.android)
+00:14 +72: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/music_test.dart: Pause music selection, skip, volume and close keep physics paused at Size(1280.0, 720.0) (variant: TargetPlatform.android)
+00:14 +73: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/music_test.dart: Pause music selection, skip, volume and close keep physics paused at Size(1280.0, 720.0) (variant: TargetPlatform.android)
+00:14 +74: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/music_test.dart: Pause music selection, skip, volume and close keep physics paused at Size(1280.0, 720.0) (variant: TargetPlatform.android)
+00:14 +75: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/music_test.dart: Pause music selection, skip, volume and close keep physics paused at Size(1280.0, 720.0) (variant: TargetPlatform.android)
+00:14 +76: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/music_test.dart: Pause music selection, skip, volume and close keep physics paused at Size(1280.0, 720.0) (variant: TargetPlatform.android)
+00:14 +77: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/music_test.dart: Pause music selection, skip, volume and close keep physics paused at Size(1280.0, 720.0) (variant: TargetPlatform.android)
+00:14 +78: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/music_test.dart: Pause music selection, skip, volume and close keep physics paused at Size(1280.0, 720.0) (variant: TargetPlatform.android)
+00:15 +79: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/music_test.dart: Pause music selection, skip, volume and close keep physics paused at Size(1280.0, 720.0) (variant: TargetPlatform.android)
+00:15 +80: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/music_test.dart: Pause music selection, skip, volume and close keep physics paused at Size(1280.0, 720.0) (variant: TargetPlatform.android)
+00:15 +81: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/music_test.dart: Pause music selection, skip, volume and close keep physics paused at Size(1280.0, 720.0) (variant: TargetPlatform.android)
+00:15 +82: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/music_test.dart: Pause music selection, skip, volume and close keep physics paused at Size(1280.0, 720.0) (variant: TargetPlatform.android)
+00:15 +83: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/hud_editor_test.dart: Move/resize/save HUD and keep multi-touch and sliding controls at Size(800.0, 360.0) (variant: TargetPlatform.android)
+00:15 +84: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/hud_editor_test.dart: Move/resize/save HUD and keep multi-touch and sliding controls at Size(800.0, 360.0) (variant: TargetPlatform.android)
+00:15 +85: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/hud_editor_test.dart: Move/resize/save HUD and keep multi-touch and sliding controls at Size(800.0, 360.0) (variant: TargetPlatform.android)
+00:15 +86: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/hud_editor_test.dart: Move/resize/save HUD and keep multi-touch and sliding controls at Size(800.0, 360.0) (variant: TargetPlatform.android)
+00:15 +87: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/hud_editor_test.dart: Move/resize/save HUD and keep multi-touch and sliding controls at Size(800.0, 360.0) (variant: TargetPlatform.android)
+00:15 +88: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/hud_editor_test.dart: Move/resize/save HUD and keep multi-touch and sliding controls at Size(800.0, 360.0) (variant: TargetPlatform.android)
+00:15 +89: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/hud_editor_test.dart: Move/resize/save HUD and keep multi-touch and sliding controls at Size(800.0, 360.0) (variant: TargetPlatform.android)
+00:16 +90: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/battle_ui_test.dart: Home to arenas, free exploration, multitouch firing, arsenal and HUD remain usable at Size(800.0, 360.0) (variant: TargetPlatform.android)
+00:16 +91: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/battle_ui_test.dart: Home to arenas, free exploration, multitouch firing, arsenal and HUD remain usable at Size(800.0, 360.0) (variant: TargetPlatform.android)
+00:16 +92: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/battle_ui_test.dart: Home to arenas, free exploration, multitouch firing, arsenal and HUD remain usable at Size(800.0, 360.0) (variant: TargetPlatform.android)
+00:17 +93: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/battle_ui_test.dart: Home to arenas, free exploration, multitouch firing, arsenal and HUD remain usable at Size(800.0, 360.0) (variant: TargetPlatform.android)
+00:17 +94: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/battle_ui_test.dart: Home to arenas, free exploration, multitouch firing, arsenal and HUD remain usable at Size(800.0, 360.0) (variant: TargetPlatform.android)
+00:18 +95: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/music_test.dart: Pause music selection, skip, volume and close keep physics paused at Size(800.0, 360.0) (variant: TargetPlatform.android)
+00:18 +96: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/road_solid_regression_test.dart: An airborne car hits the vertical loop ribbon from its upper face
+00:18 +97: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/road_solid_regression_test.dart: A fast fall lands on the upper deck instead of tunnelling through it
+00:18 +98: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/road_solid_regression_test.dart: A falling upside-down body cannot pass through a lower deck
+00:18 +99: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/road_solid_regression_test.dart: A descending deck blocks a ground car roof, without snapping it onto the road
+00:18 +100: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/weapon_visuals_test.dart: Every collectible has a distinct finite metal attachment within the native budget
+00:18 +101: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/weapon_visuals_test.dart: Only collected weapons are mounted and every selected item uses its own model
+00:18 +102: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/weapon_visuals_test.dart: Turret follows a moving target between shots and the muzzle matches projectile direction
+00:18 +103: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/weapon_visuals_test.dart: Manual target behind the car rotates the mount while the chassis stays manual
+00:19 +104: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:20 +105: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:20 +106: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:20 +107: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:20 +108: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:20 +109: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:20 +110: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:20 +111: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:20 +112: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:22 +113: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:22 +114: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:22 +115: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:22 +116: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:22 +117: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:22 +118: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:22 +119: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:22 +120: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:22 +121: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:23 +122: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:23 +123: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:23 +124: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:23 +125: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:23 +126: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:23 +127: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:23 +128: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:23 +129: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:24 +130: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:24 +131: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:24 +132: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:24 +133: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:25 +134: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:25 +135: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:25 +136: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:25 +137: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:25 +138: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:25 +139: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:25 +140: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:25 +141: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:25 +142: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:25 +143: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:25 +144: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:25 +145: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:26 +146: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:27 +147: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:28 +148: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:28 +149: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:28 +150: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:29 +151: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:29 +152: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:29 +153: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:29 +154: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:29 +155: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:30 +156: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:30 +157: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:30 +158: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:30 +159: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:30 +160: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:31 +161: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:32 +162: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:32 +163: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:32 +164: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:32 +165: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:34 +166: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:35 +167: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:35 +168: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:35 +169: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:35 +170: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:35 +171: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:35 +172: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:36 +173: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:36 +174: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:36 +175: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:36 +176: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:36 +177: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:36 +178: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:36 +179: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:36 +180: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:36 +181: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:36 +182: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:36 +183: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:36 +184: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:37 +185: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:37 +186: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:37 +187: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:37 +188: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:37 +189: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:37 +190: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:38 +191: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:38 +192: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:38 +193: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:38 +194: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:38 +195: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:39 +196: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:39 +197: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:40 +198: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:41 +199: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:41 +200: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:41 +201: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:41 +202: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:41 +203: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:41 +204: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:41 +205: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:41 +206: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:43 +207: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:44 +208: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:44 +209: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:44 +210: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:48 +211: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:54 +212: /workspace/scratch/f581f54b4d3f/game_v0141/carwece/test/regression_v03_test.dart: Failing a loop releases the car into a visible fall without teleporting
+00:54 +213: All tests passed!

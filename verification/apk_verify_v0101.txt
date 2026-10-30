@@ -1,0 +1,17 @@
+{
+  "file": "app-release.apk",
+  "size_bytes": 241140278,
+  "sha256": "64d44f74f6f95dc3e50b4d656c2c99aebdad9e5a4818e353e201bfa6450a2f6b",
+  "package": "com.hirumisu.carwece",
+  "label": "CarWece",
+  "version": "0.10.1",
+  "code": 14,
+  "abis": [
+    "armeabi-v7a",
+    "arm64-v8a",
+    "x86_64"
+  ],
+  "verified_png_resources": 20,
+  "verified_adaptive_icons": 2,
+  "certificate_sha256": "9e1be273e6871c23013157fad5378ffc4d5da5b222d70f84a995c8cb94ca8d7a"
+}

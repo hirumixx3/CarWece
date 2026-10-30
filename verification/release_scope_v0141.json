@@ -1,0 +1,21 @@
+{
+  "baseline": "CarWece_Flutter_v0.14.0_hirumisu.zip",
+  "baselineSha256": "8f7f780d3976406063ae91cf6fbdd8eb7ae1ef35eb8fb5abd840120a3ef92a73",
+  "changedCodeAndDocs": [
+    "carwece/LEIA_PRIMEIRO.md",
+    "carwece/README.md",
+    "carwece/lib/main.dart",
+    "carwece/lib/online/bore_tunnel.dart",
+    "carwece/lib/online/client.dart",
+    "carwece/lib/online/invite.dart",
+    "carwece/lib/online/phone_host.dart",
+    "carwece/lib/ui/online_screen.dart",
+    "carwece/pubspec.yaml",
+    "carwece/test/online_ui_test.dart",
+    "carwece/tools/build_android.sh",
+    "carwece/tools/friends_qa.dart",
+    "carwece/tools/verify_apk.py"
+  ],
+  "unchangedCoreAssetAndIconFiles": 86,
+  "gamePhysicsAndRenderingChanged": false
+}

@@ -1,0 +1,4 @@
+00:00 +0: loading /workspace/scratch/22726e8756c2/carwece_work/carwece/test/battle_target_test.dart
+00:00 +0: Mira alterna entre rivais válidos e não seleciona morto, bloqueado ou distante
+00:00 +1: A mira verde acompanha o alvo que a arma usa, sem alterar munição
+00:00 +2: All tests passed!

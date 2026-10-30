@@ -1,0 +1,5 @@
+00:00 +0: loading /workspace/scratch/c277226aee51/game_v0144/carwece/test/checkpoint_shortcut_regression_test.dart
+00:00 +0: A car starting on a checkpoint plane advances when it drives forward
+00:00 +1: A shortcut accepts an already credited overlapping main checkpoint
+00:00 +2: A legal jump inside the shortcut does not lose its checkpoint sequence
+00:00 +3: All tests passed!

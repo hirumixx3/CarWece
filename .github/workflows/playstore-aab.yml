@@ -1,0 +1,93 @@
+name: CarWece - AAB assinado
+
+on:
+  workflow_dispatch:
+    inputs:
+      version_name:
+        description: Versão exibida
+        required: true
+        default: '1.0.0'
+        type: string
+      first_version_code:
+        description: Primeiro versionCode (use 7 ou maior após publicar os códigos 1 a 6)
+        required: true
+        default: '1'
+        type: string
+      bundle_count:
+        description: Quantidade de AABs (1 a 6)
+        required: true
+        default: '6'
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  release:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    env:
+      ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+      ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+      ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: gradle
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.35.7'
+          channel: stable
+          cache: true
+      - name: Preparar SDK Android
+        shell: bash
+        run: |
+          sdkmanager --licenses < <(yes) > /dev/null
+          sdkmanager 'platforms;android-36' 'build-tools;35.0.0' 'ndk;27.0.12077973'
+          chmod +x android/gradlew
+      - name: Restaurar chave de assinatura
+        env:
+          ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+        run: python3 tools/prepare_github_signing.py --directory "$RUNNER_TEMP/carwece-signing"
+      - name: Resolver dependências e verificar
+        run: |
+          flutter pub get
+          flutter analyze
+          flutter test
+      - name: Gerar bundles
+        env:
+          VERSION_NAME: ${{ inputs.version_name }}
+          FIRST_VERSION_CODE: ${{ inputs.first_version_code }}
+          BUNDLE_COUNT: ${{ inputs.bundle_count }}
+        run: >-
+          python3 tools/build_play_bundles.py
+          --version-name "$VERSION_NAME"
+          --first-code "$FIRST_VERSION_CODE"
+          --count "$BUNDLE_COUNT"
+          --output dist
+      - name: Validar bundles e compatibilidade de 16 KB
+        shell: bash
+        run: |
+          curl --fail --location --retry 3 --output "$RUNNER_TEMP/bundletool.jar" 'https://github.com/google/bundletool/releases/download/1.18.3/bundletool-all-1.18.3.jar'
+          printf '%s  %s\n' 'a099cfa1543f55593bc2ed16a70a7c67fe54b1747bb7301f37fdfd6d91028e29' "$RUNNER_TEMP/bundletool.jar" | sha256sum --check -
+          python3 tools/verify_play_bundles.py --directory dist --bundletool "$RUNNER_TEMP/bundletool.jar"
+      - name: Disponibilizar AABs
+        uses: actions/upload-artifact@v7
+        with:
+          name: CarWece-${{ inputs.version_name }}-AABs
+          path: |
+            dist/*.aab
+            dist/SHA256SUMS.txt
+            dist/release-manifest.json
+            dist/validation.json
+          if-no-files-found: error
+          compression-level: 0
+      - name: Remover chave temporária
+        if: always()
+        shell: bash
+        run: rm -rf -- "$RUNNER_TEMP/carwece-signing"

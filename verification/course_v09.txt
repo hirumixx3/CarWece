@@ -1,0 +1,26 @@
+bedroom: barriers=515 shortcuts=1 11->16: 342/764
+garage: barriers=496 shortcuts=1 11->17: 526/867
+arcade: barriers=631 shortcuts=1 20->26: 492/974
+bedroom_sprint: barriers=330 shortcuts=0 
+garage_drift: barriers=760 shortcuts=1 7->13: 432/1026
+arcade_neon: barriers=534 shortcuts=1 10->16: 478/999
+bathroom: barriers=559 shortcuts=1 5->11: 617/779
+bathroom_hairpin: barriers=745 shortcuts=1 14->20: 376/920
+kitchen: barriers=260 shortcuts=0 
+kitchen_chicane: barriers=697 shortcuts=1 15->21: 402/958
+living: barriers=661 shortcuts=1 17->23: 502/844
+living_grand: barriers=613 shortcuts=1 11->17: 536/931
+bedroom_library: barriers=542 shortcuts=1 15->20: 581/910
+garage_switchyard: barriers=539 shortcuts=1 6->12: 573/1033
+bathroom_aqueduct: barriers=667 shortcuts=1 13->19: 651/1128
+kitchen_island: barriers=520 shortcuts=1 4->10: 495/996
+living_slalom: barriers=629 shortcuts=1 8->13: 363/836
+arcade_technical: barriers=621 shortcuts=1 14->20: 457/1098
+bedroom_spiral: barriers=674 shortcuts=1 16->22: 389/886
+bedroom_dual: barriers=399 shortcuts=1 9->12: 322/481
+garage_piston: barriers=749 shortcuts=1 22->28: 451/949
+garage_dual: barriers=415 shortcuts=1 25->28: 383/461
+bathroom_vortex: barriers=499 shortcuts=1 13->19: 478/913
+kitchen_dual: barriers=615 shortcuts=1 10->16: 544/1314
+living_orbit: barriers=552 shortcuts=1 13->19: 477/947
+arcade_dual: barriers=514 shortcuts=1 24->29: 428/879

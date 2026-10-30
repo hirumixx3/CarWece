@@ -1,0 +1,26 @@
+QA: host room ready
+QA: wrong certificate rejected
+QA: wrong invitation rejected
+QA: six players connected
+QA: starting match
+QA: host signOut completed; host busy=false phone=false; peers: true:Conectado | true:Conectado | true:Conectado | true:Conectado | true:Conectado
+QA: starting match
+{
+  "transport": "real direct TCP + pinned TLS + WebSocket on loopback; listener binds all IPv4; LAN address injected; no relay",
+  "nativeIdentity": "HostIdentity Kotlin output",
+  "publicInternetVerified": false,
+  "wifiInterfaceDiscoveryVerified": false,
+  "twoAndroidPhonesVerified": false,
+  "relayBypassed": true,
+  "wrongCertificateRejected": true,
+  "wrongInviteRejected": true,
+  "sixPlayers": true,
+  "duplicateNameRejected": true,
+  "seventhPlayerRejected": true,
+  "battleTargetsSynchronized": true,
+  "cycleTargetReplicated": true,
+  "hostShutdownDisconnectsPeers": true,
+  "raceAndBattle": true,
+  "result": "PASS"
+}
+QA: clients disposed and fixture listeners closed

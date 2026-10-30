@@ -1,0 +1,15 @@
+{
+  "transport": "Independent Paramiko SSH/TLS server, real sockets, forwarded pinned game TLS",
+  "publicInternetVerified": false,
+  "twoAndroidPhonesVerified": false,
+  "tlsOnlyFailureReproduced": "Não foi possível alcançar o retransmissor pelas conexões alternativas. Confira a internet e tente novamente. Diagnóstico: 127.0.0.1/TLS:TLS/CONEXAO.",
+  "failedTLSFallsBackToDirectSSH": true,
+  "blockedDirectSSHFallsBackToTLS": true,
+  "unreachableControlAddressFallsBack": true,
+  "emptyURLResponsesWaitForAllocation": true,
+  "unavailableAPIFallsBackToFragmentedANSIOutput": true,
+  "timedOutHandshakeDoesNotCorruptNextRoute": true,
+  "cancellationBeforeReadyIsSilent": true,
+  "roomCanBeRecreatedAfterFailures": true,
+  "result": "PASS"
+}

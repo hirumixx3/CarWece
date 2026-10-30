@@ -1,0 +1,33 @@
+{
+  "originalName": "23245.mp4",
+  "asset": "assets/video/carwece_intro.mp4",
+  "size_bytes": 3683690,
+  "sha256": "4e5395f7cbe6db3e29f1081c1bdc56a6c40adaf077c8a70fb9f795528fdcf204",
+  "unchanged_original": true,
+  "duration_seconds": 10.026667,
+  "streams": [
+    {
+      "codec_type": "video",
+      "codec_name": "h264",
+      "width": 1280,
+      "height": 720,
+      "r_frame_rate": "24/1",
+      "nb_frames": "240",
+      "duration": "10.000000",
+      "sample_rate": null,
+      "channels": null
+    },
+    {
+      "codec_type": "audio",
+      "codec_name": "aac",
+      "width": null,
+      "height": null,
+      "r_frame_rate": "0/0",
+      "nb_frames": "470",
+      "duration": "10.026667",
+      "sample_rate": "48000",
+      "channels": 2
+    }
+  ],
+  "full_ffmpeg_decode_passed": true
+}

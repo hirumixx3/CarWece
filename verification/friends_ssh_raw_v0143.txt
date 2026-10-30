@@ -1,0 +1,30 @@
+QA: host room ready
+QA: wrong certificate rejected
+QA: wrong invitation rejected
+QA: six players connected
+QA: starting match
+Host stop: closing game server
+Host stop: closing internet transport
+Host stop: transport closed
+QA: host signOut completed; host busy=false phone=false; peers: true:Conectado | false:Reconectando… O carro está freando. | true:Conectado | true:Conectado | true:Conectado
+QA: starting match
+{
+  "transport": "direct SSH, remote TCP forwarding, native game TLS and WebSocket; independent local Paramiko server; public DNS/SNI not emulated",
+  "nativeIdentity": "HostIdentity Kotlin output",
+  "publicInternetVerified": false,
+  "sshTransportAndPublicProbe": true,
+  "wrongCertificateRejected": true,
+  "wrongInviteRejected": true,
+  "sixPlayers": true,
+  "duplicateNameRejected": true,
+  "seventhPlayerRejected": true,
+  "battleTargetsSynchronized": true,
+  "cycleTargetReplicated": true,
+  "hostShutdownDisconnectsPeers": true,
+  "raceAndBattle": true,
+  "result": "PASS"
+}
+Host stop: closing game server
+Host stop: closing internet transport
+QA: clients disposed and fixture listeners closed
+Host stop: transport closed

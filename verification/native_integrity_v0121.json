@@ -1,0 +1,43 @@
+{
+  "native": [
+    {
+      "name": "lib/arm64-v8a/libapp.so",
+      "bytes": 5964720,
+      "elfTablesValid": true,
+      "sha256": "3e5724383d7fc2d2931a470a38040fdbf98b250a4988c9a6cfab4e44727ce933"
+    },
+    {
+      "name": "lib/arm64-v8a/libflutter.so",
+      "bytes": 11037032,
+      "elfTablesValid": true,
+      "sha256": "ee37eb8be8e01a0d840558f75e0a09c4ca135d721c2ca6145c050e4f89785129"
+    },
+    {
+      "name": "lib/armeabi-v7a/libapp.so",
+      "bytes": 6701660,
+      "elfTablesValid": true,
+      "sha256": "25db15be152e6fd8282be585940fe85dfa46a1a5e08d577f36853e1af47fbbad"
+    },
+    {
+      "name": "lib/armeabi-v7a/libflutter.so",
+      "bytes": 7926848,
+      "elfTablesValid": true,
+      "sha256": "3b01cb3751800beb7b64c09a572216c6d36707ccea927f39f29ce475a0e176c5"
+    },
+    {
+      "name": "lib/x86_64/libapp.so",
+      "bytes": 6095792,
+      "elfTablesValid": true,
+      "sha256": "a00eca60145ecd6bf56babaa9e8b99ec02878b4168d8c901fe320d7bbcfccb96"
+    },
+    {
+      "name": "lib/x86_64/libflutter.so",
+      "bytes": 12143760,
+      "elfTablesValid": true,
+      "sha256": "94a457f1f2de2ed4831460f9426a8e7bd3424b9a398564415bbf14349afc29e4"
+    }
+  ],
+  "temporaryEntries": [],
+  "unchangedShaders": true,
+  "introVerifiedInAllThreeAOTLibraries": true
+}

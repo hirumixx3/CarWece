@@ -1,0 +1,9 @@
+SSH/TLS relay fixture ready
+SSH control session closed: 1
+SSH control session closed: 2
+SSH control session closed: 3
+SSH control session closed: 4
+SSH control session closed: 6
+SSH control session closed: 5
+SSH control session closed: 7
+SSH control session closed: 8

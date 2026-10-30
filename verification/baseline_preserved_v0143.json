@@ -1,0 +1,25 @@
+{
+  "changed": [
+    "GUIA_SERVIDOR_GRATUITO.md",
+    "LEIA_PRIMEIRO.md",
+    "README.md",
+    "lib/main.dart",
+    "lib/online/client.dart",
+    "lib/online/phone_host.dart",
+    "lib/online/pinggy_tunnel.dart",
+    "lib/ui/online_screen.dart",
+    "pubspec.yaml",
+    "tools/build_android.sh",
+    "tools/friends_qa.dart",
+    "tools/pinggy_fixture.py",
+    "tools/relay_faults_qa.dart",
+    "tools/run_relay_qa.py",
+    "tools/verify_apk.py",
+    "verification/alignment.txt",
+    "verification/apk_meta.json",
+    "verification/manifest.txt",
+    "verification/manifest_tree.txt",
+    "verification/signature.txt"
+  ],
+  "identical_original_files": 1012
+}

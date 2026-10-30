@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="dev.hirumisu.pocket_rush.GraphicsContractTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2026-10-27T00:32:44" hostname="d9138fcebdad" time="0.129">
+  <properties/>
+  <testcase name="refusesTruncatedInstancePacket" classname="dev.hirumisu.pocket_rush.GraphicsContractTest" time="0.05"/>
+  <testcase name="acceptsActualFlutterPayloadWithAllSeventeenModels" classname="dev.hirumisu.pocket_rush.GraphicsContractTest" time="0.02"/>
+  <testcase name="refusesMissingMeshIndex" classname="dev.hirumisu.pocket_rush.GraphicsContractTest" time="0.015"/>
+  <testcase name="refusesNonFiniteTransforms" classname="dev.hirumisu.pocket_rush.GraphicsContractTest" time="0.011"/>
+  <testcase name="acceptsAdditionalEffectsWithinBudget" classname="dev.hirumisu.pocket_rush.GraphicsContractTest" time="0.017"/>
+  <testcase name="refusesIncompleteMeshWithSpecificReason" classname="dev.hirumisu.pocket_rush.GraphicsContractTest" time="0.014"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

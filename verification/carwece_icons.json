@@ -1,0 +1,94 @@
+{
+  "master_foreground": "7a105e042e359360e09cbb05ad8152b4a6a1030514ae84115116c8ebbf038f89",
+  "master_background": "8b94707883113020e66212c634ef168342e6641beafc12a85eea059e492c42b5",
+  "resources": [
+    {
+      "file": "android/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml",
+      "sha256": "e8200c4fc8e07fda81e7f093c1ee85f99dcf2fe8697bcf2b28404b80892748f9"
+    },
+    {
+      "file": "android/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml",
+      "sha256": "e8200c4fc8e07fda81e7f093c1ee85f99dcf2fe8697bcf2b28404b80892748f9"
+    },
+    {
+      "file": "android/app/src/main/res/mipmap-hdpi/ic_launcher.png",
+      "sha256": "421705d65a263458df945b44128157912f224c887a6bf0793dd1e702dd30a698"
+    },
+    {
+      "file": "android/app/src/main/res/mipmap-hdpi/ic_launcher_background.png",
+      "sha256": "b1140a78468aaf0d4125bf7ba0d11c6ceabbd7da6ef6e2255cb6abfae0667799"
+    },
+    {
+      "file": "android/app/src/main/res/mipmap-hdpi/ic_launcher_foreground.png",
+      "sha256": "dee1fe9c8cfbd02e9bff0922f084aeb5aeb465b46929222daa3771f48d54e360"
+    },
+    {
+      "file": "android/app/src/main/res/mipmap-hdpi/ic_launcher_round.png",
+      "sha256": "2cc5ecf08ace20462e7df8921540081f8f253d42ea94ed6852efe31139e32e48"
+    },
+    {
+      "file": "android/app/src/main/res/mipmap-mdpi/ic_launcher.png",
+      "sha256": "9b28abd0340ac8d3597ab245a8fe8ec27b677d5b0b3cf6d30382a1b4f6904720"
+    },
+    {
+      "file": "android/app/src/main/res/mipmap-mdpi/ic_launcher_background.png",
+      "sha256": "9ea3a1dfea228a744c6a742c03c71ce111c85af3e7f940febdd58d8484782524"
+    },
+    {
+      "file": "android/app/src/main/res/mipmap-mdpi/ic_launcher_foreground.png",
+      "sha256": "15d43b3e6c250723c68ef5f2f950ef6d306243a480a426210f5ee4691bb61db3"
+    },
+    {
+      "file": "android/app/src/main/res/mipmap-mdpi/ic_launcher_round.png",
+      "sha256": "57281d9e0183b93b95b6e6e8691fb7a89ab8b2344b7e51052b0add8be657e0fb"
+    },
+    {
+      "file": "android/app/src/main/res/mipmap-xhdpi/ic_launcher.png",
+      "sha256": "59f1685d88eedf077c3586086f30e2bd710673b191b5c70bdd6835ae9228eace"
+    },
+    {
+      "file": "android/app/src/main/res/mipmap-xhdpi/ic_launcher_background.png",
+      "sha256": "8c55c5cd61f89c633f35c5fc1b275a9b288a70537870e8eb42285ddf1369d320"
+    },
+    {
+      "file": "android/app/src/main/res/mipmap-xhdpi/ic_launcher_foreground.png",
+      "sha256": "f4624b6e8e0e4ed9d0bec97558bc057dcf947ad7a1f2a2476a1f52e23609119a"
+    },
+    {
+      "file": "android/app/src/main/res/mipmap-xhdpi/ic_launcher_round.png",
+      "sha256": "84d458644cad6b8ffc98cde84a61694d1dd1d45c4c18a1a3e26f2ddb570b262b"
+    },
+    {
+      "file": "android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png",
+      "sha256": "c051767a47a4e803643f94301d01fdaf50a5303515ff4db5ab009b0f3306009a"
+    },
+    {
+      "file": "android/app/src/main/res/mipmap-xxhdpi/ic_launcher_background.png",
+      "sha256": "5b3ac03642f5fcd8989441039784f35d737a3575172f35639f553c6792b35cb8"
+    },
+    {
+      "file": "android/app/src/main/res/mipmap-xxhdpi/ic_launcher_foreground.png",
+      "sha256": "2fbec8d065eab5b92d97b30f537188517c7702f37f3068761d62a5f66890e29b"
+    },
+    {
+      "file": "android/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.png",
+      "sha256": "8c79b6e850605fd7814ac39b5bf520e974c5130cf45bc6ba47adff85bd0285ec"
+    },
+    {
+      "file": "android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png",
+      "sha256": "0c4d1dd835c17c075cb3b8dd4a5aafd0ab6a70b457e3d0d3ad0b68beea89a370"
+    },
+    {
+      "file": "android/app/src/main/res/mipmap-xxxhdpi/ic_launcher_background.png",
+      "sha256": "a0d29c4acfe24ee6379cde84d08d705057170f1ffcfd1eb59ee4ce446efbc609"
+    },
+    {
+      "file": "android/app/src/main/res/mipmap-xxxhdpi/ic_launcher_foreground.png",
+      "sha256": "14ecfd727b495a46d2c29285addea84576cbf8bc5cb577378e99de2f4f413794"
+    },
+    {
+      "file": "android/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png",
+      "sha256": "20366b4e0eab254c58fd9f3eed3423b9ac54aa9df4067cdde5278c02c17c4593"
+    }
+  ]
+}

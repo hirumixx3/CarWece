@@ -1,0 +1,2105 @@
+Package Groups (1)
+Package Group 0 id=0x7f packageCount=1 name=com.hirumisu.carwece
+  Package 0 id=0x7f name=com.hirumisu.carwece
+    type 0 configCount=0 entryCount=1
+      INVALID TYPE CONFIG FOR RESOURCE 0x7f010000
+    type 1 configCount=0 entryCount=6
+      INVALID TYPE CONFIG FOR RESOURCE 0x7f020000
+      INVALID TYPE CONFIG FOR RESOURCE 0x7f020001
+      INVALID TYPE CONFIG FOR RESOURCE 0x7f020002
+      INVALID TYPE CONFIG FOR RESOURCE 0x7f020003
+      INVALID TYPE CONFIG FOR RESOURCE 0x7f020004
+      INVALID TYPE CONFIG FOR RESOURCE 0x7f020005
+    type 2 configCount=1 entryCount=38
+      spec resource 0x7f030000 com.hirumisu.carwece:attr/activityAction: flags=0x00000000
+      spec resource 0x7f030001 com.hirumisu.carwece:attr/activityName: flags=0x00000000
+      spec resource 0x7f030002 com.hirumisu.carwece:attr/alpha: flags=0x00000000
+      spec resource 0x7f030003 com.hirumisu.carwece:attr/alwaysExpand: flags=0x00000000
+      spec resource 0x7f030004 com.hirumisu.carwece:attr/animationBackgroundColor: flags=0x00000000
+      spec resource 0x7f030005 com.hirumisu.carwece:attr/clearTop: flags=0x00000000
+      spec resource 0x7f030006 com.hirumisu.carwece:attr/finishPrimaryWithPlaceholder: flags=0x00000000
+      spec resource 0x7f030007 com.hirumisu.carwece:attr/finishPrimaryWithSecondary: flags=0x00000000
+      spec resource 0x7f030008 com.hirumisu.carwece:attr/finishSecondaryWithPrimary: flags=0x00000000
+      spec resource 0x7f030009 com.hirumisu.carwece:attr/font: flags=0x00000000
+      spec resource 0x7f03000a com.hirumisu.carwece:attr/fontProviderAuthority: flags=0x00000000
+      spec resource 0x7f03000b com.hirumisu.carwece:attr/fontProviderCerts: flags=0x00000000
+      spec resource 0x7f03000c com.hirumisu.carwece:attr/fontProviderFetchStrategy: flags=0x00000000
+      spec resource 0x7f03000d com.hirumisu.carwece:attr/fontProviderFetchTimeout: flags=0x00000000
+      spec resource 0x7f03000e com.hirumisu.carwece:attr/fontProviderPackage: flags=0x00000000
+      spec resource 0x7f03000f com.hirumisu.carwece:attr/fontProviderQuery: flags=0x00000000
+      spec resource 0x7f030010 com.hirumisu.carwece:attr/fontProviderSystemFontFamily: flags=0x00000000
+      spec resource 0x7f030011 com.hirumisu.carwece:attr/fontStyle: flags=0x00000000
+      spec resource 0x7f030012 com.hirumisu.carwece:attr/fontVariationSettings: flags=0x00000000
+      spec resource 0x7f030013 com.hirumisu.carwece:attr/fontWeight: flags=0x00000000
+      spec resource 0x7f030014 com.hirumisu.carwece:attr/lStar: flags=0x00000000
+      spec resource 0x7f030015 com.hirumisu.carwece:attr/nestedScrollViewStyle: flags=0x00000000
+      spec resource 0x7f030016 com.hirumisu.carwece:attr/placeholderActivityName: flags=0x00000000
+      spec resource 0x7f030017 com.hirumisu.carwece:attr/primaryActivityName: flags=0x00000000
+      spec resource 0x7f030018 com.hirumisu.carwece:attr/queryPatterns: flags=0x00000000
+      spec resource 0x7f030019 com.hirumisu.carwece:attr/secondaryActivityAction: flags=0x00000000
+      spec resource 0x7f03001a com.hirumisu.carwece:attr/secondaryActivityName: flags=0x00000000
+      spec resource 0x7f03001b com.hirumisu.carwece:attr/shortcutMatchRequired: flags=0x00000000
+      spec resource 0x7f03001c com.hirumisu.carwece:attr/splitLayoutDirection: flags=0x00000000
+      spec resource 0x7f03001d com.hirumisu.carwece:attr/splitMaxAspectRatioInLandscape: flags=0x00000000
+      spec resource 0x7f03001e com.hirumisu.carwece:attr/splitMaxAspectRatioInPortrait: flags=0x00000000
+      spec resource 0x7f03001f com.hirumisu.carwece:attr/splitMinHeightDp: flags=0x00000000
+      spec resource 0x7f030020 com.hirumisu.carwece:attr/splitMinSmallestWidthDp: flags=0x00000000
+      spec resource 0x7f030021 com.hirumisu.carwece:attr/splitMinWidthDp: flags=0x00000000
+      spec resource 0x7f030022 com.hirumisu.carwece:attr/splitRatio: flags=0x00000000
+      spec resource 0x7f030023 com.hirumisu.carwece:attr/stickyPlaceholder: flags=0x00000000
+      spec resource 0x7f030024 com.hirumisu.carwece:attr/tag: flags=0x00000000
+      spec resource 0x7f030025 com.hirumisu.carwece:attr/ttcIndex: flags=0x00000000
+      config (default):
+        resource 0x7f030000 com.hirumisu.carwece:attr/activityAction: <bag>
+          Parent=0x00000000(Resolved=0x00000000), Count=1
+          #0 (Key=0x01000000): (int) 0x00000002 or 2
+        resource 0x7f030001 com.hirumisu.carwece:attr/activityName: <bag>
+          Parent=0x00000000(Resolved=0x00000000), Count=1
+          #0 (Key=0x01000000): (int) 0x00000002 or 2
+        resource 0x7f030002 com.hirumisu.carwece:attr/alpha: <bag>
+          Parent=0x00000000(Resolved=0x00000000), Count=1
+          #0 (Key=0x01000000): (int) 0x00000020 or 32
+        resource 0x7f030003 com.hirumisu.carwece:attr/alwaysExpand: <bag>
+          Parent=0x00000000(Resolved=0x00000000), Count=1
+          #0 (Key=0x01000000): (int) 0x00000008 or 8
+        resource 0x7f030004 com.hirumisu.carwece:attr/animationBackgroundColor: <bag>
+          Parent=0x00000000(Resolved=0x00000000), Count=1
+          #0 (Key=0x01000000): (int) 0x00000010 or 16
+        resource 0x7f030005 com.hirumisu.carwece:attr/clearTop: <bag>
+          Parent=0x00000000(Resolved=0x00000000), Count=1
+          #0 (Key=0x01000000): (int) 0x00000008 or 8
+        resource 0x7f030006 com.hirumisu.carwece:attr/finishPrimaryWithPlaceholder: <bag>
+          Parent=0x00000000(Resolved=0x00000000), Count=3
+          #0 (Key=0x01000000): (int) 0x00010000 or 65536
+          #1 (Key=0x7f070027): (int) 0x00000001 or 1
+          #2 (Key=0x7f070026): (int) 0x00000002 or 2
+        resource 0x7f030007 com.hirumisu.carwece:attr/finishPrimaryWithSecondary: <bag>
+          Parent=0x00000000(Resolved=0x00000000), Count=4
+          #0 (Key=0x01000000): (int) 0x00010000 or 65536
+          #1 (Key=0x7f07003c): (int) 0x00000000 or 0
+          #2 (Key=0x7f070027): (int) 0x00000001 or 1
+          #3 (Key=0x7f070026): (int) 0x00000002 or 2
+        resource 0x7f030008 com.hirumisu.carwece:attr/finishSecondaryWithPrimary: <bag>
+          Parent=0x00000000(Resolved=0x00000000), Count=4
+          #0 (Key=0x01000000): (int) 0x00010000 or 65536
+          #1 (Key=0x7f07003c): (int) 0x00000000 or 0
+          #2 (Key=0x7f070027): (int) 0x00000001 or 1
+          #3 (Key=0x7f070026): (int) 0x00000002 or 2
+        resource 0x7f030009 com.hirumisu.carwece:attr/font: <bag>
+          Parent=0x00000000(Resolved=0x00000000), Count=1
+          #0 (Key=0x01000000): (int) 0x00000001 or 1
+        resource 0x7f03000a com.hirumisu.carwece:attr/fontProviderAuthority: <bag>
+          Parent=0x00000000(Resolved=0x00000000), Count=1
+          #0 (Key=0x01000000): (int) 0x00000002 or 2
+        resource 0x7f03000b com.hirumisu.carwece:attr/fontProviderCerts: <bag>
+          Parent=0x00000000(Resolved=0x00000000), Count=1
+          #0 (Key=0x01000000): (int) 0x00000001 or 1
+        resource 0x7f03000c com.hirumisu.carwece:attr/fontProviderFetchStrategy: <bag>
+          Parent=0x00000000(Resolved=0x00000000), Count=3
+          #0 (Key=0x01000000): (int) 0x00010000 or 65536
+          #1 (Key=0x7f07002c): (int) 0x00000000 or 0
+          #2 (Key=0x7f07002b): (int) 0x00000001 or 1
+        resource 0x7f03000d com.hirumisu.carwece:attr/fontProviderFetchTimeout: <bag>
+          Parent=0x00000000(Resolved=0x00000000), Count=2
+          #0 (Key=0x01000000): (int) 0x00010004 or 65540
+          #1 (Key=0x7f070031): (int) 0xffffffff or -1
+        resource 0x7f03000e com.hirumisu.carwece:attr/fontProviderPackage: <bag>
+          Parent=0x00000000(Resolved=0x00000000), Count=1
+          #0 (Key=0x01000000): (int) 0x00000002 or 2
+        resource 0x7f03000f com.hirumisu.carwece:attr/fontProviderQuery: <bag>
+          Parent=0x00000000(Resolved=0x00000000), Count=1
+          #0 (Key=0x01000000): (int) 0x00000002 or 2
+        resource 0x7f030010 com.hirumisu.carwece:attr/fontProviderSystemFontFamily: <bag>
+          Parent=0x00000000(Resolved=0x00000000), Count=1
+          #0 (Key=0x01000000): (int) 0x00000002 or 2
+        resource 0x7f030011 com.hirumisu.carwece:attr/fontStyle: <bag>
+          Parent=0x00000000(Resolved=0x00000000), Count=3
+          #0 (Key=0x01000000): (int) 0x00010000 or 65536
+          #1 (Key=0x7f07003d): (int) 0x00000000 or 0
+          #2 (Key=0x7f070037): (int) 0x00000001 or 1
+        resource 0x7f030012 com.hirumisu.carwece:attr/fontVariationSettings: <bag>
+          Parent=0x00000000(Resolved=0x00000000), Count=1
+          #0 (Key=0x01000000): (int) 0x00000002 or 2
+        resource 0x7f030013 com.hirumisu.carwece:attr/fontWeight: <bag>
+          Parent=0x00000000(Resolved=0x00000000), Count=1
+          #0 (Key=0x01000000): (int) 0x00000004 or 4
+        resource 0x7f030014 com.hirumisu.carwece:attr/lStar: <bag>
+          Parent=0x00000000(Resolved=0x00000000), Count=1
+          #0 (Key=0x01000000): (int) 0x00000020 or 32
+        resource 0x7f030015 com.hirumisu.carwece:attr/nestedScrollViewStyle: <bag>
+          Parent=0x00000000(Resolved=0x00000000), Count=1
+          #0 (Key=0x01000000): (int) 0x00000001 or 1
+        resource 0x7f030016 com.hirumisu.carwece:attr/placeholderActivityName: <bag>
+          Parent=0x00000000(Resolved=0x00000000), Count=1
+          #0 (Key=0x01000000): (int) 0x00000002 or 2
+        resource 0x7f030017 com.hirumisu.carwece:attr/primaryActivityName: <bag>
+          Parent=0x00000000(Resolved=0x00000000), Count=1
+          #0 (Key=0x01000000): (int) 0x00000002 or 2
+        resource 0x7f030018 com.hirumisu.carwece:attr/queryPatterns: <bag>
+          Parent=0x00000000(Resolved=0x00000000), Count=1
+          #0 (Key=0x01000000): (int) 0x00000001 or 1
+        resource 0x7f030019 com.hirumisu.carwece:attr/secondaryActivityAction: <bag>
+          Parent=0x00000000(Resolved=0x00000000), Count=1
+          #0 (Key=0x01000000): (int) 0x00000002 or 2
+        resource 0x7f03001a com.hirumisu.carwece:attr/secondaryActivityName: <bag>
+          Parent=0x00000000(Resolved=0x00000000), Count=1
+          #0 (Key=0x01000000): (int) 0x00000002 or 2
+        resource 0x7f03001b com.hirumisu.carwece:attr/shortcutMatchRequired: <bag>
+          Parent=0x00000000(Resolved=0x00000000), Count=1
+          #0 (Key=0x01000000): (int) 0x00000008 or 8
+        resource 0x7f03001c com.hirumisu.carwece:attr/splitLayoutDirection: <bag>
+          Parent=0x00000000(Resolved=0x00000000), Count=6
+          #0 (Key=0x01000000): (int) 0x00010000 or 65536
+          #1 (Key=0x7f07003a): (int) 0x00000000 or 0
+          #2 (Key=0x7f07003b): (int) 0x00000001 or 1
+          #3 (Key=0x7f070044): (int) 0x00000002 or 2
+          #4 (Key=0x7f070057): (int) 0x00000003 or 3
+          #5 (Key=0x7f07002d): (int) 0x00000004 or 4
+        resource 0x7f03001d com.hirumisu.carwece:attr/splitMaxAspectRatioInLandscape: <bag>
+          Parent=0x00000000(Resolved=0x00000000), Count=3
+          #0 (Key=0x01000000): (int) 0x00010020 or 65568
+          #1 (Key=0x7f070028): (int) 0x00000000 or 0
+          #2 (Key=0x7f070029): (int) 0xffffffff or -1
+        resource 0x7f03001e com.hirumisu.carwece:attr/splitMaxAspectRatioInPortrait: <bag>
+          Parent=0x00000000(Resolved=0x00000000), Count=3
+          #0 (Key=0x01000000): (int) 0x00010020 or 65568
+          #1 (Key=0x7f070028): (int) 0x00000000 or 0
+          #2 (Key=0x7f070029): (int) 0xffffffff or -1
+        resource 0x7f03001f com.hirumisu.carwece:attr/splitMinHeightDp: <bag>
+          Parent=0x00000000(Resolved=0x00000000), Count=1
+          #0 (Key=0x01000000): (int) 0x00000004 or 4
+        resource 0x7f030020 com.hirumisu.carwece:attr/splitMinSmallestWidthDp: <bag>
+          Parent=0x00000000(Resolved=0x00000000), Count=1
+          #0 (Key=0x01000000): (int) 0x00000004 or 4
+        resource 0x7f030021 com.hirumisu.carwece:attr/splitMinWidthDp: <bag>
+          Parent=0x00000000(Resolved=0x00000000), Count=1
+          #0 (Key=0x01000000): (int) 0x00000004 or 4
+        resource 0x7f030022 com.hirumisu.carwece:attr/splitRatio: <bag>
+          Parent=0x00000000(Resolved=0x00000000), Count=1
+          #0 (Key=0x01000000): (int) 0x00000020 or 32
+        resource 0x7f030023 com.hirumisu.carwece:attr/stickyPlaceholder: <bag>
+          Parent=0x00000000(Resolved=0x00000000), Count=1
+          #0 (Key=0x01000000): (int) 0x00000008 or 8
+        resource 0x7f030024 com.hirumisu.carwece:attr/tag: <bag>
+          Parent=0x00000000(Resolved=0x00000000), Count=1
+          #0 (Key=0x01000000): (int) 0x00000002 or 2
+        resource 0x7f030025 com.hirumisu.carwece:attr/ttcIndex: <bag>
+          Parent=0x00000000(Resolved=0x00000000), Count=1
+          #0 (Key=0x01000000): (int) 0x00000004 or 4
+    type 3 configCount=1 entryCount=6
+      spec resource 0x7f040000 com.hirumisu.carwece:color/androidx_core_ripple_material_light: flags=0x00000000
+      spec resource 0x7f040001 com.hirumisu.carwece:color/androidx_core_secondary_text_default_material_light: flags=0x00000000
+      spec resource 0x7f040002 com.hirumisu.carwece:color/call_notification_answer_color: flags=0x00000000
+      spec resource 0x7f040003 com.hirumisu.carwece:color/call_notification_decline_color: flags=0x00000000
+      INVALID TYPE CONFIG FOR RESOURCE 0x7f040004
+      INVALID TYPE CONFIG FOR RESOURCE 0x7f040005
+      config (default):
+        resource 0x7f040000 com.hirumisu.carwece:color/androidx_core_ripple_material_light: t=0x1c d=0x1f000000 (s=0x0008 r=0x00)
+          (color) #1f000000
+        resource 0x7f040001 com.hirumisu.carwece:color/androidx_core_secondary_text_default_material_light: t=0x1c d=0x8a000000 (s=0x0008 r=0x00)
+          (color) #8a000000
+        resource 0x7f040002 com.hirumisu.carwece:color/call_notification_answer_color: t=0x1d d=0xff1d873b (s=0x0008 r=0x00)
+          (color) #ff1d873b
+        resource 0x7f040003 com.hirumisu.carwece:color/call_notification_decline_color: t=0x1d d=0xffd93025 (s=0x0008 r=0x00)
+          (color) #ffd93025
+    type 4 configCount=0 entryCount=22
+      INVALID TYPE CONFIG FOR RESOURCE 0x7f050000
+      INVALID TYPE CONFIG FOR RESOURCE 0x7f050001
+      INVALID TYPE CONFIG FOR RESOURCE 0x7f050002
+      INVALID TYPE CONFIG FOR RESOURCE 0x7f050003
+      INVALID TYPE CONFIG FOR RESOURCE 0x7f050004
+      INVALID TYPE CONFIG FOR RESOURCE 0x7f050005
+      INVALID TYPE CONFIG FOR RESOURCE 0x7f050006
+      INVALID TYPE CONFIG FOR RESOURCE 0x7f050007
+      INVALID TYPE CONFIG FOR RESOURCE 0x7f050008
+      INVALID TYPE CONFIG FOR RESOURCE 0x7f050009
+      INVALID TYPE CONFIG FOR RESOURCE 0x7f05000a
+      INVALID TYPE CONFIG FOR RESOURCE 0x7f05000b
+      INVALID TYPE CONFIG FOR RESOURCE 0x7f05000c
+      INVALID TYPE CONFIG FOR RESOURCE 0x7f05000d
+      INVALID TYPE CONFIG FOR RESOURCE 0x7f05000e
+      INVALID TYPE CONFIG FOR RESOURCE 0x7f05000f
+      INVALID TYPE CONFIG FOR RESOURCE 0x7f050010
+      INVALID TYPE CONFIG FOR RESOURCE 0x7f050011
+      INVALID TYPE CONFIG FOR RESOURCE 0x7f050012
+      INVALID TYPE CONFIG FOR RESOURCE 0x7f050013
+      INVALID TYPE CONFIG FOR RESOURCE 0x7f050014
+      INVALID TYPE CONFIG FOR RESOURCE 0x7f050015
+    type 5 configCount=1 entryCount=20
+      INVALID TYPE CONFIG FOR RESOURCE 0x7f060000
+      INVALID TYPE CONFIG FOR RESOURCE 0x7f060001
+      INVALID TYPE CONFIG FOR RESOURCE 0x7f060002
+      INVALID TYPE CONFIG FOR RESOURCE 0x7f060003
+      INVALID TYPE CONFIG FOR RESOURCE 0x7f060004
+      INVALID TYPE CONFIG FOR RESOURCE 0x7f060005
+      spec resource 0x7f060006 com.hirumisu.carwece:drawable/launch_background: flags=0x00000000
+      INVALID TYPE CONFIG FOR RESOURCE 0x7f060007
+      INVALID TYPE CONFIG FOR RESOURCE 0x7f060008
+      INVALID TYPE CONFIG FOR RESOURCE 0x7f060009
+      INVALID TYPE CONFIG FOR RESOURCE 0x7f06000a
+      INVALID TYPE CONFIG FOR RESOURCE 0x7f06000b
+      INVALID TYPE CONFIG FOR RESOURCE 0x7f06000c
+      INVALID TYPE CONFIG FOR RESOURCE 0x7f06000d
+      INVALID TYPE CONFIG FOR RESOURCE 0x7f06000e
+      INVALID TYPE CONFIG FOR RESOURCE 0x7f06000f
+      INVALID TYPE CONFIG FOR RESOURCE 0x7f060010
+      INVALID TYPE CONFIG FOR RESOURCE 0x7f060011
+      INVALID TYPE CONFIG FOR RESOURCE 0x7f060012
+      INVALID TYPE CONFIG FOR RESOURCE 0x7f060013
+      config (default):
+        resource 0x7f060006 com.hirumisu.carwece:drawable/launch_background: t=0x03 d=0x00000000 (s=0x0008 r=0x00)
+          (string8) "res/drawable-v21/launch_background.xml"
+    type 6 configCount=1 entryCount=93
+      spec resource 0x7f070000 com.hirumisu.carwece:id/accessibility_action_clickable_span: flags=0x00000000
+      spec resource 0x7f070001 com.hirumisu.carwece:id/accessibility_custom_action_0: flags=0x00000000
+      spec resource 0x7f070002 com.hirumisu.carwece:id/accessibility_custom_action_1: flags=0x00000000
+      spec resource 0x7f070003 com.hirumisu.carwece:id/accessibility_custom_action_10: flags=0x00000000
+      spec resource 0x7f070004 com.hirumisu.carwece:id/accessibility_custom_action_11: flags=0x00000000
+      spec resource 0x7f070005 com.hirumisu.carwece:id/accessibility_custom_action_12: flags=0x00000000
+      spec resource 0x7f070006 com.hirumisu.carwece:id/accessibility_custom_action_13: flags=0x00000000
+      spec resource 0x7f070007 com.hirumisu.carwece:id/accessibility_custom_action_14: flags=0x00000000
+      spec resource 0x7f070008 com.hirumisu.carwece:id/accessibility_custom_action_15: flags=0x00000000
+      spec resource 0x7f070009 com.hirumisu.carwece:id/accessibility_custom_action_16: flags=0x00000000
+      spec resource 0x7f07000a com.hirumisu.carwece:id/accessibility_custom_action_17: flags=0x00000000
+      spec resource 0x7f07000b com.hirumisu.carwece:id/accessibility_custom_action_18: flags=0x00000000
+      spec resource 0x7f07000c com.hirumisu.carwece:id/accessibility_custom_action_19: flags=0x00000000
+      spec resource 0x7f07000d com.hirumisu.carwece:id/accessibility_custom_action_2: flags=0x00000000
+      spec resource 0x7f07000e com.hirumisu.carwece:id/accessibility_custom_action_20: flags=0x00000000
+      spec resource 0x7f07000f com.hirumisu.carwece:id/accessibility_custom_action_21: flags=0x00000000
+      spec resource 0x7f070010 com.hirumisu.carwece:id/accessibility_custom_action_22: flags=0x00000000
+      spec resource 0x7f070011 com.hirumisu.carwece:id/accessibility_custom_action_23: flags=0x00000000
+      spec resource 0x7f070012 com.hirumisu.carwece:id/accessibility_custom_action_24: flags=0x00000000
+      spec resource 0x7f070013 com.hirumisu.carwece:id/accessibility_custom_action_25: flags=0x00000000
+      spec resource 0x7f070014 com.hirumisu.carwece:id/accessibility_custom_action_26: flags=0x00000000
+      spec resource 0x7f070015 com.hirumisu.carwece:id/accessibility_custom_action_27: flags=0x00000000
+      spec resource 0x7f070016 com.hirumisu.carwece:id/accessibility_custom_action_28: flags=0x00000000
+      spec resource 0x7f070017 com.hirumisu.carwece:id/accessibility_custom_action_29: flags=0x00000000
+      spec resource 0x7f070018 com.hirumisu.carwece:id/accessibility_custom_action_3: flags=0x00000000
+      spec resource 0x7f070019 com.hirumisu.carwece:id/accessibility_custom_action_30: flags=0x00000000
+      spec resource 0x7f07001a com.hirumisu.carwece:id/accessibility_custom_action_31: flags=0x00000000
+      spec resource 0x7f07001b com.hirumisu.carwece:id/accessibility_custom_action_4: flags=0x00000000
+      spec resource 0x7f07001c com.hirumisu.carwece:id/accessibility_custom_action_5: flags=0x00000000
+      spec resource 0x7f07001d com.hirumisu.carwece:id/accessibility_custom_action_6: flags=0x00000000
+      spec resource 0x7f07001e com.hirumisu.carwece:id/accessibility_custom_action_7: flags=0x00000000
+      spec resource 0x7f07001f com.hirumisu.carwece:id/accessibility_custom_action_8: flags=0x00000000
+      spec resource 0x7f070020 com.hirumisu.carwece:id/accessibility_custom_action_9: flags=0x00000000
+      spec resource 0x7f070021 com.hirumisu.carwece:id/action_container: flags=0x00000000
+      spec resource 0x7f070022 com.hirumisu.carwece:id/action_divider: flags=0x00000000
+      spec resource 0x7f070023 com.hirumisu.carwece:id/action_image: flags=0x00000000
+      spec resource 0x7f070024 com.hirumisu.carwece:id/action_text: flags=0x00000000
+      spec resource 0x7f070025 com.hirumisu.carwece:id/actions: flags=0x00000000
+      spec resource 0x7f070026 com.hirumisu.carwece:id/adjacent: flags=0x00000000
+      spec resource 0x7f070027 com.hirumisu.carwece:id/always: flags=0x00000000
+      spec resource 0x7f070028 com.hirumisu.carwece:id/alwaysAllow: flags=0x00000000
+      spec resource 0x7f070029 com.hirumisu.carwece:id/alwaysDisallow: flags=0x00000000
+      spec resource 0x7f07002a com.hirumisu.carwece:id/androidx_window_activity_scope: flags=0x00000000
+      spec resource 0x7f07002b com.hirumisu.carwece:id/async: flags=0x00000000
+      spec resource 0x7f07002c com.hirumisu.carwece:id/blocking: flags=0x00000000
+      spec resource 0x7f07002d com.hirumisu.carwece:id/bottomToTop: flags=0x00000000
+      spec resource 0x7f07002e com.hirumisu.carwece:id/chronometer: flags=0x00000000
+      spec resource 0x7f07002f com.hirumisu.carwece:id/dialog_button: flags=0x00000000
+      spec resource 0x7f070030 com.hirumisu.carwece:id/edit_text_id: flags=0x00000000
+      spec resource 0x7f070031 com.hirumisu.carwece:id/forever: flags=0x00000000
+      spec resource 0x7f070032 com.hirumisu.carwece:id/fragment_container_view_tag: flags=0x00000000
+      spec resource 0x7f070033 com.hirumisu.carwece:id/hide_ime_id: flags=0x00000000
+      spec resource 0x7f070034 com.hirumisu.carwece:id/icon: flags=0x00000000
+      spec resource 0x7f070035 com.hirumisu.carwece:id/icon_group: flags=0x00000000
+      spec resource 0x7f070036 com.hirumisu.carwece:id/info: flags=0x00000000
+      spec resource 0x7f070037 com.hirumisu.carwece:id/italic: flags=0x00000000
+      spec resource 0x7f070038 com.hirumisu.carwece:id/line1: flags=0x00000000
+      spec resource 0x7f070039 com.hirumisu.carwece:id/line3: flags=0x00000000
+      spec resource 0x7f07003a com.hirumisu.carwece:id/locale: flags=0x00000000
+      spec resource 0x7f07003b com.hirumisu.carwece:id/ltr: flags=0x00000000
+      spec resource 0x7f07003c com.hirumisu.carwece:id/never: flags=0x00000000
+      spec resource 0x7f07003d com.hirumisu.carwece:id/normal: flags=0x00000000
+      spec resource 0x7f07003e com.hirumisu.carwece:id/notification_background: flags=0x00000000
+      spec resource 0x7f07003f com.hirumisu.carwece:id/notification_main_column: flags=0x00000000
+      spec resource 0x7f070040 com.hirumisu.carwece:id/notification_main_column_container: flags=0x00000000
+      spec resource 0x7f070041 com.hirumisu.carwece:id/report_drawn: flags=0x00000000
+      spec resource 0x7f070042 com.hirumisu.carwece:id/right_icon: flags=0x00000000
+      spec resource 0x7f070043 com.hirumisu.carwece:id/right_side: flags=0x00000000
+      spec resource 0x7f070044 com.hirumisu.carwece:id/rtl: flags=0x00000000
+      spec resource 0x7f070045 com.hirumisu.carwece:id/special_effects_controller_view_tag: flags=0x00000000
+      spec resource 0x7f070046 com.hirumisu.carwece:id/tag_accessibility_actions: flags=0x00000000
+      spec resource 0x7f070047 com.hirumisu.carwece:id/tag_accessibility_clickable_spans: flags=0x00000000
+      spec resource 0x7f070048 com.hirumisu.carwece:id/tag_accessibility_heading: flags=0x00000000
+      spec resource 0x7f070049 com.hirumisu.carwece:id/tag_accessibility_pane_title: flags=0x00000000
+      spec resource 0x7f07004a com.hirumisu.carwece:id/tag_on_apply_window_listener: flags=0x00000000
+      spec resource 0x7f07004b com.hirumisu.carwece:id/tag_on_receive_content_listener: flags=0x00000000
+      spec resource 0x7f07004c com.hirumisu.carwece:id/tag_on_receive_content_mime_types: flags=0x00000000
+      spec resource 0x7f07004d com.hirumisu.carwece:id/tag_screen_reader_focusable: flags=0x00000000
+      spec resource 0x7f07004e com.hirumisu.carwece:id/tag_state_description: flags=0x00000000
+      spec resource 0x7f07004f com.hirumisu.carwece:id/tag_transition_group: flags=0x00000000
+      spec resource 0x7f070050 com.hirumisu.carwece:id/tag_unhandled_key_event_manager: flags=0x00000000
+      spec resource 0x7f070051 com.hirumisu.carwece:id/tag_unhandled_key_listeners: flags=0x00000000
+      spec resource 0x7f070052 com.hirumisu.carwece:id/tag_window_insets_animation_callback: flags=0x00000000
+      spec resource 0x7f070053 com.hirumisu.carwece:id/text: flags=0x00000000
+      spec resource 0x7f070054 com.hirumisu.carwece:id/text2: flags=0x00000000
+      spec resource 0x7f070055 com.hirumisu.carwece:id/time: flags=0x00000000
+      spec resource 0x7f070056 com.hirumisu.carwece:id/title: flags=0x00000000
+      spec resource 0x7f070057 com.hirumisu.carwece:id/topToBottom: flags=0x00000000
+      spec resource 0x7f070058 com.hirumisu.carwece:id/view_tree_lifecycle_owner: flags=0x00000000
+      spec resource 0x7f070059 com.hirumisu.carwece:id/view_tree_on_back_pressed_dispatcher_owner: flags=0x00000000
+      spec resource 0x7f07005a com.hirumisu.carwece:id/view_tree_saved_state_registry_owner: flags=0x00000000
+      spec resource 0x7f07005b com.hirumisu.carwece:id/view_tree_view_model_store_owner: flags=0x00000000
+      spec resource 0x7f07005c com.hirumisu.carwece:id/visible_removing_fragment_view_tag: flags=0x00000000
+      config (default):
+        resource 0x7f070000 com.hirumisu.carwece:id/accessibility_action_clickable_span: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f070001 com.hirumisu.carwece:id/accessibility_custom_action_0: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f070002 com.hirumisu.carwece:id/accessibility_custom_action_1: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f070003 com.hirumisu.carwece:id/accessibility_custom_action_10: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f070004 com.hirumisu.carwece:id/accessibility_custom_action_11: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f070005 com.hirumisu.carwece:id/accessibility_custom_action_12: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f070006 com.hirumisu.carwece:id/accessibility_custom_action_13: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f070007 com.hirumisu.carwece:id/accessibility_custom_action_14: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f070008 com.hirumisu.carwece:id/accessibility_custom_action_15: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f070009 com.hirumisu.carwece:id/accessibility_custom_action_16: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f07000a com.hirumisu.carwece:id/accessibility_custom_action_17: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f07000b com.hirumisu.carwece:id/accessibility_custom_action_18: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f07000c com.hirumisu.carwece:id/accessibility_custom_action_19: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f07000d com.hirumisu.carwece:id/accessibility_custom_action_2: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f07000e com.hirumisu.carwece:id/accessibility_custom_action_20: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f07000f com.hirumisu.carwece:id/accessibility_custom_action_21: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f070010 com.hirumisu.carwece:id/accessibility_custom_action_22: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f070011 com.hirumisu.carwece:id/accessibility_custom_action_23: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f070012 com.hirumisu.carwece:id/accessibility_custom_action_24: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f070013 com.hirumisu.carwece:id/accessibility_custom_action_25: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f070014 com.hirumisu.carwece:id/accessibility_custom_action_26: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f070015 com.hirumisu.carwece:id/accessibility_custom_action_27: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f070016 com.hirumisu.carwece:id/accessibility_custom_action_28: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f070017 com.hirumisu.carwece:id/accessibility_custom_action_29: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f070018 com.hirumisu.carwece:id/accessibility_custom_action_3: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f070019 com.hirumisu.carwece:id/accessibility_custom_action_30: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f07001a com.hirumisu.carwece:id/accessibility_custom_action_31: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f07001b com.hirumisu.carwece:id/accessibility_custom_action_4: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f07001c com.hirumisu.carwece:id/accessibility_custom_action_5: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f07001d com.hirumisu.carwece:id/accessibility_custom_action_6: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f07001e com.hirumisu.carwece:id/accessibility_custom_action_7: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f07001f com.hirumisu.carwece:id/accessibility_custom_action_8: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f070020 com.hirumisu.carwece:id/accessibility_custom_action_9: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f070021 com.hirumisu.carwece:id/action_container: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f070022 com.hirumisu.carwece:id/action_divider: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f070023 com.hirumisu.carwece:id/action_image: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f070024 com.hirumisu.carwece:id/action_text: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f070025 com.hirumisu.carwece:id/actions: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f070026 com.hirumisu.carwece:id/adjacent: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f070027 com.hirumisu.carwece:id/always: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f070028 com.hirumisu.carwece:id/alwaysAllow: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f070029 com.hirumisu.carwece:id/alwaysDisallow: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f07002a com.hirumisu.carwece:id/androidx_window_activity_scope: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f07002b com.hirumisu.carwece:id/async: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f07002c com.hirumisu.carwece:id/blocking: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f07002d com.hirumisu.carwece:id/bottomToTop: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f07002e com.hirumisu.carwece:id/chronometer: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f07002f com.hirumisu.carwece:id/dialog_button: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f070030 com.hirumisu.carwece:id/edit_text_id: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f070031 com.hirumisu.carwece:id/forever: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f070032 com.hirumisu.carwece:id/fragment_container_view_tag: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f070033 com.hirumisu.carwece:id/hide_ime_id: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f070034 com.hirumisu.carwece:id/icon: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f070035 com.hirumisu.carwece:id/icon_group: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f070036 com.hirumisu.carwece:id/info: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f070037 com.hirumisu.carwece:id/italic: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f070038 com.hirumisu.carwece:id/line1: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f070039 com.hirumisu.carwece:id/line3: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f07003a com.hirumisu.carwece:id/locale: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f07003b com.hirumisu.carwece:id/ltr: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f07003c com.hirumisu.carwece:id/never: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f07003d com.hirumisu.carwece:id/normal: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f07003e com.hirumisu.carwece:id/notification_background: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f07003f com.hirumisu.carwece:id/notification_main_column: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f070040 com.hirumisu.carwece:id/notification_main_column_container: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f070041 com.hirumisu.carwece:id/report_drawn: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f070042 com.hirumisu.carwece:id/right_icon: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f070043 com.hirumisu.carwece:id/right_side: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f070044 com.hirumisu.carwece:id/rtl: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f070045 com.hirumisu.carwece:id/special_effects_controller_view_tag: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f070046 com.hirumisu.carwece:id/tag_accessibility_actions: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f070047 com.hirumisu.carwece:id/tag_accessibility_clickable_spans: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f070048 com.hirumisu.carwece:id/tag_accessibility_heading: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f070049 com.hirumisu.carwece:id/tag_accessibility_pane_title: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f07004a com.hirumisu.carwece:id/tag_on_apply_window_listener: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f07004b com.hirumisu.carwece:id/tag_on_receive_content_listener: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f07004c com.hirumisu.carwece:id/tag_on_receive_content_mime_types: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f07004d com.hirumisu.carwece:id/tag_screen_reader_focusable: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f07004e com.hirumisu.carwece:id/tag_state_description: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f07004f com.hirumisu.carwece:id/tag_transition_group: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f070050 com.hirumisu.carwece:id/tag_unhandled_key_event_manager: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f070051 com.hirumisu.carwece:id/tag_unhandled_key_listeners: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f070052 com.hirumisu.carwece:id/tag_window_insets_animation_callback: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f070053 com.hirumisu.carwece:id/text: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f070054 com.hirumisu.carwece:id/text2: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f070055 com.hirumisu.carwece:id/time: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f070056 com.hirumisu.carwece:id/title: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f070057 com.hirumisu.carwece:id/topToBottom: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f070058 com.hirumisu.carwece:id/view_tree_lifecycle_owner: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f070059 com.hirumisu.carwece:id/view_tree_on_back_pressed_dispatcher_owner: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f07005a com.hirumisu.carwece:id/view_tree_saved_state_registry_owner: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f07005b com.hirumisu.carwece:id/view_tree_view_model_store_owner: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+        resource 0x7f07005c com.hirumisu.carwece:id/visible_removing_fragment_view_tag: t=0x12 d=0x00000000 (s=0x0008 r=0x00)
+          (boolean) false
+    type 7 configCount=1 entryCount=1
+      spec resource 0x7f080000 com.hirumisu.carwece:integer/status_bar_notification_info_maxnum: flags=0x00000000
+      config (default):
+        resource 0x7f080000 com.hirumisu.carwece:integer/status_bar_notification_info_maxnum: t=0x10 d=0x000003e7 (s=0x0008 r=0x00)
+          (int) 0x000003e7 or 999
+    type 8 configCount=0 entryCount=9
+      INVALID TYPE CONFIG FOR RESOURCE 0x7f090000
+      INVALID TYPE CONFIG FOR RESOURCE 0x7f090001
+      INVALID TYPE CONFIG FOR RESOURCE 0x7f090002
+      INVALID TYPE CONFIG FOR RESOURCE 0x7f090003
+      INVALID TYPE CONFIG FOR RESOURCE 0x7f090004
+      INVALID TYPE CONFIG FOR RESOURCE 0x7f090005
+      INVALID TYPE CONFIG FOR RESOURCE 0x7f090006
+      INVALID TYPE CONFIG FOR RESOURCE 0x7f090007
+      INVALID TYPE CONFIG FOR RESOURCE 0x7f090008
+    type 9 configCount=6 entryCount=4
+      spec resource 0x7f0a0000 com.hirumisu.carwece:mipmap/ic_launcher: flags=0x00000500
+      spec resource 0x7f0a0001 com.hirumisu.carwece:mipmap/ic_launcher_background: flags=0x00000100
+      spec resource 0x7f0a0002 com.hirumisu.carwece:mipmap/ic_launcher_foreground: flags=0x00000100
+      spec resource 0x7f0a0003 com.hirumisu.carwece:mipmap/ic_launcher_round: flags=0x00000500
+      config mdpi:
+        resource 0x7f0a0000 com.hirumisu.carwece:mipmap/ic_launcher: t=0x03 d=0x00000002 (s=0x0008 r=0x00)
+          (string8) "res/mipmap-mdpi-v4/ic_launcher.png"
+        resource 0x7f0a0001 com.hirumisu.carwece:mipmap/ic_launcher_background: t=0x03 d=0x00000003 (s=0x0008 r=0x00)
+          (string8) "res/mipmap-mdpi-v4/ic_launcher_background.png"
+        resource 0x7f0a0002 com.hirumisu.carwece:mipmap/ic_launcher_foreground: t=0x03 d=0x00000004 (s=0x0008 r=0x00)
+          (string8) "res/mipmap-mdpi-v4/ic_launcher_foreground.png"
+        resource 0x7f0a0003 com.hirumisu.carwece:mipmap/ic_launcher_round: t=0x03 d=0x00000005 (s=0x0008 r=0x00)
+          (string8) "res/mipmap-mdpi-v4/ic_launcher_round.png"
+      config hdpi:
+        resource 0x7f0a0000 com.hirumisu.carwece:mipmap/ic_launcher: t=0x03 d=0x00000006 (s=0x0008 r=0x00)
+          (string8) "res/mipmap-hdpi-v4/ic_launcher.png"
+        resource 0x7f0a0001 com.hirumisu.carwece:mipmap/ic_launcher_background: t=0x03 d=0x00000007 (s=0x0008 r=0x00)
+          (string8) "res/mipmap-hdpi-v4/ic_launcher_background.png"
+        resource 0x7f0a0002 com.hirumisu.carwece:mipmap/ic_launcher_foreground: t=0x03 d=0x00000008 (s=0x0008 r=0x00)
+          (string8) "res/mipmap-hdpi-v4/ic_launcher_foreground.png"
+        resource 0x7f0a0003 com.hirumisu.carwece:mipmap/ic_launcher_round: t=0x03 d=0x00000009 (s=0x0008 r=0x00)
+          (string8) "res/mipmap-hdpi-v4/ic_launcher_round.png"
+      config xhdpi:
+        resource 0x7f0a0000 com.hirumisu.carwece:mipmap/ic_launcher: t=0x03 d=0x0000000a (s=0x0008 r=0x00)
+          (string8) "res/mipmap-xhdpi-v4/ic_launcher.png"
+        resource 0x7f0a0001 com.hirumisu.carwece:mipmap/ic_launcher_background: t=0x03 d=0x0000000b (s=0x0008 r=0x00)
+          (string8) "res/mipmap-xhdpi-v4/ic_launcher_background.png"
+        resource 0x7f0a0002 com.hirumisu.carwece:mipmap/ic_launcher_foreground: t=0x03 d=0x0000000c (s=0x0008 r=0x00)
+          (string8) "res/mipmap-xhdpi-v4/ic_launcher_foreground.png"
+        resource 0x7f0a0003 com.hirumisu.carwece:mipmap/ic_launcher_round: t=0x03 d=0x0000000d (s=0x0008 r=0x00)
+          (string8) "res/mipmap-xhdpi-v4/ic_launcher_round.png"
+      config xxhdpi:
+        resource 0x7f0a0000 com.hirumisu.carwece:mipmap/ic_launcher: t=0x03 d=0x0000000e (s=0x0008 r=0x00)
+          (string8) "res/mipmap-xxhdpi-v4/ic_launcher.png"
+        resource 0x7f0a0001 com.hirumisu.carwece:mipmap/ic_launcher_background: t=0x03 d=0x0000000f (s=0x0008 r=0x00)
+          (string8) "res/mipmap-xxhdpi-v4/ic_launcher_background.png"
+        resource 0x7f0a0002 com.hirumisu.carwece:mipmap/ic_launcher_foreground: t=0x03 d=0x00000010 (s=0x0008 r=0x00)
+          (string8) "res/mipmap-xxhdpi-v4/ic_launcher_foreground.png"
+        resource 0x7f0a0003 com.hirumisu.carwece:mipmap/ic_launcher_round: t=0x03 d=0x00000011 (s=0x0008 r=0x00)
+          (string8) "res/mipmap-xxhdpi-v4/ic_launcher_round.png"
+      config xxxhdpi:
+        resource 0x7f0a0000 com.hirumisu.carwece:mipmap/ic_launcher: t=0x03 d=0x00000012 (s=0x0008 r=0x00)
+          (string8) "res/mipmap-xxxhdpi-v4/ic_launcher.png"
+        resource 0x7f0a0001 com.hirumisu.carwece:mipmap/ic_launcher_background: t=0x03 d=0x00000013 (s=0x0008 r=0x00)
+          (string8) "res/mipmap-xxxhdpi-v4/ic_launcher_background.png"
+        resource 0x7f0a0002 com.hirumisu.carwece:mipmap/ic_launcher_foreground: t=0x03 d=0x00000014 (s=0x0008 r=0x00)
+          (string8) "res/mipmap-xxxhdpi-v4/ic_launcher_foreground.png"
+        resource 0x7f0a0003 com.hirumisu.carwece:mipmap/ic_launcher_round: t=0x03 d=0x00000015 (s=0x0008 r=0x00)
+          (string8) "res/mipmap-xxxhdpi-v4/ic_launcher_round.png"
+      config anydpi-v26:
+        resource 0x7f0a0000 com.hirumisu.carwece:mipmap/ic_launcher: t=0x03 d=0x00000016 (s=0x0008 r=0x00)
+          (string8) "res/mipmap-anydpi-v26/ic_launcher.xml"
+        resource 0x7f0a0003 com.hirumisu.carwece:mipmap/ic_launcher_round: t=0x03 d=0x00000017 (s=0x0008 r=0x00)
+          (string8) "res/mipmap-anydpi-v26/ic_launcher_round.xml"
+    type 10 configCount=86 entryCount=9
+      spec resource 0x7f0b0000 com.hirumisu.carwece:string/androidx_startup: flags=0x00000000
+      spec resource 0x7f0b0001 com.hirumisu.carwece:string/call_notification_answer_action: flags=0x00000004
+      spec resource 0x7f0b0002 com.hirumisu.carwece:string/call_notification_answer_video_action: flags=0x00000004
+      spec resource 0x7f0b0003 com.hirumisu.carwece:string/call_notification_decline_action: flags=0x00000004
+      spec resource 0x7f0b0004 com.hirumisu.carwece:string/call_notification_hang_up_action: flags=0x00000004
+      spec resource 0x7f0b0005 com.hirumisu.carwece:string/call_notification_incoming_text: flags=0x00000004
+      spec resource 0x7f0b0006 com.hirumisu.carwece:string/call_notification_ongoing_text: flags=0x00000004
+      spec resource 0x7f0b0007 com.hirumisu.carwece:string/call_notification_screening_text: flags=0x00000004
+      spec resource 0x7f0b0008 com.hirumisu.carwece:string/status_bar_notification_info_overflow: flags=0x00000004
+      config (default):
+        resource 0x7f0b0000 com.hirumisu.carwece:string/androidx_startup: t=0x03 d=0x00000020 (s=0x0008 r=0x00)
+          (string8) "androidx.startup"
+        resource 0x7f0b0001 com.hirumisu.carwece:string/call_notification_answer_action: t=0x03 d=0x00000019 (s=0x0008 r=0x00)
+          (string8) "Answer"
+        resource 0x7f0b0002 com.hirumisu.carwece:string/call_notification_answer_video_action: t=0x03 d=0x0000001f (s=0x0008 r=0x00)
+          (string8) "Video"
+        resource 0x7f0b0003 com.hirumisu.carwece:string/call_notification_decline_action: t=0x03 d=0x0000001a (s=0x0008 r=0x00)
+          (string8) "Decline"
+        resource 0x7f0b0004 com.hirumisu.carwece:string/call_notification_hang_up_action: t=0x03 d=0x0000001b (s=0x0008 r=0x00)
+          (string8) "Hang Up"
+        resource 0x7f0b0005 com.hirumisu.carwece:string/call_notification_incoming_text: t=0x03 d=0x0000001c (s=0x0008 r=0x00)
+          (string8) "Incoming call"
+        resource 0x7f0b0006 com.hirumisu.carwece:string/call_notification_ongoing_text: t=0x03 d=0x0000001d (s=0x0008 r=0x00)
+          (string8) "Ongoing call"
+        resource 0x7f0b0007 com.hirumisu.carwece:string/call_notification_screening_text: t=0x03 d=0x0000001e (s=0x0008 r=0x00)
+          (string8) "Screening an incoming call"
+        resource 0x7f0b0008 com.hirumisu.carwece:string/status_bar_notification_info_overflow: t=0x03 d=0x00000018 (s=0x0008 r=0x00)
+          (string8) "999+"
+      config ca:
+        resource 0x7f0b0001 com.hirumisu.carwece:string/call_notification_answer_action: t=0x03 d=0x00000023 (s=0x0008 r=0x00)
+          (string8) "Respon"
+        resource 0x7f0b0002 com.hirumisu.carwece:string/call_notification_answer_video_action: t=0x03 d=0x00000027 (s=0x0008 r=0x00)
+          (string8) "Vídeo"
+        resource 0x7f0b0003 com.hirumisu.carwece:string/call_notification_decline_action: t=0x03 d=0x00000022 (s=0x0008 r=0x00)
+          (string8) "Rebutja"
+        resource 0x7f0b0004 com.hirumisu.carwece:string/call_notification_hang_up_action: t=0x03 d=0x00000021 (s=0x0008 r=0x00)
+          (string8) "Penja"
+        resource 0x7f0b0005 com.hirumisu.carwece:string/call_notification_incoming_text: t=0x03 d=0x00000026 (s=0x0008 r=0x00)
+          (string8) "Trucada entrant"
+        resource 0x7f0b0006 com.hirumisu.carwece:string/call_notification_ongoing_text: t=0x03 d=0x00000025 (s=0x0008 r=0x00)
+          (string8) "Trucada en curs"
+        resource 0x7f0b0007 com.hirumisu.carwece:string/call_notification_screening_text: t=0x03 d=0x00000024 (s=0x0008 r=0x00)
+          (string8) "S'està filtrant una trucada entrant"
+        resource 0x7f0b0008 com.hirumisu.carwece:string/status_bar_notification_info_overflow: t=0x03 d=0x00000018 (s=0x0008 r=0x00)
+          (string8) "999+"
+      config da:
+        resource 0x7f0b0001 com.hirumisu.carwece:string/call_notification_answer_action: t=0x03 d=0x00000029 (s=0x0008 r=0x00)
+          (string8) "Besvar"
+        resource 0x7f0b0002 com.hirumisu.carwece:string/call_notification_answer_video_action: t=0x03 d=0x0000001f (s=0x0008 r=0x00)
+          (string8) "Video"
+        resource 0x7f0b0003 com.hirumisu.carwece:string/call_notification_decline_action: t=0x03 d=0x00000028 (s=0x0008 r=0x00)
+          (string8) "Afvis"
+        resource 0x7f0b0004 com.hirumisu.carwece:string/call_notification_hang_up_action: t=0x03 d=0x0000002d (s=0x0008 r=0x00)
+          (string8) "Læg på"
+        resource 0x7f0b0005 com.hirumisu.carwece:string/call_notification_incoming_text: t=0x03 d=0x0000002c (s=0x0008 r=0x00)
+          (string8) "Indgående opkald"
+        resource 0x7f0b0006 com.hirumisu.carwece:string/call_notification_ongoing_text: t=0x03 d=0x0000002b (s=0x0008 r=0x00)
+          (string8) "Igangværende opkald"
+        resource 0x7f0b0007 com.hirumisu.carwece:string/call_notification_screening_text: t=0x03 d=0x0000002a (s=0x0008 r=0x00)
+          (string8) "Et indgående opkald screenes"
+        resource 0x7f0b0008 com.hirumisu.carwece:string/status_bar_notification_info_overflow: t=0x03 d=0x00000018 (s=0x0008 r=0x00)
+          (string8) "999+"
+      config fa:
+        resource 0x7f0b0001 com.hirumisu.carwece:string/call_notification_answer_action: t=0x03 d=0x00000034 (s=0x0008 r=0x00)
+          (string8) "پاسخ دادن"
+        resource 0x7f0b0002 com.hirumisu.carwece:string/call_notification_answer_video_action: t=0x03 d=0x00000033 (s=0x0008 r=0x00)
+          (string8) "ویدیو"
+        resource 0x7f0b0003 com.hirumisu.carwece:string/call_notification_decline_action: t=0x03 d=0x00000031 (s=0x0008 r=0x00)
+          (string8) "رد کردن"
+        resource 0x7f0b0004 com.hirumisu.carwece:string/call_notification_hang_up_action: t=0x03 d=0x00000032 (s=0x0008 r=0x00)
+          (string8) "قطع تماس"
+        resource 0x7f0b0005 com.hirumisu.carwece:string/call_notification_incoming_text: t=0x03 d=0x0000002f (s=0x0008 r=0x00)
+          (string8) "تماس ورودی"
+        resource 0x7f0b0006 com.hirumisu.carwece:string/call_notification_ongoing_text: t=0x03 d=0x0000002e (s=0x0008 r=0x00)
+          (string8) "تماس درحال انجام"
+        resource 0x7f0b0007 com.hirumisu.carwece:string/call_notification_screening_text: t=0x03 d=0x00000030 (s=0x0008 r=0x00)
+          (string8) "درحال غربال کردن تماس ورودی"
+        resource 0x7f0b0008 com.hirumisu.carwece:string/status_bar_notification_info_overflow: t=0x03 d=0x00000018 (s=0x0008 r=0x00)
+          (string8) "999+"
+      config ja:
+        resource 0x7f0b0001 com.hirumisu.carwece:string/call_notification_answer_action: t=0x03 d=0x00000036 (s=0x0008 r=0x00)
+          (string8) "応答"
+        resource 0x7f0b0002 com.hirumisu.carwece:string/call_notification_answer_video_action: t=0x03 d=0x00000035 (s=0x0008 r=0x00)
+          (string8) "ビデオ"
+        resource 0x7f0b0003 com.hirumisu.carwece:string/call_notification_decline_action: t=0x03 d=0x00000037 (s=0x0008 r=0x00)
+          (string8) "拒否"
+        resource 0x7f0b0004 com.hirumisu.carwece:string/call_notification_hang_up_action: t=0x03 d=0x0000003b (s=0x0008 r=0x00)
+          (string8) "通話終了"
+        resource 0x7f0b0005 com.hirumisu.carwece:string/call_notification_incoming_text: t=0x03 d=0x00000038 (s=0x0008 r=0x00)
+          (string8) "着信"
+        resource 0x7f0b0006 com.hirumisu.carwece:string/call_notification_ongoing_text: t=0x03 d=0x0000003a (s=0x0008 r=0x00)
+          (string8) "通話中"
+        resource 0x7f0b0007 com.hirumisu.carwece:string/call_notification_screening_text: t=0x03 d=0x00000039 (s=0x0008 r=0x00)
+          (string8) "着信をスクリーニング中"
+        resource 0x7f0b0008 com.hirumisu.carwece:string/status_bar_notification_info_overflow: t=0x03 d=0x00000018 (s=0x0008 r=0x00)
+          (string8) "999+"
+      config ka:
+        resource 0x7f0b0001 com.hirumisu.carwece:string/call_notification_answer_action: t=0x03 d=0x0000003f (s=0x0008 r=0x00)
+          (string8) "პასუხი"
+        resource 0x7f0b0002 com.hirumisu.carwece:string/call_notification_answer_video_action: t=0x03 d=0x0000003d (s=0x0008 r=0x00)
+          (string8) "ვიდეო"
+        resource 0x7f0b0003 com.hirumisu.carwece:string/call_notification_decline_action: t=0x03 d=0x00000040 (s=0x0008 r=0x00)
+          (string8) "უარყოფა"
+        resource 0x7f0b0004 com.hirumisu.carwece:string/call_notification_hang_up_action: t=0x03 d=0x0000003c (s=0x0008 r=0x00)
+          (string8) "გათიშვა"
+        resource 0x7f0b0005 com.hirumisu.carwece:string/call_notification_incoming_text: t=0x03 d=0x00000042 (s=0x0008 r=0x00)
+          (string8) "შემომავალი ზარი"
+        resource 0x7f0b0006 com.hirumisu.carwece:string/call_notification_ongoing_text: t=0x03 d=0x0000003e (s=0x0008 r=0x00)
+          (string8) "მიმდინარე ზარი"
+        resource 0x7f0b0007 com.hirumisu.carwece:string/call_notification_screening_text: t=0x03 d=0x00000041 (s=0x0008 r=0x00)
+          (string8) "შემომავალი ზარების გაცხრილვა"
+        resource 0x7f0b0008 com.hirumisu.carwece:string/status_bar_notification_info_overflow: t=0x03 d=0x00000018 (s=0x0008 r=0x00)
+          (string8) "999+"
+      config pa:
+        resource 0x7f0b0001 com.hirumisu.carwece:string/call_notification_answer_action: t=0x03 d=0x00000046 (s=0x0008 r=0x00)
+          (string8) "ਜਵਾਬ ਦਿਓ"
+        resource 0x7f0b0002 com.hirumisu.carwece:string/call_notification_answer_video_action: t=0x03 d=0x00000048 (s=0x0008 r=0x00)
+          (string8) "ਵੀਡੀਓ"
+        resource 0x7f0b0003 com.hirumisu.carwece:string/call_notification_decline_action: t=0x03 d=0x00000043 (s=0x0008 r=0x00)
+          (string8) "ਅਸਵੀਕਾਰ ਕਰੋ"
+        resource 0x7f0b0004 com.hirumisu.carwece:string/call_notification_hang_up_action: t=0x03 d=0x00000049 (s=0x0008 r=0x00)
+          (string8) "ਸਮਾਪਤ ਕਰੋ"
+        resource 0x7f0b0005 com.hirumisu.carwece:string/call_notification_incoming_text: t=0x03 d=0x00000044 (s=0x0008 r=0x00)
+          (string8) "ਇਨਕਮਿੰਗ ਕਾਲ"
+        resource 0x7f0b0006 com.hirumisu.carwece:string/call_notification_ongoing_text: t=0x03 d=0x00000047 (s=0x0008 r=0x00)
+          (string8) "ਜਾਰੀ ਕਾਲ"
+        resource 0x7f0b0007 com.hirumisu.carwece:string/call_notification_screening_text: t=0x03 d=0x00000045 (s=0x0008 r=0x00)
+          (string8) "ਇਨਕਮਿੰਗ ਕਾਲ ਦੀ ਸਕ੍ਰੀਨਿੰਗ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ"
+        resource 0x7f0b0008 com.hirumisu.carwece:string/status_bar_notification_info_overflow: t=0x03 d=0x00000018 (s=0x0008 r=0x00)
+          (string8) "999+"
+      config ta:
+        resource 0x7f0b0001 com.hirumisu.carwece:string/call_notification_answer_action: t=0x03 d=0x0000004f (s=0x0008 r=0x00)
+          (string8) "பதிலளி"
+        resource 0x7f0b0002 com.hirumisu.carwece:string/call_notification_answer_video_action: t=0x03 d=0x00000050 (s=0x0008 r=0x00)
+          (string8) "வீடியோ"
+        resource 0x7f0b0003 com.hirumisu.carwece:string/call_notification_decline_action: t=0x03 d=0x0000004e (s=0x0008 r=0x00)
+          (string8) "நிராகரி"
+        resource 0x7f0b0004 com.hirumisu.carwece:string/call_notification_hang_up_action: t=0x03 d=0x0000004d (s=0x0008 r=0x00)
+          (string8) "துண்டி"
+        resource 0x7f0b0005 com.hirumisu.carwece:string/call_notification_incoming_text: t=0x03 d=0x0000004a (s=0x0008 r=0x00)
+          (string8) "உள்வரும் அழைப்பு"
+        resource 0x7f0b0006 com.hirumisu.carwece:string/call_notification_ongoing_text: t=0x03 d=0x0000004c (s=0x0008 r=0x00)
+          (string8) "செயலில் இருக்கும் அழைப்பு"
+        resource 0x7f0b0007 com.hirumisu.carwece:string/call_notification_screening_text: t=0x03 d=0x0000004b (s=0x0008 r=0x00)
+          (string8) "உள்வரும் அழைப்பை மதிப்பாய்வு செய்கிறது"
+        resource 0x7f0b0008 com.hirumisu.carwece:string/status_bar_notification_info_overflow: t=0x03 d=0x00000018 (s=0x0008 r=0x00)
+          (string8) "999+"
+      config nb:
+        resource 0x7f0b0001 com.hirumisu.carwece:string/call_notification_answer_action: t=0x03 d=0x00000056 (s=0x0008 r=0x00)
+          (string8) "Svar"
+        resource 0x7f0b0002 com.hirumisu.carwece:string/call_notification_answer_video_action: t=0x03 d=0x0000001f (s=0x0008 r=0x00)
+          (string8) "Video"
+        resource 0x7f0b0003 com.hirumisu.carwece:string/call_notification_decline_action: t=0x03 d=0x00000051 (s=0x0008 r=0x00)
+          (string8) "Avvis"
+        resource 0x7f0b0004 com.hirumisu.carwece:string/call_notification_hang_up_action: t=0x03 d=0x00000054 (s=0x0008 r=0x00)
+          (string8) "Legg på"
+        resource 0x7f0b0005 com.hirumisu.carwece:string/call_notification_incoming_text: t=0x03 d=0x00000053 (s=0x0008 r=0x00)
+          (string8) "Innkommende anrop"
+        resource 0x7f0b0006 com.hirumisu.carwece:string/call_notification_ongoing_text: t=0x03 d=0x00000055 (s=0x0008 r=0x00)
+          (string8) "Pågående samtale"
+        resource 0x7f0b0007 com.hirumisu.carwece:string/call_notification_screening_text: t=0x03 d=0x00000052 (s=0x0008 r=0x00)
+          (string8) "Filtrerer et innkommende anrop"
+        resource 0x7f0b0008 com.hirumisu.carwece:string/status_bar_notification_info_overflow: t=0x03 d=0x00000018 (s=0x0008 r=0x00)
+          (string8) "999+"
+      config be:
+        resource 0x7f0b0001 com.hirumisu.carwece:string/call_notification_answer_action: t=0x03 d=0x00000057 (s=0x0008 r=0x00)
+          (string8) "Адказаць"
+        resource 0x7f0b0002 com.hirumisu.carwece:string/call_notification_answer_video_action: t=0x03 d=0x0000005a (s=0x0008 r=0x00)
+          (string8) "Відэа"
+        resource 0x7f0b0003 com.hirumisu.carwece:string/call_notification_decline_action: t=0x03 d=0x00000058 (s=0x0008 r=0x00)
+          (string8) "Адхіліць"
+        resource 0x7f0b0004 com.hirumisu.carwece:string/call_notification_hang_up_action: t=0x03 d=0x0000005b (s=0x0008 r=0x00)
+          (string8) "Завяршыць"
+        resource 0x7f0b0005 com.hirumisu.carwece:string/call_notification_incoming_text: t=0x03 d=0x0000005c (s=0x0008 r=0x00)
+          (string8) "Уваходны выклік"
+        resource 0x7f0b0006 com.hirumisu.carwece:string/call_notification_ongoing_text: t=0x03 d=0x00000059 (s=0x0008 r=0x00)
+          (string8) "Бягучы выклік"
+        resource 0x7f0b0007 com.hirumisu.carwece:string/call_notification_screening_text: t=0x03 d=0x0000005d (s=0x0008 r=0x00)
+          (string8) "Фільтраванне ўваходнага выкліку"
+        resource 0x7f0b0008 com.hirumisu.carwece:string/status_bar_notification_info_overflow: t=0x03 d=0x00000018 (s=0x0008 r=0x00)
+          (string8) "999+"
+      config de:
+        resource 0x7f0b0001 com.hirumisu.carwece:string/call_notification_answer_action: t=0x03 d=0x00000060 (s=0x0008 r=0x00)
+          (string8) "Annehmen"
+        resource 0x7f0b0002 com.hirumisu.carwece:string/call_notification_answer_video_action: t=0x03 d=0x0000001f (s=0x0008 r=0x00)
+          (string8) "Video"
+        resource 0x7f0b0003 com.hirumisu.carwece:string/call_notification_decline_action: t=0x03 d=0x0000005e (s=0x0008 r=0x00)
+          (string8) "Ablehnen"
+        resource 0x7f0b0004 com.hirumisu.carwece:string/call_notification_hang_up_action: t=0x03 d=0x00000061 (s=0x0008 r=0x00)
+          (string8) "Auflegen"
+        resource 0x7f0b0005 com.hirumisu.carwece:string/call_notification_incoming_text: t=0x03 d=0x00000062 (s=0x0008 r=0x00)
+          (string8) "Eingehender Anruf"
+        resource 0x7f0b0006 com.hirumisu.carwece:string/call_notification_ongoing_text: t=0x03 d=0x0000005f (s=0x0008 r=0x00)
+          (string8) "Aktueller Anruf"
+        resource 0x7f0b0007 com.hirumisu.carwece:string/call_notification_screening_text: t=0x03 d=0x00000063 (s=0x0008 r=0x00)
+          (string8) "Filter für eingehenden Anruf"
+        resource 0x7f0b0008 com.hirumisu.carwece:string/status_bar_notification_info_overflow: t=0x03 d=0x00000018 (s=0x0008 r=0x00)
+          (string8) "999+"
+      config ne:
+        resource 0x7f0b0001 com.hirumisu.carwece:string/call_notification_answer_action: t=0x03 d=0x00000067 (s=0x0008 r=0x00)
+          (string8) "जवाफ दिनुहोस्"
+        resource 0x7f0b0002 com.hirumisu.carwece:string/call_notification_answer_video_action: t=0x03 d=0x0000006a (s=0x0008 r=0x00)
+          (string8) "भिडियो"
+        resource 0x7f0b0003 com.hirumisu.carwece:string/call_notification_decline_action: t=0x03 d=0x00000066 (s=0x0008 r=0x00)
+          (string8) "काट्नुहोस्"
+        resource 0x7f0b0004 com.hirumisu.carwece:string/call_notification_hang_up_action: t=0x03 d=0x00000068 (s=0x0008 r=0x00)
+          (string8) "फोन राख्नुहोस्"
+        resource 0x7f0b0005 com.hirumisu.carwece:string/call_notification_incoming_text: t=0x03 d=0x00000064 (s=0x0008 r=0x00)
+          (string8) "आगमन कल"
+        resource 0x7f0b0006 com.hirumisu.carwece:string/call_notification_ongoing_text: t=0x03 d=0x00000069 (s=0x0008 r=0x00)
+          (string8) "भइरहेको कल"
+        resource 0x7f0b0007 com.hirumisu.carwece:string/call_notification_screening_text: t=0x03 d=0x00000065 (s=0x0008 r=0x00)
+          (string8) "आगमन कल जाँचिँदै छ"
+        resource 0x7f0b0008 com.hirumisu.carwece:string/status_bar_notification_info_overflow: t=0x03 d=0x0000006b (s=0x0008 r=0x00)
+          (string8) "९९९+"
+      config te:
+        resource 0x7f0b0001 com.hirumisu.carwece:string/call_notification_answer_action: t=0x03 d=0x00000070 (s=0x0008 r=0x00)
+          (string8) "పికప్ చేయండి"
+        resource 0x7f0b0002 com.hirumisu.carwece:string/call_notification_answer_video_action: t=0x03 d=0x00000072 (s=0x0008 r=0x00)
+          (string8) "వీడియో కాల్"
+        resource 0x7f0b0003 com.hirumisu.carwece:string/call_notification_decline_action: t=0x03 d=0x0000006e (s=0x0008 r=0x00)
+          (string8) "కట్ చేయండి"
+        resource 0x7f0b0004 com.hirumisu.carwece:string/call_notification_hang_up_action: t=0x03 d=0x00000071 (s=0x0008 r=0x00)
+          (string8) "ముగించండి"
+        resource 0x7f0b0005 com.hirumisu.carwece:string/call_notification_incoming_text: t=0x03 d=0x0000006c (s=0x0008 r=0x00)
+          (string8) "ఇన్‌కమింగ్ కాల్"
+        resource 0x7f0b0006 com.hirumisu.carwece:string/call_notification_ongoing_text: t=0x03 d=0x0000006f (s=0x0008 r=0x00)
+          (string8) "కాల్ కొనసాగుతోంది"
+        resource 0x7f0b0007 com.hirumisu.carwece:string/call_notification_screening_text: t=0x03 d=0x0000006d (s=0x0008 r=0x00)
+          (string8) "ఇన్‌కమింగ్ కాల్‌ను స్క్రీన్ చేయండి"
+        resource 0x7f0b0008 com.hirumisu.carwece:string/status_bar_notification_info_overflow: t=0x03 d=0x00000018 (s=0x0008 r=0x00)
+          (string8) "999+"
+      config af:
+        resource 0x7f0b0001 com.hirumisu.carwece:string/call_notification_answer_action: t=0x03 d=0x00000073 (s=0x0008 r=0x00)
+          (string8) "Antwoord"
+        resource 0x7f0b0002 com.hirumisu.carwece:string/call_notification_answer_video_action: t=0x03 d=0x0000001f (s=0x0008 r=0x00)
+          (string8) "Video"
+        resource 0x7f0b0003 com.hirumisu.carwece:string/call_notification_decline_action: t=0x03 d=0x00000078 (s=0x0008 r=0x00)
+          (string8) "Wys af"
+        resource 0x7f0b0004 com.hirumisu.carwece:string/call_notification_hang_up_action: t=0x03 d=0x00000076 (s=0x0008 r=0x00)
+          (string8) "Lui af"
+        resource 0x7f0b0005 com.hirumisu.carwece:string/call_notification_incoming_text: t=0x03 d=0x00000074 (s=0x0008 r=0x00)
+          (string8) "Inkomende oproep"
+        resource 0x7f0b0006 com.hirumisu.carwece:string/call_notification_ongoing_text: t=0x03 d=0x00000077 (s=0x0008 r=0x00)
+          (string8) "Oproep aan die gang"
+        resource 0x7f0b0007 com.hirumisu.carwece:string/call_notification_screening_text: t=0x03 d=0x00000075 (s=0x0008 r=0x00)
+          (string8) "Keur tans 'n inkomende oproep"
+        resource 0x7f0b0008 com.hirumisu.carwece:string/status_bar_notification_info_overflow: t=0x03 d=0x00000018 (s=0x0008 r=0x00)
+          (string8) "999+"
+      config bg:
+        resource 0x7f0b0001 com.hirumisu.carwece:string/call_notification_answer_action: t=0x03 d=0x0000007c (s=0x0008 r=0x00)
+          (string8) "Отговор"
+        resource 0x7f0b0002 com.hirumisu.carwece:string/call_notification_answer_video_action: t=0x03 d=0x00000079 (s=0x0008 r=0x00)
+          (string8) "Видеообаждане"
+        resource 0x7f0b0003 com.hirumisu.carwece:string/call_notification_decline_action: t=0x03 d=0x0000007d (s=0x0008 r=0x00)
+          (string8) "Отхвърляне"
+        resource 0x7f0b0004 com.hirumisu.carwece:string/call_notification_hang_up_action: t=0x03 d=0x0000007b (s=0x0008 r=0x00)
+          (string8) "Затваряне"
+        resource 0x7f0b0005 com.hirumisu.carwece:string/call_notification_incoming_text: t=0x03 d=0x0000007a (s=0x0008 r=0x00)
+          (string8) "Входящо обаждане"
+        resource 0x7f0b0006 com.hirumisu.carwece:string/call_notification_ongoing_text: t=0x03 d=0x0000007f (s=0x0008 r=0x00)
+          (string8) "Текущо обаждане"
+        resource 0x7f0b0007 com.hirumisu.carwece:string/call_notification_screening_text: t=0x03 d=0x0000007e (s=0x0008 r=0x00)
+          (string8) "Преглежда се входящо обаждане"
+        resource 0x7f0b0008 com.hirumisu.carwece:string/status_bar_notification_info_overflow: t=0x03 d=0x00000018 (s=0x0008 r=0x00)
+          (string8) "999+"
+      config th:
+        resource 0x7f0b0001 com.hirumisu.carwece:string/call_notification_answer_action: t=0x03 d=0x00000082 (s=0x0008 r=0x00)
+          (string8) "รับสาย"
+        resource 0x7f0b0002 com.hirumisu.carwece:string/call_notification_answer_video_action: t=0x03 d=0x00000084 (s=0x0008 r=0x00)
+          (string8) "วิดีโอ"
+        resource 0x7f0b0003 com.hirumisu.carwece:string/call_notification_decline_action: t=0x03 d=0x00000081 (s=0x0008 r=0x00)
+          (string8) "ปฏิเสธ"
+        resource 0x7f0b0004 com.hirumisu.carwece:string/call_notification_hang_up_action: t=0x03 d=0x00000083 (s=0x0008 r=0x00)
+          (string8) "วางสาย"
+        resource 0x7f0b0005 com.hirumisu.carwece:string/call_notification_incoming_text: t=0x03 d=0x00000086 (s=0x0008 r=0x00)
+          (string8) "สายเรียกเข้า"
+        resource 0x7f0b0006 com.hirumisu.carwece:string/call_notification_ongoing_text: t=0x03 d=0x00000085 (s=0x0008 r=0x00)
+          (string8) "สายที่สนทนาอยู่"
+        resource 0x7f0b0007 com.hirumisu.carwece:string/call_notification_screening_text: t=0x03 d=0x00000080 (s=0x0008 r=0x00)
+          (string8) "กำลังสกรีนสายเรียกเข้า"
+        resource 0x7f0b0008 com.hirumisu.carwece:string/status_bar_notification_info_overflow: t=0x03 d=0x00000018 (s=0x0008 r=0x00)
+          (string8) "999+"
+      config fi:
+        resource 0x7f0b0001 com.hirumisu.carwece:string/call_notification_answer_action: t=0x03 d=0x0000008c (s=0x0008 r=0x00)
+          (string8) "Vastaa"
+        resource 0x7f0b0002 com.hirumisu.carwece:string/call_notification_answer_video_action: t=0x03 d=0x0000001f (s=0x0008 r=0x00)
+          (string8) "Video"
+        resource 0x7f0b0003 com.hirumisu.carwece:string/call_notification_decline_action: t=0x03 d=0x00000087 (s=0x0008 r=0x00)
+          (string8) "Hylkää"
+        resource 0x7f0b0004 com.hirumisu.carwece:string/call_notification_hang_up_action: t=0x03 d=0x00000089 (s=0x0008 r=0x00)
+          (string8) "Lopeta puhelu"
+        resource 0x7f0b0005 com.hirumisu.carwece:string/call_notification_incoming_text: t=0x03 d=0x0000008a (s=0x0008 r=0x00)
+          (string8) "Saapuva puhelu"
+        resource 0x7f0b0006 com.hirumisu.carwece:string/call_notification_ongoing_text: t=0x03 d=0x00000088 (s=0x0008 r=0x00)
+          (string8) "Käynnissä oleva puhelu"
+        resource 0x7f0b0007 com.hirumisu.carwece:string/call_notification_screening_text: t=0x03 d=0x0000008b (s=0x0008 r=0x00)
+          (string8) "Seulotaan saapuvaa puhelua"
+        resource 0x7f0b0008 com.hirumisu.carwece:string/status_bar_notification_info_overflow: t=0x03 d=0x00000018 (s=0x0008 r=0x00)
+          (string8) "999+"
+      config hi:
+        resource 0x7f0b0001 com.hirumisu.carwece:string/call_notification_answer_action: t=0x03 d=0x00000091 (s=0x0008 r=0x00)
+          (string8) "जवाब दें"
+        resource 0x7f0b0002 com.hirumisu.carwece:string/call_notification_answer_video_action: t=0x03 d=0x00000093 (s=0x0008 r=0x00)
+          (string8) "वीडियो"
+        resource 0x7f0b0003 com.hirumisu.carwece:string/call_notification_decline_action: t=0x03 d=0x0000008d (s=0x0008 r=0x00)
+          (string8) "अस्वीकार करें"
+        resource 0x7f0b0004 com.hirumisu.carwece:string/call_notification_hang_up_action: t=0x03 d=0x00000090 (s=0x0008 r=0x00)
+          (string8) "कॉल काटें"
+        resource 0x7f0b0005 com.hirumisu.carwece:string/call_notification_incoming_text: t=0x03 d=0x0000008e (s=0x0008 r=0x00)
+          (string8) "आने वाला (इनकमिंग) कॉल"
+        resource 0x7f0b0006 com.hirumisu.carwece:string/call_notification_ongoing_text: t=0x03 d=0x00000092 (s=0x0008 r=0x00)
+          (string8) "पहले से जारी कॉल"
+        resource 0x7f0b0007 com.hirumisu.carwece:string/call_notification_screening_text: t=0x03 d=0x0000008f (s=0x0008 r=0x00)
+          (string8) "इनकमिंग कॉल को स्क्रीन किया जा रहा है"
+        resource 0x7f0b0008 com.hirumisu.carwece:string/status_bar_notification_info_overflow: t=0x03 d=0x00000018 (s=0x0008 r=0x00)
+          (string8) "999+"
+      config si:
+        resource 0x7f0b0001 com.hirumisu.carwece:string/call_notification_answer_action: t=0x03 d=0x00000098 (s=0x0008 r=0x00)
+          (string8) "පිළිතුරු දෙ."
+        resource 0x7f0b0002 com.hirumisu.carwece:string/call_notification_answer_video_action: t=0x03 d=0x0000009a (s=0x0008 r=0x00)
+          (string8) "වීඩියෝ"
+        resource 0x7f0b0003 com.hirumisu.carwece:string/call_notification_decline_action: t=0x03 d=0x00000097 (s=0x0008 r=0x00)
+          (string8) "ප්‍රතික්ෂේප ක"
+        resource 0x7f0b0004 com.hirumisu.carwece:string/call_notification_hang_up_action: t=0x03 d=0x00000099 (s=0x0008 r=0x00)
+          (string8) "විසන්ධි කරන්න"
+        resource 0x7f0b0005 com.hirumisu.carwece:string/call_notification_incoming_text: t=0x03 d=0x00000094 (s=0x0008 r=0x00)
+          (string8) "එන ඇමතුම"
+        resource 0x7f0b0006 com.hirumisu.carwece:string/call_notification_ongoing_text: t=0x03 d=0x00000096 (s=0x0008 r=0x00)
+          (string8) "කරගෙන යන ඇමතුම"
+        resource 0x7f0b0007 com.hirumisu.carwece:string/call_notification_screening_text: t=0x03 d=0x00000095 (s=0x0008 r=0x00)
+          (string8) "එන ඇමතුමක් පරීක්ෂා කරන්න"
+        resource 0x7f0b0008 com.hirumisu.carwece:string/status_bar_notification_info_overflow: t=0x03 d=0x00000018 (s=0x0008 r=0x00)
+          (string8) "999+"
+      config vi:
+        resource 0x7f0b0001 com.hirumisu.carwece:string/call_notification_answer_action: t=0x03 d=0x0000009e (s=0x0008 r=0x00)
+          (string8) "Trả lời"
+        resource 0x7f0b0002 com.hirumisu.carwece:string/call_notification_answer_video_action: t=0x03 d=0x0000001f (s=0x0008 r=0x00)
+          (string8) "Video"
+        resource 0x7f0b0003 com.hirumisu.carwece:string/call_notification_decline_action: t=0x03 d=0x0000009f (s=0x0008 r=0x00)
+          (string8) "Từ chối"
+        resource 0x7f0b0004 com.hirumisu.carwece:string/call_notification_hang_up_action: t=0x03 d=0x0000009d (s=0x0008 r=0x00)
+          (string8) "Kết thúc"
+        resource 0x7f0b0005 com.hirumisu.carwece:string/call_notification_incoming_text: t=0x03 d=0x0000009c (s=0x0008 r=0x00)
+          (string8) "Cuộc gọi đến"
+        resource 0x7f0b0006 com.hirumisu.carwece:string/call_notification_ongoing_text: t=0x03 d=0x0000009b (s=0x0008 r=0x00)
+          (string8) "Cuộc gọi đang thực hiện"
+        resource 0x7f0b0007 com.hirumisu.carwece:string/call_notification_screening_text: t=0x03 d=0x000000a0 (s=0x0008 r=0x00)
+          (string8) "Đang sàng lọc cuộc gọi đến"
+        resource 0x7f0b0008 com.hirumisu.carwece:string/status_bar_notification_info_overflow: t=0x03 d=0x00000018 (s=0x0008 r=0x00)
+          (string8) "999+"
+      config kk:
+        resource 0x7f0b0001 com.hirumisu.carwece:string/call_notification_answer_action: t=0x03 d=0x000000a2 (s=0x0008 r=0x00)
+          (string8) "Жауап"
+        resource 0x7f0b0002 com.hirumisu.carwece:string/call_notification_answer_video_action: t=0x03 d=0x000000a1 (s=0x0008 r=0x00)
+          (string8) "Бейне"
+        resource 0x7f0b0003 com.hirumisu.carwece:string/call_notification_decline_action: t=0x03 d=0x000000a6 (s=0x0008 r=0x00)
+          (string8) "Қабылдамау"
+        resource 0x7f0b0004 com.hirumisu.carwece:string/call_notification_hang_up_action: t=0x03 d=0x000000a5 (s=0x0008 r=0x00)
+          (string8) "Тұтқаны қою"
+        resource 0x7f0b0005 com.hirumisu.carwece:string/call_notification_incoming_text: t=0x03 d=0x000000a4 (s=0x0008 r=0x00)
+          (string8) "Кіріс қоңырау"
+        resource 0x7f0b0006 com.hirumisu.carwece:string/call_notification_ongoing_text: t=0x03 d=0x000000a7 (s=0x0008 r=0x00)
+          (string8) "Қоңырау"
+        resource 0x7f0b0007 com.hirumisu.carwece:string/call_notification_screening_text: t=0x03 d=0x000000a3 (s=0x0008 r=0x00)
+          (string8) "Келген қоңырауды сүзу"
+        resource 0x7f0b0008 com.hirumisu.carwece:string/status_bar_notification_info_overflow: t=0x03 d=0x00000018 (s=0x0008 r=0x00)
+          (string8) "999+"
+      config mk:
+        resource 0x7f0b0001 com.hirumisu.carwece:string/call_notification_answer_action: t=0x03 d=0x000000ab (s=0x0008 r=0x00)
+          (string8) "Одговори"
+        resource 0x7f0b0002 com.hirumisu.carwece:string/call_notification_answer_video_action: t=0x03 d=0x000000a8 (s=0x0008 r=0x00)
+          (string8) "Видео"
+        resource 0x7f0b0003 com.hirumisu.carwece:string/call_notification_decline_action: t=0x03 d=0x000000aa (s=0x0008 r=0x00)
+          (string8) "Одбиј"
+        resource 0x7f0b0004 com.hirumisu.carwece:string/call_notification_hang_up_action: t=0x03 d=0x000000ad (s=0x0008 r=0x00)
+          (string8) "Спушти"
+        resource 0x7f0b0005 com.hirumisu.carwece:string/call_notification_incoming_text: t=0x03 d=0x000000a9 (s=0x0008 r=0x00)
+          (string8) "Дојдовен повик"
+        resource 0x7f0b0006 com.hirumisu.carwece:string/call_notification_ongoing_text: t=0x03 d=0x000000ae (s=0x0008 r=0x00)
+          (string8) "Тековен повик"
+        resource 0x7f0b0007 com.hirumisu.carwece:string/call_notification_screening_text: t=0x03 d=0x000000ac (s=0x0008 r=0x00)
+          (string8) "Проверка на дојдовен повик"
+        resource 0x7f0b0008 com.hirumisu.carwece:string/status_bar_notification_info_overflow: t=0x03 d=0x00000018 (s=0x0008 r=0x00)
+          (string8) "999+"
+      config sk:
+        resource 0x7f0b0001 com.hirumisu.carwece:string/call_notification_answer_action: t=0x03 d=0x000000b3 (s=0x0008 r=0x00)
+          (string8) "Prijať"
+        resource 0x7f0b0002 com.hirumisu.carwece:string/call_notification_answer_video_action: t=0x03 d=0x0000001f (s=0x0008 r=0x00)
+          (string8) "Video"
+        resource 0x7f0b0003 com.hirumisu.carwece:string/call_notification_decline_action: t=0x03 d=0x000000af (s=0x0008 r=0x00)
+          (string8) "Odmietnuť"
+        resource 0x7f0b0004 com.hirumisu.carwece:string/call_notification_hang_up_action: t=0x03 d=0x000000b4 (s=0x0008 r=0x00)
+          (string8) "Zložiť"
+        resource 0x7f0b0005 com.hirumisu.carwece:string/call_notification_incoming_text: t=0x03 d=0x000000b2 (s=0x0008 r=0x00)
+          (string8) "Prichádzajúci hovor"
+        resource 0x7f0b0006 com.hirumisu.carwece:string/call_notification_ongoing_text: t=0x03 d=0x000000b0 (s=0x0008 r=0x00)
+          (string8) "Prebiehajúci hovor"
+        resource 0x7f0b0007 com.hirumisu.carwece:string/call_notification_screening_text: t=0x03 d=0x000000b1 (s=0x0008 r=0x00)
+          (string8) "Preveruje sa prichádzajúci hovor"
+        resource 0x7f0b0008 com.hirumisu.carwece:string/status_bar_notification_info_overflow: t=0x03 d=0x00000018 (s=0x0008 r=0x00)
+          (string8) "999+"
+      config uk:
+        resource 0x7f0b0001 com.hirumisu.carwece:string/call_notification_answer_action: t=0x03 d=0x000000b9 (s=0x0008 r=0x00)
+          (string8) "Відповісти"
+        resource 0x7f0b0002 com.hirumisu.carwece:string/call_notification_answer_video_action: t=0x03 d=0x000000b8 (s=0x0008 r=0x00)
+          (string8) "Відео"
+        resource 0x7f0b0003 com.hirumisu.carwece:string/call_notification_decline_action: t=0x03 d=0x000000ba (s=0x0008 r=0x00)
+          (string8) "Відхилити"
+        resource 0x7f0b0004 com.hirumisu.carwece:string/call_notification_hang_up_action: t=0x03 d=0x000000bb (s=0x0008 r=0x00)
+          (string8) "Завершити"
+        resource 0x7f0b0005 com.hirumisu.carwece:string/call_notification_incoming_text: t=0x03 d=0x000000b6 (s=0x0008 r=0x00)
+          (string8) "Вхідний виклик"
+        resource 0x7f0b0006 com.hirumisu.carwece:string/call_notification_ongoing_text: t=0x03 d=0x000000b5 (s=0x0008 r=0x00)
+          (string8) "Активний виклик"
+        resource 0x7f0b0007 com.hirumisu.carwece:string/call_notification_screening_text: t=0x03 d=0x000000b7 (s=0x0008 r=0x00)
+          (string8) "Вхідний виклик (Фільтр)"
+        resource 0x7f0b0008 com.hirumisu.carwece:string/status_bar_notification_info_overflow: t=0x03 d=0x00000018 (s=0x0008 r=0x00)
+          (string8) "999+"
+      config el:
+        resource 0x7f0b0001 com.hirumisu.carwece:string/call_notification_answer_action: t=0x03 d=0x000000bc (s=0x0008 r=0x00)
+          (string8) "Απάντηση"
+        resource 0x7f0b0002 com.hirumisu.carwece:string/call_notification_answer_video_action: t=0x03 d=0x000000be (s=0x0008 r=0x00)
+          (string8) "Βίντεο"
+        resource 0x7f0b0003 com.hirumisu.carwece:string/call_notification_decline_action: t=0x03 d=0x000000bd (s=0x0008 r=0x00)
+          (string8) "Απόρριψη"
+        resource 0x7f0b0004 com.hirumisu.carwece:string/call_notification_hang_up_action: t=0x03 d=0x000000c2 (s=0x0008 r=0x00)
+          (string8) "Τερματισμός"
+        resource 0x7f0b0005 com.hirumisu.carwece:string/call_notification_incoming_text: t=0x03 d=0x000000c0 (s=0x0008 r=0x00)
+          (string8) "Εισερχόμενη κλήση"
+        resource 0x7f0b0006 com.hirumisu.carwece:string/call_notification_ongoing_text: t=0x03 d=0x000000c1 (s=0x0008 r=0x00)
+          (string8) "Κλήση σε εξέλιξη"
+        resource 0x7f0b0007 com.hirumisu.carwece:string/call_notification_screening_text: t=0x03 d=0x000000bf (s=0x0008 r=0x00)
+          (string8) "Διαλογή εισερχόμενης κλήσης"
+        resource 0x7f0b0008 com.hirumisu.carwece:string/status_bar_notification_info_overflow: t=0x03 d=0x00000018 (s=0x0008 r=0x00)
+          (string8) "999+"
+      config gl:
+        resource 0x7f0b0001 com.hirumisu.carwece:string/call_notification_answer_action: t=0x03 d=0x000000c7 (s=0x0008 r=0x00)
+          (string8) "Contestar"
+        resource 0x7f0b0002 com.hirumisu.carwece:string/call_notification_answer_video_action: t=0x03 d=0x00000027 (s=0x0008 r=0x00)
+          (string8) "Vídeo"
+        resource 0x7f0b0003 com.hirumisu.carwece:string/call_notification_decline_action: t=0x03 d=0x000000c9 (s=0x0008 r=0x00)
+          (string8) "Rexeitar"
+        resource 0x7f0b0004 com.hirumisu.carwece:string/call_notification_hang_up_action: t=0x03 d=0x000000c6 (s=0x0008 r=0x00)
+          (string8) "Colgar"
+        resource 0x7f0b0005 com.hirumisu.carwece:string/call_notification_incoming_text: t=0x03 d=0x000000c5 (s=0x0008 r=0x00)
+          (string8) "Chamada entrante"
+        resource 0x7f0b0006 com.hirumisu.carwece:string/call_notification_ongoing_text: t=0x03 d=0x000000c4 (s=0x0008 r=0x00)
+          (string8) "Chamada en curso"
+        resource 0x7f0b0007 com.hirumisu.carwece:string/call_notification_screening_text: t=0x03 d=0x000000c8 (s=0x0008 r=0x00)
+          (string8) "Filtrando chamada entrante"
+        resource 0x7f0b0008 com.hirumisu.carwece:string/status_bar_notification_info_overflow: t=0x03 d=0x000000c3 (s=0x0008 r=0x00)
+          (string8) ">999"
+      config ml:
+        resource 0x7f0b0001 com.hirumisu.carwece:string/call_notification_answer_action: t=0x03 d=0x000000ce (s=0x0008 r=0x00)
+          (string8) "മറുപടി നൽകുക"
+        resource 0x7f0b0002 com.hirumisu.carwece:string/call_notification_answer_video_action: t=0x03 d=0x000000cf (s=0x0008 r=0x00)
+          (string8) "വീഡിയോ"
+        resource 0x7f0b0003 com.hirumisu.carwece:string/call_notification_decline_action: t=0x03 d=0x000000cd (s=0x0008 r=0x00)
+          (string8) "നിരസിക്കുക"
+        resource 0x7f0b0004 com.hirumisu.carwece:string/call_notification_hang_up_action: t=0x03 d=0x000000cc (s=0x0008 r=0x00)
+          (string8) "കോൾ നിർത്തുക"
+        resource 0x7f0b0005 com.hirumisu.carwece:string/call_notification_incoming_text: t=0x03 d=0x000000ca (s=0x0008 r=0x00)
+          (string8) "ഇൻകമിംഗ് കോൾ"
+        resource 0x7f0b0006 com.hirumisu.carwece:string/call_notification_ongoing_text: t=0x03 d=0x000000d0 (s=0x0008 r=0x00)
+          (string8) "സജീവമായ കോൾ"
+        resource 0x7f0b0007 com.hirumisu.carwece:string/call_notification_screening_text: t=0x03 d=0x000000cb (s=0x0008 r=0x00)
+          (string8) "ഇൻകമിംഗ് കോൾ സ്‌ക്രീൻ ചെയ്യുന്നു"
+        resource 0x7f0b0008 com.hirumisu.carwece:string/status_bar_notification_info_overflow: t=0x03 d=0x00000018 (s=0x0008 r=0x00)
+          (string8) "999+"
+      config nl:
+        resource 0x7f0b0001 com.hirumisu.carwece:string/call_notification_answer_action: t=0x03 d=0x000000d2 (s=0x0008 r=0x00)
+          (string8) "Beantwoorden"
+        resource 0x7f0b0002 com.hirumisu.carwece:string/call_notification_answer_video_action: t=0x03 d=0x0000001f (s=0x0008 r=0x00)
+          (string8) "Video"
+        resource 0x7f0b0003 com.hirumisu.carwece:string/call_notification_decline_action: t=0x03 d=0x000000d6 (s=0x0008 r=0x00)
+          (string8) "Weigeren"
+        resource 0x7f0b0004 com.hirumisu.carwece:string/call_notification_hang_up_action: t=0x03 d=0x000000d5 (s=0x0008 r=0x00)
+          (string8) "Ophangen"
+        resource 0x7f0b0005 com.hirumisu.carwece:string/call_notification_incoming_text: t=0x03 d=0x000000d4 (s=0x0008 r=0x00)
+          (string8) "Inkomend gesprek"
+        resource 0x7f0b0006 com.hirumisu.carwece:string/call_notification_ongoing_text: t=0x03 d=0x000000d1 (s=0x0008 r=0x00)
+          (string8) "Actief gesprek"
+        resource 0x7f0b0007 com.hirumisu.carwece:string/call_notification_screening_text: t=0x03 d=0x000000d3 (s=0x0008 r=0x00)
+          (string8) "Een inkomend gesprek screenen"
+        resource 0x7f0b0008 com.hirumisu.carwece:string/status_bar_notification_info_overflow: t=0x03 d=0x00000018 (s=0x0008 r=0x00)
+          (string8) "999+"
+      config pl:
+        resource 0x7f0b0001 com.hirumisu.carwece:string/call_notification_answer_action: t=0x03 d=0x000000d8 (s=0x0008 r=0x00)
+          (string8) "Odbierz"
+        resource 0x7f0b0002 com.hirumisu.carwece:string/call_notification_answer_video_action: t=0x03 d=0x000000dd (s=0x0008 r=0x00)
+          (string8) "Wideo"
+        resource 0x7f0b0003 com.hirumisu.carwece:string/call_notification_decline_action: t=0x03 d=0x000000d9 (s=0x0008 r=0x00)
+          (string8) "Odrzuć"
+        resource 0x7f0b0004 com.hirumisu.carwece:string/call_notification_hang_up_action: t=0x03 d=0x000000db (s=0x0008 r=0x00)
+          (string8) "Rozłącz"
+        resource 0x7f0b0005 com.hirumisu.carwece:string/call_notification_incoming_text: t=0x03 d=0x000000da (s=0x0008 r=0x00)
+          (string8) "Połączenie przychodzące"
+        resource 0x7f0b0006 com.hirumisu.carwece:string/call_notification_ongoing_text: t=0x03 d=0x000000dc (s=0x0008 r=0x00)
+          (string8) "Trwa połączenie"
+        resource 0x7f0b0007 com.hirumisu.carwece:string/call_notification_screening_text: t=0x03 d=0x000000d7 (s=0x0008 r=0x00)
+          (string8) "Filtruję połączenie przychodzące"
+        resource 0x7f0b0008 com.hirumisu.carwece:string/status_bar_notification_info_overflow: t=0x03 d=0x00000018 (s=0x0008 r=0x00)
+          (string8) "999+"
+      config sl:
+        resource 0x7f0b0001 com.hirumisu.carwece:string/call_notification_answer_action: t=0x03 d=0x000000e2 (s=0x0008 r=0x00)
+          (string8) "Sprejmi"
+        resource 0x7f0b0002 com.hirumisu.carwece:string/call_notification_answer_video_action: t=0x03 d=0x0000001f (s=0x0008 r=0x00)
+          (string8) "Video"
+        resource 0x7f0b0003 com.hirumisu.carwece:string/call_notification_decline_action: t=0x03 d=0x000000e3 (s=0x0008 r=0x00)
+          (string8) "Zavrni"
+        resource 0x7f0b0004 com.hirumisu.carwece:string/call_notification_hang_up_action: t=0x03 d=0x000000e0 (s=0x0008 r=0x00)
+          (string8) "Prekini klic"
+        resource 0x7f0b0005 com.hirumisu.carwece:string/call_notification_incoming_text: t=0x03 d=0x000000df (s=0x0008 r=0x00)
+          (string8) "Dohodni klic"
+        resource 0x7f0b0006 com.hirumisu.carwece:string/call_notification_ongoing_text: t=0x03 d=0x000000de (s=0x0008 r=0x00)
+          (string8) "Aktivni klic"
+        resource 0x7f0b0007 com.hirumisu.carwece:string/call_notification_screening_text: t=0x03 d=0x000000e1 (s=0x0008 r=0x00)
+          (string8) "Preverjanje dohodnega klica"
+        resource 0x7f0b0008 com.hirumisu.carwece:string/status_bar_notification_info_overflow: t=0x03 d=0x00000018 (s=0x0008 r=0x00)
+          (string8) "999+"
+      config tl:
+        resource 0x7f0b0001 com.hirumisu.carwece:string/call_notification_answer_action: t=0x03 d=0x000000e8 (s=0x0008 r=0x00)
+          (string8) "Sagutin"
+        resource 0x7f0b0002 com.hirumisu.carwece:string/call_notification_answer_video_action: t=0x03 d=0x0000001f (s=0x0008 r=0x00)
+          (string8) "Video"
+        resource 0x7f0b0003 com.hirumisu.carwece:string/call_notification_decline_action: t=0x03 d=0x000000e9 (s=0x0008 r=0x00)
+          (string8) "Tanggihan"
+        resource 0x7f0b0004 com.hirumisu.carwece:string/call_notification_hang_up_action: t=0x03 d=0x000000e4 (s=0x0008 r=0x00)
+          (string8) "Ibaba"
+        resource 0x7f0b0005 com.hirumisu.carwece:string/call_notification_incoming_text: t=0x03 d=0x000000e7 (s=0x0008 r=0x00)
+          (string8) "Papasok na tawag"
+        resource 0x7f0b0006 com.hirumisu.carwece:string/call_notification_ongoing_text: t=0x03 d=0x000000e5 (s=0x0008 r=0x00)
+          (string8) "Kasalukuyang tawag"
+        resource 0x7f0b0007 com.hirumisu.carwece:string/call_notification_screening_text: t=0x03 d=0x000000e6 (s=0x0008 r=0x00)
+          (string8) "Nagsi-screen ng papasok na tawag"
+        resource 0x7f0b0008 com.hirumisu.carwece:string/status_bar_notification_info_overflow: t=0x03 d=0x00000018 (s=0x0008 r=0x00)
+          (string8) "999+"
+      config am:
+        resource 0x7f0b0001 com.hirumisu.carwece:string/call_notification_answer_action: t=0x03 d=0x000000ea (s=0x0008 r=0x00)
+          (string8) "መልስ"
+        resource 0x7f0b0002 com.hirumisu.carwece:string/call_notification_answer_video_action: t=0x03 d=0x000000ec (s=0x0008 r=0x00)
+          (string8) "ቪዲዮ"
+        resource 0x7f0b0003 com.hirumisu.carwece:string/call_notification_decline_action: t=0x03 d=0x000000ed (s=0x0008 r=0x00)
+          (string8) "አትቀበል"
+        resource 0x7f0b0004 com.hirumisu.carwece:string/call_notification_hang_up_action: t=0x03 d=0x000000eb (s=0x0008 r=0x00)
+          (string8) "ስልኩን ዝጋ"
+        resource 0x7f0b0005 com.hirumisu.carwece:string/call_notification_incoming_text: t=0x03 d=0x000000ef (s=0x0008 r=0x00)
+          (string8) "ገቢ ጥሪ"
+        resource 0x7f0b0006 com.hirumisu.carwece:string/call_notification_ongoing_text: t=0x03 d=0x000000ee (s=0x0008 r=0x00)
+          (string8) "እየተካሄደ ያለ ጥሪ"
+        resource 0x7f0b0007 com.hirumisu.carwece:string/call_notification_screening_text: t=0x03 d=0x000000f0 (s=0x0008 r=0x00)
+          (string8) "ገቢ ጥሪ ማጣራት"
+        resource 0x7f0b0008 com.hirumisu.carwece:string/status_bar_notification_info_overflow: t=0x03 d=0x00000018 (s=0x0008 r=0x00)
+          (string8) "999+"
+      config km:
+        resource 0x7f0b0001 com.hirumisu.carwece:string/call_notification_answer_action: t=0x03 d=0x000000f4 (s=0x0008 r=0x00)
+          (string8) "ឆ្លើយ"
+        resource 0x7f0b0002 com.hirumisu.carwece:string/call_notification_answer_video_action: t=0x03 d=0x000000f7 (s=0x0008 r=0x00)
+          (string8) "វីដេអូ"
+        resource 0x7f0b0003 com.hirumisu.carwece:string/call_notification_decline_action: t=0x03 d=0x000000f6 (s=0x0008 r=0x00)
+          (string8) "បដិសេធ"
+        resource 0x7f0b0004 com.hirumisu.carwece:string/call_notification_hang_up_action: t=0x03 d=0x000000f5 (s=0x0008 r=0x00)
+          (string8) "ដាក់​ចុះ"
+        resource 0x7f0b0005 com.hirumisu.carwece:string/call_notification_incoming_text: t=0x03 d=0x000000f2 (s=0x0008 r=0x00)
+          (string8) "ការ​ហៅ​ចូល"
+        resource 0x7f0b0006 com.hirumisu.carwece:string/call_notification_ongoing_text: t=0x03 d=0x000000f1 (s=0x0008 r=0x00)
+          (string8) "ការ​ហៅដែលកំពុងដំណើរការ"
+        resource 0x7f0b0007 com.hirumisu.carwece:string/call_notification_screening_text: t=0x03 d=0x000000f3 (s=0x0008 r=0x00)
+          (string8) "កំពុងពិនិត្យការ​ហៅ​ចូល"
+        resource 0x7f0b0008 com.hirumisu.carwece:string/status_bar_notification_info_overflow: t=0x03 d=0x00000018 (s=0x0008 r=0x00)
+          (string8) "999+"
+      config bn:
+        resource 0x7f0b0001 com.hirumisu.carwece:string/call_notification_answer_action: t=0x03 d=0x000000fa (s=0x0008 r=0x00)
+          (string8) "উত্তর দিন"
+        resource 0x7f0b0002 com.hirumisu.carwece:string/call_notification_answer_video_action: t=0x03 d=0x000000fe (s=0x0008 r=0x00)
+          (string8) "ভিডিও"
+        resource 0x7f0b0003 com.hirumisu.carwece:string/call_notification_decline_action: t=0x03 d=0x000000fd (s=0x0008 r=0x00)
+          (string8) "বাতিল করুন"
+        resource 0x7f0b0004 com.hirumisu.carwece:string/call_notification_hang_up_action: t=0x03 d=0x000000fb (s=0x0008 r=0x00)
+          (string8) "কল কেটে দিন"
+        resource 0x7f0b0005 com.hirumisu.carwece:string/call_notification_incoming_text: t=0x03 d=0x000000f8 (s=0x0008 r=0x00)
+          (string8) "ইনকামিং কল"
+        resource 0x7f0b0006 com.hirumisu.carwece:string/call_notification_ongoing_text: t=0x03 d=0x000000fc (s=0x0008 r=0x00)
+          (string8) "চালু থাকা কল"
+        resource 0x7f0b0007 com.hirumisu.carwece:string/call_notification_screening_text: t=0x03 d=0x000000f9 (s=0x0008 r=0x00)
+          (string8) "ইনকামিং কল স্ক্রিনিং করা হচ্ছে"
+        resource 0x7f0b0008 com.hirumisu.carwece:string/status_bar_notification_info_overflow: t=0x03 d=0x000000ff (s=0x0008 r=0x00)
+          (string8) "৯৯৯+"
+      config in:
+        resource 0x7f0b0001 com.hirumisu.carwece:string/call_notification_answer_action: t=0x03 d=0x00000100 (s=0x0008 r=0x00)
+          (string8) "Jawab"
+        resource 0x7f0b0002 com.hirumisu.carwece:string/call_notification_answer_video_action: t=0x03 d=0x0000001f (s=0x0008 r=0x00)
+          (string8) "Video"
+        resource 0x7f0b0003 com.hirumisu.carwece:string/call_notification_decline_action: t=0x03 d=0x00000104 (s=0x0008 r=0x00)
+          (string8) "Tolak"
+        resource 0x7f0b0004 com.hirumisu.carwece:string/call_notification_hang_up_action: t=0x03 d=0x00000105 (s=0x0008 r=0x00)
+          (string8) "Tutup"
+        resource 0x7f0b0005 com.hirumisu.carwece:string/call_notification_incoming_text: t=0x03 d=0x00000102 (s=0x0008 r=0x00)
+          (string8) "Panggilan masuk"
+        resource 0x7f0b0006 com.hirumisu.carwece:string/call_notification_ongoing_text: t=0x03 d=0x00000103 (s=0x0008 r=0x00)
+          (string8) "Panggilan sedang berlangsung"
+        resource 0x7f0b0007 com.hirumisu.carwece:string/call_notification_screening_text: t=0x03 d=0x00000101 (s=0x0008 r=0x00)
+          (string8) "Menyaring panggilan masuk"
+        resource 0x7f0b0008 com.hirumisu.carwece:string/status_bar_notification_info_overflow: t=0x03 d=0x00000018 (s=0x0008 r=0x00)
+          (string8) "999+"
+      config kn:
+        resource 0x7f0b0001 com.hirumisu.carwece:string/call_notification_answer_action: t=0x03 d=0x00000106 (s=0x0008 r=0x00)
+          (string8) "ಉತ್ತರಿಸಿ"
+        resource 0x7f0b0002 com.hirumisu.carwece:string/call_notification_answer_video_action: t=0x03 d=0x0000010c (s=0x0008 r=0x00)
+          (string8) "ವೀಡಿಯೊ"
+        resource 0x7f0b0003 com.hirumisu.carwece:string/call_notification_decline_action: t=0x03 d=0x0000010b (s=0x0008 r=0x00)
+          (string8) "ನಿರಾಕರಿಸಿ"
+        resource 0x7f0b0004 com.hirumisu.carwece:string/call_notification_hang_up_action: t=0x03 d=0x00000109 (s=0x0008 r=0x00)
+          (string8) "ಕರೆ ಕೊನೆಗೊಳಿಸಿ"
+        resource 0x7f0b0005 com.hirumisu.carwece:string/call_notification_incoming_text: t=0x03 d=0x00000107 (s=0x0008 r=0x00)
+          (string8) "ಒಳಬರುವ ಕರೆ"
+        resource 0x7f0b0006 com.hirumisu.carwece:string/call_notification_ongoing_text: t=0x03 d=0x0000010a (s=0x0008 r=0x00)
+          (string8) "ಚಾಲ್ತಿಯಲ್ಲಿರುವ ಕರೆ"
+        resource 0x7f0b0007 com.hirumisu.carwece:string/call_notification_screening_text: t=0x03 d=0x00000108 (s=0x0008 r=0x00)
+          (string8) "ಒಳಬರುವ ಕರೆಯನ್ನು ಸ್ಕ್ರೀನ್ ಮಾಡಲಾಗುತ್ತಿದೆ"
+        resource 0x7f0b0008 com.hirumisu.carwece:string/status_bar_notification_info_overflow: t=0x03 d=0x00000018 (s=0x0008 r=0x00)
+          (string8) "999+"
+      config mn:
+        resource 0x7f0b0001 com.hirumisu.carwece:string/call_notification_answer_action: t=0x03 d=0x00000112 (s=0x0008 r=0x00)
+          (string8) "Хариулах"
+        resource 0x7f0b0002 com.hirumisu.carwece:string/call_notification_answer_video_action: t=0x03 d=0x000000a8 (s=0x0008 r=0x00)
+          (string8) "Видео"
+        resource 0x7f0b0003 com.hirumisu.carwece:string/call_notification_decline_action: t=0x03 d=0x00000111 (s=0x0008 r=0x00)
+          (string8) "Татгалзах"
+        resource 0x7f0b0004 com.hirumisu.carwece:string/call_notification_hang_up_action: t=0x03 d=0x00000110 (s=0x0008 r=0x00)
+          (string8) "Таслах"
+        resource 0x7f0b0005 com.hirumisu.carwece:string/call_notification_incoming_text: t=0x03 d=0x0000010e (s=0x0008 r=0x00)
+          (string8) "Ирсэн дуудлага"
+        resource 0x7f0b0006 com.hirumisu.carwece:string/call_notification_ongoing_text: t=0x03 d=0x0000010d (s=0x0008 r=0x00)
+          (string8) "Дуудлага хийгдэж байна"
+        resource 0x7f0b0007 com.hirumisu.carwece:string/call_notification_screening_text: t=0x03 d=0x0000010f (s=0x0008 r=0x00)
+          (string8) "Ирсэн дуудлагыг харуулж байна"
+        resource 0x7f0b0008 com.hirumisu.carwece:string/status_bar_notification_info_overflow: t=0x03 d=0x00000018 (s=0x0008 r=0x00)
+          (string8) "999+"
+      config ko:
+        resource 0x7f0b0001 com.hirumisu.carwece:string/call_notification_answer_action: t=0x03 d=0x00000119 (s=0x0008 r=0x00)
+          (string8) "통화"
+        resource 0x7f0b0002 com.hirumisu.carwece:string/call_notification_answer_video_action: t=0x03 d=0x00000114 (s=0x0008 r=0x00)
+          (string8) "동영상"
+        resource 0x7f0b0003 com.hirumisu.carwece:string/call_notification_decline_action: t=0x03 d=0x00000113 (s=0x0008 r=0x00)
+          (string8) "거절"
+        resource 0x7f0b0004 com.hirumisu.carwece:string/call_notification_hang_up_action: t=0x03 d=0x00000117 (s=0x0008 r=0x00)
+          (string8) "전화 끊기"
+        resource 0x7f0b0005 com.hirumisu.carwece:string/call_notification_incoming_text: t=0x03 d=0x00000115 (s=0x0008 r=0x00)
+          (string8) "수신 전화"
+        resource 0x7f0b0006 com.hirumisu.carwece:string/call_notification_ongoing_text: t=0x03 d=0x00000118 (s=0x0008 r=0x00)
+          (string8) "진행 중인 통화"
+        resource 0x7f0b0007 com.hirumisu.carwece:string/call_notification_screening_text: t=0x03 d=0x00000116 (s=0x0008 r=0x00)
+          (string8) "수신 전화 검사 중"
+        resource 0x7f0b0008 com.hirumisu.carwece:string/status_bar_notification_info_overflow: t=0x03 d=0x00000018 (s=0x0008 r=0x00)
+          (string8) "999+"
+      config lo:
+        resource 0x7f0b0001 com.hirumisu.carwece:string/call_notification_answer_action: t=0x03 d=0x00000120 (s=0x0008 r=0x00)
+          (string8) "ຮັບສາຍ"
+        resource 0x7f0b0002 com.hirumisu.carwece:string/call_notification_answer_video_action: t=0x03 d=0x0000011d (s=0x0008 r=0x00)
+          (string8) "ວິດີໂອ"
+        resource 0x7f0b0003 com.hirumisu.carwece:string/call_notification_decline_action: t=0x03 d=0x0000011b (s=0x0008 r=0x00)
+          (string8) "ປະຕິເສດ"
+        resource 0x7f0b0004 com.hirumisu.carwece:string/call_notification_hang_up_action: t=0x03 d=0x0000011c (s=0x0008 r=0x00)
+          (string8) "ວາງສາຍ"
+        resource 0x7f0b0005 com.hirumisu.carwece:string/call_notification_incoming_text: t=0x03 d=0x0000011f (s=0x0008 r=0x00)
+          (string8) "ສາຍໂທເຂົ້າ"
+        resource 0x7f0b0006 com.hirumisu.carwece:string/call_notification_ongoing_text: t=0x03 d=0x0000011e (s=0x0008 r=0x00)
+          (string8) "ສາຍໂທອອກ"
+        resource 0x7f0b0007 com.hirumisu.carwece:string/call_notification_screening_text: t=0x03 d=0x0000011a (s=0x0008 r=0x00)
+          (string8) "ກຳລັງກວດສອບສາຍໂທເຂົ້າ"
+        resource 0x7f0b0008 com.hirumisu.carwece:string/status_bar_notification_info_overflow: t=0x03 d=0x00000018 (s=0x0008 r=0x00)
+          (string8) "999+"
+      config ro:
+        resource 0x7f0b0001 com.hirumisu.carwece:string/call_notification_answer_action: t=0x03 d=0x00000124 (s=0x0008 r=0x00)
+          (string8) "Răspunde"
+        resource 0x7f0b0002 com.hirumisu.carwece:string/call_notification_answer_video_action: t=0x03 d=0x0000001f (s=0x0008 r=0x00)
+          (string8) "Video"
+        resource 0x7f0b0003 com.hirumisu.carwece:string/call_notification_decline_action: t=0x03 d=0x00000123 (s=0x0008 r=0x00)
+          (string8) "Respinge"
+        resource 0x7f0b0004 com.hirumisu.carwece:string/call_notification_hang_up_action: t=0x03 d=0x00000126 (s=0x0008 r=0x00)
+          (string8) "Închide"
+        resource 0x7f0b0005 com.hirumisu.carwece:string/call_notification_incoming_text: t=0x03 d=0x00000121 (s=0x0008 r=0x00)
+          (string8) "Apel primit"
+        resource 0x7f0b0006 com.hirumisu.carwece:string/call_notification_ongoing_text: t=0x03 d=0x00000122 (s=0x0008 r=0x00)
+          (string8) "Apel în desfășurare"
+        resource 0x7f0b0007 com.hirumisu.carwece:string/call_notification_screening_text: t=0x03 d=0x00000125 (s=0x0008 r=0x00)
+          (string8) "Se filtrează un apel primit"
+        resource 0x7f0b0008 com.hirumisu.carwece:string/status_bar_notification_info_overflow: t=0x03 d=0x00000018 (s=0x0008 r=0x00)
+          (string8) "999+"
+      config sq:
+        resource 0x7f0b0001 com.hirumisu.carwece:string/call_notification_answer_action: t=0x03 d=0x00000129 (s=0x0008 r=0x00)
+          (string8) "Përgjigju"
+        resource 0x7f0b0002 com.hirumisu.carwece:string/call_notification_answer_video_action: t=0x03 d=0x0000001f (s=0x0008 r=0x00)
+          (string8) "Video"
+        resource 0x7f0b0003 com.hirumisu.carwece:string/call_notification_decline_action: t=0x03 d=0x0000012a (s=0x0008 r=0x00)
+          (string8) "Refuzo"
+        resource 0x7f0b0004 com.hirumisu.carwece:string/call_notification_hang_up_action: t=0x03 d=0x00000127 (s=0x0008 r=0x00)
+          (string8) "Mbyll"
+        resource 0x7f0b0005 com.hirumisu.carwece:string/call_notification_incoming_text: t=0x03 d=0x0000012b (s=0x0008 r=0x00)
+          (string8) "Telefonatë hyrëse"
+        resource 0x7f0b0006 com.hirumisu.carwece:string/call_notification_ongoing_text: t=0x03 d=0x0000012c (s=0x0008 r=0x00)
+          (string8) "Telefonatë në vazhdim"
+        resource 0x7f0b0007 com.hirumisu.carwece:string/call_notification_screening_text: t=0x03 d=0x00000128 (s=0x0008 r=0x00)
+          (string8) "Po filtron një telefonatë hyrëse"
+        resource 0x7f0b0008 com.hirumisu.carwece:string/status_bar_notification_info_overflow: t=0x03 d=0x00000018 (s=0x0008 r=0x00)
+          (string8) "999+"
+      config ar:
+        resource 0x7f0b0001 com.hirumisu.carwece:string/call_notification_answer_action: t=0x03 d=0x0000012d (s=0x0008 r=0x00)
+          (string8) "ردّ"
+        resource 0x7f0b0002 com.hirumisu.carwece:string/call_notification_answer_video_action: t=0x03 d=0x0000012f (s=0x0008 r=0x00)
+          (string8) "فيديو"
+        resource 0x7f0b0003 com.hirumisu.carwece:string/call_notification_decline_action: t=0x03 d=0x0000012e (s=0x0008 r=0x00)
+          (string8) "رفض"
+        resource 0x7f0b0004 com.hirumisu.carwece:string/call_notification_hang_up_action: t=0x03 d=0x00000130 (s=0x0008 r=0x00)
+          (string8) "قطع الاتصال"
+        resource 0x7f0b0005 com.hirumisu.carwece:string/call_notification_incoming_text: t=0x03 d=0x00000132 (s=0x0008 r=0x00)
+          (string8) "مكالمة واردة"
+        resource 0x7f0b0006 com.hirumisu.carwece:string/call_notification_ongoing_text: t=0x03 d=0x00000131 (s=0x0008 r=0x00)
+          (string8) "مكالمة جارية"
+        resource 0x7f0b0007 com.hirumisu.carwece:string/call_notification_screening_text: t=0x03 d=0x00000133 (s=0x0008 r=0x00)
+          (string8) "يتم فحص المكالمة الواردة"
+        resource 0x7f0b0008 com.hirumisu.carwece:string/status_bar_notification_info_overflow: t=0x03 d=0x00000018 (s=0x0008 r=0x00)
+          (string8) "999+"
+      config fr:
+        resource 0x7f0b0001 com.hirumisu.carwece:string/call_notification_answer_action: t=0x03 d=0x00000139 (s=0x0008 r=0x00)
+          (string8) "Répondre"
+        resource 0x7f0b0002 com.hirumisu.carwece:string/call_notification_answer_video_action: t=0x03 d=0x0000013a (s=0x0008 r=0x00)
+          (string8) "Vidéo"
+        resource 0x7f0b0003 com.hirumisu.carwece:string/call_notification_decline_action: t=0x03 d=0x00000138 (s=0x0008 r=0x00)
+          (string8) "Refuser"
+        resource 0x7f0b0004 com.hirumisu.carwece:string/call_notification_hang_up_action: t=0x03 d=0x00000137 (s=0x0008 r=0x00)
+          (string8) "Raccrocher"
+        resource 0x7f0b0005 com.hirumisu.carwece:string/call_notification_incoming_text: t=0x03 d=0x00000135 (s=0x0008 r=0x00)
+          (string8) "Appel entrant"
+        resource 0x7f0b0006 com.hirumisu.carwece:string/call_notification_ongoing_text: t=0x03 d=0x00000134 (s=0x0008 r=0x00)
+          (string8) "Appel en cours"
+        resource 0x7f0b0007 com.hirumisu.carwece:string/call_notification_screening_text: t=0x03 d=0x00000136 (s=0x0008 r=0x00)
+          (string8) "Filtrage d'un appel entrant"
+        resource 0x7f0b0008 com.hirumisu.carwece:string/status_bar_notification_info_overflow: t=0x03 d=0x00000018 (s=0x0008 r=0x00)
+          (string8) "999+"
+      config hr:
+        resource 0x7f0b0001 com.hirumisu.carwece:string/call_notification_answer_action: t=0x03 d=0x0000013e (s=0x0008 r=0x00)
+          (string8) "Odgovori"
+        resource 0x7f0b0002 com.hirumisu.carwece:string/call_notification_answer_video_action: t=0x03 d=0x00000141 (s=0x0008 r=0x00)
+          (string8) "Videozapis"
+        resource 0x7f0b0003 com.hirumisu.carwece:string/call_notification_decline_action: t=0x03 d=0x0000013d (s=0x0008 r=0x00)
+          (string8) "Odbij"
+        resource 0x7f0b0004 com.hirumisu.carwece:string/call_notification_hang_up_action: t=0x03 d=0x00000140 (s=0x0008 r=0x00)
+          (string8) "Prekini"
+        resource 0x7f0b0005 com.hirumisu.carwece:string/call_notification_incoming_text: t=0x03 d=0x0000013b (s=0x0008 r=0x00)
+          (string8) "Dolazni poziv"
+        resource 0x7f0b0006 com.hirumisu.carwece:string/call_notification_ongoing_text: t=0x03 d=0x0000013f (s=0x0008 r=0x00)
+          (string8) "Poziv u tijeku"
+        resource 0x7f0b0007 com.hirumisu.carwece:string/call_notification_screening_text: t=0x03 d=0x0000013c (s=0x0008 r=0x00)
+          (string8) "Filtriranje dolaznog poziva"
+        resource 0x7f0b0008 com.hirumisu.carwece:string/status_bar_notification_info_overflow: t=0x03 d=0x00000018 (s=0x0008 r=0x00)
+          (string8) "999+"
+      config mr:
+        resource 0x7f0b0001 com.hirumisu.carwece:string/call_notification_answer_action: t=0x03 d=0x00000144 (s=0x0008 r=0x00)
+          (string8) "उत्तर द्या"
+        resource 0x7f0b0002 com.hirumisu.carwece:string/call_notification_answer_video_action: t=0x03 d=0x00000147 (s=0x0008 r=0x00)
+          (string8) "व्हिडिओ"
+        resource 0x7f0b0003 com.hirumisu.carwece:string/call_notification_decline_action: t=0x03 d=0x00000146 (s=0x0008 r=0x00)
+          (string8) "नकार द्या"
+        resource 0x7f0b0004 com.hirumisu.carwece:string/call_notification_hang_up_action: t=0x03 d=0x00000145 (s=0x0008 r=0x00)
+          (string8) "कॉल बंद करा"
+        resource 0x7f0b0005 com.hirumisu.carwece:string/call_notification_incoming_text: t=0x03 d=0x00000142 (s=0x0008 r=0x00)
+          (string8) "इनकमिंग कॉल"
+        resource 0x7f0b0006 com.hirumisu.carwece:string/call_notification_ongoing_text: t=0x03 d=0x00000148 (s=0x0008 r=0x00)
+          (string8) "सुरू असलेला कॉल"
+        resource 0x7f0b0007 com.hirumisu.carwece:string/call_notification_screening_text: t=0x03 d=0x00000143 (s=0x0008 r=0x00)
+          (string8) "इनकमिंग कॉल स्क्रीन करत आहे"
+        resource 0x7f0b0008 com.hirumisu.carwece:string/status_bar_notification_info_overflow: t=0x03 d=0x0000006b (s=0x0008 r=0x00)
+          (string8) "९९९+"
+      config or:
+        resource 0x7f0b0001 com.hirumisu.carwece:string/call_notification_answer_action: t=0x03 d=0x0000014b (s=0x0008 r=0x00)
+          (string8) "ଉତ୍ତର ଦିଅନ୍ତୁ"
+        resource 0x7f0b0002 com.hirumisu.carwece:string/call_notification_answer_video_action: t=0x03 d=0x0000014e (s=0x0008 r=0x00)
+          (string8) "ଭିଡିଓ"
+        resource 0x7f0b0003 com.hirumisu.carwece:string/call_notification_decline_action: t=0x03 d=0x00000149 (s=0x0008 r=0x00)
+          (string8) "ଅଗ୍ରାହ୍ୟ କର"
+        resource 0x7f0b0004 com.hirumisu.carwece:string/call_notification_hang_up_action: t=0x03 d=0x0000014f (s=0x0008 r=0x00)
+          (string8) "ସମାପ୍ତ କରନ୍ତୁ"
+        resource 0x7f0b0005 com.hirumisu.carwece:string/call_notification_incoming_text: t=0x03 d=0x0000014a (s=0x0008 r=0x00)
+          (string8) "ଇନକମିଂ କଲ୍"
+        resource 0x7f0b0006 com.hirumisu.carwece:string/call_notification_ongoing_text: t=0x03 d=0x0000014d (s=0x0008 r=0x00)
+          (string8) "ଚାଲିଥିବା କଲ୍"
+        resource 0x7f0b0007 com.hirumisu.carwece:string/call_notification_screening_text: t=0x03 d=0x0000014c (s=0x0008 r=0x00)
+          (string8) "ଏକ ଇନକମିଂ କଲକୁ ସ୍କ୍ରିନ୍ କରୁଛି"
+        resource 0x7f0b0008 com.hirumisu.carwece:string/status_bar_notification_info_overflow: t=0x03 d=0x00000018 (s=0x0008 r=0x00)
+          (string8) "999+"
+      config sr:
+        resource 0x7f0b0001 com.hirumisu.carwece:string/call_notification_answer_action: t=0x03 d=0x000000ab (s=0x0008 r=0x00)
+          (string8) "Одговори"
+        resource 0x7f0b0002 com.hirumisu.carwece:string/call_notification_answer_video_action: t=0x03 d=0x000000a8 (s=0x0008 r=0x00)
+          (string8) "Видео"
+        resource 0x7f0b0003 com.hirumisu.carwece:string/call_notification_decline_action: t=0x03 d=0x000000aa (s=0x0008 r=0x00)
+          (string8) "Одбиј"
+        resource 0x7f0b0004 com.hirumisu.carwece:string/call_notification_hang_up_action: t=0x03 d=0x00000152 (s=0x0008 r=0x00)
+          (string8) "Прекини везу"
+        resource 0x7f0b0005 com.hirumisu.carwece:string/call_notification_incoming_text: t=0x03 d=0x00000150 (s=0x0008 r=0x00)
+          (string8) "Долазни позив"
+        resource 0x7f0b0006 com.hirumisu.carwece:string/call_notification_ongoing_text: t=0x03 d=0x00000151 (s=0x0008 r=0x00)
+          (string8) "Позив је у току"
+        resource 0x7f0b0007 com.hirumisu.carwece:string/call_notification_screening_text: t=0x03 d=0x00000153 (s=0x0008 r=0x00)
+          (string8) "Проверава се долазни позив"
+        resource 0x7f0b0008 com.hirumisu.carwece:string/status_bar_notification_info_overflow: t=0x03 d=0x00000018 (s=0x0008 r=0x00)
+          (string8) "999+"
+      config b+sr+Latn:
+        resource 0x7f0b0001 com.hirumisu.carwece:string/call_notification_answer_action: t=0x03 d=0x0000013e (s=0x0008 r=0x00)
+          (string8) "Odgovori"
+        resource 0x7f0b0002 com.hirumisu.carwece:string/call_notification_answer_video_action: t=0x03 d=0x0000001f (s=0x0008 r=0x00)
+          (string8) "Video"
+        resource 0x7f0b0003 com.hirumisu.carwece:string/call_notification_decline_action: t=0x03 d=0x0000013d (s=0x0008 r=0x00)
+          (string8) "Odbij"
+        resource 0x7f0b0004 com.hirumisu.carwece:string/call_notification_hang_up_action: t=0x03 d=0x00000155 (s=0x0008 r=0x00)
+          (string8) "Prekini vezu"
+        resource 0x7f0b0005 com.hirumisu.carwece:string/call_notification_incoming_text: t=0x03 d=0x0000013b (s=0x0008 r=0x00)
+          (string8) "Dolazni poziv"
+        resource 0x7f0b0006 com.hirumisu.carwece:string/call_notification_ongoing_text: t=0x03 d=0x00000154 (s=0x0008 r=0x00)
+          (string8) "Poziv je u toku"
+        resource 0x7f0b0007 com.hirumisu.carwece:string/call_notification_screening_text: t=0x03 d=0x00000156 (s=0x0008 r=0x00)
+          (string8) "Proverava se dolazni poziv"
+        resource 0x7f0b0008 com.hirumisu.carwece:string/status_bar_notification_info_overflow: t=0x03 d=0x00000018 (s=0x0008 r=0x00)
+          (string8) "999+"
+      config tr:
+        resource 0x7f0b0001 com.hirumisu.carwece:string/call_notification_answer_action: t=0x03 d=0x0000015c (s=0x0008 r=0x00)
+          (string8) "Yanıtla"
+        resource 0x7f0b0002 com.hirumisu.carwece:string/call_notification_answer_video_action: t=0x03 d=0x0000001f (s=0x0008 r=0x00)
+          (string8) "Video"
+        resource 0x7f0b0003 com.hirumisu.carwece:string/call_notification_decline_action: t=0x03 d=0x0000015b (s=0x0008 r=0x00)
+          (string8) "Reddet"
+        resource 0x7f0b0004 com.hirumisu.carwece:string/call_notification_hang_up_action: t=0x03 d=0x0000015a (s=0x0008 r=0x00)
+          (string8) "Kapat"
+        resource 0x7f0b0005 com.hirumisu.carwece:string/call_notification_incoming_text: t=0x03 d=0x00000158 (s=0x0008 r=0x00)
+          (string8) "Gelen arama"
+        resource 0x7f0b0006 com.hirumisu.carwece:string/call_notification_ongoing_text: t=0x03 d=0x00000157 (s=0x0008 r=0x00)
+          (string8) "Devam eden arama"
+        resource 0x7f0b0007 com.hirumisu.carwece:string/call_notification_screening_text: t=0x03 d=0x00000159 (s=0x0008 r=0x00)
+          (string8) "Gelen arama süzülüyor"
+        resource 0x7f0b0008 com.hirumisu.carwece:string/status_bar_notification_info_overflow: t=0x03 d=0x00000018 (s=0x0008 r=0x00)
+          (string8) "999+"
+      config ur:
+        resource 0x7f0b0001 com.hirumisu.carwece:string/call_notification_answer_action: t=0x03 d=0x00000161 (s=0x0008 r=0x00)
+          (string8) "جواب دیں"
+        resource 0x7f0b0002 com.hirumisu.carwece:string/call_notification_answer_video_action: t=0x03 d=0x00000164 (s=0x0008 r=0x00)
+          (string8) "ویڈیو"
+        resource 0x7f0b0003 com.hirumisu.carwece:string/call_notification_decline_action: t=0x03 d=0x00000162 (s=0x0008 r=0x00)
+          (string8) "مسترد کریں"
+        resource 0x7f0b0004 com.hirumisu.carwece:string/call_notification_hang_up_action: t=0x03 d=0x00000163 (s=0x0008 r=0x00)
+          (string8) "منقطع کر دیں"
+        resource 0x7f0b0005 com.hirumisu.carwece:string/call_notification_incoming_text: t=0x03 d=0x0000015e (s=0x0008 r=0x00)
+          (string8) "اِن کمنگ کال"
+        resource 0x7f0b0006 com.hirumisu.carwece:string/call_notification_ongoing_text: t=0x03 d=0x00000160 (s=0x0008 r=0x00)
+          (string8) "جاری کال"
+        resource 0x7f0b0007 com.hirumisu.carwece:string/call_notification_screening_text: t=0x03 d=0x0000015f (s=0x0008 r=0x00)
+          (string8) "اِن کمنگ کال کی اسکریننگ"
+        resource 0x7f0b0008 com.hirumisu.carwece:string/status_bar_notification_info_overflow: t=0x03 d=0x0000015d (s=0x0008 r=0x00)
+          (string8) "+999"
+      config as:
+        resource 0x7f0b0001 com.hirumisu.carwece:string/call_notification_answer_action: t=0x03 d=0x00000166 (s=0x0008 r=0x00)
+          (string8) "উত্তৰ দিয়ক"
+        resource 0x7f0b0002 com.hirumisu.carwece:string/call_notification_answer_video_action: t=0x03 d=0x0000016b (s=0x0008 r=0x00)
+          (string8) "ভিডিঅ’"
+        resource 0x7f0b0003 com.hirumisu.carwece:string/call_notification_decline_action: t=0x03 d=0x0000016a (s=0x0008 r=0x00)
+          (string8) "প্ৰত্যাখ্যান কৰক"
+        resource 0x7f0b0004 com.hirumisu.carwece:string/call_notification_hang_up_action: t=0x03 d=0x00000168 (s=0x0008 r=0x00)
+          (string8) "কল কাটি দিয়ক"
+        resource 0x7f0b0005 com.hirumisu.carwece:string/call_notification_incoming_text: t=0x03 d=0x00000165 (s=0x0008 r=0x00)
+          (string8) "অন্তৰ্গামী কল"
+        resource 0x7f0b0006 com.hirumisu.carwece:string/call_notification_ongoing_text: t=0x03 d=0x00000169 (s=0x0008 r=0x00)
+          (string8) "চলি থকা কল"
+        resource 0x7f0b0007 com.hirumisu.carwece:string/call_notification_screening_text: t=0x03 d=0x00000167 (s=0x0008 r=0x00)
+          (string8) "এটা অন্তৰ্গামী কলৰ পৰীক্ষা কৰি থকা হৈছে"
+        resource 0x7f0b0008 com.hirumisu.carwece:string/status_bar_notification_info_overflow: t=0x03 d=0x000000ff (s=0x0008 r=0x00)
+          (string8) "৯৯৯+"
+      config bs:
+        resource 0x7f0b0001 com.hirumisu.carwece:string/call_notification_answer_action: t=0x03 d=0x0000013e (s=0x0008 r=0x00)
+          (string8) "Odgovori"
+        resource 0x7f0b0002 com.hirumisu.carwece:string/call_notification_answer_video_action: t=0x03 d=0x0000001f (s=0x0008 r=0x00)
+          (string8) "Video"
+        resource 0x7f0b0003 com.hirumisu.carwece:string/call_notification_decline_action: t=0x03 d=0x0000016c (s=0x0008 r=0x00)
+          (string8) "Odbaci"
+        resource 0x7f0b0004 com.hirumisu.carwece:string/call_notification_hang_up_action: t=0x03 d=0x00000155 (s=0x0008 r=0x00)
+          (string8) "Prekini vezu"
+        resource 0x7f0b0005 com.hirumisu.carwece:string/call_notification_incoming_text: t=0x03 d=0x0000013b (s=0x0008 r=0x00)
+          (string8) "Dolazni poziv"
+        resource 0x7f0b0006 com.hirumisu.carwece:string/call_notification_ongoing_text: t=0x03 d=0x0000016d (s=0x0008 r=0x00)
+          (string8) "Poziv u toku"
+        resource 0x7f0b0007 com.hirumisu.carwece:string/call_notification_screening_text: t=0x03 d=0x0000013c (s=0x0008 r=0x00)
+          (string8) "Filtriranje dolaznog poziva"
+        resource 0x7f0b0008 com.hirumisu.carwece:string/status_bar_notification_info_overflow: t=0x03 d=0x00000018 (s=0x0008 r=0x00)
+          (string8) "999+"
+      config cs:
+        resource 0x7f0b0001 com.hirumisu.carwece:string/call_notification_answer_action: t=0x03 d=0x00000171 (s=0x0008 r=0x00)
+          (string8) "Přijmout"
+        resource 0x7f0b0002 com.hirumisu.carwece:string/call_notification_answer_video_action: t=0x03 d=0x0000001f (s=0x0008 r=0x00)
+          (string8) "Video"
+        resource 0x7f0b0003 com.hirumisu.carwece:string/call_notification_decline_action: t=0x03 d=0x0000016e (s=0x0008 r=0x00)
+          (string8) "Odmítnout"
+        resource 0x7f0b0004 com.hirumisu.carwece:string/call_notification_hang_up_action: t=0x03 d=0x00000173 (s=0x0008 r=0x00)
+          (string8) "Zavěsit"
+        resource 0x7f0b0005 com.hirumisu.carwece:string/call_notification_incoming_text: t=0x03 d=0x00000172 (s=0x0008 r=0x00)
+          (string8) "Příchozí hovor"
+        resource 0x7f0b0006 com.hirumisu.carwece:string/call_notification_ongoing_text: t=0x03 d=0x0000016f (s=0x0008 r=0x00)
+          (string8) "Probíhající hovor"
+        resource 0x7f0b0007 com.hirumisu.carwece:string/call_notification_screening_text: t=0x03 d=0x00000170 (s=0x0008 r=0x00)
+          (string8) "Prověřování příchozího hovoru"
+        resource 0x7f0b0008 com.hirumisu.carwece:string/status_bar_notification_info_overflow: t=0x03 d=0x00000018 (s=0x0008 r=0x00)
+          (string8) "999+"
+      config es:
+        resource 0x7f0b0001 com.hirumisu.carwece:string/call_notification_answer_action: t=0x03 d=0x00000178 (s=0x0008 r=0x00)
+          (string8) "Responder"
+        resource 0x7f0b0002 com.hirumisu.carwece:string/call_notification_answer_video_action: t=0x03 d=0x00000027 (s=0x0008 r=0x00)
+          (string8) "Vídeo"
+        resource 0x7f0b0003 com.hirumisu.carwece:string/call_notification_decline_action: t=0x03 d=0x00000177 (s=0x0008 r=0x00)
+          (string8) "Rechazar"
+        resource 0x7f0b0004 com.hirumisu.carwece:string/call_notification_hang_up_action: t=0x03 d=0x000000c6 (s=0x0008 r=0x00)
+          (string8) "Colgar"
+        resource 0x7f0b0005 com.hirumisu.carwece:string/call_notification_incoming_text: t=0x03 d=0x00000176 (s=0x0008 r=0x00)
+          (string8) "Llamada entrante"
+        resource 0x7f0b0006 com.hirumisu.carwece:string/call_notification_ongoing_text: t=0x03 d=0x00000175 (s=0x0008 r=0x00)
+          (string8) "Llamada en curso"
+        resource 0x7f0b0007 com.hirumisu.carwece:string/call_notification_screening_text: t=0x03 d=0x00000174 (s=0x0008 r=0x00)
+          (string8) "Filtrando una llamada entrante"
+        resource 0x7f0b0008 com.hirumisu.carwece:string/status_bar_notification_info_overflow: t=0x03 d=0x00000018 (s=0x0008 r=0x00)
+          (string8) "999+"
+      config is:
+        resource 0x7f0b0001 com.hirumisu.carwece:string/call_notification_answer_action: t=0x03 d=0x0000017c (s=0x0008 r=0x00)
+          (string8) "Svara"
+        resource 0x7f0b0002 com.hirumisu.carwece:string/call_notification_answer_video_action: t=0x03 d=0x0000017b (s=0x0008 r=0x00)
+          (string8) "Myndsímtal"
+        resource 0x7f0b0003 com.hirumisu.carwece:string/call_notification_decline_action: t=0x03 d=0x00000179 (s=0x0008 r=0x00)
+          (string8) "Hafna"
+        resource 0x7f0b0004 com.hirumisu.carwece:string/call_notification_hang_up_action: t=0x03 d=0x0000017a (s=0x0008 r=0x00)
+          (string8) "Leggja á"
+        resource 0x7f0b0005 com.hirumisu.carwece:string/call_notification_incoming_text: t=0x03 d=0x0000017e (s=0x0008 r=0x00)
+          (string8) "Símtal berst"
+        resource 0x7f0b0006 com.hirumisu.carwece:string/call_notification_ongoing_text: t=0x03 d=0x0000017f (s=0x0008 r=0x00)
+          (string8) "Símtal í gangi"
+        resource 0x7f0b0007 com.hirumisu.carwece:string/call_notification_screening_text: t=0x03 d=0x0000017d (s=0x0008 r=0x00)
+          (string8) "Síar símtal sem berst"
+        resource 0x7f0b0008 com.hirumisu.carwece:string/status_bar_notification_info_overflow: t=0x03 d=0x00000018 (s=0x0008 r=0x00)
+          (string8) "999+"
+      config ms:
+        resource 0x7f0b0001 com.hirumisu.carwece:string/call_notification_answer_action: t=0x03 d=0x00000100 (s=0x0008 r=0x00)
+          (string8) "Jawab"
+        resource 0x7f0b0002 com.hirumisu.carwece:string/call_notification_answer_video_action: t=0x03 d=0x0000001f (s=0x0008 r=0x00)
+          (string8) "Video"
+        resource 0x7f0b0003 com.hirumisu.carwece:string/call_notification_decline_action: t=0x03 d=0x00000104 (s=0x0008 r=0x00)
+          (string8) "Tolak"
+        resource 0x7f0b0004 com.hirumisu.carwece:string/call_notification_hang_up_action: t=0x03 d=0x00000180 (s=0x0008 r=0x00)
+          (string8) "Tamatkan Panggilan"
+        resource 0x7f0b0005 com.hirumisu.carwece:string/call_notification_incoming_text: t=0x03 d=0x00000102 (s=0x0008 r=0x00)
+          (string8) "Panggilan masuk"
+        resource 0x7f0b0006 com.hirumisu.carwece:string/call_notification_ongoing_text: t=0x03 d=0x00000103 (s=0x0008 r=0x00)
+          (string8) "Panggilan sedang berlangsung"
+        resource 0x7f0b0007 com.hirumisu.carwece:string/call_notification_screening_text: t=0x03 d=0x00000101 (s=0x0008 r=0x00)
+          (string8) "Menyaring panggilan masuk"
+        resource 0x7f0b0008 com.hirumisu.carwece:string/status_bar_notification_info_overflow: t=0x03 d=0x00000018 (s=0x0008 r=0x00)
+          (string8) "999+"
+      config et:
+        resource 0x7f0b0001 com.hirumisu.carwece:string/call_notification_answer_action: t=0x03 d=0x00000186 (s=0x0008 r=0x00)
+          (string8) "Vasta"
+        resource 0x7f0b0002 com.hirumisu.carwece:string/call_notification_answer_video_action: t=0x03 d=0x0000001f (s=0x0008 r=0x00)
+          (string8) "Video"
+        resource 0x7f0b0003 com.hirumisu.carwece:string/call_notification_decline_action: t=0x03 d=0x00000181 (s=0x0008 r=0x00)
+          (string8) "Keeldu"
+        resource 0x7f0b0004 com.hirumisu.carwece:string/call_notification_hang_up_action: t=0x03 d=0x00000183 (s=0x0008 r=0x00)
+          (string8) "Lõpeta kõne"
+        resource 0x7f0b0005 com.hirumisu.carwece:string/call_notification_incoming_text: t=0x03 d=0x00000184 (s=0x0008 r=0x00)
+          (string8) "Sissetulev kõne"
+        resource 0x7f0b0006 com.hirumisu.carwece:string/call_notification_ongoing_text: t=0x03 d=0x00000182 (s=0x0008 r=0x00)
+          (string8) "Käimasolev kõne"
+        resource 0x7f0b0007 com.hirumisu.carwece:string/call_notification_screening_text: t=0x03 d=0x00000185 (s=0x0008 r=0x00)
+          (string8) "Sissetuleva kõne filtreerimine"
+        resource 0x7f0b0008 com.hirumisu.carwece:string/status_bar_notification_info_overflow: t=0x03 d=0x00000018 (s=0x0008 r=0x00)
+          (string8) "999+"
+      config it:
+        resource 0x7f0b0001 com.hirumisu.carwece:string/call_notification_answer_action: t=0x03 d=0x0000018c (s=0x0008 r=0x00)
+          (string8) "Rispondi"
+        resource 0x7f0b0002 com.hirumisu.carwece:string/call_notification_answer_video_action: t=0x03 d=0x0000001f (s=0x0008 r=0x00)
+          (string8) "Video"
+        resource 0x7f0b0003 com.hirumisu.carwece:string/call_notification_decline_action: t=0x03 d=0x0000018b (s=0x0008 r=0x00)
+          (string8) "Rifiuta"
+        resource 0x7f0b0004 com.hirumisu.carwece:string/call_notification_hang_up_action: t=0x03 d=0x0000018a (s=0x0008 r=0x00)
+          (string8) "Riaggancia"
+        resource 0x7f0b0005 com.hirumisu.carwece:string/call_notification_incoming_text: t=0x03 d=0x00000188 (s=0x0008 r=0x00)
+          (string8) "Chiamata in arrivo"
+        resource 0x7f0b0006 com.hirumisu.carwece:string/call_notification_ongoing_text: t=0x03 d=0x00000189 (s=0x0008 r=0x00)
+          (string8) "Chiamata in corso"
+        resource 0x7f0b0007 com.hirumisu.carwece:string/call_notification_screening_text: t=0x03 d=0x00000187 (s=0x0008 r=0x00)
+          (string8) "Applicazione filtro a chiamata in arrivo"
+        resource 0x7f0b0008 com.hirumisu.carwece:string/status_bar_notification_info_overflow: t=0x03 d=0x00000018 (s=0x0008 r=0x00)
+          (string8) "999+"
+      config lt:
+        resource 0x7f0b0001 com.hirumisu.carwece:string/call_notification_answer_action: t=0x03 d=0x0000018e (s=0x0008 r=0x00)
+          (string8) "Atsakyti"
+        resource 0x7f0b0002 com.hirumisu.carwece:string/call_notification_answer_video_action: t=0x03 d=0x00000192 (s=0x0008 r=0x00)
+          (string8) "Vaizdo įrašas"
+        resource 0x7f0b0003 com.hirumisu.carwece:string/call_notification_decline_action: t=0x03 d=0x0000018d (s=0x0008 r=0x00)
+          (string8) "Atmesti"
+        resource 0x7f0b0004 com.hirumisu.carwece:string/call_notification_hang_up_action: t=0x03 d=0x0000018f (s=0x0008 r=0x00)
+          (string8) "Baigti pok."
+        resource 0x7f0b0005 com.hirumisu.carwece:string/call_notification_incoming_text: t=0x03 d=0x00000190 (s=0x0008 r=0x00)
+          (string8) "Gaunamasis skambutis"
+        resource 0x7f0b0006 com.hirumisu.carwece:string/call_notification_ongoing_text: t=0x03 d=0x00000193 (s=0x0008 r=0x00)
+          (string8) "Vykstantis skambutis"
+        resource 0x7f0b0007 com.hirumisu.carwece:string/call_notification_screening_text: t=0x03 d=0x00000191 (s=0x0008 r=0x00)
+          (string8) "Gaunamojo skambučio tikrinimas"
+        resource 0x7f0b0008 com.hirumisu.carwece:string/status_bar_notification_info_overflow: t=0x03 d=0x00000018 (s=0x0008 r=0x00)
+          (string8) "999+"
+      config pt:
+        resource 0x7f0b0001 com.hirumisu.carwece:string/call_notification_answer_action: t=0x03 d=0x00000194 (s=0x0008 r=0x00)
+          (string8) "Atender"
+        resource 0x7f0b0002 com.hirumisu.carwece:string/call_notification_answer_video_action: t=0x03 d=0x00000027 (s=0x0008 r=0x00)
+          (string8) "Vídeo"
+        resource 0x7f0b0003 com.hirumisu.carwece:string/call_notification_decline_action: t=0x03 d=0x00000199 (s=0x0008 r=0x00)
+          (string8) "Recusar"
+        resource 0x7f0b0004 com.hirumisu.carwece:string/call_notification_hang_up_action: t=0x03 d=0x00000197 (s=0x0008 r=0x00)
+          (string8) "Desligar"
+        resource 0x7f0b0005 com.hirumisu.carwece:string/call_notification_incoming_text: t=0x03 d=0x00000196 (s=0x0008 r=0x00)
+          (string8) "Chamada recebida"
+        resource 0x7f0b0006 com.hirumisu.carwece:string/call_notification_ongoing_text: t=0x03 d=0x00000195 (s=0x0008 r=0x00)
+          (string8) "Chamada em andamento"
+        resource 0x7f0b0007 com.hirumisu.carwece:string/call_notification_screening_text: t=0x03 d=0x00000198 (s=0x0008 r=0x00)
+          (string8) "Filtrando uma ligação recebida"
+        resource 0x7f0b0008 com.hirumisu.carwece:string/status_bar_notification_info_overflow: t=0x03 d=0x00000018 (s=0x0008 r=0x00)
+          (string8) "999+"
+      config eu:
+        resource 0x7f0b0001 com.hirumisu.carwece:string/call_notification_answer_action: t=0x03 d=0x0000019e (s=0x0008 r=0x00)
+          (string8) "Erantzun"
+        resource 0x7f0b0002 com.hirumisu.carwece:string/call_notification_answer_video_action: t=0x03 d=0x0000019c (s=0x0008 r=0x00)
+          (string8) "Bideoa"
+        resource 0x7f0b0003 com.hirumisu.carwece:string/call_notification_decline_action: t=0x03 d=0x0000019b (s=0x0008 r=0x00)
+          (string8) "Baztertu"
+        resource 0x7f0b0004 com.hirumisu.carwece:string/call_notification_hang_up_action: t=0x03 d=0x0000019a (s=0x0008 r=0x00)
+          (string8) "Amaitu deia"
+        resource 0x7f0b0005 com.hirumisu.carwece:string/call_notification_incoming_text: t=0x03 d=0x000001a0 (s=0x0008 r=0x00)
+          (string8) "Sarrerako deia"
+        resource 0x7f0b0006 com.hirumisu.carwece:string/call_notification_ongoing_text: t=0x03 d=0x0000019d (s=0x0008 r=0x00)
+          (string8) "Deia abian da"
+        resource 0x7f0b0007 com.hirumisu.carwece:string/call_notification_screening_text: t=0x03 d=0x0000019f (s=0x0008 r=0x00)
+          (string8) "Sarrerako dei bat bistaratzen"
+        resource 0x7f0b0008 com.hirumisu.carwece:string/status_bar_notification_info_overflow: t=0x03 d=0x00000018 (s=0x0008 r=0x00)
+          (string8) "999+"
+      config gu:
+        resource 0x7f0b0001 com.hirumisu.carwece:string/call_notification_answer_action: t=0x03 d=0x000001a4 (s=0x0008 r=0x00)
+          (string8) "જવાબ"
+        resource 0x7f0b0002 com.hirumisu.carwece:string/call_notification_answer_video_action: t=0x03 d=0x000001a6 (s=0x0008 r=0x00)
+          (string8) "વીડિયો"
+        resource 0x7f0b0003 com.hirumisu.carwece:string/call_notification_decline_action: t=0x03 d=0x000001a5 (s=0x0008 r=0x00)
+          (string8) "નકારો"
+        resource 0x7f0b0004 com.hirumisu.carwece:string/call_notification_hang_up_action: t=0x03 d=0x000001a7 (s=0x0008 r=0x00)
+          (string8) "સમાપ્ત કરો"
+        resource 0x7f0b0005 com.hirumisu.carwece:string/call_notification_incoming_text: t=0x03 d=0x000001a1 (s=0x0008 r=0x00)
+          (string8) "ઇનકમિંગ કૉલ"
+        resource 0x7f0b0006 com.hirumisu.carwece:string/call_notification_ongoing_text: t=0x03 d=0x000001a3 (s=0x0008 r=0x00)
+          (string8) "ચાલુ કૉલ"
+        resource 0x7f0b0007 com.hirumisu.carwece:string/call_notification_screening_text: t=0x03 d=0x000001a2 (s=0x0008 r=0x00)
+          (string8) "ઇનકમિંગ કૉલનું સ્ક્રીનિંગ થાય છે"
+        resource 0x7f0b0008 com.hirumisu.carwece:string/status_bar_notification_info_overflow: t=0x03 d=0x00000018 (s=0x0008 r=0x00)
+          (string8) "999+"
+      config hu:
+        resource 0x7f0b0001 com.hirumisu.carwece:string/call_notification_answer_action: t=0x03 d=0x000001ac (s=0x0008 r=0x00)
+          (string8) "Fogadás"
+        resource 0x7f0b0002 com.hirumisu.carwece:string/call_notification_answer_video_action: t=0x03 d=0x000001ae (s=0x0008 r=0x00)
+          (string8) "Videó"
+        resource 0x7f0b0003 com.hirumisu.carwece:string/call_notification_decline_action: t=0x03 d=0x000001ab (s=0x0008 r=0x00)
+          (string8) "Elutasítás"
+        resource 0x7f0b0004 com.hirumisu.carwece:string/call_notification_hang_up_action: t=0x03 d=0x000001a8 (s=0x0008 r=0x00)
+          (string8) "Befejezés"
+        resource 0x7f0b0005 com.hirumisu.carwece:string/call_notification_incoming_text: t=0x03 d=0x000001a9 (s=0x0008 r=0x00)
+          (string8) "Bejövő hívás"
+        resource 0x7f0b0006 com.hirumisu.carwece:string/call_notification_ongoing_text: t=0x03 d=0x000001ad (s=0x0008 r=0x00)
+          (string8) "Hívás folyamatban"
+        resource 0x7f0b0007 com.hirumisu.carwece:string/call_notification_screening_text: t=0x03 d=0x000001aa (s=0x0008 r=0x00)
+          (string8) "Bejövő hívás szűrése"
+        resource 0x7f0b0008 com.hirumisu.carwece:string/status_bar_notification_info_overflow: t=0x03 d=0x00000018 (s=0x0008 r=0x00)
+          (string8) "999+"
+      config ru:
+        resource 0x7f0b0001 com.hirumisu.carwece:string/call_notification_answer_action: t=0x03 d=0x000001b1 (s=0x0008 r=0x00)
+          (string8) "Ответить"
+        resource 0x7f0b0002 com.hirumisu.carwece:string/call_notification_answer_video_action: t=0x03 d=0x000000a8 (s=0x0008 r=0x00)
+          (string8) "Видео"
+        resource 0x7f0b0003 com.hirumisu.carwece:string/call_notification_decline_action: t=0x03 d=0x000001b2 (s=0x0008 r=0x00)
+          (string8) "Отклонить"
+        resource 0x7f0b0004 com.hirumisu.carwece:string/call_notification_hang_up_action: t=0x03 d=0x000001b0 (s=0x0008 r=0x00)
+          (string8) "Завершить"
+        resource 0x7f0b0005 com.hirumisu.carwece:string/call_notification_incoming_text: t=0x03 d=0x000001af (s=0x0008 r=0x00)
+          (string8) "Входящий вызов"
+        resource 0x7f0b0006 com.hirumisu.carwece:string/call_notification_ongoing_text: t=0x03 d=0x000001b3 (s=0x0008 r=0x00)
+          (string8) "Текущий вызов"
+        resource 0x7f0b0007 com.hirumisu.carwece:string/call_notification_screening_text: t=0x03 d=0x000001b4 (s=0x0008 r=0x00)
+          (string8) "Фильтрация входящего вызова"
+        resource 0x7f0b0008 com.hirumisu.carwece:string/status_bar_notification_info_overflow: t=0x03 d=0x000000c3 (s=0x0008 r=0x00)
+          (string8) ">999"
+      config zu:
+        resource 0x7f0b0001 com.hirumisu.carwece:string/call_notification_answer_action: t=0x03 d=0x000001b8 (s=0x0008 r=0x00)
+          (string8) "Phendula"
+        resource 0x7f0b0002 com.hirumisu.carwece:string/call_notification_answer_video_action: t=0x03 d=0x000001b7 (s=0x0008 r=0x00)
+          (string8) "Ividiyo"
+        resource 0x7f0b0003 com.hirumisu.carwece:string/call_notification_decline_action: t=0x03 d=0x000001bb (s=0x0008 r=0x00)
+          (string8) "Yenqaba"
+        resource 0x7f0b0004 com.hirumisu.carwece:string/call_notification_hang_up_action: t=0x03 d=0x000001ba (s=0x0008 r=0x00)
+          (string8) "Vala Ucingo"
+        resource 0x7f0b0005 com.hirumisu.carwece:string/call_notification_incoming_text: t=0x03 d=0x000001b5 (s=0x0008 r=0x00)
+          (string8) "Ikholi engenayo"
+        resource 0x7f0b0006 com.hirumisu.carwece:string/call_notification_ongoing_text: t=0x03 d=0x000001b6 (s=0x0008 r=0x00)
+          (string8) "Ikholi eqhubekayo"
+        resource 0x7f0b0007 com.hirumisu.carwece:string/call_notification_screening_text: t=0x03 d=0x000001b9 (s=0x0008 r=0x00)
+          (string8) "Ukuveza ikholi engenayo"
+        resource 0x7f0b0008 com.hirumisu.carwece:string/status_bar_notification_info_overflow: t=0x03 d=0x00000018 (s=0x0008 r=0x00)
+          (string8) "999+"
+      config lv:
+        resource 0x7f0b0001 com.hirumisu.carwece:string/call_notification_answer_action: t=0x03 d=0x000001bc (s=0x0008 r=0x00)
+          (string8) "Atbildēt"
+        resource 0x7f0b0002 com.hirumisu.carwece:string/call_notification_answer_video_action: t=0x03 d=0x0000001f (s=0x0008 r=0x00)
+          (string8) "Video"
+        resource 0x7f0b0003 com.hirumisu.carwece:string/call_notification_decline_action: t=0x03 d=0x000001bf (s=0x0008 r=0x00)
+          (string8) "Noraidīt"
+        resource 0x7f0b0004 com.hirumisu.carwece:string/call_notification_hang_up_action: t=0x03 d=0x000001c1 (s=0x0008 r=0x00)
+          (string8) "Pārtraukt"
+        resource 0x7f0b0005 com.hirumisu.carwece:string/call_notification_incoming_text: t=0x03 d=0x000001bd (s=0x0008 r=0x00)
+          (string8) "Ienākošais zvans"
+        resource 0x7f0b0006 com.hirumisu.carwece:string/call_notification_ongoing_text: t=0x03 d=0x000001c0 (s=0x0008 r=0x00)
+          (string8) "Pašreizējais zvans"
+        resource 0x7f0b0007 com.hirumisu.carwece:string/call_notification_screening_text: t=0x03 d=0x000001be (s=0x0008 r=0x00)
+          (string8) "Ienākošā zvana filtrēšana"
+        resource 0x7f0b0008 com.hirumisu.carwece:string/status_bar_notification_info_overflow: t=0x03 d=0x00000018 (s=0x0008 r=0x00)
+          (string8) "999+"
+      config sv:
+        resource 0x7f0b0001 com.hirumisu.carwece:string/call_notification_answer_action: t=0x03 d=0x0000017c (s=0x0008 r=0x00)
+          (string8) "Svara"
+        resource 0x7f0b0002 com.hirumisu.carwece:string/call_notification_answer_video_action: t=0x03 d=0x0000001f (s=0x0008 r=0x00)
+          (string8) "Video"
+        resource 0x7f0b0003 com.hirumisu.carwece:string/call_notification_decline_action: t=0x03 d=0x000001c2 (s=0x0008 r=0x00)
+          (string8) "Avvisa"
+        resource 0x7f0b0004 com.hirumisu.carwece:string/call_notification_hang_up_action: t=0x03 d=0x000001c5 (s=0x0008 r=0x00)
+          (string8) "Lägg på"
+        resource 0x7f0b0005 com.hirumisu.carwece:string/call_notification_incoming_text: t=0x03 d=0x000001c4 (s=0x0008 r=0x00)
+          (string8) "Inkommande samtal"
+        resource 0x7f0b0006 com.hirumisu.carwece:string/call_notification_ongoing_text: t=0x03 d=0x000001c6 (s=0x0008 r=0x00)
+          (string8) "Pågående samtal"
+        resource 0x7f0b0007 com.hirumisu.carwece:string/call_notification_screening_text: t=0x03 d=0x000001c3 (s=0x0008 r=0x00)
+          (string8) "Ett inkommande samtal filtreras"
+        resource 0x7f0b0008 com.hirumisu.carwece:string/status_bar_notification_info_overflow: t=0x03 d=0x00000018 (s=0x0008 r=0x00)
+          (string8) "999+"
+      config iw:
+        resource 0x7f0b0001 com.hirumisu.carwece:string/call_notification_answer_action: t=0x03 d=0x000001c9 (s=0x0008 r=0x00)
+          (string8) "מענה"
+        resource 0x7f0b0002 com.hirumisu.carwece:string/call_notification_answer_video_action: t=0x03 d=0x000001c8 (s=0x0008 r=0x00)
+          (string8) "וידאו"
+        resource 0x7f0b0003 com.hirumisu.carwece:string/call_notification_decline_action: t=0x03 d=0x000001c7 (s=0x0008 r=0x00)
+          (string8) "דחייה"
+        resource 0x7f0b0004 com.hirumisu.carwece:string/call_notification_hang_up_action: t=0x03 d=0x000001ca (s=0x0008 r=0x00)
+          (string8) "ניתוק"
+        resource 0x7f0b0005 com.hirumisu.carwece:string/call_notification_incoming_text: t=0x03 d=0x000001cc (s=0x0008 r=0x00)
+          (string8) "שיחה נכנסת"
+        resource 0x7f0b0006 com.hirumisu.carwece:string/call_notification_ongoing_text: t=0x03 d=0x000001cd (s=0x0008 r=0x00)
+          (string8) "שיחה פעילה"
+        resource 0x7f0b0007 com.hirumisu.carwece:string/call_notification_screening_text: t=0x03 d=0x000001cb (s=0x0008 r=0x00)
+          (string8) "סינון שיחה נכנסת"
+        resource 0x7f0b0008 com.hirumisu.carwece:string/status_bar_notification_info_overflow: t=0x03 d=0x00000018 (s=0x0008 r=0x00)
+          (string8) "999+"
+      config sw:
+        resource 0x7f0b0001 com.hirumisu.carwece:string/call_notification_answer_action: t=0x03 d=0x000001cf (s=0x0008 r=0x00)
+          (string8) "Jibu"
+        resource 0x7f0b0002 com.hirumisu.carwece:string/call_notification_answer_video_action: t=0x03 d=0x0000001f (s=0x0008 r=0x00)
+          (string8) "Video"
+        resource 0x7f0b0003 com.hirumisu.carwece:string/call_notification_decline_action: t=0x03 d=0x000001d1 (s=0x0008 r=0x00)
+          (string8) "Kataa"
+        resource 0x7f0b0004 com.hirumisu.carwece:string/call_notification_hang_up_action: t=0x03 d=0x000001d0 (s=0x0008 r=0x00)
+          (string8) "Kata simu"
+        resource 0x7f0b0005 com.hirumisu.carwece:string/call_notification_incoming_text: t=0x03 d=0x000001d3 (s=0x0008 r=0x00)
+          (string8) "Simu uliyopigiwa"
+        resource 0x7f0b0006 com.hirumisu.carwece:string/call_notification_ongoing_text: t=0x03 d=0x000001d2 (s=0x0008 r=0x00)
+          (string8) "Simu inayoendelea"
+        resource 0x7f0b0007 com.hirumisu.carwece:string/call_notification_screening_text: t=0x03 d=0x000001ce (s=0x0008 r=0x00)
+          (string8) "Inachuja simu unayopigiwa"
+        resource 0x7f0b0008 com.hirumisu.carwece:string/status_bar_notification_info_overflow: t=0x03 d=0x00000018 (s=0x0008 r=0x00)
+          (string8) "999+"
+      config hy:
+        resource 0x7f0b0001 com.hirumisu.carwece:string/call_notification_answer_action: t=0x03 d=0x000001d9 (s=0x0008 r=0x00)
+          (string8) "Պատասխանել"
+        resource 0x7f0b0002 com.hirumisu.carwece:string/call_notification_answer_video_action: t=0x03 d=0x000001da (s=0x0008 r=0x00)
+          (string8) "Տեսազանգ"
+        resource 0x7f0b0003 com.hirumisu.carwece:string/call_notification_decline_action: t=0x03 d=0x000001d6 (s=0x0008 r=0x00)
+          (string8) "Մերժել"
+        resource 0x7f0b0004 com.hirumisu.carwece:string/call_notification_hang_up_action: t=0x03 d=0x000001d4 (s=0x0008 r=0x00)
+          (string8) "Ավարտել"
+        resource 0x7f0b0005 com.hirumisu.carwece:string/call_notification_incoming_text: t=0x03 d=0x000001d7 (s=0x0008 r=0x00)
+          (string8) "Մուտքային զանգ"
+        resource 0x7f0b0006 com.hirumisu.carwece:string/call_notification_ongoing_text: t=0x03 d=0x000001d5 (s=0x0008 r=0x00)
+          (string8) "Ընթացիկ զանգ"
+        resource 0x7f0b0007 com.hirumisu.carwece:string/call_notification_screening_text: t=0x03 d=0x000001d8 (s=0x0008 r=0x00)
+          (string8) "Մուտքային զանգի զտում"
+        resource 0x7f0b0008 com.hirumisu.carwece:string/status_bar_notification_info_overflow: t=0x03 d=0x00000018 (s=0x0008 r=0x00)
+          (string8) "999+"
+      config ky:
+        resource 0x7f0b0001 com.hirumisu.carwece:string/call_notification_answer_action: t=0x03 d=0x000001db (s=0x0008 r=0x00)
+          (string8) "Жооп берүү"
+        resource 0x7f0b0002 com.hirumisu.carwece:string/call_notification_answer_video_action: t=0x03 d=0x000000a8 (s=0x0008 r=0x00)
+          (string8) "Видео"
+        resource 0x7f0b0003 com.hirumisu.carwece:string/call_notification_decline_action: t=0x03 d=0x000001e0 (s=0x0008 r=0x00)
+          (string8) "Четке кагуу"
+        resource 0x7f0b0004 com.hirumisu.carwece:string/call_notification_hang_up_action: t=0x03 d=0x000001df (s=0x0008 r=0x00)
+          (string8) "Чалууну бүтүрүү"
+        resource 0x7f0b0005 com.hirumisu.carwece:string/call_notification_incoming_text: t=0x03 d=0x000001dc (s=0x0008 r=0x00)
+          (string8) "Кирүүчү чалуу"
+        resource 0x7f0b0006 com.hirumisu.carwece:string/call_notification_ongoing_text: t=0x03 d=0x000001de (s=0x0008 r=0x00)
+          (string8) "Учурдагы чалуу"
+        resource 0x7f0b0007 com.hirumisu.carwece:string/call_notification_screening_text: t=0x03 d=0x000001dd (s=0x0008 r=0x00)
+          (string8) "Кирүүчү чалууну иргөө"
+        resource 0x7f0b0008 com.hirumisu.carwece:string/status_bar_notification_info_overflow: t=0x03 d=0x00000018 (s=0x0008 r=0x00)
+          (string8) "999+"
+      config my:
+        resource 0x7f0b0001 com.hirumisu.carwece:string/call_notification_answer_action: t=0x03 d=0x000001e2 (s=0x0008 r=0x00)
+          (string8) "ဖုန်းကိုင်ရန်"
+        resource 0x7f0b0002 com.hirumisu.carwece:string/call_notification_answer_video_action: t=0x03 d=0x000001e4 (s=0x0008 r=0x00)
+          (string8) "ဗီဒီယို"
+        resource 0x7f0b0003 com.hirumisu.carwece:string/call_notification_decline_action: t=0x03 d=0x000001e1 (s=0x0008 r=0x00)
+          (string8) "ငြင်းပယ်ရန်"
+        resource 0x7f0b0004 com.hirumisu.carwece:string/call_notification_hang_up_action: t=0x03 d=0x000001e3 (s=0x0008 r=0x00)
+          (string8) "ဖုန်းချရန်"
+        resource 0x7f0b0005 com.hirumisu.carwece:string/call_notification_incoming_text: t=0x03 d=0x000001e6 (s=0x0008 r=0x00)
+          (string8) "အဝင်ခေါ်ဆိုမှု"
+        resource 0x7f0b0006 com.hirumisu.carwece:string/call_notification_ongoing_text: t=0x03 d=0x000001e5 (s=0x0008 r=0x00)
+          (string8) "လက်ရှိခေါ်ဆိုမှု"
+        resource 0x7f0b0007 com.hirumisu.carwece:string/call_notification_screening_text: t=0x03 d=0x000001e7 (s=0x0008 r=0x00)
+          (string8) "အဝင်ခေါ်ဆိုမှုကို စစ်ဆေးနေသည်"
+        resource 0x7f0b0008 com.hirumisu.carwece:string/status_bar_notification_info_overflow: t=0x03 d=0x000001e8 (s=0x0008 r=0x00)
+          (string8) "၉၉၉+"
+      config az:
+        resource 0x7f0b0001 com.hirumisu.carwece:string/call_notification_answer_action: t=0x03 d=0x000001e9 (s=0x0008 r=0x00)
+          (string8) "Cavab verin"
+        resource 0x7f0b0002 com.hirumisu.carwece:string/call_notification_answer_video_action: t=0x03 d=0x0000001f (s=0x0008 r=0x00)
+          (string8) "Video"
+        resource 0x7f0b0003 com.hirumisu.carwece:string/call_notification_decline_action: t=0x03 d=0x000001ee (s=0x0008 r=0x00)
+          (string8) "İmtina edin"
+        resource 0x7f0b0004 com.hirumisu.carwece:string/call_notification_hang_up_action: t=0x03 d=0x000001eb (s=0x0008 r=0x00)
+          (string8) "Dəstəyi asın"
+        resource 0x7f0b0005 com.hirumisu.carwece:string/call_notification_incoming_text: t=0x03 d=0x000001ec (s=0x0008 r=0x00)
+          (string8) "Gələn zəng"
+        resource 0x7f0b0006 com.hirumisu.carwece:string/call_notification_ongoing_text: t=0x03 d=0x000001ea (s=0x0008 r=0x00)
+          (string8) "Davam edən zəng"
+        resource 0x7f0b0007 com.hirumisu.carwece:string/call_notification_screening_text: t=0x03 d=0x000001ed (s=0x0008 r=0x00)
+          (string8) "Gələn zəng göstərilir"
+        resource 0x7f0b0008 com.hirumisu.carwece:string/status_bar_notification_info_overflow: t=0x03 d=0x00000018 (s=0x0008 r=0x00)
+          (string8) "999+"
+      config uz:
+        resource 0x7f0b0001 com.hirumisu.carwece:string/call_notification_answer_action: t=0x03 d=0x000001ef (s=0x0008 r=0x00)
+          (string8) "Javob berish"
+        resource 0x7f0b0002 com.hirumisu.carwece:string/call_notification_answer_video_action: t=0x03 d=0x0000001f (s=0x0008 r=0x00)
+          (string8) "Video"
+        resource 0x7f0b0003 com.hirumisu.carwece:string/call_notification_decline_action: t=0x03 d=0x000001f3 (s=0x0008 r=0x00)
+          (string8) "Rad etish"
+        resource 0x7f0b0004 com.hirumisu.carwece:string/call_notification_hang_up_action: t=0x03 d=0x000001f4 (s=0x0008 r=0x00)
+          (string8) "Tugatish"
+        resource 0x7f0b0005 com.hirumisu.carwece:string/call_notification_incoming_text: t=0x03 d=0x000001f1 (s=0x0008 r=0x00)
+          (string8) "Kiruvchi chaqiruv"
+        resource 0x7f0b0006 com.hirumisu.carwece:string/call_notification_ongoing_text: t=0x03 d=0x000001f0 (s=0x0008 r=0x00)
+          (string8) "Joriy chaqiruv"
+        resource 0x7f0b0007 com.hirumisu.carwece:string/call_notification_screening_text: t=0x03 d=0x000001f2 (s=0x0008 r=0x00)
+          (string8) "Kiruvchi chaqiruvni filtrlash"
+        resource 0x7f0b0008 com.hirumisu.carwece:string/status_bar_notification_info_overflow: t=0x03 d=0x00000018 (s=0x0008 r=0x00)
+          (string8) "999+"
+      config en-rCA:
+        resource 0x7f0b0001 com.hirumisu.carwece:string/call_notification_answer_action: t=0x03 d=0x00000019 (s=0x0008 r=0x00)
+          (string8) "Answer"
+        resource 0x7f0b0002 com.hirumisu.carwece:string/call_notification_answer_video_action: t=0x03 d=0x0000001f (s=0x0008 r=0x00)
+          (string8) "Video"
+        resource 0x7f0b0003 com.hirumisu.carwece:string/call_notification_decline_action: t=0x03 d=0x0000001a (s=0x0008 r=0x00)
+          (string8) "Decline"
+        resource 0x7f0b0004 com.hirumisu.carwece:string/call_notification_hang_up_action: t=0x03 d=0x0000001b (s=0x0008 r=0x00)
+          (string8) "Hang Up"
+        resource 0x7f0b0005 com.hirumisu.carwece:string/call_notification_incoming_text: t=0x03 d=0x0000001c (s=0x0008 r=0x00)
+          (string8) "Incoming call"
+        resource 0x7f0b0006 com.hirumisu.carwece:string/call_notification_ongoing_text: t=0x03 d=0x0000001d (s=0x0008 r=0x00)
+          (string8) "Ongoing call"
+        resource 0x7f0b0007 com.hirumisu.carwece:string/call_notification_screening_text: t=0x03 d=0x0000001e (s=0x0008 r=0x00)
+          (string8) "Screening an incoming call"
+        resource 0x7f0b0008 com.hirumisu.carwece:string/status_bar_notification_info_overflow: t=0x03 d=0x00000018 (s=0x0008 r=0x00)
+          (string8) "999+"
+      config fr-rCA:
+        resource 0x7f0b0001 com.hirumisu.carwece:string/call_notification_answer_action: t=0x03 d=0x00000139 (s=0x0008 r=0x00)
+          (string8) "Répondre"
+        resource 0x7f0b0002 com.hirumisu.carwece:string/call_notification_answer_video_action: t=0x03 d=0x0000013a (s=0x0008 r=0x00)
+          (string8) "Vidéo"
+        resource 0x7f0b0003 com.hirumisu.carwece:string/call_notification_decline_action: t=0x03 d=0x00000138 (s=0x0008 r=0x00)
+          (string8) "Refuser"
+        resource 0x7f0b0004 com.hirumisu.carwece:string/call_notification_hang_up_action: t=0x03 d=0x00000137 (s=0x0008 r=0x00)
+          (string8) "Raccrocher"
+        resource 0x7f0b0005 com.hirumisu.carwece:string/call_notification_incoming_text: t=0x03 d=0x00000135 (s=0x0008 r=0x00)
+          (string8) "Appel entrant"
+        resource 0x7f0b0006 com.hirumisu.carwece:string/call_notification_ongoing_text: t=0x03 d=0x00000134 (s=0x0008 r=0x00)
+          (string8) "Appel en cours"
+        resource 0x7f0b0007 com.hirumisu.carwece:string/call_notification_screening_text: t=0x03 d=0x000001f5 (s=0x0008 r=0x00)
+          (string8) "Filtrer un appel entrant"
+        resource 0x7f0b0008 com.hirumisu.carwece:string/status_bar_notification_info_overflow: t=0x03 d=0x00000018 (s=0x0008 r=0x00)
+          (string8) "999+"
+      config en-rGB:
+        resource 0x7f0b0001 com.hirumisu.carwece:string/call_notification_answer_action: t=0x03 d=0x00000019 (s=0x0008 r=0x00)
+          (string8) "Answer"
+        resource 0x7f0b0002 com.hirumisu.carwece:string/call_notification_answer_video_action: t=0x03 d=0x0000001f (s=0x0008 r=0x00)
+          (string8) "Video"
+        resource 0x7f0b0003 com.hirumisu.carwece:string/call_notification_decline_action: t=0x03 d=0x0000001a (s=0x0008 r=0x00)
+          (string8) "Decline"
+        resource 0x7f0b0004 com.hirumisu.carwece:string/call_notification_hang_up_action: t=0x03 d=0x000001f6 (s=0x0008 r=0x00)
+          (string8) "Hang up"
+        resource 0x7f0b0005 com.hirumisu.carwece:string/call_notification_incoming_text: t=0x03 d=0x0000001c (s=0x0008 r=0x00)
+          (string8) "Incoming call"
+        resource 0x7f0b0006 com.hirumisu.carwece:string/call_notification_ongoing_text: t=0x03 d=0x000001f7 (s=0x0008 r=0x00)
+          (string8) "On-going call"
+        resource 0x7f0b0007 com.hirumisu.carwece:string/call_notification_screening_text: t=0x03 d=0x0000001e (s=0x0008 r=0x00)
+          (string8) "Screening an incoming call"
+        resource 0x7f0b0008 com.hirumisu.carwece:string/status_bar_notification_info_overflow: t=0x03 d=0x00000018 (s=0x0008 r=0x00)
+          (string8) "999+"
+      config en-rXC:
+        resource 0x7f0b0001 com.hirumisu.carwece:string/call_notification_answer_action: t=0x03 d=0x000001f9 (s=0x0008 r=0x00)
+          (string8) "‎‏‎‎‎‎‎‏‎‏‏‏‎‎‎‎‎‎‏‎‎‏‎‎‎‎‏‏‏‏‏‎‎‏‏‎‎‎‎‏‏‏‎‏‏‎‏‏‎‎‏‎‏‏‎‎‎‎‎‏‎‏‎‏‎‏‏‎‎‏‎‎‏‏‏‏‎‎‏‎‏‎‏‎‎‎‎‎‏‎‏‎‎‎Answer‎‏‎‎‏‎"
+        resource 0x7f0b0002 com.hirumisu.carwece:string/call_notification_answer_video_action: t=0x03 d=0x000001ff (s=0x0008 r=0x00)
+          (string8) "‎‏‎‎‎‎‎‏‎‏‏‏‎‎‎‎‎‎‏‎‎‏‎‎‎‎‏‏‏‏‏‏‏‏‏‏‏‎‏‎‎‎‎‎‏‎‎‏‏‏‎‎‎‏‎‎‎‏‎‏‎‏‎‎‏‏‎‎‏‏‎‎‏‎‎‎‎‏‎‏‎‏‎‎‏‏‎‏‎‎‏‎‎‎‎‎‎Video‎‏‎‎‏‎"
+        resource 0x7f0b0003 com.hirumisu.carwece:string/call_notification_decline_action: t=0x03 d=0x000001fb (s=0x0008 r=0x00)
+          (string8) "‎‏‎‎‎‎‎‏‎‏‏‏‎‎‎‎‎‎‏‎‎‏‎‎‎‎‏‏‏‏‏‏‎‏‎‏‏‎‎‏‏‎‏‎‎‎‏‏‎‎‎‎‏‎‎‏‏‏‎‏‎‎‏‏‎‎‎‎‏‎‎‏‏‎‎‏‏‏‏‏‎‎‏‎‎‏‎‎‎‎‏‎‎‏‎‎Decline‎‏‎‎‏‎"
+        resource 0x7f0b0004 com.hirumisu.carwece:string/call_notification_hang_up_action: t=0x03 d=0x000001fa (s=0x0008 r=0x00)
+          (string8) "‎‏‎‎‎‎‎‏‎‏‏‏‎‎‎‎‎‎‏‎‎‏‎‎‎‎‏‏‏‏‏‏‎‏‎‎‏‎‎‏‏‏‎‏‎‎‎‎‏‎‎‏‎‏‎‏‏‏‎‏‎‎‏‏‎‎‎‎‎‎‏‏‎‏‏‎‎‏‏‏‏‎‎‎‎‎‎‎‎‎‏‎‏‏‏‎Hang Up‎‏‎‎‏‎"
+        resource 0x7f0b0005 com.hirumisu.carwece:string/call_notification_incoming_text: t=0x03 d=0x000001fc (s=0x0008 r=0x00)
+          (string8) "‎‏‎‎‎‎‎‏‎‏‏‏‎‎‎‎‎‎‏‎‎‏‎‎‎‎‏‏‏‏‏‏‏‏‎‏‎‏‎‎‏‏‎‎‎‎‏‎‎‏‎‏‎‎‎‎‏‎‎‎‎‏‎‏‏‎‎‎‏‏‏‎‏‏‎‎‎‏‎‎‎‏‏‎‏‎‎‎‏‎‏‏‎‏‏‏‎Incoming call‎‏‎‎‏‎"
+        resource 0x7f0b0006 com.hirumisu.carwece:string/call_notification_ongoing_text: t=0x03 d=0x000001fe (s=0x0008 r=0x00)
+          (string8) "‎‏‎‎‎‎‎‏‎‏‏‏‎‎‎‎‎‎‏‎‎‏‎‎‎‎‏‏‏‏‏‏‏‏‏‏‎‏‏‏‏‎‏‎‏‏‎‏‏‏‏‏‏‏‎‏‎‎‎‏‎‏‏‎‎‏‏‏‏‏‎‎‎‎‎‏‎‏‏‏‎‎‎‏‎‏‎‎‏‎‏‏‏‏‏‎‎Ongoing call‎‏‎‎‏‎"
+        resource 0x7f0b0007 com.hirumisu.carwece:string/call_notification_screening_text: t=0x03 d=0x000001f8 (s=0x0008 r=0x00)
+          (string8) "‎‏‎‎‎‎‎‏‎‏‏‏‎‎‎‎‎‎‏‎‎‏‎‎‎‎‏‏‏‏‎‎‎‏‏‎‏‎‎‎‏‏‏‎‎‏‎‎‏‎‏‎‎‎‏‏‎‎‏‎‎‎‏‏‏‎‎‏‎‏‎‏‏‏‏‏‎‏‏‏‏‎‏‎‏‏‏‎‎‎Screening an incoming call‎‏‎‎‏‎"
+        resource 0x7f0b0008 com.hirumisu.carwece:string/status_bar_notification_info_overflow: t=0x03 d=0x000001fd (s=0x0008 r=0x00)
+          (string8) "‎‏‎‎‎‎‎‏‎‏‏‏‎‎‎‎‎‎‏‎‎‏‎‎‎‎‏‏‏‏‏‏‏‏‎‏‎‏‏‏‎‎‎‏‏‏‏‎‎‏‎‎‏‏‎‏‎‏‏‎‎‏‎‏‏‎‎‎‏‎‎‎‎‎‎‎‏‎‎‎‎‏‎‏‎‏‎‎‎‎‏‎‎‎‎‎‎999+‎‏‎‎‏‎"
+      config zh-rHK:
+        resource 0x7f0b0001 com.hirumisu.carwece:string/call_notification_answer_action: t=0x03 d=0x00000203 (s=0x0008 r=0x00)
+          (string8) "接聽"
+        resource 0x7f0b0002 com.hirumisu.carwece:string/call_notification_answer_video_action: t=0x03 d=0x00000205 (s=0x0008 r=0x00)
+          (string8) "視像"
+        resource 0x7f0b0003 com.hirumisu.carwece:string/call_notification_decline_action: t=0x03 d=0x00000201 (s=0x0008 r=0x00)
+          (string8) "拒接"
+        resource 0x7f0b0004 com.hirumisu.carwece:string/call_notification_hang_up_action: t=0x03 d=0x00000202 (s=0x0008 r=0x00)
+          (string8) "掛斷"
+        resource 0x7f0b0005 com.hirumisu.carwece:string/call_notification_incoming_text: t=0x03 d=0x00000200 (s=0x0008 r=0x00)
+          (string8) "來電"
+        resource 0x7f0b0006 com.hirumisu.carwece:string/call_notification_ongoing_text: t=0x03 d=0x0000003a (s=0x0008 r=0x00)
+          (string8) "通話中"
+        resource 0x7f0b0007 com.hirumisu.carwece:string/call_notification_screening_text: t=0x03 d=0x00000204 (s=0x0008 r=0x00)
+          (string8) "正在過濾來電"
+        resource 0x7f0b0008 com.hirumisu.carwece:string/status_bar_notification_info_overflow: t=0x03 d=0x00000018 (s=0x0008 r=0x00)
+          (string8) "999+"
+      config zh-rCN:
+        resource 0x7f0b0001 com.hirumisu.carwece:string/call_notification_answer_action: t=0x03 d=0x00000207 (s=0x0008 r=0x00)
+          (string8) "接听"
+        resource 0x7f0b0002 com.hirumisu.carwece:string/call_notification_answer_video_action: t=0x03 d=0x0000020b (s=0x0008 r=0x00)
+          (string8) "视频通话"
+        resource 0x7f0b0003 com.hirumisu.carwece:string/call_notification_decline_action: t=0x03 d=0x00000201 (s=0x0008 r=0x00)
+          (string8) "拒接"
+        resource 0x7f0b0004 com.hirumisu.carwece:string/call_notification_hang_up_action: t=0x03 d=0x00000206 (s=0x0008 r=0x00)
+          (string8) "挂断"
+        resource 0x7f0b0005 com.hirumisu.carwece:string/call_notification_incoming_text: t=0x03 d=0x00000208 (s=0x0008 r=0x00)
+          (string8) "来电"
+        resource 0x7f0b0006 com.hirumisu.carwece:string/call_notification_ongoing_text: t=0x03 d=0x0000020a (s=0x0008 r=0x00)
+          (string8) "正在通话"
+        resource 0x7f0b0007 com.hirumisu.carwece:string/call_notification_screening_text: t=0x03 d=0x00000209 (s=0x0008 r=0x00)
+          (string8) "正在过滤来电"
+        resource 0x7f0b0008 com.hirumisu.carwece:string/status_bar_notification_info_overflow: t=0x03 d=0x00000018 (s=0x0008 r=0x00)
+          (string8) "999+"
+      config en-rIN:
+        resource 0x7f0b0001 com.hirumisu.carwece:string/call_notification_answer_action: t=0x03 d=0x00000019 (s=0x0008 r=0x00)
+          (string8) "Answer"
+        resource 0x7f0b0002 com.hirumisu.carwece:string/call_notification_answer_video_action: t=0x03 d=0x0000001f (s=0x0008 r=0x00)
+          (string8) "Video"
+        resource 0x7f0b0003 com.hirumisu.carwece:string/call_notification_decline_action: t=0x03 d=0x0000001a (s=0x0008 r=0x00)
+          (string8) "Decline"
+        resource 0x7f0b0004 com.hirumisu.carwece:string/call_notification_hang_up_action: t=0x03 d=0x000001f6 (s=0x0008 r=0x00)
+          (string8) "Hang up"
+        resource 0x7f0b0005 com.hirumisu.carwece:string/call_notification_incoming_text: t=0x03 d=0x0000001c (s=0x0008 r=0x00)
+          (string8) "Incoming call"
+        resource 0x7f0b0006 com.hirumisu.carwece:string/call_notification_ongoing_text: t=0x03 d=0x000001f7 (s=0x0008 r=0x00)
+          (string8) "On-going call"
+        resource 0x7f0b0007 com.hirumisu.carwece:string/call_notification_screening_text: t=0x03 d=0x0000001e (s=0x0008 r=0x00)
+          (string8) "Screening an incoming call"
+        resource 0x7f0b0008 com.hirumisu.carwece:string/status_bar_notification_info_overflow: t=0x03 d=0x00000018 (s=0x0008 r=0x00)
+          (string8) "999+"
+      config pt-rBR:
+        resource 0x7f0b0001 com.hirumisu.carwece:string/call_notification_answer_action: t=0x03 d=0x00000194 (s=0x0008 r=0x00)
+          (string8) "Atender"
+        resource 0x7f0b0002 com.hirumisu.carwece:string/call_notification_answer_video_action: t=0x03 d=0x00000027 (s=0x0008 r=0x00)
+          (string8) "Vídeo"
+        resource 0x7f0b0003 com.hirumisu.carwece:string/call_notification_decline_action: t=0x03 d=0x00000199 (s=0x0008 r=0x00)
+          (string8) "Recusar"
+        resource 0x7f0b0004 com.hirumisu.carwece:string/call_notification_hang_up_action: t=0x03 d=0x00000197 (s=0x0008 r=0x00)
+          (string8) "Desligar"
+        resource 0x7f0b0005 com.hirumisu.carwece:string/call_notification_incoming_text: t=0x03 d=0x00000196 (s=0x0008 r=0x00)
+          (string8) "Chamada recebida"
+        resource 0x7f0b0006 com.hirumisu.carwece:string/call_notification_ongoing_text: t=0x03 d=0x00000195 (s=0x0008 r=0x00)
+          (string8) "Chamada em andamento"
+        resource 0x7f0b0007 com.hirumisu.carwece:string/call_notification_screening_text: t=0x03 d=0x00000198 (s=0x0008 r=0x00)
+          (string8) "Filtrando uma ligação recebida"
+        resource 0x7f0b0008 com.hirumisu.carwece:string/status_bar_notification_info_overflow: t=0x03 d=0x00000018 (s=0x0008 r=0x00)
+          (string8) "999+"
+      config es-rUS:
+        resource 0x7f0b0001 com.hirumisu.carwece:string/call_notification_answer_action: t=0x03 d=0x00000178 (s=0x0008 r=0x00)
+          (string8) "Responder"
+        resource 0x7f0b0002 com.hirumisu.carwece:string/call_notification_answer_video_action: t=0x03 d=0x0000001f (s=0x0008 r=0x00)
+          (string8) "Video"
+        resource 0x7f0b0003 com.hirumisu.carwece:string/call_notification_decline_action: t=0x03 d=0x00000177 (s=0x0008 r=0x00)
+          (string8) "Rechazar"
+        resource 0x7f0b0004 com.hirumisu.carwece:string/call_notification_hang_up_action: t=0x03 d=0x000000c6 (s=0x0008 r=0x00)
+          (string8) "Colgar"
+        resource 0x7f0b0005 com.hirumisu.carwece:string/call_notification_incoming_text: t=0x03 d=0x00000176 (s=0x0008 r=0x00)
+          (string8) "Llamada entrante"
+        resource 0x7f0b0006 com.hirumisu.carwece:string/call_notification_ongoing_text: t=0x03 d=0x00000175 (s=0x0008 r=0x00)
+          (string8) "Llamada en curso"
+        resource 0x7f0b0007 com.hirumisu.carwece:string/call_notification_screening_text: t=0x03 d=0x00000174 (s=0x0008 r=0x00)
+          (string8) "Filtrando una llamada entrante"
+        resource 0x7f0b0008 com.hirumisu.carwece:string/status_bar_notification_info_overflow: t=0x03 d=0x00000018 (s=0x0008 r=0x00)
+          (string8) "999+"
+      config pt-rPT:
+        resource 0x7f0b0001 com.hirumisu.carwece:string/call_notification_answer_action: t=0x03 d=0x00000194 (s=0x0008 r=0x00)
+          (string8) "Atender"
+        resource 0x7f0b0002 com.hirumisu.carwece:string/call_notification_answer_video_action: t=0x03 d=0x00000027 (s=0x0008 r=0x00)
+          (string8) "Vídeo"
+        resource 0x7f0b0003 com.hirumisu.carwece:string/call_notification_decline_action: t=0x03 d=0x00000199 (s=0x0008 r=0x00)
+          (string8) "Recusar"
+        resource 0x7f0b0004 com.hirumisu.carwece:string/call_notification_hang_up_action: t=0x03 d=0x00000197 (s=0x0008 r=0x00)
+          (string8) "Desligar"
+        resource 0x7f0b0005 com.hirumisu.carwece:string/call_notification_incoming_text: t=0x03 d=0x00000196 (s=0x0008 r=0x00)
+          (string8) "Chamada recebida"
+        resource 0x7f0b0006 com.hirumisu.carwece:string/call_notification_ongoing_text: t=0x03 d=0x0000020d (s=0x0008 r=0x00)
+          (string8) "Chamada em curso"
+        resource 0x7f0b0007 com.hirumisu.carwece:string/call_notification_screening_text: t=0x03 d=0x0000020c (s=0x0008 r=0x00)
+          (string8) "A filtrar uma chamada recebida…"
+        resource 0x7f0b0008 com.hirumisu.carwece:string/status_bar_notification_info_overflow: t=0x03 d=0x00000018 (s=0x0008 r=0x00)
+          (string8) "999+"
+      config en-rAU:
+        resource 0x7f0b0001 com.hirumisu.carwece:string/call_notification_answer_action: t=0x03 d=0x00000019 (s=0x0008 r=0x00)
+          (string8) "Answer"
+        resource 0x7f0b0002 com.hirumisu.carwece:string/call_notification_answer_video_action: t=0x03 d=0x0000001f (s=0x0008 r=0x00)
+          (string8) "Video"
+        resource 0x7f0b0003 com.hirumisu.carwece:string/call_notification_decline_action: t=0x03 d=0x0000001a (s=0x0008 r=0x00)
+          (string8) "Decline"
+        resource 0x7f0b0004 com.hirumisu.carwece:string/call_notification_hang_up_action: t=0x03 d=0x000001f6 (s=0x0008 r=0x00)
+          (string8) "Hang up"
+        resource 0x7f0b0005 com.hirumisu.carwece:string/call_notification_incoming_text: t=0x03 d=0x0000001c (s=0x0008 r=0x00)
+          (string8) "Incoming call"
+        resource 0x7f0b0006 com.hirumisu.carwece:string/call_notification_ongoing_text: t=0x03 d=0x000001f7 (s=0x0008 r=0x00)
+          (string8) "On-going call"
+        resource 0x7f0b0007 com.hirumisu.carwece:string/call_notification_screening_text: t=0x03 d=0x0000001e (s=0x0008 r=0x00)
+          (string8) "Screening an incoming call"
+        resource 0x7f0b0008 com.hirumisu.carwece:string/status_bar_notification_info_overflow: t=0x03 d=0x00000018 (s=0x0008 r=0x00)
+          (string8) "999+"
+      config zh-rTW:
+        resource 0x7f0b0001 com.hirumisu.carwece:string/call_notification_answer_action: t=0x03 d=0x00000203 (s=0x0008 r=0x00)
+          (string8) "接聽"
+        resource 0x7f0b0002 com.hirumisu.carwece:string/call_notification_answer_video_action: t=0x03 d=0x0000020e (s=0x0008 r=0x00)
+          (string8) "視訊"
+        resource 0x7f0b0003 com.hirumisu.carwece:string/call_notification_decline_action: t=0x03 d=0x00000201 (s=0x0008 r=0x00)
+          (string8) "拒接"
+        resource 0x7f0b0004 com.hirumisu.carwece:string/call_notification_hang_up_action: t=0x03 d=0x00000202 (s=0x0008 r=0x00)
+          (string8) "掛斷"
+        resource 0x7f0b0005 com.hirumisu.carwece:string/call_notification_incoming_text: t=0x03 d=0x00000200 (s=0x0008 r=0x00)
+          (string8) "來電"
+        resource 0x7f0b0006 com.hirumisu.carwece:string/call_notification_ongoing_text: t=0x03 d=0x0000003a (s=0x0008 r=0x00)
+          (string8) "通話中"
+        resource 0x7f0b0007 com.hirumisu.carwece:string/call_notification_screening_text: t=0x03 d=0x00000204 (s=0x0008 r=0x00)
+          (string8) "正在過濾來電"
+        resource 0x7f0b0008 com.hirumisu.carwece:string/status_bar_notification_info_overflow: t=0x03 d=0x00000018 (s=0x0008 r=0x00)
+          (string8) "999+"
+    type 11 configCount=2 entryCount=9
+      spec resource 0x7f0c0000 com.hirumisu.carwece:style/LaunchTheme: flags=0x00001000
+      spec resource 0x7f0c0001 com.hirumisu.carwece:style/NormalTheme: flags=0x00001000
+      INVALID TYPE CONFIG FOR RESOURCE 0x7f0c0002
+      INVALID TYPE CONFIG FOR RESOURCE 0x7f0c0003
+      INVALID TYPE CONFIG FOR RESOURCE 0x7f0c0004
+      INVALID TYPE CONFIG FOR RESOURCE 0x7f0c0005
+      INVALID TYPE CONFIG FOR RESOURCE 0x7f0c0006
+      INVALID TYPE CONFIG FOR RESOURCE 0x7f0c0007
+      INVALID TYPE CONFIG FOR RESOURCE 0x7f0c0008
+      config (default):
+        resource 0x7f0c0000 com.hirumisu.carwece:style/LaunchTheme: <bag>
+          Parent=0x0103000d(Resolved=0x0103000d), Count=1
+          #0 (Key=0x01010054): (reference) 0x7f060006
+        resource 0x7f0c0001 com.hirumisu.carwece:style/NormalTheme: <bag>
+          Parent=0x0103000d(Resolved=0x0103000d), Count=1
+          #0 (Key=0x01010054): (attribute) 0x01010031
+      config night:
+        resource 0x7f0c0000 com.hirumisu.carwece:style/LaunchTheme: <bag>
+          Parent=0x01030009(Resolved=0x01030009), Count=1
+          #0 (Key=0x01010054): (reference) 0x7f060006
+        resource 0x7f0c0001 com.hirumisu.carwece:style/NormalTheme: <bag>
+          Parent=0x01030009(Resolved=0x01030009), Count=1
+          #0 (Key=0x01010054): (attribute) 0x01010031
+    type 13 configCount=1 entryCount=1
+      spec resource 0x7f0e0000 com.hirumisu.carwece:xml/splits0: flags=0x00000000
+      config (default):
+        resource 0x7f0e0000 com.hirumisu.carwece:xml/splits0: t=0x03 d=0x00000001 (s=0x0008 r=0x00)
+          (string8) "res/xml/splits0.xml"

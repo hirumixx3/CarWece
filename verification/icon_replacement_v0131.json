@@ -1,0 +1,185 @@
+{
+  "source": {
+    "source": "icon_source_v0131.png",
+    "sourceSha256": "d2a32fa95fc553b906f98b7e29276533c9131092eccfc0e4a1037927b169f026",
+    "sourceSize": [
+      1649,
+      1649
+    ],
+    "artworkBounds": [
+      362,
+      362,
+      1287,
+      1287
+    ],
+    "adaptiveCanvas": [
+      1024,
+      1024
+    ],
+    "artworkSize": [
+      640,
+      640
+    ],
+    "artworkOffset": [
+      192,
+      192
+    ],
+    "foregroundSha256": "b0b907e02dcdf2583c386de028567d718346adb98970016bd1b852c9f68013bf",
+    "backgroundSha256": "706f05bd154a5cee7792bbfe49cd54f88f6171a7eb8c75686fb2c0da14deff91",
+    "conversion": "Trim external transparent padding, scale proportionally, center in adaptive viewport. No generated replacement artwork."
+  },
+  "png": [
+    {
+      "name": "ic_launcher",
+      "density": "mdpi",
+      "changed": true,
+      "compiledPixelsMatchSource": true,
+      "sha256": "72f40b7f634ca75583ceaa89f9962ddfa705b4944c3c7956922e86b4628ab5c5"
+    },
+    {
+      "name": "ic_launcher_background",
+      "density": "mdpi",
+      "changed": true,
+      "compiledPixelsMatchSource": true,
+      "sha256": "8663791ebe364913ea8b2b13b381fe607892aa4cd7f560ca26263590080ebb66"
+    },
+    {
+      "name": "ic_launcher_foreground",
+      "density": "mdpi",
+      "changed": true,
+      "compiledPixelsMatchSource": true,
+      "sha256": "deff57353dba35c5d8246651104c02b7687b4446a44ce889acfb1011859ade43"
+    },
+    {
+      "name": "ic_launcher_round",
+      "density": "mdpi",
+      "changed": true,
+      "compiledPixelsMatchSource": true,
+      "sha256": "35f241e1154322eb0e2f06e0f4cd39fe80a3ca473a3689191496aa3ad43c5f3a"
+    },
+    {
+      "name": "ic_launcher",
+      "density": "hdpi",
+      "changed": true,
+      "compiledPixelsMatchSource": true,
+      "sha256": "ce687cd3fbfedc4243f39a64e2c492565c7a3ba2cd56901f7d3beb9162ffde6d"
+    },
+    {
+      "name": "ic_launcher_background",
+      "density": "hdpi",
+      "changed": true,
+      "compiledPixelsMatchSource": true,
+      "sha256": "223790c7e4df8a278ae46c746cd9c2e727ae7fbe55f2e029d2a4c0284887509e"
+    },
+    {
+      "name": "ic_launcher_foreground",
+      "density": "hdpi",
+      "changed": true,
+      "compiledPixelsMatchSource": true,
+      "sha256": "2c5e1c9284aed1a318f5094c05bde32cf229445c476f1d9510d589c9abf6e702"
+    },
+    {
+      "name": "ic_launcher_round",
+      "density": "hdpi",
+      "changed": true,
+      "compiledPixelsMatchSource": true,
+      "sha256": "591f54b365995c610c0d0a5e00ae66445bd8ae02c24f9818a1068e10dfcc8492"
+    },
+    {
+      "name": "ic_launcher",
+      "density": "xhdpi",
+      "changed": true,
+      "compiledPixelsMatchSource": true,
+      "sha256": "c9484ff16dd332f94b5bc3f6c26b9d7070509a3df5a5a9ca5b3b8cd7aee7ff64"
+    },
+    {
+      "name": "ic_launcher_background",
+      "density": "xhdpi",
+      "changed": true,
+      "compiledPixelsMatchSource": true,
+      "sha256": "99a0f88ba31005fff08cb4030846031d6b584f08d187410ace51eb270164cd25"
+    },
+    {
+      "name": "ic_launcher_foreground",
+      "density": "xhdpi",
+      "changed": true,
+      "compiledPixelsMatchSource": true,
+      "sha256": "c50d053aeaafb659717ed65f2d310cd6ef46f32624d40e4e77d431c696220b0c"
+    },
+    {
+      "name": "ic_launcher_round",
+      "density": "xhdpi",
+      "changed": true,
+      "compiledPixelsMatchSource": true,
+      "sha256": "1ff99bf801ecb63e4c61b92ba3ac01064f826e6f5270fade92eaa463005a3ebd"
+    },
+    {
+      "name": "ic_launcher",
+      "density": "xxhdpi",
+      "changed": true,
+      "compiledPixelsMatchSource": true,
+      "sha256": "75ac7938f0bf9a3250b7de18cfdef646c19d487f4e8affdc0042d523e0d4a30d"
+    },
+    {
+      "name": "ic_launcher_background",
+      "density": "xxhdpi",
+      "changed": true,
+      "compiledPixelsMatchSource": true,
+      "sha256": "3a888bcf5496c82fc73885f725f4c167bb665e55974df266723d1aa005ad6c41"
+    },
+    {
+      "name": "ic_launcher_foreground",
+      "density": "xxhdpi",
+      "changed": true,
+      "compiledPixelsMatchSource": true,
+      "sha256": "8b3fa5d8793c36ebee6cc79d6f38c88d4fb1fd1ebe5081dfaae3924ad8c40b84"
+    },
+    {
+      "name": "ic_launcher_round",
+      "density": "xxhdpi",
+      "changed": true,
+      "compiledPixelsMatchSource": true,
+      "sha256": "e17dd554eb8f4ab507c4f03312a2831d238235ac3ed626c50e5c2286933454c7"
+    },
+    {
+      "name": "ic_launcher",
+      "density": "xxxhdpi",
+      "changed": true,
+      "compiledPixelsMatchSource": true,
+      "sha256": "ee31565aacea3171d8a62b7fdca15568b92202191952cbe76eb440fca7b1e2d5"
+    },
+    {
+      "name": "ic_launcher_background",
+      "density": "xxxhdpi",
+      "changed": true,
+      "compiledPixelsMatchSource": true,
+      "sha256": "9c8e094d121ea7f60a19af4133f72735c270ca21ac2e2059a80cc0ff9ec80db1"
+    },
+    {
+      "name": "ic_launcher_foreground",
+      "density": "xxxhdpi",
+      "changed": true,
+      "compiledPixelsMatchSource": true,
+      "sha256": "4e7c6bb6533c3b59eb65b45ad7c4aef4109c03268e1c03f3670edd52d7642eee"
+    },
+    {
+      "name": "ic_launcher_round",
+      "density": "xxxhdpi",
+      "changed": true,
+      "compiledPixelsMatchSource": true,
+      "sha256": "d2e31649d8f2bf1b8fe0228dc0916e3449747803732a9de9d05e5ec7be785784"
+    }
+  ],
+  "adaptive": [
+    {
+      "name": "ic_launcher",
+      "compiled": "res/BW.xml",
+      "layers_match": true
+    },
+    {
+      "name": "ic_launcher_round",
+      "compiled": "res/0K.xml",
+      "layers_match": true
+    }
+  ]
+}

@@ -1,0 +1,2 @@
+Exported 109 views, 26 circuits and 114 GPU object meshes.
+v0.9: 146 actual GLES views, 114 meshes; traffic packet records real simulation positions.

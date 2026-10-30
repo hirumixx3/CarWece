@@ -1,0 +1,11 @@
+00:00 +0: loading /workspace/scratch/f581f54b4d3f/pocket_rush/test/flow_test.dart
+00:00 +0: (setUpAll)
+00:00 +0: Menu, garage purchase, settings, multi-touch driving, pause and finish (variant: TargetPlatform.linux)
+00:01 +1: Manual pedal supports three simultaneous touches and losing shows the actual winner (variant: TargetPlatform.linux)
+00:02 +2: Held controls survive countdown, messages and sliding between arrows (variant: TargetPlatform.linux)
+00:02 +3: Pause clears old pointers and keyboard direction survives touch release (variant: TargetPlatform.linux)
+00:03 +4: Championship runs through all three circuits and awards points (variant: TargetPlatform.linux)
+00:03 +5: Menus remain usable on a small landscape screen (variant: TargetPlatform.linux)
+00:03 +6: Settings, purchased cars, coins and records survive save and reload
+00:03 +7: (tearDownAll)
+00:03 +7: All tests passed!

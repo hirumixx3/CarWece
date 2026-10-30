@@ -1,0 +1,122 @@
+[
+  {
+    "id": "sing_me_to_sleep",
+    "bytes": 781063,
+    "sha256": "c8e4862d26909c4bcf87aba4b4fad6b0cfa8e34b7cab7931c515a8a7a26b6210",
+    "uncompressedAsset": true
+  },
+  {
+    "id": "attention",
+    "bytes": 867928,
+    "sha256": "4661b26df5148dd0eaf20a5a3a4e47a5eae63198ed8d197fbff5004588614a17",
+    "uncompressedAsset": true
+  },
+  {
+    "id": "k",
+    "bytes": 1319646,
+    "sha256": "0513a73aec908577a20b8fef4947170beff864f670a6701d8203b7d5b4bdf0ff",
+    "uncompressedAsset": true
+  },
+  {
+    "id": "words",
+    "bytes": 851143,
+    "sha256": "216425a39abed0e7964a018b5557cc5dc7ad2404071fe16b33c6fd2176ba67f7",
+    "uncompressedAsset": true
+  },
+  {
+    "id": "everybodys_changing",
+    "bytes": 883803,
+    "sha256": "1a01c015d913ee256d13d7b0386692261be40723a8b9273a47685291f53610ac",
+    "uncompressedAsset": true
+  },
+  {
+    "id": "legends_never_die",
+    "bytes": 968805,
+    "sha256": "4addf503f0cc2a581d84b84b48946a676e8bcc26002b9d4dafdf82e4ff0eca6f",
+    "uncompressedAsset": true
+  },
+  {
+    "id": "see_you_again",
+    "bytes": 947032,
+    "sha256": "5f9ad6260d86909ef1f0c1488356d5e906a37291e768f5b6a327e7ff5ab88aff",
+    "uncompressedAsset": true
+  },
+  {
+    "id": "lalala",
+    "bytes": 662400,
+    "sha256": "a86a92b5c4f5f7578d04a0d57da8a6942fc83aca257aea3f6194027ca1ccb5f7",
+    "uncompressedAsset": true
+  },
+  {
+    "id": "rockabye",
+    "bytes": 1035566,
+    "sha256": "578fd27155ec9b33e5dc4d7529500823d902f5d8cd539608a7ae38fcf17006d5",
+    "uncompressedAsset": true
+  },
+  {
+    "id": "somewhere_only_we_know",
+    "bytes": 967997,
+    "sha256": "f31026aecc02df65cfacfe07f9fbb957bdb57eb5b8537ae62b55e6ed5e97ae32",
+    "uncompressedAsset": true
+  },
+  {
+    "id": "marvin_gaye",
+    "bytes": 774417,
+    "sha256": "99cbfa0e58e6632fd223b3df0c869ff89ad3ed6c3c994ca6f1151733a9ce336b",
+    "uncompressedAsset": true
+  },
+  {
+    "id": "do_you_remember",
+    "bytes": 1144973,
+    "sha256": "b8faecb031f286ff8fb1610c6c18b14ad94b6ae11d031bf8bf028751790d72fe",
+    "uncompressedAsset": true
+  },
+  {
+    "id": "creep",
+    "bytes": 973067,
+    "sha256": "51962b0d674d3bc6fc7b1b6a57948e810bdcf56b9f0df154ca437d7f38aedc7a",
+    "uncompressedAsset": true
+  },
+  {
+    "id": "be_my_baby",
+    "bytes": 662493,
+    "sha256": "16d25a164c6d0c06a7ca76a6169cd74bbbd9da972d79c518b40923ed68aee42a",
+    "uncompressedAsset": true
+  },
+  {
+    "id": "dance_monkey",
+    "bytes": 862366,
+    "sha256": "1f3c49e2954dc2868cbfc340720f6e1c64d38ee6e5d0e7a78fadfb73441ce114",
+    "uncompressedAsset": true
+  },
+  {
+    "id": "when_youre_gone",
+    "bytes": 1221363,
+    "sha256": "22560a1a267649d2c3f9d7bb853947c955c49ff29607971eef14259c4cb70302",
+    "uncompressedAsset": true
+  },
+  {
+    "id": "let_down",
+    "bytes": 1231646,
+    "sha256": "82f9bafe2f7974ebb7c0c415f2547657d15c473a6e1921d4c582a44f440b4946",
+    "uncompressedAsset": true
+  },
+  {
+    "id": "talking_to_the_moon",
+    "bytes": 898273,
+    "sha256": "4266c801b35aecc82d13cb12079a5262e241e115c8c68d689a77776dcc2a7b77",
+    "uncompressedAsset": true
+  },
+  {
+    "id": "i_love_you",
+    "bytes": 1203285,
+    "sha256": "8aa6eb061489b1faea99571694f8738d49091ce9376b3800604e4765480c9ab5",
+    "uncompressedAsset": true
+  },
+  {
+    "id": "young_turks_2008",
+    "bytes": 1247519,
+    "sha256": "ca01ebbe27818f3dafe93acccdb4bc4d1b8a76a7b2bd7c25dd12b82b881e063a",
+    "uncompressedAsset": true
+  }
+]

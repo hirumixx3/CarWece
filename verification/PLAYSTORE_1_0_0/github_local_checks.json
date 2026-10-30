@@ -1,0 +1,8 @@
+{
+  "workflow_yaml_valid": true,
+  "manual_dispatch_only": true,
+  "read_only_repository_permissions": true,
+  "restored_keystore_matches_original": true,
+  "private_keystore_permissions": "0600",
+  "github_workflow_executed": false
+}

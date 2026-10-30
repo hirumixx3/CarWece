@@ -1,0 +1,17 @@
+{
+  "file": "CarWece_v0.13.1_hirumisu.apk",
+  "size_bytes": 76661104,
+  "sha256": "6fd1956dcd194623892ea8a48fad074a87dbc41a3ab87e1071f539dc865d26a6",
+  "package": "com.hirumisu.carwece",
+  "label": "CarWece",
+  "version": "0.13.1",
+  "code": 22,
+  "abis": [
+    "armeabi-v7a",
+    "arm64-v8a",
+    "x86_64"
+  ],
+  "verified_png_resources": 20,
+  "verified_adaptive_icons": 2,
+  "certificate_sha256": "9e1be273e6871c23013157fad5378ffc4d5da5b222d70f84a995c8cb94ca8d7a"
+}

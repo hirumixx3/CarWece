@@ -1,0 +1,1 @@
+206 meshes, 178 frames, GPU buffer bytes 598852368 -> 343925196

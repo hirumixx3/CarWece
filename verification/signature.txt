@@ -1,0 +1,18 @@
+Picked up JAVA_TOOL_OPTIONS: -Djavax.net.ssl.trustStore=/etc/ssl/certs/java/cacerts
+Verifies
+Verified using v1 scheme (JAR signing): false
+Verified using v2 scheme (APK Signature Scheme v2): true
+Verified using v3 scheme (APK Signature Scheme v3): true
+Verified using v3.1 scheme (APK Signature Scheme v3.1): false
+Verified using v4 scheme (APK Signature Scheme v4): false
+Verified for SourceStamp: false
+Number of signers: 1
+Signer #1 certificate DN: CN=hirumi, OU=CarWece, O=hirumisu, C=BR
+Signer #1 certificate SHA-256 digest: 36d37a19082d266b741937d4ac7d0fc0d7d581017d1a5b5cae4bab5b5d91433a
+Signer #1 certificate SHA-1 digest: 2b8b98c96928d34e0c79c97bd3644b9027004abf
+Signer #1 certificate MD5 digest: b11664122e4f55e2e4ab7e3ad135002b
+Signer #1 key algorithm: RSA
+Signer #1 key size (bits): 4096
+Signer #1 public key SHA-256 digest: 17ec5ed77fd1f3d3ccd748fb5b2e6fdde83fdba4556359ee8d4760788625f926
+Signer #1 public key SHA-1 digest: 17b647877c3c68ed6f7f95ceee8b0000d6d08424
+Signer #1 public key MD5 digest: 5acd6da28363133b04991d818facb26a

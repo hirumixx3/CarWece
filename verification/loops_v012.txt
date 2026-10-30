@@ -1,0 +1,9 @@
+{"arena":"arena_1","loop":1,"crossed":true,"fell":false,"time":6.491666666666779,"speed":91.53147490904189,"finalS":798.153183579393,"start":352.9812413336576,"end":772.9545601768325}
+{"arena":"arena_2","loop":1,"crossed":true,"fell":false,"time":6.825000000000129,"speed":91.81480812832748,"finalS":803.9545835083709,"start":353.02441181402384,"end":778.9378399438227}
+{"arena":"arena_2","loop":2,"crossed":true,"fell":false,"time":7.225000000000149,"speed":89.58124822605721,"finalS":3439.061322973058,"start":2964.174118930458,"end":3413.903278326078}
+{"arena":"arena_3","loop":1,"crossed":true,"fell":false,"time":6.291666666666769,"speed":86.28766066954917,"finalS":900.2756321185284,"start":447.28726374440566,"end":874.8650840730043}
+{"arena":"arena_4","loop":1,"crossed":true,"fell":false,"time":7.016666666666805,"speed":92.27106247866692,"finalS":816.5230848029441,"start":353.1107541015004,"end":790.9216074709913}
+{"arena":"arena_4","loop":2,"crossed":true,"fell":false,"time":7.058333333333474,"speed":89.36256579775458,"finalS":3589.4571454342886,"start":3126.176261749859,"end":3563.986743806733}
+{"arena":"arena_5","loop":1,"crossed":true,"fell":false,"time":6.791666666666794,"speed":87.75152660661708,"finalS":936.6085723091969,"start":447.54629321555757,"end":910.878159661219}
+{"arena":"arena_6","loop":1,"crossed":true,"fell":false,"time":7.175000000000146,"speed":92.42383757136824,"finalS":827.9685232815182,"start":353.1970981505504,"end":802.926636775193}
+{"arena":"arena_6","loop":2,"crossed":true,"fell":false,"time":6.933333333333468,"speed":88.5876574730541,"finalS":3730.5171364797798,"start":3278.9939364854267,"end":3704.907001347605}

@@ -1,0 +1,140 @@
+{
+  "masters": {
+    "foreground": "b0b907e02dcdf2583c386de028567d718346adb98970016bd1b852c9f68013bf",
+    "background": "706f05bd154a5cee7792bbfe49cd54f88f6171a7eb8c75686fb2c0da14deff91"
+  },
+  "png": [
+    {
+      "name": "ic_launcher",
+      "density": "mdpi",
+      "compiled": "res/mipmap-mdpi-v4/ic_launcher.png",
+      "pixels_match": true
+    },
+    {
+      "name": "ic_launcher_background",
+      "density": "mdpi",
+      "compiled": "res/mipmap-mdpi-v4/ic_launcher_background.png",
+      "pixels_match": true
+    },
+    {
+      "name": "ic_launcher_foreground",
+      "density": "mdpi",
+      "compiled": "res/mipmap-mdpi-v4/ic_launcher_foreground.png",
+      "pixels_match": true
+    },
+    {
+      "name": "ic_launcher_round",
+      "density": "mdpi",
+      "compiled": "res/mipmap-mdpi-v4/ic_launcher_round.png",
+      "pixels_match": true
+    },
+    {
+      "name": "ic_launcher",
+      "density": "hdpi",
+      "compiled": "res/mipmap-hdpi-v4/ic_launcher.png",
+      "pixels_match": true
+    },
+    {
+      "name": "ic_launcher_background",
+      "density": "hdpi",
+      "compiled": "res/mipmap-hdpi-v4/ic_launcher_background.png",
+      "pixels_match": true
+    },
+    {
+      "name": "ic_launcher_foreground",
+      "density": "hdpi",
+      "compiled": "res/mipmap-hdpi-v4/ic_launcher_foreground.png",
+      "pixels_match": true
+    },
+    {
+      "name": "ic_launcher_round",
+      "density": "hdpi",
+      "compiled": "res/mipmap-hdpi-v4/ic_launcher_round.png",
+      "pixels_match": true
+    },
+    {
+      "name": "ic_launcher",
+      "density": "xhdpi",
+      "compiled": "res/mipmap-xhdpi-v4/ic_launcher.png",
+      "pixels_match": true
+    },
+    {
+      "name": "ic_launcher_background",
+      "density": "xhdpi",
+      "compiled": "res/mipmap-xhdpi-v4/ic_launcher_background.png",
+      "pixels_match": true
+    },
+    {
+      "name": "ic_launcher_foreground",
+      "density": "xhdpi",
+      "compiled": "res/mipmap-xhdpi-v4/ic_launcher_foreground.png",
+      "pixels_match": true
+    },
+    {
+      "name": "ic_launcher_round",
+      "density": "xhdpi",
+      "compiled": "res/mipmap-xhdpi-v4/ic_launcher_round.png",
+      "pixels_match": true
+    },
+    {
+      "name": "ic_launcher",
+      "density": "xxhdpi",
+      "compiled": "res/mipmap-xxhdpi-v4/ic_launcher.png",
+      "pixels_match": true
+    },
+    {
+      "name": "ic_launcher_background",
+      "density": "xxhdpi",
+      "compiled": "res/mipmap-xxhdpi-v4/ic_launcher_background.png",
+      "pixels_match": true
+    },
+    {
+      "name": "ic_launcher_foreground",
+      "density": "xxhdpi",
+      "compiled": "res/mipmap-xxhdpi-v4/ic_launcher_foreground.png",
+      "pixels_match": true
+    },
+    {
+      "name": "ic_launcher_round",
+      "density": "xxhdpi",
+      "compiled": "res/mipmap-xxhdpi-v4/ic_launcher_round.png",
+      "pixels_match": true
+    },
+    {
+      "name": "ic_launcher",
+      "density": "xxxhdpi",
+      "compiled": "res/mipmap-xxxhdpi-v4/ic_launcher.png",
+      "pixels_match": true
+    },
+    {
+      "name": "ic_launcher_background",
+      "density": "xxxhdpi",
+      "compiled": "res/mipmap-xxxhdpi-v4/ic_launcher_background.png",
+      "pixels_match": true
+    },
+    {
+      "name": "ic_launcher_foreground",
+      "density": "xxxhdpi",
+      "compiled": "res/mipmap-xxxhdpi-v4/ic_launcher_foreground.png",
+      "pixels_match": true
+    },
+    {
+      "name": "ic_launcher_round",
+      "density": "xxxhdpi",
+      "compiled": "res/mipmap-xxxhdpi-v4/ic_launcher_round.png",
+      "pixels_match": true
+    }
+  ],
+  "adaptive": [
+    {
+      "name": "ic_launcher",
+      "compiled": "res/mipmap-anydpi-v26/ic_launcher.xml",
+      "layers_match": true
+    },
+    {
+      "name": "ic_launcher_round",
+      "compiled": "res/mipmap-anydpi-v26/ic_launcher_round.xml",
+      "layers_match": true
+    }
+  ]
+}

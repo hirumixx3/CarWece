@@ -1,0 +1,6 @@
+Running Gradle task 'assembleRelease'...                        
+Picked up JAVA_TOOL_OPTIONS: -Djavax.net.ssl.trustStore=/etc/ssl/certs/java/cacerts
+/workspace/scratch/f581f54b4d3f/toolchain/ambiente_flutter/android-sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-strip: error: '/workspace/scratch/f581f54b4d3f/game/carwece/build/app/intermediates/merged_native_libs/release/mergeReleaseNativeLibs/out/lib/x86_64/.libflutter.so.l4YSPt': section header table goes past the end of the file: e_shoff = 0x8b7d340
+
+Running Gradle task 'assembleRelease'...                           68.5s
+✓ Built build/app/outputs/flutter-apk/app-release.apk (244.4MB)

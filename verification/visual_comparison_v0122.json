@@ -1,0 +1,125 @@
+{
+  "scope": "Mesa 1280x720, same shaders at high quality versus 0.12.1 shader, no MSAA, not a phone",
+  "scenes": [
+    {
+      "scene": "arena_4_loop_2",
+      "mean_absolute_channel_difference": 0.0019755497685185184,
+      "fraction_pixels_difference_over_8": 4.2317708333333335e-05,
+      "p99_pixel_difference": 0.0
+    },
+    {
+      "scene": "arena_3_drive",
+      "mean_absolute_channel_difference": 0.0015972222222222223,
+      "fraction_pixels_difference_over_8": 1.953125e-05,
+      "p99_pixel_difference": 0.0
+    },
+    {
+      "scene": "race_bedroom",
+      "mean_absolute_channel_difference": 0.0004738136574074074,
+      "fraction_pixels_difference_over_8": 2.170138888888889e-06,
+      "p99_pixel_difference": 0.0
+    },
+    {
+      "scene": "arena_5_drive",
+      "mean_absolute_channel_difference": 0.0006557436342592592,
+      "fraction_pixels_difference_over_8": 2.170138888888889e-05,
+      "p99_pixel_difference": 0.0
+    },
+    {
+      "scene": "arena_3_loop_1",
+      "mean_absolute_channel_difference": 0.010634765625,
+      "fraction_pixels_difference_over_8": 0.00022135416666666666,
+      "p99_pixel_difference": 0.0
+    },
+    {
+      "scene": "arena_1_drive",
+      "mean_absolute_channel_difference": 0.0009935619212962962,
+      "fraction_pixels_difference_over_8": 8.680555555555556e-06,
+      "p99_pixel_difference": 0.0
+    },
+    {
+      "scene": "garage_zonda",
+      "mean_absolute_channel_difference": 4.340277777777778e-05,
+      "fraction_pixels_difference_over_8": 0.0,
+      "p99_pixel_difference": 0.0
+    },
+    {
+      "scene": "arena_4_drive",
+      "mean_absolute_channel_difference": 3.616898148148148e-07,
+      "fraction_pixels_difference_over_8": 0.0,
+      "p99_pixel_difference": 0.0
+    },
+    {
+      "scene": "arena_5_loop_1",
+      "mean_absolute_channel_difference": 0.02228913483796296,
+      "fraction_pixels_difference_over_8": 0.00016710069444444444,
+      "p99_pixel_difference": 0.0
+    },
+    {
+      "scene": "arena_6_drive",
+      "mean_absolute_channel_difference": 0.12073386863425926,
+      "fraction_pixels_difference_over_8": 0.0013780381944444445,
+      "p99_pixel_difference": 0.0
+    },
+    {
+      "scene": "garage_r34",
+      "mean_absolute_channel_difference": 4.1956018518518515e-05,
+      "fraction_pixels_difference_over_8": 0.0,
+      "p99_pixel_difference": 0.0
+    },
+    {
+      "scene": "arena_6_loop_1",
+      "mean_absolute_channel_difference": 0.00822048611111111,
+      "fraction_pixels_difference_over_8": 7.8125e-05,
+      "p99_pixel_difference": 0.0
+    },
+    {
+      "scene": "arena_4_loop_1",
+      "mean_absolute_channel_difference": 0.0025289351851851853,
+      "fraction_pixels_difference_over_8": 3.689236111111111e-05,
+      "p99_pixel_difference": 0.0
+    },
+    {
+      "scene": "arena_2_loop_2",
+      "mean_absolute_channel_difference": 0.0020616319444444445,
+      "fraction_pixels_difference_over_8": 2.8211805555555554e-05,
+      "p99_pixel_difference": 0.0
+    },
+    {
+      "scene": "race_arcade_dual",
+      "mean_absolute_channel_difference": 0.0002271412037037037,
+      "fraction_pixels_difference_over_8": 0.0,
+      "p99_pixel_difference": 0.0
+    },
+    {
+      "scene": "garage_rx7",
+      "mean_absolute_channel_difference": 6.148726851851851e-05,
+      "fraction_pixels_difference_over_8": 0.0,
+      "p99_pixel_difference": 0.0
+    },
+    {
+      "scene": "arena_6_loop_2",
+      "mean_absolute_channel_difference": 0.0008130787037037037,
+      "fraction_pixels_difference_over_8": 1.736111111111111e-05,
+      "p99_pixel_difference": 0.0
+    },
+    {
+      "scene": "arena_1_loop_1",
+      "mean_absolute_channel_difference": 0.00390625,
+      "fraction_pixels_difference_over_8": 4.557291666666667e-05,
+      "p99_pixel_difference": 0.0
+    },
+    {
+      "scene": "arena_2_loop_1",
+      "mean_absolute_channel_difference": 0.001302445023148148,
+      "fraction_pixels_difference_over_8": 1.5190972222222222e-05,
+      "p99_pixel_difference": 0.0
+    },
+    {
+      "scene": "arena_2_drive",
+      "mean_absolute_channel_difference": 0.0016995804398148148,
+      "fraction_pixels_difference_over_8": 2.387152777777778e-05,
+      "p99_pixel_difference": 0.0
+    }
+  ]
+}

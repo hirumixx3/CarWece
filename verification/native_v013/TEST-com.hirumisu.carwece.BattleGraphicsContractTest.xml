@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.hirumisu.carwece.BattleGraphicsContractTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2026-10-28T17:55:54" hostname="216016e3d806" time="0.261">
+  <properties/>
+  <testcase name="healthAndMetalAreOpaqueWhileGasUsesTransparentMaterial" classname="com.hirumisu.carwece.BattleGraphicsContractTest" time="0.088"/>
+  <testcase name="acceptsActualBattleWorldAndAllFortyFourWeaponAttachments" classname="com.hirumisu.carwece.BattleGraphicsContractTest" time="0.066"/>
+  <testcase name="everyAdditionalVertexAndTransformHasFiniteValues" classname="com.hirumisu.carwece.BattleGraphicsContractTest" time="0.038"/>
+  <testcase name="battleFrameRejectsAnIndexOutsideTheUploadedInventory" classname="com.hirumisu.carwece.BattleGraphicsContractTest" time="0.034"/>
+  <testcase name="healthBillboardsNeverCastFloatingRectangularShadows" classname="com.hirumisu.carwece.BattleGraphicsContractTest" time="0.017"/>
+  <testcase name="healthBarsTurretsAndProjectilesAreInTheActualFrame" classname="com.hirumisu.carwece.BattleGraphicsContractTest" time="0.016"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

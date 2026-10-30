@@ -1,0 +1,72 @@
+bedroom: human finished=true place=1 time=65.8
+NOVA progress=89.3% gate=29 speed=70.1
+BOLT progress=89.2% gate=29 speed=70.3
+RAVEN progress=89.0% gate=29 speed=70.3
+REX progress=88.9% gate=29 speed=70.4
+PIXEL progress=88.7% gate=29 speed=70.4
+garage: human finished=true place=1 time=60.1
+NOVA progress=88.8% gate=29 speed=70.1
+BOLT progress=88.7% gate=29 speed=70.1
+RAVEN progress=88.4% gate=29 speed=70.2
+REX progress=88.5% gate=29 speed=70.1
+PIXEL progress=88.2% gate=29 speed=70.4
+arcade: human finished=true place=1 time=67.6
+NOVA progress=94.7% gate=31 speed=73.3
+BOLT progress=94.5% gate=31 speed=73.6
+RAVEN progress=94.4% gate=31 speed=73.4
+REX progress=89.4% gate=29 speed=69.7
+PIXEL progress=89.5% gate=29 speed=69.6
+bedroom_sprint: human finished=true place=1 time=51.1
+NOVA progress=87.5% gate=28 speed=69.8
+BOLT progress=87.3% gate=28 speed=69.8
+RAVEN progress=87.1% gate=28 speed=69.9
+REX progress=86.9% gate=28 speed=69.9
+PIXEL progress=86.7% gate=28 speed=70.0
+garage_drift: human finished=true place=1 time=73.8
+NOVA progress=94.1% gate=31 speed=73.0
+BOLT progress=93.9% gate=31 speed=73.1
+RAVEN progress=91.8% gate=30 speed=71.9
+REX progress=94.0% gate=31 speed=73.1
+PIXEL progress=88.2% gate=29 speed=69.1
+arcade_neon: human finished=true place=1 time=72.3
+NOVA progress=99.7% gate=0 speed=77.4
+BOLT progress=99.6% gate=0 speed=77.4
+RAVEN progress=99.1% gate=0 speed=77.4
+REX progress=99.4% gate=0 speed=77.5
+PIXEL progress=99.3% gate=0 speed=78.1
+bathroom: human finished=true place=1 time=53.5
+NOVA progress=89.3% gate=29 speed=72.0
+BOLT progress=89.1% gate=29 speed=72.0
+RAVEN progress=88.9% gate=29 speed=72.1
+REX progress=87.9% gate=29 speed=71.7
+PIXEL progress=88.8% gate=29 speed=72.1
+bathroom_hairpin: human finished=true place=1 time=65.5
+NOVA progress=92.4% gate=30 speed=72.4
+BOLT progress=92.2% gate=30 speed=72.6
+RAVEN progress=90.4% gate=29 speed=70.0
+REX progress=92.0% gate=30 speed=73.5
+PIXEL progress=91.9% gate=30 speed=73.6
+kitchen: human finished=true place=1 time=49.3
+NOVA progress=98.3% gate=0 speed=73.1
+BOLT progress=98.1% gate=0 speed=73.4
+RAVEN progress=95.6% gate=31 speed=72.4
+REX progress=97.9% gate=0 speed=73.2
+PIXEL progress=97.7% gate=0 speed=73.6
+kitchen_chicane: human finished=true place=1 time=66.9
+NOVA progress=92.4% gate=30 speed=73.9
+BOLT progress=92.1% gate=30 speed=74.0
+RAVEN progress=89.2% gate=29 speed=71.7
+REX progress=92.2% gate=30 speed=74.0
+PIXEL progress=89.4% gate=29 speed=71.3
+living: human finished=true place=1 time=58.4
+NOVA progress=92.1% gate=30 speed=75.6
+BOLT progress=91.9% gate=30 speed=75.5
+RAVEN progress=88.1% gate=29 speed=72.3
+REX progress=91.0% gate=30 speed=74.7
+PIXEL progress=88.3% gate=29 speed=72.4
+living_grand: human finished=true place=2 time=63.4
+NOVA progress=100.0% gate=0 speed=83.0
+BOLT progress=88.9% gate=29 speed=72.6
+RAVEN progress=91.1% gate=30 speed=73.9
+REX progress=90.9% gate=30 speed=73.9
+PIXEL progress=88.7% gate=29 speed=72.6

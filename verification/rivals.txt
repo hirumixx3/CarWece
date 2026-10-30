@@ -1,0 +1,12 @@
+bedroom: finished=5/5 time=128.6 lateralStd=10.20 orderChanges=10 recoveries=2 NOVA:100 BOLT:100 RAVEN:100 REX:100 PIXEL:100
+garage: finished=5/5 time=92.1 lateralStd=6.54 orderChanges=17 recoveries=0 NOVA:100 BOLT:100 RAVEN:100 REX:100 PIXEL:100
+arcade: finished=5/5 time=79.8 lateralStd=10.04 orderChanges=9 recoveries=0 NOVA:100 BOLT:100 RAVEN:100 REX:100 PIXEL:100
+bedroom_sprint: finished=5/5 time=89.4 lateralStd=8.42 orderChanges=11 recoveries=0 NOVA:100 BOLT:100 RAVEN:100 REX:100 PIXEL:100
+garage_drift: finished=5/5 time=88.5 lateralStd=11.17 orderChanges=11 recoveries=0 NOVA:100 BOLT:100 RAVEN:100 REX:100 PIXEL:100
+arcade_neon: finished=5/5 time=85.1 lateralStd=7.19 orderChanges=11 recoveries=0 NOVA:100 BOLT:100 RAVEN:100 REX:100 PIXEL:100
+bathroom: finished=5/5 time=67.8 lateralStd=11.42 orderChanges=18 recoveries=0 NOVA:100 BOLT:100 RAVEN:100 REX:100 PIXEL:100
+bathroom_hairpin: finished=5/5 time=87.2 lateralStd=9.19 orderChanges=11 recoveries=0 NOVA:100 BOLT:100 RAVEN:100 REX:100 PIXEL:100
+kitchen: finished=5/5 time=63.9 lateralStd=8.04 orderChanges=10 recoveries=0 NOVA:100 BOLT:100 RAVEN:100 REX:100 PIXEL:100
+kitchen_chicane: finished=5/5 time=80.6 lateralStd=6.68 orderChanges=4 recoveries=0 NOVA:100 BOLT:100 RAVEN:100 REX:100 PIXEL:100
+living: finished=5/5 time=106.0 lateralStd=12.52 orderChanges=17 recoveries=0 NOVA:100 BOLT:100 RAVEN:100 REX:100 PIXEL:100
+living_grand: finished=5/5 time=94.1 lateralStd=9.42 orderChanges=13 recoveries=0 NOVA:100 BOLT:100 RAVEN:100 REX:100 PIXEL:100

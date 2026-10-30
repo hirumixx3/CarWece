@@ -1,0 +1,63 @@
+Starting Flutter task ['test', '--no-pub', '--reporter', 'expanded', '--dart-define=EXPORT_GRAPHICS_WIRE=true']
+00:00 +0: loading /workspace/scratch/f581f54b4d3f/pocket_rush/test/free_drive_test.dart
+00:00 +0: /workspace/scratch/f581f54b4d3f/pocket_rush/test/free_drive_test.dart: Neutral steering preserves the world heading instead of following a curve
+00:00 +1: /workspace/scratch/f581f54b4d3f/pocket_rush/test/free_drive_test.dart: Left and right turn the body and its actual world trajectory in opposite directions
+00:00 +2: /workspace/scratch/f581f54b4d3f/pocket_rush/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:00 +3: /workspace/scratch/f581f54b4d3f/pocket_rush/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:00 +4: /workspace/scratch/f581f54b4d3f/pocket_rush/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:00 +5: /workspace/scratch/f581f54b4d3f/pocket_rush/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:00 +6: /workspace/scratch/f581f54b4d3f/pocket_rush/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:00 +7: /workspace/scratch/f581f54b4d3f/pocket_rush/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:00 +8: /workspace/scratch/f581f54b4d3f/pocket_rush/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:00 +9: /workspace/scratch/f581f54b4d3f/pocket_rush/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:00 +10: /workspace/scratch/f581f54b4d3f/pocket_rush/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:00 +11: /workspace/scratch/f581f54b4d3f/pocket_rush/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:00 +12: /workspace/scratch/f581f54b4d3f/pocket_rush/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:00 +13: /workspace/scratch/f581f54b4d3f/pocket_rush/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:00 +14: /workspace/scratch/f581f54b4d3f/pocket_rush/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:00 +15: /workspace/scratch/f581f54b4d3f/pocket_rush/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:00 +16: /workspace/scratch/f581f54b4d3f/pocket_rush/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:01 +17: /workspace/scratch/f581f54b4d3f/pocket_rush/test/graphics_backend_test.dart: Android uses its GPU texture and sends all 17 models (variant: TargetPlatform.android)
+00:01 +18: /workspace/scratch/f581f54b4d3f/pocket_rush/test/engine_test.dart: Physics gives the same result at 30, 60 and 120 FPS
+00:01 +19: /workspace/scratch/f581f54b4d3f/pocket_rush/test/engine_test.dart: Physics gives the same result at 30, 60 and 120 FPS
+00:01 +20: /workspace/scratch/f581f54b4d3f/pocket_rush/test/engine_test.dart: Physics gives the same result at 30, 60 and 120 FPS
+00:01 +21: /workspace/scratch/f581f54b4d3f/pocket_rush/test/engine_test.dart: Physics gives the same result at 30, 60 and 120 FPS
+00:01 +22: /workspace/scratch/f581f54b4d3f/pocket_rush/test/engine_test.dart: Physics gives the same result at 30, 60 and 120 FPS
+00:01 +23: /workspace/scratch/f581f54b4d3f/pocket_rush/test/engine_test.dart: Physics gives the same result at 30, 60 and 120 FPS
+00:01 +24: /workspace/scratch/f581f54b4d3f/pocket_rush/test/engine_test.dart: Physics gives the same result at 30, 60 and 120 FPS
+00:01 +25: /workspace/scratch/f581f54b4d3f/pocket_rush/test/engine_test.dart: Physics gives the same result at 30, 60 and 120 FPS
+00:01 +26: /workspace/scratch/f581f54b4d3f/pocket_rush/test/engine_test.dart: Physics gives the same result at 30, 60 and 120 FPS
+00:01 +27: /workspace/scratch/f581f54b4d3f/pocket_rush/test/engine_test.dart: Physics gives the same result at 30, 60 and 120 FPS
+00:01 +28: /workspace/scratch/f581f54b4d3f/pocket_rush/test/engine_test.dart: Physics gives the same result at 30, 60 and 120 FPS
+00:01 +29: /workspace/scratch/f581f54b4d3f/pocket_rush/test/engine_test.dart: Physics gives the same result at 30, 60 and 120 FPS
+00:01 +30: /workspace/scratch/f581f54b4d3f/pocket_rush/test/engine_test.dart: Physics gives the same result at 30, 60 and 120 FPS
+00:02 +31: /workspace/scratch/f581f54b4d3f/pocket_rush/test/engine_test.dart: Physics gives the same result at 30, 60 and 120 FPS
+00:02 +32: /workspace/scratch/f581f54b4d3f/pocket_rush/test/engine_test.dart: Physics gives the same result at 30, 60 and 120 FPS
+00:02 +33: /workspace/scratch/f581f54b4d3f/pocket_rush/test/engine_test.dart: Physics gives the same result at 30, 60 and 120 FPS
+00:02 +34: /workspace/scratch/f581f54b4d3f/pocket_rush/test/engine_test.dart: Physics gives the same result at 30, 60 and 120 FPS
+00:02 +35: /workspace/scratch/f581f54b4d3f/pocket_rush/test/engine_test.dart: Physics gives the same result at 30, 60 and 120 FPS
+00:02 +36: /workspace/scratch/f581f54b4d3f/pocket_rush/test/engine_test.dart: Physics gives the same result at 30, 60 and 120 FPS
+00:02 +37: /workspace/scratch/f581f54b4d3f/pocket_rush/test/engine_test.dart: Physics gives the same result at 30, 60 and 120 FPS
+00:02 +38: /workspace/scratch/f581f54b4d3f/pocket_rush/test/engine_test.dart: Physics gives the same result at 30, 60 and 120 FPS
+00:03 +39: /workspace/scratch/f581f54b4d3f/pocket_rush/test/engine_test.dart: Physics gives the same result at 30, 60 and 120 FPS
+00:03 +40: /workspace/scratch/f581f54b4d3f/pocket_rush/test/regression_v03_test.dart: All three circuits are finishable using steering, throttle and brakes
+00:03 +41: /workspace/scratch/f581f54b4d3f/pocket_rush/test/regression_v03_test.dart: All three circuits are finishable using steering, throttle and brakes
+00:03 +42: /workspace/scratch/f581f54b4d3f/pocket_rush/test/regression_v03_test.dart: All three circuits are finishable using steering, throttle and brakes
+00:03 +43: /workspace/scratch/f581f54b4d3f/pocket_rush/test/regression_v03_test.dart: All three circuits are finishable using steering, throttle and brakes
+00:03 +44: /workspace/scratch/f581f54b4d3f/pocket_rush/test/regression_v03_test.dart: All three circuits are finishable using steering, throttle and brakes
+00:03 +45: /workspace/scratch/f581f54b4d3f/pocket_rush/test/regression_v03_test.dart: All three circuits are finishable using steering, throttle and brakes
+00:03 +46: /workspace/scratch/f581f54b4d3f/pocket_rush/test/regression_v03_test.dart: All three circuits are finishable using steering, throttle and brakes
+00:03 +47: /workspace/scratch/f581f54b4d3f/pocket_rush/test/engine_test.dart: Finishing records exactly three laps and a finite reward
+00:03 +48: /workspace/scratch/f581f54b4d3f/pocket_rush/test/engine_test.dart: Finishing records exactly three laps and a finite reward
+00:04 +49: /workspace/scratch/f581f54b4d3f/pocket_rush/test/flow_test.dart: Held controls survive countdown, messages and sliding between arrows (variant: TargetPlatform.linux)
+00:04 +50: /workspace/scratch/f581f54b4d3f/pocket_rush/test/flow_test.dart: Held controls survive countdown, messages and sliding between arrows (variant: TargetPlatform.linux)
+00:04 +51: /workspace/scratch/f581f54b4d3f/pocket_rush/test/flow_test.dart: Held controls survive countdown, messages and sliding between arrows (variant: TargetPlatform.linux)
+00:04 +52: /workspace/scratch/f581f54b4d3f/pocket_rush/test/flow_test.dart: Held controls survive countdown, messages and sliding between arrows (variant: TargetPlatform.linux)
+00:04 +53: /workspace/scratch/f581f54b4d3f/pocket_rush/test/engine_test.dart: Hitch cap prevents a paused app from fast-forwarding physics
+00:04 +54: /workspace/scratch/f581f54b4d3f/pocket_rush/test/flow_test.dart: Pause clears old pointers and keyboard direction survives touch release (variant: TargetPlatform.linux)
+00:04 +55: /workspace/scratch/f581f54b4d3f/pocket_rush/test/flow_test.dart: Pause clears old pointers and keyboard direction survives touch release (variant: TargetPlatform.linux)
+00:04 +56: /workspace/scratch/f581f54b4d3f/pocket_rush/test/flow_test.dart: Championship runs through all three circuits and awards points (variant: TargetPlatform.linux)
+00:05 +57: /workspace/scratch/f581f54b4d3f/pocket_rush/test/flow_test.dart: Menus remain usable on a small landscape screen (variant: TargetPlatform.linux)
+00:05 +58: /workspace/scratch/f581f54b4d3f/pocket_rush/test/flow_test.dart: Settings, purchased cars, coins and records survive save and reload
+00:05 +59: /workspace/scratch/f581f54b4d3f/pocket_rush/test/flow_test.dart: (tearDownAll)
+00:05 +59: All tests passed!

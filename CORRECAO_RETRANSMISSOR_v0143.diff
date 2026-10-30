@@ -1,0 +1,990 @@
+--- a/lib/main.dart
++++ b/lib/main.dart
+@@ -1270,7 +1270,7 @@
+                 ),
+                 const SizedBox(height: 25),
+                 Text(
+-                  'Versão 0.14.2 • ${cars.length} carros • ${tracks.length} pistas • Android',
++                  'Versão 0.14.3 • ${cars.length} carros • ${tracks.length} pistas • Android',
+                   style: body(16),
+                 ),
+                 const SizedBox(height: 10),
+--- a/lib/online/client.dart
++++ b/lib/online/client.dart
+@@ -69,6 +69,7 @@
+       error = '';
+   bool connected = false, busy = false, closed = false;
+   int pingMs = 0, _inputSeq = 0, _retry = 0;
++  DateTime _lastPacketAt = DateTime.now();
+   String? _game;
+   bool _ready = false;
+   bool _leaving = false;
+@@ -341,6 +342,7 @@
+     }
+     _socket = socket;
+     connected = true;
++    _lastPacketAt = DateTime.now();
+     _retry = 0;
+     _ready = false;
+     error = '';
+@@ -354,12 +356,30 @@
+     _inputs?.cancel();
+     _inputs = Timer.periodic(const Duration(milliseconds: 40), (_) => _input());
+     _ping?.cancel();
+-    _ping = Timer.periodic(
+-      const Duration(seconds: 2),
+-      (_) =>
+-          send({'type': 'ping', 'at': DateTime.now().millisecondsSinceEpoch}),
+-    );
+-    _emit();
++    _ping = Timer.periodic(const Duration(seconds: 2), (_) => _heartbeat());
++    _emit();
++  }
++
++  void _heartbeat() {
++    if (closed || !connected) return;
++    final now = DateTime.now();
++    if (now.difference(_lastPacketAt) >= const Duration(seconds: 8)) {
++      // A broken reverse tunnel can leave the guest's TCP connection open
++      // without forwarding data. WebSocket onDone/pong alone can take much
++      // longer to notice. Require responses from the actual game server.
++      final socket = _socket;
++      _lost();
++      if (socket != null) {
++        unawaited(
++          socket
++              .close(1001, 'Sala sem resposta')
++              .timeout(const Duration(seconds: 2))
++              .then<void>((_) {}, onError: (Object _, StackTrace __) {}),
++        );
++      }
++      return;
++    }
++    send({'type': 'ping', 'at': now.millisecondsSinceEpoch});
+   }
+ 
+   void _lost() {
+@@ -403,15 +423,21 @@
+   }
+ 
+   void _scheduleReconnect() {
+-    if (closed || _token == null) return;
++    if (closed || connected || _token == null) return;
+     _reconnect?.cancel();
++    final token = _token, address = endpoint;
+     final seconds = math.min(10, 1 << math.min(_retry++, 4));
+     _reconnect = Timer(Duration(seconds: seconds), () async {
++      bool stale() =>
++          closed || connected || _token != token || endpoint != address;
++      if (stale()) return;
+       try {
+         await _request('/api/v1/me');
++        if (stale()) return;
+         await _subscription?.cancel();
+         await _open();
+       } catch (e) {
++        if (stale()) return;
+         if (e is OnlineFailure && e.message.contains('Entre na sua conta')) {
+           _token = null;
+           profile = null;
+@@ -455,6 +481,7 @@
+       if (raw is! String || raw.length > 2 * 1024 * 1024)
+         throw const FormatException();
+       final m = jsonDecode(raw) as Map<String, dynamic>;
++      _lastPacketAt = DateTime.now();
+       switch (m['type']) {
+         case 'hello':
+           profile = Map<String, dynamic>.from(m['profile']);
+--- a/lib/online/phone_host.dart
++++ b/lib/online/phone_host.dart
+@@ -112,7 +112,7 @@
+         debugName: 'CarWece friend host',
+         onExit: _messages.sendPort,
+       );
+-      await ready.future.timeout(const Duration(seconds: 50));
++      await ready.future.timeout(const Duration(seconds: 95));
+     } catch (_) {
+       await close();
+       rethrow;
+@@ -201,6 +201,16 @@
+         serverPort: options['port'] as int? ?? 443,
+         pinnedTransportCertificate: options['tlsPin'] as String?,
+         probeLoopback: options['probeLoopback'] == true,
++        routes: (options['routes'] as List?)
++            ?.map(
++              (dynamic route) => PinggyRoute(
++                route['host'] as String,
++                port: route['port'] as int? ?? 443,
++                tls: route['tls'] == true,
++                certificatePin: route['tlsPin'] as String?,
++              ),
++            )
++            .toList(),
+         onStatus: (message) {
+           if (!stopping) output.send({'type': 'progress', 'message': message});
+         },
+--- a/lib/online/pinggy_tunnel.dart
++++ b/lib/online/pinggy_tunnel.dart
+@@ -8,9 +8,25 @@
+ import 'invite.dart';
+ import 'protocol.dart';
+ 
+-/// All production control and player connections use TLS on TCP 443. SSH runs
+-/// inside a CA-validated TLS connection; the game's independent session TLS
+-/// certificate stays pinned by the invitation through every forwarded channel.
++/// A control route is separate from the public, TLS-passthrough game route.
++/// Pinggy's standard control protocol is SSH on port 443, not HTTPS. Some
++/// networks also support its optional SSH-over-TLS listener.
++class PinggyRoute {
++  final String host;
++  final int port;
++  final bool tls;
++  final String? certificatePin;
++  const PinggyRoute(
++    this.host, {
++    this.port = 443,
++    this.tls = false,
++    this.certificatePin,
++  });
++}
++
++/// No account/password is sent to this untrusted transport. The game's own
++/// TLS certificate remains pinned end to end by the invitation on both SSH
++/// control routes; accepting a relay's SSH key never trusts it with game data.
+ class PinggyTunnel {
+   final int localPort;
+   final String serverHost;
+@@ -18,16 +34,19 @@
+   final String? pinnedTransportCertificate;
+   final String gameCertificatePin;
+   final bool probeLoopback;
++  final List<PinggyRoute>? routes;
+   final void Function(String)? onClosed, onStatus;
+   final Duration attemptTimeout;
+   SSHClient? _client;
+   Socket? _transport;
+   final _locals = <Socket>{};
+   final _channels = <SSHForwardChannel>{};
++  final _bridges = <Future<void>>{};
+   Timer? _expiry;
+   bool _closed = false, _active = false, _started = false;
+   int _generation = 0;
+   Future<void>? _closing;
++  String _stage = 'TCP';
+   PinggyTunnel({
+     required this.localPort,
+     required this.gameCertificatePin,
+@@ -35,6 +54,7 @@
+     this.serverPort = 443,
+     this.pinnedTransportCertificate,
+     this.probeLoopback = false,
++    this.routes,
+     this.onClosed,
+     this.onStatus,
+     this.attemptTimeout = const Duration(seconds: 20),
+@@ -43,10 +63,38 @@
+   Future<Uri> start() async {
+     if (_started || _closed) throw StateError('Sala já iniciada ou encerrada.');
+     _started = true;
+-    for (var attempt = 1; attempt <= 2; attempt++) {
++    final candidates =
++        routes ??
++        (pinnedTransportCertificate != null
++            ? List.filled(
++                2,
++                PinggyRoute(
++                  serverHost,
++                  port: serverPort,
++                  tls: true,
++                  certificatePin: pinnedTransportCertificate,
++                ),
++              )
++            : [
++                PinggyRoute(serverHost, port: serverPort),
++                if (serverHost == 'free.pinggy.io')
++                  const PinggyRoute('a.pinggy.io'),
++                PinggyRoute(serverHost, port: serverPort, tls: true),
++                if (serverHost == 'free.pinggy.io')
++                  const PinggyRoute('a.pinggy.io', tls: true),
++              ]);
++    if (candidates.isEmpty || candidates.length > 4) {
++      throw ArgumentError('Informe de uma a quatro rotas de controle.');
++    }
++    final failures = <String>[];
++    for (var attempt = 0; attempt < candidates.length; attempt++) {
++      final route = candidates[attempt];
+       final generation = ++_generation;
+       try {
+-        final endpoint = await _open(generation).timeout(attemptTimeout);
++        onStatus?.call(
++          'Conectando a sala… tentativa ${attempt + 1} de ${candidates.length}',
++        );
++        final endpoint = await _open(generation, route).timeout(attemptTimeout);
+         _check(generation);
+         if (_client!.isClosed) throw const SocketException('Túnel encerrado');
+         _active = true;
+@@ -57,18 +105,41 @@
+         });
+         return endpoint;
+       } catch (e) {
++        failures.add(
++          '${route.host}/${route.tls ? 'TLS' : 'SSH'}:${_failureCode(e)}',
++        );
+         await _cleanup();
+         if (_closed) rethrow;
+-        if (attempt == 2 || e is HandshakeException || e is FormatException) {
++        // A fixture's explicit identity pin is never bypassed by an unpinned
++        // route. Production TLS validation also stays enabled on TLS routes.
++        if (attempt == candidates.length - 1 ||
++            (route.certificatePin != null && e is HandshakeException)) {
+           await close();
+-          throw _friendly(e);
++          final friendly = _friendly(e);
++          throw RelayFailure(
++            '${friendly.message} Diagnóstico: ${failures.join('; ')}.',
++            retryable: friendly.retryable,
++          );
+         }
+-        onStatus?.call('Reconectando o túnel seguro… tentativa 2 de 2');
+-        await Future<void>.delayed(const Duration(milliseconds: 400));
++        onStatus?.call('Tentando outra conexão para a sala…');
++        await Future<void>.delayed(const Duration(milliseconds: 150));
+         if (_closed) throw StateError('Criação cancelada.');
+       }
+     }
+     throw StateError('Tentativas esgotadas.');
++  }
++
++  String _failureCode(Object e) {
++    if (e is SocketException &&
++        RegExp(
++          r'lookup|resolv|name|nodename',
++          caseSensitive: false,
++        ).hasMatch(e.message))
++      return 'DNS';
++    if (e is HandshakeException) return 'TLS';
++    if (e is TimeoutException) return '$_stage/TEMPO';
++    if (e is SocketException) return '$_stage/CONEXAO';
++    return _stage;
+   }
+ 
+   RelayFailure _friendly(Object e) {
+@@ -92,7 +163,7 @@
+     }
+     if (e is SocketException) {
+       return const RelayFailure(
+-        'Não foi possível conectar ao novo retransmissor pela porta 443. Confira a conexão e tente novamente.',
++        'Não foi possível alcançar o retransmissor pelas conexões alternativas. Confira a internet e tente novamente.',
+       );
+     }
+     return const RelayFailure(
+@@ -105,22 +176,30 @@
+       throw StateError('Criação cancelada.');
+   }
+ 
+-  Future<Uri> _open(int generation) async {
+-    onStatus?.call('Conectando o túnel seguro na porta 443…');
+-    final pinned = pinnedTransportCertificate;
+-    final socket = await SecureSocket.connect(
+-      serverHost,
+-      serverPort,
+-      context: pinned == null ? null : SecurityContext(withTrustedRoots: false),
+-      onBadCertificate: pinned == null
+-          ? null
+-          : (cert) =>
+-                base64UrlEncode(
+-                  sha256.convert(cert.der).bytes,
+-                ).replaceAll('=', '') ==
+-                pinned,
+-      timeout: const Duration(seconds: 8),
+-    );
++  Future<Uri> _open(int generation, PinggyRoute route) async {
++    _stage = route.tls ? 'TLS' : 'TCP';
++    final pinned = route.certificatePin;
++    final socket = route.tls
++        ? await SecureSocket.connect(
++            route.host,
++            route.port,
++            context: pinned == null
++                ? null
++                : SecurityContext(withTrustedRoots: false),
++            onBadCertificate: pinned == null
++                ? null
++                : (cert) =>
++                      base64UrlEncode(
++                        sha256.convert(cert.der).bytes,
++                      ).replaceAll('=', '') ==
++                      pinned,
++            timeout: const Duration(seconds: 8),
++          )
++        : await Socket.connect(
++            route.host,
++            route.port,
++            timeout: const Duration(seconds: 8),
++          );
+     if (_closed || generation != _generation) {
+       socket.destroy();
+       _check(generation);
+@@ -128,16 +207,17 @@
+     _transport = socket;
+     socket.setOption(SocketOption.tcpNoDelay, true);
+     final client = SSHClient(
+-      _TLSControlSocket(socket),
++      _ControlSocket(socket),
+       username: 'tls',
+       onPasswordRequest: () => '',
+-      // The outer TLS connection has already authenticated serverHost. SSH
+-      // signature verification remains enabled; no credentials are stored.
++      // A free relay is an untrusted byte transport, including on the direct
++      // SSH route. No credentials are used; the independent game TLS pin
++      // authenticates every public /health, HTTP and WebSocket connection.
+       onVerifyHostKey: (_, _) => true,
+       handshakeTimeout: const Duration(seconds: 8),
+       authTimeout: const Duration(seconds: 8),
+       keepAliveInterval: const Duration(seconds: 10),
+-      ident: 'CarWece_0.14.2',
++      ident: 'CarWece_0.14.3',
+     );
+     _client = client;
+     unawaited(
+@@ -152,9 +232,11 @@
+         },
+       ),
+     );
++    _stage = 'SSH';
+     await client.authenticated;
+     _check(generation);
+     onStatus?.call('Abrindo endereço público da sala…');
++    _stage = 'ENCAMINHAMENTO';
+     final forward = await client.forwardRemote(host: 'localhost', port: 0);
+     _check(generation);
+     if (forward == null)
+@@ -164,43 +246,82 @@
+         channel.destroy();
+       } else {
+         _channels.add(channel);
+-        unawaited(_bridge(channel, generation));
++        final bridge = _bridge(channel, generation);
++        _bridges.add(bridge);
++        unawaited(bridge.then((_) => _bridges.remove(bridge)));
+       }
+     }, onError: (Object _) => _lost('A conexão da sala com a internet caiu.'));
+     final shell = await client.shell(pty: null);
+     _check(generation);
+-    // Drain status output to keep the SSH channel's receive window flowing.
+-    shell.stdout.listen((_) {}, onError: (Object _) {});
+-    shell.stderr.listen((_) {}, onError: (Object _) {});
++    // Keep output flowing, but retain a bounded copy of advertised URLs. Some
++    // edges expose them here before /urls is ready (or without that API).
++    var output = '';
++    void collect(List<int> bytes) {
++      output += utf8.decode(bytes, allowMalformed: true);
++      if (output.length > 32768)
++        output = output.substring(output.length - 16384);
++    }
++
++    shell.stdout.listen(collect, onError: (Object _) {});
++    shell.stderr.listen(collect, onError: (Object _) {});
+     final api = SSHHttpClient(client, idleTimeout: const Duration(seconds: 4));
+-    // This is Pinggy's documented API over a local SSH forwarding channel.
+-    final request = api.get(Uri.parse('http://localhost:4300/urls'))
+-      ..protocolVersion = SSHHttpProtocolVersion.http10;
+-    final response = await request.close().timeout(const Duration(seconds: 5));
+-    _check(generation);
+-    if (response.statusCode != 200 || (response.body?.length ?? 0) > 16384) {
+-      throw const FormatException('Resposta de endereços inválida');
+-    }
+-    final data = jsonDecode(response.body ?? '');
+-    if (data is! Map || data['urls'] is! List)
+-      throw const FormatException('Sem endereços');
+-    for (final value in data['urls'] as List) {
+-      if (value is! String) continue;
+-      final u = Uri.tryParse(value);
+-      if (u == null ||
+-          !['tls', 'https'].contains(u.scheme) ||
+-          u.userInfo.isNotEmpty ||
+-          u.hasQuery ||
+-          u.hasFragment ||
+-          (u.path.isNotEmpty && u.path != '/') ||
+-          (u.hasPort && u.port != 443) ||
+-          !FriendInvite.validRelayHost(u.host))
+-        continue;
+-      final endpoint = Uri(scheme: 'https', host: u.host, port: 443);
+-      onStatus?.call('Testando a conexão pública da sala…');
+-      await _probe(endpoint, forward.port);
++    _stage = 'ENDERECO';
++    for (var poll = 0; poll < 5; poll++) {
+       _check(generation);
+-      return endpoint;
++      final urls = <String>[];
++      // Pinggy's /urls API over a direct SSH forwarding channel. Empty or
++      // temporarily unavailable responses are startup conditions, not failure.
++      try {
++        final request = api.get(Uri.parse('http://localhost:4300/urls'))
++          ..protocolVersion = SSHHttpProtocolVersion.http10;
++        final response = await request.close().timeout(
++          const Duration(seconds: 2),
++        );
++        if (response.statusCode == 200 &&
++            (response.body?.length ?? 0) <= 16384) {
++          final data = jsonDecode(response.body ?? '');
++          if (data is Map && data['urls'] is List)
++            urls.addAll((data['urls'] as List).whereType<String>());
++        }
++      } catch (_) {
++        _check(generation);
++      }
++      final text = output.replaceAll(RegExp(r'\x1b\[[0-9;?]*[A-Za-z]'), '');
++      urls.addAll(
++        RegExp(
++          r'(?:tls|https)://[a-zA-Z0-9.-]+(?::[0-9]+)?',
++        ).allMatches(text).map((m) => m[0]!),
++      );
++      _check(generation);
++      for (final value in urls.toSet()) {
++        final u = Uri.tryParse(value);
++        if (u == null ||
++            !['tls', 'https'].contains(u.scheme) ||
++            u.userInfo.isNotEmpty ||
++            u.hasQuery ||
++            u.hasFragment ||
++            (u.path.isNotEmpty && u.path != '/') ||
++            (u.hasPort && u.port != 443) ||
++            !FriendInvite.validRelayHost(u.host))
++          continue;
++        final endpoint = Uri(scheme: 'https', host: u.host, port: 443);
++        onStatus?.call('Testando a conexão pública da sala…');
++        _stage = 'ROTA_PUBLICA';
++        // Startup DNS/SNI propagation can lag behind the allocation response.
++        for (var probe = 0; probe < 3; probe++) {
++          try {
++            await _probe(endpoint, forward.port);
++            _check(generation);
++            return endpoint;
++          } on RelayFailure {
++            if (probe == 2) rethrow;
++            _check(generation);
++            await Future<void>.delayed(const Duration(milliseconds: 300));
++          }
++        }
++      }
++      if (poll < 4)
++        await Future<void>.delayed(Duration(milliseconds: 250 * (poll + 1)));
+     }
+     throw const FormatException('Nenhum endereço TLS válido');
+   }
+@@ -306,8 +427,13 @@
+     _channels.clear();
+     final client = _client;
+     final transport = _transport;
+-    client?.close();
+     _client = null;
++    // SSHClient.close is asynchronous. Await its actual socket shutdown,
++    // rather than its early `done` notification, before the isolate can exit.
++    // Always bound a graceful close and force release a stalled transport.
++    try {
++      await client?.close().timeout(const Duration(seconds: 1));
++    } catch (_) {}
+     transport?.destroy();
+     _transport = null;
+     // Finish native IO closure before the phone-host isolate is killed.
+@@ -320,8 +446,12 @@
+             (_) {},
+             onError: (Object _, StackTrace __) {},
+           ),
++        ..._bridges.toList(),
+       ]).timeout(const Duration(seconds: 1));
+     } catch (_) {}
++    // Let native stream-cancellation callbacks finish before PhoneHost kills
++    // its isolate; otherwise a remote peer can retain a stale TCP connection.
++    await Future<void>.delayed(Duration.zero);
+   }
+ 
+   Future<void> close() {
+@@ -332,9 +462,9 @@
+   }
+ }
+ 
+-class _TLSControlSocket implements SSHSocket {
++class _ControlSocket implements SSHSocket {
+   final Socket socket;
+-  _TLSControlSocket(this.socket);
++  _ControlSocket(this.socket);
+   @override
+   Stream<Uint8List> get stream => socket;
+   @override
+--- a/lib/ui/online_screen.dart
++++ b/lib/ui/online_screen.dart
+@@ -224,7 +224,7 @@
+             Text(
+               localNetwork
+                   ? 'Todos precisam estar no mesmo Wi-Fi ou ponto de acesso. Esta opção não usa retransmissor nem precisa de internet.'
+-                  : 'Para amigos em outras casas. O novo túnel seguro usa a porta 443 e testa o endereço público antes de liberar o convite. Cada sala gratuita dura até 60 minutos.',
++                  : 'Para amigos em outras casas. A conexão tenta caminhos alternativos automaticamente e testa a sala antes de liberar o convite. Aguarde a criação terminar. Cada sala gratuita dura até 60 minutos.',
+               style: body(13, color: muted),
+             ),
+             const Divider(height: 30),
+--- a/pubspec.yaml
++++ b/pubspec.yaml
+@@ -1,7 +1,7 @@
+ name: carwece
+ description: CarWece, corrida arcade de miniaturas em pistas de brinquedo, por hirumisu.
+ publish_to: none
+-version: 0.14.2+25
++version: 0.14.3+26
+ environment:
+   sdk: '>=3.8.0 <4.0.0'
+ dependencies:
+--- a/tools/build_android.sh
++++ b/tools/build_android.sh
+@@ -5,4 +5,4 @@
+ flutter analyze
+ flutter test --dart-define=EXPORT_GRAPHICS_WIRE=true
+ (cd android && ./gradlew :app:testReleaseUnitTest)
+-flutter build apk --release --target-platform android-arm,android-arm64,android-x64 --build-name=0.14.2 --build-number=25
++flutter build apk --release --target-platform android-arm,android-arm64,android-x64 --build-name=0.14.3 --build-number=26
+--- a/tools/friends_qa.dart
++++ b/tools/friends_qa.dart
+@@ -134,6 +134,7 @@
+ Future<void> main(List<String> args) async {
+   final localNetwork = args.contains("--lan");
+   final sshMode = args.contains("--ssh");
++  final rawSSH = args.contains('--raw');
+   Map<String, dynamic> sshState() =>
+       jsonDecode(
+             File(
+@@ -170,7 +171,7 @@
+       pinggyOptions: sshMode
+           ? {
+               for (final key in ['host', 'port', 'tlsPin', 'probeLoopback'])
+-                key: sshState()[key],
++                if (key != 'tlsPin' || !rawSSH) key: sshState()[key],
+             }
+           : null,
+       relayControlPort: relay.control.port,
+@@ -193,7 +194,7 @@
+   Timer? render;
+   final report = <String, dynamic>{
+     'transport': sshMode
+-        ? 'real SSH inside TLS, remote TCP forwarding, native game TLS and WebSocket; independent local Paramiko server; public DNS/SNI not emulated'
++        ? '${rawSSH ? "direct SSH" : "SSH inside TLS"}, remote TCP forwarding, native game TLS and WebSocket; independent local Paramiko server; public DNS/SNI not emulated'
+         : localNetwork
+         ? 'real direct TCP + pinned TLS + WebSocket on loopback; listener binds all IPv4; LAN address injected; no relay'
+         : 'real TCP + pinned TLS + WebSocket; local bore protocol oracle',
+@@ -380,7 +381,7 @@
+               .join(' | '),
+     );
+     await until(
+-      () => guests.first.connected == false,
++      () => guests.take(5).every((guest) => !guest.connected),
+       'host closes room for everyone',
+     );
+     report['hostShutdownDisconnectsPeers'] = true;
+@@ -425,10 +426,10 @@
+     report['result'] = 'PASS';
+     await File(
+       localNetwork
+-          ? 'verification/friends_lan_v0142.json'
++          ? 'verification/friends_lan_v0143.json'
+           : sshMode
+-          ? 'verification/friends_ssh_v0142.json'
+-          : 'verification/friends_transport_v0142.json',
++          ? 'verification/friends_ssh_${rawSSH ? "raw" : "tls"}_v0143.json'
++          : 'verification/friends_transport_v0143.json',
+     ).writeAsString(const JsonEncoder.withIndent('  ').convert(report));
+     stdout.writeln(const JsonEncoder.withIndent('  ').convert(report));
+   } finally {
+@@ -438,5 +439,6 @@
+       g.dispose();
+     }
+     await relay.close();
++    stdout.writeln('QA: clients disposed and fixture listeners closed');
+   }
+ }
+--- a/tools/pinggy_fixture.py
++++ b/tools/pinggy_fixture.py
+@@ -1,5 +1,5 @@
+ #!/usr/bin/env python3
+-"""Independent local SSH-over-TLS relay fixture (requires paramiko).
++"""Independent local SSH and SSH-over-TLS relay fixture (requires paramiko).
+ It implements SSH remote forwarding and Pinggy's documented /urls API.
+ It does not claim to emulate public DNS, SNI routing or provider availability.
+ """
+@@ -18,7 +18,7 @@
+ lock=threading.Lock();transports=[];serial=0
+ listener=socket.socket();listener.bind(('127.0.0.1',0));listener.listen(16);listener.settimeout(.4)
+ pin=base64.urlsafe_b64encode(hashlib.sha256(ssl.PEM_cert_to_DER_cert(cert.read_text())).digest()).decode().rstrip('=')
+-state={'host':'127.0.0.1','port':listener.getsockname()[1],'tlsPin':pin,'probeLoopback':True,'forwards':{},'sessions':0}
++state={'host':'127.0.0.1','port':listener.getsockname()[1],'tlsPin':pin,'probeLoopback':True,'forwards':{},'sessions':0,'apiCalls':0,'rawSessions':0,'tlsSessions':0,'activeSessions':0}
+ def save():
+  target=directory/'connection.json';temp=directory/'connection.tmp'
+  temp.write_text(json.dumps(state));temp.replace(target)
+@@ -44,7 +44,7 @@
+ class Session(paramiko.ServerInterface):
+  def __init__(self,transport,number,selected_mode):
+   self.transport=transport;self.name='session-'+str(number)+'.a.pinggy.link'
+-  self.direct={};self.listeners=[];self.peers=[];self.selected_mode=selected_mode
++  self.direct={};self.listeners=[];self.peers=[];self.selected_mode=selected_mode;self.api_calls=0
+  def get_allowed_auths(self,username):return 'none,password'
+  def check_auth_none(self,username):return paramiko.AUTH_SUCCESSFUL
+  def check_auth_password(self,username,password):return paramiko.AUTH_SUCCESSFUL
+@@ -54,6 +54,15 @@
+  def check_channel_pty_request(self,*args):return True
+  def check_channel_shell_request(self,channel):
+   channel.send(b'Local relay fixture. No public connectivity asserted.\r\n')
++  if self.selected_mode=='api_disabled':
++   # An edge may advertise its URL in output while /urls is unavailable.
++   def announce():
++    try:
++     channel.send(b'\x1b[32mTLS route: tls://sess')
++     time.sleep(.05)
++     channel.send((self.name[len('sess'):]+ '\x1b[0m\r\n').encode())
++    except Exception:pass
++   threading.Thread(target=announce,daemon=True).start()
+   return True
+  def check_channel_direct_tcpip_request(self,channel_id,origin,destination):
+   if destination!=('localhost',4300):return paramiko.OPEN_FAILED_ADMINISTRATIVELY_PROHIBITED
+@@ -82,7 +91,12 @@
+   try:
+    request=b'';channel.settimeout(5)
+    while b'\r\n\r\n' not in request and len(request)<8192:request+=channel.recv(4096)
++   self.api_calls+=1
++   with lock:state['apiCalls']+=1;save()
++   if self.selected_mode=='api_disabled':
++    channel.sendall(b'HTTP/1.0 503 Unavailable\r\nContent-Length: 0\r\nConnection: close\r\n\r\n');return
+    urls=['tls://'+self.name] if self.selected_mode!='bad_urls' else ['tls://untrusted.invalid']
++   if self.selected_mode=='delayed_urls' and self.api_calls<3:urls=[]
+    data=json.dumps({'urls':urls}).encode()
+    response=b'HTTP/1.0 200 OK\r\nContent-Type: application/json\r\nContent-Length: '+str(len(data)).encode()+b'\r\nConnection: close\r\n\r\n'+data
+    channel.sendall(response)
+@@ -90,10 +104,16 @@
+ def serve(raw,number):
+  transport=None;session=None
+  try:
+-  secured=context.wrap_socket(raw,server_side=True)
++  selected=mode();raw.settimeout(5)
++  first=raw.recv(1,socket.MSG_PEEK)
++  is_tls=first==b'\x16'
++  if (selected=='raw_only' and is_tls) or (selected=='tls_only' and not is_tls):
++   raw.close();return
++  secured=context.wrap_socket(raw,server_side=True) if is_tls else raw
++  secured.settimeout(None)
+   transport=paramiko.Transport(secured);transport.add_server_key(host_key)
+-  with lock:transports.append(transport)
+-  selected=mode()
++  with lock:
++   transports.append(transport);state['tlsSessions' if is_tls else 'rawSessions']+=1;state['activeSessions']+=1;save()
+   if selected=='drop_ssh':transport.close();return
+   session=Session(transport,number,selected);transport.start_server(server=session)
+   while transport.is_active() and not stop.exists():
+@@ -111,6 +131,8 @@
+    for public in session.listeners:public.close()
+   if transport:transport.close()
+   else:raw.close()
++  if transport:
++   with lock:state['activeSessions']-=1;save()
+ try:
+  print('SSH/TLS relay fixture ready',flush=True)
+  while not stop.exists():
+--- a/tools/relay_faults_qa.dart
++++ b/tools/relay_faults_qa.dart
+@@ -107,7 +107,7 @@
+   report['internetInvitesRestrictedToProviderDomains'] = true;
+   report['result'] = 'PASS';
+   File(
+-    'verification/relay_faults_v0142.json',
++    'verification/relay_faults_v0143.json',
+   ).writeAsStringSync(const JsonEncoder.withIndent('  ').convert(report));
+   stdout.writeln(const JsonEncoder.withIndent('  ').convert(report));
+ }
+--- a/tools/run_relay_qa.py
++++ b/tools/run_relay_qa.py
+@@ -1,14 +1,14 @@
+ #!/usr/bin/env python3
+ """Run an independent SSH/TLS relay and the game's clients in one environment."""
+-import argparse,os,shutil,subprocess,sys,time
++import argparse,os,shutil,subprocess,sys,time,uuid
+ from pathlib import Path
+ p=argparse.ArgumentParser();p.add_argument('--dart',default=shutil.which('dart'));args=p.parse_args()
+ if not args.dart:raise SystemExit('Dart não encontrado.')
+ root=Path(__file__).resolve().parent.parent
+-folder=root/'build/pinggy_fixture'/('run-'+str(os.getpid()));folder.mkdir(parents=True,exist_ok=True)
++folder=root/'build/pinggy_fixture'/('run-'+uuid.uuid4().hex[:12]);folder.mkdir(parents=True,exist_ok=True)
+ state=folder/'connection.json'
+ if state.exists():state.unlink()
+-with (root/'verification/ssh_fixture_v0142.txt').open('w') as log:
++with (root/'verification/ssh_fixture_v0143.txt').open('w') as log:
+  env=os.environ.copy();env['CARWECE_RELAY_FIXTURE']=str(folder)
+  relay=subprocess.Popen([sys.executable,str(root/'tools/pinggy_fixture.py')],cwd=root,env=env,stdout=log,stderr=subprocess.STDOUT)
+  try:
+@@ -17,11 +17,13 @@
+    if relay.poll() is not None or time.monotonic()>limit:raise SystemExit('SSH fixture failed to start')
+    time.sleep(.05)
+   for script,options,name in [
+-   ('relay_faults_qa.dart',[],'relay_faults_v0142.txt'),
+-   ('friends_qa.dart',['--ssh'],'friends_ssh_v0142.txt'),
++   ('adaptive_relay_qa.dart',[],'adaptive_relay_v0143.txt'),
++   ('relay_faults_qa.dart',[],'relay_faults_v0143.txt'),
++   ('friends_qa.dart',['--ssh'],'friends_ssh_tls_v0143.txt'),
++   ('friends_qa.dart',['--ssh','--raw'],'friends_ssh_raw_v0143.txt'),
+   ]:
+    with (root/'verification'/name).open('w') as output:
+-    r=subprocess.run([args.dart,'-DCARWECE_NETWORK_QA=true','run','tools/'+script,*options],cwd=root,env=env,stdout=output,stderr=subprocess.STDOUT)
++    r=subprocess.run([args.dart,'-DCARWECE_NETWORK_QA=true','run','tools/'+script,*options],cwd=root,env=env,stdout=output,stderr=subprocess.STDOUT,timeout=120)
+    print(name+': '+str(r.returncode),flush=True)
+    if r.returncode:raise SystemExit(r.returncode)
+  finally:
+--- a/tools/verify_apk.py
++++ b/tools/verify_apk.py
+@@ -39,8 +39,8 @@
+         return result.stdout
+ 
+     badging = run('manifest.txt', [str(build_tools / 'aapt'), 'dump', 'badging', str(apk)])
+-    for expected in ["name='com.hirumisu.carwece'", "versionCode='25'",
+-                     "versionName='0.14.2'", "application-label:'CarWece'",
++    for expected in ["name='com.hirumisu.carwece'", "versionCode='26'",
++                     "versionName='0.14.3'", "application-label:'CarWece'",
+                      "sdkVersion:'24'", "targetSdkVersion:'35'",
+                      "name='com.hirumisu.carwece.MainActivity'"]:
+         assert expected in badging, expected
+@@ -174,7 +174,9 @@
+     metadata = {'file': apk.name, 'size_bytes': apk.stat().st_size,
+                 'sha256': hashlib.sha256(apk.read_bytes()).hexdigest(),
+                 'package': 'com.hirumisu.carwece', 'label': 'CarWece',
+-                'version': '0.14.2', 'code': 25, 'abis': abis,
++                'version': re.search(r"versionName='([^']+)'", badging).group(1),
++                'code': int(re.search(r"versionCode='([0-9]+)'", badging).group(1)),
++                'abis': abis,
+                 'verified_png_resources': 20, 'verified_adaptive_icons': 2,
+                 'certificate_sha256': certificate}
+     (out / 'apk_meta.json').write_text(json.dumps(metadata, indent=2) + '\n')
+--- /dev/null
++++ b/tools/adaptive_relay_qa.dart
+@@ -0,0 +1,227 @@
++import 'dart:async';
++import 'dart:convert';
++import 'dart:io';
++import 'package:crypto/crypto.dart';
++import 'package:carwece/online/bore_tunnel.dart';
++import 'package:carwece/online/pinggy_tunnel.dart';
++import 'package:carwece/online/host/auth.dart';
++import 'package:carwece/online/host/server.dart';
++import 'package:carwece/online/protocol.dart';
++
++void check(bool value, String reason) {
++  if (!value) throw StateError(reason);
++}
++
++Future<void> main() async {
++  final directory = Platform.environment['CARWECE_RELAY_FIXTURE']!;
++  Map<String, dynamic> state() =>
++      jsonDecode(File('$directory/connection.json').readAsStringSync())
++          as Map<String, dynamic>;
++  final config = state();
++  final host = config['host'] as String, port = config['port'] as int;
++  final pem = File('build/host_identity/certificate.pem').readAsStringSync();
++  final key = File('build/host_identity/key.pem').readAsStringSync();
++  final pin = base64UrlEncode(
++    sha256
++        .convert(
++          base64Decode(pem.replaceAll(RegExp(r'-----[^-]+-----|\s'), '')),
++        )
++        .bytes,
++  ).replaceAll('=', '');
++  final game = CarWeceServer(GuestAuthStore(), maxRooms: 1);
++  final local = await game.start(
++    address: '127.0.0.1',
++    port: 0,
++    tls: SecurityContext()
++      ..useCertificateChainBytes(utf8.encode(pem))
++      ..usePrivateKeyBytes(utf8.encode(key)),
++  );
++  void mode(String name) => File(
++    '$directory/mode.json',
++  ).writeAsStringSync(jsonEncode({'mode': name}));
++  final raw = PinggyRoute(host, port: port);
++  final tls = PinggyRoute(
++    host,
++    port: port,
++    tls: true,
++    certificatePin: config['tlsPin'] as String,
++  );
++  final report = <String, dynamic>{
++    'transport':
++        'Independent Paramiko SSH/TLS server, real sockets, forwarded pinned game TLS',
++    'publicInternetVerified': false,
++    'twoAndroidPhonesVerified': false,
++  };
++  PinggyTunnel tunnel(
++    List<PinggyRoute> routes, {
++    Duration? timeout,
++    void Function(String)? lost,
++  }) => PinggyTunnel(
++    localPort: local,
++    gameCertificatePin: pin,
++    routes: routes,
++    probeLoopback: true,
++    attemptTimeout: timeout ?? const Duration(seconds: 15),
++    onClosed: lost,
++  );
++
++  Future<void> healthy(PinggyTunnel active) async {
++    final endpoint = await active.start();
++    final forward = (state()['forwards'] as Map)[endpoint.host] as int;
++    final client = HttpClient(context: SecurityContext(withTrustedRoots: false))
++      ..badCertificateCallback = (cert, _, _) =>
++          base64UrlEncode(sha256.convert(cert.der).bytes).replaceAll('=', '') ==
++          pin;
++    try {
++      final request = await client.getUrl(
++        Uri.parse('https://127.0.0.1:$forward/health'),
++      );
++      final response = await request.close();
++      final body = jsonDecode(await utf8.decoder.bind(response).join()) as Map;
++      check(
++        response.statusCode == 200 &&
++            body['protocol'] == onlineProtocol &&
++            body['content'] == onlineContent,
++        'Forwarded game health failed',
++      );
++    } finally {
++      client.close(force: true);
++    }
++  }
++
++  try {
++    mode('raw_only');
++    final old = tunnel([tls]);
++    Object? originalFailure;
++    try {
++      await old.start();
++    } catch (e) {
++      originalFailure = e;
++    } finally {
++      await old.close();
++    }
++    check(
++      originalFailure is RelayFailure,
++      'TLS-only route must fail on SSH-only edge',
++    );
++    report['tlsOnlyFailureReproduced'] = originalFailure.toString();
++
++    // This first route has no certificate override, as in the released APK.
++    final fixed = tunnel([PinggyRoute(host, port: port, tls: true), raw]);
++    final rawBefore = state()['rawSessions'] as int;
++    try {
++      await healthy(fixed);
++    } finally {
++      await fixed.close();
++    }
++    check(
++      (state()['rawSessions'] as int) > rawBefore,
++      'Did not switch to direct SSH',
++    );
++    report['failedTLSFallsBackToDirectSSH'] = true;
++
++    mode('tls_only');
++    final sslFallback = tunnel([raw, tls]);
++    final tlsBefore = state()['tlsSessions'] as int;
++    try {
++      await healthy(sslFallback);
++    } finally {
++      await sslFallback.close();
++    }
++    check(
++      (state()['tlsSessions'] as int) > tlsBefore,
++      'Did not switch to SSH over TLS',
++    );
++    report['blockedDirectSSHFallsBackToTLS'] = true;
++
++    mode('normal');
++    final unavailable = await ServerSocket.bind('127.0.0.1', 0);
++    final deadPort = unavailable.port;
++    await unavailable.close();
++    final alternate = tunnel([PinggyRoute(host, port: deadPort), raw]);
++    try {
++      await healthy(alternate);
++    } finally {
++      await alternate.close();
++    }
++    report['unreachableControlAddressFallsBack'] = true;
++
++    mode('delayed_urls');
++    final delayed = tunnel([raw]);
++    final before = state()['apiCalls'] as int;
++    try {
++      await healthy(delayed);
++    } finally {
++      await delayed.close();
++    }
++    check(
++      (state()['apiCalls'] as int) - before >= 3,
++      'Did not wait for URL allocation',
++    );
++    report['emptyURLResponsesWaitForAllocation'] = true;
++
++    mode('api_disabled');
++    final output = tunnel([raw]);
++    try {
++      await healthy(output);
++    } finally {
++      await output.close();
++    }
++    report['unavailableAPIFallsBackToFragmentedANSIOutput'] = true;
++
++    // A timeout leaves an outstanding SSH handshake. Its late completion must
++    // not publish a room or corrupt the next attempt's generation.
++    mode('normal');
++    final silent = await ServerSocket.bind('127.0.0.1', 0);
++    final silentSockets = <Socket>[];
++    silent.listen((socket) {
++      silentSockets.add(socket);
++      socket.listen((_) {}, onError: (Object _) {});
++    });
++    final timed = tunnel([
++      PinggyRoute(host, port: silent.port),
++      raw,
++    ], timeout: const Duration(seconds: 2));
++    try {
++      await healthy(timed);
++    } finally {
++      await timed.close();
++      for (final socket in silentSockets) {
++        socket.destroy();
++      }
++      await silent.close();
++    }
++    report['timedOutHandshakeDoesNotCorruptNextRoute'] = true;
++
++    final lost = <String>[];
++    final cancelled = tunnel([raw], lost: lost.add);
++    final starting = cancelled.start().then<Object?>(
++      (_) => null,
++      onError: (Object e) => e,
++    );
++    await cancelled.close();
++    final cancellation = await starting;
++    check(
++      cancellation is Exception || cancellation is Error,
++      'Cancelled startup unexpectedly succeeded',
++    );
++    check(lost.isEmpty, 'Cancelled startup announced a disconnected room');
++    report['cancellationBeforeReadyIsSilent'] = true;
++
++    mode('normal');
++    final recreated = tunnel([raw]);
++    try {
++      await healthy(recreated);
++    } finally {
++      await recreated.close();
++    }
++    report['roomCanBeRecreatedAfterFailures'] = true;
++    report['result'] = 'PASS';
++    final result = const JsonEncoder.withIndent('  ').convert(report);
++    File('verification/adaptive_relay_v0143.json').writeAsStringSync(result);
++    stdout.writeln(result);
++  } finally {
++    mode('normal');
++    await game.close();
++  }
++}

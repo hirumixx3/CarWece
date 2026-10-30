@@ -1,0 +1,35 @@
+[
+  {
+    "file": "lib/armeabi-v7a/libapp.so",
+    "validELF": true,
+    "bytes": 7668316
+  },
+  {
+    "file": "lib/armeabi-v7a/libflutter.so",
+    "validELF": true,
+    "bytes": 7926848,
+    "matchesStrippedFlutterEngine": true
+  },
+  {
+    "file": "lib/arm64-v8a/libapp.so",
+    "validELF": true,
+    "bytes": 6816688
+  },
+  {
+    "file": "lib/arm64-v8a/libflutter.so",
+    "validELF": true,
+    "bytes": 11037032,
+    "matchesStrippedFlutterEngine": true
+  },
+  {
+    "file": "lib/x86_64/libapp.so",
+    "validELF": true,
+    "bytes": 6947760
+  },
+  {
+    "file": "lib/x86_64/libflutter.so",
+    "validELF": true,
+    "bytes": 12143760,
+    "matchesStrippedFlutterEngine": true
+  }
+]

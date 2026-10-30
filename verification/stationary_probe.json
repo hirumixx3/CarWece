@@ -1,0 +1,2550 @@
+[
+  {
+    "track": "bedroom",
+    "mode": "quick",
+    "idleMoved": 0.00012259804937714237,
+    "launchSpeed": 23.576568777846248,
+    "startS": 4828.845262197801,
+    "finalS": 4838.95194018328,
+    "lane": 0.3216638762392472,
+    "position": [
+      -586.2332422287568,
+      5.898876892602371,
+      -607.2188090497997
+    ],
+    "airborne": false,
+    "normal": 0.9999808829461764
+  },
+  {
+    "track": "bedroom",
+    "mode": "timeTrial",
+    "idleMoved": 0.0,
+    "launchSpeed": 23.720952118892747,
+    "startS": 0.0,
+    "finalS": 9.148705077323939,
+    "lane": -0.00704136735463855,
+    "position": [
+      -615.0851034565493,
+      5.999999999999999,
+      -557.6818997937191
+    ],
+    "airborne": false,
+    "normal": 1.0
+  },
+  {
+    "track": "bedroom",
+    "mode": "stop",
+    "idleMoved": 4.941989386674107e-7,
+    "launchSpeed": 16.11556281886356,
+    "startS": 0.0,
+    "finalS": 4.4959175706762835,
+    "lane": 0.49859762351800824,
+    "normal": 1.0,
+    "slope": 0.00000425600426952628
+  },
+  {
+    "track": "bedroom",
+    "mode": "stop",
+    "idleMoved": 1.625942802695669e-7,
+    "launchSpeed": 16.064995248154844,
+    "startS": 226.7055309396228,
+    "finalS": 230.82757147048142,
+    "lane": 0.5006971338280602,
+    "normal": 0.9999912333657959,
+    "slope": 0.003705695894874103
+  },
+  {
+    "track": "bedroom",
+    "mode": "stop",
+    "idleMoved": 0.000018255187358669395,
+    "launchSpeed": 16.323108681416272,
+    "startS": 792.3246931179951,
+    "finalS": 796.5358246309934,
+    "lane": 0.5003452526558254,
+    "normal": 0.999862106884168,
+    "slope": -0.015476855120935364
+  },
+  {
+    "track": "bedroom",
+    "mode": "stop",
+    "idleMoved": 0.0006634758871211664,
+    "launchSpeed": 15.789906111223194,
+    "startS": 2952.124035956687,
+    "finalS": 2956.4062886516986,
+    "lane": 0.49702647941838224,
+    "normal": 0.9996633129956252,
+    "slope": 0.024252318065919598
+  },
+  {
+    "track": "bedroom",
+    "mode": "stop",
+    "idleMoved": 0.000005449338549259529,
+    "launchSpeed": 16.021744024141096,
+    "startS": 4423.688677353225,
+    "finalS": 4427.82884121562,
+    "lane": 0.5002348785972898,
+    "normal": 0.9999733730885958,
+    "slope": 0.007106140118862953
+  },
+  {
+    "track": "bedroom",
+    "mode": "stop",
+    "idleMoved": 0.000044143357389997094,
+    "launchSpeed": 15.921330066674315,
+    "startS": 4766.644661466158,
+    "finalS": 4770.8285299983545,
+    "lane": 0.4991285004979941,
+    "normal": 0.9998910655310912,
+    "slope": 0.014885265430388834
+  },
+  {
+    "track": "garage",
+    "mode": "quick",
+    "idleMoved": 0.0,
+    "launchSpeed": 23.720988071506113,
+    "startS": 4560.323405002404,
+    "finalS": 4570.82870680405,
+    "lane": 0.32109766814675894,
+    "position": [
+      -542.3224447686447,
+      6.0,
+      -604.2025573647038
+    ],
+    "airborne": false,
+    "normal": 1.0
+  },
+  {
+    "track": "garage",
+    "mode": "timeTrial",
+    "idleMoved": 0.0,
+    "launchSpeed": 23.720988071506163,
+    "startS": 0.0,
+    "finalS": 9.132885659584645,
+    "lane": -0.0188043620077905,
+    "position": [
+      -592.3496163754434,
+      6.0,
+      -579.4903719075012
+    ],
+    "airborne": false,
+    "normal": 1.0
+  },
+  {
+    "track": "garage",
+    "mode": "stop",
+    "idleMoved": 0.0,
+    "launchSpeed": 16.115599269650623,
+    "startS": 0.0,
+    "finalS": 4.475562261579398,
+    "lane": 0.4950511711343654,
+    "normal": 1.0,
+    "slope": 0.0
+  },
+  {
+    "track": "garage",
+    "mode": "stop",
+    "idleMoved": 0.00010952688059778785,
+    "launchSpeed": 15.956122299867134,
+    "startS": 331.3067015474046,
+    "finalS": 335.50651053617366,
+    "lane": 0.49902923631585194,
+    "normal": 0.9999199647092021,
+    "slope": 0.011931305428175575
+  },
+  {
+    "track": "garage",
+    "mode": "stop",
+    "idleMoved": 0.00012278547702303556,
+    "launchSpeed": 15.951538935987587,
+    "startS": 3334.78445058587,
+    "finalS": 3339.1708026541246,
+    "lane": 0.49595840627865073,
+    "normal": 0.9999160865021652,
+    "slope": 0.01227978991770728
+  },
+  {
+    "track": "garage",
+    "mode": "stop",
+    "idleMoved": 0.000030823625282657316,
+    "launchSpeed": 16.08582617104242,
+    "startS": 3708.9941061003606,
+    "finalS": 3713.2387453187803,
+    "lane": 0.49883538549327033,
+    "normal": 0.9999976392777721,
+    "slope": 0.0023300939719692625
+  },
+  {
+    "track": "garage",
+    "mode": "stop",
+    "idleMoved": 0.0,
+    "launchSpeed": 16.115599269650644,
+    "startS": 4128.949154430605,
+    "finalS": 4132.863633648174,
+    "lane": 0.5040368968355464,
+    "normal": 1.0,
+    "slope": 0.0
+  },
+  {
+    "track": "garage",
+    "mode": "stop",
+    "idleMoved": 8.881784197001252e-16,
+    "launchSpeed": 16.11559926965061,
+    "startS": 4473.533476085471,
+    "finalS": 4477.779882487019,
+    "lane": 0.4989313108202797,
+    "normal": 1.0,
+    "slope": 0.0
+  },
+  {
+    "track": "arcade",
+    "mode": "quick",
+    "idleMoved": 0.00005104656035229151,
+    "launchSpeed": 23.56664299887776,
+    "startS": 5130.338447635027,
+    "finalS": 5139.824801755075,
+    "lane": 0.34173014778697774,
+    "position": [
+      -513.8070831621922,
+      6.387197505946996,
+      -610.7088748302493
+    ],
+    "airborne": false,
+    "normal": 0.9999610069636481
+  },
+  {
+    "track": "arcade",
+    "mode": "timeTrial",
+    "idleMoved": 0.0,
+    "launchSpeed": 23.440868460362452,
+    "startS": 0.0,
+    "finalS": 9.043043297642726,
+    "lane": -0.003814585122038583,
+    "position": [
+      -552.42498606805,
+      7.134709210971259,
+      -563.6004413653644
+    ],
+    "airborne": false,
+    "normal": 0.9998819347140625
+  },
+  {
+    "track": "arcade",
+    "mode": "stop",
+    "idleMoved": 0.000021543733406501122,
+    "launchSpeed": 15.924569283687708,
+    "startS": 0.0,
+    "finalS": 4.244334840273041,
+    "lane": 0.4981841083531182,
+    "normal": 0.9998893711462048,
+    "slope": 0.014438067792390234
+  },
+  {
+    "track": "arcade",
+    "mode": "stop",
+    "idleMoved": 0.0,
+    "launchSpeed": 16.348347499667845,
+    "startS": 1185.1218425742966,
+    "finalS": 1189.2285465996947,
+    "lane": 0.5020897621867892,
+    "normal": 0.9998334345636418,
+    "slope": -0.01756773722020042
+  },
+  {
+    "track": "arcade",
+    "mode": "stop",
+    "idleMoved": 0.00022368946951645255,
+    "launchSpeed": 15.86633369524661,
+    "startS": 4739.15491337733,
+    "finalS": 4743.441255560164,
+    "lane": 0.49725946856151515,
+    "normal": 0.9998204071726868,
+    "slope": 0.019094402124528592
+  },
+  {
+    "track": "arcade",
+    "mode": "stop",
+    "idleMoved": 0.0000837512331803381,
+    "launchSpeed": 16.09342008683322,
+    "startS": 5066.2415157539845,
+    "finalS": 5070.625514581147,
+    "lane": 0.49657720823260276,
+    "normal": 0.9999982151128852,
+    "slope": 0.0015789323133182638
+  },
+  {
+    "track": "bedroom_sprint",
+    "mode": "quick",
+    "idleMoved": 0.0,
+    "launchSpeed": 23.720988071506135,
+    "startS": 3954.708126791805,
+    "finalS": 3964.30057665681,
+    "lane": 0.341227299805253,
+    "position": [
+      -556.3954290975599,
+      6.0,
+      -599.4101939814602
+    ],
+    "airborne": false,
+    "normal": 1.0
+  },
+  {
+    "track": "bedroom_sprint",
+    "mode": "timeTrial",
+    "idleMoved": 0.0,
+    "launchSpeed": 23.72119284241142,
+    "startS": 0.0,
+    "finalS": 9.152677691989993,
+    "lane": -0.006816071048170592,
+    "position": [
+      -593.7462363903986,
+      5.999936854883871,
+      -551.6476467179605
+    ],
+    "airborne": false,
+    "normal": 0.9999999996911397
+  },
+  {
+    "track": "bedroom_sprint",
+    "mode": "stop",
+    "idleMoved": 8.426305830914694e-7,
+    "launchSpeed": 16.115694662440124,
+    "startS": 0.0,
+    "finalS": 4.388583977872713,
+    "lane": 0.4965983264734821,
+    "normal": 0.9999999999056162,
+    "slope": -0.0000034965756902975638
+  },
+  {
+    "track": "bedroom_sprint",
+    "mode": "stop",
+    "idleMoved": 3.2495209141078887e-7,
+    "launchSpeed": 16.275380720501637,
+    "startS": 541.1204697709313,
+    "finalS": 545.3446245708997,
+    "lane": 0.4999497687410298,
+    "normal": 0.9999259551495335,
+    "slope": -0.012231668363253973
+  },
+  {
+    "track": "bedroom_sprint",
+    "mode": "stop",
+    "idleMoved": 0.00006256641779688178,
+    "launchSpeed": 16.359123812531564,
+    "startS": 2891.6349883554576,
+    "finalS": 2895.8737612096143,
+    "lane": 0.5000774246897687,
+    "normal": 0.9998434598536357,
+    "slope": -0.01908359720032984
+  },
+  {
+    "track": "bedroom_sprint",
+    "mode": "stop",
+    "idleMoved": 0.00038863598950460545,
+    "launchSpeed": 15.950445826771636,
+    "startS": 3626.6958035199236,
+    "finalS": 3631.0516725997118,
+    "lane": 0.4964550796009868,
+    "normal": 0.9999255151286448,
+    "slope": 0.012861562984053582
+  },
+  {
+    "track": "bedroom_sprint",
+    "mode": "stop",
+    "idleMoved": 0.0,
+    "launchSpeed": 16.115599269650623,
+    "startS": 3960.1162927435557,
+    "finalS": 3964.5329422779946,
+    "lane": 0.4961305900848619,
+    "normal": 1.0,
+    "slope": 0.0
+  },
+  {
+    "track": "garage_drift",
+    "mode": "quick",
+    "idleMoved": 0.0,
+    "launchSpeed": 23.72098807150614,
+    "startS": 5411.537944536285,
+    "finalS": 5421.283217998665,
+    "lane": 0.34246767453271393,
+    "position": [
+      -540.2370704947368,
+      6.0,
+      -643.9156328732735
+    ],
+    "airborne": false,
+    "normal": 1.0
+  },
+  {
+    "track": "garage_drift",
+    "mode": "timeTrial",
+    "idleMoved": 0.0,
+    "launchSpeed": 23.721330032344856,
+    "startS": 0.0,
+    "finalS": 9.140653211430617,
+    "lane": -0.011526887955139587,
+    "position": [
+      -586.8781309021541,
+      5.999835127708509,
+      -605.8075591504835
+    ],
+    "airborne": false,
+    "normal": 0.9999999986434629
+  },
+  {
+    "track": "garage_drift",
+    "mode": "stop",
+    "idleMoved": 0.0000012255813972691222,
+    "launchSpeed": 16.115751002095536,
+    "startS": 0.0,
+    "finalS": 4.431023407347311,
+    "lane": 0.49588548468881394,
+    "normal": 0.9999999997328279,
+    "slope": -0.000004614877185805676
+  },
+  {
+    "track": "garage_drift",
+    "mode": "stop",
+    "idleMoved": 0.000003888553034298033,
+    "launchSpeed": 16.300002289015033,
+    "startS": 406.9161517043534,
+    "finalS": 411.11489304886527,
+    "lane": 0.5004575958667832,
+    "normal": 0.9999019879129015,
+    "slope": -0.014138547400777015
+  },
+  {
+    "track": "garage_drift",
+    "mode": "stop",
+    "idleMoved": 0.000046714992856857256,
+    "launchSpeed": 16.438777199784987,
+    "startS": 4442.10273856737,
+    "finalS": 4446.485565109284,
+    "lane": 0.4980402732796764,
+    "normal": 0.999679471663355,
+    "slope": -0.02435555376525229
+  },
+  {
+    "track": "garage_drift",
+    "mode": "stop",
+    "idleMoved": 0.0,
+    "launchSpeed": 16.11559926965066,
+    "startS": 5229.530039258627,
+    "finalS": 5233.745731791707,
+    "lane": 0.49942312086050167,
+    "normal": 1.0,
+    "slope": -6.477889722896499e-17
+  },
+  {
+    "track": "arcade_neon",
+    "mode": "quick",
+    "idleMoved": 0.0,
+    "launchSpeed": 23.720988071506127,
+    "startS": 5265.916844572735,
+    "finalS": 5275.477844873317,
+    "lane": 0.3473027517272943,
+    "position": [
+      -516.3261637071257,
+      6.0,
+      -615.3385821385863
+    ],
+    "airborne": false,
+    "normal": 1.0
+  },
+  {
+    "track": "arcade_neon",
+    "mode": "timeTrial",
+    "idleMoved": 0.0,
+    "launchSpeed": 23.720524633909516,
+    "startS": 0.0,
+    "finalS": 9.150472937427367,
+    "lane": -0.010805347353113517,
+    "position": [
+      -574.4043756813695,
+      6.000136025779966,
+      -596.7757742809343
+    ],
+    "airborne": false,
+    "normal": 0.9999999983569525
+  },
+  {
+    "track": "arcade_neon",
+    "mode": "stop",
+    "idleMoved": 0.000002313085489471759,
+    "launchSpeed": 16.11537785329794,
+    "startS": 0.0,
+    "finalS": 4.502913853407335,
+    "lane": 0.49466055186409974,
+    "normal": 0.9999999994892255,
+    "slope": 0.000007361943673874124
+  },
+  {
+    "track": "arcade_neon",
+    "mode": "stop",
+    "idleMoved": 0.0,
+    "launchSpeed": 16.414466374814065,
+    "startS": 1285.1944797996407,
+    "finalS": 1289.0855525636098,
+    "lane": 0.5056120247226515,
+    "normal": 0.9997593800526208,
+    "slope": -0.023221142462120526
+  },
+  {
+    "track": "arcade_neon",
+    "mode": "stop",
+    "idleMoved": 0.0,
+    "launchSpeed": 16.24532032294115,
+    "startS": 4811.6890974790285,
+    "finalS": 4815.747324788309,
+    "lane": 0.5024184688200316,
+    "normal": 0.999953730112467,
+    "slope": -0.010050306594100064
+  },
+  {
+    "track": "arcade_neon",
+    "mode": "stop",
+    "idleMoved": 8.881784197001252e-16,
+    "launchSpeed": 16.11559926965062,
+    "startS": 5297.201139102982,
+    "finalS": 5301.614448448126,
+    "lane": 0.49618431593130763,
+    "normal": 1.0,
+    "slope": 0.0
+  },
+  {
+    "track": "bathroom",
+    "mode": "quick",
+    "idleMoved": 0.000014363333479608746,
+    "launchSpeed": 23.839197098655916,
+    "startS": 4094.808738419526,
+    "finalS": 4104.349142857225,
+    "lane": 0.3443973755534962,
+    "position": [
+      -481.4252061738916,
+      5.549257516618523,
+      -645.8668876015091
+    ],
+    "airborne": false,
+    "normal": 0.9999757215153666
+  },
+  {
+    "track": "bathroom",
+    "mode": "timeTrial",
+    "idleMoved": 0.0,
+    "launchSpeed": 23.971677859260453,
+    "startS": 0.0,
+    "finalS": 9.24970917450537,
+    "lane": -0.006234413398759474,
+    "position": [
+      -533.1737687697774,
+      4.902853823176571,
+      -613.4258094616661
+    ],
+    "airborne": false,
+    "normal": 0.9999044975921596
+  },
+  {
+    "track": "bathroom",
+    "mode": "stop",
+    "idleMoved": 0.00004201213129666613,
+    "launchSpeed": 16.286507476278892,
+    "startS": 0.0,
+    "finalS": 4.414696551125417,
+    "lane": 0.49687377521040255,
+    "normal": 0.9999110119435547,
+    "slope": -0.012897440866270109
+  },
+  {
+    "track": "bathroom",
+    "mode": "stop",
+    "idleMoved": 0.0,
+    "launchSpeed": 15.84864119435438,
+    "startS": 2576.224680811199,
+    "finalS": 2580.0883734340123,
+    "lane": 0.5037132786922067,
+    "normal": 0.9997751878164073,
+    "slope": 0.02003754117272882
+  },
+  {
+    "track": "bathroom",
+    "mode": "stop",
+    "idleMoved": 2.220446049250313e-16,
+    "launchSpeed": 15.90435114296919,
+    "startS": 3735.6910082084632,
+    "finalS": 3739.7599601562724,
+    "lane": 0.5008631713567595,
+    "normal": 0.9998663754451627,
+    "slope": 0.016035087059524056
+  },
+  {
+    "track": "bathroom",
+    "mode": "stop",
+    "idleMoved": 0.00003506897997398034,
+    "launchSpeed": 16.21801071641014,
+    "startS": 4110.09301303536,
+    "finalS": 4114.472981222592,
+    "lane": 0.49716717095056656,
+    "normal": 0.9999667940007739,
+    "slope": -0.007639099273707463
+  },
+  {
+    "track": "bathroom_hairpin",
+    "mode": "quick",
+    "idleMoved": 0.0,
+    "launchSpeed": 23.720988071506135,
+    "startS": 4842.033866487542,
+    "finalS": 4851.510679355257,
+    "lane": 0.34199835252372407,
+    "position": [
+      -487.0090971710311,
+      6.0,
+      -626.8477402941085
+    ],
+    "airborne": false,
+    "normal": 1.0
+  },
+  {
+    "track": "bathroom_hairpin",
+    "mode": "timeTrial",
+    "idleMoved": 0.0,
+    "launchSpeed": 23.72129988435723,
+    "startS": 0.0,
+    "finalS": 9.133810078890747,
+    "lane": -0.013421452407224255,
+    "position": [
+      -544.1841030557509,
+      5.999863118156754,
+      -608.1098601286237
+    ],
+    "airborne": false,
+    "normal": 0.9999999989544952
+  },
+  {
+    "track": "bathroom_hairpin",
+    "mode": "stop",
+    "idleMoved": 0.0000012719739608466453,
+    "launchSpeed": 16.115743100249606,
+    "startS": 0.0,
+    "finalS": 4.4942922382979305,
+    "lane": 0.49480852148515825,
+    "normal": 0.9999999997690572,
+    "slope": -0.000004352533457830631
+  },
+  {
+    "track": "bathroom_hairpin",
+    "mode": "stop",
+    "idleMoved": 0.0002962532563334395,
+    "launchSpeed": 16.419272124887303,
+    "startS": 329.1160354500441,
+    "finalS": 333.5556029349582,
+    "lane": 0.4970190125472814,
+    "normal": 0.9997334079644369,
+    "slope": -0.02327740518938908
+  },
+  {
+    "track": "bathroom_hairpin",
+    "mode": "stop",
+    "idleMoved": 0.00017368897365665814,
+    "launchSpeed": 15.839973903383228,
+    "startS": 3819.378333230154,
+    "finalS": 3823.6273582138783,
+    "lane": 0.49775910434804993,
+    "normal": 0.999778389419049,
+    "slope": 0.021057467701809093
+  },
+  {
+    "track": "bathroom_hairpin",
+    "mode": "stop",
+    "idleMoved": 8.881784197001252e-16,
+    "launchSpeed": 16.115599269650616,
+    "startS": 4136.494497499282,
+    "finalS": 4140.736297900721,
+    "lane": 0.4990063735315806,
+    "normal": 1.0,
+    "slope": 0.0
+  },
+  {
+    "track": "bathroom_hairpin",
+    "mode": "stop",
+    "idleMoved": 0.0,
+    "launchSpeed": 16.115599269650637,
+    "startS": 4399.668050311612,
+    "finalS": 4403.613280487487,
+    "lane": 0.5035831816312295,
+    "normal": 1.0,
+    "slope": 0.0
+  },
+  {
+    "track": "bathroom_hairpin",
+    "mode": "stop",
+    "idleMoved": 0.0,
+    "launchSpeed": 16.115599269650613,
+    "startS": 4808.937945199937,
+    "finalS": 4813.3176889389,
+    "lane": 0.49674848813214506,
+    "normal": 1.0,
+    "slope": 0.0
+  },
+  {
+    "track": "kitchen",
+    "mode": "quick",
+    "idleMoved": 0.0,
+    "launchSpeed": 23.720988071506085,
+    "startS": 3507.142037276134,
+    "finalS": 3516.878213857778,
+    "lane": 0.3404488460764073,
+    "position": [
+      -527.4660486491255,
+      6.0,
+      -645.271115105668
+    ],
+    "airborne": false,
+    "normal": 1.0
+  },
+  {
+    "track": "kitchen",
+    "mode": "timeTrial",
+    "idleMoved": 0.0,
+    "launchSpeed": 23.721317706774222,
+    "startS": 0.0,
+    "finalS": 9.13710875673587,
+    "lane": -0.012799786147874881,
+    "position": [
+      -575.3762965677244,
+      5.999845914592307,
+      -609.2577512287545
+    ],
+    "airborne": false,
+    "normal": 0.9999999987860417
+  },
+  {
+    "track": "kitchen",
+    "mode": "stop",
+    "idleMoved": 0.0000013387579400739001,
+    "launchSpeed": 16.115748512118927,
+    "startS": 0.0,
+    "finalS": 4.466844011223657,
+    "lane": 0.4952775848107467,
+    "normal": 0.9999999997468966,
+    "slope": -0.000004542675841187681
+  },
+  {
+    "track": "kitchen",
+    "mode": "stop",
+    "idleMoved": 0.00043756257456081327,
+    "launchSpeed": 16.420120176057882,
+    "startS": 345.6530157847412,
+    "finalS": 350.1352808218062,
+    "lane": 0.49629660361645767,
+    "normal": 0.9997313801593777,
+    "slope": -0.023330286719143885
+  },
+  {
+    "track": "kitchen",
+    "mode": "stop",
+    "idleMoved": 0.000030526558384288025,
+    "launchSpeed": 16.16956414005439,
+    "startS": 2359.732406576685,
+    "finalS": 2363.9125454195037,
+    "lane": 0.5002052354791564,
+    "normal": 0.9999896785741949,
+    "slope": -0.003908597208836797
+  },
+  {
+    "track": "kitchen",
+    "mode": "stop",
+    "idleMoved": 0.000010896413730563227,
+    "launchSpeed": 16.140976805563994,
+    "startS": 3259.4480414186332,
+    "finalS": 3263.65363732853,
+    "lane": 0.49969071875006366,
+    "normal": 0.999998295821183,
+    "slope": -0.001987843932500431
+  },
+  {
+    "track": "kitchen_chicane",
+    "mode": "quick",
+    "idleMoved": 0.0,
+    "launchSpeed": 23.72098807150612,
+    "startS": 5045.790770825473,
+    "finalS": 5055.174711780664,
+    "lane": 0.3448177291699922,
+    "position": [
+      -489.60030704305456,
+      6.0,
+      -624.1571236247019
+    ],
+    "airborne": false,
+    "normal": 1.0
+  },
+  {
+    "track": "kitchen_chicane",
+    "mode": "timeTrial",
+    "idleMoved": 0.0,
+    "launchSpeed": 23.721257949341453,
+    "startS": 0.0,
+    "finalS": 9.124684093616452,
+    "lane": -0.014373377448825535,
+    "position": [
+      -547.689239454489,
+      5.999907470351451,
+      -606.6995797649297
+    ],
+    "airborne": false,
+    "normal": 0.9999999993496924
+  },
+  {
+    "track": "kitchen_chicane",
+    "mode": "stop",
+    "idleMoved": 0.0000013943550687606237,
+    "launchSpeed": 16.11572909814583,
+    "startS": 0.0,
+    "finalS": 4.568011027510693,
+    "lane": 0.49353269702140024,
+    "normal": 0.9999999998200726,
+    "slope": -0.000003956350791586919
+  },
+  {
+    "track": "kitchen_chicane",
+    "mode": "stop",
+    "idleMoved": 0.0,
+    "launchSpeed": 16.424062560610917,
+    "startS": 330.0264517507974,
+    "finalS": 334.1453280236601,
+    "lane": 0.5022243249003178,
+    "normal": 0.9997281860290222,
+    "slope": -0.023699168041526802
+  },
+  {
+    "track": "kitchen_chicane",
+    "mode": "stop",
+    "idleMoved": 0.0,
+    "launchSpeed": 16.37759251398157,
+    "startS": 4340.655164211821,
+    "finalS": 4344.855362004875,
+    "lane": 0.5007624135639883,
+    "normal": 0.9998090781059191,
+    "slope": -0.020264541660982176
+  },
+  {
+    "track": "kitchen_chicane",
+    "mode": "stop",
+    "idleMoved": 0.0,
+    "launchSpeed": 16.115599269650623,
+    "startS": 4714.596489793429,
+    "finalS": 4718.749886840618,
+    "lane": 0.5004102246805396,
+    "normal": 1.0,
+    "slope": 0.0
+  },
+  {
+    "track": "living",
+    "mode": "quick",
+    "idleMoved": 0.00002761445978617349,
+    "launchSpeed": 23.755525759290908,
+    "startS": 4438.279415828813,
+    "finalS": 4448.090994145613,
+    "lane": 0.33958250442043975,
+    "position": [
+      -542.2769742616372,
+      6.023591146016776,
+      -647.9893368799701
+    ],
+    "airborne": false,
+    "normal": 0.99999900192056
+  },
+  {
+    "track": "living",
+    "mode": "timeTrial",
+    "idleMoved": 0.0,
+    "launchSpeed": 23.721335817525553,
+    "startS": 0.0,
+    "finalS": 9.146017145382757,
+    "lane": -0.008113570393825873,
+    "position": [
+      -586.5426322387623,
+      5.999877284496419,
+      -607.2526188834762
+    ],
+    "airborne": false,
+    "normal": 0.9999999991394156
+  },
+  {
+    "track": "living",
+    "mode": "stop",
+    "idleMoved": 7.355914989117034e-9,
+    "launchSpeed": 16.115778383066896,
+    "startS": 0.0,
+    "finalS": 4.380466523461109,
+    "lane": 0.4967371186179731,
+    "normal": 0.9999999997575935,
+    "slope": -0.000008759350905332603
+  },
+  {
+    "track": "living",
+    "mode": "stop",
+    "idleMoved": 0.00011697831889731314,
+    "launchSpeed": 16.35093967933274,
+    "startS": 391.9160522626344,
+    "finalS": 396.26240832047733,
+    "lane": 0.49828569838240805,
+    "normal": 0.9998406798016676,
+    "slope": -0.018059985376963125
+  },
+  {
+    "track": "living",
+    "mode": "stop",
+    "idleMoved": 0.0001267815451758717,
+    "launchSpeed": 16.410972216092286,
+    "startS": 3822.97772727557,
+    "finalS": 3827.3074995573434,
+    "lane": 0.4987953486694366,
+    "normal": 0.9997274709017112,
+    "slope": -0.022156701705478357
+  },
+  {
+    "track": "living_grand",
+    "mode": "quick",
+    "idleMoved": 0.0,
+    "launchSpeed": 23.720988071506124,
+    "startS": 4904.81472977293,
+    "finalS": 4914.339588868179,
+    "lane": 0.3431603076543629,
+    "position": [
+      -536.4478459858624,
+      6.0,
+      -666.860601924905
+    ],
+    "airborne": false,
+    "normal": 1.0
+  },
+  {
+    "track": "living_grand",
+    "mode": "timeTrial",
+    "idleMoved": 0.0,
+    "launchSpeed": 23.721222291946404,
+    "startS": 0.0,
+    "finalS": 9.151278979831659,
+    "lane": -0.00974827359949455,
+    "position": [
+      -587.900580735324,
+      5.999931957348245,
+      -634.963344426904
+    ],
+    "airborne": false,
+    "normal": 0.9999999995810318
+  },
+  {
+    "track": "living_grand",
+    "mode": "stop",
+    "idleMoved": 0.0000011367866976715453,
+    "launchSpeed": 16.11570990286181,
+    "startS": 0.0,
+    "finalS": 4.472708065200095,
+    "lane": 0.4951797600506036,
+    "normal": 0.9999999998710017,
+    "slope": -0.0000037324821364046893
+  },
+  {
+    "track": "living_grand",
+    "mode": "stop",
+    "idleMoved": 0.0000018811791780524182,
+    "launchSpeed": 16.302220534778307,
+    "startS": 455.71529884924973,
+    "finalS": 459.92779795821843,
+    "lane": 0.5002478900077092,
+    "normal": 0.9998992601650337,
+    "slope": -0.014296266443018613
+  },
+  {
+    "track": "living_grand",
+    "mode": "stop",
+    "idleMoved": 0.000012248879602380455,
+    "launchSpeed": 16.36456036612168,
+    "startS": 4267.080999970315,
+    "finalS": 4271.294761717381,
+    "lane": 0.5004928231240503,
+    "normal": 0.9998280024267819,
+    "slope": -0.019269885090156407
+  },
+  {
+    "track": "living_grand",
+    "mode": "stop",
+    "idleMoved": 0.0,
+    "launchSpeed": 16.115599269650627,
+    "startS": 4667.571476668307,
+    "finalS": 4671.7782438013855,
+    "lane": 0.49956648990398456,
+    "normal": 1.0,
+    "slope": 0.0
+  },
+  {
+    "track": "bedroom_library",
+    "mode": "quick",
+    "idleMoved": 0.0,
+    "launchSpeed": 23.72098807150615,
+    "startS": 5760.261420504562,
+    "finalS": 5769.835217284092,
+    "lane": 0.3419364630662189,
+    "position": [
+      -576.7198607001937,
+      6.0,
+      -634.5711538312272
+    ],
+    "airborne": false,
+    "normal": 1.0
+  },
+  {
+    "track": "bedroom_library",
+    "mode": "timeTrial",
+    "idleMoved": 0.0,
+    "launchSpeed": 23.720539885454563,
+    "startS": 0.0,
+    "finalS": 9.151903133542874,
+    "lane": -0.008211906193024043,
+    "position": [
+      -621.7057700268537,
+      6.000134398347192,
+      -594.0246474433056
+    ],
+    "airborne": false,
+    "normal": 0.9999999984945745
+  },
+  {
+    "track": "bedroom_library",
+    "mode": "stop",
+    "idleMoved": 0.0000020179198330604905,
+    "launchSpeed": 16.1153889777598,
+    "startS": 0.0,
+    "finalS": 4.428589604426634,
+    "lane": 0.4959265385084897,
+    "normal": 0.999999999538423,
+    "slope": 0.000007409326738458908
+  },
+  {
+    "track": "bedroom_library",
+    "mode": "stop",
+    "idleMoved": 0.0,
+    "launchSpeed": 98.77560821087259,
+    "startS": 872.8567958223823,
+    "finalS": 910.6911636817977,
+    "lane": 0.5700655918839764,
+    "normal": 0.9996510625703081,
+    "slope": -0.016252068696173055
+  },
+  {
+    "track": "bedroom_library",
+    "mode": "stop",
+    "idleMoved": 0.0012986746122028246,
+    "launchSpeed": 16.204306053582325,
+    "startS": 4515.902113092197,
+    "finalS": 4520.561084028984,
+    "lane": 0.49201415434295975,
+    "normal": 0.9999626822644024,
+    "slope": -0.0055073125820896
+  },
+  {
+    "track": "bedroom_library",
+    "mode": "stop",
+    "idleMoved": 0.0,
+    "launchSpeed": 16.115652838026318,
+    "startS": 5387.4800696775765,
+    "finalS": 5391.392908375198,
+    "lane": 0.5040562011303109,
+    "normal": 0.9999999999958767,
+    "slope": -0.000004628683086888357
+  },
+  {
+    "track": "bedroom_library",
+    "mode": "stop",
+    "idleMoved": 0.0,
+    "launchSpeed": 16.115599269650623,
+    "startS": 5747.297181869609,
+    "finalS": 5751.701737805027,
+    "lane": 0.4963337265538383,
+    "normal": 1.0,
+    "slope": 0.0
+  },
+  {
+    "track": "garage_switchyard",
+    "mode": "quick",
+    "idleMoved": 0.0,
+    "launchSpeed": 23.720988071506103,
+    "startS": 5445.166260466044,
+    "finalS": 5454.708806004231,
+    "lane": 0.3453151000843723,
+    "position": [
+      -540.2383013873224,
+      6.0,
+      -639.8673048171448
+    ],
+    "airborne": false,
+    "normal": 1.0
+  },
+  {
+    "track": "garage_switchyard",
+    "mode": "timeTrial",
+    "idleMoved": 0.0,
+    "launchSpeed": 23.721178173676797,
+    "startS": 0.0,
+    "finalS": 9.150847883845927,
+    "lane": -0.010469195459364374,
+    "position": [
+      -591.1678011841065,
+      5.999939978865693,
+      -606.5691442908624
+    ],
+    "airborne": false,
+    "normal": 0.9999999997348483
+  },
+  {
+    "track": "garage_switchyard",
+    "mode": "stop",
+    "idleMoved": 0.000001007310977748904,
+    "launchSpeed": 16.115691256546018,
+    "startS": 0.0,
+    "finalS": 4.493303463754273,
+    "lane": 0.4948210839496593,
+    "normal": 0.9999999999158118,
+    "slope": -0.000003271534218444746
+  },
+  {
+    "track": "garage_switchyard",
+    "mode": "stop",
+    "idleMoved": 0.00019438513197137956,
+    "launchSpeed": 16.378777334374103,
+    "startS": 402.25732578921134,
+    "finalS": 406.6838218067096,
+    "lane": 0.49707065504173714,
+    "normal": 0.9998005179268117,
+    "slope": -0.020194008203463627
+  },
+  {
+    "track": "garage_switchyard",
+    "mode": "stop",
+    "idleMoved": 0.0,
+    "launchSpeed": 15.91848553042838,
+    "startS": 3212.349396672279,
+    "finalS": 3216.3782360265222,
+    "lane": 0.5015241833199809,
+    "normal": 0.999893723934514,
+    "slope": 0.015291248685512637
+  },
+  {
+    "track": "garage_switchyard",
+    "mode": "stop",
+    "idleMoved": 0.0006136382884769772,
+    "launchSpeed": 15.915029630596688,
+    "startS": 4246.152774942696,
+    "finalS": 4250.542238702811,
+    "lane": 0.49575436553671925,
+    "normal": 0.9998732460913491,
+    "slope": 0.014954860467719641
+  },
+  {
+    "track": "garage_switchyard",
+    "mode": "stop",
+    "idleMoved": 0.0,
+    "launchSpeed": 16.115599269650623,
+    "startS": 4695.454903071391,
+    "finalS": 4699.590975120568,
+    "lane": 0.5006813970909986,
+    "normal": 1.0,
+    "slope": 3.7037243804899324e-17
+  },
+  {
+    "track": "garage_switchyard",
+    "mode": "stop",
+    "idleMoved": 0.0,
+    "launchSpeed": 16.115599269650623,
+    "startS": 5184.91647988781,
+    "finalS": 5189.1635847759835,
+    "lane": 0.49891892160064144,
+    "normal": 1.0,
+    "slope": 0.0
+  },
+  {
+    "track": "bathroom_aqueduct",
+    "mode": "quick",
+    "idleMoved": 0.000009968364424109325,
+    "launchSpeed": 23.58957108955522,
+    "startS": 5954.019040187834,
+    "finalS": 5963.499011199282,
+    "lane": 0.3442562453418713,
+    "position": [
+      -511.07436989082703,
+      6.447744686292559,
+      -660.5989830590621
+    ],
+    "airborne": false,
+    "normal": 0.9999717539914337
+  },
+  {
+    "track": "bathroom_aqueduct",
+    "mode": "timeTrial",
+    "idleMoved": 0.0,
+    "launchSpeed": 23.446032592449715,
+    "startS": 0.0,
+    "finalS": 9.030255581649726,
+    "lane": -0.010705269339590984,
+    "position": [
+      -567.1595629144301,
+      7.132879768389657,
+      -637.8022710059025
+    ],
+    "airborne": false,
+    "normal": 0.9998819127285771
+  },
+  {
+    "track": "bathroom_aqueduct",
+    "mode": "stop",
+    "idleMoved": 0.0006181242526071659,
+    "launchSpeed": 15.92864340465604,
+    "startS": 0.0,
+    "finalS": 4.441818922266975,
+    "lane": 0.4949330387181985,
+    "normal": 0.999892072118054,
+    "slope": 0.014024177324425954
+  },
+  {
+    "track": "bathroom_aqueduct",
+    "mode": "stop",
+    "idleMoved": 0.000254840376087644,
+    "launchSpeed": 16.393515867113436,
+    "startS": 1702.787933718801,
+    "finalS": 1707.3045645944649,
+    "lane": 0.49560537442870356,
+    "normal": 0.9997855109142306,
+    "slope": -0.021562771734123833
+  },
+  {
+    "track": "bathroom_aqueduct",
+    "mode": "stop",
+    "idleMoved": 0.0002460975602169884,
+    "launchSpeed": 16.010408236199385,
+    "startS": 5053.757407840121,
+    "finalS": 5058.048127953915,
+    "lane": 0.49777211257731246,
+    "normal": 0.9999721878669475,
+    "slope": 0.008363514401707135
+  },
+  {
+    "track": "bathroom_aqueduct",
+    "mode": "stop",
+    "idleMoved": 0.0000053281014035549175,
+    "launchSpeed": 16.11747670949632,
+    "startS": 5735.010271045938,
+    "finalS": 5739.221808443178,
+    "lane": 0.49949817362847887,
+    "normal": 0.9999999929684089,
+    "slope": -0.00015660232639240517
+  },
+  {
+    "track": "kitchen_island",
+    "mode": "quick",
+    "idleMoved": 0.0,
+    "launchSpeed": 23.72098807150617,
+    "startS": 5248.651344413307,
+    "finalS": 5258.024724888537,
+    "lane": 0.34366466312111643,
+    "position": [
+      -530.8787963373709,
+      6.0,
+      -628.1568770573036
+    ],
+    "airborne": false,
+    "normal": 1.0
+  },
+  {
+    "track": "kitchen_island",
+    "mode": "timeTrial",
+    "idleMoved": 0.0,
+    "launchSpeed": 23.721163991504334,
+    "startS": 0.0,
+    "finalS": 9.149486889009495,
+    "lane": -0.012511561336157148,
+    "position": [
+      -585.1813743281751,
+      5.999942836809392,
+      -600.5921052031682
+    ],
+    "airborne": false,
+    "normal": 0.9999999997757578
+  },
+  {
+    "track": "kitchen_island",
+    "mode": "stop",
+    "idleMoved": 0.0000011036862792665265,
+    "launchSpeed": 16.115686333302577,
+    "startS": 0.0,
+    "finalS": 4.551692377125619,
+    "lane": 0.4938060416603722,
+    "normal": 0.9999999999268494,
+    "slope": -0.0000030976693322803003
+  },
+  {
+    "track": "kitchen_island",
+    "mode": "stop",
+    "idleMoved": 4.440892098500626e-16,
+    "launchSpeed": 16.334892869560182,
+    "startS": 436.7861185999627,
+    "finalS": 440.9422033431265,
+    "lane": 0.5012741025201726,
+    "normal": 0.9998608874726183,
+    "slope": -0.016798008334794626
+  },
+  {
+    "track": "kitchen_island",
+    "mode": "stop",
+    "idleMoved": 0.0,
+    "launchSpeed": 16.29000370049243,
+    "startS": 3350.3165609836933,
+    "finalS": 3354.279946348781,
+    "lane": 0.5040148711437054,
+    "normal": 0.9998990870215831,
+    "slope": -0.012941896508001814
+  },
+  {
+    "track": "kitchen_island",
+    "mode": "stop",
+    "idleMoved": 0.000208401904450997,
+    "launchSpeed": 16.00578580503002,
+    "startS": 4214.268232877429,
+    "finalS": 4218.587355383215,
+    "lane": 0.4972925473422374,
+    "normal": 0.9999673891278233,
+    "slope": 0.008570245837722352
+  },
+  {
+    "track": "kitchen_island",
+    "mode": "stop",
+    "idleMoved": 0.0,
+    "launchSpeed": 16.11559926965062,
+    "startS": 4632.455564805306,
+    "finalS": 4636.491004519425,
+    "lane": 0.5022303993375572,
+    "normal": 1.0,
+    "slope": 0.0
+  },
+  {
+    "track": "kitchen_island",
+    "mode": "stop",
+    "idleMoved": 0.0,
+    "launchSpeed": 16.115599269650634,
+    "startS": 5166.872624007901,
+    "finalS": 5171.157931163923,
+    "lane": 0.49829671307329265,
+    "normal": 1.0,
+    "slope": 0.0
+  },
+  {
+    "track": "living_slalom",
+    "mode": "quick",
+    "idleMoved": 0.0,
+    "launchSpeed": 23.720988071506145,
+    "startS": 5288.874189515287,
+    "finalS": 5298.233531646536,
+    "lane": 0.34416651649523367,
+    "position": [
+      -536.4681161090456,
+      6.0,
+      -665.2494423182169
+    ],
+    "airborne": false,
+    "normal": 1.0
+  },
+  {
+    "track": "living_slalom",
+    "mode": "timeTrial",
+    "idleMoved": 0.0,
+    "launchSpeed": 23.721233528974288,
+    "startS": 0.0,
+    "finalS": 9.150277463972088,
+    "lane": -0.011388003474827671,
+    "position": [
+      -592.119304645531,
+      5.999930454752786,
+      -640.9123849733414
+    ],
+    "airborne": false,
+    "normal": 0.9999999995314792
+  },
+  {
+    "track": "living_slalom",
+    "mode": "stop",
+    "idleMoved": 0.0000012140253629203469,
+    "launchSpeed": 16.115716461451637,
+    "startS": 0.0,
+    "finalS": 4.519686090467985,
+    "lane": 0.49437357718853253,
+    "normal": 0.9999999998548614,
+    "slope": -0.000003770577061271961
+  },
+  {
+    "track": "living_slalom",
+    "mode": "stop",
+    "idleMoved": 0.00008028142363564735,
+    "launchSpeed": 16.367658330848812,
+    "startS": 374.08184953702033,
+    "finalS": 378.43042261718165,
+    "lane": 0.4983193578481043,
+    "normal": 0.9998161087636104,
+    "slope": -0.019310892916350485
+  },
+  {
+    "track": "living_slalom",
+    "mode": "stop",
+    "idleMoved": 0.0,
+    "launchSpeed": 15.791043765279007,
+    "startS": 3445.344848576051,
+    "finalS": 3449.2405551170814,
+    "lane": 0.5030087068968357,
+    "normal": 0.9996833477139062,
+    "slope": 0.02462528988561965
+  },
+  {
+    "track": "living_slalom",
+    "mode": "stop",
+    "idleMoved": 0.0,
+    "launchSpeed": 16.11773243098653,
+    "startS": 4771.221195607204,
+    "finalS": 4775.176462631915,
+    "lane": 0.5034415930554884,
+    "normal": 0.999999991357941,
+    "slope": -0.00017714846927396769
+  },
+  {
+    "track": "living_slalom",
+    "mode": "stop",
+    "idleMoved": 0.0,
+    "launchSpeed": 16.115599269650605,
+    "startS": 5244.808850246531,
+    "finalS": 5249.121235511078,
+    "lane": 0.4978578464762453,
+    "normal": 1.0,
+    "slope": -3.760311964412028e-17
+  },
+  {
+    "track": "arcade_technical",
+    "mode": "quick",
+    "idleMoved": 0.000002182610261710747,
+    "launchSpeed": 23.602525520352334,
+    "startS": 5792.501498018914,
+    "finalS": 5801.8754660339155,
+    "lane": 0.34535793689387406,
+    "position": [
+      -526.4089100574269,
+      6.534747099409872,
+      -647.3903214074251
+    ],
+    "airborne": false,
+    "normal": 0.9999777791118778
+  },
+  {
+    "track": "arcade_technical",
+    "mode": "timeTrial",
+    "idleMoved": 0.0,
+    "launchSpeed": 23.495319458765817,
+    "startS": 0.0,
+    "finalS": 9.063004711093527,
+    "lane": -0.011901169737626546,
+    "position": [
+      -584.2913845798262,
+      7.110011442947733,
+      -628.4277651566787
+    ],
+    "airborne": false,
+    "normal": 0.9999204761654525
+  },
+  {
+    "track": "arcade_technical",
+    "mode": "stop",
+    "idleMoved": 0.0005913345070602905,
+    "launchSpeed": 15.962071691204518,
+    "startS": 0.0,
+    "finalS": 4.497282725034893,
+    "lane": 0.49411527897587126,
+    "normal": 0.9999272401529542,
+    "slope": 0.011512534917176518
+  },
+  {
+    "track": "arcade_technical",
+    "mode": "stop",
+    "idleMoved": 0.00012507771220270813,
+    "launchSpeed": 16.182680306178106,
+    "startS": 1077.2797014677317,
+    "finalS": 1081.6048157635896,
+    "lane": 0.4979259775464407,
+    "normal": 0.9999850429753722,
+    "slope": -0.004932042331979779
+  },
+  {
+    "track": "arcade_technical",
+    "mode": "stop",
+    "idleMoved": 0.0,
+    "launchSpeed": 16.31209544930354,
+    "startS": 5261.870294387283,
+    "finalS": 5265.915778744594,
+    "lane": 0.5028865642511597,
+    "normal": 0.9998930272778426,
+    "slope": -0.015196153628043822
+  },
+  {
+    "track": "arcade_technical",
+    "mode": "stop",
+    "idleMoved": 0.000214168802452399,
+    "launchSpeed": 16.02057118379346,
+    "startS": 5808.455196713109,
+    "finalS": 5812.8388570424695,
+    "lane": 0.49628395557337696,
+    "normal": 0.9999720229222038,
+    "slope": 0.007128132798177978
+  },
+  {
+    "track": "bedroom_spiral",
+    "mode": "quick",
+    "idleMoved": 0.000003988031567370667,
+    "launchSpeed": 23.652515533259876,
+    "startS": 4662.096616669013,
+    "finalS": 4671.805908837184,
+    "lane": 0.3400375122687081,
+    "position": [
+      -584.7611036602286,
+      5.94093977430336,
+      -688.8194025213421
+    ],
+    "airborne": false,
+    "normal": 0.9999953917386952
+  },
+  {
+    "track": "bedroom_spiral",
+    "mode": "timeTrial",
+    "idleMoved": 0.0,
+    "launchSpeed": 23.720952573009768,
+    "startS": 0.0,
+    "finalS": 9.089713967019634,
+    "lane": -0.0254847620698972,
+    "position": [
+      -635.2423083306555,
+      6.0,
+      -660.8291382671665
+    ],
+    "airborne": false,
+    "normal": 1.0
+  },
+  {
+    "track": "bedroom_spiral",
+    "mode": "stop",
+    "idleMoved": 0.0000010996653321532057,
+    "launchSpeed": 16.115565533350832,
+    "startS": 0.0,
+    "finalS": 5.248012810709042,
+    "lane": 0.49278526348881396,
+    "normal": 1.0,
+    "slope": 0.000004171720238825901
+  },
+  {
+    "track": "bedroom_spiral",
+    "mode": "stop",
+    "idleMoved": 0.0,
+    "launchSpeed": 16.115599269650627,
+    "startS": 201.03098483916037,
+    "finalS": 205.16524418017616,
+    "lane": 0.5007097165824175,
+    "normal": 1.0,
+    "slope": 0.0
+  },
+  {
+    "track": "bedroom_spiral",
+    "mode": "stop",
+    "idleMoved": 0.0,
+    "launchSpeed": 16.306301047896945,
+    "startS": 804.8292115789893,
+    "finalS": 809.0118151911893,
+    "lane": 0.500759231482873,
+    "normal": 0.9999181786055917,
+    "slope": -0.015541284469169463
+  },
+  {
+    "track": "bedroom_spiral",
+    "mode": "stop",
+    "idleMoved": 0.000011968212873238147,
+    "launchSpeed": 16.364067408660798,
+    "startS": 998.3962076495192,
+    "finalS": 1002.6361218895536,
+    "lane": 0.5000676025924073,
+    "normal": 0.9998202882137933,
+    "slope": -0.019004870574358172
+  },
+  {
+    "track": "bedroom_spiral",
+    "mode": "stop",
+    "idleMoved": 0.00001068814865187362,
+    "launchSpeed": 16.05704025618674,
+    "startS": 4126.154058597192,
+    "finalS": 4130.355615558178,
+    "lane": 0.4994100048373059,
+    "normal": 0.9999894855895423,
+    "slope": 0.004415178355456918
+  },
+  {
+    "track": "bedroom_spiral",
+    "mode": "stop",
+    "idleMoved": 7.458269037934848e-7,
+    "launchSpeed": 15.945052928284493,
+    "startS": 4519.2840411294555,
+    "finalS": 4523.4023323875745,
+    "lane": 0.500261383615207,
+    "normal": 0.9999157574531625,
+    "slope": 0.013054945228570237
+  },
+  {
+    "track": "bedroom_dual",
+    "mode": "quick",
+    "idleMoved": 6.11026105272138e-7,
+    "launchSpeed": 23.672629917816526,
+    "startS": 5073.980578723781,
+    "finalS": 5083.482681605849,
+    "lane": 0.3418155017928043,
+    "position": [
+      -568.5985353599345,
+      5.958580370249666,
+      -691.8200005180536
+    ],
+    "airborne": false,
+    "normal": 0.9999977225000946
+  },
+  {
+    "track": "bedroom_dual",
+    "mode": "timeTrial",
+    "idleMoved": 0.0,
+    "launchSpeed": 23.720928188166734,
+    "startS": 0.0,
+    "finalS": 9.119207644441303,
+    "lane": -0.023454973470306808,
+    "position": [
+      -623.2723353084651,
+      6.0,
+      -668.6628355899855
+    ],
+    "airborne": false,
+    "normal": 1.0
+  },
+  {
+    "track": "bedroom_dual",
+    "mode": "stop",
+    "idleMoved": 0.000002056713801967552,
+    "launchSpeed": 16.115544395527067,
+    "startS": 0.0,
+    "finalS": 4.557293979225506,
+    "lane": 0.49360896895514567,
+    "normal": 0.9999999999992297,
+    "slope": 0.00000612600476303896
+  },
+  {
+    "track": "bedroom_dual",
+    "mode": "stop",
+    "idleMoved": 0.0,
+    "launchSpeed": 16.11559926965063,
+    "startS": 228.36725689958325,
+    "finalS": 232.5015162405989,
+    "lane": 0.5007097165824225,
+    "normal": 1.0,
+    "slope": 0.0
+  },
+  {
+    "track": "bedroom_dual",
+    "mode": "stop",
+    "idleMoved": 0.0,
+    "launchSpeed": 16.338694479317475,
+    "startS": 808.0963465369512,
+    "finalS": 812.2812355938813,
+    "lane": 0.5008066860749296,
+    "normal": 0.9998915053025361,
+    "slope": -0.018303538203732077
+  },
+  {
+    "track": "bedroom_dual",
+    "mode": "stop",
+    "idleMoved": 0.0000229358353684261,
+    "launchSpeed": 16.328326724989868,
+    "startS": 1015.8854563578041,
+    "finalS": 1020.1433221609586,
+    "lane": 0.4996302556882015,
+    "normal": 0.9998680684357336,
+    "slope": -0.016263961870494205
+  },
+  {
+    "track": "bedroom_dual",
+    "mode": "stop",
+    "idleMoved": 0.000007854459778077103,
+    "launchSpeed": 16.056800227215675,
+    "startS": 2525.5858910574752,
+    "finalS": 2529.7319435707404,
+    "lane": 0.5002864041557341,
+    "normal": 0.999989109467241,
+    "slope": 0.004403484284629029
+  },
+  {
+    "track": "bedroom_dual",
+    "mode": "stop",
+    "idleMoved": 0.000293098247171143,
+    "launchSpeed": 15.860753491891835,
+    "startS": 2788.5657667489904,
+    "finalS": 2792.845419292981,
+    "lane": 0.4973198990185354,
+    "normal": 0.9998121826522379,
+    "slope": 0.019518906227544985
+  },
+  {
+    "track": "bedroom_dual",
+    "mode": "stop",
+    "idleMoved": 3.1853062624228657e-9,
+    "launchSpeed": 16.113801265918607,
+    "startS": 2991.7200496705,
+    "finalS": 2995.85396169281,
+    "lane": 0.5007082808376861,
+    "normal": 0.9999999845342685,
+    "slope": 0.00011810078841160632
+  },
+  {
+    "track": "bedroom_dual",
+    "mode": "stop",
+    "idleMoved": 0.0000027026045483273864,
+    "launchSpeed": 16.18608806781802,
+    "startS": 3600.5259870901123,
+    "finalS": 3604.6948308625606,
+    "lane": 0.5004586954115348,
+    "normal": 0.9999860890414894,
+    "slope": -0.005442830729684672
+  },
+  {
+    "track": "bedroom_dual",
+    "mode": "stop",
+    "idleMoved": 0.00007518908370903088,
+    "launchSpeed": 16.329763433875712,
+    "startS": 3855.535567848631,
+    "finalS": 3859.844677422964,
+    "lane": 0.49880639852862807,
+    "normal": 0.9998672793852056,
+    "slope": -0.016407026714806962
+  },
+  {
+    "track": "bedroom_dual",
+    "mode": "stop",
+    "idleMoved": 0.000012581385469525365,
+    "launchSpeed": 15.938723911581885,
+    "startS": 4730.3997314501385,
+    "finalS": 4734.594934965077,
+    "lane": 0.4990276840798048,
+    "normal": 0.9999059672230937,
+    "slope": 0.013405091527709228
+  },
+  {
+    "track": "bedroom_dual",
+    "mode": "stop",
+    "idleMoved": 0.000017206689027209557,
+    "launchSpeed": 16.101365005814404,
+    "startS": 5099.421296665878,
+    "finalS": 5103.839228304319,
+    "lane": 0.4960220332974236,
+    "normal": 0.9999995530202929,
+    "slope": 0.0011736217278045464
+  },
+  {
+    "track": "garage_piston",
+    "mode": "quick",
+    "idleMoved": 5.870345003675828e-7,
+    "launchSpeed": 23.665093833213902,
+    "startS": 4998.533876076957,
+    "finalS": 5007.028750752366,
+    "lane": 0.3618482423099713,
+    "position": [
+      -682.2334459771414,
+      5.949340801187793,
+      -523.7655491850617
+    ],
+    "airborne": false,
+    "normal": 0.9999967992554828
+  },
+  {
+    "track": "garage_piston",
+    "mode": "timeTrial",
+    "idleMoved": 0.0,
+    "launchSpeed": 23.720925160405457,
+    "startS": 0.0,
+    "finalS": 9.089993310846694,
+    "lane": 0.03437562100314547,
+    "position": [
+      -656.8890443333418,
+      6.0,
+      -582.808251295345
+    ],
+    "airborne": false,
+    "normal": 1.0
+  },
+  {
+    "track": "garage_piston",
+    "mode": "stop",
+    "idleMoved": 0.0,
+    "launchSpeed": 16.115527271383264,
+    "startS": 0.0,
+    "finalS": 3.633596766174378,
+    "lane": 0.507911812528011,
+    "normal": 0.9999999999981108,
+    "slope": 0.0000068434020262903366
+  },
+  {
+    "track": "garage_piston",
+    "mode": "stop",
+    "idleMoved": 0.0,
+    "launchSpeed": 16.115599269650634,
+    "startS": 214.61579401711498,
+    "finalS": 218.75005335812966,
+    "lane": 0.5007097165824225,
+    "normal": 1.0,
+    "slope": 0.0
+  },
+  {
+    "track": "garage_piston",
+    "mode": "stop",
+    "idleMoved": 0.0,
+    "launchSpeed": 16.320066975947334,
+    "startS": 822.0029685309922,
+    "finalS": 826.1836759342232,
+    "lane": 0.50078914033014,
+    "normal": 0.9999059957042555,
+    "slope": -0.01664696709356532
+  },
+  {
+    "track": "garage_piston",
+    "mode": "stop",
+    "idleMoved": 0.0,
+    "launchSpeed": 16.278239092105263,
+    "startS": 1082.9018628367344,
+    "finalS": 1087.0003678007452,
+    "lane": 0.5019331595376381,
+    "normal": 0.9999225519366869,
+    "slope": -0.012421051441397357
+  },
+  {
+    "track": "garage_piston",
+    "mode": "stop",
+    "idleMoved": 0.00001835449556990281,
+    "launchSpeed": 16.04096727144087,
+    "startS": 4589.310735633286,
+    "finalS": 4593.550249314461,
+    "lane": 0.4987387191506608,
+    "normal": 0.9999825027060235,
+    "slope": 0.005586041709115993
+  },
+  {
+    "track": "garage_piston",
+    "mode": "stop",
+    "idleMoved": 0.0,
+    "launchSpeed": 16.015261352178456,
+    "startS": 4948.042363556554,
+    "finalS": 4951.92519372867,
+    "lane": 0.5040912959972765,
+    "normal": 0.9999726821746014,
+    "slope": 0.0077866502778488455
+  },
+  {
+    "track": "garage_dual",
+    "mode": "quick",
+    "idleMoved": 0.00022180425503934937,
+    "launchSpeed": 23.043972053201113,
+    "startS": 4853.911036919341,
+    "finalS": 4863.322532378176,
+    "lane": 0.336669840995474,
+    "position": [
+      -573.4534419338721,
+      3.224249011018479,
+      -701.997878231207
+    ],
+    "airborne": false,
+    "normal": 0.9993314137997212
+  },
+  {
+    "track": "garage_dual",
+    "mode": "timeTrial",
+    "idleMoved": 0.0,
+    "launchSpeed": 23.270893789055744,
+    "startS": 0.0,
+    "finalS": 8.939966547272888,
+    "lane": -0.023962743126001208,
+    "position": [
+      -623.3637624843541,
+      5.230675879965925,
+      -674.2404952612935
+    ],
+    "airborne": false,
+    "normal": 0.9997857688331397
+  },
+  {
+    "track": "garage_dual",
+    "mode": "stop",
+    "idleMoved": 0.0018831906138780448,
+    "launchSpeed": 15.829179681582772,
+    "startS": 4.8572608386746525,
+    "finalS": 9.291989204338279,
+    "lane": 0.49447541074626655,
+    "normal": 0.9997894307689077,
+    "slope": 0.02272808912067126
+  },
+  {
+    "track": "garage_dual",
+    "mode": "stop",
+    "idleMoved": 0.0,
+    "launchSpeed": 16.115599269650637,
+    "startS": 235.7374915679573,
+    "finalS": 239.871750908972,
+    "lane": 0.5007097165824225,
+    "normal": 1.0,
+    "slope": 0.0
+  },
+  {
+    "track": "garage_dual",
+    "mode": "stop",
+    "idleMoved": 0.0,
+    "launchSpeed": 16.269529784730793,
+    "startS": 856.9396597115285,
+    "finalS": 861.1126033023911,
+    "lane": 0.5007487182844256,
+    "normal": 0.9999438419737439,
+    "slope": -0.012366109639923352
+  },
+  {
+    "track": "garage_dual",
+    "mode": "stop",
+    "idleMoved": 0.00004343963910443892,
+    "launchSpeed": 16.38364275070675,
+    "startS": 1118.9282718888128,
+    "finalS": 1123.194667142483,
+    "lane": 0.49972766343888964,
+    "normal": 0.999795437917952,
+    "slope": -0.020620603207878382
+  },
+  {
+    "track": "garage_dual",
+    "mode": "stop",
+    "idleMoved": 0.000036802723652873875,
+    "launchSpeed": 15.938554018743128,
+    "startS": 2288.3687248255173,
+    "finalS": 2292.5454272289016,
+    "lane": 0.49931951680192915,
+    "normal": 0.9999073187890458,
+    "slope": 0.01347866609237375
+  },
+  {
+    "track": "garage_dual",
+    "mode": "stop",
+    "idleMoved": 0.00023475230533554804,
+    "launchSpeed": 16.053842933584114,
+    "startS": 2552.2788713939426,
+    "finalS": 2556.6577138330877,
+    "lane": 0.49643915160898877,
+    "normal": 0.9999906214268166,
+    "slope": 0.004947292035427432
+  },
+  {
+    "track": "garage_dual",
+    "mode": "stop",
+    "idleMoved": 0.00000230842849219499,
+    "launchSpeed": 15.942273662729498,
+    "startS": 2777.631182751905,
+    "finalS": 2781.729906969901,
+    "lane": 0.5006487341676384,
+    "normal": 0.9998885931310911,
+    "slope": 0.01243871226302871
+  },
+  {
+    "track": "garage_dual",
+    "mode": "stop",
+    "idleMoved": 0.0000038638767625373795,
+    "launchSpeed": 16.27481595711688,
+    "startS": 3373.514803452393,
+    "finalS": 3377.7652434348265,
+    "lane": 0.4995249593960742,
+    "normal": 0.9999244559612502,
+    "slope": -0.012101393600645279
+  },
+  {
+    "track": "garage_dual",
+    "mode": "stop",
+    "idleMoved": 0.000452605092772849,
+    "launchSpeed": 16.215046477125004,
+    "startS": 3707.9828093539304,
+    "finalS": 3712.5554291055223,
+    "lane": 0.49387209693646517,
+    "normal": 0.999972802818515,
+    "slope": -0.007742742063257956
+  },
+  {
+    "track": "bathroom_vortex",
+    "mode": "quick",
+    "idleMoved": 8.881784197001252e-16,
+    "launchSpeed": 23.720988071506145,
+    "startS": 4807.080626153953,
+    "finalS": 4816.919299637191,
+    "lane": 0.3391528068259028,
+    "position": [
+      -570.2349373190364,
+      6.000000000000001,
+      -677.895607032138
+    ],
+    "airborne": false,
+    "normal": 1.0
+  },
+  {
+    "track": "bathroom_vortex",
+    "mode": "timeTrial",
+    "idleMoved": 0.0,
+    "launchSpeed": 23.72098807150614,
+    "startS": 0.0,
+    "finalS": 9.114575954157772,
+    "lane": -0.025683586600829932,
+    "position": [
+      -624.9481109104207,
+      6.0,
+      -657.0056290522715
+    ],
+    "airborne": false,
+    "normal": 1.0
+  },
+  {
+    "track": "bathroom_vortex",
+    "mode": "stop",
+    "idleMoved": 0.0,
+    "launchSpeed": 16.115599269650616,
+    "startS": 0.0,
+    "finalS": 4.58020908222079,
+    "lane": 0.49315607602001515,
+    "normal": 1.0,
+    "slope": 0.0
+  },
+  {
+    "track": "bathroom_vortex",
+    "mode": "stop",
+    "idleMoved": 0.0,
+    "launchSpeed": 16.11559926965063,
+    "startS": 226.18806609240966,
+    "finalS": 230.32232543342525,
+    "lane": 0.5007097165824126,
+    "normal": 1.0,
+    "slope": 0.0
+  },
+  {
+    "track": "bathroom_vortex",
+    "mode": "stop",
+    "idleMoved": 8.881784197001252e-16,
+    "launchSpeed": 16.33768643331626,
+    "startS": 793.6854191382532,
+    "finalS": 797.8696292145951,
+    "lane": 0.500806508933988,
+    "normal": 0.9998913460206824,
+    "slope": -0.018174997616118307
+  },
+  {
+    "track": "bathroom_vortex",
+    "mode": "stop",
+    "idleMoved": 0.0000529765881212906,
+    "launchSpeed": 16.330045678246435,
+    "startS": 1016.6227844273678,
+    "finalS": 1020.9293846871069,
+    "lane": 0.4988458336264565,
+    "normal": 0.9998642242142322,
+    "slope": -0.016339363952678352
+  },
+  {
+    "track": "bathroom_vortex",
+    "mode": "stop",
+    "idleMoved": 5.551115123125783e-17,
+    "launchSpeed": 16.175172001926803,
+    "startS": 1315.0543113066171,
+    "finalS": 1319.0691815673608,
+    "lane": 0.5027876577498602,
+    "normal": 0.9999902282200824,
+    "slope": -0.004629447866926759
+  },
+  {
+    "track": "bathroom_vortex",
+    "mode": "stop",
+    "idleMoved": 0.000010643557755988537,
+    "launchSpeed": 16.021501404160976,
+    "startS": 3680.385579416832,
+    "finalS": 3684.6970546728135,
+    "lane": 0.4974840727461202,
+    "normal": 0.9999757082429384,
+    "slope": 0.007315162902824313
+  },
+  {
+    "track": "bathroom_vortex",
+    "mode": "stop",
+    "idleMoved": 0.0,
+    "launchSpeed": 16.115599269650623,
+    "startS": 4028.176178146571,
+    "finalS": 4032.054391071124,
+    "lane": 0.5045675347391256,
+    "normal": 1.0,
+    "slope": 0.0
+  },
+  {
+    "track": "bathroom_vortex",
+    "mode": "stop",
+    "idleMoved": 0.0,
+    "launchSpeed": 16.115599269650602,
+    "startS": 4353.77918217996,
+    "finalS": 4357.872343636378,
+    "lane": 0.5013472507877519,
+    "normal": 1.0,
+    "slope": -4.4622657604762085e-17
+  },
+  {
+    "track": "bathroom_vortex",
+    "mode": "stop",
+    "idleMoved": 0.0,
+    "launchSpeed": 16.115599269650623,
+    "startS": 4750.271179563066,
+    "finalS": 4754.599187922615,
+    "lane": 0.4976044885235993,
+    "normal": 1.0,
+    "slope": 5.537945506839986e-17
+  },
+  {
+    "track": "kitchen_dual",
+    "mode": "quick",
+    "idleMoved": 0.0,
+    "launchSpeed": 23.72098807150616,
+    "startS": 6945.979203274562,
+    "finalS": 6956.557125410879,
+    "lane": 0.3132480980941038,
+    "position": [
+      -676.1074866273622,
+      6.000000000000001,
+      -663.6548482678479
+    ],
+    "airborne": false,
+    "normal": 1.0
+  },
+  {
+    "track": "kitchen_dual",
+    "mode": "timeTrial",
+    "idleMoved": 0.0,
+    "launchSpeed": 23.72098807150615,
+    "startS": 0.0,
+    "finalS": 9.089631179062962,
+    "lane": -0.025489522529274368,
+    "position": [
+      -650.8289004546365,
+      6.0,
+      -614.7579955139237
+    ],
+    "airborne": false,
+    "normal": 1.0
+  },
+  {
+    "track": "kitchen_dual",
+    "mode": "stop",
+    "idleMoved": 0.0,
+    "launchSpeed": 16.115599269650623,
+    "startS": 0.0,
+    "finalS": 5.24861827543009,
+    "lane": 0.4927885232259077,
+    "normal": 1.0,
+    "slope": 0.0
+  },
+  {
+    "track": "kitchen_dual",
+    "mode": "stop",
+    "idleMoved": 0.0,
+    "launchSpeed": 16.115599269650637,
+    "startS": 207.25966057158786,
+    "finalS": 211.39391991260345,
+    "lane": 0.5007097165824225,
+    "normal": 1.0,
+    "slope": 0.0
+  },
+  {
+    "track": "kitchen_dual",
+    "mode": "stop",
+    "idleMoved": 0.0,
+    "launchSpeed": 16.332894619330663,
+    "startS": 787.6597545966066,
+    "finalS": 791.8431040350006,
+    "lane": 0.5007978260085546,
+    "normal": 0.999894420228453,
+    "slope": -0.017716927619755223
+  },
+  {
+    "track": "kitchen_dual",
+    "mode": "stop",
+    "idleMoved": 0.0,
+    "launchSpeed": 98.70359027655013,
+    "startS": 1044.6721201693185,
+    "finalS": 1082.3099827861297,
+    "lane": 0.583921639417126,
+    "normal": 0.9999132443257335,
+    "slope": -0.012929846974347924
+  },
+  {
+    "track": "kitchen_dual",
+    "mode": "stop",
+    "idleMoved": 0.0,
+    "launchSpeed": 16.160821957617404,
+    "startS": 1455.086250816765,
+    "finalS": 1459.1308917334836,
+    "lane": 0.5022767062468138,
+    "normal": 0.9999943218249498,
+    "slope": -0.00349587979886499
+  },
+  {
+    "track": "kitchen_dual",
+    "mode": "stop",
+    "idleMoved": 0.00010983483689053123,
+    "launchSpeed": 15.878546184548963,
+    "startS": 4129.903728544124,
+    "finalS": 4134.112129868344,
+    "lane": 0.4985622601972002,
+    "normal": 0.9998362311016031,
+    "slope": 0.018115954062397827
+  },
+  {
+    "track": "kitchen_dual",
+    "mode": "stop",
+    "idleMoved": 1.2608936130243892e-9,
+    "launchSpeed": 16.114775584916874,
+    "startS": 4349.88264320211,
+    "finalS": 4354.016764537561,
+    "lane": 0.5007088213327097,
+    "normal": 0.9999999961799958,
+    "slope": 0.000050677863396206244
+  },
+  {
+    "track": "kitchen_dual",
+    "mode": "stop",
+    "idleMoved": 0.0,
+    "launchSpeed": 16.16070362917277,
+    "startS": 4958.4787367281015,
+    "finalS": 4962.58650407187,
+    "lane": 0.5013092666689597,
+    "normal": 0.9999949514633247,
+    "slope": -0.003577936486305976
+  },
+  {
+    "track": "kitchen_dual",
+    "mode": "stop",
+    "idleMoved": 8.881784197001252e-16,
+    "launchSpeed": 16.11559926965062,
+    "startS": 5294.3284564823825,
+    "finalS": 5298.531414477561,
+    "lane": 0.4996270721213488,
+    "normal": 1.0,
+    "slope": 0.0
+  },
+  {
+    "track": "kitchen_dual",
+    "mode": "stop",
+    "idleMoved": 0.0,
+    "launchSpeed": 16.115599269650616,
+    "startS": 5729.818994136615,
+    "finalS": 5734.136340320908,
+    "lane": 0.49777667163910894,
+    "normal": 1.0,
+    "slope": 0.0
+  },
+  {
+    "track": "kitchen_dual",
+    "mode": "stop",
+    "idleMoved": 8.881784197001252e-16,
+    "launchSpeed": 16.115599269650634,
+    "startS": 6233.76926736628,
+    "finalS": 6237.918523588695,
+    "lane": 0.5004751013365102,
+    "normal": 1.0,
+    "slope": -3.342152256848149e-17
+  },
+  {
+    "track": "kitchen_dual",
+    "mode": "stop",
+    "idleMoved": 0.0,
+    "launchSpeed": 16.115599269650613,
+    "startS": 6728.219739325827,
+    "finalS": 6732.401116333028,
+    "lane": 0.4999694712846181,
+    "normal": 1.0,
+    "slope": 0.0
+  },
+  {
+    "track": "kitchen_dual",
+    "mode": "stop",
+    "idleMoved": 0.0,
+    "launchSpeed": 16.115599269650637,
+    "startS": 6974.731423042782,
+    "finalS": 6980.0579904041015,
+    "lane": 0.49140492810123076,
+    "normal": 1.0,
+    "slope": 0.0
+  },
+  {
+    "track": "living_orbit",
+    "mode": "quick",
+    "idleMoved": 6.002686184741518e-7,
+    "launchSpeed": 23.672987166947294,
+    "startS": 4991.154476458692,
+    "finalS": 5000.669747996233,
+    "lane": 0.3415590174273104,
+    "position": [
+      -575.6239987531391,
+      5.958290346487717,
+      -693.6308403717385
+    ],
+    "airborne": false,
+    "normal": 0.9999977440639246
+  },
+  {
+    "track": "living_orbit",
+    "mode": "timeTrial",
+    "idleMoved": 0.0,
+    "launchSpeed": 23.720927649285493,
+    "startS": 0.0,
+    "finalS": 9.110960281715052,
+    "lane": -0.026424070895786713,
+    "position": [
+      -632.0865699005906,
+      6.0,
+      -675.8722702927912
+    ],
+    "airborne": false,
+    "normal": 1.0
+  },
+  {
+    "track": "living_orbit",
+    "mode": "stop",
+    "idleMoved": 0.0000022312845820248125,
+    "launchSpeed": 16.115544439678654,
+    "startS": 0.0,
+    "finalS": 4.597850218608983,
+    "lane": 0.4928487349073044,
+    "normal": 0.9999999999993886,
+    "slope": 0.000006254949605833196
+  },
+  {
+    "track": "living_orbit",
+    "mode": "stop",
+    "idleMoved": 0.0,
+    "launchSpeed": 16.115599269650637,
+    "startS": 226.24719519562342,
+    "finalS": 230.38145453663856,
+    "lane": 0.5007097165824225,
+    "normal": 1.0,
+    "slope": 0.0
+  },
+  {
+    "track": "living_orbit",
+    "mode": "stop",
+    "idleMoved": 0.0,
+    "launchSpeed": 16.298194831087194,
+    "startS": 861.0724478406138,
+    "finalS": 865.2488829523163,
+    "lane": 0.5007679646328514,
+    "normal": 0.9999226864538204,
+    "slope": -0.014748483871535803
+  },
+  {
+    "track": "living_orbit",
+    "mode": "stop",
+    "idleMoved": 0.000002235195327206295,
+    "launchSpeed": 16.29418767139049,
+    "startS": 1122.8036108483916,
+    "finalS": 1127.0143670652506,
+    "lane": 0.5002414527955669,
+    "normal": 0.999906711196058,
+    "slope": -0.013641850117962312
+  },
+  {
+    "track": "living_orbit",
+    "mode": "stop",
+    "idleMoved": 0.00008720439016177161,
+    "launchSpeed": 98.5219173053124,
+    "startS": 3692.319547528546,
+    "finalS": 3732.3473199556884,
+    "lane": 0.4153474877958021,
+    "normal": 0.9999417870263771,
+    "slope": 0.005950436332624554
+  },
+  {
+    "track": "living_orbit",
+    "mode": "stop",
+    "idleMoved": 0.000175389823676097,
+    "launchSpeed": 16.047950610693306,
+    "startS": 4007.194181084879,
+    "finalS": 4011.5336130696014,
+    "lane": 0.4971324367062023,
+    "normal": 0.999988206817446,
+    "slope": 0.00534888499224663
+  },
+  {
+    "track": "living_orbit",
+    "mode": "stop",
+    "idleMoved": 0.0,
+    "launchSpeed": 16.280405903263564,
+    "startS": 4399.402752314173,
+    "finalS": 4403.383669322302,
+    "lane": 0.5037250169739552,
+    "normal": 0.9999207904089263,
+    "slope": -0.012598600439360227
+  },
+  {
+    "track": "living_orbit",
+    "mode": "stop",
+    "idleMoved": 0.000005487842812280708,
+    "launchSpeed": 15.888637719279942,
+    "startS": 4794.770721675536,
+    "finalS": 4798.889844747933,
+    "lane": 0.5000194474369636,
+    "normal": 0.999850334909363,
+    "slope": 0.017358646090854458
+  },
+  {
+    "track": "arcade_dual",
+    "mode": "quick",
+    "idleMoved": 0.000006728816741896339,
+    "launchSpeed": 23.658891634347828,
+    "startS": 5562.535570716927,
+    "finalS": 5571.317904963835,
+    "lane": 0.3615299529173079,
+    "position": [
+      -691.3193182343986,
+      5.942961375650524,
+      -549.9042773009584
+    ],
+    "airborne": false,
+    "normal": 0.9999960748286167
+  },
+  {
+    "track": "arcade_dual",
+    "mode": "timeTrial",
+    "idleMoved": 0.0,
+    "launchSpeed": 23.72092439066335,
+    "startS": 0.0,
+    "finalS": 9.098088613351138,
+    "lane": 0.03239582440375375,
+    "position": [
+      -659.365247262305,
+      6.0,
+      -605.5474871233004
+    ],
+    "airborne": false,
+    "normal": 1.0
+  },
+  {
+    "track": "arcade_dual",
+    "mode": "stop",
+    "idleMoved": 0.0,
+    "launchSpeed": 16.115526472815006,
+    "startS": 0.0,
+    "finalS": 3.6653855677186584,
+    "lane": 0.5074807855347476,
+    "normal": 0.9999999999982637,
+    "slope": 0.00000698120518922348
+  },
+  {
+    "track": "arcade_dual",
+    "mode": "stop",
+    "idleMoved": 0.0,
+    "launchSpeed": 16.115599269650637,
+    "startS": 215.69347195292724,
+    "finalS": 219.82773129394263,
+    "lane": 0.5007097165824175,
+    "normal": 1.0,
+    "slope": 0.0
+  },
+  {
+    "track": "arcade_dual",
+    "mode": "stop",
+    "idleMoved": 0.0,
+    "launchSpeed": 98.66632008839163,
+    "startS": 848.3250172056854,
+    "finalS": 886.6667411820254,
+    "lane": 0.5400876673565506,
+    "normal": 0.9999858561461202,
+    "slope": -0.016646979176562847
+  },
+  {
+    "track": "arcade_dual",
+    "mode": "stop",
+    "idleMoved": 0.0,
+    "launchSpeed": 16.265090043164207,
+    "startS": 1133.6276170916492,
+    "finalS": 1137.715064626329,
+    "lane": 0.5020489395928783,
+    "normal": 0.999934437064017,
+    "slope": -0.011411229014011787
+  },
+  {
+    "track": "arcade_dual",
+    "mode": "stop",
+    "idleMoved": 0.0000071066071297638685,
+    "launchSpeed": 16.049020846163916,
+    "startS": 2371.035798262339,
+    "finalS": 2375.1726560150537,
+    "lane": 0.5003990412971118,
+    "normal": 0.9999859536804151,
+    "slope": 0.004978583673132259
+  },
+  {
+    "track": "arcade_dual",
+    "mode": "stop",
+    "idleMoved": 3.3060781019141506e-9,
+    "launchSpeed": 16.113837119348194,
+    "startS": 2717.928700933791,
+    "finalS": 2722.062629234644,
+    "lane": 0.5007081930010788,
+    "normal": 0.9999999847618516,
+    "slope": 0.00011463936357444045
+  },
+  {
+    "track": "arcade_dual",
+    "mode": "stop",
+    "idleMoved": 0.0,
+    "launchSpeed": 16.176006496829583,
+    "startS": 3284.781640563897,
+    "finalS": 3288.8977070265228,
+    "lane": 0.5012415309460413,
+    "normal": 0.9999898562045941,
+    "slope": -0.004670697245056626
+  },
+  {
+    "track": "arcade_dual",
+    "mode": "stop",
+    "idleMoved": 4.440892098500626e-16,
+    "launchSpeed": 16.325765969812217,
+    "startS": 3579.5321377152704,
+    "finalS": 3583.472995685879,
+    "lane": 0.5045067456624525,
+    "normal": 0.9998710150315765,
+    "slope": -0.016062790387172947
+  },
+  {
+    "track": "arcade_dual",
+    "mode": "stop",
+    "idleMoved": 0.0002839047871795443,
+    "launchSpeed": 15.936448765533589,
+    "startS": 5243.089415880956,
+    "finalS": 5247.420247930588,
+    "lane": 0.4968211683777827,
+    "normal": 0.9999023622208129,
+    "slope": 0.01351700537386933
+  },
+  {
+    "track": "arcade_dual",
+    "mode": "stop",
+    "idleMoved": 0.0,
+    "launchSpeed": 16.09432220622651,
+    "startS": 5585.819873127181,
+    "finalS": 5589.667161057798,
+    "lane": 0.5049124781066925,
+    "normal": 0.9999989601888506,
+    "slope": 0.0017037699526319871
+  }
+]

@@ -1,0 +1,7 @@
+Running Gradle task 'assembleRelease'...                        
+Picked up JAVA_TOOL_OPTIONS: -Djavax.net.ssl.trustStore=/etc/ssl/certs/java/cacerts
+Font asset "MaterialIcons-Regular.otf" was tree-shaken, reducing it from 1645184 to 11400 bytes (99.3% reduction). Tree-shaking can be disabled by providing the --no-tree-shake-icons flag when building your app.
+/workspace/scratch/f581f54b4d3f/toolchain/ambiente_flutter/android-sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-strip: error: '/workspace/scratch/f581f54b4d3f/game/carwece/build/app/intermediates/merged_native_libs/release/mergeReleaseNativeLibs/out/lib/arm64-v8a/.libflutter.so.vrjoNk.9We8te': section header table goes past the end of the file: e_shoff = 0x8cb4680
+
+Running Gradle task 'assembleRelease'...                           90.4s
+✓ Built build/app/outputs/flutter-apk/app-release.apk (76.7MB)

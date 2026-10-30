@@ -1,0 +1,24 @@
+bedroom: length=4891 finished=true t=65.5 gate=0 floor=302/1224 upMin=-1.0
+minEdgeY=0.15999999999999998 postLoopMinUp=0.9967059146719636
+garage: length=4603 finished=true t=59.7 gate=0 floor=195/552 upMin=0.9961695829058741
+minEdgeY=0.15999999999999998 postLoopMinUp=1.0
+arcade: length=4629 finished=true t=60.1 gate=0 floor=189/528 upMin=0.9910508280436054
+minEdgeY=0.15999999999999998 postLoopMinUp=1.0
+bedroom_sprint: length=4540 finished=true t=59.0 gate=0 floor=219/552 upMin=0.9969170344216947
+minEdgeY=0.15999999999999998 postLoopMinUp=1.0
+garage_drift: length=4646 finished=true t=60.7 gate=0 floor=219/552 upMin=0.9975359532208359
+minEdgeY=0.15999999999999998 postLoopMinUp=1.0
+arcade_neon: length=4669 finished=true t=60.9 gate=0 floor=219/552 upMin=0.9978944722818527
+minEdgeY=0.15999999999999998 postLoopMinUp=1.0
+bathroom: length=4649 finished=true t=60.9 gate=0 floor=293/552 upMin=0.9978045938570749
+minEdgeY=0.15999999999999998 postLoopMinUp=1.0
+bathroom_hairpin: length=4661 finished=true t=61.0 gate=0 floor=293/552 upMin=0.9978071764998213
+minEdgeY=0.15999999999999998 postLoopMinUp=1.0
+kitchen: length=4574 finished=true t=59.9 gate=0 floor=293/552 upMin=0.9973198735962375
+minEdgeY=0.15999999999999998 postLoopMinUp=1.0
+kitchen_chicane: length=4538 finished=true t=59.1 gate=0 floor=293/552 upMin=0.9970172956068277
+minEdgeY=0.15999999999999998 postLoopMinUp=1.0
+living: length=4624 finished=true t=60.3 gate=0 floor=293/552 upMin=0.9971049570026991
+minEdgeY=0.15999999999999998 postLoopMinUp=1.0
+living_grand: length=4586 finished=true t=59.5 gate=0 floor=293/552 upMin=0.9975347719799594
+minEdgeY=0.15999999999999998 postLoopMinUp=1.0

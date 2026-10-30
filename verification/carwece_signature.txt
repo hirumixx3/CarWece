@@ -1,0 +1,17 @@
+Verifies
+Verified using v1 scheme (JAR signing): false
+Verified using v2 scheme (APK Signature Scheme v2): true
+Verified using v3 scheme (APK Signature Scheme v3): false
+Verified using v3.1 scheme (APK Signature Scheme v3.1): false
+Verified using v4 scheme (APK Signature Scheme v4): false
+Verified for SourceStamp: false
+Number of signers: 1
+Signer #1 certificate DN: CN=hirumisu Test, O=Pocket Rush, C=BR
+Signer #1 certificate SHA-256 digest: 9e1be273e6871c23013157fad5378ffc4d5da5b222d70f84a995c8cb94ca8d7a
+Signer #1 certificate SHA-1 digest: 29a0937836b4a908e97ae9fb50358ee5c8bbf5a6
+Signer #1 certificate MD5 digest: 73861edeea6c159d56dd7c56b2d56dd5
+Signer #1 key algorithm: RSA
+Signer #1 key size (bits): 2048
+Signer #1 public key SHA-256 digest: 3681e0e3bc11c11c942383d60c7cb5e2f9a9143164a382240d1d5c3c9bbb238b
+Signer #1 public key SHA-1 digest: f66d2d281edcc08301823efd80456f93c9bfa99d
+Signer #1 public key MD5 digest: 14e2605770e8c9877a47289291d34a2f

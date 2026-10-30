@@ -1,0 +1,16 @@
+{
+  "transport": "direct SSH, remote TCP forwarding, native game TLS and WebSocket; independent local Paramiko server; public DNS/SNI not emulated",
+  "nativeIdentity": "HostIdentity Kotlin output",
+  "publicInternetVerified": false,
+  "sshTransportAndPublicProbe": true,
+  "wrongCertificateRejected": true,
+  "wrongInviteRejected": true,
+  "sixPlayers": true,
+  "duplicateNameRejected": true,
+  "seventhPlayerRejected": true,
+  "battleTargetsSynchronized": true,
+  "cycleTargetReplicated": true,
+  "hostShutdownDisconnectsPeers": true,
+  "raceAndBattle": true,
+  "result": "PASS"
+}

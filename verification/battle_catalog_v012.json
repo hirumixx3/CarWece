@@ -1,0 +1,466 @@
+{
+  "arenas": [
+    {
+      "id": "arena_1",
+      "name": "FORTALEZA DOS BRINQUEDOS",
+      "room": "QUARTO",
+      "loops": 1,
+      "floorNodes": 238,
+      "spawns": 6,
+      "ammoPickups": 18,
+      "repairPickups": 4
+    },
+    {
+      "id": "arena_2",
+      "name": "FERRO-VELHO ELÉTRICO",
+      "room": "GARAGEM",
+      "loops": 2,
+      "floorNodes": 247,
+      "spawns": 6,
+      "ammoPickups": 18,
+      "repairPickups": 4
+    },
+    {
+      "id": "arena_3",
+      "name": "MARÉ DE AZULEJOS",
+      "room": "BANHEIRO",
+      "loops": 1,
+      "floorNodes": 245,
+      "spawns": 6,
+      "ammoPickups": 18,
+      "repairPickups": 4
+    },
+    {
+      "id": "arena_4",
+      "name": "CAOS NA COZINHA",
+      "room": "COZINHA",
+      "loops": 2,
+      "floorNodes": 233,
+      "spawns": 6,
+      "ammoPickups": 18,
+      "repairPickups": 4
+    },
+    {
+      "id": "arena_5",
+      "name": "CERCO DO SOFÁ",
+      "room": "SALA",
+      "loops": 1,
+      "floorNodes": 256,
+      "spawns": 6,
+      "ammoPickups": 18,
+      "repairPickups": 4
+    },
+    {
+      "id": "arena_6",
+      "name": "DOMO NEON",
+      "room": "ARCADE",
+      "loops": 2,
+      "floorNodes": 240,
+      "spawns": 6,
+      "ammoPickups": 18,
+      "repairPickups": 4
+    }
+  ],
+  "weapons": [
+    {
+      "id": "machineGun",
+      "name": "METRALHADORA",
+      "reference": "Mosquito Machine Gun",
+      "description": "Tiros frontais; 60 disparos por coleta, aquece ao manter o disparo.",
+      "ammo": 60,
+      "damage": 3.2,
+      "cooldown": 0.13
+    },
+    {
+      "id": "homingMissile",
+      "name": "MÍSSIL GUIADO",
+      "reference": "Interceptor Missiles",
+      "description": "Persegue o alvo selecionado; obstáculos interceptam o míssil.",
+      "ammo": 6,
+      "damage": 19.0,
+      "cooldown": 0.8
+    },
+    {
+      "id": "rocket",
+      "name": "FOGUETE",
+      "reference": "Bull’s Eye Rockets",
+      "description": "Disparo reto, rápido e explosivo; exige apontar o carro.",
+      "ammo": 8,
+      "damage": 25.0,
+      "cooldown": 0.65
+    },
+    {
+      "id": "mortar",
+      "name": "MORTEIRO",
+      "reference": "Sky Hammer Mortar",
+      "description": "Projétil em arco com correção limitada e explosão em área.",
+      "ammo": 5,
+      "damage": 25.0,
+      "cooldown": 1.1
+    },
+    {
+      "id": "cannon",
+      "name": "CANHÃO",
+      "reference": "Bruiser Cannon",
+      "description": "Torre gira até o alvo; projétil pesado causa recuo.",
+      "ammo": 10,
+      "damage": 16.0,
+      "cooldown": 0.55
+    },
+    {
+      "id": "roadMine",
+      "name": "MINA DE CONTATO",
+      "reference": "Roadkill Mines",
+      "description": "Fica atrás do carro e arma antes de explodir por contato.",
+      "ammo": 6,
+      "damage": 27.0,
+      "cooldown": 0.7
+    },
+    {
+      "id": "ripperWheels",
+      "name": "RODAS CORTANTES",
+      "reference": "Ripper Wheels",
+      "description": "Lâminas nas rodas ferem carros próximos durante sete segundos.",
+      "ammo": 2,
+      "damage": 9.0,
+      "cooldown": 1.0
+    },
+    {
+      "id": "armorRepair",
+      "name": "REPARO COMPLETO",
+      "reference": "Armor Repair",
+      "description": "Restaura a vida e limpa fogo, gelo, fumaça e pane.",
+      "ammo": 1,
+      "damage": 0.0,
+      "cooldown": 1.0
+    },
+    {
+      "id": "oilDrum",
+      "name": "TAMBOR DE ÓLEO",
+      "reference": "Oil Drum",
+      "description": "Arremessa um barril; o impacto espalha óleo que faz derrapar.",
+      "ammo": 4,
+      "damage": 10.0,
+      "cooldown": 0.8
+    },
+    {
+      "id": "laserCannon",
+      "name": "CANHÃO LASER",
+      "reference": "Laser Cannon",
+      "description": "Raio azul frontal preciso; cobertura sólida bloqueia o tiro.",
+      "ammo": 5,
+      "damage": 27.0,
+      "cooldown": 0.9
+    },
+    {
+      "id": "sonicBoom",
+      "name": "EXPLOSÃO SÔNICA",
+      "reference": "Sonic Boom",
+      "description": "Pulso circular desestabiliza e empurra inimigos próximos.",
+      "ammo": 3,
+      "damage": 15.0,
+      "cooldown": 1.2
+    },
+    {
+      "id": "atomBlaster",
+      "name": "RAJADA ATÔMICA",
+      "reference": "Atom Blaster",
+      "description": "Rajada dupla de partículas amarelas.",
+      "ammo": 16,
+      "damage": 5.0,
+      "cooldown": 0.2
+    },
+    {
+      "id": "freonBomb",
+      "name": "BOMBA CRIOGÊNICA",
+      "reference": "Freon Bomb",
+      "description": "Bomba com quique que congela no raio da explosão.",
+      "ammo": 4,
+      "damage": 16.0,
+      "cooldown": 1.0
+    },
+    {
+      "id": "energyShield",
+      "name": "ESCUDO DE ENERGIA",
+      "reference": "Energy Shield",
+      "description": "Bloqueia dano por cinco segundos; mantém o carro visível.",
+      "ammo": 2,
+      "damage": 0.0,
+      "cooldown": 1.0
+    },
+    {
+      "id": "jetBoosters",
+      "name": "PROPULSORES",
+      "reference": "Jet Boosters",
+      "description": "Aceleração forçada por três segundos e dano ao abalroar.",
+      "ammo": 3,
+      "damage": 12.0,
+      "cooldown": 1.0
+    },
+    {
+      "id": "superZapper",
+      "name": "SUPER DESCARGA",
+      "reference": "Super Zapper",
+      "description": "Arco elétrico trava o motor e descarrega pulsos de dano.",
+      "ammo": 4,
+      "damage": 13.0,
+      "cooldown": 0.9
+    },
+    {
+      "id": "magnetMine",
+      "name": "MINA MAGNÉTICA",
+      "reference": "Magnet Mine",
+      "description": "Mina lançada segue, gruda no alvo e explode após a contagem.",
+      "ammo": 4,
+      "damage": 27.0,
+      "cooldown": 1.0
+    },
+    {
+      "id": "doomDisks",
+      "name": "DISCOS GUIADOS",
+      "reference": "Doom Disks",
+      "description": "Três discos curvos convergem sobre o alvo.",
+      "ammo": 3,
+      "damage": 10.0,
+      "cooldown": 1.0
+    },
+    {
+      "id": "quantumAnnihilator",
+      "name": "ANIQUILADOR QUÂNTICO",
+      "reference": "Quantum Annihilator",
+      "description": "Raio frontal raro de grande dano e recarga lenta.",
+      "ammo": 1,
+      "damage": 65.0,
+      "cooldown": 2.3
+    },
+    {
+      "id": "gridlock",
+      "name": "GRADE DE FLARES",
+      "reference": "Gridlock",
+      "description": "Malha expansiva de flares, dano e pane dentro da grade.",
+      "ammo": 3,
+      "damage": 19.0,
+      "cooldown": 1.2
+    },
+    {
+      "id": "whiteLightning",
+      "name": "RELÂMPAGO BRANCO",
+      "reference": "White Lightning",
+      "description": "Descarga guiada com salto entre carros próximos.",
+      "ammo": 3,
+      "damage": 22.0,
+      "cooldown": 1.2
+    },
+    {
+      "id": "tantrumGun",
+      "name": "TORRE GIRATÓRIA",
+      "reference": "Tantrum Gun",
+      "description": "Gatling automática em rajada; pode expulsar munição do inimigo.",
+      "ammo": 10,
+      "damage": 7.0,
+      "cooldown": 0.24
+    },
+    {
+      "id": "bassQuake",
+      "name": "TERREMOTO DE GRAVES",
+      "reference": "Bass Quake",
+      "description": "Ondas pelo chão levantam carros sem atingir veículos muito altos.",
+      "ammo": 3,
+      "damage": 22.0,
+      "cooldown": 1.4
+    },
+    {
+      "id": "invasion",
+      "name": "INVASÃO ORBITAL",
+      "reference": "Invasion Attack",
+      "description": "Três sondas orbitam o alvo e lançam pulsos visíveis.",
+      "ammo": 2,
+      "damage": 8.0,
+      "cooldown": 1.7
+    },
+    {
+      "id": "steelBelter",
+      "name": "PNEU EXPLOSIVO",
+      "reference": "Steel Belter",
+      "description": "Pneu rola, procura um alvo e explode em área.",
+      "ammo": 4,
+      "damage": 33.0,
+      "cooldown": 1.2
+    },
+    {
+      "id": "scatterMissiles",
+      "name": "SALVA DISPERSA",
+      "reference": "Scatter Missiles",
+      "description": "Seis pequenos mísseis se abrem e convergem.",
+      "ammo": 3,
+      "damage": 8.0,
+      "cooldown": 1.4
+    },
+    {
+      "id": "deathRay",
+      "name": "RAIO PERFURANTE",
+      "reference": "Super Fantastic Death Ray 3-Ax",
+      "description": "Feixe atravessa cobertura e pode atingir vários carros.",
+      "ammo": 4,
+      "damage": 28.0,
+      "cooldown": 1.2
+    },
+    {
+      "id": "discoInferno",
+      "name": "GLOBO DO CAOS",
+      "reference": "Disco Inferno",
+      "description": "Globo sobre o carro solta flares em todas as direções.",
+      "ammo": 2,
+      "damage": 8.0,
+      "cooldown": 1.6
+    },
+    {
+      "id": "gammaSwarm",
+      "name": "ENXAME GAMA",
+      "reference": "Gamma Swarm",
+      "description": "Enxame perseguidor ergue o alvo e provoca dano em pulsos.",
+      "ammo": 3,
+      "damage": 7.0,
+      "cooldown": 1.5
+    },
+    {
+      "id": "smogCheck",
+      "name": "NUVEM TÓXICA",
+      "reference": "Smog Check",
+      "description": "Gás atrás do carro; dano e visão reduzida apenas dentro da nuvem.",
+      "ammo": 3,
+      "damage": 7.0,
+      "cooldown": 1.2
+    },
+    {
+      "id": "breathOfFire",
+      "name": "SOPRO DE FOGO",
+      "reference": "Breath of Fire",
+      "description": "Bolas de fogo deixam o alvo em chamas por tempo limitado.",
+      "ammo": 6,
+      "damage": 14.0,
+      "cooldown": 0.65
+    },
+    {
+      "id": "alienLaser",
+      "name": "LASER ALIENÍGENA",
+      "reference": "Blue Laser",
+      "description": "Laser penetrante de alto dano, com pontaria frontal estreita.",
+      "ammo": 3,
+      "damage": 42.0,
+      "cooldown": 1.5
+    },
+    {
+      "id": "haloDecoy",
+      "name": "ISCA HOLOGRÁFICA",
+      "reference": "Halo Decoy",
+      "description": "Anel-isca desvia projéteis guiados para longe do carro.",
+      "ammo": 3,
+      "damage": 0.0,
+      "cooldown": 0.8
+    },
+    {
+      "id": "afterburner",
+      "name": "PÓS-COMBUSTÃO",
+      "reference": "Afterburner",
+      "description": "Usa a carga para uma arrancada curta, inclusive antes de rampas.",
+      "ammo": 4,
+      "damage": 0.0,
+      "cooldown": 0.9
+    },
+    {
+      "id": "roadRunner",
+      "name": "FOGUETE REBELDE",
+      "reference": "Road Runner",
+      "description": "Foguete adesivo empurra e faz o alvo rodar.",
+      "ammo": 4,
+      "damage": 7.0,
+      "cooldown": 0.9
+    },
+    {
+      "id": "stampede",
+      "name": "DEBANDADA",
+      "reference": "Stampede",
+      "description": "Cinco foguetes disparados em leque concentrado.",
+      "ammo": 3,
+      "damage": 10.0,
+      "cooldown": 1.2
+    },
+    {
+      "id": "turtleTurnover",
+      "name": "VIRA-CARRO",
+      "reference": "Turtle Turnover",
+      "description": "Morteiro lança o carro para cima e o faz tombar.",
+      "ammo": 3,
+      "damage": 12.0,
+      "cooldown": 1.2
+    },
+    {
+      "id": "craterMaker",
+      "name": "MEGACRATERA",
+      "reference": "Crater Maker",
+      "description": "Morteiro pesado com grande raio e marca de impacto temporária.",
+      "ammo": 2,
+      "damage": 43.0,
+      "cooldown": 1.8
+    },
+    {
+      "id": "cowPuncher",
+      "name": "SOCO CINÉTICO",
+      "reference": "Cow Puncher",
+      "description": "Bala de impacto lança o carro atingido para trás.",
+      "ammo": 4,
+      "damage": 10.0,
+      "cooldown": 0.8
+    },
+    {
+      "id": "buckshot",
+      "name": "CHUMBO ESPALHADO",
+      "reference": "Buckshot",
+      "description": "Seis balas em leque; forte a curta distância.",
+      "ammo": 4,
+      "damage": 7.0,
+      "cooldown": 0.9
+    },
+    {
+      "id": "bearHug",
+      "name": "ABRAÇO MAGNÉTICO",
+      "reference": "Bear Hug",
+      "description": "Armadilha atrai e imobiliza; não confere invulnerabilidade.",
+      "ammo": 3,
+      "damage": 8.0,
+      "cooldown": 1.0
+    },
+    {
+      "id": "cactusPatch",
+      "name": "CAMPO MINADO",
+      "reference": "Cactus Patch",
+      "description": "Espalha seis minas de contato atrás do carro.",
+      "ammo": 3,
+      "damage": 13.0,
+      "cooldown": 1.1
+    },
+    {
+      "id": "radarJammer",
+      "name": "BLOQUEADOR DE RADAR",
+      "reference": "Radar Jammer",
+      "description": "Oculta do radar e interrompe a mira guiada por sete segundos.",
+      "ammo": 2,
+      "damage": 0.0,
+      "cooldown": 1.0
+    },
+    {
+      "id": "weaponUpgrade",
+      "name": "DANO DOBRADO",
+      "reference": "Weapon Upgrade",
+      "description": "Dobra temporariamente o dano das seis armas padrão.",
+      "ammo": 2,
+      "damage": 0.0,
+      "cooldown": 1.0
+    }
+  ],
+  "frames": 121,
+  "meshes": 173,
+  "stagedViews": true,
+  "deviceCapture": false
+}

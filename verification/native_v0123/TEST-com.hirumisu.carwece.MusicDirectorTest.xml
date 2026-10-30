@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.hirumisu.carwece.MusicDirectorTest" tests="19" skipped="0" failures="0" errors="0" timestamp="2026-10-28T15:39:04" hostname="20e089c65b28" time="0.016">
+  <properties/>
+  <testcase name="failedSongsAreSkippedAndAnEntirelyFailedLibraryStopsAfterNineteenAttempts" classname="com.hirumisu.carwece.MusicDirectorTest" time="0.005"/>
+  <testcase name="explicitSelectionStartsThatTrackAndFollowingCompletionContinuesThePlaylist" classname="com.hirumisu.carwece.MusicDirectorTest" time="0.0"/>
+  <testcase name="aFailedMenuSongNeverSubstitutesARaceSong" classname="com.hirumisu.carwece.MusicDirectorTest" time="0.0"/>
+  <testcase name="sequentialModePreservesTheCurrentTrackThenAdvancesInOrder" classname="com.hirumisu.carwece.MusicDirectorTest" time="0.0"/>
+  <testcase name="obsoleteCallbacksAfterTrackChangesAndCloseNeverRestartAReleasedDecoder" classname="com.hirumisu.carwece.MusicDirectorTest" time="0.001"/>
+  <testcase name="playbackExceptionsSkipAProblematicSongWithoutCrashingTheGame" classname="com.hirumisu.carwece.MusicDirectorTest" time="0.0"/>
+  <testcase name="invalidOrMenuSelectionsCannotEnterTheRacePlaylist" classname="com.hirumisu.carwece.MusicDirectorTest" time="0.0"/>
+  <testcase name="menuLoopsTheExactMenuSongAndRepeatedUpdatesDoNotRestartIt" classname="com.hirumisu.carwece.MusicDirectorTest" time="0.001"/>
+  <testcase name="onStopReleasesTheDecoderAndResumeSeeksToTheSavedPosition" classname="com.hirumisu.carwece.MusicDirectorTest" time="0.0"/>
+  <testcase name="gameplayPauseDoesNotSwitchToMenuOrReloadTheSong" classname="com.hirumisu.carwece.MusicDirectorTest" time="0.001"/>
+  <testcase name="noPlaybackOccursWithoutFocusOrInTheBackgroundEvenIfPreparationFinishes" classname="com.hirumisu.carwece.MusicDirectorTest" time="0.0"/>
+  <testcase name="randomDeckCoversAllNineteenBeforeRepeatingAndDoesNotRepeatAtTheBoundary" classname="com.hirumisu.carwece.MusicDirectorTest" time="0.002"/>
+  <testcase name="changingTracksWhilePausedByTheUserExplicitlyPlaysTheChosenTrack" classname="com.hirumisu.carwece.MusicDirectorTest" time="0.001"/>
+  <testcase name="visitingMenusBetweenRacesPreservesTheDeckAndSequentialPosition" classname="com.hirumisu.carwece.MusicDirectorTest" time="0.002"/>
+  <testcase name="aPreparingSongCanBeSuspendedAndTheObsoleteReadyIsIgnored" classname="com.hirumisu.carwece.MusicDirectorTest" time="0.0"/>
+  <testcase name="focusLossPausesAndGainResumesWithoutReloadOrShuffle" classname="com.hirumisu.carwece.MusicDirectorTest" time="0.0"/>
+  <testcase name="zeroVolumePausesWithoutChangingTrackAndRestoringVolumeResumesIt" classname="com.hirumisu.carwece.MusicDirectorTest" time="0.0"/>
+  <testcase name="raceUsesOnlyTheOtherNineteenSongsAndMenuRestartsOnlyOnReturn" classname="com.hirumisu.carwece.MusicDirectorTest" time="0.0"/>
+  <testcase name="manualPauseSurvivesSceneAndVolumeUpdatesUntilTheUserPlaysAgain" classname="com.hirumisu.carwece.MusicDirectorTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

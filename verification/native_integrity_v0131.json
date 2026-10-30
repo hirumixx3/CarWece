@@ -1,0 +1,44 @@
+[
+  {
+    "file": "lib/arm64-v8a/libapp.so",
+    "bytes": 6554544,
+    "sha256": "f1ae73435d70cf60269a1626bb7168def6f1e1f9daa988ab7cbce743e755bc2e",
+    "elfBoundsValid": true,
+    "sameAsPrevious": false
+  },
+  {
+    "file": "lib/arm64-v8a/libflutter.so",
+    "bytes": 11037032,
+    "sha256": "ee37eb8be8e01a0d840558f75e0a09c4ca135d721c2ca6145c050e4f89785129",
+    "elfBoundsValid": true,
+    "sameAsPrevious": true
+  },
+  {
+    "file": "lib/armeabi-v7a/libapp.so",
+    "bytes": 7406172,
+    "sha256": "a2d6f622c30842d325d1c704728b7acc38c4cdc952166efd1aea97f6961405a9",
+    "elfBoundsValid": true,
+    "sameAsPrevious": false
+  },
+  {
+    "file": "lib/armeabi-v7a/libflutter.so",
+    "bytes": 7926848,
+    "sha256": "3b01cb3751800beb7b64c09a572216c6d36707ccea927f39f29ce475a0e176c5",
+    "elfBoundsValid": true,
+    "sameAsPrevious": true
+  },
+  {
+    "file": "lib/x86_64/libapp.so",
+    "bytes": 6751152,
+    "sha256": "25728d9ccefbfeaee913c9ca92c8bf9012f1977fd8818b03f709c72124e345d6",
+    "elfBoundsValid": true,
+    "sameAsPrevious": false
+  },
+  {
+    "file": "lib/x86_64/libflutter.so",
+    "bytes": 12143760,
+    "sha256": "94a457f1f2de2ed4831460f9426a8e7bd3424b9a398564415bbf14349afc29e4",
+    "elfBoundsValid": true,
+    "sameAsPrevious": true
+  }
+]

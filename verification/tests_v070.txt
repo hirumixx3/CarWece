@@ -1,0 +1,115 @@
+Resolving dependencies...
+Downloading packages...
+  characters 1.4.0 (1.4.1 available)
+  clock 1.1.2 (1.1.3 available)
+  matcher 0.12.17 (0.12.20 available)
+  material_color_utilities 0.11.1 (0.13.1 available)
+  meta 1.16.0 (1.19.0 available)
+  stack_trace 1.12.1 (1.12.2 available)
+  test_api 0.7.6 (0.7.15 available)
+  vector_math 2.2.0 (2.4.3 available)
+Got dependencies!
+8 packages have newer versions incompatible with dependency constraints.
+Try `flutter pub outdated` for more information.
+00:00 +0: loading /workspace/scratch/f581f54b4d3f/game/carwece/test/engine_test.dart
+00:00 +0: /workspace/scratch/f581f54b4d3f/game/carwece/test/engine_test.dart: All twelve circuits have finite, continuous, orthonormal frames
+00:00 +1: /workspace/scratch/f581f54b4d3f/game/carwece/test/graphics_backend_test.dart: Android uses its GPU texture and sends all 54 models (variant: TargetPlatform.android)
+00:00 +2: /workspace/scratch/f581f54b4d3f/game/carwece/test/graphics_backend_test.dart: Android uses its GPU texture and sends all 54 models (variant: TargetPlatform.android)
+00:01 +3: /workspace/scratch/f581f54b4d3f/game/carwece/test/graphics_backend_test.dart: Android uses its GPU texture and sends all 54 models (variant: TargetPlatform.android)
+00:01 +4: /workspace/scratch/f581f54b4d3f/game/carwece/test/graphics_backend_test.dart: Android uses its GPU texture and sends all 54 models (variant: TargetPlatform.android)
+00:01 +5: /workspace/scratch/f581f54b4d3f/game/carwece/test/graphics_backend_test.dart: Android uses its GPU texture and sends all 54 models (variant: TargetPlatform.android)
+00:01 +6: /workspace/scratch/f581f54b4d3f/game/carwece/test/graphics_backend_test.dart: Android uses its GPU texture and sends all 54 models (variant: TargetPlatform.android)
+00:01 +7: /workspace/scratch/f581f54b4d3f/game/carwece/test/graphics_backend_test.dart: Android uses its GPU texture and sends all 54 models (variant: TargetPlatform.android)
+00:01 +8: /workspace/scratch/f581f54b4d3f/game/carwece/test/graphics_backend_test.dart: Android uses its GPU texture and sends all 54 models (variant: TargetPlatform.android)
+00:01 +9: /workspace/scratch/f581f54b4d3f/game/carwece/test/graphics_backend_test.dart: Android uses its GPU texture and sends all 54 models (variant: TargetPlatform.android)
+00:01 +10: /workspace/scratch/f581f54b4d3f/game/carwece/test/graphics_backend_test.dart: Android uses its GPU texture and sends all 54 models (variant: TargetPlatform.android)
+00:01 +11: /workspace/scratch/f581f54b4d3f/game/carwece/test/graphics_backend_test.dart: Android uses its GPU texture and sends all 54 models (variant: TargetPlatform.android)
+00:01 +12: /workspace/scratch/f581f54b4d3f/game/carwece/test/graphics_backend_test.dart: Android uses its GPU texture and sends all 54 models (variant: TargetPlatform.android)
+00:01 +13: /workspace/scratch/f581f54b4d3f/game/carwece/test/graphics_backend_test.dart: Android uses its GPU texture and sends all 54 models (variant: TargetPlatform.android)
+00:01 +14: /workspace/scratch/f581f54b4d3f/game/carwece/test/graphics_backend_test.dart: Android uses its GPU texture and sends all 54 models (variant: TargetPlatform.android)
+00:01 +15: /workspace/scratch/f581f54b4d3f/game/carwece/test/graphics_backend_test.dart: Android uses its GPU texture and sends all 54 models (variant: TargetPlatform.android)
+00:01 +16: /workspace/scratch/f581f54b4d3f/game/carwece/test/graphics_backend_test.dart: Android uses its GPU texture and sends all 54 models (variant: TargetPlatform.android)
+00:02 +17: /workspace/scratch/f581f54b4d3f/game/carwece/test/engine_test.dart: Physics gives the same result at 30, 60 and 120 FPS
+00:02 +18: /workspace/scratch/f581f54b4d3f/game/carwece/test/engine_test.dart: Physics gives the same result at 30, 60 and 120 FPS
+00:02 +19: /workspace/scratch/f581f54b4d3f/game/carwece/test/engine_test.dart: Physics gives the same result at 30, 60 and 120 FPS
+00:03 +20: /workspace/scratch/f581f54b4d3f/game/carwece/test/engine_test.dart: Physics gives the same result at 30, 60 and 120 FPS
+00:03 +21: /workspace/scratch/f581f54b4d3f/game/carwece/test/engine_test.dart: Physics gives the same result at 30, 60 and 120 FPS
+00:03 +22: /workspace/scratch/f581f54b4d3f/game/carwece/test/engine_test.dart: Physics gives the same result at 30, 60 and 120 FPS
+00:03 +23: /workspace/scratch/f581f54b4d3f/game/carwece/test/engine_test.dart: Physics gives the same result at 30, 60 and 120 FPS
+00:03 +24: /workspace/scratch/f581f54b4d3f/game/carwece/test/engine_test.dart: Physics gives the same result at 30, 60 and 120 FPS
+00:04 +25: /workspace/scratch/f581f54b4d3f/game/carwece/test/engine_test.dart: Physics gives the same result at 30, 60 and 120 FPS
+00:04 +26: /workspace/scratch/f581f54b4d3f/game/carwece/test/engine_test.dart: Physics gives the same result at 30, 60 and 120 FPS
+00:04 +27: /workspace/scratch/f581f54b4d3f/game/carwece/test/engine_test.dart: Physics gives the same result at 30, 60 and 120 FPS
+00:04 +28: /workspace/scratch/f581f54b4d3f/game/carwece/test/engine_test.dart: Physics gives the same result at 30, 60 and 120 FPS
+00:04 +29: /workspace/scratch/f581f54b4d3f/game/carwece/test/engine_test.dart: Physics gives the same result at 30, 60 and 120 FPS
+00:04 +30: /workspace/scratch/f581f54b4d3f/game/carwece/test/engine_test.dart: Physics gives the same result at 30, 60 and 120 FPS
+00:04 +31: /workspace/scratch/f581f54b4d3f/game/carwece/test/engine_test.dart: Physics gives the same result at 30, 60 and 120 FPS
+00:04 +32: /workspace/scratch/f581f54b4d3f/game/carwece/test/engine_test.dart: Physics gives the same result at 30, 60 and 120 FPS
+00:04 +33: /workspace/scratch/f581f54b4d3f/game/carwece/test/engine_test.dart: Physics gives the same result at 30, 60 and 120 FPS
+00:04 +34: /workspace/scratch/f581f54b4d3f/game/carwece/test/engine_test.dart: Physics gives the same result at 30, 60 and 120 FPS
+00:04 +35: /workspace/scratch/f581f54b4d3f/game/carwece/test/engine_test.dart: Physics gives the same result at 30, 60 and 120 FPS
+00:05 +36: /workspace/scratch/f581f54b4d3f/game/carwece/test/engine_test.dart: Physics gives the same result at 30, 60 and 120 FPS
+00:05 +37: /workspace/scratch/f581f54b4d3f/game/carwece/test/engine_test.dart: Physics gives the same result at 30, 60 and 120 FPS
+00:05 +38: /workspace/scratch/f581f54b4d3f/game/carwece/test/engine_test.dart: Physics gives the same result at 30, 60 and 120 FPS
+00:05 +39: /workspace/scratch/f581f54b4d3f/game/carwece/test/engine_test.dart: Physics gives the same result at 30, 60 and 120 FPS
+00:05 +40: /workspace/scratch/f581f54b4d3f/game/carwece/test/engine_test.dart: Physics gives the same result at 30, 60 and 120 FPS
+00:05 +41: /workspace/scratch/f581f54b4d3f/game/carwece/test/engine_test.dart: Physics gives the same result at 30, 60 and 120 FPS
+00:05 +42: /workspace/scratch/f581f54b4d3f/game/carwece/test/engine_test.dart: Physics gives the same result at 30, 60 and 120 FPS
+00:05 +43: /workspace/scratch/f581f54b4d3f/game/carwece/test/engine_test.dart: Physics gives the same result at 30, 60 and 120 FPS
+00:05 +44: /workspace/scratch/f581f54b4d3f/game/carwece/test/engine_test.dart: Physics gives the same result at 30, 60 and 120 FPS
+00:05 +45: /workspace/scratch/f581f54b4d3f/game/carwece/test/engine_test.dart: Physics gives the same result at 30, 60 and 120 FPS
+00:05 +46: /workspace/scratch/f581f54b4d3f/game/carwece/test/engine_test.dart: Physics gives the same result at 30, 60 and 120 FPS
+00:05 +47: /workspace/scratch/f581f54b4d3f/game/carwece/test/engine_test.dart: Physics gives the same result at 30, 60 and 120 FPS
+00:05 +48: /workspace/scratch/f581f54b4d3f/game/carwece/test/engine_test.dart: Physics gives the same result at 30, 60 and 120 FPS
+00:05 +49: /workspace/scratch/f581f54b4d3f/game/carwece/test/engine_test.dart: Physics gives the same result at 30, 60 and 120 FPS
+00:06 +50: /workspace/scratch/f581f54b4d3f/game/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:06 +51: /workspace/scratch/f581f54b4d3f/game/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:06 +52: /workspace/scratch/f581f54b4d3f/game/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:06 +53: /workspace/scratch/f581f54b4d3f/game/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:06 +54: /workspace/scratch/f581f54b4d3f/game/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:06 +55: /workspace/scratch/f581f54b4d3f/game/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:06 +56: /workspace/scratch/f581f54b4d3f/game/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:06 +57: /workspace/scratch/f581f54b4d3f/game/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:06 +58: /workspace/scratch/f581f54b4d3f/game/carwece/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:07 +59: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All twelve circuits are finishable using steering, throttle and brakes
+00:07 +60: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All twelve circuits are finishable using steering, throttle and brakes
+00:07 +61: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All twelve circuits are finishable using steering, throttle and brakes
+00:07 +62: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All twelve circuits are finishable using steering, throttle and brakes
+00:07 +63: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All twelve circuits are finishable using steering, throttle and brakes
+00:08 +64: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All twelve circuits are finishable using steering, throttle and brakes
+00:08 +65: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All twelve circuits are finishable using steering, throttle and brakes
+00:08 +66: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All twelve circuits are finishable using steering, throttle and brakes
+00:08 +67: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All twelve circuits are finishable using steering, throttle and brakes
+00:08 +68: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All twelve circuits are finishable using steering, throttle and brakes
+00:08 +69: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All twelve circuits are finishable using steering, throttle and brakes
+00:08 +70: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All twelve circuits are finishable using steering, throttle and brakes
+00:08 +71: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All twelve circuits are finishable using steering, throttle and brakes
+00:08 +72: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All twelve circuits are finishable using steering, throttle and brakes
+00:09 +73: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All twelve circuits are finishable using steering, throttle and brakes
+00:09 +74: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All twelve circuits are finishable using steering, throttle and brakes
+00:09 +75: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All twelve circuits are finishable using steering, throttle and brakes
+00:09 +76: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All twelve circuits are finishable using steering, throttle and brakes
+00:09 +77: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All twelve circuits are finishable using steering, throttle and brakes
+00:09 +78: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All twelve circuits are finishable using steering, throttle and brakes
+00:09 +79: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All twelve circuits are finishable using steering, throttle and brakes
+00:09 +80: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All twelve circuits are finishable using steering, throttle and brakes
+00:10 +81: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All twelve circuits are finishable using steering, throttle and brakes
+00:10 +82: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All twelve circuits are finishable using steering, throttle and brakes
+00:10 +83: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All twelve circuits are finishable using steering, throttle and brakes
+00:10 +84: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All twelve circuits are finishable using steering, throttle and brakes
+00:10 +85: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All twelve circuits are finishable using steering, throttle and brakes
+00:10 +86: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All twelve circuits are finishable using steering, throttle and brakes
+00:10 +87: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All twelve circuits are finishable using steering, throttle and brakes
+00:10 +88: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All twelve circuits are finishable using steering, throttle and brakes
+00:11 +89: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All twelve circuits are finishable using steering, throttle and brakes
+00:12 +90: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All twelve circuits are finishable using steering, throttle and brakes
+00:12 +91: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All twelve circuits are finishable using steering, throttle and brakes
+00:12 +92: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All twelve circuits are finishable using steering, throttle and brakes
+00:13 +93: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All twelve circuits are finishable using steering, throttle and brakes
+00:14 +94: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All twelve circuits are finishable using steering, throttle and brakes
+00:15 +95: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All twelve circuits are finishable using steering, throttle and brakes
+00:15 +96: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All twelve circuits are finishable using steering, throttle and brakes
+00:16 +97: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All twelve circuits are finishable using steering, throttle and brakes
+00:16 +98: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All twelve circuits are finishable using steering, throttle and brakes
+00:19 +99: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: Failing a loop releases the car into a visible fall without teleporting
+00:19 +100: All tests passed!

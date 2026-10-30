@@ -1,0 +1,11 @@
+{
+  "native_tests": {
+    "tests": 52,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "new_online_button_in_all_abis": true,
+  "old_test_badges_absent": true,
+  "green_shortcut_prompt_absent": true
+}

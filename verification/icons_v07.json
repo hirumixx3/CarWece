@@ -1,0 +1,140 @@
+{
+  "masters": {
+    "foreground": "7a105e042e359360e09cbb05ad8152b4a6a1030514ae84115116c8ebbf038f89",
+    "background": "8b94707883113020e66212c634ef168342e6641beafc12a85eea059e492c42b5"
+  },
+  "png": [
+    {
+      "name": "ic_launcher",
+      "density": "mdpi",
+      "compiled": "res/9w.png",
+      "pixels_match": true
+    },
+    {
+      "name": "ic_launcher_background",
+      "density": "mdpi",
+      "compiled": "res/3z.png",
+      "pixels_match": true
+    },
+    {
+      "name": "ic_launcher_foreground",
+      "density": "mdpi",
+      "compiled": "res/QZ.png",
+      "pixels_match": true
+    },
+    {
+      "name": "ic_launcher_round",
+      "density": "mdpi",
+      "compiled": "res/zR.png",
+      "pixels_match": true
+    },
+    {
+      "name": "ic_launcher",
+      "density": "hdpi",
+      "compiled": "res/yn.png",
+      "pixels_match": true
+    },
+    {
+      "name": "ic_launcher_background",
+      "density": "hdpi",
+      "compiled": "res/I2.png",
+      "pixels_match": true
+    },
+    {
+      "name": "ic_launcher_foreground",
+      "density": "hdpi",
+      "compiled": "res/zr.png",
+      "pixels_match": true
+    },
+    {
+      "name": "ic_launcher_round",
+      "density": "hdpi",
+      "compiled": "res/8c.png",
+      "pixels_match": true
+    },
+    {
+      "name": "ic_launcher",
+      "density": "xhdpi",
+      "compiled": "res/FS.png",
+      "pixels_match": true
+    },
+    {
+      "name": "ic_launcher_background",
+      "density": "xhdpi",
+      "compiled": "res/6h.png",
+      "pixels_match": true
+    },
+    {
+      "name": "ic_launcher_foreground",
+      "density": "xhdpi",
+      "compiled": "res/Em.png",
+      "pixels_match": true
+    },
+    {
+      "name": "ic_launcher_round",
+      "density": "xhdpi",
+      "compiled": "res/wb.png",
+      "pixels_match": true
+    },
+    {
+      "name": "ic_launcher",
+      "density": "xxhdpi",
+      "compiled": "res/RJ.png",
+      "pixels_match": true
+    },
+    {
+      "name": "ic_launcher_background",
+      "density": "xxhdpi",
+      "compiled": "res/cV.png",
+      "pixels_match": true
+    },
+    {
+      "name": "ic_launcher_foreground",
+      "density": "xxhdpi",
+      "compiled": "res/Lf.png",
+      "pixels_match": true
+    },
+    {
+      "name": "ic_launcher_round",
+      "density": "xxhdpi",
+      "compiled": "res/fO.png",
+      "pixels_match": true
+    },
+    {
+      "name": "ic_launcher",
+      "density": "xxxhdpi",
+      "compiled": "res/o-.png",
+      "pixels_match": true
+    },
+    {
+      "name": "ic_launcher_background",
+      "density": "xxxhdpi",
+      "compiled": "res/Gx.png",
+      "pixels_match": true
+    },
+    {
+      "name": "ic_launcher_foreground",
+      "density": "xxxhdpi",
+      "compiled": "res/as.png",
+      "pixels_match": true
+    },
+    {
+      "name": "ic_launcher_round",
+      "density": "xxxhdpi",
+      "compiled": "res/Gc.png",
+      "pixels_match": true
+    }
+  ],
+  "adaptive": [
+    {
+      "name": "ic_launcher",
+      "compiled": "res/BW.xml",
+      "layers_match": true
+    },
+    {
+      "name": "ic_launcher_round",
+      "compiled": "res/0K.xml",
+      "layers_match": true
+    }
+  ]
+}

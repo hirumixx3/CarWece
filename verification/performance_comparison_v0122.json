@@ -1,0 +1,149 @@
+{
+  "scope": "Host AOT CPU microbenchmark, not Android FPS",
+  "runs": [
+    {
+      "run": 1,
+      "version": "before",
+      "cases": [
+        {
+          "case": "bedroom",
+          "battle": false,
+          "samples": 1500,
+          "median_us": 2398,
+          "p95_us": 8630,
+          "mean_us": 3673.69,
+          "physics_median_us": 2359,
+          "checksum": -835891.462033838
+        },
+        {
+          "case": "arcade_dual",
+          "battle": false,
+          "samples": 1500,
+          "median_us": 1295,
+          "p95_us": 8684,
+          "mean_us": 3193.044,
+          "physics_median_us": 1246,
+          "checksum": -997495.8762933612
+        },
+        {
+          "case": "arena_2",
+          "battle": true,
+          "samples": 1500,
+          "median_us": 2615,
+          "p95_us": 3813,
+          "mean_us": 2432.886,
+          "physics_median_us": 2554,
+          "checksum": 339288.4069607109
+        }
+      ]
+    },
+    {
+      "run": 1,
+      "version": "after",
+      "cases": [
+        {
+          "case": "bedroom",
+          "battle": false,
+          "samples": 1500,
+          "median_us": 696,
+          "p95_us": 1033,
+          "mean_us": 744.2926666666667,
+          "physics_median_us": 664,
+          "checksum": -835891.462033838
+        },
+        {
+          "case": "arcade_dual",
+          "battle": false,
+          "samples": 1500,
+          "median_us": 606,
+          "p95_us": 932,
+          "mean_us": 652.0033333333333,
+          "physics_median_us": 569,
+          "checksum": -997495.8762933612
+        },
+        {
+          "case": "arena_2",
+          "battle": true,
+          "samples": 1500,
+          "median_us": 573,
+          "p95_us": 952,
+          "mean_us": 606.428,
+          "physics_median_us": 522,
+          "checksum": 339288.4069607109
+        }
+      ]
+    },
+    {
+      "run": 2,
+      "version": "before",
+      "cases": [
+        {
+          "case": "bedroom",
+          "battle": false,
+          "samples": 1500,
+          "median_us": 2367,
+          "p95_us": 9705,
+          "mean_us": 3693.4266666666667,
+          "physics_median_us": 2321,
+          "checksum": -835891.462033838
+        },
+        {
+          "case": "arcade_dual",
+          "battle": false,
+          "samples": 1500,
+          "median_us": 1190,
+          "p95_us": 8446,
+          "mean_us": 2868.944,
+          "physics_median_us": 1134,
+          "checksum": -997495.8762933612
+        },
+        {
+          "case": "arena_2",
+          "battle": true,
+          "samples": 1500,
+          "median_us": 2609,
+          "p95_us": 4226,
+          "mean_us": 2562.7753333333335,
+          "physics_median_us": 2548,
+          "checksum": 339288.4069607109
+        }
+      ]
+    },
+    {
+      "run": 2,
+      "version": "after",
+      "cases": [
+        {
+          "case": "bedroom",
+          "battle": false,
+          "samples": 1500,
+          "median_us": 669,
+          "p95_us": 916,
+          "mean_us": 691.4453333333333,
+          "physics_median_us": 641,
+          "checksum": -835891.462033838
+        },
+        {
+          "case": "arcade_dual",
+          "battle": false,
+          "samples": 1500,
+          "median_us": 523,
+          "p95_us": 751,
+          "mean_us": 537.9673333333334,
+          "physics_median_us": 495,
+          "checksum": -997495.8762933612
+        },
+        {
+          "case": "arena_2",
+          "battle": true,
+          "samples": 1500,
+          "median_us": 565,
+          "p95_us": 901,
+          "mean_us": 581.382,
+          "physics_median_us": 520,
+          "checksum": 339288.4069607109
+        }
+      ]
+    }
+  ]
+}

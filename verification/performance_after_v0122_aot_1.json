@@ -1,0 +1,35 @@
+{
+  "scope": "Host Dart CPU, 60 simulation updates/sec plus frame serialization; not device FPS",
+  "cases": [
+    {
+      "case": "bedroom",
+      "battle": false,
+      "samples": 1500,
+      "median_us": 696,
+      "p95_us": 1033,
+      "mean_us": 744.2926666666667,
+      "physics_median_us": 664,
+      "checksum": -835891.462033838
+    },
+    {
+      "case": "arcade_dual",
+      "battle": false,
+      "samples": 1500,
+      "median_us": 606,
+      "p95_us": 932,
+      "mean_us": 652.0033333333333,
+      "physics_median_us": 569,
+      "checksum": -997495.8762933612
+    },
+    {
+      "case": "arena_2",
+      "battle": true,
+      "samples": 1500,
+      "median_us": 573,
+      "p95_us": 952,
+      "mean_us": 606.428,
+      "physics_median_us": 522,
+      "checksum": 339288.4069607109
+    }
+  ]
+}

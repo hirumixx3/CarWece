@@ -1,0 +1,7 @@
+{
+  "alias": "hirumi",
+  "algorithm": "RSA",
+  "bits": 4096,
+  "certificateSha256": "36d37a19082d266b741937d4ac7d0fc0d7d581017d1a5b5cae4bab5b5d91433a",
+  "validityDays": 10000
+}

@@ -1,0 +1,23 @@
+QA: host room ready
+QA: wrong certificate rejected
+QA: wrong invitation rejected
+QA: six players connected
+QA: starting match
+QA: starting match
+{
+  "transport": "real TCP + pinned TLS + WebSocket; local bore protocol oracle",
+  "nativeIdentity": "HostIdentity Kotlin output",
+  "publicInternetVerified": false,
+  "startupErrorPreserved": true,
+  "startupRecoveredAfterTwoDisconnects": true,
+  "wrongCertificateRejected": true,
+  "wrongInviteRejected": true,
+  "sixPlayers": true,
+  "duplicateNameRejected": true,
+  "seventhPlayerRejected": true,
+  "battleTargetsSynchronized": true,
+  "cycleTargetReplicated": true,
+  "hostShutdownDisconnectsPeers": true,
+  "raceAndBattle": true,
+  "result": "PASS"
+}

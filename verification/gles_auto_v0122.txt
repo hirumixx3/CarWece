@@ -1,0 +1,13 @@
+GLES: OpenGL ES 3.2 Mesa 25.2.8-0ubuntu0.24.04.2 renderer: llvmpipe (LLVM 20.1.2, 256 bits)
+Triangle counts: {'bedroom': 141337, 'arena_1': 83753, 'arena_2': 89710, 'arena_4': 92294, 'arcade_dual': 147467, 'arena_6': 89157, 'arena_3': 70184, 'arena_5': 66957} car: [9742, 10626, 9798, 8560]
+Rendered arena_1_drive
+Rendered arena_1_loop_1
+Rendered arena_2_drive
+Rendered arena_2_loop_2
+Rendered arena_3_drive
+Rendered arena_4_drive
+Rendered arena_5_drive
+Rendered arena_6_drive
+Rendered race_bedroom
+Rendered race_arcade_dual
+Both shader programs compiled; all frames rendered without GLES errors.

@@ -1,0 +1,207 @@
+Resolving dependencies...
+Downloading packages...
+  characters 1.4.0 (1.4.1 available)
+  clock 1.1.2 (1.1.3 available)
+  matcher 0.12.17 (0.12.20 available)
+  material_color_utilities 0.11.1 (0.13.1 available)
+  meta 1.16.0 (1.19.0 available)
+  stack_trace 1.12.1 (1.12.2 available)
+  test_api 0.7.6 (0.7.15 available)
+  vector_math 2.2.0 (2.4.3 available)
+Got dependencies!
+8 packages have newer versions incompatible with dependency constraints.
+Try `flutter pub outdated` for more information.
+00:00 +0: loading /workspace/scratch/f581f54b4d3f/game/carwece/test/battle_graphics_channel_test.dart
+00:00 +0: /workspace/scratch/f581f54b4d3f/game/carwece/test/battle_graphics_channel_test.dart: Battle GPU uploads all 44 weapon models, life bars and active projectile (variant: TargetPlatform.android)
+00:01 +1: /workspace/scratch/f581f54b4d3f/game/carwece/test/battle_graphics_channel_test.dart: Battle GPU uploads all 44 weapon models, life bars and active projectile (variant: TargetPlatform.android)
+00:01 +2: /workspace/scratch/f581f54b4d3f/game/carwece/test/battle_graphics_channel_test.dart: Battle GPU uploads all 44 weapon models, life bars and active projectile (variant: TargetPlatform.android)
+00:01 +3: /workspace/scratch/f581f54b4d3f/game/carwece/test/battle_graphics_channel_test.dart: Battle GPU uploads all 44 weapon models, life bars and active projectile (variant: TargetPlatform.android)
+00:01 +4: /workspace/scratch/f581f54b4d3f/game/carwece/test/battle_graphics_channel_test.dart: Battle GPU uploads all 44 weapon models, life bars and active projectile (variant: TargetPlatform.android)
+00:01 +5: /workspace/scratch/f581f54b4d3f/game/carwece/test/battle_graphics_channel_test.dart: Battle GPU uploads all 44 weapon models, life bars and active projectile (variant: TargetPlatform.android)
+00:01 +6: /workspace/scratch/f581f54b4d3f/game/carwece/test/battle_graphics_channel_test.dart: Battle GPU uploads all 44 weapon models, life bars and active projectile (variant: TargetPlatform.android)
+00:01 +7: /workspace/scratch/f581f54b4d3f/game/carwece/test/battle_graphics_channel_test.dart: Battle GPU uploads all 44 weapon models, life bars and active projectile (variant: TargetPlatform.android)
+00:01 +8: /workspace/scratch/f581f54b4d3f/game/carwece/test/battle_graphics_channel_test.dart: Battle GPU uploads all 44 weapon models, life bars and active projectile (variant: TargetPlatform.android)
+00:01 +9: /workspace/scratch/f581f54b4d3f/game/carwece/test/battle_graphics_channel_test.dart: Battle GPU uploads all 44 weapon models, life bars and active projectile (variant: TargetPlatform.android)
+00:01 +10: /workspace/scratch/f581f54b4d3f/game/carwece/test/battle_graphics_channel_test.dart: Battle GPU uploads all 44 weapon models, life bars and active projectile (variant: TargetPlatform.android)
+00:01 +11: /workspace/scratch/f581f54b4d3f/game/carwece/test/battle_graphics_channel_test.dart: Battle GPU uploads all 44 weapon models, life bars and active projectile (variant: TargetPlatform.android)
+00:01 +12: /workspace/scratch/f581f54b4d3f/game/carwece/test/battle_graphics_channel_test.dart: Battle GPU uploads all 44 weapon models, life bars and active projectile (variant: TargetPlatform.android)
+00:01 +13: /workspace/scratch/f581f54b4d3f/game/carwece/test/battle_graphics_channel_test.dart: Battle GPU uploads all 44 weapon models, life bars and active projectile (variant: TargetPlatform.android)
+00:01 +14: /workspace/scratch/f581f54b4d3f/game/carwece/test/battle_graphics_channel_test.dart: Battle GPU uploads all 44 weapon models, life bars and active projectile (variant: TargetPlatform.android)
+00:01 +15: /workspace/scratch/f581f54b4d3f/game/carwece/test/battle_graphics_channel_test.dart: Battle GPU uploads all 44 weapon models, life bars and active projectile (variant: TargetPlatform.android)
+00:01 +16: /workspace/scratch/f581f54b4d3f/game/carwece/test/battle_graphics_channel_test.dart: Battle GPU uploads all 44 weapon models, life bars and active projectile (variant: TargetPlatform.android)
+00:02 +17: /workspace/scratch/f581f54b4d3f/game/carwece/test/battle_graphics_channel_test.dart: Battle GPU uploads all 44 weapon models, life bars and active projectile (variant: TargetPlatform.android)
+00:02 +18: /workspace/scratch/f581f54b4d3f/game/carwece/test/battle_graphics_channel_test.dart: Battle GPU uploads all 44 weapon models, life bars and active projectile (variant: TargetPlatform.android)
+00:02 +19: /workspace/scratch/f581f54b4d3f/game/carwece/test/battle_graphics_channel_test.dart: Battle GPU uploads all 44 weapon models, life bars and active projectile (variant: TargetPlatform.android)
+00:02 +20: /workspace/scratch/f581f54b4d3f/game/carwece/test/battle_graphics_channel_test.dart: Battle GPU uploads all 44 weapon models, life bars and active projectile (variant: TargetPlatform.android)
+00:02 +21: /workspace/scratch/f581f54b4d3f/game/carwece/test/battle_graphics_channel_test.dart: Battle GPU uploads all 44 weapon models, life bars and active projectile (variant: TargetPlatform.android)
+00:02 +22: /workspace/scratch/f581f54b4d3f/game/carwece/test/battle_graphics_channel_test.dart: Battle GPU uploads all 44 weapon models, life bars and active projectile (variant: TargetPlatform.android)
+00:02 +23: /workspace/scratch/f581f54b4d3f/game/carwece/test/battle_graphics_channel_test.dart: Battle GPU uploads all 44 weapon models, life bars and active projectile (variant: TargetPlatform.android)
+00:02 +24: /workspace/scratch/f581f54b4d3f/game/carwece/test/battle_graphics_channel_test.dart: Battle GPU uploads all 44 weapon models, life bars and active projectile (variant: TargetPlatform.android)
+00:02 +25: /workspace/scratch/f581f54b4d3f/game/carwece/test/battle_graphics_channel_test.dart: Battle GPU uploads all 44 weapon models, life bars and active projectile (variant: TargetPlatform.android)
+00:02 +26: /workspace/scratch/f581f54b4d3f/game/carwece/test/battle_graphics_channel_test.dart: Battle GPU uploads all 44 weapon models, life bars and active projectile (variant: TargetPlatform.android)
+00:02 +27: /workspace/scratch/f581f54b4d3f/game/carwece/test/battle_graphics_channel_test.dart: Battle GPU uploads all 44 weapon models, life bars and active projectile (variant: TargetPlatform.android)
+00:02 +28: /workspace/scratch/f581f54b4d3f/game/carwece/test/battle_graphics_channel_test.dart: Battle GPU uploads all 44 weapon models, life bars and active projectile (variant: TargetPlatform.android)
+00:02 +29: /workspace/scratch/f581f54b4d3f/game/carwece/test/battle_graphics_channel_test.dart: Battle GPU uploads all 44 weapon models, life bars and active projectile (variant: TargetPlatform.android)
+00:02 +30: /workspace/scratch/f581f54b4d3f/game/carwece/test/battle_graphics_channel_test.dart: Battle GPU uploads all 44 weapon models, life bars and active projectile (variant: TargetPlatform.android)
+00:02 +31: /workspace/scratch/f581f54b4d3f/game/carwece/test/battle_graphics_channel_test.dart: Battle GPU uploads all 44 weapon models, life bars and active projectile (variant: TargetPlatform.android)
+00:02 +32: /workspace/scratch/f581f54b4d3f/game/carwece/test/battle_graphics_channel_test.dart: Battle GPU uploads all 44 weapon models, life bars and active projectile (variant: TargetPlatform.android)
+00:02 +33: /workspace/scratch/f581f54b4d3f/game/carwece/test/battle_graphics_channel_test.dart: Battle GPU uploads all 44 weapon models, life bars and active projectile (variant: TargetPlatform.android)
+00:02 +34: /workspace/scratch/f581f54b4d3f/game/carwece/test/battle_graphics_channel_test.dart: Battle GPU uploads all 44 weapon models, life bars and active projectile (variant: TargetPlatform.android)
+00:02 +35: /workspace/scratch/f581f54b4d3f/game/carwece/test/battle_graphics_channel_test.dart: Battle GPU uploads all 44 weapon models, life bars and active projectile (variant: TargetPlatform.android)
+00:02 +36: /workspace/scratch/f581f54b4d3f/game/carwece/test/battle_graphics_channel_test.dart: Battle GPU uploads all 44 weapon models, life bars and active projectile (variant: TargetPlatform.android)
+00:02 +37: /workspace/scratch/f581f54b4d3f/game/carwece/test/flow_test.dart: Menu, garage purchase, settings, multi-touch driving, pause and finish (variant: TargetPlatform.linux)
+00:03 +38: /workspace/scratch/f581f54b4d3f/game/carwece/test/flow_test.dart: Menu, garage purchase, settings, multi-touch driving, pause and finish (variant: TargetPlatform.linux)
+00:03 +39: /workspace/scratch/f581f54b4d3f/game/carwece/test/flow_test.dart: Menu, garage purchase, settings, multi-touch driving, pause and finish (variant: TargetPlatform.linux)
+00:03 +40: /workspace/scratch/f581f54b4d3f/game/carwece/test/flow_test.dart: Menu, garage purchase, settings, multi-touch driving, pause and finish (variant: TargetPlatform.linux)
+00:03 +41: /workspace/scratch/f581f54b4d3f/game/carwece/test/flow_test.dart: Menu, garage purchase, settings, multi-touch driving, pause and finish (variant: TargetPlatform.linux)
+00:03 +42: /workspace/scratch/f581f54b4d3f/game/carwece/test/flow_test.dart: Menu, garage purchase, settings, multi-touch driving, pause and finish (variant: TargetPlatform.linux)
+00:03 +43: /workspace/scratch/f581f54b4d3f/game/carwece/test/flow_test.dart: Menu, garage purchase, settings, multi-touch driving, pause and finish (variant: TargetPlatform.linux)
+00:03 +44: /workspace/scratch/f581f54b4d3f/game/carwece/test/flow_test.dart: Menu, garage purchase, settings, multi-touch driving, pause and finish (variant: TargetPlatform.linux)
+00:04 +45: /workspace/scratch/f581f54b4d3f/game/carwece/test/flow_test.dart: Menu, garage purchase, settings, multi-touch driving, pause and finish (variant: TargetPlatform.linux)
+00:04 +46: /workspace/scratch/f581f54b4d3f/game/carwece/test/graphics_channel_test.dart: Android graphics payload round-trips all car bodies, effects, damage and animated wheels
+00:04 +47: /workspace/scratch/f581f54b4d3f/game/carwece/test/graphics_channel_test.dart: Android graphics payload round-trips all car bodies, effects, damage and animated wheels
+00:05 +48: /workspace/scratch/f581f54b4d3f/game/carwece/test/graphics_channel_test.dart: Android graphics payload round-trips all car bodies, effects, damage and animated wheels
+00:05 +49: /workspace/scratch/f581f54b4d3f/game/carwece/test/graphics_channel_test.dart: Android graphics payload round-trips all car bodies, effects, damage and animated wheels
+00:05 +50: /workspace/scratch/f581f54b4d3f/game/carwece/test/graphics_channel_test.dart: Android graphics payload round-trips all car bodies, effects, damage and animated wheels
+00:06 +51: /workspace/scratch/f581f54b4d3f/game/carwece/test/graphics_channel_test.dart: Android graphics payload round-trips all car bodies, effects, damage and animated wheels
+00:06 +52: /workspace/scratch/f581f54b4d3f/game/carwece/test/graphics_channel_test.dart: Android graphics payload round-trips all car bodies, effects, damage and animated wheels
+00:06 +53: /workspace/scratch/f581f54b4d3f/game/carwece/test/graphics_channel_test.dart: Android graphics payload round-trips all car bodies, effects, damage and animated wheels
+00:06 +54: /workspace/scratch/f581f54b4d3f/game/carwece/test/graphics_channel_test.dart: Android graphics payload round-trips all car bodies, effects, damage and animated wheels
+00:06 +55: /workspace/scratch/f581f54b4d3f/game/carwece/test/graphics_channel_test.dart: Android graphics payload round-trips all car bodies, effects, damage and animated wheels
+00:07 +56: /workspace/scratch/f581f54b4d3f/game/carwece/test/graphics_channel_test.dart: Android graphics payload round-trips all car bodies, effects, damage and animated wheels
+00:07 +57: /workspace/scratch/f581f54b4d3f/game/carwece/test/graphics_channel_test.dart: Android graphics payload round-trips all car bodies, effects, damage and animated wheels
+00:07 +58: /workspace/scratch/f581f54b4d3f/game/carwece/test/graphics_channel_test.dart: Android graphics payload round-trips all car bodies, effects, damage and animated wheels
+00:07 +59: /workspace/scratch/f581f54b4d3f/game/carwece/test/graphics_channel_test.dart: Android graphics payload round-trips all car bodies, effects, damage and animated wheels
+00:08 +60: /workspace/scratch/f581f54b4d3f/game/carwece/test/graphics_channel_test.dart: Android graphics payload round-trips all car bodies, effects, damage and animated wheels
+00:08 +61: /workspace/scratch/f581f54b4d3f/game/carwece/test/graphics_channel_test.dart: Android graphics payload round-trips all car bodies, effects, damage and animated wheels
+00:08 +62: /workspace/scratch/f581f54b4d3f/game/carwece/test/graphics_channel_test.dart: Android graphics payload round-trips all car bodies, effects, damage and animated wheels
+00:08 +63: /workspace/scratch/f581f54b4d3f/game/carwece/test/graphics_channel_test.dart: Android graphics payload round-trips all car bodies, effects, damage and animated wheels
+00:08 +64: /workspace/scratch/f581f54b4d3f/game/carwece/test/graphics_channel_test.dart: Android graphics payload round-trips all car bodies, effects, damage and animated wheels
+00:08 +65: /workspace/scratch/f581f54b4d3f/game/carwece/test/graphics_channel_test.dart: Android graphics payload round-trips all car bodies, effects, damage and animated wheels
+00:08 +66: /workspace/scratch/f581f54b4d3f/game/carwece/test/graphics_channel_test.dart: Android graphics payload round-trips all car bodies, effects, damage and animated wheels
+00:08 +67: /workspace/scratch/f581f54b4d3f/game/carwece/test/graphics_channel_test.dart: Android graphics payload round-trips all car bodies, effects, damage and animated wheels
+00:08 +68: /workspace/scratch/f581f54b4d3f/game/carwece/test/graphics_channel_test.dart: Android graphics payload round-trips all car bodies, effects, damage and animated wheels
+00:08 +69: /workspace/scratch/f581f54b4d3f/game/carwece/test/graphics_channel_test.dart: Android graphics payload round-trips all car bodies, effects, damage and animated wheels
+00:08 +70: /workspace/scratch/f581f54b4d3f/game/carwece/test/graphics_channel_test.dart: Android graphics payload round-trips all car bodies, effects, damage and animated wheels
+00:08 +71: /workspace/scratch/f581f54b4d3f/game/carwece/test/hud_editor_test.dart: Reset is a draft until saved and cancelling preserves the previous layout (variant: TargetPlatform.android)
+00:09 +72: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: Loop entry and exit have separate lanes and clear vertical and lateral space
+00:09 +73: /workspace/scratch/f581f54b4d3f/game/carwece/test/hud_editor_test.dart: Failed HUD save keeps the editor open and preserves the stored layout (variant: TargetPlatform.android)
+00:09 +74: /workspace/scratch/f581f54b4d3f/game/carwece/test/hud_editor_test.dart: Failed HUD save keeps the editor open and preserves the stored layout (variant: TargetPlatform.android)
+00:09 +75: /workspace/scratch/f581f54b4d3f/game/carwece/test/hud_editor_test.dart: Failed HUD save keeps the editor open and preserves the stored layout (variant: TargetPlatform.android)
+00:09 +76: /workspace/scratch/f581f54b4d3f/game/carwece/test/hud_editor_test.dart: Failed HUD save keeps the editor open and preserves the stored layout (variant: TargetPlatform.android)
+00:09 +77: /workspace/scratch/f581f54b4d3f/game/carwece/test/hud_editor_test.dart: Failed HUD save keeps the editor open and preserves the stored layout (variant: TargetPlatform.android)
+00:09 +78: /workspace/scratch/f581f54b4d3f/game/carwece/test/hud_editor_test.dart: Failed HUD save keeps the editor open and preserves the stored layout (variant: TargetPlatform.android)
+00:09 +79: /workspace/scratch/f581f54b4d3f/game/carwece/test/hud_editor_test.dart: Failed HUD save keeps the editor open and preserves the stored layout (variant: TargetPlatform.android)
+00:09 +80: /workspace/scratch/f581f54b4d3f/game/carwece/test/intro_test.dart: Production launch waits beyond video duration and enters menu only on decoder completion
+00:09 +81: /workspace/scratch/f581f54b4d3f/game/carwece/test/intro_test.dart: Production launch waits beyond video duration and enters menu only on decoder completion
+00:10 +82: /workspace/scratch/f581f54b4d3f/game/carwece/test/intro_test.dart: Production launch waits beyond video duration and enters menu only on decoder completion
+00:10 +83: /workspace/scratch/f581f54b4d3f/game/carwece/test/intro_test.dart: Production launch waits beyond video duration and enters menu only on decoder completion
+00:10 +84: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:10 +85: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:11 +86: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:11 +87: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:11 +88: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:11 +89: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:11 +90: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:11 +91: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:11 +92: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:11 +93: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:11 +94: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:11 +95: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:13 +96: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:13 +97: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:14 +98: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:15 +99: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:15 +100: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:15 +101: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:15 +102: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:15 +103: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:15 +104: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:15 +105: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:15 +106: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:15 +107: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:15 +108: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:16 +109: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:16 +110: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:17 +111: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:17 +112: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:17 +113: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:17 +114: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:18 +115: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:18 +116: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:18 +117: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:21 +118: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:21 +119: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:21 +120: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:21 +121: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:21 +122: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:21 +123: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:21 +124: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:22 +125: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:22 +126: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:22 +127: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:22 +128: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:23 +129: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:23 +130: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:23 +131: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:24 +132: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:24 +133: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:24 +134: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:25 +135: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:25 +136: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:25 +137: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:26 +138: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:27 +139: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:27 +140: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:27 +141: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:27 +142: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:27 +143: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:29 +144: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:29 +145: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:29 +146: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:29 +147: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:29 +148: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:29 +149: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:29 +150: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:29 +151: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:29 +152: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:30 +153: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:30 +154: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:31 +155: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:31 +156: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:31 +157: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:31 +158: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:31 +159: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:31 +160: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:31 +161: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:32 +162: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:34 +163: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:35 +164: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:35 +165: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:35 +166: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:35 +167: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:35 +168: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:36 +169: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:36 +170: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:36 +171: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:37 +172: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:37 +173: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:37 +174: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:37 +175: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:37 +176: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:37 +177: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:37 +178: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:37 +179: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:37 +180: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:37 +181: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:38 +182: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:38 +183: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:38 +184: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:38 +185: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:38 +186: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:38 +187: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:39 +188: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:40 +189: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:40 +190: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+00:43 +191: /workspace/scratch/f581f54b4d3f/game/carwece/test/regression_v03_test.dart: Failing a loop releases the car into a visible fall without teleporting
+00:43 +192: All tests passed!

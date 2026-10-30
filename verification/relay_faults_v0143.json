@@ -1,0 +1,10 @@
+{
+  "transport": "actual local SSH inside TLS, with independent Paramiko relay",
+  "publicInternetVerified": false,
+  "forwardRefusalPreserved": true,
+  "untrustedAddressRejected": true,
+  "brokenPublicRouteRejectedBeforeInvite": true,
+  "wrongControlTLSRejected": true,
+  "internetInvitesRestrictedToProviderDomains": true,
+  "result": "PASS"
+}

@@ -1,0 +1,19 @@
+{
+  "tracks": 20,
+  "music_bytes": 193016589,
+  "explicitAssetEntries": 21,
+  "unusedTemporaryFilesExcluded": [
+    {
+      "bytes": 8650752,
+      "action": "quarantined outside game assets"
+    },
+    {
+      "bytes": 11010048,
+      "action": "quarantined outside game assets"
+    },
+    {
+      "bytes": 2621440,
+      "action": "quarantined outside game assets"
+    }
+  ]
+}

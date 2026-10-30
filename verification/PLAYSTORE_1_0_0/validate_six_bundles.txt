@@ -1,0 +1,6 @@
+Validado: CarWece_1.0.0_vc1.aab — código 1, API 36, chave hirumi, 16 KB
+Validado: CarWece_1.0.0_vc2.aab — código 2, API 36, chave hirumi, 16 KB
+Validado: CarWece_1.0.0_vc3.aab — código 3, API 36, chave hirumi, 16 KB
+Validado: CarWece_1.0.0_vc4.aab — código 4, API 36, chave hirumi, 16 KB
+Validado: CarWece_1.0.0_vc5.aab — código 5, API 36, chave hirumi, 16 KB
+Validado: CarWece_1.0.0_vc6.aab — código 6, API 36, chave hirumi, 16 KB

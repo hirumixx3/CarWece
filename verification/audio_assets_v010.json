@@ -1,0 +1,62 @@
+[
+  {
+    "id": "sing_me_to_sleep",
+    "bytes": 7800060,
+    "sha256": "b7e46abc5520f8b0e9ceaf86af70b650eb97f30c272b505907d5a19612786c8a",
+    "uncompressedAsset": true
+  },
+  {
+    "id": "attention",
+    "bytes": 8505047,
+    "sha256": "637edde184843421d3cd5b1425ada69132abb6d2393c7c0fbae7c256ef112af2",
+    "uncompressedAsset": true
+  },
+  {
+    "id": "k",
+    "bytes": 12850028,
+    "sha256": "e2cd93d1f542e12925df10a509d331987ac9dce148d90c041d1849584019f6e1",
+    "uncompressedAsset": true
+  },
+  {
+    "id": "words",
+    "bytes": 8670217,
+    "sha256": "ef2437ffc15eebf7869b96efd9a9394d056e771475d0fe7ad9ef7f9b002b5f22",
+    "uncompressedAsset": true
+  },
+  {
+    "id": "everybodys_changing",
+    "bytes": 8927487,
+    "sha256": "17211b1ca489c21b53fc3c1543fd4c73995958ac59d7526afa727986ef98b86d",
+    "uncompressedAsset": true
+  },
+  {
+    "id": "legends_never_die",
+    "bytes": 9512616,
+    "sha256": "f31f3bd7a2778fb2b7e247e77e84c7e1227a52802ba839890d8e9d0735fd1e2b",
+    "uncompressedAsset": true
+  },
+  {
+    "id": "see_you_again",
+    "bytes": 9352499,
+    "sha256": "4c8a369d7b066e6f20cbf8793265a4b996a1f74a30be40e0aa3b7ceebc898758",
+    "uncompressedAsset": true
+  },
+  {
+    "id": "lalala",
+    "bytes": 6584285,
+    "sha256": "c7ab3c85b735d0036d4952260130f7445ca0dd7bb19b5f8eb686ddcf2866f356",
+    "uncompressedAsset": true
+  },
+  {
+    "id": "rockabye",
+    "bytes": 10294336,
+    "sha256": "909d5cb49f27d450209622da09a6835748f98603221d53ff18689c9fe6a6a518",
+    "uncompressedAsset": true
+  },
+  {
+    "id": "somewhere_only_we_know",
+    "bytes": 9723021,
+    "sha256": "f5c7b51322bf592f8263537b3db3d32518c50d71221288f73ef4c2471be508c2",
+    "uncompressedAsset": true
+  }
+]

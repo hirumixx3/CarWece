@@ -1,0 +1,1 @@
+Created circuits_v08.png and release_v08.png from actual geometry/GLES/UI renders.

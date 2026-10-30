@@ -1,0 +1,5 @@
+Running Gradle task 'assembleRelease'...                        
+Picked up JAVA_TOOL_OPTIONS:  -Djavax.net.ssl.trustStore=/etc/ssl/certs/java/cacerts
+Font asset "MaterialIcons-Regular.otf" was tree-shaken, reducing it from 1645184 to 10740 bytes (99.3% reduction). Tree-shaking can be disabled by providing the --no-tree-shake-icons flag when building your app.
+Running Gradle task 'assembleRelease'...                          101.3s
+✓ Built build/app/outputs/flutter-apk/app-release.apk (252.8MB)

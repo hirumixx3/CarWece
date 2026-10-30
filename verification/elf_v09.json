@@ -1,0 +1,38 @@
+[
+  {
+    "path": "lib/arm64-v8a/libapp.so",
+    "class": 64,
+    "machine": 183,
+    "bytes": 4785072
+  },
+  {
+    "path": "lib/arm64-v8a/libflutter.so",
+    "class": 64,
+    "machine": 183,
+    "bytes": 11037032
+  },
+  {
+    "path": "lib/armeabi-v7a/libapp.so",
+    "class": 32,
+    "machine": 40,
+    "bytes": 5407324
+  },
+  {
+    "path": "lib/armeabi-v7a/libflutter.so",
+    "class": 32,
+    "machine": 40,
+    "bytes": 7926848
+  },
+  {
+    "path": "lib/x86_64/libapp.so",
+    "class": 64,
+    "machine": 62,
+    "bytes": 4916144
+  },
+  {
+    "path": "lib/x86_64/libflutter.so",
+    "class": 64,
+    "machine": 62,
+    "bytes": 12143760
+  }
+]

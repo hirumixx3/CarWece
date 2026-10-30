@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="dev.hirumisu.pocket_rush.GraphicsContractTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2026-10-27T02:46:55" hostname="eaaa78b02e0a" time="0.289">
+  <properties/>
+  <testcase name="refusesTruncatedInstancePacket" classname="dev.hirumisu.pocket_rush.GraphicsContractTest" time="0.084"/>
+  <testcase name="wheelMaterialsAreOpaqueAndOnlyShieldAndSmokeUseBlending" classname="dev.hirumisu.pocket_rush.GraphicsContractTest" time="0.044"/>
+  <testcase name="refusesMissingMeshIndex" classname="dev.hirumisu.pocket_rush.GraphicsContractTest" time="0.038"/>
+  <testcase name="refusesNonFiniteTransforms" classname="dev.hirumisu.pocket_rush.GraphicsContractTest" time="0.03"/>
+  <testcase name="acceptsActualFlutterPayloadWithAllCarAndWheelModels" classname="dev.hirumisu.pocket_rush.GraphicsContractTest" time="0.038"/>
+  <testcase name="acceptsAdditionalEffectsWithinBudget" classname="dev.hirumisu.pocket_rush.GraphicsContractTest" time="0.025"/>
+  <testcase name="refusesIncompleteMeshWithSpecificReason" classname="dev.hirumisu.pocket_rush.GraphicsContractTest" time="0.027"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -1,0 +1,40 @@
+name: carwece
+description: CarWece, corrida arcade de miniaturas em pistas de brinquedo, por hirumisu.
+publish_to: none
+version: 1.0.0+1
+environment:
+  sdk: '>=3.8.0 <4.0.0'
+dependencies:
+  dartssh2: 4.1.0
+  crypto: 3.0.6
+  flutter:
+    sdk: flutter
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/shaders/
+    - assets/video/carwece_intro.mp4
+    - assets/music/
+  fonts:
+    - family: RushDisplay
+      fonts:
+        - asset: assets/fonts/Display.ttf
+    - family: RushBody
+      fonts:
+        - asset: assets/fonts/Body.ttf
+
+# Vendored official sources permit rebuilding with the saved offline SDK.
+dependency_overrides:
+  dartssh2:
+    path: third_party/dartssh2
+  asn1lib:
+    path: third_party/asn1lib
+  convert:
+    path: third_party/convert
+  pointycastle:
+    path: third_party/pointycastle
+  pinenacl:
+    path: third_party/pinenacl

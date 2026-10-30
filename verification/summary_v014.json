@@ -1,0 +1,51 @@
+{
+  "version": "0.14.0+23",
+  "author": "hirumisu",
+  "flutter_tests": {
+    "passed": 204,
+    "failed": 0
+  },
+  "native_tests": {
+    "passed": 52,
+    "failed": 0
+  },
+  "analyzer": "No issues found",
+  "network": {
+    "transport": "real TCP + pinned TLS + WebSocket; local bore protocol oracle",
+    "nativeIdentity": "HostIdentity Kotlin output",
+    "publicInternetVerified": false,
+    "wrongCertificateRejected": true,
+    "wrongInviteRejected": true,
+    "sixPlayers": true,
+    "duplicateNameRejected": true,
+    "seventhPlayerRejected": true,
+    "battleTargetsSynchronized": true,
+    "cycleTargetReplicated": true,
+    "hostShutdownDisconnectsPeers": true,
+    "raceAndBattle": true,
+    "result": "PASS"
+  },
+  "apk": {
+    "file": "app-release.apk",
+    "size_bytes": 77349456,
+    "sha256": "8fd858fc5081e5c3faf0e5338cbdcddc9ad8c6b3bd52e8e64d01c3c6713ef6d2",
+    "package": "com.hirumisu.carwece",
+    "label": "CarWece",
+    "version": "0.14.0",
+    "code": 23,
+    "abis": [
+      "armeabi-v7a",
+      "arm64-v8a",
+      "x86_64"
+    ],
+    "verified_png_resources": 20,
+    "verified_adaptive_icons": 2,
+    "certificate_sha256": "9e1be273e6871c23013157fad5378ffc4d5da5b222d70f84a995c8cb94ca8d7a"
+  },
+  "visual_qa": "Mesa GLES renders: green reticle before/after cycling; online UI 1280x720 and 800x360",
+  "limitations": [
+    "Public bore.pub service could not be reached from this restricted environment.",
+    "No physical phones or cross-network public test.",
+    "Host must stay online; room closes when host leaves."
+  ]
+}

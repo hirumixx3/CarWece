@@ -1,0 +1,48 @@
+{
+  "noTemporaryEntries": true,
+  "noMp3InApk": true,
+  "libraries": [
+    {
+      "name": "lib/arm64-v8a/libapp.so",
+      "bytes": 5964720,
+      "headerTablesValid": true,
+      "sha256": "85b2b4e6576c2a81c882015425b4864c3c9adc15d112e4edd91cd881cc4e99d5",
+      "engineUnchanged": null
+    },
+    {
+      "name": "lib/arm64-v8a/libflutter.so",
+      "bytes": 11037032,
+      "headerTablesValid": true,
+      "sha256": "ee37eb8be8e01a0d840558f75e0a09c4ca135d721c2ca6145c050e4f89785129",
+      "engineUnchanged": true
+    },
+    {
+      "name": "lib/armeabi-v7a/libapp.so",
+      "bytes": 6750812,
+      "headerTablesValid": true,
+      "sha256": "105769df32c3484af3e4174a301028fc527217f34c916342d01a3f09813366f8",
+      "engineUnchanged": null
+    },
+    {
+      "name": "lib/armeabi-v7a/libflutter.so",
+      "bytes": 7926848,
+      "headerTablesValid": true,
+      "sha256": "3b01cb3751800beb7b64c09a572216c6d36707ccea927f39f29ce475a0e176c5",
+      "engineUnchanged": true
+    },
+    {
+      "name": "lib/x86_64/libapp.so",
+      "bytes": 6161328,
+      "headerTablesValid": true,
+      "sha256": "f2fe853029b686f0ff1064a97493df96b5b3fd7427cfa2fc37c0e7c82237085c",
+      "engineUnchanged": null
+    },
+    {
+      "name": "lib/x86_64/libflutter.so",
+      "bytes": 12143760,
+      "headerTablesValid": true,
+      "sha256": "94a457f1f2de2ed4831460f9426a8e7bd3424b9a398564415bbf14349afc29e4",
+      "engineUnchanged": true
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "source": "icon_source_v0131.png",
+  "sourceSha256": "d2a32fa95fc553b906f98b7e29276533c9131092eccfc0e4a1037927b169f026",
+  "sourceSize": [
+    1649,
+    1649
+  ],
+  "artworkBounds": [
+    362,
+    362,
+    1287,
+    1287
+  ],
+  "adaptiveCanvas": [
+    1024,
+    1024
+  ],
+  "artworkSize": [
+    640,
+    640
+  ],
+  "artworkOffset": [
+    192,
+    192
+  ],
+  "foregroundSha256": "b0b907e02dcdf2583c386de028567d718346adb98970016bd1b852c9f68013bf",
+  "backgroundSha256": "706f05bd154a5cee7792bbfe49cd54f88f6171a7eb8c75686fb2c0da14deff91",
+  "conversion": "Trim external transparent padding, scale proportionally, center in adaptive viewport. No generated replacement artwork."
+}

@@ -1,0 +1,9 @@
+APK BUILD NOT STARTED: flutter executable is not installed in this environment.
+Android SDK / sdkmanager: None
+Official SDK download connectivity probe exit: 6
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0curl: (6) Could not resolve host: storage.googleapis.com
+
+No APK was generated, signed, installed or tested in this delivery.

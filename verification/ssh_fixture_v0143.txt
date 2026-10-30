@@ -1,0 +1,51 @@
+SSH/TLS relay fixture ready
+SSH control session closed: 1
+SSH control session closed: 2
+Socket exception: Connection reset by peer (104)
+SSH control session closed: 3
+SSH control session closed: 4
+SSH control session closed: 5
+Socket exception: Connection reset by peer (104)
+SSH control session closed: 6
+Socket exception: Connection reset by peer (104)
+SSH control session closed: 7
+Socket exception: Connection reset by peer (104)
+SSH control session closed: 8
+Socket exception: Connection reset by peer (104)
+SSH control session closed: 9
+Exception (server): Error reading SSH protocol banner
+Traceback (most recent call last):
+  File "/workspace/scratch/f581f54b4d3f/relay_research/python/paramiko/transport.py", line 2227, in _check_banner
+    buf = self.packetizer.readline(timeout)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/f581f54b4d3f/relay_research/python/paramiko/packet.py", line 395, in readline
+    buf += self._read_timeout(timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/f581f54b4d3f/relay_research/python/paramiko/packet.py", line 665, in _read_timeout
+    raise EOFError()
+EOFError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/scratch/f581f54b4d3f/relay_research/python/paramiko/transport.py", line 2043, in run
+    self._check_banner()
+  File "/workspace/scratch/f581f54b4d3f/relay_research/python/paramiko/transport.py", line 2231, in _check_banner
+    raise SSHException(
+paramiko.ssh_exception.SSHException: Error reading SSH protocol banner
+
+SSH control session closed: 10
+SSH control session closed: 11
+SSH control session closed: 12
+SSH control session closed: 13
+SSH control session closed: 14
+SSH control session closed: 15
+SSH control session closed: 16
+SSH control session closed: 17
+SSH control session closed: 18
+SSH control session closed: 19
+SSH control session closed: 20
+Socket exception: Connection reset by peer (104)
+SSH control session closed: 21
+Socket exception: Connection reset by peer (104)
+SSH control session closed: 22

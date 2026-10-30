@@ -1,0 +1,808 @@
+--- a/.github/workflows/signed-apk.yml
++++ b/.github/workflows/signed-apk.yml
+@@ -9,7 +9,7 @@
+         default: '1.0.0'
+         type: string
+       version_code:
+-        description: Código de versão (incremente a cada publicação)
++        description: Código de versão (maior que o último já publicado)
+         required: true
+         default: '7'
+         type: string
+@@ -22,6 +22,8 @@
+     runs-on: ubuntu-24.04
+     timeout-minutes: 60
+     env:
++      VERSION_NAME: ${{ inputs.version_name }}
++      VERSION_CODE: ${{ inputs.version_code }}
+       ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+       ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+       ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+@@ -29,6 +31,17 @@
+       - uses: actions/checkout@v4
+         with:
+           persist-credentials: false
++      - name: Validar versão
++        shell: bash
++        run: |
++          python3 - <<'PY'
++          import os, re
++          name, code = os.environ['VERSION_NAME'], os.environ['VERSION_CODE']
++          if not re.fullmatch(r'[0-9]+\.[0-9]+\.[0-9]+(?:[-+][A-Za-z0-9.-]+)?', name):
++              raise SystemExit('version_name inválida: use 1.0.0, por exemplo.')
++          if not re.fullmatch(r'[0-9]{1,10}', code) or not 1 <= int(code) <= 2100000000:
++              raise SystemExit('version_code deve ser um inteiro entre 1 e 2100000000.')
++          PY
+       - uses: actions/setup-java@v4
+         with:
+           distribution: temurin
+@@ -42,35 +55,39 @@
+       - name: Preparar Android SDK
+         shell: bash
+         run: |
+-          yes | sdkmanager --licenses >/dev/null || true
++          sdkmanager --licenses < <(yes) >/dev/null
+           sdkmanager 'platforms;android-36' 'build-tools;35.0.0' 'ndk;27.0.12077973'
+           chmod +x android/gradlew
+       - name: Restaurar chave privada apenas no runner
+         env:
+           ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+         run: python3 tools/prepare_github_signing.py --directory "$RUNNER_TEMP/carwece-signing"
+-      - name: Analisar e testar
++      - name: Analisar e testar Flutter
+         run: |
+           flutter pub get
+           flutter analyze
+           flutter test
++      - name: Testar playlists e ciclo de vida nativos
++        working-directory: android
++        run: ./gradlew :app:testReleaseUnitTest --tests com.hirumisu.carwece.MusicDirectorTest --no-daemon --stacktrace
+       - name: Compilar APK release assinado
+-        env:
+-          VERSION_NAME: ${{ inputs.version_name }}
+-          VERSION_CODE: ${{ inputs.version_code }}
+-        run: |
+-          case "$VERSION_CODE" in ''|*[!0-9]*) echo 'version_code inválido'; exit 1;; esac
+-          flutter build apk --release --build-name="$VERSION_NAME" --build-number="$VERSION_CODE"
+-      - name: Verificar assinatura e ZIP alignment
++        run: >-
++          flutter build apk --release
++          --build-name="$VERSION_NAME"
++          --build-number="$VERSION_CODE"
++          --dart-define="CARWECE_VERSION_NAME=$VERSION_NAME"
++      - name: Verificar assinatura, músicas e alinhamento
+         shell: bash
+         run: |
+           APK=build/app/outputs/flutter-apk/app-release.apk
+           BUILD_TOOLS="$ANDROID_HOME/build-tools/35.0.0"
+           "$BUILD_TOOLS/apksigner" verify --verbose --print-certs "$APK" | tee "$RUNNER_TEMP/apk-signature.txt"
++          python3 tools/check_apk_signature.py "$RUNNER_TEMP/apk-signature.txt"
+           "$BUILD_TOOLS/zipalign" -c -P 16 -v 4 "$APK"
+           python3 tools/check_apk_music.py "$APK"
+           mkdir -p dist
+-          cp "$APK" dist/CarWece-${{ inputs.version_name }}-${{ inputs.version_code }}-signed.apk
++          cp "$APK" "dist/CarWece-${VERSION_NAME}-${VERSION_CODE}-signed.apk"
++          cp "$RUNNER_TEMP/apk-signature.txt" dist/
+           (cd dist && sha256sum *.apk > SHA256SUMS.txt)
+       - name: Disponibilizar APK
+         uses: actions/upload-artifact@v4
+--- a/GUIA_APK_MUSICAS.md
++++ b/GUIA_APK_MUSICAS.md
+@@ -1,26 +1,63 @@
+-# CarWece — trilhas originais e APK assinado
++# CarWece — músicas originais e menu aleatório
+ 
+-Este código substitui as 20 músicas antigas por **25 faixas originais** do pacote Game_Musics.zip: 5 no menu, 15 nas corridas e 5 no modo batalha. Cada cena tem sua playlist independente; as músicas avançam automaticamente, com aleatório ou ordem sequencial e mantendo o áudio dos efeitos do jogo.
++## Alteração desta revisão
+ 
+-## Gerar APK no GitHub
++O menu usa as cinco músicas originais em uma fila embaralhada independente da opção de aleatório de corrida/batalha. O sorteio acontece na abertura do aplicativo, ao reabrir o aplicativo em uma tela de menu e a cada retorno real ao menu principal. Também ocorre ao sair de corrida/batalha para uma tela de menu. Navegar do menu principal para suas opções mantém a faixa; voltar ao menu principal escolhe a próxima.
+ 
+-1. Envie os arquivos deste projeto à raiz de um repositório GitHub (inclusive `.github/workflows/signed-apk.yml`). **Não envie o JKS nem o .b64 ao GitHub.**
+-2. Vá a **Settings > Secrets and variables > Actions** e defina: `ANDROID_KEYSTORE_BASE64` (conteúdo do arquivo `hirumi-upload.jks.b64` do kit), `ANDROID_KEYSTORE_PASSWORD` (`hirumi`), `ANDROID_KEY_PASSWORD` (`hirumi`) e `ANDROID_KEY_ALIAS` (`hirumi`).
+-3. Em **Actions > CarWece - APK assinado > Run workflow**, escolha `version_name` e `version_code` (use um código maior que o último já publicado).
+-4. Após o job concluir, baixe o artifact **CarWece-APK-assinado**. Inclui APK release assinado e hash SHA-256.
++As atualizações de animação, volume e áudio do menu não reiniciam a música. Dentro da mesma execução, a fila evita repetição imediata e percorre as cinco faixas antes de reiniciar o ciclo, salvo seleção manual/falha de reprodução. Encerrar completamente o processo inicia um novo sorteio; não há histórico persistente entre processos.
+ 
+-Para criar bundle Play Store, use o workflow original `CarWece - AAB assinado` com os mesmos Secrets.
++Corridas continuam com 15 faixas próprias e batalhas com 5. Pausa manual e volume são respeitados. Voltar do segundo plano durante corrida/batalha mantém a faixa e sua posição. Perda momentânea de foco de áudio não é tratada como uma nova entrada no menu.
++
++Também foram corrigidos o título da tela de seleção de músicas, referências a músicas antigas nos testes, o controle de aleatório da batalha que enviava a cena errada e efeitos de clique que podiam trocar indevidamente a playlist para menu.
++
++## Estado desta entrega
++
++**Este pacote é código-fonte, não um APK.**
++
++- 32 testes do controlador Kotlin passaram em execução isolada na JVM, com adaptador de asserções e compilação do código de produção sem alterações.
++- Os 25 arquivos musicais foram conferidos contra seus tamanhos e hashes SHA-256.
++- Flutter analyze, testes Flutter, build Android e execução em aparelho não foram executados nesta revisão: o ambiente não possui Flutter/Android SDK e falhou ao tentar acessar os servidores de download.
++- O workflow foi atualizado, mas não foi executado no GitHub nesta entrega.
++- O relatório atual está em `verification/menu_random/`. Relatórios antigos nas demais pastas são históricos, não comprovantes desta revisão.
++
++## Gerar APK assinado no GitHub
++
++Coloque o conteúdo do projeto na raiz do repositório, incluindo a pasta oculta `.github`.
++
++Em **Settings > Secrets and variables > Actions**, cadastre:
++
++| Secret | Conteúdo |
++|---|---|
++| `ANDROID_KEYSTORE_BASE64` | Conteúdo do `.jks.b64` do kit privado |
++| `ANDROID_KEYSTORE_PASSWORD` | Senha do keystore enviada separadamente |
++| `ANDROID_KEY_PASSWORD` | Senha da chave enviada separadamente |
++| `ANDROID_KEY_ALIAS` | Alias `hirumi` |
++
++Não publique JKS, Base64 ou senhas no repositório. O código contém somente o certificado público.
++
++Abra **Actions > CarWece - APK assinado > Run workflow**. Mantenha `version_name=1.0.0` ou escolha outra versão. Escolha um `version_code` superior ao último já publicado; o padrão 7 não é prova de que esse código está disponível na sua conta.
++
++O workflow analisa/testa o Flutter, executa os testes nativos de música, compila o APK release, confere o certificado, o alinhamento e os 25 arquivos de música. Se todos os passos passarem, o APK estará no artefato **CarWece-APK-assinado**, acompanhado do SHA-256 e do relatório de assinatura. A chave temporária é removida ao terminar.
++
++O workflow AAB anterior continua disponível para Play Store e não foi executado nesta revisão.
+ 
+ ## Build local
+ 
+-Instale Flutter 3.35.7, Java 17, Android SDK API 36 e NDK 27.0.12077973; aponte `ANDROID_KEYSTORE_PATH` para o arquivo JKS privado e exporte `ANDROID_KEYSTORE_PASSWORD`, `ANDROID_KEY_PASSWORD` e `ANDROID_KEY_ALIAS`.
++Requisitos do projeto: Flutter 3.35.7, Java 17, Android SDK API 36, build-tools 35.0.0 e NDK 27.0.12077973. Configure `ANDROID_KEYSTORE_PATH` com o caminho absoluto do JKS e as variáveis de assinatura indicadas acima (Base64 não é necessário no build local).
+ 
+ ```bash
+ flutter pub get
+ flutter analyze
+ flutter test
+-flutter build apk --release --build-name=1.0.0 --build-number=7
++(cd android && ./gradlew :app:testReleaseUnitTest --tests com.hirumisu.carwece.MusicDirectorTest)
++flutter build apk --release --build-name=1.0.0 --build-number=7 --dart-define=CARWECE_VERSION_NAME=1.0.0
+ python3 tools/check_apk_music.py build/app/outputs/flutter-apk/app-release.apk
+ ```
+ 
+-O ZIP de código-fonte **não contém sua chave privada**, de propósito. A senha e o alias foram fornecidos apenas para configuração local/GitHub Secrets.
++Para repetir somente a verificação isolada do controlador com Java/Kotlin instalados:
++
++```bash
++python3 tools/run_music_tests_offline.py
++```
++
++Essa verificação isolada não substitui os testes Flutter, a compilação Android ou um teste de reprodução no celular.
+--- a/README_GITHUB_PLAYSTORE.md
++++ b/README_GITHUB_PLAYSTORE.md
+@@ -6,8 +6,8 @@
+ ## Arquivos e assinatura
+ 
+ Os AABs 1 a 6 exibem a versão 1.0.0 e têm códigos diferentes. Todos usam a
+-mesma chave RSA de 4096 bits, com alias **hirumi**. A senha do keystore e a senha
+-da chave são **hirumi**, conforme solicitado. Guarde o JKS e uma cópia de backup.
++mesma chave RSA de 4096 bits, com alias **hirumi**. Use as senhas fornecidas no kit privado. Não grave senhas no repositório.
++Guarde o JKS e uma cópia de backup.
+ 
+ No código-fonte há somente `android/hirumi-upload-certificate.pem`, que é público.
+ O JKS e seu Base64 são privados e foram entregues no kit de assinatura separado.
+@@ -22,8 +22,8 @@
+ | Secret | Valor |
+ | --- | --- |
+ | `ANDROID_KEYSTORE_BASE64` | Conteúdo inteiro de `hirumi-upload.jks.b64`, no kit privado |
+-| `ANDROID_KEYSTORE_PASSWORD` | `hirumi` |
+-| `ANDROID_KEY_PASSWORD` | `hirumi` |
++| `ANDROID_KEYSTORE_PASSWORD` | Senha do keystore, fornecida separadamente |
++| `ANDROID_KEY_PASSWORD` | Senha da chave, fornecida separadamente |
+ | `ANDROID_KEY_ALIAS` | `hirumi` |
+ 
+ 3. Abra Actions > CarWece - AAB assinado > Run workflow.
+@@ -58,8 +58,8 @@
+ 
+ ```sh
+ export ANDROID_KEYSTORE_PATH='/caminho/absoluto/hirumi-upload.jks'
+-export ANDROID_KEYSTORE_PASSWORD='hirumi'
+-export ANDROID_KEY_PASSWORD='hirumi'
++export ANDROID_KEYSTORE_PASSWORD='SUA_SENHA_DO_KEYSTORE'
++export ANDROID_KEY_PASSWORD='SUA_SENHA_DA_CHAVE'
+ export ANDROID_KEY_ALIAS='hirumi'
+ flutter pub get
+ python3 tools/build_play_bundles.py --version-name 1.0.0 --first-code 1 --count 6
+--- a/android/app/src/main/kotlin/com/hirumisu/carwece/MusicDirector.kt
++++ b/android/app/src/main/kotlin/com/hirumisu/carwece/MusicDirector.kt
+@@ -52,7 +52,9 @@
+     private val lastPlayed = mutableMapOf<String, String>()
+     private fun activeIds() = playlists.getValue(scene)
+     private fun deck() = decks.getValue(scene)
+-    private fun chooseNext() = deck().next(lastPlayed[scene], shuffle, failed)
++    // Menu music is always shuffled, independently of the race/battle preference.
++    private fun sceneShuffle() = scene == "menu" || shuffle
++    private fun chooseNext() = deck().next(lastPlayed[scene], sceneShuffle(), failed)
+     private val failed = mutableSetOf<String>()
+     private var generation = 0
+     private var ready = false
+@@ -95,6 +97,13 @@
+         scene = next; userPaused = false; failed.clear(); error = null
+         choose(chooseNext())
+     }
++    /** One explicit return to the main menu, never a periodic audio update. */
++    fun enterMenu() {
++        if (closed) return
++        if (scene != "menu") { setScene("menu"); return }
++        userPaused = false; failed.clear(); error = null
++        choose(chooseNext())
++    }
+     fun setVolume(value: Float) {
+         if (closed) return
+         val next = if (value.isFinite()) value.coerceIn(0f, 1f) else .35f
+@@ -108,13 +117,22 @@
+     }
+     fun setActive(value: Boolean) {
+         if (closed) return
++        val returningToMenu = value && !active && scene == "menu" && currentId != null
+         active = value
+-        if (value) ensureLoaded()
++        if (returningToMenu) {
++            // Opening the app again while in a menu starts a fresh draw.
++            // Keep an explicit user pause and leave race/battle resume untouched.
++            failed.clear(); error = null
++            choose(chooseNext())
++        } else if (value) ensureLoaded()
+         reconcile()
+     }
+     fun setShuffle(value: Boolean) {
+         if (closed || shuffle == value) return
+-        shuffle = value; decks.values.forEach { it.clear() }; emit()
++        shuffle = value
++        // Do not reset the independent menu shuffle bag when changing this setting.
++        decks.filterKeys { it != "menu" }.values.forEach { it.clear() }
++        emit()
+     }
+     fun select(id: String) {
+         if (closed || id !in activeIds()) return
+@@ -125,7 +143,7 @@
+         if (closed) return
+         userPaused = false
+         if (failed.containsAll(activeIds())) failed.clear()
+-        choose(deck().next(currentId, shuffle, failed))
++        choose(deck().next(currentId, sceneShuffle(), failed))
+     }
+     fun setUserPaused(value: Boolean) {
+         if (closed) return
+@@ -145,13 +163,15 @@
+         if (closed || !active || loaded || error != null) return
+         if (currentId == null) currentId = chooseNext()
+         val track = catalog[currentId] ?: return
++        // Also remember the initial draw (not just tracks selected by choose()).
++        lastPlayed[scene] = track.id
+         loaded = true; ready = false; val token = ++generation
+         try {
+             backend.load(track, false, startMs, {
+                 if (!closed && token == generation) { ready = true; startMs = 0; reconcile() }
+             }, {
+                 if (!closed && token == generation) {
+-                    choose(deck().next(currentId, shuffle, failed))
++                    choose(deck().next(currentId, sceneShuffle(), failed))
+                 }
+             }, { fail(token) })
+         } catch (_: Exception) { fail(token) }
+@@ -159,7 +179,7 @@
+     private fun fail(token: Int) {
+         if (closed || token != generation) return
+         currentId?.let { failed.add(it) }
+-        val next = deck().next(currentId, shuffle, failed)
++        val next = deck().next(currentId, sceneShuffle(), failed)
+         if (next != null) { choose(next); return }
+         generation++; backend.release(); loaded = false; ready = false; playing = false
+         error = "Não foi possível iniciar a trilha. Toque em PULAR FAIXA para tentar novamente."
+--- a/android/app/src/main/kotlin/com/hirumisu/carwece/RushMusic.kt
++++ b/android/app/src/main/kotlin/com/hirumisu/carwece/RushMusic.kt
+@@ -13,7 +13,7 @@
+ import android.os.Looper
+ import org.json.JSONObject
+ 
+-/** Only one MP3 decoder exists, independently of the lightweight engine/SFX mixer. */
++/** Only one music decoder exists, independently of the lightweight engine/SFX mixer. */
+ internal class AndroidMusicBackend(private val context: Context) : MusicBackend {
+     private var player: MediaPlayer? = null
+     private var prepared = false
+@@ -157,7 +157,8 @@
+         if (closed) return
+         director.setVolume(((args["music"] as? Number)?.toFloat() ?: .35f))
+         director.setShuffle(args["shuffle"] != false)
+-        director.setScene(args["scene"] as? String ?: "menu")
++        if (args["enterMenu"] == true) director.enterMenu()
++        else director.setScene(args["scene"] as? String ?: "menu")
+     }
+     fun command(action: String, args: Map<*, *>): Map<String, Any?> {
+         if (action != "status") {
+--- a/android/app/src/test/kotlin/com/hirumisu/carwece/MusicDirectorTest.kt
++++ b/android/app/src/test/kotlin/com/hirumisu/carwece/MusicDirectorTest.kt
+@@ -33,20 +33,20 @@
+     private fun active(d: MusicDirector) { d.setActive(true); d.setFocus(true) }
+     private fun racing(d: MusicDirector, f: Fake) { d.setScene("race"); active(d); f.loads.last().ready() }
+ 
+-    @Test fun menuLoopsTheExactMenuSongAndRepeatedUpdatesDoNotRestartIt() {
++    @Test fun menuUsesOnlyMenuTracksAndRepeatedUpdatesDoNotRestartIt() {
+         val f=Fake();val d=director(f);active(d);f.loads.last().ready()
+         assertTrue(d.currentId in menus);assertFalse(f.loads.single().loop);assertEquals(1,f.plays)
+         repeat(100){d.setScene("menu");d.setVolume(.35f);d.setShuffle(true)}
+         assertEquals(1,f.loads.size);assertEquals(1,f.plays)
+     }
+-    @Test fun raceUsesOnlyTheOtherNineteenSongsAndMenuRestartsOnlyOnReturn() {
++    @Test fun raceUsesOnlyRaceTracksAndMenuChangesOnlyOnReturn() {
+         val f=Fake();val d=director(f);active(d);val old=f.loads.last();d.setScene("race");f.loads.last().ready()
+         assertTrue(d.currentId in ids);assertFalse(f.loads.last().loop)
+         old.ready();assertEquals(1,f.plays)
+         d.setScene("menu");f.loads.last().ready();assertTrue(d.currentId in menus);assertFalse(f.loads.last().loop)
+         repeat(20){d.setScene("menu")};assertEquals(3,f.loads.size)
+     }
+-    @Test fun randomDeckCoversAllNineteenBeforeRepeatingAndDoesNotRepeatAtTheBoundary() {
++    @Test fun randomDeckCoversAllRaceTracksBeforeRepeatingAndDoesNotRepeatAtTheBoundary() {
+         val f=Fake();val d=director(f);racing(d,f);val played=mutableListOf<String>()
+         repeat(ids.size * 3){played.add(d.currentId!!);val c=f.loads.last();c.complete();f.loads.last().ready()}
+         for(i in 0 until ids.size * 3 step ids.size)assertEquals(ids.toSet(),played.subList(i,i+ids.size).toSet())
+@@ -94,7 +94,9 @@
+     }
+     @Test fun noPlaybackOccursWithoutFocusOrInTheBackgroundEvenIfPreparationFinishes() {
+         val f=Fake();val d=director(f);d.setActive(true);f.loads.last().ready();assertEquals(0,f.plays)
+-        d.setActive(false);d.setFocus(true);assertEquals(0,f.plays);d.setActive(true);assertEquals(1,f.plays)
++        d.setActive(false);d.setFocus(true);assertEquals(0,f.plays)
++        d.setActive(true);assertEquals(0,f.plays) // The new menu song must prepare first.
++        f.loads.last().ready();assertEquals(1,f.plays)
+     }
+     @Test fun onStopReleasesTheDecoderAndResumeSeeksToTheSavedPosition() {
+         val f=Fake();val d=director(f);racing(d,f);val old=f.loads.last();val id=d.currentId
+@@ -109,7 +111,7 @@
+         d.close();val n=f.loads.size;current.ready();current.complete();current.fail();d.next();d.setActive(true)
+         assertEquals(n,f.loads.size);assertEquals(0,f.alive)
+     }
+-    @Test fun failedSongsAreSkippedAndAnEntirelyFailedLibraryStopsAfterNineteenAttempts() {
++    @Test fun failedSongsAreSkippedAndAnEntirelyFailedLibraryStopsAfterAllRaceAttempts() {
+         val f=Fake();f.failLoad=true;val d=director(f);d.setScene("race");active(d)
+         assertEquals(ids.size,f.loads.size);assertEquals("error",d.state()["status"]);assertEquals(0,f.alive)
+         repeat(100){d.setScene("race")};assertEquals(ids.size,f.loads.size)
+@@ -154,4 +156,142 @@
+         d.setScene("menu"); f.loads.last().ready(); assertTrue(d.currentId in menus)
+     }
+ 
++
++    @Test fun coldStartDrawsFromAllFiveMenuSongsEvenWhenRaceShuffleIsOff() {
++        val firstSongs = mutableSetOf<String>()
++        repeat(100) { seed ->
++            val f = Fake()
++            val d = MusicDirector(tracks, menus, ids, battles, f, Random(seed))
++            d.setShuffle(false); active(d)
++            assertTrue(d.currentId in menus)
++            firstSongs.add(d.currentId!!)
++            d.close()
++        }
++        assertEquals(menus.toSet(), firstSongs)
++    }
++
++    @Test fun eachExplicitMenuEntryUsesTheIndependentShuffleBagWithoutImmediateRepeats() {
++        val f = Fake(); val d = director(f)
++        d.setShuffle(false); active(d); f.loads.last().ready()
++        val played = mutableListOf<String>()
++        repeat(menus.size * 4) {
++            played.add(d.currentId!!)
++            val before = f.loads.size
++            d.enterMenu(); f.loads.last().ready()
++            assertEquals(before + 1, f.loads.size)
++        }
++        for (i in played.indices step menus.size)
++            assertEquals(menus.toSet(), played.subList(i, i + menus.size).toSet())
++        for (i in 1 until played.size) assertNotEquals(played[i - 1], played[i])
++        assertFalse(d.shuffle) // Race/battle preference was not overwritten.
++        assertEquals(1, f.peak)
++    }
++
++    @Test fun returningToTheAppInMenuDrawsANewSongAtTheBeginning() {
++        val f = Fake(); val d = director(f); active(d); f.loads.last().ready()
++        val old = f.loads.last(); val id = d.currentId
++        d.setActive(false); d.suspend(); d.setActive(true)
++        assertTrue(d.currentId in menus); assertNotEquals(id, d.currentId)
++        assertEquals(0, f.loads.last().seek)
++        val n = f.loads.size
++        old.ready(); old.complete(); old.fail()
++        assertEquals(n, f.loads.size)
++        f.loads.last().ready(); assertEquals("playing", d.state()["status"])
++        assertEquals(1, f.peak)
++    }
++
++    @Test fun repeatedResumeOrMenuUpdatesNeverRestartTheCurrentMenuSong() {
++        val f = Fake(); val d = director(f); active(d); f.loads.last().ready()
++        val id = d.currentId
++        repeat(100) { d.setActive(true); d.setScene("menu"); d.setVolume(.35f) }
++        assertEquals(1, f.loads.size); assertEquals(id, d.currentId)
++        d.enterMenu(); f.loads.last().ready()
++        val nextId = d.currentId
++        repeat(100) { d.setScene("menu"); d.setActive(true) }
++        assertEquals(2, f.loads.size); assertEquals(nextId, d.currentId)
++    }
++
++    @Test fun transientAudioFocusLossDoesNotCountAsANewMenuVisit() {
++        val f = Fake(); val d = director(f); active(d); f.loads.last().ready()
++        val id = d.currentId
++        d.setFocus(false); d.setFocus(true)
++        assertEquals(1, f.loads.size); assertEquals(id, d.currentId)
++        assertEquals("playing", d.state()["status"])
++    }
++
++    @Test fun anExplicitUserPauseIsStillRespectedAfterReopeningTheMenu() {
++        val f = Fake(); val d = director(f); active(d); f.loads.last().ready()
++        d.setUserPaused(true)
++        val plays = f.plays
++        d.setActive(false); d.suspend(); d.setActive(true); f.loads.last().ready()
++        assertTrue(d.userPaused); assertEquals(plays, f.plays)
++        assertEquals("paused", d.state()["status"])
++    }
++
++    @Test fun raceShuffleChangesDoNotResetTheMenuBag() {
++        val f = Fake(); val d = director(f); active(d); f.loads.last().ready()
++        val played = mutableListOf<String>()
++        repeat(menus.size * 3) { i ->
++            played.add(d.currentId!!)
++            d.setShuffle(i % 2 == 0)
++            d.enterMenu(); f.loads.last().ready()
++        }
++        for (i in played.indices step menus.size)
++            assertEquals(menus.toSet(), played.subList(i, i + menus.size).toSet())
++    }
++
++    @Test fun battleResumeRetainsTheTrackAndSavedPositionInsteadOfDrawingMenuMusic() {
++        val f = Fake(); val d = director(f)
++        d.setScene("battle"); active(d); f.loads.last().ready()
++        val id = d.currentId
++        d.setActive(false); d.suspend(); d.setActive(true)
++        assertEquals(id, d.currentId); assertEquals(12345, f.loads.last().seek)
++        assertTrue(d.currentId in battles)
++    }
++
++    @Test fun explicitMenuEntryFromEitherGameplaySceneLoadsExactlyOnce() {
++        for (scene in listOf("race", "battle")) {
++            val f = Fake(); val d = director(f)
++            d.setScene(scene); active(d); f.loads.last().ready()
++            val before = f.loads.size
++            d.enterMenu(); f.loads.last().ready()
++            assertEquals(before + 1, f.loads.size)
++            assertTrue(d.currentId in menus); assertEquals("menu", d.scene)
++            repeat(20) { d.setScene("menu") }
++            assertEquals(before + 1, f.loads.size)
++        }
++    }
++
++    @Test fun closingTheDirectorAlsoDisablesExplicitMenuEntries() {
++        val f = Fake(); val d = director(f); active(d)
++        d.close(); val n = f.loads.size
++        d.enterMenu(); d.setActive(true)
++        assertEquals(n, f.loads.size); assertEquals(0, f.alive)
++    }
++
++    @Test fun aNewMenuVisitRetriesFailedMenuMusicWithoutLeakingOtherCategories() {
++        val f = Fake(); val d = director(f)
++        f.failLoad = true; active(d)
++        assertEquals("error", d.state()["status"])
++        assertTrue(f.loads.all { it.id in menus })
++        f.failLoad = false; d.enterMenu(); f.loads.last().ready()
++        assertEquals("playing", d.state()["status"])
++        assertTrue(d.currentId in menus)
++    }
++
++    @Test fun menuCompletionShufflesEvenWhenRacePlaybackIsSequential() {
++        val firstSongs = mutableSetOf<String>()
++        repeat(30) { seed ->
++            val f = Fake()
++            val d = MusicDirector(tracks, menus, ids, battles, f, Random(seed))
++            d.setShuffle(false); active(d); f.loads.last().ready()
++            d.select(menus.first()); f.loads.last().ready()
++            f.loads.last().complete()
++            assertTrue(d.currentId in menus); assertNotEquals(menus.first(), d.currentId)
++            firstSongs.add(d.currentId!!)
++            d.close()
++        }
++        assertTrue(firstSongs.size > 1)
++    }
++
+ }
+--- a/lib/main.dart
++++ b/lib/main.dart
+@@ -165,7 +165,12 @@
+   }
+ 
+   void go(String target) {
+-    store.tap();
++    if (target == 'home' && page != 'home') {
++      // A real navigation event: redraw once, not on menu animation/audio ticks.
++      unawaited(store.audio(event: 'tap', enterMenu: true));
++    } else {
++      store.tap();
++    }
+     setState(() {
+       page = target;
+       if (target == 'garage') garageIndex = store.selectedCar;
+--- a/lib/music.dart
++++ b/lib/music.dart
+@@ -120,7 +120,7 @@
+   Future<void> toggle() =>
+       _command(playing ? 'pause' : 'play', {'scene': scene});
+   Future<void> setShuffle(bool enabled) =>
+-      _command('shuffle', {'enabled': enabled, 'scene': 'race'});
++      _command('shuffle', {'enabled': enabled, 'scene': scene});
+   @override
+   void dispose() {
+     _disposed = true;
+--- a/lib/platform.dart
++++ b/lib/platform.dart
+@@ -65,6 +65,7 @@
+   static const channel = MethodChannel('com.hirumisu.carwece/native');
+   final settings = GameSettings();
+   SoundtrackController? _soundtrack;
++  String _audioScene = 'menu';
+   SoundtrackController get soundtrack => _soundtrack ??= SoundtrackController();
+   @override
+   void dispose() {
+@@ -234,12 +235,16 @@
+     bool turbo = false,
+     String? event,
+     String? scene,
++    bool enterMenu = false,
+   }) async {
++    final nextScene = enterMenu ? 'menu' : (scene ?? (racing ? 'race' : 'menu'));
++    _audioScene = nextScene;
+     try {
+       _soundtrack ??= SoundtrackController();
+       await channel.invokeMethod('audio', {
+         'music': settings.music,
+-        'scene': scene ?? (racing ? 'race' : 'menu'),
++        'scene': nextScene,
++        if (enterMenu) 'enterMenu': true,
+         'shuffle': settings.musicShuffle,
+         'effects': settings.effects,
+         'speed': speed,
+@@ -255,7 +260,8 @@
+   }
+ 
+   void tap() {
+-    unawaited(audio(event: 'tap'));
++    // Button sound effects must not switch a paused race or battle to menu music.
++    unawaited(audio(event: 'tap', scene: _audioScene));
+   }
+ 
+   void haptic() {
+--- a/lib/ui/music_sheet.dart
++++ b/lib/ui/music_sheet.dart
+@@ -32,7 +32,12 @@
+                     const Icon(Icons.queue_music_rounded, color: cyan),
+                     const SizedBox(width: 10),
+                     Expanded(
+-                      child: Text('player.scene == 'battle' ? 'MÚSICAS DA BATALHA' : 'MÚSICAS DA CORRIDA'', style: display(25)),
++                      child: Text(
++                        player.scene == 'battle'
++                            ? 'MÚSICAS DA BATALHA'
++                            : 'MÚSICAS DA CORRIDA',
++                        style: display(25),
++                      ),
+                     ),
+                     IconButton(
+                       tooltip: 'Fechar músicas',
+--- a/test/music_test.dart
++++ b/test/music_test.dart
+@@ -198,6 +198,40 @@
+       store.dispose();
+     },
+   );
++  test('Menu entry is explicit and is not repeated by normal audio ticks', () async {
++    final store = GameStore();
++    await store.audio(enterMenu: true, event: 'tap');
++    expect(audioCalls.last['scene'], 'menu');
++    expect(audioCalls.last['enterMenu'], isTrue);
++    await store.audio();
++    expect(audioCalls.last.containsKey('enterMenu'), isFalse);
++    store.dispose();
++  });
++
++  test('Button effects keep the current race or battle playlist', () async {
++    final store = GameStore();
++    for (final scene in ['race', 'battle']) {
++      await store.audio(scene: scene);
++      store.tap();
++      await Future<void>.delayed(Duration.zero);
++      expect(audioCalls.last['scene'], scene);
++      expect(audioCalls.last['event'], 'tap');
++      expect(audioCalls.last.containsKey('enterMenu'), isFalse);
++    }
++    store.dispose();
++  });
++
++  test('Shuffle control preserves the active battle scene', () async {
++    state['scene'] = 'battle';
++    state['trackId'] = battleSongs.first.id;
++    final player = SoundtrackController();
++    await player.refresh();
++    await player.setShuffle(false);
++    expect(musicCalls.last.method, 'shuffle');
++    expect(musicCalls.last.arguments, {'enabled': false, 'scene': 'battle'});
++    player.dispose();
++  });
++
+   for (final size in [const Size(1280, 720), const Size(800, 360)]) {
+     testWidgets(
+       'Pause music selection, skip, volume and close keep physics paused at $size',
+@@ -251,7 +285,7 @@
+         expect(state['scene'], 'race');
+         expect(find.text('Burned Track'), findsNothing);
+         final time = race.time, position = race.player.position!;
+-        await tester.tap(find.byKey(const ValueKey('song-attention')));
++        await tester.tap(find.byKey(const ValueKey('song-race_02')));
+         await tester.pump();
+         expect(store.soundtrack.trackId, 'race_02');
+         expect(musicCalls.where((c) => c.method == 'select').last.arguments, {
+@@ -296,16 +330,16 @@
+         await tester.pump();
+         expect(store.soundtrack.playing, isTrue);
+         await tester.scrollUntilVisible(
+-          find.byKey(const ValueKey('song-young_turks_2008')),
++          find.byKey(const ValueKey('song-race_15')),
+           100,
+           scrollable: find.descendant(
+             of: find.byKey(const ValueKey('race-music-list')),
+             matching: find.byType(Scrollable),
+           ),
+         );
+-        await tester.tap(find.byKey(const ValueKey('song-young_turks_2008')));
+-        await tester.pump();
+-        expect(store.soundtrack.trackId, 'young_turks_2008');
++        await tester.tap(find.byKey(const ValueKey('song-race_15')));
++        await tester.pump();
++        expect(store.soundtrack.trackId, 'race_15');
+         await tester.sendKeyDownEvent(LogicalKeyboardKey.arrowUp);
+         await tester.sendKeyUpEvent(LogicalKeyboardKey.arrowUp);
+         await tester.pump(const Duration(seconds: 1));
+--- a/tools/check_apk_music.py
++++ b/tools/check_apk_music.py
+@@ -1,13 +1,39 @@
+ #!/usr/bin/env python3
+-"""Verify the built APK includes only the 25 new categorized tracks."""
+-import json, sys, zipfile
++"""Verify the built APK contains the exact new tracks, playable via openFd."""
++import argparse
++import hashlib
++import json
+ from pathlib import Path
+-catalog = json.loads(Path('assets/music/catalog.json').read_text())
+-assert {x: len(catalog[x]) for x in ('menuIds', 'raceIds', 'battleIds')} == {'menuIds': 5, 'raceIds': 15, 'battleIds': 5}
+-with zipfile.ZipFile(sys.argv[1]) as apk:
+-    entries = {x.filename for x in apk.infolist()}
++import zipfile
++
++
++def main() -> None:
++    parser = argparse.ArgumentParser(description=__doc__)
++    parser.add_argument('apk', type=Path)
++    args = parser.parse_args()
++    root = Path(__file__).resolve().parents[1]
++    catalog_bytes = (root / 'assets/music/catalog.json').read_bytes()
++    catalog = json.loads(catalog_bytes)
++    counts = {key: len(catalog[key]) for key in ('menuIds', 'raceIds', 'battleIds')}
++    if counts != {'menuIds': 5, 'raceIds': 15, 'battleIds': 5}:
++        raise SystemExit(f'Categorias inesperadas: {counts}')
+     prefix = 'assets/flutter_assets/assets/music/'
+-    expected = {prefix + t['file'] for t in catalog['tracks']} | {prefix + 'catalog.json'}
+-    actual = {name for name in entries if name.startswith(prefix)}
+-    assert actual == expected, f'Missing: {expected-actual}; extra: {actual-expected}'
+-print('OK: 25 faixas novas em 3 categorias, sem músicas antigas no APK.')
++    with zipfile.ZipFile(args.apk) as apk:
++        expected = {prefix + track['file'] for track in catalog['tracks']} | {prefix + 'catalog.json'}
++        names = [entry.filename for entry in apk.infolist() if entry.filename.startswith(prefix)]
++        if set(names) != expected or len(names) != len(expected):
++            raise SystemExit('Arquivos de música ausentes, duplicados ou extras no APK.')
++        if apk.read(prefix + 'catalog.json') != catalog_bytes:
++            raise SystemExit('O catálogo no APK difere do código-fonte.')
++        for track in catalog['tracks']:
++            info = apk.getinfo(prefix + track['file'])
++            if info.compress_type != zipfile.ZIP_STORED:
++                raise SystemExit(f"{track['file']}: comprimida no ZIP; openFd exige entrada sem compressão.")
++            data = apk.read(info)
++            if len(data) != track['bytes'] or hashlib.sha256(data).hexdigest() != track['sha256']:
++                raise SystemExit(f"{track['file']}: tamanho ou SHA-256 diferente do catálogo.")
++    print('OK: 25/25 faixas novas, categorias corretas, hashes íntegros e sem compressão ZIP.')
++
++
++if __name__ == '__main__':
++    main()
+--- /dev/null
++++ b/tools/check_apk_signature.py
+@@ -0,0 +1,25 @@
++#!/usr/bin/env python3
++"""Compare apksigner's verified certificate digest to the project's public PEM."""
++import argparse
++import hashlib
++from pathlib import Path
++import re
++import ssl
++
++
++def main() -> None:
++    parser = argparse.ArgumentParser(description=__doc__)
++    parser.add_argument('apksigner_log', type=Path)
++    args = parser.parse_args()
++    root = Path(__file__).resolve().parents[1]
++    pem = (root / 'android/hirumi-upload-certificate.pem').read_text(encoding='ascii')
++    expected = hashlib.sha256(ssl.PEM_cert_to_DER_cert(pem)).hexdigest()
++    text = args.apksigner_log.read_text(encoding='utf-8')
++    digests = re.findall(r'^Signer #[0-9]+ certificate SHA-256 digest:\s*([a-fA-F0-9]{64})\s*$', text, re.MULTILINE)
++    if len(digests) != 1 or digests[0].lower() != expected:
++        raise SystemExit('O APK não usa exclusivamente o certificado público esperado do projeto.')
++    print('OK: certificado de assinatura corresponde à chave pública do projeto.')
++
++
++if __name__ == '__main__':
++    main()
+--- /dev/null
++++ b/tools/run_music_tests_offline.py
+@@ -0,0 +1,74 @@
++#!/usr/bin/env python3
++"""Run the real MusicDirector unit-test methods using Kotlin/JVM without Android.
++
++Requires Java and kotlinc on PATH (or KOTLINC). A small assertion adapter replaces
++only the JUnit dependency in a temporary copy of the tests. Production source is
++compiled unchanged. This is not Flutter testing, an Android build or device QA.
++The normal JUnit tests remain intact for Gradle/GitHub Actions.
++"""
++import os
++from pathlib import Path
++import re
++import shutil
++import subprocess
++import tempfile
++
++ROOT = Path(__file__).resolve().parents[1]
++SRC = ROOT / 'android/app/src/main/kotlin/com/hirumisu/carwece/MusicDirector.kt'
++TEST = ROOT / 'android/app/src/test/kotlin/com/hirumisu/carwece/MusicDirectorTest.kt'
++
++
++def main():
++    compiler = os.environ.get('KOTLINC') or shutil.which('kotlinc')
++    java = shutil.which('java')
++    if not compiler or not java:
++        raise SystemExit('Instale Java e Kotlin (kotlinc), ou configure KOTLINC.')
++    original = TEST.read_text(encoding='utf-8')
++    names = re.findall(r'@Test\s+fun\s+(\w+)\s*\(\s*\)', original)
++    if not names or original.count('@Test') != len(names):
++        raise SystemExit('Formato de testes não suportado; use JUnit/Gradle.')
++    adapted = original.replace('import org.junit.Assert.*\n', '').replace('import org.junit.Test\n', '')
++    adapted = re.sub(r'@Test\s+', '', adapted)
++    adapter = '''package com.hirumisu.carwece
++import kotlin.math.abs
++fun assertTrue(value: Boolean) { check(value) { "Expected true" } }
++fun assertFalse(value: Boolean) { check(!value) { "Expected false" } }
++fun assertEquals(expected: Any?, actual: Any?) {
++    check(expected == actual) { "Expected <$expected>, got <$actual>" }
++}
++fun assertNotEquals(expected: Any?, actual: Any?) {
++    check(expected != actual) { "Expected values to differ, both were <$actual>" }
++}
++fun assertEquals(expected: Float, actual: Float, delta: Float) {
++    check(abs(expected - actual) <= delta) { "Expected <$expected>, got <$actual> (delta $delta)" }
++}
++fun main() {
++    var failures = 0
++    var passed = 0
++'''
++    for name in names:
++        adapter += f'''    try {{
++        MusicDirectorTest().{name}()
++        println("PASS {name}"); passed++
++    }} catch (error: Throwable) {{
++        println("FAIL {name}: ${{error.message}}")
++        error.printStackTrace(); failures++
++    }}
++'''
++    adapter += '''    println("Kotlin/JVM standalone: $passed passed; $failures failed.")
++    check(failures == 0) { "Music regression failures" }
++}
++'''
++    with tempfile.TemporaryDirectory(prefix='carwece-music-') as tmp:
++        out = Path(tmp)
++        (out / 'MusicDirectorTest.kt').write_text(adapted, encoding='utf-8')
++        (out / 'OfflineMusicTests.kt').write_text(adapter, encoding='utf-8')
++        jar = out / 'music-tests.jar'
++        subprocess.run([compiler, str(SRC), str(out / 'MusicDirectorTest.kt'),
++                        str(out / 'OfflineMusicTests.kt'), '-jvm-target', '17',
++                        '-include-runtime', '-d', str(jar)], check=True)
++        subprocess.run([java, '-jar', str(jar)], check=True)
++
++
++if __name__ == '__main__':
++    main()

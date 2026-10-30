@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.hirumisu.carwece.IntroDirectorTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2026-10-28T12:51:12" hostname="20e089c65b28" time="0.008">
+  <properties/>
+  <testcase name="backgroundPauseAndResumeKeepTheSameDecoderAndPosition" classname="com.hirumisu.carwece.IntroDirectorTest" time="0.004"/>
+  <testcase name="audioFocusLossPausesAndGainResumesWithoutReload" classname="com.hirumisu.carwece.IntroDirectorTest" time="0.0"/>
+  <testcase name="loadExceptionCanBeRetriedAndDoesNotSkipVideo" classname="com.hirumisu.carwece.IntroDirectorTest" time="0.001"/>
+  <testcase name="invalidMetadataIsAnErrorAndCannotAdvanceToMenu" classname="com.hirumisu.carwece.IntroDirectorTest" time="0.0"/>
+  <testcase name="waitsForPreparedForegroundAndFocusBeforeStarting" classname="com.hirumisu.carwece.IntroDirectorTest" time="0.001"/>
+  <testcase name="decoderErrorNeverPretendsVideoFinishedAndRetryIgnoresOldCallbacks" classname="com.hirumisu.carwece.IntroDirectorTest" time="0.0"/>
+  <testcase name="repeatedOpenNeverRestartsAnOngoingVideo" classname="com.hirumisu.carwece.IntroDirectorTest" time="0.0"/>
+  <testcase name="onlyDecoderCompletionFinishesAndForegroundChangesCannotReplay" classname="com.hirumisu.carwece.IntroDirectorTest" time="0.0"/>
+  <testcase name="closeRejectsLateCallbacksAndReleasesDecoder" classname="com.hirumisu.carwece.IntroDirectorTest" time="0.001"/>
+  <testcase name="prematureCompletionAndLateErrorCannotForgeOrUndoCompletion" classname="com.hirumisu.carwece.IntroDirectorTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
