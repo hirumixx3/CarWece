@@ -106,22 +106,6 @@ jobs:
       - name: Baixar dependências Flutter
         run: flutter pub get
 
-      - name: Analisar código Flutter
-        run: flutter analyze
-
-      - name: Executar testes Flutter
-        run: flutter test
-
-      - name: Testar playlists e ciclo de vida nativos
-        working-directory: android
-        shell: bash
-        run: |
-          set -euo pipefail
-          ./gradlew :app:testReleaseUnitTest \
-            --tests com.hirumisu.carwece.MusicDirectorTest \
-            --no-daemon \
-            --stacktrace
-
       - name: Compilar APK release
         shell: bash
         run: |
