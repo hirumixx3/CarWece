@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:carwece/game/content.dart';
+import 'package:carwece/game/gpu_frame.dart';
 import 'package:carwece/game/engine.dart';
 import 'package:carwece/game/renderer.dart';
 import 'package:carwece/ui/gpu_view.dart';
@@ -47,15 +48,18 @@ void main() {
       }
       final create = calls.firstWhere((c) => c.method == 'create'),
           args = create.arguments as Map;
-      expect((args['objects'] as List).length, 174);
+      expect((args['objects'] as List).length, BattleMesh.count);
       final frame = args['frame'] as List;
       expect(frame[14], lessThanOrEqualTo(128));
       final meshes = [
         for (var i = 0; i < (frame[14] as num).toInt(); i++)
           frame[15 + i * 17] as num,
       ];
-      expect(meshes.any((n) => n == 121), isTrue);
-      expect(meshes.any((n) => n == 146), isTrue);
+      expect(meshes.any((n) => n == BattleMesh.hpGreen), isTrue);
+      expect(
+        meshes.any((n) => n == BattleMesh.weapon(BattlePower.doomDisks)),
+        isTrue,
+      );
       if (const bool.fromEnvironment('EXPORT_GRAPHICS_WIRE')) {
         final p = File('build/graphics_bridge/battle.bin');
         p.parent.createSync(recursive: true);

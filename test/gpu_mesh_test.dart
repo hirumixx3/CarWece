@@ -10,18 +10,31 @@ void main() {
   test(
     'All uploaded meshes have finite complete triangles and valid materials',
     () {
-      for (final data in [
-        ...tracks.map(GpuResources.world),
-        GpuResources.showroom,
-        ...GpuResources.objects,
-      ]) {
+      Iterable<List<double>> meshes() sync* {
+        for (final track in tracks) yield GpuResources.world(track);
+        yield GpuResources.showroom;
+        yield* GpuResources.objects;
+      }
+
+      for (final data in meshes()) {
         expect(data.length % 36, 0);
         expect(data.every((v) => v.isFinite), isTrue);
+        var invalidNormal = -1, invalidMaterial = -1;
         for (var i = 0; i < data.length; i += 12) {
           final normal = V3(data[i + 3], data[i + 4], data[i + 5]);
-          expect(normal.length, closeTo(1, .0001));
-          expect(data[i + 11], inInclusiveRange(0, 17));
+          if ((normal.length - 1).abs() > .0001) invalidNormal = i;
+          if (data[i + 11] < 0 || data[i + 11] > 17) invalidMaterial = i;
         }
+        expect(
+          invalidNormal,
+          -1,
+          reason: 'Non-unit normal at float offset $invalidNormal',
+        );
+        expect(
+          invalidMaterial,
+          -1,
+          reason: 'Invalid material at float offset $invalidMaterial',
+        );
       }
     },
   );

@@ -21,7 +21,32 @@ void buildCourseObjects(Mesh3 m, TrackSpec track) {
       _ => [0xff61798c, 0xff7a7065, 0xffb28d61],
     };
     final c = colors[i % colors.length];
-    if (b.kind == 'books') {
+    if (['logs', 'rocks', 'sandstone', 'snowbanks', 'buoys'].contains(b.kind)) {
+      final color = switch (b.kind) {
+        'logs' => 0xff80603d,
+        'rocks' => 0xff6d7560,
+        'sandstone' => 0xffc69b63,
+        'snowbanks' => 0xffd6e8ee,
+        _ => i.isEven ? 0xffe8733c : 0xffe7e3cf,
+      };
+      // Same bounds as CourseBarrier.collider; no decorative overhang in lane.
+      box(
+        0,
+        6,
+        0,
+        V3(5, 12, b.length),
+        color,
+        b.kind == 'logs' ? Material3.wood : Material3.plastic,
+      );
+      box(
+        0,
+        10.5,
+        0,
+        V3(4.5, .35, b.length - .4),
+        b.kind == 'snowbanks' ? 0xffeff9ff : 0xffd1be88,
+        Material3.paint,
+      );
+    } else if (b.kind == 'books') {
       box(0, 6, 0, V3(5, 12, b.length), c, Material3.fabric);
       box(0, 6, 0, V3(4.4, 10.9, b.length - .5), 0xffdcd3ba, Material3.fabric);
       for (final side in [-1.0, 1.0])

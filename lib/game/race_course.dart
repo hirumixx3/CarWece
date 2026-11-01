@@ -190,6 +190,11 @@ void buildRaceCourse(TrackSpec t) {
     'BANHEIRO' => 'towels',
     'COZINHA' => 'cartons',
     'SALA' => 'cases',
+    'FLORESTA' => 'logs',
+    'PRÉ-HISTÓRIA' => 'rocks',
+    'DESERTO' => 'sandstone',
+    'NEVE' => 'snowbanks',
+    'LITORAL' => 'buoys',
     _ => 'dominoes',
   };
   void add(TrackFrame f, double lateral) {

@@ -2,7 +2,9 @@ package com.hirumisu.carwece
 
 /** Validates the typed payload at the real Flutter/Android boundary, before EGL. */
 internal object GraphicsContract {
-    const val MAX_MESHES = 192
+    // 56 cars × (body, damage, wheels) + 21 effects + 60 battle meshes = 249.
+    // Only active car slots contain full geometry; unused slots stay tiny.
+    const val MAX_MESHES = 256
     const val MAX_INSTANCES = 128
 
     fun validateCreate(world: FloatArray, meshes: List<FloatArray>, shaders: List<String>, frame: FloatArray) {

@@ -838,7 +838,28 @@ Mesh3 buildCarMesh(CarSpec car) {
         );
       }
     case >= 16:
-      _buildExpansionDetails(m, car);
+      if (car.body >= 31) {
+        buildWorldCarDetails(m, car);
+      } else {
+        _buildExpansionDetails(m, car);
+      }
+  }
+  if (car.body >= 31) {
+    final rounded = m.buffer;
+    V3 value(int at) => V3(rounded[at], rounded[at + 1], rounded[at + 2]);
+    for (var i = 0; i < rounded.length; i += 36) {
+      final geometric = (value(i + 12) - value(i)).cross(
+        value(i + 24) - value(i),
+      );
+      final normals = value(i + 3) + value(i + 15) + value(i + 27);
+      if (geometric.dot(normals) < 0) {
+        for (var j = 0; j < 12; j++) {
+          final old = m.data[i + 12 + j];
+          m.data[i + 12 + j] = m.data[i + 24 + j];
+          m.data[i + 24 + j] = old;
+        }
+      }
+    }
   }
   return m;
 }

@@ -970,5 +970,6 @@ List<ArenaSpec> createBattleArenas() {
     }
     arenas.add(ArenaSpec(t, tags[i], i));
   }
+  arenas.addAll(createExpansionArenas());
   return arenas;
 }

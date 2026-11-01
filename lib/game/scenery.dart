@@ -16,6 +16,10 @@ class RoomProp {
 
 /// The renderer and physical scene use these exact same authored bounds.
 void populateRoom(TrackSpec t) {
+  if (t.outdoor) {
+    populateExpansionScenery(t);
+    return;
+  }
   void add(String kind, V3 p, V3 size, int color, {bool solid = true}) {
     if (solid) {
       for (final f in t.frames) {
@@ -255,6 +259,10 @@ void populateRoom(TrackSpec t) {
 /// Close trackside vignettes fill the room around the race, while leaving both
 /// the main corridor and every alternate route physically clear.
 void populateTrackside(TrackSpec t) {
+  if (t.outdoor) {
+    populateExpansionTrackside(t);
+    return;
+  }
   final choices = switch (t.room) {
     'QUARTO' => ['basket', 'shoe', 'ball', 'plant'],
     'GARAGEM' => ['tire', 'can', 'workbench', 'speaker'],

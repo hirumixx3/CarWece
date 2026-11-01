@@ -58,7 +58,7 @@ void main() {
   test(
     'Eight new circuits have twelve independent full loops and no residual roll',
     () {
-      final added = tracks.skip(18).toList();
+      final added = tracks.skip(18).take(8).toList();
       expect(added.length, 8);
       expect(added.map((t) => t.loops.length), [1, 2, 1, 2, 1, 2, 1, 2]);
       for (final t in added) {
@@ -244,7 +244,7 @@ void main() {
     () {
       final full = GpuResources.objects,
           one = GpuResources.objectsFor([cars.last.body]);
-      expect(one.length, 114);
+      expect(one.length, cars.length * 3 + 21);
       expect(one[cars.last.body], orderedEquals(full[cars.last.body]));
       expect(
         one[GpuMeshId.wheel + cars.last.body],

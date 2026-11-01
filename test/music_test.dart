@@ -37,7 +37,11 @@ void main() {
         audioCalls.add(args);
         if (state['scene'] != args['scene']) {
           state['scene'] = args['scene'];
-          state['trackId'] = args['scene'] == 'battle' ? battleSongs.first.id : args['scene'] == 'race' ? raceSongs.first.id : menuSongId;
+          state['trackId'] = args['scene'] == 'battle'
+              ? battleSongs.first.id
+              : args['scene'] == 'race'
+              ? raceSongs.first.id
+              : menuSongId;
           state['status'] = 'playing';
           state['userPaused'] = false;
         }
@@ -58,7 +62,15 @@ void main() {
           state['userPaused'] = false;
         case 'next':
           state['trackId'] =
-              (state['scene'] == 'battle' ? battleSongs : raceSongs)[((state['scene'] == 'battle' ? battleSongs : raceSongs).indexWhere((s) => s.id == state['trackId']) + 1) % (state['scene'] == 'battle' ? battleSongs : raceSongs).length]
+              (state['scene'] == 'battle'
+                      ? battleSongs
+                      : raceSongs)[((state['scene'] == 'battle'
+                                  ? battleSongs
+                                  : raceSongs)
+                              .indexWhere((s) => s.id == state['trackId']) +
+                          1) %
+                      (state['scene'] == 'battle' ? battleSongs : raceSongs)
+                          .length]
                   .id;
         case 'play':
           state['status'] = 'playing';
@@ -198,15 +210,18 @@ void main() {
       store.dispose();
     },
   );
-  test('Menu entry is explicit and is not repeated by normal audio ticks', () async {
-    final store = GameStore();
-    await store.audio(enterMenu: true, event: 'tap');
-    expect(audioCalls.last['scene'], 'menu');
-    expect(audioCalls.last['enterMenu'], isTrue);
-    await store.audio();
-    expect(audioCalls.last.containsKey('enterMenu'), isFalse);
-    store.dispose();
-  });
+  test(
+    'Menu entry is explicit and is not repeated by normal audio ticks',
+    () async {
+      final store = GameStore();
+      await store.audio(enterMenu: true, event: 'tap');
+      expect(audioCalls.last['scene'], 'menu');
+      expect(audioCalls.last['enterMenu'], isTrue);
+      await store.audio();
+      expect(audioCalls.last.containsKey('enterMenu'), isFalse);
+      store.dispose();
+    },
+  );
 
   test('Button effects keep the current race or battle playlist', () async {
     final store = GameStore();
@@ -337,6 +352,8 @@ void main() {
             matching: find.byType(Scrollable),
           ),
         );
+        await tester.ensureVisible(find.byKey(const ValueKey('song-race_15')));
+        await tester.pumpAndSettle();
         await tester.tap(find.byKey(const ValueKey('song-race_15')));
         await tester.pump();
         expect(store.soundtrack.trackId, 'race_15');

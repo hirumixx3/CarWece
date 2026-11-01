@@ -63,9 +63,9 @@ void main() {
   test(
     'Thirty-one real-name models have distinct silhouettes and a starter RX7',
     () {
-      expect(cars.length, 31);
+      expect(cars.length, 56);
       expect(cars.take(4).map((c) => c.id), ['rx7', 'evo9', 'r34', '350z']);
-      expect(cars.map((c) => c.body).toSet().length, 31);
+      expect(cars.map((c) => c.body).toSet().length, 56);
       expect(
         cars
             .map(
@@ -74,10 +74,10 @@ void main() {
             )
             .toSet()
             .length,
-        31,
+        56,
       );
       expect(cars.where((c) => c.cost == 0).map((c) => c.id), ['rx7']);
-      expect(GpuResources.objects.length, 114);
+      expect(GpuResources.objects.length, cars.length * 3 + 21);
       final store = GameStore();
       expect(store.ownedCars, {'rx7'});
       store.dispose();
@@ -86,7 +86,7 @@ void main() {
   test(
     'Every room has at least four circuits and matching tire surface grip',
     () {
-      expect(tracks.length, 26);
+      expect(tracks.length, 51);
       final rooms = tracks.map((t) => t.room).toSet();
       expect(rooms, {
         'QUARTO',
@@ -95,6 +95,7 @@ void main() {
         'BANHEIRO',
         'COZINHA',
         'SALA',
+        ...expansionBiomes.keys,
       });
       for (final room in rooms) {
         expect(

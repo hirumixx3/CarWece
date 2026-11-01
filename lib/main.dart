@@ -15,7 +15,8 @@ import 'ui/intro_screen.dart';
 import 'ui/online_screen.dart';
 
 const carWeceVersion = String.fromEnvironment(
-  'CARWECE_VERSION_NAME', defaultValue: '1.0.0',
+  'CARWECE_VERSION_NAME',
+  defaultValue: '1.1.0',
 );
 
 Future<void> main() async {
@@ -612,6 +613,7 @@ class _RushShellState extends State<RushShell>
               'COZINHA',
               'SALA',
               'ARCADE',
+              ...expansionBiomes.keys,
             ])
               Padding(
                 padding: const EdgeInsets.only(right: 8),

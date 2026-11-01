@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'content.dart';
 import 'engine.dart';
 import 'math3d.dart';
+import 'gpu_mesh.dart';
 import '../ui/map_geometry.dart';
 
 class Face3 {
@@ -364,6 +365,29 @@ class TrackScene {
   }
 
   void _room() {
+    if (track.outdoor) {
+      final mesh = Mesh3();
+      buildExpansionWorld(mesh, track);
+      for (var i = 0; i < mesh.data.length; i += 36) {
+        final data = mesh.data;
+        room.faces.add(
+          Face3(
+            [
+              V3(data[i], data[i + 1], data[i + 2]),
+              V3(data[i + 12], data[i + 13], data[i + 14]),
+              V3(data[i + 24], data[i + 25], data[i + 26]),
+            ],
+            Color.fromARGB(
+              255,
+              (data[i + 6] * 255).round(),
+              (data[i + 7] * 255).round(),
+              (data[i + 8] * 255).round(),
+            ),
+          ),
+        );
+      }
+      return;
+    }
     final dark = track.id == 'arcade';
     for (var x = -5; x <= 5; x++) {
       for (var z = -5; z <= 5; z++) {

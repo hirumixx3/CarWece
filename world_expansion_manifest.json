@@ -1,0 +1,448 @@
+{
+  "expansion": "Mundos e Lendas",
+  "original": {
+    "cars": 31,
+    "tracks": 26,
+    "arenas": 6
+  },
+  "updated": {
+    "cars": 56,
+    "tracks": 51,
+    "arenas": 11
+  },
+  "newCars": [
+    {
+      "id": "r32",
+      "name": "NISSAN SKYLINE GT-R R32",
+      "body": 31
+    },
+    {
+      "id": "r33",
+      "name": "NISSAN SKYLINE GT-R R33",
+      "body": 32
+    },
+    {
+      "id": "s13",
+      "name": "NISSAN SILVIA S13",
+      "body": 33
+    },
+    {
+      "id": "180sx",
+      "name": "NISSAN 180SX TYPE X",
+      "body": 34
+    },
+    {
+      "id": "300zx",
+      "name": "NISSAN 300ZX TWIN TURBO",
+      "body": 35
+    },
+    {
+      "id": "240z",
+      "name": "DATSUN 240Z",
+      "body": 36
+    },
+    {
+      "id": "celica_gt4",
+      "name": "TOYOTA CELICA GT-FOUR",
+      "body": 37
+    },
+    {
+      "id": "mr2_sw20",
+      "name": "TOYOTA MR2 GT-S",
+      "body": 38
+    },
+    {
+      "id": "integra_dc2",
+      "name": "HONDA INTEGRA TYPE R",
+      "body": 39
+    },
+    {
+      "id": "civic_fl5",
+      "name": "HONDA CIVIC TYPE R FL5",
+      "body": 40
+    },
+    {
+      "id": "wrx_sti04",
+      "name": "SUBARU IMPREZA WRX STI",
+      "body": 41
+    },
+    {
+      "id": "evo6",
+      "name": "MITSUBISHI LANCER EVOLUTION VI",
+      "body": 42
+    },
+    {
+      "id": "bmw_m1",
+      "name": "BMW M1",
+      "body": 43
+    },
+    {
+      "id": "m4_g82",
+      "name": "BMW M4 COMPETITION",
+      "body": 44
+    },
+    {
+      "id": "quattro",
+      "name": "AUDI SPORT QUATTRO",
+      "body": 45
+    },
+    {
+      "id": "golf_gti",
+      "name": "VOLKSWAGEN GOLF GTI MK1",
+      "body": 46
+    },
+    {
+      "id": "mini_cooper",
+      "name": "MINI COOPER S",
+      "body": 47
+    },
+    {
+      "id": "205_t16",
+      "name": "PEUGEOT 205 TURBO 16",
+      "body": 48
+    },
+    {
+      "id": "r5_turbo",
+      "name": "RENAULT 5 TURBO",
+      "body": 49
+    },
+    {
+      "id": "delta",
+      "name": "LANCIA DELTA HF INTEGRALE",
+      "body": 50
+    },
+    {
+      "id": "stratos",
+      "name": "LANCIA STRATOS HF",
+      "body": 51
+    },
+    {
+      "id": "alpine_a110",
+      "name": "ALPINE A110",
+      "body": 52
+    },
+    {
+      "id": "countach",
+      "name": "LAMBORGHINI COUNTACH LP5000",
+      "body": 53
+    },
+    {
+      "id": "testarossa",
+      "name": "FERRARI TESTAROSSA",
+      "body": 54
+    },
+    {
+      "id": "chiron",
+      "name": "BUGATTI CHIRON",
+      "body": 55
+    }
+  ],
+  "biomes": [
+    "FLORESTA",
+    "PRÉ-HISTÓRIA",
+    "DESERTO",
+    "NEVE",
+    "LITORAL"
+  ],
+  "dinosaurs": "Miniaturas estáticas de T-rex, tricerátops e saurópode com colisão; não são NPCs vivos.",
+  "version": "1.1.0+2",
+  "flutterTestsPassed": 230,
+  "nativeGraphicsTestsPassed": 13,
+  "simulatedLapsPassed": 50,
+  "renderedViews": 68,
+  "onlineContent": "carwece-worlds-1.0",
+  "tracks": [
+    {
+      "id": "forest_canopy",
+      "length": 5541.937211784485,
+      "shortcuts": 1,
+      "loops": 0,
+      "props": 47,
+      "ramps": 1,
+      "species": []
+    },
+    {
+      "id": "forest_roots",
+      "length": 5242.019073709756,
+      "shortcuts": 1,
+      "loops": 0,
+      "props": 43,
+      "ramps": 1,
+      "species": []
+    },
+    {
+      "id": "forest_river",
+      "length": 5138.35547587355,
+      "shortcuts": 1,
+      "loops": 0,
+      "props": 42,
+      "ramps": 1,
+      "species": []
+    },
+    {
+      "id": "forest_sawmill",
+      "length": 5500.394587480591,
+      "shortcuts": 1,
+      "loops": 0,
+      "props": 47,
+      "ramps": 1,
+      "species": []
+    },
+    {
+      "id": "forest_spiral",
+      "length": 5485.965313670522,
+      "shortcuts": 1,
+      "loops": 1,
+      "props": 41,
+      "ramps": 1,
+      "species": []
+    },
+    {
+      "id": "prehistoric_valley",
+      "length": 5593.894027627395,
+      "shortcuts": 1,
+      "loops": 0,
+      "props": 39,
+      "ramps": 1,
+      "species": [
+        "rex",
+        "triceratops",
+        "sauropod"
+      ]
+    },
+    {
+      "id": "prehistoric_eggs",
+      "length": 5162.391197289281,
+      "shortcuts": 1,
+      "loops": 0,
+      "props": 34,
+      "ramps": 1,
+      "species": [
+        "rex",
+        "triceratops",
+        "sauropod"
+      ]
+    },
+    {
+      "id": "prehistoric_fossils",
+      "length": 5059.095899020795,
+      "shortcuts": 1,
+      "loops": 0,
+      "props": 39,
+      "ramps": 1,
+      "species": [
+        "rex",
+        "triceratops",
+        "sauropod"
+      ]
+    },
+    {
+      "id": "prehistoric_volcano",
+      "length": 5420.475076726903,
+      "shortcuts": 1,
+      "loops": 0,
+      "props": 41,
+      "ramps": 1,
+      "species": [
+        "rex",
+        "triceratops",
+        "sauropod"
+      ]
+    },
+    {
+      "id": "prehistoric_loop",
+      "length": 5746.519207501201,
+      "shortcuts": 1,
+      "loops": 1,
+      "props": 37,
+      "ramps": 1,
+      "species": [
+        "rex",
+        "triceratops",
+        "sauropod"
+      ]
+    },
+    {
+      "id": "desert_oasis",
+      "length": 5363.274574567481,
+      "shortcuts": 1,
+      "loops": 0,
+      "props": 45,
+      "ramps": 1,
+      "species": []
+    },
+    {
+      "id": "desert_dunes",
+      "length": 5336.93758034226,
+      "shortcuts": 1,
+      "loops": 0,
+      "props": 43,
+      "ramps": 1,
+      "species": []
+    },
+    {
+      "id": "desert_canyon",
+      "length": 5260.1302164400095,
+      "shortcuts": 1,
+      "loops": 0,
+      "props": 43,
+      "ramps": 1,
+      "species": []
+    },
+    {
+      "id": "desert_mirage",
+      "length": 5407.016799414415,
+      "shortcuts": 1,
+      "loops": 0,
+      "props": 45,
+      "ramps": 1,
+      "species": []
+    },
+    {
+      "id": "desert_sunloop",
+      "length": 5475.348367148192,
+      "shortcuts": 1,
+      "loops": 1,
+      "props": 40,
+      "ramps": 1,
+      "species": []
+    },
+    {
+      "id": "snow_pines",
+      "length": 5348.147643828097,
+      "shortcuts": 1,
+      "loops": 0,
+      "props": 46,
+      "ramps": 1,
+      "species": []
+    },
+    {
+      "id": "snow_glacier",
+      "length": 5324.065266558445,
+      "shortcuts": 1,
+      "loops": 0,
+      "props": 41,
+      "ramps": 1,
+      "species": []
+    },
+    {
+      "id": "snow_fjord",
+      "length": 5297.780210931964,
+      "shortcuts": 1,
+      "loops": 0,
+      "props": 43,
+      "ramps": 1,
+      "species": []
+    },
+    {
+      "id": "snow_avalanche",
+      "length": 5446.709533378583,
+      "shortcuts": 1,
+      "loops": 0,
+      "props": 42,
+      "ramps": 1,
+      "species": []
+    },
+    {
+      "id": "snow_polarloop",
+      "length": 5773.203238294546,
+      "shortcuts": 1,
+      "loops": 1,
+      "props": 40,
+      "ramps": 1,
+      "species": []
+    },
+    {
+      "id": "coast_bay",
+      "length": 5525.737323931954,
+      "shortcuts": 1,
+      "loops": 0,
+      "props": 47,
+      "ramps": 1,
+      "species": []
+    },
+    {
+      "id": "coast_lighthouse",
+      "length": 5117.591823494541,
+      "shortcuts": 1,
+      "loops": 0,
+      "props": 39,
+      "ramps": 1,
+      "species": []
+    },
+    {
+      "id": "coast_reef",
+      "length": 5388.994199034897,
+      "shortcuts": 1,
+      "loops": 0,
+      "props": 42,
+      "ramps": 1,
+      "species": []
+    },
+    {
+      "id": "coast_harbor",
+      "length": 5340.66786550561,
+      "shortcuts": 1,
+      "loops": 0,
+      "props": 43,
+      "ramps": 1,
+      "species": []
+    },
+    {
+      "id": "coast_tideloop",
+      "length": 5831.84712647366,
+      "shortcuts": 1,
+      "loops": 1,
+      "props": 42,
+      "ramps": 1,
+      "species": []
+    }
+  ],
+  "arenas": [
+    {
+      "id": "arena_world_0",
+      "nav": 262,
+      "supplies": 18,
+      "spawns": 6,
+      "health": 4,
+      "props": 42,
+      "ramps": 3
+    },
+    {
+      "id": "arena_world_1",
+      "nav": 258,
+      "supplies": 18,
+      "spawns": 6,
+      "health": 4,
+      "props": 43,
+      "ramps": 2
+    },
+    {
+      "id": "arena_world_2",
+      "nav": 266,
+      "supplies": 18,
+      "spawns": 6,
+      "health": 4,
+      "props": 42,
+      "ramps": 2
+    },
+    {
+      "id": "arena_world_3",
+      "nav": 260,
+      "supplies": 18,
+      "spawns": 6,
+      "health": 4,
+      "props": 42,
+      "ramps": 3
+    },
+    {
+      "id": "arena_world_4",
+      "nav": 263,
+      "supplies": 18,
+      "spawns": 6,
+      "health": 4,
+      "props": 42,
+      "ramps": 3
+    }
+  ]
+}

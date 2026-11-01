@@ -1,0 +1,142 @@
+CARWECE — MUNDOS E LENDAS | CÓDIGO-FONTE 1.1.0+2
+
+CONTEÚDO ENTREGUE
+Original: 31 carros, 26 circuitos, 6 arenas.
+Atualizado: 56 carros, 51 circuitos, 11 arenas.
+Foram acrescentados 25 modelos de carros reais, 25 circuitos e 5 arenas.
+Ambientes novos: floresta, pré-história, deserto, neve e litoral.
+Cada ambiente tem 5 pistas próprias e uma arena de batalha independente.
+Cada pista nova tem 1 atalho mais curto com portão destrutível e 1 rampa;
+5 pistas novas têm um loop vertical. Há pontes de retorno e zonas de impulso.
+T-rex, tricerátops e saurópodes são miniaturas estáticas com colisão,
+não animais vivos com animação ou inteligência artificial.
+Os carros são interpretações estilizadas de modelos reais; não são modelos
+oficiais licenciados nem reproduções fotogramétricas. Não foram usados logos
+ou arquivos 3D extraídos de outros jogos.
+
+COMO O PROJETO FUNCIONA
+lib/main.dart: fluxo dos menus, seleção de carros/pistas, progressão e campeonato.
+lib/platform.dart: preferências, persistência, compras, moedas e estrelas.
+lib/game/content.dart e seus parts: catálogos, splines, pistas, colisões e arenas.
+lib/game/engine.dart: simulação arcade, aderência, controles, IA e checkpoints.
+lib/game/battle_engine.dart: vida, armas, suprimentos e comportamento de combate.
+lib/game/gpu_mesh.dart: malhas procedurais, materiais, carros, rodas e cenários.
+lib/game/gpu_frame.dart: pacotes de câmera, poses e IDs enviados à GPU.
+android/.../RushGLRenderer.kt: renderização OpenGL ES nativa, materiais e sombras.
+lib/game/renderer.dart: renderização Flutter de compatibilidade.
+lib/online/: autenticação, convites, servidor, rede e retransmissores.
+assets/: trilha, introdução, fontes e shaders originais preservados.
+
+ARQUIVOS CENTRAIS DA EXPANSÃO
+lib/game/world_expansion.dart: 25 circuitos, biomas, cenário, colisões e 5 arenas.
+lib/game/world_expansion_mesh.dart: árvores, rochas, gelo, palmeiras e dinossauros.
+lib/game/car_details_world.dart: faróis, grades, asas e detalhes dos 25 carros.
+lib/game/content.dart: 25 CarDesign e 25 CarSpec novos, anexados ao catálogo.
+lib/game/car_mesh.dart: detalhes novos e correção de winding após float32.
+lib/game/course_mesh.dart: barreiras visuais específicas dos biomas.
+lib/main.dart: filtros dos novos ambientes, sem substituir os ambientes antigos.
+android/.../GraphicsContract.kt: teto de 256 slots; a batalha agora usa 249 slots.
+Os modelos fora da partida continuam usando placeholders pequenos; o limite
+de 128 instâncias por quadro e a preparação em isolate foram preservados.
+lib/online/protocol.dart: identificação de conteúdo alterada para evitar que
+clientes com catálogos antigos misturem mapas/carros incompatíveis. Todos os
+participantes online precisam desta versão; partida online real não foi feita.
+IDs, ordem e recursos do conteúdo original foram mantidos para preservar saves.
+Novos itens seguem as regras normais de preço e estrelas; não foram desbloqueados
+todos automaticamente. Floresta e pré-história possuem uma pista inicial livre.
+
+VALIDAÇÃO EXECUTADA
+Flutter 3.35.7 / Dart 3.9.2.
+flutter analyze: sem problemas encontrados.
+flutter test --concurrency=1: 230 testes aprovados, sem testes ignorados novos.
+13 testes Kotlin/JVM aprovados, usando o codec real do Flutter e mensagens
+exportadas: catálogo, rodas, armas, transparência, limites e rejeição de erros.
+50 voltas simuladas concluídas: uma em cada pista nova e uma com cada carro novo.
+Todos os 51 circuitos passaram pela regressão de conclusão de volta e geometria.
+25 atalhos verificados: mais curtos, checkpoints ordenados e sem props no corredor.
+68 vistas renderizadas com as malhas e shaders reais em Mesa/OpenGL ES.
+Testes históricos de inventário foram atualizados para os totais novos.
+A checagem completa de vértices foi mantida, mas passou a consumir malhas em
+sequência para não reter 51 mundos simultaneamente no processo de testes.
+O teste da playlist recebeu scroll adicional para que o último item fique
+inteiramente clicável em telas estreitas; a reprodução original não foi alterada.
+Logs, resultados estruturados e prévias estão em verification/worlds/ e
+previews/worlds/. As pastas antigas de verificação, quando presentes no ZIP
+original, são históricas e não representam esta execução.
+
+LIMITAÇÕES IMPORTANTES
+Este ZIP contém código-fonte, não APK/AAB pronto.
+Não foi realizada compilação Android completa, assinatura nem instalação em
+celular físico. Os testes Kotlin/JVM não substituem um build Gradle/Android.
+Não há garantia de FPS, consumo de RAM, temperatura ou comportamento em todos
+os dispositivos; validar no aparelho antes de publicar.
+A análise cobriu as integrações necessárias, mas não é garantia de compreensão
+ou validação absoluta de 100% dos caminhos possíveis do jogo.
+
+PARA USAR
+Extraia o ZIP e abra a pasta CarWece_Mundos_e_Lendas no editor Flutter.
+Use Flutter 3.35.7, a versão já usada pelos workflows originais do projeto.
+Execute: flutter pub get
+Confira: flutter analyze
+Teste: flutter test --concurrency=1
+Com Android SDK/JDK instalados: flutter run
+APK de teste: flutter build apk --debug
+APK release: flutter build apk --release --build-name=1.1.0 --build-number=8
+O build-number de release precisa ser maior que o último publicado; ajuste-o.
+A assinatura e os segredos continuam seguindo as instruções originais do projeto.
+android/local.properties e caches locais foram excluídos de propósito: são
+gerados pelo Flutter na máquina de quem compilar.
+
+CARROS ADICIONADOS
+01. NISSAN SKYLINE GT-R R32
+02. NISSAN SKYLINE GT-R R33
+03. NISSAN SILVIA S13
+04. NISSAN 180SX TYPE X
+05. NISSAN 300ZX TWIN TURBO
+06. DATSUN 240Z
+07. TOYOTA CELICA GT-FOUR
+08. TOYOTA MR2 GT-S
+09. HONDA INTEGRA TYPE R
+10. HONDA CIVIC TYPE R FL5
+11. SUBARU IMPREZA WRX STI
+12. MITSUBISHI LANCER EVOLUTION VI
+13. BMW M1
+14. BMW M4 COMPETITION
+15. AUDI SPORT QUATTRO
+16. VOLKSWAGEN GOLF GTI MK1
+17. MINI COOPER S
+18. PEUGEOT 205 TURBO 16
+19. RENAULT 5 TURBO
+20. LANCIA DELTA HF INTEGRALE
+21. LANCIA STRATOS HF
+22. ALPINE A110
+23. LAMBORGHINI COUNTACH LP5000
+24. FERRARI TESTAROSSA
+25. BUGATTI CHIRON
+
+PISTAS ADICIONADAS
+forest_canopy: 5541.9 unidades; 1 atalho; 0 loop
+forest_roots: 5242.0 unidades; 1 atalho; 0 loop
+forest_river: 5138.4 unidades; 1 atalho; 0 loop
+forest_sawmill: 5500.4 unidades; 1 atalho; 0 loop
+forest_spiral: 5486.0 unidades; 1 atalho; 1 loop
+prehistoric_valley: 5593.9 unidades; 1 atalho; 0 loop
+prehistoric_eggs: 5162.4 unidades; 1 atalho; 0 loop
+prehistoric_fossils: 5059.1 unidades; 1 atalho; 0 loop
+prehistoric_volcano: 5420.5 unidades; 1 atalho; 0 loop
+prehistoric_loop: 5746.5 unidades; 1 atalho; 1 loop
+desert_oasis: 5363.3 unidades; 1 atalho; 0 loop
+desert_dunes: 5336.9 unidades; 1 atalho; 0 loop
+desert_canyon: 5260.1 unidades; 1 atalho; 0 loop
+desert_mirage: 5407.0 unidades; 1 atalho; 0 loop
+desert_sunloop: 5475.3 unidades; 1 atalho; 1 loop
+snow_pines: 5348.1 unidades; 1 atalho; 0 loop
+snow_glacier: 5324.1 unidades; 1 atalho; 0 loop
+snow_fjord: 5297.8 unidades; 1 atalho; 0 loop
+snow_avalanche: 5446.7 unidades; 1 atalho; 0 loop
+snow_polarloop: 5773.2 unidades; 1 atalho; 1 loop
+coast_bay: 5525.7 unidades; 1 atalho; 0 loop
+coast_lighthouse: 5117.6 unidades; 1 atalho; 0 loop
+coast_reef: 5389.0 unidades; 1 atalho; 0 loop
+coast_harbor: 5340.7 unidades; 1 atalho; 0 loop
+coast_tideloop: 5831.8 unidades; 1 atalho; 1 loop

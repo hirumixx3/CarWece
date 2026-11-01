@@ -20,35 +20,35 @@ class BattleGraphicsContractTest {
             a["shaders"] as List<String>,a["frame"] as FloatArray)
     }
     @Test fun acceptsActualBattleWorldAndAllFortyFourWeaponAttachments() {
-        val a=request();assertEquals(174,(a["objects"] as List<*>).size);validate(a)
+        val a=request();assertEquals(249,(a["objects"] as List<*>).size);validate(a)
     }
     @Test fun healthBarsTurretsAndProjectilesAreInTheActualFrame() {
         val a=request();val f=a["frame"] as FloatArray
         val indices=(0 until f[14].toInt()).map { f[15+it*17].toInt() }
-        assertTrue(indices.contains(121));assertTrue(indices.contains(123));assertTrue(indices.contains(146))
-        assertTrue(indices.contains(115));assertTrue(f[14]<=128)
+        assertTrue(indices.contains(196));assertTrue(indices.contains(198));assertTrue(indices.contains(221))
+        assertTrue(indices.contains(190));assertTrue(f[14]<=GraphicsContract.MAX_INSTANCES)
     }
     @Test fun healthAndMetalAreOpaqueWhileGasUsesTransparentMaterial() {
         val m=request()["objects"] as List<*>
-        for(i in listOf(114,115,116,117,118,121,122,123,124,125,128))
+        for(i in listOf(189,190,191,192,193,196,197,198,199,200,203))
             assertFalse(GraphicsContract.isTransparentMesh(m[i] as FloatArray))
-        assertTrue(GraphicsContract.isTransparentMesh(m[127] as FloatArray))
+        assertTrue(GraphicsContract.isTransparentMesh(m[202] as FloatArray))
     }
     @Test fun everyAdditionalVertexAndTransformHasFiniteValues() {
         val a=request();val meshes=a["objects"] as List<*>
-        for(i in 114..172) {
+        for(i in 189..247) {
             val m=meshes[i] as FloatArray;assertTrue(m.isNotEmpty());assertEquals(0,m.size%36)
             assertTrue(m.all { it.isFinite() })
         }
         assertTrue((a["frame"] as FloatArray).all { it.isFinite() })
     }
     @Test fun battleFrameRejectsAnIndexOutsideTheUploadedInventory() {
-        val a=request().toMutableMap();val frame=(a["frame"] as FloatArray).clone();frame[15]=174f;a["frame"]=frame
+        val a=request().toMutableMap();val frame=(a["frame"] as FloatArray).clone();frame[15]=(a["objects"] as List<*>).size.toFloat();a["frame"]=frame
         try {validate(a);fail("Invalid battle mesh accepted")}catch(_:IllegalArgumentException){}
     }
     @Test fun healthBillboardsNeverCastFloatingRectangularShadows() {
         val meshes=request()["objects"] as List<*>
-        for(i in 121..123)assertFalse(GraphicsContract.castsShadowMesh(meshes[i] as FloatArray))
-        assertTrue(GraphicsContract.castsShadowMesh(meshes[128] as FloatArray))
+        for(i in 196..198)assertFalse(GraphicsContract.castsShadowMesh(meshes[i] as FloatArray))
+        assertTrue(GraphicsContract.castsShadowMesh(meshes[203] as FloatArray))
     }
 }

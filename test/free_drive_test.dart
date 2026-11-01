@@ -132,7 +132,7 @@ void main() {
         expect(floorLength / t.length, greaterThan(.3));
         expect(
           t.widthAt(t.frames.firstWhere((f) => t.isFloor(f.s)).s),
-          greaterThan(t.width * 2),
+          t.outdoor ? greaterThan(t.width) : greaterThan(t.width * 2),
         );
         expect(
           t.obstacles.where((o) => o.visible).length,

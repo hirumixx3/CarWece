@@ -1,0 +1,300 @@
+{
+  "cars": 56,
+  "tracks": 51,
+  "arenas": 11,
+  "circuits": [
+    {
+      "id": "forest_canopy",
+      "length": 5541.937211784485,
+      "shortcuts": 1,
+      "loops": 0,
+      "props": 47,
+      "ramps": 1,
+      "species": []
+    },
+    {
+      "id": "forest_roots",
+      "length": 5242.019073709756,
+      "shortcuts": 1,
+      "loops": 0,
+      "props": 43,
+      "ramps": 1,
+      "species": []
+    },
+    {
+      "id": "forest_river",
+      "length": 5138.35547587355,
+      "shortcuts": 1,
+      "loops": 0,
+      "props": 42,
+      "ramps": 1,
+      "species": []
+    },
+    {
+      "id": "forest_sawmill",
+      "length": 5500.394587480591,
+      "shortcuts": 1,
+      "loops": 0,
+      "props": 47,
+      "ramps": 1,
+      "species": []
+    },
+    {
+      "id": "forest_spiral",
+      "length": 5485.965313670522,
+      "shortcuts": 1,
+      "loops": 1,
+      "props": 41,
+      "ramps": 1,
+      "species": []
+    },
+    {
+      "id": "prehistoric_valley",
+      "length": 5593.894027627395,
+      "shortcuts": 1,
+      "loops": 0,
+      "props": 39,
+      "ramps": 1,
+      "species": [
+        "rex",
+        "triceratops",
+        "sauropod"
+      ]
+    },
+    {
+      "id": "prehistoric_eggs",
+      "length": 5162.391197289281,
+      "shortcuts": 1,
+      "loops": 0,
+      "props": 34,
+      "ramps": 1,
+      "species": [
+        "rex",
+        "triceratops",
+        "sauropod"
+      ]
+    },
+    {
+      "id": "prehistoric_fossils",
+      "length": 5059.095899020795,
+      "shortcuts": 1,
+      "loops": 0,
+      "props": 39,
+      "ramps": 1,
+      "species": [
+        "rex",
+        "triceratops",
+        "sauropod"
+      ]
+    },
+    {
+      "id": "prehistoric_volcano",
+      "length": 5420.475076726903,
+      "shortcuts": 1,
+      "loops": 0,
+      "props": 41,
+      "ramps": 1,
+      "species": [
+        "rex",
+        "triceratops",
+        "sauropod"
+      ]
+    },
+    {
+      "id": "prehistoric_loop",
+      "length": 5746.519207501201,
+      "shortcuts": 1,
+      "loops": 1,
+      "props": 37,
+      "ramps": 1,
+      "species": [
+        "rex",
+        "triceratops",
+        "sauropod"
+      ]
+    },
+    {
+      "id": "desert_oasis",
+      "length": 5363.274574567481,
+      "shortcuts": 1,
+      "loops": 0,
+      "props": 45,
+      "ramps": 1,
+      "species": []
+    },
+    {
+      "id": "desert_dunes",
+      "length": 5336.93758034226,
+      "shortcuts": 1,
+      "loops": 0,
+      "props": 43,
+      "ramps": 1,
+      "species": []
+    },
+    {
+      "id": "desert_canyon",
+      "length": 5260.1302164400095,
+      "shortcuts": 1,
+      "loops": 0,
+      "props": 43,
+      "ramps": 1,
+      "species": []
+    },
+    {
+      "id": "desert_mirage",
+      "length": 5407.016799414415,
+      "shortcuts": 1,
+      "loops": 0,
+      "props": 45,
+      "ramps": 1,
+      "species": []
+    },
+    {
+      "id": "desert_sunloop",
+      "length": 5475.348367148192,
+      "shortcuts": 1,
+      "loops": 1,
+      "props": 40,
+      "ramps": 1,
+      "species": []
+    },
+    {
+      "id": "snow_pines",
+      "length": 5348.147643828097,
+      "shortcuts": 1,
+      "loops": 0,
+      "props": 46,
+      "ramps": 1,
+      "species": []
+    },
+    {
+      "id": "snow_glacier",
+      "length": 5324.065266558445,
+      "shortcuts": 1,
+      "loops": 0,
+      "props": 41,
+      "ramps": 1,
+      "species": []
+    },
+    {
+      "id": "snow_fjord",
+      "length": 5297.780210931964,
+      "shortcuts": 1,
+      "loops": 0,
+      "props": 43,
+      "ramps": 1,
+      "species": []
+    },
+    {
+      "id": "snow_avalanche",
+      "length": 5446.709533378583,
+      "shortcuts": 1,
+      "loops": 0,
+      "props": 42,
+      "ramps": 1,
+      "species": []
+    },
+    {
+      "id": "snow_polarloop",
+      "length": 5773.203238294546,
+      "shortcuts": 1,
+      "loops": 1,
+      "props": 40,
+      "ramps": 1,
+      "species": []
+    },
+    {
+      "id": "coast_bay",
+      "length": 5525.737323931954,
+      "shortcuts": 1,
+      "loops": 0,
+      "props": 47,
+      "ramps": 1,
+      "species": []
+    },
+    {
+      "id": "coast_lighthouse",
+      "length": 5117.591823494541,
+      "shortcuts": 1,
+      "loops": 0,
+      "props": 39,
+      "ramps": 1,
+      "species": []
+    },
+    {
+      "id": "coast_reef",
+      "length": 5388.994199034897,
+      "shortcuts": 1,
+      "loops": 0,
+      "props": 42,
+      "ramps": 1,
+      "species": []
+    },
+    {
+      "id": "coast_harbor",
+      "length": 5340.66786550561,
+      "shortcuts": 1,
+      "loops": 0,
+      "props": 43,
+      "ramps": 1,
+      "species": []
+    },
+    {
+      "id": "coast_tideloop",
+      "length": 5831.84712647366,
+      "shortcuts": 1,
+      "loops": 1,
+      "props": 42,
+      "ramps": 1,
+      "species": []
+    }
+  ],
+  "battle": [
+    {
+      "id": "arena_world_0",
+      "nav": 262,
+      "supplies": 18,
+      "spawns": 6,
+      "health": 4,
+      "props": 42,
+      "ramps": 3
+    },
+    {
+      "id": "arena_world_1",
+      "nav": 258,
+      "supplies": 18,
+      "spawns": 6,
+      "health": 4,
+      "props": 43,
+      "ramps": 2
+    },
+    {
+      "id": "arena_world_2",
+      "nav": 266,
+      "supplies": 18,
+      "spawns": 6,
+      "health": 4,
+      "props": 42,
+      "ramps": 2
+    },
+    {
+      "id": "arena_world_3",
+      "nav": 260,
+      "supplies": 18,
+      "spawns": 6,
+      "health": 4,
+      "props": 42,
+      "ramps": 3
+    },
+    {
+      "id": "arena_world_4",
+      "nav": 263,
+      "supplies": 18,
+      "spawns": 6,
+      "health": 4,
+      "props": 42,
+      "ramps": 3
+    }
+  ],
+  "distinctNewCarMeshes": 25
+}

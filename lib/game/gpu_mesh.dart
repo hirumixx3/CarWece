@@ -9,6 +9,8 @@ part 'room_mesh.dart';
 part 'room_finish.dart';
 part 'detailed_props.dart';
 part 'course_mesh.dart';
+part 'world_expansion_mesh.dart';
+part 'car_details_world.dart';
 
 /// Vertex layout shared with the Android GLES renderer and the offscreen QA tool:
 /// position.xyz, normal.xyz, linear-input color.rgb, texture.uv, material.
@@ -721,6 +723,11 @@ Mesh3 buildWorldMesh(TrackSpec track) {
     .64,
     0xffffd398,
   );
+  if (track.outdoor) {
+    buildExpansionWorld(m, track);
+    buildCourseObjects(m, track);
+    return m;
+  }
   // Household floor material and wall color are selected by environment.
   m.box(
     const V3(0, -1, 0),

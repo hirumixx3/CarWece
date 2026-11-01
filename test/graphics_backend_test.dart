@@ -37,7 +37,7 @@ void main() {
   }
 
   androidWidgets(
-    'Android keeps all 114 slots while uploading just the visible car',
+    'Android keeps the expanded inventory while uploading just the visible car',
     (tester) async {
       var creates = 0;
       TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
@@ -141,7 +141,7 @@ void main() {
               selected.add(id);
               final models = args['objects'] as List;
               expect((models[id] as List).length, greaterThan(1000));
-              expect((models[id == 0 ? 30 : 0] as List).length, 36);
+              expect((models[id == 0 ? cars.last.body : 0] as List).length, 36);
               return 70 + selected.length;
             }
             if (call.method == 'dispose') disposed.add(args['id'] as int);
@@ -170,7 +170,7 @@ void main() {
         expect(find.byType(Texture), findsOneWidget);
         expect(tester.takeException(), isNull);
       }
-      expect(selected, [0, 30, 16]);
+      expect(selected, [cars.first.body, cars.last.body, cars[16].body]);
       expect(disposed, containsAll([71, 72]));
       await tester.pumpWidget(const SizedBox());
     },

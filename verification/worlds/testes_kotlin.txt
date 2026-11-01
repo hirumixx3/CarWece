@@ -1,0 +1,9 @@
+carwece/project/android/app/src/test/kotlin/com/hirumisu/carwece/BattleGraphicsContractTest.kt:20:26: warning: unchecked cast of 'Any?' to 'List<String>'.
+            a["shaders"] as List<String>,a["frame"] as FloatArray)
+                         ^^^^^^^^^^^^^^^
+JUnit version 4.13.2
+.............
+Time: 3.901
+
+OK (13 tests)
+

@@ -17,10 +17,10 @@ void main() {
         expect(mesh.length, greaterThan(1000));
         expect(mesh.every((n) => n.isFinite), isTrue);
         fingerprints.add(Object.hashAll(mesh));
-        expect(BattleMesh.weapon(power), 129 + power.index);
+        expect(BattleMesh.weapon(power), BattleMesh.first + 15 + power.index);
       }
       expect(fingerprints.length, 44);
-      expect(BattleMesh.count, 174);
+      expect(BattleMesh.count, cars.length * 3 + 81);
       expect(BattleGpuMeshes.objects.length, 60);
       expect(
         BattleGpuMeshes.objects.fold<int>(0, (n, m) => n + m.length * 4),
@@ -42,7 +42,11 @@ void main() {
       }
 
       expect(
-        ids().any((n) => n >= 129 && n < BattleMesh.targetReticle),
+        ids().any(
+          (n) =>
+              n >= BattleMesh.weapon(BattlePower.values.first) &&
+              n < BattleMesh.targetReticle,
+        ),
         isFalse,
       );
       for (final power in BattlePower.values) {
@@ -50,7 +54,13 @@ void main() {
         e.human.selected = null;
         e.giveWeapon(e.player, power);
         expect(
-          ids().where((n) => n >= 129 && n < BattleMesh.targetReticle).toList(),
+          ids()
+              .where(
+                (n) =>
+                    n >= BattleMesh.weapon(BattlePower.values.first) &&
+                    n < BattleMesh.targetReticle,
+              )
+              .toList(),
           [BattleMesh.weapon(power)],
         );
         expect(ids().contains(BattleMesh.turret), isFalse);
@@ -58,7 +68,13 @@ void main() {
       e.giveWeapon(e.player, BattlePower.cannon);
       e.giveWeapon(e.player, BattlePower.energyShield);
       expect(
-        ids().where((n) => n >= 129 && n < BattleMesh.targetReticle).length,
+        ids()
+            .where(
+              (n) =>
+                  n >= BattleMesh.weapon(BattlePower.values.first) &&
+                  n < BattleMesh.targetReticle,
+            )
+            .length,
         3,
       );
     },

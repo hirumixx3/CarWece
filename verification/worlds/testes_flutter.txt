@@ -1,0 +1,302 @@
+Resolving dependencies...
+Downloading packages...
+! asn1lib 1.6.7 from path third_party/asn1lib (overridden)
+  characters 1.4.0 (1.4.1 available)
+  clock 1.1.2 (1.1.3 available)
+! convert 3.1.2 from path third_party/convert (overridden)
+  crypto 3.0.6 (3.0.8 available)
+! dartssh2 4.1.0 from path third_party/dartssh2 (overridden)
+  matcher 0.12.17 (0.12.20 available)
+  material_color_utilities 0.11.1 (0.13.1 available)
+  meta 1.16.0 (1.19.0 available)
+! pinenacl 0.6.0 from path third_party/pinenacl (overridden)
+! pointycastle 4.0.0 from path third_party/pointycastle (overridden)
+  stack_trace 1.12.1 (1.12.2 available)
+  test_api 0.7.6 (0.7.15 available)
+  vector_math 2.2.0 (2.4.4 available)
+Got dependencies!
+9 packages have newer versions incompatible with dependency constraints.
+Try `flutter pub outdated` for more information.
+00:00 +0: loading <projeto>/test/expansion_v07_test.dart
+00:00 +0: <projeto>/test/expansion_v07_test.dart: (setUpAll)
+00:00 +0: <projeto>/test/expansion_v07_test.dart: Faster rivals leave a common line and physically overtake a slower leader
+00:00 +1: <projeto>/test/expansion_v07_test.dart: Object boundary stops sustained outward steering with a matching rotated collider
+00:00 +2: <projeto>/test/expansion_v07_test.dart: Missile destroys an actual blocking gate; ice and ramming leave it solid
+00:00 +3: <projeto>/test/expansion_v07_test.dart: All alternate routes validate their portals and rejoin the right main checkpoint
+00:02 +4: <projeto>/test/expansion_v07_test.dart: Entering each closed shortcut, shooting inside and rejoining counts without returning to its entrance
+00:04 +5: <projeto>/test/expansion_v07_test.dart: Jumping directly to an open shortcut exit never awards the skipped checkpoints
+00:04 +6: <projeto>/test/expansion_v07_test.dart: Full power shuffle bag covers every type and avoids immediate repeats across refills
+00:04 +7: <projeto>/test/expansion_v07_test.dart: Three rocket charges fire separately and supercharge requires the full power bar
+00:04 +8: <projeto>/test/expansion_v07_test.dart: EMP clears nearby ordnance and blocks weapons temporarily
+00:04 +9: <projeto>/test/expansion_v07_test.dart: Ice shot freezes its target, renders a shell and thaws without clearing held controls
+00:04 +10: <projeto>/test/expansion_v07_test.dart: Tesla has a visible beam and temporary motor failure; shield intercepts it
+00:04 +11: <projeto>/test/expansion_v07_test.dart: Armed mines detonate visibly, and smoke only blinds cars inside its cloud
+00:04 +12: <projeto>/test/expansion_v07_test.dart: Trackside props and barriers add detail without blocking alternate routes
+00:04 +13: <projeto>/test/expansion_v07_test.dart: Power charging HUD keeps the pedal and steering independent at Size(1280.0, 720.0) (variant: TargetPlatform.linux)
+00:05 +14: <projeto>/test/expansion_v07_test.dart: Power charging HUD keeps the pedal and steering independent at Size(800.0, 360.0) (variant: TargetPlatform.linux)
+00:05 +15: <projeto>/test/expansion_v07_test.dart: (tearDownAll)
+00:05 +15: loading <projeto>/test/graphics_backend_test.dart
+00:06 +15: <projeto>/test/graphics_backend_test.dart: Android keeps the expanded inventory while uploading just the visible car (variant: TargetPlatform.android)
+00:06 +16: <projeto>/test/graphics_backend_test.dart: Native initialization failure never swaps to the old renderer; retry restores GPU (variant: TargetPlatform.android)
+00:07 +17: <projeto>/test/graphics_backend_test.dart: A later GPU failure releases the previous texture before retrying (variant: TargetPlatform.android)
+00:07 +18: <projeto>/test/graphics_backend_test.dart: Changing garage cars reloads their own meshes and releases the old texture (variant: TargetPlatform.android)
+00:08 +19: loading <projeto>/test/graphics_channel_test.dart
+00:08 +19: <projeto>/test/graphics_channel_test.dart: Android graphics payload round-trips all car bodies, effects, damage and animated wheels
+00:17 +20: loading <projeto>/test/gpu_mesh_test.dart
+00:18 +20: <projeto>/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:47 +21: <projeto>/test/gpu_mesh_test.dart: Car winding agrees with normals, preventing inverted lighting
+00:50 +22: <projeto>/test/gpu_mesh_test.dart: Camera and model packets remain finite throughout the vertical loop
+00:50 +23: <projeto>/test/gpu_mesh_test.dart: GLES instance packets include shield, missiles, oil and turbo effects
+00:50 +24: loading <projeto>/test/smoke_regression_test.dart
+00:51 +24: <projeto>/test/smoke_regression_test.dart: (setUpAll)
+00:51 +24: <projeto>/test/smoke_regression_test.dart: Smoke clears on the first physics step outside and can be entered again
+00:51 +25: <projeto>/test/smoke_regression_test.dart: A stopped car clears as the cloud expires; removed clouds cannot leave a timer
+00:51 +26: <projeto>/test/smoke_regression_test.dart: Own smoke is ignored; overlapping enemy clouds do not stack opacity
+00:51 +27: <projeto>/test/smoke_regression_test.dart: Visibility volume matches the rendered smoke sphere and softens at its edge
+00:51 +28: <projeto>/test/smoke_regression_test.dart: Enemy smoke does not break the Android HUD at Size(1280.0, 720.0) (variant: TargetPlatform.android)
+00:53 +29: <projeto>/test/smoke_regression_test.dart: Enemy smoke does not break the Android HUD at Size(800.0, 360.0) (variant: TargetPlatform.android)
+00:53 +30: <projeto>/test/smoke_regression_test.dart: (tearDownAll)
+00:53 +30: loading <projeto>/test/podium_rewards_test.dart
+00:54 +30: <projeto>/test/podium_rewards_test.dart: Every race difficulty pays exactly the podium, without hit bonuses
+00:55 +31: <projeto>/test/podium_rewards_test.dart: Battle podium payouts match results and are recorded only once
+00:55 +32: <projeto>/test/podium_rewards_test.dart: Battle settings persist independently and tiers change real weapon damage
+00:55 +33: loading <projeto>/test/road_solid_regression_test.dart
+00:56 +33: <projeto>/test/road_solid_regression_test.dart: An airborne car hits the vertical loop ribbon from its upper face
+00:57 +34: <projeto>/test/road_solid_regression_test.dart: A fast fall lands on the upper deck instead of tunnelling through it
+00:57 +35: <projeto>/test/road_solid_regression_test.dart: A falling upside-down body cannot pass through a lower deck
+00:57 +36: <projeto>/test/road_solid_regression_test.dart: A descending deck blocks a ground car roof, without snapping it onto the road
+00:57 +37: loading <projeto>/test/online_ui_test.dart
+00:57 +37: <projeto>/test/online_ui_test.dart: (setUpAll)
+00:57 +37: <projeto>/test/online_ui_test.dart: online login and map selection fit Size(1280.0, 720.0) and preserve offline progress
+01:00 +38: <projeto>/test/online_ui_test.dart: online login and map selection fit Size(800.0, 360.0) and preserve offline progress
+01:01 +39: <projeto>/test/online_ui_test.dart: home opens online and credits include Marcos Nascimento Sage Corp
+01:02 +40: <projeto>/test/online_ui_test.dart: (tearDownAll)
+01:02 +40: loading <projeto>/test/regression_v03_test.dart
+01:04 +40: <projeto>/test/regression_v03_test.dart: Manual is the default, including migration of old automatic settings
+01:04 +41: <projeto>/test/regression_v03_test.dart: Throttle, coasting and brakes change momentum; steering has inertia
+01:04 +42: <projeto>/test/regression_v03_test.dart: Rear collision exchanges momentum and never allows an overtake through a car
+01:04 +43: <projeto>/test/regression_v03_test.dart: Side contact next to a barrier separates the whole pack
+01:04 +44: <projeto>/test/regression_v03_test.dart: Collisions also detect a lapped car across the course seam
+01:04 +45: <projeto>/test/regression_v03_test.dart: Cars can jump over a rival without an invisible collision
+01:04 +46: <projeto>/test/regression_v03_test.dart: All road ribbons are wider than six car bodies and do not fold inside corners
+01:04 +47: <projeto>/test/regression_v03_test.dart: Loop entry and exit have separate lanes and clear vertical and lateral space
+01:05 +48: <projeto>/test/regression_v03_test.dart: Photo finish in the same physics step uses crossing times, not update order
+01:05 +49: <projeto>/test/regression_v03_test.dart: Every finishing place agrees with the immutable results and rewards
+01:05 +50: <projeto>/test/regression_v03_test.dart: Being pushed backwards over a lap gate cannot record a second lap
+01:05 +51: <projeto>/test/regression_v03_test.dart: Missile is visible in flight, then triggers damage, spin, sparks and smoke
+01:05 +52: <projeto>/test/regression_v03_test.dart: A missile in another lane cannot hit by distance alone
+01:05 +53: <projeto>/test/regression_v03_test.dart: Oil causes a visible spin and a shield blocks physical weapon damage
+01:05 +54: <projeto>/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+01:55 +55: <projeto>/test/regression_v03_test.dart: Failing a loop releases the car into a visible fall without teleporting
+01:55 +56: loading <projeto>/test/intro_test.dart
+01:56 +56: <projeto>/test/intro_test.dart: (setUpAll)
+01:56 +56: <projeto>/test/intro_test.dart: Production launch waits beyond video duration and enters menu only on decoder completion
+01:57 +57: <projeto>/test/intro_test.dart: Background pauses and resumes intro without reopening or skipping it
+01:58 +58: <projeto>/test/intro_test.dart: A decoding error offers retry and does not advance to the menu
+01:58 +59: <projeto>/test/intro_test.dart: Widescreen phones preserve the complete 16:9 video without cropping
+01:58 +60: <projeto>/test/intro_test.dart: Completion is terminal even if an older platform response arrives later
+01:58 +61: <projeto>/test/intro_test.dart: (tearDownAll)
+01:58 +61: loading <projeto>/test/relay_regression_test.dart
+01:58 +61: <projeto>/test/relay_regression_test.dart: transient EOF retries up to three times without announcing a lost room
+01:59 +62: <projeto>/test/relay_regression_test.dart: persistent EOF preserves startup error instead of generic onClosed
+01:59 +63: <projeto>/test/relay_regression_test.dart: authentication requirement fails immediately, with its actual reason
+01:59 +64: <projeto>/test/relay_regression_test.dart: relay rejection is bounded and does not render arbitrary remote text
+01:59 +65: <projeto>/test/relay_regression_test.dart: silent relay times out, releases attempts, and never announces a room
+01:59 +66: <projeto>/test/relay_regression_test.dart: cancelling a silent startup stops retries and completes promptly
+01:59 +67: <projeto>/test/relay_regression_test.dart: fragmented frames and heartbeats coexist; established EOF reports once
+01:59 +68: <projeto>/test/relay_regression_test.dart: invalid public port and oversized frames are refused without retry loops
+01:59 +69: <projeto>/test/relay_regression_test.dart: internet invitations remain compatible; LAN invites preserve only private IPv4
+01:59 +70: loading <projeto>/test/flow_test.dart
+02:00 +70: <projeto>/test/flow_test.dart: (setUpAll)
+02:00 +70: <projeto>/test/flow_test.dart: Menu, garage purchase, settings, multi-touch driving, pause and finish (variant: TargetPlatform.linux)
+02:03 +71: <projeto>/test/flow_test.dart: Manual pedal supports three simultaneous touches and losing shows the actual winner (variant: TargetPlatform.linux)
+02:04 +72: <projeto>/test/flow_test.dart: Held controls survive countdown, messages and sliding between arrows (variant: TargetPlatform.linux)
+02:05 +73: <projeto>/test/flow_test.dart: Pause clears old pointers and keyboard direction survives touch release (variant: TargetPlatform.linux)
+02:06 +74: <projeto>/test/flow_test.dart: Championship runs through all three circuits and awards points (variant: TargetPlatform.linux)
+02:08 +75: <projeto>/test/flow_test.dart: Menus remain usable on a small landscape screen (variant: TargetPlatform.linux)
+02:08 +76: <projeto>/test/flow_test.dart: Settings, purchased cars, coins and records survive save and reload
+02:08 +77: <projeto>/test/flow_test.dart: Menu animation resumes immediately after backgrounding (variant: TargetPlatform.linux)
+02:09 +78: <projeto>/test/flow_test.dart: (tearDownAll)
+02:09 +78: loading <projeto>/test/stationary_regression_test.dart
+02:11 +78: <projeto>/test/stationary_regression_test.dart: All 26 starting grids remain stationary when steering; throttle launches normally
+02:13 +79: <projeto>/test/stationary_regression_test.dart: Stopped cars on offset curved plastic surfaces do not creep to a rail
+02:15 +80: <projeto>/test/stationary_regression_test.dart: Steering parked beside a rail moves only the front wheels, then can drive away
+02:15 +81: loading <projeto>/test/expansion_v06_test.dart
+02:16 +81: <projeto>/test/expansion_v06_test.dart: (setUpAll)
+02:16 +81: <projeto>/test/expansion_v06_test.dart: Stopped inverted car loses support, falls and lands without progress or teleport
+02:16 +82: <projeto>/test/expansion_v06_test.dart: Fast loop tires retain positive support while slow ones detach
+02:16 +83: <projeto>/test/expansion_v06_test.dart: No traction or steering changes ballistic momentum during a fall
+02:16 +84: <projeto>/test/expansion_v06_test.dart: A descending rocket detonates at ground contact and submits fire and shock ring
+02:16 +85: <projeto>/test/expansion_v06_test.dart: An untargeted rocket has gravity and explodes instead of vanishing
+02:16 +86: <projeto>/test/expansion_v06_test.dart: Swept rocket collision hits an elevated road and a solid household object
+02:16 +87: <projeto>/test/expansion_v06_test.dart: A missile hit animates damage and explosion even when shield absorbs damage
+02:16 +88: <projeto>/test/expansion_v06_test.dart: Each layout has its own shape and figure-eight crossings have clearance
+02:17 +89: <projeto>/test/expansion_v06_test.dart: New solid room props share bounds and leave every route corridor clear
+02:17 +90: <projeto>/test/expansion_v06_test.dart: Podium stars improve once per circuit, time trial does not award wins or stars
+02:17 +91: <projeto>/test/expansion_v06_test.dart: Career cannot deadlock: each unlock threshold is reachable before next track
+02:17 +92: <projeto>/test/expansion_v06_test.dart: Purchases require earned eligibility and money; owned models are never charged again
+02:17 +93: <projeto>/test/expansion_v06_test.dart: New saves retain only earned cars, legacy saves retain all old free cars
+02:17 +94: <projeto>/test/expansion_v06_test.dart: Production shader has no fog operation and both clear scene pipelines compile in QA
+02:17 +95: <projeto>/test/expansion_v06_test.dart: Locked circuit is previewable but cannot launch at Size(1280.0, 720.0) (variant: TargetPlatform.linux)
+02:19 +96: <projeto>/test/expansion_v06_test.dart: Locked circuit is previewable but cannot launch at Size(800.0, 360.0) (variant: TargetPlatform.linux)
+02:20 +97: <projeto>/test/expansion_v06_test.dart: (tearDownAll)
+02:20 +97: loading <projeto>/test/checkpoint_shortcut_regression_test.dart
+02:22 +97: <projeto>/test/checkpoint_shortcut_regression_test.dart: A car starting on a checkpoint plane advances when it drives forward
+02:22 +98: <projeto>/test/checkpoint_shortcut_regression_test.dart: A shortcut accepts an already credited overlapping main checkpoint
+02:22 +99: <projeto>/test/checkpoint_shortcut_regression_test.dart: A legal jump inside the shortcut does not lose its checkpoint sequence
+02:22 +100: <projeto>/test/checkpoint_shortcut_regression_test.dart: A missed entry plane does not invalidate a correctly driven shortcut
+02:22 +101: <projeto>/test/checkpoint_shortcut_regression_test.dart: Crossing a checkpoint backwards does not grant progress
+02:22 +102: <projeto>/test/checkpoint_shortcut_regression_test.dart: Every shortcut rejoins and completes the current lap without an extra lap
+02:31 +103: loading <projeto>/test/music_test.dart
+02:32 +103: <projeto>/test/music_test.dart: (setUpAll)
+02:32 +103: <projeto>/test/music_test.dart: Twenty-five new tracks and platform catalogs agree across three scenes
+02:32 +104: <projeto>/test/music_test.dart: Existing saves default to shuffle and music preferences retain HUD and progress
+02:32 +105: <projeto>/test/music_test.dart: Controller accepts native automatic track changes and ignores unknown track requests
+02:32 +106: <projeto>/test/music_test.dart: Audio transport distinguishes a paused race from the menu and keeps volume independent
+02:32 +107: <projeto>/test/music_test.dart: Menu entry is explicit and is not repeated by normal audio ticks
+02:32 +108: <projeto>/test/music_test.dart: Button effects keep the current race or battle playlist
+02:32 +109: <projeto>/test/music_test.dart: Shuffle control preserves the active battle scene
+02:32 +110: <projeto>/test/music_test.dart: Pause music selection, skip, volume and close keep physics paused at Size(1280.0, 720.0) (variant: TargetPlatform.android)
+02:37 +111: <projeto>/test/music_test.dart: Pause music selection, skip, volume and close keep physics paused at Size(800.0, 360.0) (variant: TargetPlatform.android)
+02:39 +112: <projeto>/test/music_test.dart: (tearDownAll)
+02:39 +112: loading <projeto>/test/battle_test.dart
+02:39 +112: <projeto>/test/battle_test.dart: Six open arenas are separate from all 26 race circuits and have nine independent loops
+02:40 +113: <projeto>/test/battle_test.dart: All 44 adaptations have unique functional identities and positive cooldowns
+02:41 +114: <projeto>/test/battle_test.dart: Both arena modes start every car unarmed with no automatic fallback
+02:41 +115: <projeto>/test/battle_test.dart: Every power including the machine gun is obtained from a map pickup and runs out
+02:41 +116: <projeto>/test/battle_test.dart: Only remaining collected ammo is selected when a weapon is exhausted
+02:41 +117: <projeto>/test/battle_test.dart: Map loot cycles through all 44 powers with a finite three-weapon inventory
+02:41 +118: <projeto>/test/battle_test.dart: Unarmed bots seek map supplies and receive ammo only on collecting them
+02:41 +119: <projeto>/test/battle_test.dart: Player stays still without accelerator and can leave the road freely without checkpoints
+02:41 +120: <projeto>/test/battle_test.dart: Health is individual, shields block damage, repair restores health and removes statuses
+02:41 +121: <projeto>/test/battle_test.dart: Swept bullets hit a car before tunnelling and solid cover blocks ordinary shots and lasers
+02:41 +122: <projeto>/test/battle_test.dart: Rocket, guided missile, disks, salvo and kinetic projectiles all cause visible damage
+02:41 +123: <projeto>/test/battle_test.dart: Mortars use real ballistic gravity and freezing bombs apply temporary ice
+02:41 +124: <projeto>/test/battle_test.dart: Magnetic mine attaches then detonates; guided fire is disrupted by jammer or decoy
+02:41 +125: <projeto>/test/battle_test.dart: All three trap forms arm, consume ammo, detonate or attract and cannot remain forever
+02:41 +126: <projeto>/test/battle_test.dart: Sonic pulse, ground bass, grid, electrical attacks and orbital swarm have distinct effects
+02:41 +127: <projeto>/test/battle_test.dart: Toxic smoke affects health and visibility only inside its living volume
+02:41 +128: <projeto>/test/battle_test.dart: Upgrade doubles standard damage, wheel blades hurt contacts and shield/boost buffs expire
+02:41 +129: <projeto>/test/battle_test.dart: Both high energy lasers deal damage immediately and generate beam geometry
+02:41 +130: <projeto>/test/battle_test.dart: Kills are counted once, destroyed cars stop fighting and victory does not use race laps
+02:41 +131: <projeto>/test/battle_test.dart: Free exploration has passive rebuilding targets, no time limit or reward; pause freezes combat
+02:41 +132: <projeto>/test/battle_test.dart: Every arena loop releases an inverted stationary car and battle frames fit native budgets
+02:48 +133: <projeto>/test/battle_test.dart: Navigation finds safe detours through cover and world projectiles use oriented collision bounds
+02:48 +134: loading <projeto>/test/online_simulation_test.dart
+02:49 +134: <projeto>/test/online_simulation_test.dart: six online drivers require their own gas and steering, with no AI
+02:50 +135: <projeto>/test/online_simulation_test.dart: race inventories, missile owner and turbo are independent for every peer
+02:50 +136: <projeto>/test/online_simulation_test.dart: battle snapshot preserves all 44 weapons, finite ammo and the selected local driver
+02:50 +137: <projeto>/test/online_simulation_test.dart: race snapshots preserve smoke, explosions, projectiles, wheels and gates
+02:50 +138: <projeto>/test/online_simulation_test.dart: online finish waits for the room, and client actions cannot create local damage
+02:50 +139: <projeto>/test/online_simulation_test.dart: public accounts require HTTPS; cleartext is restricted to private LAN addresses
+02:50 +140: <projeto>/test/online_simulation_test.dart: online slipstream, track pads and enhanced shields work for non-hosts
+02:50 +141: loading <projeto>/test/hud_editor_test.dart
+02:51 +141: <projeto>/test/hud_editor_test.dart: (setUpAll)
+02:51 +141: <projeto>/test/hud_editor_test.dart: HUD customization survives settings serialization and older saves use the defaults
+02:51 +142: <projeto>/test/hud_editor_test.dart: Invalid saved coordinates cannot lose HUD elements beyond the screen
+02:51 +143: <projeto>/test/hud_editor_test.dart: Move/resize/save HUD and keep multi-touch and sliding controls at Size(1280.0, 720.0) (variant: TargetPlatform.android)
+02:53 +144: <projeto>/test/hud_editor_test.dart: Move/resize/save HUD and keep multi-touch and sliding controls at Size(800.0, 360.0) (variant: TargetPlatform.android)
+02:54 +145: <projeto>/test/hud_editor_test.dart: Reset is a draft until saved and cancelling preserves the previous layout (variant: TargetPlatform.android)
+02:55 +146: <projeto>/test/hud_editor_test.dart: Failed HUD save keeps the editor open and preserves the stored layout (variant: TargetPlatform.android)
+02:56 +147: <projeto>/test/hud_editor_test.dart: (tearDownAll)
+02:56 +147: loading <projeto>/test/surface_contacts_test.dart
+02:56 +147: <projeto>/test/surface_contacts_test.dart: Outside road rail blocks side -1.0 without pulling car onto deck
+02:56 +148: <projeto>/test/surface_contacts_test.dart: Outside road rail blocks side 1.0 without pulling car onto deck
+02:56 +149: <projeto>/test/surface_contacts_test.dart: Inside rail retains a car without letting it cross to the exterior
+02:56 +150: <projeto>/test/surface_contacts_test.dart: Driving under an elevated bridge never snaps up to the deck
+02:57 +151: <projeto>/test/surface_contacts_test.dart: A car can land from above and hits the underside from below
+02:57 +152: <projeto>/test/surface_contacts_test.dart: Ramp sides and back are solid and never grant top contact from outside
+02:57 +153: <projeto>/test/surface_contacts_test.dart: Ramp entrance climbs continuously, launches at the lip and permits a top landing
+02:57 +154: loading <projeto>/test/performance_regression_test.dart
+02:57 +154: <projeto>/test/performance_regression_test.dart: Cached projection matches the original in all circuits, loops and arena heights
+02:59 +155: <projeto>/test/performance_regression_test.dart: Worker preparation returns identical world and car bytes without remapping slots
+03:01 +156: <projeto>/test/performance_regression_test.dart: Automatic quality migrates old graphics settings and preserves explicit new choices
+03:01 +157: loading <projeto>/test/expansion_v05_test.dart
+03:03 +157: <projeto>/test/expansion_v05_test.dart: (setUpAll)
+03:03 +157: <projeto>/test/expansion_v05_test.dart: Thirty-one real-name models have distinct silhouettes and a starter RX7
+03:10 +158: <projeto>/test/expansion_v05_test.dart: Every room has at least four circuits and matching tire surface grip
+03:10 +159: <projeto>/test/expansion_v05_test.dart: Steering rack animates at rest without moving the car or rear wheels
+03:10 +160: <projeto>/test/expansion_v05_test.dart: Tire roll comes from signed traveled speed and stops at rest
+03:10 +161: <projeto>/test/expansion_v05_test.dart: Separate wheel transforms retain axle center, spin and front steer
+03:10 +162: <projeto>/test/expansion_v05_test.dart: Drift requires its own button and releases rear grip without braking gas
+03:10 +163: <projeto>/test/expansion_v05_test.dart: Wheel meshes have correct normals and readable material diversity
+03:10 +164: <projeto>/test/expansion_v05_test.dart: Legacy car purchases and selected index migrate without losing currency
+03:10 +165: <projeto>/test/expansion_v05_test.dart: Room filters and slide-to-drift controls fit Size(1280.0, 720.0) (variant: TargetPlatform.linux)
+03:12 +166: <projeto>/test/expansion_v05_test.dart: Room filters and slide-to-drift controls fit Size(800.0, 360.0) (variant: TargetPlatform.linux)
+03:13 +167: <projeto>/test/expansion_v05_test.dart: (tearDownAll)
+03:13 +167: loading <projeto>/test/free_drive_test.dart
+03:15 +167: <projeto>/test/free_drive_test.dart: Neutral steering preserves the world heading instead of following a curve
+03:15 +168: <projeto>/test/free_drive_test.dart: Left and right turn the body and its actual world trajectory in opposite directions
+03:15 +169: <projeto>/test/free_drive_test.dart: Floor driving stays free outside the circuit corridor and never recenters the car
+03:15 +170: <projeto>/test/free_drive_test.dart: Holding the accelerator alone cannot complete a lap
+03:16 +171: <projeto>/test/free_drive_test.dart: Crossing the finish line after skipping gates never awards a lap
+03:16 +172: <projeto>/test/free_drive_test.dart: Solid room props stop the front bumper and produce an impact
+03:16 +173: <projeto>/test/free_drive_test.dart: All road edges stay above the floor and no roll leaks past the loop
+03:16 +174: <projeto>/test/free_drive_test.dart: Braking at low speed engages reverse so the player can leave a wall
+03:16 +175: <projeto>/test/free_drive_test.dart: Recovery returns to the last validated gate without completing skipped sectors
+03:16 +176: <projeto>/test/free_drive_test.dart: A turn requires braking at speed: the bicycle model has a finite turning radius
+03:16 +177: <projeto>/test/free_drive_test.dart: The ramp raises the body, launches it and lands it back on the real floor
+03:16 +178: <projeto>/test/free_drive_test.dart: Cars waiting behind the start cannot appear one lap ahead when the race begins
+03:16 +179: <projeto>/test/free_drive_test.dart: The chase camera follows the actual body heading on free floor
+03:16 +180: <projeto>/test/free_drive_test.dart: Longer layouts keep independent records while preserving old saved times
+03:16 +181: loading <projeto>/test/loading_start_test.dart
+03:17 +181: <projeto>/test/loading_start_test.dart: The entire countdown waits for the first native 3D frame (variant: TargetPlatform.android)
+03:21 +182: loading <projeto>/test/weapon_visuals_test.dart
+03:21 +182: <projeto>/test/weapon_visuals_test.dart: Every collectible has a distinct finite metal attachment within the native budget
+03:21 +183: <projeto>/test/weapon_visuals_test.dart: Only collected weapons are mounted and every selected item uses its own model
+03:22 +184: <projeto>/test/weapon_visuals_test.dart: Turret follows a moving target between shots and the muzzle matches projectile direction
+03:22 +185: <projeto>/test/weapon_visuals_test.dart: Manual target behind the car rotates the mount while the chassis stays manual
+03:22 +186: loading <projeto>/test/battle_target_test.dart
+03:22 +186: <projeto>/test/battle_target_test.dart: Mira alterna entre rivais válidos e não seleciona morto, bloqueado ou distante
+03:22 +187: <projeto>/test/battle_target_test.dart: A mira verde acompanha o alvo que a arma usa, sem alterar munição
+03:22 +188: loading <projeto>/test/engine_test.dart
+03:24 +188: <projeto>/test/engine_test.dart: All twelve circuits have finite, continuous, orthonormal frames
+03:24 +189: <projeto>/test/engine_test.dart: Countdown holds cars, then automatic acceleration moves the player
+03:24 +190: <projeto>/test/engine_test.dart: Physics gives the same result at 30, 60 and 120 FPS
+03:26 +191: <projeto>/test/engine_test.dart: Pausing freezes the clock and clears held controls
+03:26 +192: <projeto>/test/engine_test.dart: Manual acceleration, braking, walls, nitro and drift affect driving
+03:27 +193: <projeto>/test/engine_test.dart: Items are collected once per pickup per lap
+03:27 +194: <projeto>/test/engine_test.dart: All four items have functional effects and consume inventory
+03:27 +195: <projeto>/test/engine_test.dart: Time trial excludes bots and weapons
+03:27 +196: <projeto>/test/engine_test.dart: Finishing records exactly three laps and a finite reward
+03:28 +197: <projeto>/test/engine_test.dart: A bot that finished earlier still ranks ahead at the finish line
+03:28 +198: <projeto>/test/engine_test.dart: Visible boost pads provide an actual velocity impulse
+03:28 +199: <projeto>/test/engine_test.dart: Settings restore clamps invalid input; records and car purchases persist in the store model
+03:28 +200: <projeto>/test/engine_test.dart: Hitch cap prevents a paused app from fast-forwarding physics
+03:28 +201: <projeto>/test/engine_test.dart: Time formatting and vector rotation preserve useful invariants
+03:28 +202: loading <projeto>/test/world_expansion_test.dart
+03:30 +202: <projeto>/test/world_expansion_test.dart: Append-only catalogues add exactly 25 cars, 25 circuits and 5 arenas
+03:30 +203: <projeto>/test/world_expansion_test.dart: 25 new sculpted cars have distinct finite chassis and independent wheels
+03:38 +204: <projeto>/test/world_expansion_test.dart: All new tracks have genuine clear shorter branches with ordered checkpoints
+03:38 +205: <projeto>/test/world_expansion_test.dart: Prehistoric racing and battle contain all three physical toy species
+03:40 +206: <projeto>/test/world_expansion_test.dart: New battle floors have clear safe spawns, pickups, routes and independent loops
+03:40 +207: <projeto>/test/world_expansion_test.dart: Every new biome produces finite world data within the existing vertex layout
+03:41 +208: <projeto>/test/world_expansion_test.dart: Every new car starts in racing and combat with finite physical and GPU state
+03:41 +209: <projeto>/test/world_expansion_test.dart: Grip is biome-specific without changing existing room surfaces
+03:41 +210: loading <projeto>/test/battle_ui_test.dart
+03:42 +210: <projeto>/test/battle_ui_test.dart: (setUpAll)
+03:42 +210: <projeto>/test/battle_ui_test.dart: Battle rewards and history persist separately from race medals and records
+03:42 +211: <projeto>/test/battle_ui_test.dart: Battle difficulty can be chosen before launch at Size(1280.0, 720.0) (variant: TargetPlatform.android)
+03:45 +212: <projeto>/test/battle_ui_test.dart: Battle difficulty can be chosen before launch at Size(800.0, 360.0) (variant: TargetPlatform.android)
+03:47 +213: <projeto>/test/battle_ui_test.dart: Home to arenas, free exploration, multitouch firing, arsenal and HUD remain usable at Size(1280.0, 720.0) (variant: TargetPlatform.android)
+03:52 +214: <projeto>/test/battle_ui_test.dart: Home to arenas, free exploration, multitouch firing, arsenal and HUD remain usable at Size(800.0, 360.0) (variant: TargetPlatform.android)
+03:54 +215: <projeto>/test/battle_ui_test.dart: (tearDownAll)
+03:54 +215: loading <projeto>/test/battle_graphics_channel_test.dart
+03:55 +215: <projeto>/test/battle_graphics_channel_test.dart: Battle GPU uploads all 44 weapon models, life bars and active projectile (variant: TargetPlatform.android)
+03:58 +216: loading <projeto>/test/difficulty_v08_test.dart
+03:59 +216: <projeto>/test/difficulty_v08_test.dart: Normal and hard select a competitive car class and keep the player unchanged
+03:59 +217: <projeto>/test/difficulty_v08_test.dart: Rival turbo uses finite energy and actual motion, with no boost on easy
+04:00 +218: <projeto>/test/difficulty_v08_test.dart: Difficulty never reduces the player acceleration, steering or wheel dynamics
+04:00 +219: loading <projeto>/test/expansion_v09_test.dart
+04:01 +219: <projeto>/test/expansion_v09_test.dart: Eight new circuits have twelve independent full loops and no residual roll
+04:02 +220: <projeto>/test/expansion_v09_test.dart: Reset in a second loop returns before that loop without skipping gates
+04:02 +221: <projeto>/test/expansion_v09_test.dart: Grenades are visible ballistic objects, bounce and explode on their fuse
+04:02 +222: <projeto>/test/expansion_v09_test.dart: Grenade splash hits nearby rivals and a shield absorbs the same hit
+04:02 +223: <projeto>/test/expansion_v09_test.dart: Shockwave pushes nearby rivals, respects shields and does not hit distant cars
+04:02 +224: <projeto>/test/expansion_v09_test.dart: Spikes puncture locally and repair removes damage and temporary faults
+04:02 +225: <projeto>/test/expansion_v09_test.dart: Punctured tires lose grip while shields and height avoid spike damage
+04:02 +226: <projeto>/test/expansion_v09_test.dart: Current race and garage upload only their models with stable mesh indices
+04:09 +227: <projeto>/test/expansion_v09_test.dart: Quick race and first championship stage always start last; solo starts alone
+04:09 +228: <projeto>/test/expansion_v09_test.dart: Championship stages use the complete previous finish order, not cup points
+04:09 +229: <projeto>/test/expansion_v09_test.dart: Expanded normal roster recovers from oscillation and completes chicanes
+04:12 +230: All tests passed!

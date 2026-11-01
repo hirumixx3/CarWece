@@ -65,9 +65,9 @@ void main() {
     () {
       final arenas = createBattleArenas(),
           raceIds = createTracks().map((t) => t.id).toSet();
-      expect(arenas.length, 6);
-      expect(arenas.map((a) => a.track.room).toSet().length, 6);
-      expect(arenas.map((a) => a.track.loops.length).toList(), [
+      expect(arenas.length, 11);
+      expect(arenas.map((a) => a.track.room).toSet().length, 11);
+      expect(arenas.take(6).map((a) => a.track.loops.length).toList(), [
         1,
         2,
         1,
@@ -571,13 +571,13 @@ void main() {
         final frame = raceGpuFrame(e);
         expect(frame.every((n) => n.isFinite), isTrue);
         expect(frame[14], lessThanOrEqualTo(128));
-        expect(BattleMesh.first, 114);
+        expect(BattleMesh.first, GpuResources.objects.length);
         expect(
           GpuResources.objectsFor([0]).length + BattleGpuMeshes.objects.length,
-          lessThanOrEqualTo(192),
+          lessThanOrEqualTo(256),
         );
         for (var i = 0; i < frame[14].toInt(); i++)
-          expect(frame[15 + i * 17], lessThan(174));
+          expect(frame[15 + i * 17], lessThan(BattleMesh.count));
       }
     },
   );
