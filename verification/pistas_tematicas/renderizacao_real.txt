@@ -1,0 +1,18 @@
+GLES: OpenGL ES 3.2 Mesa 25.2.8-0ubuntu0.24.04.4 renderer: llvmpipe (LLVM 20.1.2, 256 bits)
+Triangle counts: {'prehistoric_valley': 134896, 'forest_canopy': 68600, 'desert_oasis': 76542, 'coast_bay': 59675, 'snow_pines': 56486} car: [9742, 10626, 9798, 8560]
+Rendered forest_canopy_obstaculos
+Rendered forest_canopy_visao_geral
+Rendered forest_canopy_miniatura
+Rendered prehistoric_valley_obstaculos
+Rendered prehistoric_valley_visao_geral
+Rendered prehistoric_valley_miniatura
+Rendered desert_oasis_obstaculos
+Rendered desert_oasis_visao_geral
+Rendered desert_oasis_miniatura
+Rendered snow_pines_obstaculos
+Rendered snow_pines_visao_geral
+Rendered snow_pines_miniatura
+Rendered coast_bay_obstaculos
+Rendered coast_bay_visao_geral
+Rendered coast_bay_miniatura
+Both shader programs compiled; all frames rendered without GLES errors.

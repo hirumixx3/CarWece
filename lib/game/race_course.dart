@@ -11,8 +11,8 @@ class CourseBarrier {
     this.height = 12,
   });
   WorldObstacle get collider => WorldObstacle(
-    frame.p + const V3(0, 6, 0),
-    V3(5, 12, length),
+    frame.p + V3(0, height / 2, 0),
+    V3(5, height, length),
     visible: false,
     right: frame.right,
     forward: frame.forward,
@@ -202,6 +202,7 @@ void buildRaceCourse(TrackSpec t) {
     final barrier = CourseBarrier(
       TrackFrame(p, r, const V3(0, 1, 0), f.forward, f.s),
       kind,
+      height: t.outdoor && !t.openArena ? 4.8 : 12,
     );
     t.barriers.add(barrier);
     t.barrierGrid

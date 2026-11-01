@@ -1,0 +1,26 @@
+{
+  "pistas_novas": 25,
+  "obstaculos": 300,
+  "largura": 46,
+  "testes_aprovados": 236,
+  "preservados": 37,
+  "vistas_gles": 15,
+  "voltas_adicionais": 50,
+  "arquivos_originais_alterados": [
+    "lib/game/content.dart",
+    "lib/game/course_mesh.dart",
+    "lib/game/gpu_mesh.dart",
+    "lib/game/race_course.dart",
+    "lib/game/world_expansion.dart",
+    "lib/game/world_expansion_mesh.dart",
+    "lib/online/protocol.dart",
+    "test/free_drive_test.dart"
+  ],
+  "codigo_novo": [
+    "lib/game/world_track_obstacles.dart",
+    "lib/game/world_track_obstacle_mesh.dart",
+    "test/themed_track_obstacles_test.dart",
+    "tools/track_revision_qa.dart",
+    "tools/export_themed_tracks.dart"
+  ]
+}

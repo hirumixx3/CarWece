@@ -1,0 +1,290 @@
+00:00 +0: loading /home/user/carwece/CarWece_Mundos_e_Lendas/test/expansion_v07_test.dart
+00:00 +0: /home/user/carwece/CarWece_Mundos_e_Lendas/test/expansion_v07_test.dart: (setUpAll)
+00:00 +0: /home/user/carwece/CarWece_Mundos_e_Lendas/test/expansion_v07_test.dart: Faster rivals leave a common line and physically overtake a slower leader
+00:00 +1: /home/user/carwece/CarWece_Mundos_e_Lendas/test/expansion_v07_test.dart: Object boundary stops sustained outward steering with a matching rotated collider
+00:00 +2: /home/user/carwece/CarWece_Mundos_e_Lendas/test/expansion_v07_test.dart: Missile destroys an actual blocking gate; ice and ramming leave it solid
+00:00 +3: /home/user/carwece/CarWece_Mundos_e_Lendas/test/expansion_v07_test.dart: All alternate routes validate their portals and rejoin the right main checkpoint
+00:03 +4: /home/user/carwece/CarWece_Mundos_e_Lendas/test/expansion_v07_test.dart: Entering each closed shortcut, shooting inside and rejoining counts without returning to its entrance
+00:05 +5: /home/user/carwece/CarWece_Mundos_e_Lendas/test/expansion_v07_test.dart: Jumping directly to an open shortcut exit never awards the skipped checkpoints
+00:05 +6: /home/user/carwece/CarWece_Mundos_e_Lendas/test/expansion_v07_test.dart: Full power shuffle bag covers every type and avoids immediate repeats across refills
+00:05 +7: /home/user/carwece/CarWece_Mundos_e_Lendas/test/expansion_v07_test.dart: Three rocket charges fire separately and supercharge requires the full power bar
+00:05 +8: /home/user/carwece/CarWece_Mundos_e_Lendas/test/expansion_v07_test.dart: EMP clears nearby ordnance and blocks weapons temporarily
+00:05 +9: /home/user/carwece/CarWece_Mundos_e_Lendas/test/expansion_v07_test.dart: Ice shot freezes its target, renders a shell and thaws without clearing held controls
+00:05 +10: /home/user/carwece/CarWece_Mundos_e_Lendas/test/expansion_v07_test.dart: Tesla has a visible beam and temporary motor failure; shield intercepts it
+00:05 +11: /home/user/carwece/CarWece_Mundos_e_Lendas/test/expansion_v07_test.dart: Armed mines detonate visibly, and smoke only blinds cars inside its cloud
+00:05 +12: /home/user/carwece/CarWece_Mundos_e_Lendas/test/expansion_v07_test.dart: Trackside props and barriers add detail without blocking alternate routes
+00:05 +13: /home/user/carwece/CarWece_Mundos_e_Lendas/test/expansion_v07_test.dart: Power charging HUD keeps the pedal and steering independent at Size(1280.0, 720.0) (variant: TargetPlatform.linux)
+00:06 +14: /home/user/carwece/CarWece_Mundos_e_Lendas/test/expansion_v07_test.dart: Power charging HUD keeps the pedal and steering independent at Size(800.0, 360.0) (variant: TargetPlatform.linux)
+00:06 +15: /home/user/carwece/CarWece_Mundos_e_Lendas/test/expansion_v07_test.dart: (tearDownAll)
+00:06 +15: loading /home/user/carwece/CarWece_Mundos_e_Lendas/test/graphics_backend_test.dart
+00:07 +15: /home/user/carwece/CarWece_Mundos_e_Lendas/test/graphics_backend_test.dart: Android keeps the expanded inventory while uploading just the visible car (variant: TargetPlatform.android)
+00:08 +16: /home/user/carwece/CarWece_Mundos_e_Lendas/test/graphics_backend_test.dart: Native initialization failure never swaps to the old renderer; retry restores GPU (variant: TargetPlatform.android)
+00:08 +17: /home/user/carwece/CarWece_Mundos_e_Lendas/test/graphics_backend_test.dart: A later GPU failure releases the previous texture before retrying (variant: TargetPlatform.android)
+00:08 +18: /home/user/carwece/CarWece_Mundos_e_Lendas/test/graphics_backend_test.dart: Changing garage cars reloads their own meshes and releases the old texture (variant: TargetPlatform.android)
+00:09 +19: loading /home/user/carwece/CarWece_Mundos_e_Lendas/test/graphics_channel_test.dart
+00:09 +19: /home/user/carwece/CarWece_Mundos_e_Lendas/test/graphics_channel_test.dart: Android graphics payload round-trips all car bodies, effects, damage and animated wheels
+00:16 +20: loading /home/user/carwece/CarWece_Mundos_e_Lendas/test/gpu_mesh_test.dart
+00:17 +20: /home/user/carwece/CarWece_Mundos_e_Lendas/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:40 +21: /home/user/carwece/CarWece_Mundos_e_Lendas/test/gpu_mesh_test.dart: Car winding agrees with normals, preventing inverted lighting
+00:43 +22: /home/user/carwece/CarWece_Mundos_e_Lendas/test/gpu_mesh_test.dart: Camera and model packets remain finite throughout the vertical loop
+00:43 +23: /home/user/carwece/CarWece_Mundos_e_Lendas/test/gpu_mesh_test.dart: GLES instance packets include shield, missiles, oil and turbo effects
+00:43 +24: loading /home/user/carwece/CarWece_Mundos_e_Lendas/test/smoke_regression_test.dart
+00:43 +24: /home/user/carwece/CarWece_Mundos_e_Lendas/test/smoke_regression_test.dart: (setUpAll)
+00:44 +24: /home/user/carwece/CarWece_Mundos_e_Lendas/test/smoke_regression_test.dart: Smoke clears on the first physics step outside and can be entered again
+00:44 +25: /home/user/carwece/CarWece_Mundos_e_Lendas/test/smoke_regression_test.dart: A stopped car clears as the cloud expires; removed clouds cannot leave a timer
+00:44 +26: /home/user/carwece/CarWece_Mundos_e_Lendas/test/smoke_regression_test.dart: Own smoke is ignored; overlapping enemy clouds do not stack opacity
+00:44 +27: /home/user/carwece/CarWece_Mundos_e_Lendas/test/smoke_regression_test.dart: Visibility volume matches the rendered smoke sphere and softens at its edge
+00:44 +28: /home/user/carwece/CarWece_Mundos_e_Lendas/test/smoke_regression_test.dart: Enemy smoke does not break the Android HUD at Size(1280.0, 720.0) (variant: TargetPlatform.android)
+00:45 +29: /home/user/carwece/CarWece_Mundos_e_Lendas/test/smoke_regression_test.dart: Enemy smoke does not break the Android HUD at Size(800.0, 360.0) (variant: TargetPlatform.android)
+00:46 +30: /home/user/carwece/CarWece_Mundos_e_Lendas/test/smoke_regression_test.dart: (tearDownAll)
+00:46 +30: loading /home/user/carwece/CarWece_Mundos_e_Lendas/test/podium_rewards_test.dart
+00:46 +30: /home/user/carwece/CarWece_Mundos_e_Lendas/test/podium_rewards_test.dart: Every race difficulty pays exactly the podium, without hit bonuses
+00:47 +31: /home/user/carwece/CarWece_Mundos_e_Lendas/test/podium_rewards_test.dart: Battle podium payouts match results and are recorded only once
+00:47 +32: /home/user/carwece/CarWece_Mundos_e_Lendas/test/podium_rewards_test.dart: Battle settings persist independently and tiers change real weapon damage
+00:47 +33: loading /home/user/carwece/CarWece_Mundos_e_Lendas/test/road_solid_regression_test.dart
+00:48 +33: /home/user/carwece/CarWece_Mundos_e_Lendas/test/road_solid_regression_test.dart: An airborne car hits the vertical loop ribbon from its upper face
+00:48 +34: /home/user/carwece/CarWece_Mundos_e_Lendas/test/road_solid_regression_test.dart: A fast fall lands on the upper deck instead of tunnelling through it
+00:48 +35: /home/user/carwece/CarWece_Mundos_e_Lendas/test/road_solid_regression_test.dart: A falling upside-down body cannot pass through a lower deck
+00:48 +36: /home/user/carwece/CarWece_Mundos_e_Lendas/test/road_solid_regression_test.dart: A descending deck blocks a ground car roof, without snapping it onto the road
+00:48 +37: loading /home/user/carwece/CarWece_Mundos_e_Lendas/test/online_ui_test.dart
+00:49 +37: /home/user/carwece/CarWece_Mundos_e_Lendas/test/online_ui_test.dart: (setUpAll)
+00:49 +37: /home/user/carwece/CarWece_Mundos_e_Lendas/test/online_ui_test.dart: online login and map selection fit Size(1280.0, 720.0) and preserve offline progress
+00:52 +38: /home/user/carwece/CarWece_Mundos_e_Lendas/test/online_ui_test.dart: online login and map selection fit Size(800.0, 360.0) and preserve offline progress
+00:52 +39: /home/user/carwece/CarWece_Mundos_e_Lendas/test/online_ui_test.dart: home opens online and credits include Marcos Nascimento Sage Corp
+00:53 +40: /home/user/carwece/CarWece_Mundos_e_Lendas/test/online_ui_test.dart: (tearDownAll)
+00:53 +40: loading /home/user/carwece/CarWece_Mundos_e_Lendas/test/regression_v03_test.dart
+00:54 +40: /home/user/carwece/CarWece_Mundos_e_Lendas/test/regression_v03_test.dart: Manual is the default, including migration of old automatic settings
+00:54 +41: /home/user/carwece/CarWece_Mundos_e_Lendas/test/regression_v03_test.dart: Throttle, coasting and brakes change momentum; steering has inertia
+00:55 +42: /home/user/carwece/CarWece_Mundos_e_Lendas/test/regression_v03_test.dart: Rear collision exchanges momentum and never allows an overtake through a car
+00:55 +43: /home/user/carwece/CarWece_Mundos_e_Lendas/test/regression_v03_test.dart: Side contact next to a barrier separates the whole pack
+00:55 +44: /home/user/carwece/CarWece_Mundos_e_Lendas/test/regression_v03_test.dart: Collisions also detect a lapped car across the course seam
+00:55 +45: /home/user/carwece/CarWece_Mundos_e_Lendas/test/regression_v03_test.dart: Cars can jump over a rival without an invisible collision
+00:55 +46: /home/user/carwece/CarWece_Mundos_e_Lendas/test/regression_v03_test.dart: All road ribbons are wider than six car bodies and do not fold inside corners
+00:55 +47: /home/user/carwece/CarWece_Mundos_e_Lendas/test/regression_v03_test.dart: Loop entry and exit have separate lanes and clear vertical and lateral space
+00:55 +48: /home/user/carwece/CarWece_Mundos_e_Lendas/test/regression_v03_test.dart: Photo finish in the same physics step uses crossing times, not update order
+00:55 +49: /home/user/carwece/CarWece_Mundos_e_Lendas/test/regression_v03_test.dart: Every finishing place agrees with the immutable results and rewards
+00:55 +50: /home/user/carwece/CarWece_Mundos_e_Lendas/test/regression_v03_test.dart: Being pushed backwards over a lap gate cannot record a second lap
+00:55 +51: /home/user/carwece/CarWece_Mundos_e_Lendas/test/regression_v03_test.dart: Missile is visible in flight, then triggers damage, spin, sparks and smoke
+00:55 +52: /home/user/carwece/CarWece_Mundos_e_Lendas/test/regression_v03_test.dart: A missile in another lane cannot hit by distance alone
+00:55 +53: /home/user/carwece/CarWece_Mundos_e_Lendas/test/regression_v03_test.dart: Oil causes a visible spin and a shield blocks physical weapon damage
+00:55 +54: /home/user/carwece/CarWece_Mundos_e_Lendas/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+01:53 +55: /home/user/carwece/CarWece_Mundos_e_Lendas/test/regression_v03_test.dart: Failing a loop releases the car into a visible fall without teleporting
+01:53 +56: loading /home/user/carwece/CarWece_Mundos_e_Lendas/test/intro_test.dart
+01:54 +56: /home/user/carwece/CarWece_Mundos_e_Lendas/test/intro_test.dart: (setUpAll)
+01:54 +56: /home/user/carwece/CarWece_Mundos_e_Lendas/test/intro_test.dart: Production launch waits beyond video duration and enters menu only on decoder completion
+01:55 +57: /home/user/carwece/CarWece_Mundos_e_Lendas/test/intro_test.dart: Background pauses and resumes intro without reopening or skipping it
+01:55 +58: /home/user/carwece/CarWece_Mundos_e_Lendas/test/intro_test.dart: A decoding error offers retry and does not advance to the menu
+01:55 +59: /home/user/carwece/CarWece_Mundos_e_Lendas/test/intro_test.dart: Widescreen phones preserve the complete 16:9 video without cropping
+01:55 +60: /home/user/carwece/CarWece_Mundos_e_Lendas/test/intro_test.dart: Completion is terminal even if an older platform response arrives later
+01:55 +61: /home/user/carwece/CarWece_Mundos_e_Lendas/test/intro_test.dart: (tearDownAll)
+01:55 +61: loading /home/user/carwece/CarWece_Mundos_e_Lendas/test/relay_regression_test.dart
+01:56 +61: /home/user/carwece/CarWece_Mundos_e_Lendas/test/relay_regression_test.dart: transient EOF retries up to three times without announcing a lost room
+01:56 +62: /home/user/carwece/CarWece_Mundos_e_Lendas/test/relay_regression_test.dart: persistent EOF preserves startup error instead of generic onClosed
+01:56 +63: /home/user/carwece/CarWece_Mundos_e_Lendas/test/relay_regression_test.dart: authentication requirement fails immediately, with its actual reason
+01:56 +64: /home/user/carwece/CarWece_Mundos_e_Lendas/test/relay_regression_test.dart: relay rejection is bounded and does not render arbitrary remote text
+01:56 +65: /home/user/carwece/CarWece_Mundos_e_Lendas/test/relay_regression_test.dart: silent relay times out, releases attempts, and never announces a room
+01:56 +66: /home/user/carwece/CarWece_Mundos_e_Lendas/test/relay_regression_test.dart: cancelling a silent startup stops retries and completes promptly
+01:56 +67: /home/user/carwece/CarWece_Mundos_e_Lendas/test/relay_regression_test.dart: fragmented frames and heartbeats coexist; established EOF reports once
+01:56 +68: /home/user/carwece/CarWece_Mundos_e_Lendas/test/relay_regression_test.dart: invalid public port and oversized frames are refused without retry loops
+01:56 +69: /home/user/carwece/CarWece_Mundos_e_Lendas/test/relay_regression_test.dart: internet invitations remain compatible; LAN invites preserve only private IPv4
+01:56 +70: loading /home/user/carwece/CarWece_Mundos_e_Lendas/test/flow_test.dart
+01:57 +70: /home/user/carwece/CarWece_Mundos_e_Lendas/test/flow_test.dart: (setUpAll)
+01:57 +70: /home/user/carwece/CarWece_Mundos_e_Lendas/test/flow_test.dart: Menu, garage purchase, settings, multi-touch driving, pause and finish (variant: TargetPlatform.linux)
+02:00 +71: /home/user/carwece/CarWece_Mundos_e_Lendas/test/flow_test.dart: Manual pedal supports three simultaneous touches and losing shows the actual winner (variant: TargetPlatform.linux)
+02:01 +72: /home/user/carwece/CarWece_Mundos_e_Lendas/test/flow_test.dart: Held controls survive countdown, messages and sliding between arrows (variant: TargetPlatform.linux)
+02:02 +73: /home/user/carwece/CarWece_Mundos_e_Lendas/test/flow_test.dart: Pause clears old pointers and keyboard direction survives touch release (variant: TargetPlatform.linux)
+02:03 +74: /home/user/carwece/CarWece_Mundos_e_Lendas/test/flow_test.dart: Championship runs through all three circuits and awards points (variant: TargetPlatform.linux)
+02:04 +75: /home/user/carwece/CarWece_Mundos_e_Lendas/test/flow_test.dart: Menus remain usable on a small landscape screen (variant: TargetPlatform.linux)
+02:04 +76: /home/user/carwece/CarWece_Mundos_e_Lendas/test/flow_test.dart: Settings, purchased cars, coins and records survive save and reload
+02:04 +77: /home/user/carwece/CarWece_Mundos_e_Lendas/test/flow_test.dart: Menu animation resumes immediately after backgrounding (variant: TargetPlatform.linux)
+02:05 +78: /home/user/carwece/CarWece_Mundos_e_Lendas/test/flow_test.dart: (tearDownAll)
+02:05 +78: loading /home/user/carwece/CarWece_Mundos_e_Lendas/test/stationary_regression_test.dart
+02:06 +78: /home/user/carwece/CarWece_Mundos_e_Lendas/test/stationary_regression_test.dart: All 26 starting grids remain stationary when steering; throttle launches normally
+02:08 +79: /home/user/carwece/CarWece_Mundos_e_Lendas/test/stationary_regression_test.dart: Stopped cars on offset curved plastic surfaces do not creep to a rail
+02:10 +80: /home/user/carwece/CarWece_Mundos_e_Lendas/test/stationary_regression_test.dart: Steering parked beside a rail moves only the front wheels, then can drive away
+02:10 +81: loading /home/user/carwece/CarWece_Mundos_e_Lendas/test/expansion_v06_test.dart
+02:12 +81: /home/user/carwece/CarWece_Mundos_e_Lendas/test/expansion_v06_test.dart: (setUpAll)
+02:12 +81: /home/user/carwece/CarWece_Mundos_e_Lendas/test/expansion_v06_test.dart: Stopped inverted car loses support, falls and lands without progress or teleport
+02:12 +82: /home/user/carwece/CarWece_Mundos_e_Lendas/test/expansion_v06_test.dart: Fast loop tires retain positive support while slow ones detach
+02:12 +83: /home/user/carwece/CarWece_Mundos_e_Lendas/test/expansion_v06_test.dart: No traction or steering changes ballistic momentum during a fall
+02:12 +84: /home/user/carwece/CarWece_Mundos_e_Lendas/test/expansion_v06_test.dart: A descending rocket detonates at ground contact and submits fire and shock ring
+02:12 +85: /home/user/carwece/CarWece_Mundos_e_Lendas/test/expansion_v06_test.dart: An untargeted rocket has gravity and explodes instead of vanishing
+02:12 +86: /home/user/carwece/CarWece_Mundos_e_Lendas/test/expansion_v06_test.dart: Swept rocket collision hits an elevated road and a solid household object
+02:12 +87: /home/user/carwece/CarWece_Mundos_e_Lendas/test/expansion_v06_test.dart: A missile hit animates damage and explosion even when shield absorbs damage
+02:12 +88: /home/user/carwece/CarWece_Mundos_e_Lendas/test/expansion_v06_test.dart: Each layout has its own shape and figure-eight crossings have clearance
+02:12 +89: /home/user/carwece/CarWece_Mundos_e_Lendas/test/expansion_v06_test.dart: New solid room props share bounds and leave every route corridor clear
+02:12 +90: /home/user/carwece/CarWece_Mundos_e_Lendas/test/expansion_v06_test.dart: Podium stars improve once per circuit, time trial does not award wins or stars
+02:12 +91: /home/user/carwece/CarWece_Mundos_e_Lendas/test/expansion_v06_test.dart: Career cannot deadlock: each unlock threshold is reachable before next track
+02:13 +92: /home/user/carwece/CarWece_Mundos_e_Lendas/test/expansion_v06_test.dart: Purchases require earned eligibility and money; owned models are never charged again
+02:13 +93: /home/user/carwece/CarWece_Mundos_e_Lendas/test/expansion_v06_test.dart: New saves retain only earned cars, legacy saves retain all old free cars
+02:13 +94: /home/user/carwece/CarWece_Mundos_e_Lendas/test/expansion_v06_test.dart: Production shader has no fog operation and both clear scene pipelines compile in QA
+02:13 +95: /home/user/carwece/CarWece_Mundos_e_Lendas/test/expansion_v06_test.dart: Locked circuit is previewable but cannot launch at Size(1280.0, 720.0) (variant: TargetPlatform.linux)
+02:14 +96: /home/user/carwece/CarWece_Mundos_e_Lendas/test/expansion_v06_test.dart: Locked circuit is previewable but cannot launch at Size(800.0, 360.0) (variant: TargetPlatform.linux)
+02:15 +97: /home/user/carwece/CarWece_Mundos_e_Lendas/test/expansion_v06_test.dart: (tearDownAll)
+02:15 +97: loading /home/user/carwece/CarWece_Mundos_e_Lendas/test/themed_track_obstacles_test.dart
+02:16 +97: /home/user/carwece/CarWece_Mundos_e_Lendas/test/themed_track_obstacles_test.dart: Only the 25 new races use fixed legacy ribbon width
+02:17 +98: /home/user/carwece/CarWece_Mundos_e_Lendas/test/themed_track_obstacles_test.dart: Each new circuit has 12 solid theme-specific toys instead of generic boxes
+02:17 +99: /home/user/carwece/CarWece_Mundos_e_Lendas/test/themed_track_obstacles_test.dart: Obstacle footprints stay in-lane and do not block shortcut corridors
+02:17 +100: /home/user/carwece/CarWece_Mundos_e_Lendas/test/themed_track_obstacles_test.dart: Every toy mesh is finite and fits its actual physical proxy
+02:18 +101: /home/user/carwece/CarWece_Mundos_e_Lendas/test/themed_track_obstacles_test.dart: The existing race solver physically ejects a car from every new obstacle
+02:18 +102: /home/user/carwece/CarWece_Mundos_e_Lendas/test/themed_track_obstacles_test.dart: Obstacle placement and theme order are deterministic
+02:18 +103: loading /home/user/carwece/CarWece_Mundos_e_Lendas/test/checkpoint_shortcut_regression_test.dart
+02:20 +103: /home/user/carwece/CarWece_Mundos_e_Lendas/test/checkpoint_shortcut_regression_test.dart: A car starting on a checkpoint plane advances when it drives forward
+02:20 +104: /home/user/carwece/CarWece_Mundos_e_Lendas/test/checkpoint_shortcut_regression_test.dart: A shortcut accepts an already credited overlapping main checkpoint
+02:20 +105: /home/user/carwece/CarWece_Mundos_e_Lendas/test/checkpoint_shortcut_regression_test.dart: A legal jump inside the shortcut does not lose its checkpoint sequence
+02:20 +106: /home/user/carwece/CarWece_Mundos_e_Lendas/test/checkpoint_shortcut_regression_test.dart: A missed entry plane does not invalidate a correctly driven shortcut
+02:20 +107: /home/user/carwece/CarWece_Mundos_e_Lendas/test/checkpoint_shortcut_regression_test.dart: Crossing a checkpoint backwards does not grant progress
+02:20 +108: /home/user/carwece/CarWece_Mundos_e_Lendas/test/checkpoint_shortcut_regression_test.dart: Every shortcut rejoins and completes the current lap without an extra lap
+02:30 +109: loading /home/user/carwece/CarWece_Mundos_e_Lendas/test/music_test.dart
+02:31 +109: /home/user/carwece/CarWece_Mundos_e_Lendas/test/music_test.dart: (setUpAll)
+02:31 +109: /home/user/carwece/CarWece_Mundos_e_Lendas/test/music_test.dart: Twenty-five new tracks and platform catalogs agree across three scenes
+02:31 +110: /home/user/carwece/CarWece_Mundos_e_Lendas/test/music_test.dart: Existing saves default to shuffle and music preferences retain HUD and progress
+02:31 +111: /home/user/carwece/CarWece_Mundos_e_Lendas/test/music_test.dart: Controller accepts native automatic track changes and ignores unknown track requests
+02:31 +112: /home/user/carwece/CarWece_Mundos_e_Lendas/test/music_test.dart: Audio transport distinguishes a paused race from the menu and keeps volume independent
+02:31 +113: /home/user/carwece/CarWece_Mundos_e_Lendas/test/music_test.dart: Menu entry is explicit and is not repeated by normal audio ticks
+02:31 +114: /home/user/carwece/CarWece_Mundos_e_Lendas/test/music_test.dart: Button effects keep the current race or battle playlist
+02:31 +115: /home/user/carwece/CarWece_Mundos_e_Lendas/test/music_test.dart: Shuffle control preserves the active battle scene
+02:31 +116: /home/user/carwece/CarWece_Mundos_e_Lendas/test/music_test.dart: Pause music selection, skip, volume and close keep physics paused at Size(1280.0, 720.0) (variant: TargetPlatform.android)
+02:35 +117: /home/user/carwece/CarWece_Mundos_e_Lendas/test/music_test.dart: Pause music selection, skip, volume and close keep physics paused at Size(800.0, 360.0) (variant: TargetPlatform.android)
+02:37 +118: /home/user/carwece/CarWece_Mundos_e_Lendas/test/music_test.dart: (tearDownAll)
+02:37 +118: loading /home/user/carwece/CarWece_Mundos_e_Lendas/test/battle_test.dart
+02:37 +118: /home/user/carwece/CarWece_Mundos_e_Lendas/test/battle_test.dart: Six open arenas are separate from all 26 race circuits and have nine independent loops
+02:38 +119: /home/user/carwece/CarWece_Mundos_e_Lendas/test/battle_test.dart: All 44 adaptations have unique functional identities and positive cooldowns
+02:38 +120: /home/user/carwece/CarWece_Mundos_e_Lendas/test/battle_test.dart: Both arena modes start every car unarmed with no automatic fallback
+02:38 +121: /home/user/carwece/CarWece_Mundos_e_Lendas/test/battle_test.dart: Every power including the machine gun is obtained from a map pickup and runs out
+02:38 +122: /home/user/carwece/CarWece_Mundos_e_Lendas/test/battle_test.dart: Only remaining collected ammo is selected when a weapon is exhausted
+02:38 +123: /home/user/carwece/CarWece_Mundos_e_Lendas/test/battle_test.dart: Map loot cycles through all 44 powers with a finite three-weapon inventory
+02:38 +124: /home/user/carwece/CarWece_Mundos_e_Lendas/test/battle_test.dart: Unarmed bots seek map supplies and receive ammo only on collecting them
+02:38 +125: /home/user/carwece/CarWece_Mundos_e_Lendas/test/battle_test.dart: Player stays still without accelerator and can leave the road freely without checkpoints
+02:38 +126: /home/user/carwece/CarWece_Mundos_e_Lendas/test/battle_test.dart: Health is individual, shields block damage, repair restores health and removes statuses
+02:38 +127: /home/user/carwece/CarWece_Mundos_e_Lendas/test/battle_test.dart: Swept bullets hit a car before tunnelling and solid cover blocks ordinary shots and lasers
+02:38 +128: /home/user/carwece/CarWece_Mundos_e_Lendas/test/battle_test.dart: Rocket, guided missile, disks, salvo and kinetic projectiles all cause visible damage
+02:39 +129: /home/user/carwece/CarWece_Mundos_e_Lendas/test/battle_test.dart: Mortars use real ballistic gravity and freezing bombs apply temporary ice
+02:39 +130: /home/user/carwece/CarWece_Mundos_e_Lendas/test/battle_test.dart: Magnetic mine attaches then detonates; guided fire is disrupted by jammer or decoy
+02:39 +131: /home/user/carwece/CarWece_Mundos_e_Lendas/test/battle_test.dart: All three trap forms arm, consume ammo, detonate or attract and cannot remain forever
+02:39 +132: /home/user/carwece/CarWece_Mundos_e_Lendas/test/battle_test.dart: Sonic pulse, ground bass, grid, electrical attacks and orbital swarm have distinct effects
+02:39 +133: /home/user/carwece/CarWece_Mundos_e_Lendas/test/battle_test.dart: Toxic smoke affects health and visibility only inside its living volume
+02:39 +134: /home/user/carwece/CarWece_Mundos_e_Lendas/test/battle_test.dart: Upgrade doubles standard damage, wheel blades hurt contacts and shield/boost buffs expire
+02:39 +135: /home/user/carwece/CarWece_Mundos_e_Lendas/test/battle_test.dart: Both high energy lasers deal damage immediately and generate beam geometry
+02:39 +136: /home/user/carwece/CarWece_Mundos_e_Lendas/test/battle_test.dart: Kills are counted once, destroyed cars stop fighting and victory does not use race laps
+02:39 +137: /home/user/carwece/CarWece_Mundos_e_Lendas/test/battle_test.dart: Free exploration has passive rebuilding targets, no time limit or reward; pause freezes combat
+02:39 +138: /home/user/carwece/CarWece_Mundos_e_Lendas/test/battle_test.dart: Every arena loop releases an inverted stationary car and battle frames fit native budgets
+02:44 +139: /home/user/carwece/CarWece_Mundos_e_Lendas/test/battle_test.dart: Navigation finds safe detours through cover and world projectiles use oriented collision bounds
+02:44 +140: loading /home/user/carwece/CarWece_Mundos_e_Lendas/test/online_simulation_test.dart
+02:45 +140: /home/user/carwece/CarWece_Mundos_e_Lendas/test/online_simulation_test.dart: six online drivers require their own gas and steering, with no AI
+02:46 +141: /home/user/carwece/CarWece_Mundos_e_Lendas/test/online_simulation_test.dart: race inventories, missile owner and turbo are independent for every peer
+02:46 +142: /home/user/carwece/CarWece_Mundos_e_Lendas/test/online_simulation_test.dart: battle snapshot preserves all 44 weapons, finite ammo and the selected local driver
+02:46 +143: /home/user/carwece/CarWece_Mundos_e_Lendas/test/online_simulation_test.dart: race snapshots preserve smoke, explosions, projectiles, wheels and gates
+02:46 +144: /home/user/carwece/CarWece_Mundos_e_Lendas/test/online_simulation_test.dart: online finish waits for the room, and client actions cannot create local damage
+02:46 +145: /home/user/carwece/CarWece_Mundos_e_Lendas/test/online_simulation_test.dart: public accounts require HTTPS; cleartext is restricted to private LAN addresses
+02:46 +146: /home/user/carwece/CarWece_Mundos_e_Lendas/test/online_simulation_test.dart: online slipstream, track pads and enhanced shields work for non-hosts
+02:46 +147: loading /home/user/carwece/CarWece_Mundos_e_Lendas/test/hud_editor_test.dart
+02:47 +147: /home/user/carwece/CarWece_Mundos_e_Lendas/test/hud_editor_test.dart: (setUpAll)
+02:47 +147: /home/user/carwece/CarWece_Mundos_e_Lendas/test/hud_editor_test.dart: HUD customization survives settings serialization and older saves use the defaults
+02:47 +148: /home/user/carwece/CarWece_Mundos_e_Lendas/test/hud_editor_test.dart: Invalid saved coordinates cannot lose HUD elements beyond the screen
+02:47 +149: /home/user/carwece/CarWece_Mundos_e_Lendas/test/hud_editor_test.dart: Move/resize/save HUD and keep multi-touch and sliding controls at Size(1280.0, 720.0) (variant: TargetPlatform.android)
+02:49 +150: /home/user/carwece/CarWece_Mundos_e_Lendas/test/hud_editor_test.dart: Move/resize/save HUD and keep multi-touch and sliding controls at Size(800.0, 360.0) (variant: TargetPlatform.android)
+02:50 +151: /home/user/carwece/CarWece_Mundos_e_Lendas/test/hud_editor_test.dart: Reset is a draft until saved and cancelling preserves the previous layout (variant: TargetPlatform.android)
+02:50 +152: /home/user/carwece/CarWece_Mundos_e_Lendas/test/hud_editor_test.dart: Failed HUD save keeps the editor open and preserves the stored layout (variant: TargetPlatform.android)
+02:51 +153: /home/user/carwece/CarWece_Mundos_e_Lendas/test/hud_editor_test.dart: (tearDownAll)
+02:51 +153: loading /home/user/carwece/CarWece_Mundos_e_Lendas/test/surface_contacts_test.dart
+02:52 +153: /home/user/carwece/CarWece_Mundos_e_Lendas/test/surface_contacts_test.dart: Outside road rail blocks side -1.0 without pulling car onto deck
+02:52 +154: /home/user/carwece/CarWece_Mundos_e_Lendas/test/surface_contacts_test.dart: Outside road rail blocks side 1.0 without pulling car onto deck
+02:52 +155: /home/user/carwece/CarWece_Mundos_e_Lendas/test/surface_contacts_test.dart: Inside rail retains a car without letting it cross to the exterior
+02:52 +156: /home/user/carwece/CarWece_Mundos_e_Lendas/test/surface_contacts_test.dart: Driving under an elevated bridge never snaps up to the deck
+02:52 +157: /home/user/carwece/CarWece_Mundos_e_Lendas/test/surface_contacts_test.dart: A car can land from above and hits the underside from below
+02:52 +158: /home/user/carwece/CarWece_Mundos_e_Lendas/test/surface_contacts_test.dart: Ramp sides and back are solid and never grant top contact from outside
+02:52 +159: /home/user/carwece/CarWece_Mundos_e_Lendas/test/surface_contacts_test.dart: Ramp entrance climbs continuously, launches at the lip and permits a top landing
+02:52 +160: loading /home/user/carwece/CarWece_Mundos_e_Lendas/test/performance_regression_test.dart
+02:52 +160: /home/user/carwece/CarWece_Mundos_e_Lendas/test/performance_regression_test.dart: Cached projection matches the original in all circuits, loops and arena heights
+02:54 +161: /home/user/carwece/CarWece_Mundos_e_Lendas/test/performance_regression_test.dart: Worker preparation returns identical world and car bytes without remapping slots
+02:55 +162: /home/user/carwece/CarWece_Mundos_e_Lendas/test/performance_regression_test.dart: Automatic quality migrates old graphics settings and preserves explicit new choices
+02:55 +163: loading /home/user/carwece/CarWece_Mundos_e_Lendas/test/expansion_v05_test.dart
+02:57 +163: /home/user/carwece/CarWece_Mundos_e_Lendas/test/expansion_v05_test.dart: (setUpAll)
+02:57 +163: /home/user/carwece/CarWece_Mundos_e_Lendas/test/expansion_v05_test.dart: Thirty-one real-name models have distinct silhouettes and a starter RX7
+03:02 +164: /home/user/carwece/CarWece_Mundos_e_Lendas/test/expansion_v05_test.dart: Every room has at least four circuits and matching tire surface grip
+03:02 +165: /home/user/carwece/CarWece_Mundos_e_Lendas/test/expansion_v05_test.dart: Steering rack animates at rest without moving the car or rear wheels
+03:02 +166: /home/user/carwece/CarWece_Mundos_e_Lendas/test/expansion_v05_test.dart: Tire roll comes from signed traveled speed and stops at rest
+03:02 +167: /home/user/carwece/CarWece_Mundos_e_Lendas/test/expansion_v05_test.dart: Separate wheel transforms retain axle center, spin and front steer
+03:02 +168: /home/user/carwece/CarWece_Mundos_e_Lendas/test/expansion_v05_test.dart: Drift requires its own button and releases rear grip without braking gas
+03:02 +169: /home/user/carwece/CarWece_Mundos_e_Lendas/test/expansion_v05_test.dart: Wheel meshes have correct normals and readable material diversity
+03:02 +170: /home/user/carwece/CarWece_Mundos_e_Lendas/test/expansion_v05_test.dart: Legacy car purchases and selected index migrate without losing currency
+03:02 +171: /home/user/carwece/CarWece_Mundos_e_Lendas/test/expansion_v05_test.dart: Room filters and slide-to-drift controls fit Size(1280.0, 720.0) (variant: TargetPlatform.linux)
+03:04 +172: /home/user/carwece/CarWece_Mundos_e_Lendas/test/expansion_v05_test.dart: Room filters and slide-to-drift controls fit Size(800.0, 360.0) (variant: TargetPlatform.linux)
+03:05 +173: /home/user/carwece/CarWece_Mundos_e_Lendas/test/expansion_v05_test.dart: (tearDownAll)
+03:05 +173: loading /home/user/carwece/CarWece_Mundos_e_Lendas/test/free_drive_test.dart
+03:06 +173: /home/user/carwece/CarWece_Mundos_e_Lendas/test/free_drive_test.dart: Neutral steering preserves the world heading instead of following a curve
+03:06 +174: /home/user/carwece/CarWece_Mundos_e_Lendas/test/free_drive_test.dart: Left and right turn the body and its actual world trajectory in opposite directions
+03:06 +175: /home/user/carwece/CarWece_Mundos_e_Lendas/test/free_drive_test.dart: Floor driving stays free outside the circuit corridor and never recenters the car
+03:06 +176: /home/user/carwece/CarWece_Mundos_e_Lendas/test/free_drive_test.dart: Holding the accelerator alone cannot complete a lap
+03:07 +177: /home/user/carwece/CarWece_Mundos_e_Lendas/test/free_drive_test.dart: Crossing the finish line after skipping gates never awards a lap
+03:07 +178: /home/user/carwece/CarWece_Mundos_e_Lendas/test/free_drive_test.dart: Solid room props stop the front bumper and produce an impact
+03:07 +179: /home/user/carwece/CarWece_Mundos_e_Lendas/test/free_drive_test.dart: All road edges stay above the floor and no roll leaks past the loop
+03:07 +180: /home/user/carwece/CarWece_Mundos_e_Lendas/test/free_drive_test.dart: Braking at low speed engages reverse so the player can leave a wall
+03:07 +181: /home/user/carwece/CarWece_Mundos_e_Lendas/test/free_drive_test.dart: Recovery returns to the last validated gate without completing skipped sectors
+03:07 +182: /home/user/carwece/CarWece_Mundos_e_Lendas/test/free_drive_test.dart: A turn requires braking at speed: the bicycle model has a finite turning radius
+03:07 +183: /home/user/carwece/CarWece_Mundos_e_Lendas/test/free_drive_test.dart: The ramp raises the body, launches it and lands it back on the real floor
+03:07 +184: /home/user/carwece/CarWece_Mundos_e_Lendas/test/free_drive_test.dart: Cars waiting behind the start cannot appear one lap ahead when the race begins
+03:07 +185: /home/user/carwece/CarWece_Mundos_e_Lendas/test/free_drive_test.dart: The chase camera follows the actual body heading on free floor
+03:07 +186: /home/user/carwece/CarWece_Mundos_e_Lendas/test/free_drive_test.dart: Longer layouts keep independent records while preserving old saved times
+03:07 +187: loading /home/user/carwece/CarWece_Mundos_e_Lendas/test/loading_start_test.dart
+03:08 +187: /home/user/carwece/CarWece_Mundos_e_Lendas/test/loading_start_test.dart: The entire countdown waits for the first native 3D frame (variant: TargetPlatform.android)
+03:11 +188: loading /home/user/carwece/CarWece_Mundos_e_Lendas/test/weapon_visuals_test.dart
+03:12 +188: /home/user/carwece/CarWece_Mundos_e_Lendas/test/weapon_visuals_test.dart: Every collectible has a distinct finite metal attachment within the native budget
+03:12 +189: /home/user/carwece/CarWece_Mundos_e_Lendas/test/weapon_visuals_test.dart: Only collected weapons are mounted and every selected item uses its own model
+03:12 +190: /home/user/carwece/CarWece_Mundos_e_Lendas/test/weapon_visuals_test.dart: Turret follows a moving target between shots and the muzzle matches projectile direction
+03:12 +191: /home/user/carwece/CarWece_Mundos_e_Lendas/test/weapon_visuals_test.dart: Manual target behind the car rotates the mount while the chassis stays manual
+03:12 +192: loading /home/user/carwece/CarWece_Mundos_e_Lendas/test/battle_target_test.dart
+03:13 +192: /home/user/carwece/CarWece_Mundos_e_Lendas/test/battle_target_test.dart: Mira alterna entre rivais válidos e não seleciona morto, bloqueado ou distante
+03:13 +193: /home/user/carwece/CarWece_Mundos_e_Lendas/test/battle_target_test.dart: A mira verde acompanha o alvo que a arma usa, sem alterar munição
+03:13 +194: loading /home/user/carwece/CarWece_Mundos_e_Lendas/test/engine_test.dart
+03:14 +194: /home/user/carwece/CarWece_Mundos_e_Lendas/test/engine_test.dart: All twelve circuits have finite, continuous, orthonormal frames
+03:15 +195: /home/user/carwece/CarWece_Mundos_e_Lendas/test/engine_test.dart: Countdown holds cars, then automatic acceleration moves the player
+03:15 +196: /home/user/carwece/CarWece_Mundos_e_Lendas/test/engine_test.dart: Physics gives the same result at 30, 60 and 120 FPS
+03:17 +197: /home/user/carwece/CarWece_Mundos_e_Lendas/test/engine_test.dart: Pausing freezes the clock and clears held controls
+03:17 +198: /home/user/carwece/CarWece_Mundos_e_Lendas/test/engine_test.dart: Manual acceleration, braking, walls, nitro and drift affect driving
+03:17 +199: /home/user/carwece/CarWece_Mundos_e_Lendas/test/engine_test.dart: Items are collected once per pickup per lap
+03:17 +200: /home/user/carwece/CarWece_Mundos_e_Lendas/test/engine_test.dart: All four items have functional effects and consume inventory
+03:17 +201: /home/user/carwece/CarWece_Mundos_e_Lendas/test/engine_test.dart: Time trial excludes bots and weapons
+03:17 +202: /home/user/carwece/CarWece_Mundos_e_Lendas/test/engine_test.dart: Finishing records exactly three laps and a finite reward
+03:19 +203: /home/user/carwece/CarWece_Mundos_e_Lendas/test/engine_test.dart: A bot that finished earlier still ranks ahead at the finish line
+03:19 +204: /home/user/carwece/CarWece_Mundos_e_Lendas/test/engine_test.dart: Visible boost pads provide an actual velocity impulse
+03:19 +205: /home/user/carwece/CarWece_Mundos_e_Lendas/test/engine_test.dart: Settings restore clamps invalid input; records and car purchases persist in the store model
+03:19 +206: /home/user/carwece/CarWece_Mundos_e_Lendas/test/engine_test.dart: Hitch cap prevents a paused app from fast-forwarding physics
+03:19 +207: /home/user/carwece/CarWece_Mundos_e_Lendas/test/engine_test.dart: Time formatting and vector rotation preserve useful invariants
+03:19 +208: loading /home/user/carwece/CarWece_Mundos_e_Lendas/test/world_expansion_test.dart
+03:20 +208: /home/user/carwece/CarWece_Mundos_e_Lendas/test/world_expansion_test.dart: Append-only catalogues add exactly 25 cars, 25 circuits and 5 arenas
+03:20 +209: /home/user/carwece/CarWece_Mundos_e_Lendas/test/world_expansion_test.dart: 25 new sculpted cars have distinct finite chassis and independent wheels
+03:26 +210: /home/user/carwece/CarWece_Mundos_e_Lendas/test/world_expansion_test.dart: All new tracks have genuine clear shorter branches with ordered checkpoints
+03:26 +211: /home/user/carwece/CarWece_Mundos_e_Lendas/test/world_expansion_test.dart: Prehistoric racing and battle contain all three physical toy species
+03:28 +212: /home/user/carwece/CarWece_Mundos_e_Lendas/test/world_expansion_test.dart: New battle floors have clear safe spawns, pickups, routes and independent loops
+03:28 +213: /home/user/carwece/CarWece_Mundos_e_Lendas/test/world_expansion_test.dart: Every new biome produces finite world data within the existing vertex layout
+03:30 +214: /home/user/carwece/CarWece_Mundos_e_Lendas/test/world_expansion_test.dart: Every new car starts in racing and combat with finite physical and GPU state
+03:30 +215: /home/user/carwece/CarWece_Mundos_e_Lendas/test/world_expansion_test.dart: Grip is biome-specific without changing existing room surfaces
+03:30 +216: loading /home/user/carwece/CarWece_Mundos_e_Lendas/test/battle_ui_test.dart
+03:31 +216: /home/user/carwece/CarWece_Mundos_e_Lendas/test/battle_ui_test.dart: (setUpAll)
+03:31 +216: /home/user/carwece/CarWece_Mundos_e_Lendas/test/battle_ui_test.dart: Battle rewards and history persist separately from race medals and records
+03:31 +217: /home/user/carwece/CarWece_Mundos_e_Lendas/test/battle_ui_test.dart: Battle difficulty can be chosen before launch at Size(1280.0, 720.0) (variant: TargetPlatform.android)
+03:33 +218: /home/user/carwece/CarWece_Mundos_e_Lendas/test/battle_ui_test.dart: Battle difficulty can be chosen before launch at Size(800.0, 360.0) (variant: TargetPlatform.android)
+03:35 +219: /home/user/carwece/CarWece_Mundos_e_Lendas/test/battle_ui_test.dart: Home to arenas, free exploration, multitouch firing, arsenal and HUD remain usable at Size(1280.0, 720.0) (variant: TargetPlatform.android)
+03:38 +220: /home/user/carwece/CarWece_Mundos_e_Lendas/test/battle_ui_test.dart: Home to arenas, free exploration, multitouch firing, arsenal and HUD remain usable at Size(800.0, 360.0) (variant: TargetPlatform.android)
+03:40 +221: /home/user/carwece/CarWece_Mundos_e_Lendas/test/battle_ui_test.dart: (tearDownAll)
+03:40 +221: loading /home/user/carwece/CarWece_Mundos_e_Lendas/test/battle_graphics_channel_test.dart
+03:41 +221: /home/user/carwece/CarWece_Mundos_e_Lendas/test/battle_graphics_channel_test.dart: Battle GPU uploads all 44 weapon models, life bars and active projectile (variant: TargetPlatform.android)
+03:43 +222: loading /home/user/carwece/CarWece_Mundos_e_Lendas/test/difficulty_v08_test.dart
+03:45 +222: /home/user/carwece/CarWece_Mundos_e_Lendas/test/difficulty_v08_test.dart: Normal and hard select a competitive car class and keep the player unchanged
+03:45 +223: /home/user/carwece/CarWece_Mundos_e_Lendas/test/difficulty_v08_test.dart: Rival turbo uses finite energy and actual motion, with no boost on easy
+03:45 +224: /home/user/carwece/CarWece_Mundos_e_Lendas/test/difficulty_v08_test.dart: Difficulty never reduces the player acceleration, steering or wheel dynamics
+03:45 +225: loading /home/user/carwece/CarWece_Mundos_e_Lendas/test/expansion_v09_test.dart
+03:46 +225: /home/user/carwece/CarWece_Mundos_e_Lendas/test/expansion_v09_test.dart: Eight new circuits have twelve independent full loops and no residual roll
+03:47 +226: /home/user/carwece/CarWece_Mundos_e_Lendas/test/expansion_v09_test.dart: Reset in a second loop returns before that loop without skipping gates
+03:47 +227: /home/user/carwece/CarWece_Mundos_e_Lendas/test/expansion_v09_test.dart: Grenades are visible ballistic objects, bounce and explode on their fuse
+03:47 +228: /home/user/carwece/CarWece_Mundos_e_Lendas/test/expansion_v09_test.dart: Grenade splash hits nearby rivals and a shield absorbs the same hit
+03:47 +229: /home/user/carwece/CarWece_Mundos_e_Lendas/test/expansion_v09_test.dart: Shockwave pushes nearby rivals, respects shields and does not hit distant cars
+03:47 +230: /home/user/carwece/CarWece_Mundos_e_Lendas/test/expansion_v09_test.dart: Spikes puncture locally and repair removes damage and temporary faults
+03:47 +231: /home/user/carwece/CarWece_Mundos_e_Lendas/test/expansion_v09_test.dart: Punctured tires lose grip while shields and height avoid spike damage
+03:47 +232: /home/user/carwece/CarWece_Mundos_e_Lendas/test/expansion_v09_test.dart: Current race and garage upload only their models with stable mesh indices
+03:52 +233: /home/user/carwece/CarWece_Mundos_e_Lendas/test/expansion_v09_test.dart: Quick race and first championship stage always start last; solo starts alone
+03:52 +234: /home/user/carwece/CarWece_Mundos_e_Lendas/test/expansion_v09_test.dart: Championship stages use the complete previous finish order, not cup points
+03:52 +235: /home/user/carwece/CarWece_Mundos_e_Lendas/test/expansion_v09_test.dart: Expanded normal roster recovers from oscillation and completes chicanes
+03:56 +236: All tests passed!

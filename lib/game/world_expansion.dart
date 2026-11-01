@@ -843,10 +843,11 @@ List<TrackSpec> createExpansionTracks() {
         biome.floor,
         biome.horizon,
         positioned,
-        width: 48,
+        width: 46,
         loopSections: sections,
       ),
     );
+    populateExpansionObstacles(result.last, i);
   }
   return result;
 }

@@ -8,6 +8,7 @@ part 'race_course.dart';
 part 'battle_content.dart';
 part 'road_geometry.dart';
 part 'world_expansion.dart';
+part 'world_track_obstacles.dart';
 
 enum DriveType { rear, all, front }
 
@@ -1838,6 +1839,8 @@ class TrackSpec {
   final List<TrackFrame> frames = [];
   late final RoadCollisionMesh roadCollision = RoadCollisionMesh(this);
   final List<WorldObstacle> obstacles = [];
+  // Only the 25 expansion race circuits opt in; legacy maps/arenas stay intact.
+  final List<ExpansionTrackObstacle> themedObstacles = [];
   final List<WorldObstacle> scenery = [];
   final List<WorldRamp> ramps = [];
   final List<RoomProp> details = [];
@@ -2189,6 +2192,10 @@ class TrackSpec {
 
   bool isFloor(double distance) => at(distance).p.y < .38;
   double widthAt(double distance) {
+    // Expansion races use the original 46-unit toy ribbon on the floor too.
+    // Do not inflate their floor corridors to 96 units on straight sectors.
+    // Legacy room tracks and all battle arenas keep their original behavior.
+    if (outdoor && !openArena) return width;
     if (!isFloor(distance)) return width;
     final curvature =
         (at(distance + 3).forward - at(distance - 3).forward).length / 6;

@@ -32,15 +32,15 @@ void buildCourseObjects(Mesh3 m, TrackSpec track) {
       // Same bounds as CourseBarrier.collider; no decorative overhang in lane.
       box(
         0,
-        6,
+        b.height / 2,
         0,
-        V3(5, 12, b.length),
+        V3(5, b.height, b.length),
         color,
         b.kind == 'logs' ? Material3.wood : Material3.plastic,
       );
       box(
         0,
-        10.5,
+        b.height * .875,
         0,
         V3(4.5, .35, b.length - .4),
         b.kind == 'snowbanks' ? 0xffeff9ff : 0xffd1be88,

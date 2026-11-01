@@ -1,0 +1,153 @@
+CARWECE — REVISÃO DAS 25 PISTAS TEMÁTICAS
+
+ENTREGA
+Este arquivo contém o projeto-fonte completo revisado, não um APK/AAB.
+Abra a pasta CarWece_Mundos_e_Lendas em uma instalação Flutter 3.35.7
+(Dart 3.9.2), execute flutter pub get e depois flutter run.
+A compilação Android depende de Android SDK/JDK e da assinatura já prevista
+no projeto original. Esta entrega não foi instalada em celular físico.
+
+ESCOPO ATENDIDO
+Somente as 25 pistas novas receberam o redesenho de largura, piso e obstáculos.
+São 5 pistas por ambiente: floresta, pré-história, deserto, neve e litoral.
+12 obstáculos sólidos por pista, 300 no total, substituindo as caixas genéricas.
+As 26 pistas antigas e as 11 arenas mantêm geometria e conteúdo idênticos.
+Carros, preços, estrelas, IDs, ordem dos catálogos e salvamentos não foram
+alterados. Músicas, vídeo, shaders e recursos Android originais preservados.
+O identificador de conteúdo online foi atualizado: todos os participantes
+precisam desta revisão para não misturar larguras/colisões incompatíveis.
+
+LARGURA E ESTILO
+A faixa-base passou de 48 para 46 unidades, padrão nominal das pistas antigas.
+Nas novas pistas, widthAt também permanece em 46: foi removida a abertura
+para até 96 unidades que ocorria nas retas sobre o chão. Nas pistas antigas,
+a regra original de alargamento permanece intacta.
+O piso das novas corridas agora tem faixa laranja de plástico, emendas e
+marcas de borda. As proteções temáticas baixaram de 12 para 4,8 unidades,
+com o mesmo limite na malha visual e no colisor. Rampas, atalhos, pontes,
+turbos e os 5 loops preexistentes foram mantidos.
+A direção visual usa corrida arcade de miniaturas como referência, inspirada
+em Hot Wheels: Beat That!, sem logos, modelos ou recursos copiados do jogo.
+Não é uma reprodução exata da arte ou da física desse título.
+
+OBSTÁCULOS POR AMBIENTE
+FLORESTA: troncos, tocos com anéis de madeira, pedras e árvores pequenas.
+PRÉ-HISTÓRIA: ninhos de ovos, fósseis, rochas e miniaturas de tiranossauro.
+DESERTO: cactos, rochas de arenito e pequenas dunas sólidas de brinquedo.
+NEVE: rochas nevadas, blocos de gelo, bolas de neve e pinheiros nevados.
+LITORAL: boias, conchas, corais e madeira trazida pela maré.
+São obstáculos estáticos e sólidos, não animais ou perigos animados.
+As dunas não são rampas novas: são peças sólidas para desvio.
+
+REGRAS DE POSICIONAMENTO
+Distribuição determinística, com variação de posição e sequência por pista.
+As peças ficam dentro do corredor, com passagem central e margem de direção.
+A largada, a chegada, os atalhos, as pontes e os acessos aos loops ficam livres.
+A pista reserva 80 unidades antes e 320 depois de cada rampa, além de uma
+checagem espacial, para não colocar obstáculos na área de aterrissagem.
+A validação inicial identificou um bloqueio após salto na neve; ele foi
+corrigido ampliando essa área de proteção. Erros iniciais de compilação e
+as expectativas antigas dos testes de largura foram corrigidos antes da
+execução final aprovada. Nenhum teste foi desativado ou ignorado para a revisão.
+Os obstáculos usam o mesmo solver de colisão e a mesma percepção da IA.
+Suas malhas são ajustadas aos limites reais dos colisores; normais recebem
+correção de escala para preservar a iluminação.
+
+MAPA DE FUNCIONAMENTO DO PROJETO
+lib/main.dart: menus, seleção, garagem, progressão e campeonato.
+lib/platform.dart: preferências, moedas, compras, progresso e salvamentos.
+lib/game/content.dart e seus parts: carros, pistas, arenas, splines, projeções,
+checkpoints, materiais de piso e catálogo de objetos físicos.
+lib/game/engine.dart e seus parts: integração física a 120 Hz, controles,
+aderência, contato das rodas, IA, colisões, saltos, voltas e itens de corrida.
+lib/game/race_course.dart: escolha dos atalhos e barreiras físicas de contorno.
+lib/game/battle_engine.dart e battle_content.dart: combate, navegação, armas,
+vida, suprimentos e arenas independentes das corridas.
+lib/game/gpu_mesh.dart e seus parts: malhas procedurais do mundo e dos carros.
+lib/game/gpu_frame.dart: câmera, instâncias e pacotes enviados à GPU.
+lib/game/renderer.dart: renderização Flutter de compatibilidade.
+android/.../RushGLRenderer.kt: renderização OpenGL ES e gestão de recursos.
+lib/ui/: telas, HUD, toque, escolha de armas e superfície gráfica nativa.
+lib/online/: autenticação, convites, retransmissores, cliente e servidor.
+
+INTEGRAÇÃO DESTA REVISÃO
+world_expansion.dart cria as pistas e então adiciona os obstáculos temáticos,
+após a geração dos atalhos e da decoração. Isso evita bloquear a rota extra.
+world_track_obstacles.dart contém os tipos, tamanhos e filtros de segurança.
+Os colisores são registrados em TrackSpec.obstacles; as peças visuais ficam
+em TrackSpec.themedObstacles, separadas da decoração externa de cenário.
+world_track_obstacle_mesh.dart contém os protótipos e o piso laranja novo.
+world_expansion_mesh.dart desenha essas peças no mesmo mundo de jogo.
+course_mesh.dart usa a altura real das novas barreiras ao construir a malha.
+Os caminhos antigos mantêm os valores e os ramos de execução originais.
+
+VALIDAÇÃO FINAL EXECUTADA NESTA REVISÃO
+Flutter 3.35.7 / Dart 3.9.2.
+flutter analyze --no-pub: sem problemas.
+flutter test --no-pub --concurrency=1: 236 testes aprovados.
+A suíte inclui conclusão de 3 voltas em todos os 51 circuitos e reentrada
+pelos atalhos. O conjunto novo verifica os 300 obstáculos, colisões reais,
+malhas finitas, ajuste aos colisores e determinismo.
+50 voltas adicionais aprovadas: uma em cada pista nova e uma com cada carro
+adicionado pela expansão anterior, sem alterar os carros.
+37 assinaturas SHA-256 de conteúdo e de malha comparadas: 26 pistas antigas
+e todas as 11 arenas, todas idênticas às do ZIP recebido.
+15 vistas reais dos cinco ambientes renderizadas com as malhas de produção
+e os shaders originais em Mesa/OpenGL ES 3.2, sem erros GLES.
+Essas imagens não são arte conceitual gerada por IA.
+Logs e catálogo: verification/pistas_tematicas/.
+Imagens desta revisão: previews/pistas_tematicas/.
+As pastas de verificação e prévias anteriores, vindas no ZIP original, são
+históricas e não substituem os resultados desta revisão.
+
+LIMITAÇÕES
+Não se afirma compreensão ou validação absoluta de 100% dos caminhos do jogo.
+A revisão analisou a arquitetura e as integrações necessárias à alteração,
+com testes automatizados e revisão de cenas realmente renderizadas.
+Não foi feito build APK/AAB, assinatura, instalação em aparelho, medição
+real de FPS/temperatura nem partida online entre aparelhos nesta execução.
+Validar no dispositivo de destino antes de publicar.
+
+ARQUIVOS ORIGINAIS MODIFICADOS
+ - lib/game/content.dart
+ - lib/game/course_mesh.dart
+ - lib/game/gpu_mesh.dart
+ - lib/game/race_course.dart
+ - lib/game/world_expansion.dart
+ - lib/game/world_expansion_mesh.dart
+ - lib/online/protocol.dart
+ - test/free_drive_test.dart
+
+NOVOS ARQUIVOS DE CÓDIGO E TESTE
+ - lib/game/world_track_obstacles.dart
+ - lib/game/world_track_obstacle_mesh.dart
+ - test/themed_track_obstacles_test.dart
+ - tools/track_revision_qa.dart
+ - tools/export_themed_tracks.dart
+
+LISTA DAS 25 PISTAS REVISADAS
+01. COPAS VELOZES | FLORESTA | 46 unidades | 12 obstáculos
+02. RAÍZES DO RALI | FLORESTA | 46 unidades | 12 obstáculos
+03. CURVAS DO RIACHO | FLORESTA | 46 unidades | 12 obstáculos
+04. SERRARIA TURBO | FLORESTA | 46 unidades | 12 obstáculos
+05. ESPIRAL DA FLORESTA | FLORESTA | 46 unidades | 12 obstáculos
+06. VALE DOS DINOSSAUROS | PRÉ-HISTÓRIA | 46 unidades | 12 obstáculos
+07. NINHO DOS GIGANTES | PRÉ-HISTÓRIA | 46 unidades | 12 obstáculos
+08. CÂNION DOS FÓSSEIS | PRÉ-HISTÓRIA | 46 unidades | 12 obstáculos
+09. ROTA DO VULCÃO | PRÉ-HISTÓRIA | 46 unidades | 12 obstáculos
+10. LOOP DO TIRANOSSAURO | PRÉ-HISTÓRIA | 46 unidades | 12 obstáculos
+11. VOLTA DO OÁSIS | DESERTO | 46 unidades | 12 obstáculos
+12. DUNAS DOURADAS | DESERTO | 46 unidades | 12 obstáculos
+13. SERPENTE DO CÂNION | DESERTO | 46 unidades | 12 obstáculos
+14. MIRAGEM TURBO | DESERTO | 46 unidades | 12 obstáculos
+15. LOOP DO SOL | DESERTO | 46 unidades | 12 obstáculos
+16. RALI DOS PINHEIROS | NEVE | 46 unidades | 12 obstáculos
+17. PONTE GLACIAL | NEVE | 46 unidades | 12 obstáculos
+18. CURVAS DO FIORD | NEVE | 46 unidades | 12 obstáculos
+19. ROTA DA AVALANCHE | NEVE | 46 unidades | 12 obstáculos
+20. ESPIRAL POLAR | NEVE | 46 unidades | 12 obstáculos
+21. CURVAS DA BAÍA | LITORAL | 46 unidades | 12 obstáculos
+22. RETA DO FAROL | LITORAL | 46 unidades | 12 obstáculos
+23. LABIRINTO DOS RECIFES | LITORAL | 46 unidades | 12 obstáculos
+24. PORTO A TODO VAPOR | LITORAL | 46 unidades | 12 obstáculos
+25. LOOP DA MARÉ | LITORAL | 46 unidades | 12 obstáculos

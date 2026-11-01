@@ -60,6 +60,9 @@ void buildExpansionWorld(Mesh3 m, TrackSpec t) {
     }
   }
   for (final prop in t.details) buildExpansionPropMesh(m, prop);
+  for (final obstacle in t.themedObstacles) {
+    buildExpansionTrackObstacleMesh(m, obstacle);
+  }
 }
 
 void _worldEllipsoid(Mesh3 m, V3 p, V3 radius, int color, {int segments = 12}) {

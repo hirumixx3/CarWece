@@ -10,6 +10,7 @@ part 'room_finish.dart';
 part 'detailed_props.dart';
 part 'course_mesh.dart';
 part 'world_expansion_mesh.dart';
+part 'world_track_obstacle_mesh.dart';
 part 'car_details_world.dart';
 
 /// Vertex layout shared with the Android GLES renderer and the offscreen QA tool:
@@ -325,6 +326,9 @@ Mesh3 buildWorldMesh(TrackSpec track) {
   for (var i = 0; i < fs.length; i++) {
     final a = fs[i], b = fs[(i + 1) % fs.length];
     if (track.isFloor((a.s + (i + 1 == fs.length ? track.length : b.s)) * .5)) {
+      if (track.outdoor && !track.openArena) {
+        buildExpansionFloorRibbon(m, track, a, b, i);
+      }
       if (!track.openArena && i % 24 == 0) {
         final p = a.point(0, .025);
         m.triangle(
