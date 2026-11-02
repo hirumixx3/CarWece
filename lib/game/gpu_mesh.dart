@@ -12,6 +12,8 @@ part 'course_mesh.dart';
 part 'world_expansion_mesh.dart';
 part 'world_track_obstacle_mesh.dart';
 part 'car_details_world.dart';
+part 'car_details_brazil.dart';
+part 'brazil_indoor_mesh.dart';
 
 /// Vertex layout shared with the Android GLES renderer and the offscreen QA tool:
 /// position.xyz, normal.xyz, linear-input color.rgb, texture.uv, material.
@@ -730,6 +732,10 @@ Mesh3 buildWorldMesh(TrackSpec track) {
   if (track.outdoor) {
     buildExpansionWorld(m, track);
     buildCourseObjects(m, track);
+    return m;
+  }
+  if (brazilLoopStars.containsKey(track.id)) {
+    buildBrazilIndoorWorld(m, track);
     return m;
   }
   // Household floor material and wall color are selected by environment.

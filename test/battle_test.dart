@@ -574,7 +574,7 @@ void main() {
         expect(BattleMesh.first, GpuResources.objects.length);
         expect(
           GpuResources.objectsFor([0]).length + BattleGpuMeshes.objects.length,
-          lessThanOrEqualTo(256),
+          lessThanOrEqualTo(512),
         );
         for (var i = 0; i < frame[14].toInt(); i++)
           expect(frame[15 + i * 17], lessThan(BattleMesh.count));

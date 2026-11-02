@@ -268,7 +268,7 @@ void main() {
     'Podium stars improve once per circuit, time trial does not award wins or stars',
     () async {
       final store = GameStore();
-      expect(tracks.where(store.trackUnlocked).length, 5);
+      expect(tracks.where(store.trackUnlocked).length, 8);
       store.record(tracks.first, result(3), RaceMode.quick);
       expect(store.stars, 1);
       store.record(tracks.first, result(2), RaceMode.quick);

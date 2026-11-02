@@ -1,0 +1,53 @@
+{
+  "versao": "1.2.0+3",
+  "pistas_total": 76,
+  "pistas_novas": 25,
+  "loops_novos": 25,
+  "carros_total": 81,
+  "carros_novos": 25,
+  "arenas_preservadas": 11,
+  "testes_flutter": 245,
+  "testes_contrato_android": 6,
+  "voltas_adicionais": 75,
+  "vistas_gles": 44,
+  "classes": [
+    "S",
+    "A",
+    "B",
+    "C",
+    "D"
+  ],
+  "arquivos_modificados": [
+    "android/app/src/main/kotlin/com/hirumisu/carwece/GraphicsContract.kt",
+    "android/app/src/test/kotlin/com/hirumisu/carwece/BattleGraphicsContractTest.kt",
+    "android/app/src/test/kotlin/com/hirumisu/carwece/GraphicsContractTest.kt",
+    "lib/game/car_mesh.dart",
+    "lib/game/content.dart",
+    "lib/game/gpu_mesh.dart",
+    "lib/game/renderer.dart",
+    "lib/game/world_track_obstacle_mesh.dart",
+    "lib/game/world_track_obstacles.dart",
+    "lib/main.dart",
+    "lib/online/protocol.dart",
+    "pubspec.yaml",
+    "test/battle_test.dart",
+    "test/expansion_v05_test.dart",
+    "test/expansion_v06_test.dart",
+    "test/flow_test.dart",
+    "test/free_drive_test.dart",
+    "test/themed_track_obstacles_test.dart",
+    "test/world_expansion_test.dart"
+  ],
+  "arquivos_novos_codigo": [
+    "lib/game/brazil_content.dart",
+    "lib/game/loop_expansion_brazil.dart",
+    "lib/game/car_details_brazil.dart",
+    "lib/game/brazil_indoor_mesh.dart",
+    "test/brazil_expansion_test.dart",
+    "test/garage_filters_test.dart",
+    "tools/brazil_drive_qa.dart",
+    "tools/brazil_preservation_qa.dart",
+    "tools/export_brazil_expansion.dart",
+    "tools/BrazilGraphicsBudgetProbe.kt"
+  ]
+}

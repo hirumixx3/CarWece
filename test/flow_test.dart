@@ -112,7 +112,15 @@ void main() {
       expect(find.text('ESCOLHA A CORRIDA'), findsOneWidget);
       await screenshot(tester, '02_circuitos');
       await tap(tester, 'GARAGEM');
-      await tester.ensureVisible(find.text('TOYOTA SUPRA A80'));
+      await tester.scrollUntilVisible(
+        find.text('TOYOTA SUPRA A80'),
+        240,
+        scrollable: find.descendant(
+          of: find.byKey(const ValueKey('garage-car-list')),
+          matching: find.byType(Scrollable),
+        ),
+        maxScrolls: 100,
+      );
       await tester.pump();
       await tap(tester, 'TOYOTA SUPRA A80');
       await screenshot(tester, '03_garagem');
@@ -156,11 +164,11 @@ void main() {
           find.byWidgetPredicate((w) => w is HoldControl && w.label == name);
       final left = await tester.startGesture(
         tester.getCenter(control('ESQUERDA')),
-        pointer: 1,
+        pointer: 10001,
       );
       final boost = await tester.startGesture(
         tester.getCenter(control('TURBO')),
-        pointer: 2,
+        pointer: 10002,
       );
       await tester.pump(const Duration(milliseconds: 30));
       expect(race.steering, -1);
@@ -206,15 +214,15 @@ void main() {
           find.byWidgetPredicate((w) => w is HoldControl && w.label == name);
       final gas = await tester.startGesture(
         tester.getCenter(control('ACELERAR')),
-        pointer: 11,
+        pointer: 10011,
       );
       final left = await tester.startGesture(
         tester.getCenter(control('ESQUERDA')),
-        pointer: 12,
+        pointer: 10012,
       );
       final turbo = await tester.startGesture(
         tester.getCenter(control('TURBO')),
-        pointer: 13,
+        pointer: 10013,
       );
       await tester.pump(const Duration(milliseconds: 50));
       expect(race.accelerating, isTrue);
@@ -270,15 +278,15 @@ void main() {
           find.byWidgetPredicate((w) => w is HoldControl && w.label == name);
       final gas = await tester.startGesture(
         tester.getCenter(control('ACELERAR')),
-        pointer: 31,
+        pointer: 10031,
       );
       final wheel = await tester.startGesture(
         tester.getCenter(control('ESQUERDA')),
-        pointer: 32,
+        pointer: 10032,
       );
       final turbo = await tester.startGesture(
         tester.getCenter(control('TURBO')),
-        pointer: 33,
+        pointer: 10033,
       );
       for (var i = 0; i < 12; i++) {
         race.tell('HUD $i');
@@ -322,11 +330,11 @@ void main() {
           find.byWidgetPredicate((w) => w is HoldControl && w.label == name);
       final gas = await tester.startGesture(
         tester.getCenter(control('ACELERAR')),
-        pointer: 41,
+        pointer: 10041,
       );
       final left = await tester.startGesture(
         tester.getCenter(control('ESQUERDA')),
-        pointer: 42,
+        pointer: 10042,
       );
       await tester.pump(const Duration(milliseconds: 20));
       await tester.tap(find.byIcon(Icons.pause_rounded));
@@ -338,11 +346,11 @@ void main() {
       await tap(tester, 'CONTINUAR');
       final gas2 = await tester.startGesture(
         tester.getCenter(control('ACELERAR')),
-        pointer: 43,
+        pointer: 10043,
       );
       final right = await tester.startGesture(
         tester.getCenter(control('DIREITA')),
-        pointer: 44,
+        pointer: 10044,
       );
       await tester.pump(const Duration(milliseconds: 20));
       expect(race.accelerating, isTrue);

@@ -46,7 +46,11 @@ V3 expansionObstacleSize(String kind) {
 /// safety rules intentionally exclude road props, so obstacles are a separate
 /// collection. Nothing is added to old circuits or to the battle arenas.
 void populateExpansionObstacles(TrackSpec t, int trackIndex) {
-  if (!expansionCircuitStars.containsKey(t.id) || t.openArena) return;
+  if ((!expansionCircuitStars.containsKey(t.id) &&
+          !brazilLoopStars.containsKey(t.id)) ||
+      !t.outdoor ||
+      t.openArena)
+    return;
   t.obstacles.removeWhere((o) => o.visible); // replace generic storage boxes
   final kinds = expansionObstacleKinds[t.room]!;
   final variant = trackIndex % 5;

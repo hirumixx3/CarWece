@@ -22,18 +22,18 @@ class GraphicsContractTest {
     }
     @Test fun acceptsActualFlutterPayloadWithAllCarAndWheelModels() {
         val args = request()
-        assertEquals(189, (args["objects"] as List<*>).size)
+        assertEquals(264, (args["objects"] as List<*>).size)
         validate(args)
         val frame = args["frame"] as FloatArray
-        assertTrue((0 until frame[14].toInt()).any { frame[15 + it * 17].toInt() == 176 })
+        assertTrue((0 until frame[14].toInt()).any { frame[15 + it * 17].toInt() == 251 })
     }
     @Test fun wheelMaterialsAreOpaqueAndShieldSmokeAndIceUseBlending() {
         val meshes = request()["objects"] as List<*>
-        for (i in 121..176) assertFalse(GraphicsContract.isTransparentMesh(meshes[i] as FloatArray))
-        assertTrue(GraphicsContract.isTransparentMesh(meshes[59] as FloatArray))
-        assertTrue(GraphicsContract.isTransparentMesh(meshes[63] as FloatArray))
-        assertTrue(GraphicsContract.isTransparentMesh(meshes[182] as FloatArray))
-        assertFalse(GraphicsContract.isTransparentMesh(meshes[120] as FloatArray))
+        for (i in 171..251) assertFalse(GraphicsContract.isTransparentMesh(meshes[i] as FloatArray))
+        assertTrue(GraphicsContract.isTransparentMesh(meshes[84] as FloatArray))
+        assertTrue(GraphicsContract.isTransparentMesh(meshes[88] as FloatArray))
+        assertTrue(GraphicsContract.isTransparentMesh(meshes[257] as FloatArray))
+        assertFalse(GraphicsContract.isTransparentMesh(meshes[170] as FloatArray))
     }
     @Test fun acceptsAdditionalEffectsWithinBudget() {
         val args = request().toMutableMap()

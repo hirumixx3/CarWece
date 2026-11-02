@@ -5,6 +5,7 @@ part of 'gpu_mesh.dart';
 Mesh3 buildCarMesh(CarSpec car) {
   final m = Mesh3(), d = car.design, color = car.color;
   final kind = car.body, length = d.halfLength;
+  final roundedCabin = kind == 10 || car.id == 'br_fusca';
   final rings = <List<V3>>[];
   const slices = 64, segments = 40;
   double widthAt(double z) {
@@ -155,8 +156,8 @@ Mesh3 buildCarMesh(CarSpec car) {
   final roofColor = [0, 5, 12, 18, 21, 22, 26, 30].contains(kind)
       ? 0xff151e29
       : color;
-  if (kind == 10) _buildRounded911Cabin(m, car);
-  if (kind != 10)
+  if (roundedCabin) _buildRounded911Cabin(m, car);
+  if (!roundedCabin)
     for (var i = 0; i < 16; i++) {
       final t0 = -1 + i / 8, t1 = -1 + (i + 1) / 8;
       double crown(double t) => (kind == 10 ? .17 : .11) * (1 - t * t);
@@ -192,7 +193,7 @@ Mesh3 buildCarMesh(CarSpec car) {
     }
   for (final sign in [-1.0, 1.0]) {
     final x = sign * side, rx = sign * roofSide;
-    if (kind != 10)
+    if (!roundedCabin)
       m.quad(
         V3(x, d.belt + .025, d.glassFront),
         V3(rx, d.roof, d.roofFront),
@@ -218,7 +219,7 @@ Mesh3 buildCarMesh(CarSpec car) {
       );
     }
 
-    if (kind != 10) {
+    if (!roundedCabin) {
       pillar(d.glassFront, d.roofFront);
       pillar(d.glassRear, d.roofRear);
       pillar(d.sedan ? -.28 : -.72, d.sedan ? -.28 : -.72);
@@ -838,7 +839,9 @@ Mesh3 buildCarMesh(CarSpec car) {
         );
       }
     case >= 16:
-      if (car.body >= 31) {
+      if (car.body >= 56) {
+        buildBrazilCarDetails(m, car);
+      } else if (car.body >= 31) {
         buildWorldCarDetails(m, car);
       } else {
         _buildExpansionDetails(m, car);

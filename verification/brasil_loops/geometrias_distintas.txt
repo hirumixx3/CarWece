@@ -1,0 +1,1 @@
+Minimum difference: 88.7654536126271; failures: 0

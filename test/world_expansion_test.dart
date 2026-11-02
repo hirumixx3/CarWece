@@ -6,16 +6,16 @@ import 'package:carwece/game/gpu_mesh.dart';
 import 'package:carwece/game/gpu_frame.dart';
 
 void main() {
-  final tracks = createTracks(), added = tracks.skip(26).toList();
+  final tracks = createTracks(), added = tracks.skip(26).take(25).toList();
   final arenas = createBattleArenas().skip(6).toList();
   test(
     'Append-only catalogues add exactly 25 cars, 25 circuits and 5 arenas',
     () {
-      expect(cars.length, 56);
-      expect(tracks.length, 51);
+      expect(cars.length, 81);
+      expect(tracks.length, 76);
       expect(arenas.length, 5);
       expect(cars.map((c) => c.id).toSet().length, cars.length);
-      expect(cars.map((c) => c.body), List.generate(56, (i) => i));
+      expect(cars.map((c) => c.body), List.generate(cars.length, (i) => i));
       expect(tracks.map((t) => t.id).toSet().length, tracks.length);
       for (final room in expansionBiomes.keys) {
         expect(added.where((t) => t.room == room).length, 5);
@@ -29,7 +29,7 @@ void main() {
     '25 new sculpted cars have distinct finite chassis and independent wheels',
     () {
       final hashes = <int>{};
-      for (final c in cars.skip(31)) {
+      for (final c in cars.skip(31).take(25)) {
         final body = buildCarMesh(c).buffer, wheel = buildWheelMesh(c).buffer;
         expect(body.length % 36, 0, reason: c.id);
         expect(body.every((n) => n.isFinite), isTrue, reason: c.id);
@@ -175,7 +175,7 @@ void main() {
   test(
     'Every new car starts in racing and combat with finite physical and GPU state',
     () {
-      for (final c in cars.skip(31)) {
+      for (final c in cars.skip(31).take(25)) {
         final race = RaceEngine(
           track: added.first,
           car: c,

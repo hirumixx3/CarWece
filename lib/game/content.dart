@@ -9,6 +9,8 @@ part 'battle_content.dart';
 part 'road_geometry.dart';
 part 'world_expansion.dart';
 part 'world_track_obstacles.dart';
+part 'brazil_content.dart';
+part 'loop_expansion_brazil.dart';
 
 enum DriveType { rear, all, front }
 
@@ -850,6 +852,7 @@ const carDesigns = <CarDesign>[
     spokes: 7,
     rimColor: 0xffaeb9c2,
   ), // BUGATTI CHIRON
+  ...brazilCarDesigns,
 ];
 
 const cars = <CarSpec>[
@@ -1738,6 +1741,7 @@ const cars = <CarSpec>[
     requiredStars: 55,
     tier: 'MUNDO REAL',
   ),
+  ...brazilCars,
 ];
 
 enum RaceMode { quick, championship, timeTrial }
@@ -1855,7 +1859,8 @@ class TrackSpec {
         yield* barrierGrid[(i, j)] ?? const <WorldObstacle>[];
   }
 
-  int get requiredStars => circuitStars[id] ?? expansionCircuitStars[id] ?? 0;
+  int get requiredStars =>
+      circuitStars[id] ?? expansionCircuitStars[id] ?? brazilLoopStars[id] ?? 0;
   final Map<(int, int), Set<int>> _grid = {};
   // The route is immutable after construction. Reuse the same ordered segment
   // candidates instead of allocating/merging nine sets for every tire contact.
@@ -2014,87 +2019,114 @@ class TrackSpec {
       scenery.add(block);
       obstacles.add(WorldObstacle(block.center, block.size, visible: false));
     }
-    if (!tiled && !outdoor) {
-      obstacles.add(
-        const WorldObstacle(V3(790, 55, 380), V3(70, 110, 130), visible: false),
-      );
-    }
-    if (room == 'BANHEIRO') {
-      obstacles.addAll(const [
-        WorldObstacle(V3(100, 36, 590), V3(460, 72, 190), visible: false),
-        WorldObstacle(V3(710, 50, 20), V3(150, 100, 170), visible: false),
-        WorldObstacle(V3(-710, 43, 220), V3(110, 86, 90), visible: false),
-      ]);
-    }
-    if (room == 'COZINHA') {
-      obstacles.addAll(const [
-        WorldObstacle(V3(50, 60, 620), V3(640, 120, 170), visible: false),
-        WorldObstacle(V3(735, 135, 30), V3(140, 270, 160), visible: false),
-        WorldObstacle(V3(-735, 55, 50), V3(150, 110, 220), visible: false),
-      ]);
-    }
-    if (room == 'SALA') {
-      obstacles.addAll(const [
-        WorldObstacle(V3(60, 50, 630), V3(500, 100, 160), visible: false),
-        WorldObstacle(V3(740, 50, 20), V3(120, 100, 320), visible: false),
-      ]);
-      for (final x in [-465.0, -295.0]) {
-        for (final z in [-5.0, 85.0]) {
-          obstacles.add(
-            WorldObstacle(V3(x, 32, z), const V3(7, 64, 7), visible: false),
-          );
-        }
-      }
-    }
-    if (room == 'GARAGEM') {
-      obstacles.add(
-        const WorldObstacle(V3(-30, 46, 560), V3(211, 92, 71), visible: false),
-      );
-      obstacles.add(
-        const WorldObstacle(V3(-720, 40, 380), V3(76, 80, 76), visible: false),
-      );
-      obstacles.add(
-        const WorldObstacle(V3(730, 60, -50), V3(52, 120, 100), visible: false),
-      );
-    }
-    if (room == 'ARCADE') {
-      for (var i = 0; i < 5; i++) {
+    // Fixed furniture belongs only to its original authored room routes.
+    if (!brazilLoopStars.containsKey(id)) {
+      if (!tiled && !outdoor) {
         obstacles.add(
-          WorldObstacle(
-            V3(-230 + i * 110.0, 63, 630),
-            const V3(72, 126, 64),
+          const WorldObstacle(
+            V3(790, 55, 380),
+            V3(70, 110, 130),
             visible: false,
           ),
         );
       }
-    }
-    if (room == 'QUARTO') {
-      obstacles.add(
-        const WorldObstacle(
-          V3(180, 75, 600),
-          V3(500, 150, 210),
-          visible: false,
-        ),
-      );
-      for (final x in [-750.0, -550.0]) {
-        for (final z in [490.0, 610.0]) {
+      if (room == 'BANHEIRO') {
+        obstacles.addAll(const [
+          WorldObstacle(V3(100, 36, 590), V3(460, 72, 190), visible: false),
+          WorldObstacle(V3(710, 50, 20), V3(150, 100, 170), visible: false),
+          WorldObstacle(V3(-710, 43, 220), V3(110, 86, 90), visible: false),
+        ]);
+      }
+      if (room == 'COZINHA') {
+        obstacles.addAll(const [
+          WorldObstacle(V3(50, 60, 620), V3(640, 120, 170), visible: false),
+          WorldObstacle(V3(735, 135, 30), V3(140, 270, 160), visible: false),
+          WorldObstacle(V3(-735, 55, 50), V3(150, 110, 220), visible: false),
+        ]);
+      }
+      if (room == 'SALA') {
+        obstacles.addAll(const [
+          WorldObstacle(V3(60, 50, 630), V3(500, 100, 160), visible: false),
+          WorldObstacle(V3(740, 50, 20), V3(120, 100, 320), visible: false),
+        ]);
+        for (final x in [-465.0, -295.0]) {
+          for (final z in [-5.0, 85.0]) {
+            obstacles.add(
+              WorldObstacle(V3(x, 32, z), const V3(7, 64, 7), visible: false),
+            );
+          }
+        }
+      }
+      if (room == 'GARAGEM') {
+        obstacles.add(
+          const WorldObstacle(
+            V3(-30, 46, 560),
+            V3(211, 92, 71),
+            visible: false,
+          ),
+        );
+        obstacles.add(
+          const WorldObstacle(
+            V3(-720, 40, 380),
+            V3(76, 80, 76),
+            visible: false,
+          ),
+        );
+        obstacles.add(
+          const WorldObstacle(
+            V3(730, 60, -50),
+            V3(52, 120, 100),
+            visible: false,
+          ),
+        );
+      }
+      if (room == 'ARCADE') {
+        for (var i = 0; i < 5; i++) {
           obstacles.add(
-            WorldObstacle(V3(x, 55, z), const V3(6, 110, 6), visible: false),
+            WorldObstacle(
+              V3(-230 + i * 110.0, 63, 630),
+              const V3(72, 126, 64),
+              visible: false,
+            ),
           );
         }
       }
+      if (room == 'QUARTO') {
+        obstacles.add(
+          const WorldObstacle(
+            V3(180, 75, 600),
+            V3(500, 150, 210),
+            visible: false,
+          ),
+        );
+        for (final x in [-750.0, -550.0]) {
+          for (final z in [490.0, 610.0]) {
+            obstacles.add(
+              WorldObstacle(V3(x, 55, z), const V3(6, 110, 6), visible: false),
+            );
+          }
+        }
 
-      obstacles.add(
-        const WorldObstacle(V3(96, 28, 245), V3(178, 56, 103), visible: false),
-      );
-      obstacles.add(
-        const WorldObstacle(V3(-238, 20, -100), V3(66, 40, 52), visible: false),
-      );
-      for (final x in [-150.0, -30.0]) {
-        for (final z in [241.0, 290.0]) {
-          obstacles.add(
-            WorldObstacle(V3(x, 48, z), const V3(4, 96, 4), visible: false),
-          );
+        obstacles.add(
+          const WorldObstacle(
+            V3(96, 28, 245),
+            V3(178, 56, 103),
+            visible: false,
+          ),
+        );
+        obstacles.add(
+          const WorldObstacle(
+            V3(-238, 20, -100),
+            V3(66, 40, 52),
+            visible: false,
+          ),
+        );
+        for (final x in [-150.0, -30.0]) {
+          for (final z in [241.0, 290.0]) {
+            obstacles.add(
+              WorldObstacle(V3(x, 48, z), const V3(4, 96, 4), visible: false),
+            );
+          }
         }
       }
     }
@@ -2195,7 +2227,8 @@ class TrackSpec {
     // Expansion races use the original 46-unit toy ribbon on the floor too.
     // Do not inflate their floor corridors to 96 units on straight sectors.
     // Legacy room tracks and all battle arenas keep their original behavior.
-    if (outdoor && !openArena) return width;
+    if ((outdoor || brazilLoopStars.containsKey(id)) && !openArena)
+      return width;
     if (!isFloor(distance)) return width;
     final curvature =
         (at(distance + 3).forward - at(distance - 3).forward).length / 6;
@@ -2442,5 +2475,6 @@ List<TrackSpec> createTracks() {
     ),
     ...createLoopTracks(),
     ...createExpansionTracks(),
+    ...createBrazilLoopTracks(),
   ];
 }

@@ -233,7 +233,10 @@ class TrackScene {
           ? const Color(0xfff4782e)
           : const Color(0xffed6b24);
       final green = track.isShortcut(a.s, .8);
-      road.quad(a.point(-w), a.point(w), b.point(w), b.point(-w), base, true);
+      // The five outdoor biomes use their own terrain on ground sectors.
+      if (!(track.outdoor && track.isFloor(a.s))) {
+        road.quad(a.point(-w), a.point(w), b.point(w), b.point(-w), base, true);
+      }
       if (green) {
         road.quad(
           a.point(w * .55, .025),
@@ -365,9 +368,13 @@ class TrackScene {
   }
 
   void _room() {
-    if (track.outdoor) {
+    if (track.outdoor || brazilLoopStars.containsKey(track.id)) {
       final mesh = Mesh3();
-      buildExpansionWorld(mesh, track);
+      if (track.outdoor) {
+        buildExpansionWorld(mesh, track);
+      } else {
+        buildBrazilIndoorWorld(mesh, track);
+      }
       for (var i = 0; i < mesh.data.length; i += 36) {
         final data = mesh.data;
         room.faces.add(

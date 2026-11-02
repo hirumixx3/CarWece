@@ -20,23 +20,23 @@ class BattleGraphicsContractTest {
             a["shaders"] as List<String>,a["frame"] as FloatArray)
     }
     @Test fun acceptsActualBattleWorldAndAllFortyFourWeaponAttachments() {
-        val a=request();assertEquals(249,(a["objects"] as List<*>).size);validate(a)
+        val a=request();assertEquals(324,(a["objects"] as List<*>).size);validate(a)
     }
     @Test fun healthBarsTurretsAndProjectilesAreInTheActualFrame() {
         val a=request();val f=a["frame"] as FloatArray
         val indices=(0 until f[14].toInt()).map { f[15+it*17].toInt() }
-        assertTrue(indices.contains(196));assertTrue(indices.contains(198));assertTrue(indices.contains(221))
-        assertTrue(indices.contains(190));assertTrue(f[14]<=GraphicsContract.MAX_INSTANCES)
+        assertTrue(indices.contains(271));assertTrue(indices.contains(273));assertTrue(indices.contains(296))
+        assertTrue(indices.contains(265));assertTrue(f[14]<=GraphicsContract.MAX_INSTANCES)
     }
     @Test fun healthAndMetalAreOpaqueWhileGasUsesTransparentMaterial() {
         val m=request()["objects"] as List<*>
-        for(i in listOf(189,190,191,192,193,196,197,198,199,200,203))
+        for(i in listOf(264,265,266,267,268,271,272,273,274,275,278))
             assertFalse(GraphicsContract.isTransparentMesh(m[i] as FloatArray))
-        assertTrue(GraphicsContract.isTransparentMesh(m[202] as FloatArray))
+        assertTrue(GraphicsContract.isTransparentMesh(m[277] as FloatArray))
     }
     @Test fun everyAdditionalVertexAndTransformHasFiniteValues() {
         val a=request();val meshes=a["objects"] as List<*>
-        for(i in 189..247) {
+        for(i in 264..322) {
             val m=meshes[i] as FloatArray;assertTrue(m.isNotEmpty());assertEquals(0,m.size%36)
             assertTrue(m.all { it.isFinite() })
         }
@@ -48,7 +48,7 @@ class BattleGraphicsContractTest {
     }
     @Test fun healthBillboardsNeverCastFloatingRectangularShadows() {
         val meshes=request()["objects"] as List<*>
-        for(i in 196..198)assertFalse(GraphicsContract.castsShadowMesh(meshes[i] as FloatArray))
-        assertTrue(GraphicsContract.castsShadowMesh(meshes[203] as FloatArray))
+        for(i in 271..273)assertFalse(GraphicsContract.castsShadowMesh(meshes[i] as FloatArray))
+        assertTrue(GraphicsContract.castsShadowMesh(meshes[278] as FloatArray))
     }
 }

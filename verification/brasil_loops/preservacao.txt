@@ -1,0 +1,2 @@
+PASS: all 51 previous physical routes, all 11 arenas, all 56 previous cars preserved.
+PASS: original 26 room meshes preserved; only the requested outdoor floor overlay was removed.

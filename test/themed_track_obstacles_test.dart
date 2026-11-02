@@ -7,7 +7,7 @@ import 'package:carwece/game/math3d.dart';
 
 void main() {
   final tracks = createTracks();
-  final added = tracks.skip(26).toList();
+  final added = tracks.skip(26).take(25).toList();
   test('Only the 25 new races use fixed legacy ribbon width', () {
     expect(added.length, 25);
     for (final t in added) {
@@ -160,7 +160,7 @@ void main() {
     },
   );
   test('Obstacle placement and theme order are deterministic', () {
-    final again = createTracks().skip(26).toList();
+    final again = createTracks().skip(26).take(25).toList();
     for (var i = 0; i < added.length; i++) {
       final a = added[i].themedObstacles, b = again[i].themedObstacles;
       expect(b.length, a.length);

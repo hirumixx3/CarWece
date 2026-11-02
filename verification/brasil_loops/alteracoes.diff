@@ -1,0 +1,3752 @@
+--- a/android/app/src/main/kotlin/com/hirumisu/carwece/GraphicsContract.kt
++++ b/android/app/src/main/kotlin/com/hirumisu/carwece/GraphicsContract.kt
+@@ -2,9 +2,9 @@
+ 
+ /** Validates the typed payload at the real Flutter/Android boundary, before EGL. */
+ internal object GraphicsContract {
+-    // 56 cars × (body, damage, wheels) + 21 effects + 60 battle meshes = 249.
++    // 81 cars × (body, damage, wheels) + 21 effects + 60 battle meshes = 324.
+     // Only active car slots contain full geometry; unused slots stay tiny.
+-    const val MAX_MESHES = 256
++    const val MAX_MESHES = 512
+     const val MAX_INSTANCES = 128
+ 
+     fun validateCreate(world: FloatArray, meshes: List<FloatArray>, shaders: List<String>, frame: FloatArray) {
+--- a/android/app/src/test/kotlin/com/hirumisu/carwece/BattleGraphicsContractTest.kt
++++ b/android/app/src/test/kotlin/com/hirumisu/carwece/BattleGraphicsContractTest.kt
+@@ -20,23 +20,23 @@
+             a["shaders"] as List<String>,a["frame"] as FloatArray)
+     }
+     @Test fun acceptsActualBattleWorldAndAllFortyFourWeaponAttachments() {
+-        val a=request();assertEquals(249,(a["objects"] as List<*>).size);validate(a)
++        val a=request();assertEquals(324,(a["objects"] as List<*>).size);validate(a)
+     }
+     @Test fun healthBarsTurretsAndProjectilesAreInTheActualFrame() {
+         val a=request();val f=a["frame"] as FloatArray
+         val indices=(0 until f[14].toInt()).map { f[15+it*17].toInt() }
+-        assertTrue(indices.contains(196));assertTrue(indices.contains(198));assertTrue(indices.contains(221))
+-        assertTrue(indices.contains(190));assertTrue(f[14]<=GraphicsContract.MAX_INSTANCES)
++        assertTrue(indices.contains(271));assertTrue(indices.contains(273));assertTrue(indices.contains(296))
++        assertTrue(indices.contains(265));assertTrue(f[14]<=GraphicsContract.MAX_INSTANCES)
+     }
+     @Test fun healthAndMetalAreOpaqueWhileGasUsesTransparentMaterial() {
+         val m=request()["objects"] as List<*>
+-        for(i in listOf(189,190,191,192,193,196,197,198,199,200,203))
++        for(i in listOf(264,265,266,267,268,271,272,273,274,275,278))
+             assertFalse(GraphicsContract.isTransparentMesh(m[i] as FloatArray))
+-        assertTrue(GraphicsContract.isTransparentMesh(m[202] as FloatArray))
++        assertTrue(GraphicsContract.isTransparentMesh(m[277] as FloatArray))
+     }
+     @Test fun everyAdditionalVertexAndTransformHasFiniteValues() {
+         val a=request();val meshes=a["objects"] as List<*>
+-        for(i in 189..247) {
++        for(i in 264..322) {
+             val m=meshes[i] as FloatArray;assertTrue(m.isNotEmpty());assertEquals(0,m.size%36)
+             assertTrue(m.all { it.isFinite() })
+         }
+@@ -48,7 +48,7 @@
+     }
+     @Test fun healthBillboardsNeverCastFloatingRectangularShadows() {
+         val meshes=request()["objects"] as List<*>
+-        for(i in 196..198)assertFalse(GraphicsContract.castsShadowMesh(meshes[i] as FloatArray))
+-        assertTrue(GraphicsContract.castsShadowMesh(meshes[203] as FloatArray))
++        for(i in 271..273)assertFalse(GraphicsContract.castsShadowMesh(meshes[i] as FloatArray))
++        assertTrue(GraphicsContract.castsShadowMesh(meshes[278] as FloatArray))
+     }
+ }
+--- a/android/app/src/test/kotlin/com/hirumisu/carwece/GraphicsContractTest.kt
++++ b/android/app/src/test/kotlin/com/hirumisu/carwece/GraphicsContractTest.kt
+@@ -22,18 +22,18 @@
+     }
+     @Test fun acceptsActualFlutterPayloadWithAllCarAndWheelModels() {
+         val args = request()
+-        assertEquals(189, (args["objects"] as List<*>).size)
++        assertEquals(264, (args["objects"] as List<*>).size)
+         validate(args)
+         val frame = args["frame"] as FloatArray
+-        assertTrue((0 until frame[14].toInt()).any { frame[15 + it * 17].toInt() == 176 })
++        assertTrue((0 until frame[14].toInt()).any { frame[15 + it * 17].toInt() == 251 })
+     }
+     @Test fun wheelMaterialsAreOpaqueAndShieldSmokeAndIceUseBlending() {
+         val meshes = request()["objects"] as List<*>
+-        for (i in 121..176) assertFalse(GraphicsContract.isTransparentMesh(meshes[i] as FloatArray))
+-        assertTrue(GraphicsContract.isTransparentMesh(meshes[59] as FloatArray))
+-        assertTrue(GraphicsContract.isTransparentMesh(meshes[63] as FloatArray))
+-        assertTrue(GraphicsContract.isTransparentMesh(meshes[182] as FloatArray))
+-        assertFalse(GraphicsContract.isTransparentMesh(meshes[120] as FloatArray))
++        for (i in 171..251) assertFalse(GraphicsContract.isTransparentMesh(meshes[i] as FloatArray))
++        assertTrue(GraphicsContract.isTransparentMesh(meshes[84] as FloatArray))
++        assertTrue(GraphicsContract.isTransparentMesh(meshes[88] as FloatArray))
++        assertTrue(GraphicsContract.isTransparentMesh(meshes[257] as FloatArray))
++        assertFalse(GraphicsContract.isTransparentMesh(meshes[170] as FloatArray))
+     }
+     @Test fun acceptsAdditionalEffectsWithinBudget() {
+         val args = request().toMutableMap()
+--- a/lib/game/car_mesh.dart
++++ b/lib/game/car_mesh.dart
+@@ -5,6 +5,7 @@
+ Mesh3 buildCarMesh(CarSpec car) {
+   final m = Mesh3(), d = car.design, color = car.color;
+   final kind = car.body, length = d.halfLength;
++  final roundedCabin = kind == 10 || car.id == 'br_fusca';
+   final rings = <List<V3>>[];
+   const slices = 64, segments = 40;
+   double widthAt(double z) {
+@@ -155,8 +156,8 @@
+   final roofColor = [0, 5, 12, 18, 21, 22, 26, 30].contains(kind)
+       ? 0xff151e29
+       : color;
+-  if (kind == 10) _buildRounded911Cabin(m, car);
+-  if (kind != 10)
++  if (roundedCabin) _buildRounded911Cabin(m, car);
++  if (!roundedCabin)
+     for (var i = 0; i < 16; i++) {
+       final t0 = -1 + i / 8, t1 = -1 + (i + 1) / 8;
+       double crown(double t) => (kind == 10 ? .17 : .11) * (1 - t * t);
+@@ -192,7 +193,7 @@
+     }
+   for (final sign in [-1.0, 1.0]) {
+     final x = sign * side, rx = sign * roofSide;
+-    if (kind != 10)
++    if (!roundedCabin)
+       m.quad(
+         V3(x, d.belt + .025, d.glassFront),
+         V3(rx, d.roof, d.roofFront),
+@@ -218,7 +219,7 @@
+       );
+     }
+ 
+-    if (kind != 10) {
++    if (!roundedCabin) {
+       pillar(d.glassFront, d.roofFront);
+       pillar(d.glassRear, d.roofRear);
+       pillar(d.sedan ? -.28 : -.72, d.sedan ? -.28 : -.72);
+@@ -838,7 +839,9 @@
+         );
+       }
+     case >= 16:
+-      if (car.body >= 31) {
++      if (car.body >= 56) {
++        buildBrazilCarDetails(m, car);
++      } else if (car.body >= 31) {
+         buildWorldCarDetails(m, car);
+       } else {
+         _buildExpansionDetails(m, car);
+--- a/lib/game/content.dart
++++ b/lib/game/content.dart
+@@ -9,6 +9,8 @@
+ part 'road_geometry.dart';
+ part 'world_expansion.dart';
+ part 'world_track_obstacles.dart';
++part 'brazil_content.dart';
++part 'loop_expansion_brazil.dart';
+ 
+ enum DriveType { rear, all, front }
+ 
+@@ -850,6 +852,7 @@
+     spokes: 7,
+     rimColor: 0xffaeb9c2,
+   ), // BUGATTI CHIRON
++  ...brazilCarDesigns,
+ ];
+ 
+ const cars = <CarSpec>[
+@@ -1738,6 +1741,7 @@
+     requiredStars: 55,
+     tier: 'MUNDO REAL',
+   ),
++  ...brazilCars,
+ ];
+ 
+ enum RaceMode { quick, championship, timeTrial }
+@@ -1855,7 +1859,8 @@
+         yield* barrierGrid[(i, j)] ?? const <WorldObstacle>[];
+   }
+ 
+-  int get requiredStars => circuitStars[id] ?? expansionCircuitStars[id] ?? 0;
++  int get requiredStars =>
++      circuitStars[id] ?? expansionCircuitStars[id] ?? brazilLoopStars[id] ?? 0;
+   final Map<(int, int), Set<int>> _grid = {};
+   // The route is immutable after construction. Reuse the same ordered segment
+   // candidates instead of allocating/merging nine sets for every tire contact.
+@@ -2014,87 +2019,114 @@
+       scenery.add(block);
+       obstacles.add(WorldObstacle(block.center, block.size, visible: false));
+     }
+-    if (!tiled && !outdoor) {
+-      obstacles.add(
+-        const WorldObstacle(V3(790, 55, 380), V3(70, 110, 130), visible: false),
+-      );
+-    }
+-    if (room == 'BANHEIRO') {
+-      obstacles.addAll(const [
+-        WorldObstacle(V3(100, 36, 590), V3(460, 72, 190), visible: false),
+-        WorldObstacle(V3(710, 50, 20), V3(150, 100, 170), visible: false),
+-        WorldObstacle(V3(-710, 43, 220), V3(110, 86, 90), visible: false),
+-      ]);
+-    }
+-    if (room == 'COZINHA') {
+-      obstacles.addAll(const [
+-        WorldObstacle(V3(50, 60, 620), V3(640, 120, 170), visible: false),
+-        WorldObstacle(V3(735, 135, 30), V3(140, 270, 160), visible: false),
+-        WorldObstacle(V3(-735, 55, 50), V3(150, 110, 220), visible: false),
+-      ]);
+-    }
+-    if (room == 'SALA') {
+-      obstacles.addAll(const [
+-        WorldObstacle(V3(60, 50, 630), V3(500, 100, 160), visible: false),
+-        WorldObstacle(V3(740, 50, 20), V3(120, 100, 320), visible: false),
+-      ]);
+-      for (final x in [-465.0, -295.0]) {
+-        for (final z in [-5.0, 85.0]) {
+-          obstacles.add(
+-            WorldObstacle(V3(x, 32, z), const V3(7, 64, 7), visible: false),
+-          );
+-        }
+-      }
+-    }
+-    if (room == 'GARAGEM') {
+-      obstacles.add(
+-        const WorldObstacle(V3(-30, 46, 560), V3(211, 92, 71), visible: false),
+-      );
+-      obstacles.add(
+-        const WorldObstacle(V3(-720, 40, 380), V3(76, 80, 76), visible: false),
+-      );
+-      obstacles.add(
+-        const WorldObstacle(V3(730, 60, -50), V3(52, 120, 100), visible: false),
+-      );
+-    }
+-    if (room == 'ARCADE') {
+-      for (var i = 0; i < 5; i++) {
++    // Fixed furniture belongs only to its original authored room routes.
++    if (!brazilLoopStars.containsKey(id)) {
++      if (!tiled && !outdoor) {
+         obstacles.add(
+-          WorldObstacle(
+-            V3(-230 + i * 110.0, 63, 630),
+-            const V3(72, 126, 64),
++          const WorldObstacle(
++            V3(790, 55, 380),
++            V3(70, 110, 130),
+             visible: false,
+           ),
+         );
+       }
+-    }
+-    if (room == 'QUARTO') {
+-      obstacles.add(
+-        const WorldObstacle(
+-          V3(180, 75, 600),
+-          V3(500, 150, 210),
+-          visible: false,
+-        ),
+-      );
+-      for (final x in [-750.0, -550.0]) {
+-        for (final z in [490.0, 610.0]) {
++      if (room == 'BANHEIRO') {
++        obstacles.addAll(const [
++          WorldObstacle(V3(100, 36, 590), V3(460, 72, 190), visible: false),
++          WorldObstacle(V3(710, 50, 20), V3(150, 100, 170), visible: false),
++          WorldObstacle(V3(-710, 43, 220), V3(110, 86, 90), visible: false),
++        ]);
++      }
++      if (room == 'COZINHA') {
++        obstacles.addAll(const [
++          WorldObstacle(V3(50, 60, 620), V3(640, 120, 170), visible: false),
++          WorldObstacle(V3(735, 135, 30), V3(140, 270, 160), visible: false),
++          WorldObstacle(V3(-735, 55, 50), V3(150, 110, 220), visible: false),
++        ]);
++      }
++      if (room == 'SALA') {
++        obstacles.addAll(const [
++          WorldObstacle(V3(60, 50, 630), V3(500, 100, 160), visible: false),
++          WorldObstacle(V3(740, 50, 20), V3(120, 100, 320), visible: false),
++        ]);
++        for (final x in [-465.0, -295.0]) {
++          for (final z in [-5.0, 85.0]) {
++            obstacles.add(
++              WorldObstacle(V3(x, 32, z), const V3(7, 64, 7), visible: false),
++            );
++          }
++        }
++      }
++      if (room == 'GARAGEM') {
++        obstacles.add(
++          const WorldObstacle(
++            V3(-30, 46, 560),
++            V3(211, 92, 71),
++            visible: false,
++          ),
++        );
++        obstacles.add(
++          const WorldObstacle(
++            V3(-720, 40, 380),
++            V3(76, 80, 76),
++            visible: false,
++          ),
++        );
++        obstacles.add(
++          const WorldObstacle(
++            V3(730, 60, -50),
++            V3(52, 120, 100),
++            visible: false,
++          ),
++        );
++      }
++      if (room == 'ARCADE') {
++        for (var i = 0; i < 5; i++) {
+           obstacles.add(
+-            WorldObstacle(V3(x, 55, z), const V3(6, 110, 6), visible: false),
++            WorldObstacle(
++              V3(-230 + i * 110.0, 63, 630),
++              const V3(72, 126, 64),
++              visible: false,
++            ),
+           );
+         }
+       }
++      if (room == 'QUARTO') {
++        obstacles.add(
++          const WorldObstacle(
++            V3(180, 75, 600),
++            V3(500, 150, 210),
++            visible: false,
++          ),
++        );
++        for (final x in [-750.0, -550.0]) {
++          for (final z in [490.0, 610.0]) {
++            obstacles.add(
++              WorldObstacle(V3(x, 55, z), const V3(6, 110, 6), visible: false),
++            );
++          }
++        }
+ 
+-      obstacles.add(
+-        const WorldObstacle(V3(96, 28, 245), V3(178, 56, 103), visible: false),
+-      );
+-      obstacles.add(
+-        const WorldObstacle(V3(-238, 20, -100), V3(66, 40, 52), visible: false),
+-      );
+-      for (final x in [-150.0, -30.0]) {
+-        for (final z in [241.0, 290.0]) {
+-          obstacles.add(
+-            WorldObstacle(V3(x, 48, z), const V3(4, 96, 4), visible: false),
+-          );
++        obstacles.add(
++          const WorldObstacle(
++            V3(96, 28, 245),
++            V3(178, 56, 103),
++            visible: false,
++          ),
++        );
++        obstacles.add(
++          const WorldObstacle(
++            V3(-238, 20, -100),
++            V3(66, 40, 52),
++            visible: false,
++          ),
++        );
++        for (final x in [-150.0, -30.0]) {
++          for (final z in [241.0, 290.0]) {
++            obstacles.add(
++              WorldObstacle(V3(x, 48, z), const V3(4, 96, 4), visible: false),
++            );
++          }
+         }
+       }
+     }
+@@ -2195,7 +2227,8 @@
+     // Expansion races use the original 46-unit toy ribbon on the floor too.
+     // Do not inflate their floor corridors to 96 units on straight sectors.
+     // Legacy room tracks and all battle arenas keep their original behavior.
+-    if (outdoor && !openArena) return width;
++    if ((outdoor || brazilLoopStars.containsKey(id)) && !openArena)
++      return width;
+     if (!isFloor(distance)) return width;
+     final curvature =
+         (at(distance + 3).forward - at(distance - 3).forward).length / 6;
+@@ -2442,5 +2475,6 @@
+     ),
+     ...createLoopTracks(),
+     ...createExpansionTracks(),
++    ...createBrazilLoopTracks(),
+   ];
+ }
+--- a/lib/game/gpu_mesh.dart
++++ b/lib/game/gpu_mesh.dart
+@@ -12,6 +12,8 @@
+ part 'world_expansion_mesh.dart';
+ part 'world_track_obstacle_mesh.dart';
+ part 'car_details_world.dart';
++part 'car_details_brazil.dart';
++part 'brazil_indoor_mesh.dart';
+ 
+ /// Vertex layout shared with the Android GLES renderer and the offscreen QA tool:
+ /// position.xyz, normal.xyz, linear-input color.rgb, texture.uv, material.
+@@ -326,9 +328,6 @@
+   for (var i = 0; i < fs.length; i++) {
+     final a = fs[i], b = fs[(i + 1) % fs.length];
+     if (track.isFloor((a.s + (i + 1 == fs.length ? track.length : b.s)) * .5)) {
+-      if (track.outdoor && !track.openArena) {
+-        buildExpansionFloorRibbon(m, track, a, b, i);
+-      }
+       if (!track.openArena && i % 24 == 0) {
+         final p = a.point(0, .025);
+         m.triangle(
+@@ -730,6 +729,10 @@
+   if (track.outdoor) {
+     buildExpansionWorld(m, track);
+     buildCourseObjects(m, track);
++    return m;
++  }
++  if (brazilLoopStars.containsKey(track.id)) {
++    buildBrazilIndoorWorld(m, track);
+     return m;
+   }
+   // Household floor material and wall color are selected by environment.
+--- a/lib/game/renderer.dart
++++ b/lib/game/renderer.dart
+@@ -233,7 +233,10 @@
+           ? const Color(0xfff4782e)
+           : const Color(0xffed6b24);
+       final green = track.isShortcut(a.s, .8);
+-      road.quad(a.point(-w), a.point(w), b.point(w), b.point(-w), base, true);
++      // The five outdoor biomes use their own terrain on ground sectors.
++      if (!(track.outdoor && track.isFloor(a.s))) {
++        road.quad(a.point(-w), a.point(w), b.point(w), b.point(-w), base, true);
++      }
+       if (green) {
+         road.quad(
+           a.point(w * .55, .025),
+@@ -365,9 +368,13 @@
+   }
+ 
+   void _room() {
+-    if (track.outdoor) {
++    if (track.outdoor || brazilLoopStars.containsKey(track.id)) {
+       final mesh = Mesh3();
+-      buildExpansionWorld(mesh, track);
++      if (track.outdoor) {
++        buildExpansionWorld(mesh, track);
++      } else {
++        buildBrazilIndoorWorld(mesh, track);
++      }
+       for (var i = 0; i < mesh.data.length; i += 36) {
+         final data = mesh.data;
+         room.faces.add(
+--- a/lib/main.dart
++++ b/lib/main.dart
+@@ -16,7 +16,7 @@
+ 
+ const carWeceVersion = String.fromEnvironment(
+   'CARWECE_VERSION_NAME',
+-  defaultValue: '1.1.0',
++  defaultValue: '1.2.0',
+ );
+ 
+ Future<void> main() async {
+@@ -90,6 +90,32 @@
+   String page = 'home', returnPage = 'home';
+   int trackIndex = 0, garageIndex = 0, round = 0;
+   String selectedRoom = 'TODOS';
++  String garageClass = 'TODAS', garageCategory = 'TODOS';
++  bool garageBrazilOnly = false;
++  List<int> get visibleGarageCars =>
++      filterCarCollection(
++        performanceClass: garageClass,
++        category: garageCategory,
++        brazilOnly: garageBrazilOnly,
++      )..sort((a, b) {
++        final ca = cars[a], cb = cars[b];
++        final byClass = carPerformanceClasses
++            .indexOf(ca.performanceClass)
++            .compareTo(carPerformanceClasses.indexOf(cb.performanceClass));
++        if (byClass != 0) return byClass;
++        final byCategory = ca.modelCategory.compareTo(cb.modelCategory);
++        return byCategory != 0 ? byCategory : ca.name.compareTo(cb.name);
++      });
++  void changeGarageFilter(VoidCallback update) {
++    store.tap();
++    setState(() {
++      update();
++      final visible = visibleGarageCars;
++      if (visible.isNotEmpty && !visible.contains(garageIndex))
++        garageIndex = visible.first;
++    });
++  }
++
+   List<int> cupRoute = [0, 1, 2];
+   List<int> get visibleTracks => [
+     for (var i = 0; i < tracks.length; i++)
+@@ -174,7 +200,12 @@
+     }
+     setState(() {
+       page = target;
+-      if (target == 'garage') garageIndex = store.selectedCar;
++      if (target == 'garage') {
++        garageIndex = store.selectedCar;
++        final visible = visibleGarageCars;
++        if (visible.isNotEmpty && !visible.contains(garageIndex))
++          garageIndex = visible.first;
++      }
+     });
+   }
+ 
+@@ -785,6 +816,7 @@
+   }
+ 
+   Widget garage() {
++    final visible = visibleGarageCars;
+     final car = cars[garageIndex],
+         owned = store.ownedCars.contains(car.id),
+         chosen = garageIndex == store.selectedCar;
+@@ -796,173 +828,287 @@
+           () => go(returnPage == 'select' ? 'select' : 'home'),
+           trailing: coinRushBadge(),
+         ),
+-        Expanded(
++        SizedBox(
++          height: 44,
+           child: Row(
+             children: [
+-              SizedBox(
+-                width: 210,
+-                child: ListView(
++              Text('CLASSE', style: body(10, color: muted)),
++              const SizedBox(width: 8),
++              DropdownButton<String>(
++                key: const ValueKey('garage-class-filter'),
++                value: garageClass,
++                menuMaxHeight: 240,
++                dropdownColor: panel,
++                style: body(11),
++                underline: const SizedBox.shrink(),
++                items: [
++                  for (final value in ['TODAS', ...carPerformanceClasses])
++                    DropdownMenuItem(
++                      value: value,
++                      child: Text(value == 'TODAS' ? 'TODAS' : 'CLASSE $value'),
++                    ),
++                ],
++                onChanged: (value) {
++                  if (value != null)
++                    changeGarageFilter(() => garageClass = value);
++                },
++              ),
++              const SizedBox(width: 20),
++              Text('MODELO', style: body(10, color: muted)),
++              const SizedBox(width: 8),
++              DropdownButton<String>(
++                key: const ValueKey('garage-category-filter'),
++                value: garageCategory,
++                menuMaxHeight: 240,
++                dropdownColor: panel,
++                style: body(11),
++                underline: const SizedBox.shrink(),
++                items: [
++                  for (final value in ['TODOS', ...carModelCategories])
++                    DropdownMenuItem(value: value, child: Text(value)),
++                ],
++                onChanged: (value) {
++                  if (value != null)
++                    changeGarageFilter(() => garageCategory = value);
++                },
++              ),
++              const SizedBox(width: 14),
++              FilterChip(
++                key: const ValueKey('garage-brazil-filter'),
++                label: Text('BRASILEIROS', style: body(10)),
++                selected: garageBrazilOnly,
++                onSelected: (value) =>
++                    changeGarageFilter(() => garageBrazilOnly = value),
++              ),
++              const Spacer(),
++              Text(
++                '${visible.length} / ${cars.length} CARROS',
++                style: body(10, color: muted),
++              ),
++              const SizedBox(width: 8),
++              IconButton(
++                tooltip: 'Limpar filtros',
++                icon: const Icon(Icons.filter_alt_off_outlined, size: 19),
++                onPressed: () => changeGarageFilter(() {
++                  garageClass = 'TODAS';
++                  garageCategory = 'TODOS';
++                  garageBrazilOnly = false;
++                }),
++              ),
++            ],
++          ),
++        ),
++        Expanded(
++          child: visible.isEmpty
++              ? Center(
++                  child: Text(
++                    'NENHUM CARRO NESTA COMBINAÇÃO',
++                    style: display(24),
++                  ),
++                )
++              : Row(
+                   children: [
+-                    for (var i = 0; i < cars.length; i++) ...[
+-                      SizedBox(
+-                        height: 88,
+-                        child: Material(
+-                          color: garageIndex == i
+-                              ? const Color(0xff2b3b56)
+-                              : panel,
+-                          borderRadius: BorderRadius.circular(9),
+-                          child: InkWell(
+-                            borderRadius: BorderRadius.circular(9),
+-                            onTap: () {
+-                              store.tap();
+-                              setState(() => garageIndex = i);
+-                            },
+-                            child: Padding(
+-                              padding: const EdgeInsets.all(14),
+-                              child: Row(
+-                                children: [
+-                                  Container(
+-                                    width: 6,
+-                                    height: 34,
+-                                    decoration: BoxDecoration(
+-                                      color: Color(cars[i].color),
+-                                      borderRadius: BorderRadius.circular(2),
+-                                    ),
+-                                  ),
+-                                  const SizedBox(width: 10),
+-                                  Expanded(
+-                                    child: Column(
+-                                      crossAxisAlignment:
+-                                          CrossAxisAlignment.start,
+-                                      mainAxisAlignment:
+-                                          MainAxisAlignment.center,
++                    SizedBox(
++                      width: 210,
++                      child: ListView(
++                        key: const ValueKey('garage-car-list'),
++                        children: [
++                          for (final i in visible) ...[
++                            if (i == visible.first ||
++                                cars[visible[visible.indexOf(i) - 1]]
++                                        .performanceClass !=
++                                    cars[i].performanceClass ||
++                                cars[visible[visible.indexOf(i) - 1]]
++                                        .modelCategory !=
++                                    cars[i].modelCategory)
++                              Padding(
++                                padding: const EdgeInsets.fromLTRB(3, 12, 0, 8),
++                                child: Text(
++                                  'CLASSE ${cars[i].performanceClass} • ${cars[i].modelCategory}',
++                                  style: body(10, color: cyan),
++                                ),
++                              ),
++                            SizedBox(
++                              height: 96,
++                              child: Material(
++                                color: garageIndex == i
++                                    ? const Color(0xff2b3b56)
++                                    : panel,
++                                borderRadius: BorderRadius.circular(9),
++                                child: InkWell(
++                                  borderRadius: BorderRadius.circular(9),
++                                  onTap: () {
++                                    store.tap();
++                                    setState(() => garageIndex = i);
++                                  },
++                                  child: Padding(
++                                    padding: const EdgeInsets.all(14),
++                                    child: Row(
+                                       children: [
+-                                        Text(
+-                                          cars[i].name,
+-                                          maxLines: 2,
+-                                          overflow: TextOverflow.ellipsis,
+-                                          style: display(20),
++                                        Container(
++                                          width: 6,
++                                          height: 34,
++                                          decoration: BoxDecoration(
++                                            color: Color(cars[i].color),
++                                            borderRadius: BorderRadius.circular(
++                                              2,
++                                            ),
++                                          ),
+                                         ),
+-                                        const SizedBox(height: 4),
+-                                        Text(
+-                                          store.ownedCars.contains(cars[i].id)
+-                                              ? 'NA SUA COLEÇÃO'
+-                                              : '${cars[i].cost} MOEDAS',
+-                                          style: body(9, color: muted),
++                                        const SizedBox(width: 10),
++                                        Expanded(
++                                          child: Column(
++                                            crossAxisAlignment:
++                                                CrossAxisAlignment.start,
++                                            mainAxisAlignment:
++                                                MainAxisAlignment.center,
++                                            children: [
++                                              Text(
++                                                cars[i].name,
++                                                maxLines: 2,
++                                                overflow: TextOverflow.ellipsis,
++                                                style: display(20),
++                                              ),
++                                              const SizedBox(height: 4),
++                                              Text(
++                                                store.ownedCars.contains(
++                                                      cars[i].id,
++                                                    )
++                                                    ? 'NA SUA COLEÇÃO'
++                                                    : '${cars[i].cost} MOEDAS',
++                                                style: body(9, color: muted),
++                                              ),
++                                            ],
++                                          ),
+                                         ),
++                                        if (i == store.selectedCar)
++                                          const Icon(
++                                            Icons.check_circle,
++                                            size: 16,
++                                            color: cyan,
++                                          ),
+                                       ],
+                                     ),
+                                   ),
+-                                  if (i == store.selectedCar)
+-                                    const Icon(
+-                                      Icons.check_circle,
+-                                      size: 16,
+-                                      color: cyan,
++                                ),
++                              ),
++                            ),
++                            if (i != cars.length - 1) const SizedBox(height: 9),
++                          ],
++                        ],
++                      ),
++                    ),
++                    Expanded(
++                      child: Column(
++                        children: [
++                          Expanded(
++                            child: GpuGarageView(
++                              car: car,
++                              angle: -.7 + math.sin(phase * .3) * .24,
++                            ),
++                          ),
++                          RushBadge(car.tag, color: Color(car.color)),
++                          const SizedBox(height: 16),
++                        ],
++                      ),
++                    ),
++                    SizedBox(
++                      width: 250,
++                      child: Column(
++                        crossAxisAlignment: CrossAxisAlignment.start,
++                        mainAxisAlignment: MainAxisAlignment.center,
++                        children: [
++                          Expanded(
++                            child: SingleChildScrollView(
++                              key: const ValueKey('garage-car-details'),
++                              child: Column(
++                                crossAxisAlignment: CrossAxisAlignment.start,
++                                children: [
++                                  Text(
++                                    '${(garageIndex + 1).toString().padLeft(2, '0')} / COLEÇÃO • CLASSE ${car.performanceClass}',
++                                    style: body(10, color: muted, spacing: 1.7),
++                                  ),
++                                  const SizedBox(height: 10),
++                                  Text(car.name, style: display(38)),
++                                  const SizedBox(height: 12),
++                                  Text(
++                                    '${car.modelCategory} • ${car.description}',
++                                    style: body(13, color: muted),
++                                  ),
++                                  const SizedBox(height: 14),
++                                  StatBar(
++                                    'VELOCIDADE',
++                                    car.speed / 105,
++                                    color: Color(car.color),
++                                  ),
++                                  StatBar(
++                                    'ACELERAÇÃO',
++                                    car.acceleration / 43,
++                                    color: Color(car.color),
++                                  ),
++                                  StatBar(
++                                    'DIREÇÃO',
++                                    car.handling / 1.45,
++                                    color: Color(car.color),
++                                  ),
++                                  const SizedBox(height: 8),
++                                  Text(
++                                    owned
++                                        ? '${car.tier} • NA SUA COLEÇÃO'
++                                        : store.carRequirement(car),
++                                    maxLines: 2,
++                                    style: body(
++                                      11,
++                                      color: store.carEligible(car)
++                                          ? cyan
++                                          : orange,
+                                     ),
++                                  ),
+                                 ],
+                               ),
+                             ),
+                           ),
+-                        ),
+-                      ),
+-                      if (i != cars.length - 1) const SizedBox(height: 9),
+-                    ],
++                          const SizedBox(height: 20),
++                          SizedBox(
++                            width: double.infinity,
++                            child: RushButton(
++                              chosen
++                                  ? 'SELECIONADO'
++                                  : owned
++                                  ? 'SELECIONAR'
++                                  : store.carEligible(car)
++                                  ? 'COMPRAR • ${car.cost}'
++                                  : 'REQUER ${car.requiredStars} ★',
++                              primary: !chosen,
++                              compact: true,
++                              icon: owned ? Icons.check : Icons.lock_open,
++                              onTap:
++                                  chosen || (!owned && !store.carEligible(car))
++                                  ? null
++                                  : () {
++                                      if (!store.buyCar(car)) {
++                                        ScaffoldMessenger.of(
++                                          context,
++                                        ).showSnackBar(
++                                          const SnackBar(
++                                            content: Text(
++                                              'Ganhe moedas completando corridas.',
++                                            ),
++                                          ),
++                                        );
++                                        return;
++                                      }
++                                      store.selectedCar = garageIndex;
++                                      store.changed();
++                                      store.tap();
++                                    },
++                            ),
++                          ),
++                        ],
++                      ),
++                    ),
+                   ],
+                 ),
+-              ),
+-              Expanded(
+-                child: Column(
+-                  children: [
+-                    Expanded(
+-                      child: GpuGarageView(
+-                        car: car,
+-                        angle: -.7 + math.sin(phase * .3) * .24,
+-                      ),
+-                    ),
+-                    RushBadge(car.tag, color: Color(car.color)),
+-                    const SizedBox(height: 16),
+-                  ],
+-                ),
+-              ),
+-              SizedBox(
+-                width: 250,
+-                child: Column(
+-                  crossAxisAlignment: CrossAxisAlignment.start,
+-                  mainAxisAlignment: MainAxisAlignment.center,
+-                  children: [
+-                    Text(
+-                      '0${garageIndex + 1} / COLEÇÃO',
+-                      style: body(10, color: muted, spacing: 1.7),
+-                    ),
+-                    const SizedBox(height: 10),
+-                    Text(car.name, style: display(38)),
+-                    const SizedBox(height: 12),
+-                    Text(car.description, style: body(14, color: muted)),
+-                    const SizedBox(height: 27),
+-                    StatBar(
+-                      'VELOCIDADE',
+-                      car.speed / 105,
+-                      color: Color(car.color),
+-                    ),
+-                    StatBar(
+-                      'ACELERAÇÃO',
+-                      car.acceleration / 43,
+-                      color: Color(car.color),
+-                    ),
+-                    StatBar(
+-                      'DIREÇÃO',
+-                      car.handling / 1.45,
+-                      color: Color(car.color),
+-                    ),
+-                    const SizedBox(height: 8),
+-                    Text(
+-                      owned
+-                          ? '${car.tier} • NA SUA COLEÇÃO'
+-                          : store.carRequirement(car),
+-                      maxLines: 2,
+-                      style: body(
+-                        11,
+-                        color: store.carEligible(car) ? cyan : orange,
+-                      ),
+-                    ),
+-                    const SizedBox(height: 20),
+-                    SizedBox(
+-                      width: double.infinity,
+-                      child: RushButton(
+-                        chosen
+-                            ? 'SELECIONADO'
+-                            : owned
+-                            ? 'SELECIONAR'
+-                            : store.carEligible(car)
+-                            ? 'COMPRAR • ${car.cost}'
+-                            : 'REQUER ${car.requiredStars} ★',
+-                        primary: !chosen,
+-                        compact: true,
+-                        icon: owned ? Icons.check : Icons.lock_open,
+-                        onTap: chosen || (!owned && !store.carEligible(car))
+-                            ? null
+-                            : () {
+-                                if (!store.buyCar(car)) {
+-                                  ScaffoldMessenger.of(context).showSnackBar(
+-                                    const SnackBar(
+-                                      content: Text(
+-                                        'Ganhe moedas completando corridas.',
+-                                      ),
+-                                    ),
+-                                  );
+-                                  return;
+-                                }
+-                                store.selectedCar = garageIndex;
+-                                store.changed();
+-                                store.tap();
+-                              },
+-                      ),
+-                    ),
+-                  ],
+-                ),
+-              ),
+-            ],
+-          ),
+         ),
+         const SizedBox(height: 8),
+         Text(
+--- a/lib/online/protocol.dart
++++ b/lib/online/protocol.dart
+@@ -1,4 +1,4 @@
+ const onlineProtocol = 1;
+ // New race widths/colliders require identical content on every online peer.
+-const onlineContent = 'carwece-worlds-1.1-themed46';
++const onlineContent = 'carwece-brasil-loops-2.0';
+ const onlineMaxPlayers = 6;
+--- a/pubspec.yaml
++++ b/pubspec.yaml
+@@ -1,7 +1,7 @@
+ name: carwece
+ description: CarWece, corrida arcade de miniaturas em pistas de brinquedo, por hirumisu.
+ publish_to: none
+-version: 1.1.0+2
++version: 1.2.0+3
+ environment:
+   sdk: '>=3.8.0 <4.0.0'
+ dependencies:
+--- a/test/battle_test.dart
++++ b/test/battle_test.dart
+@@ -574,7 +574,7 @@
+         expect(BattleMesh.first, GpuResources.objects.length);
+         expect(
+           GpuResources.objectsFor([0]).length + BattleGpuMeshes.objects.length,
+-          lessThanOrEqualTo(256),
++          lessThanOrEqualTo(512),
+         );
+         for (var i = 0; i < frame[14].toInt(); i++)
+           expect(frame[15 + i * 17], lessThan(BattleMesh.count));
+--- a/test/expansion_v05_test.dart
++++ b/test/expansion_v05_test.dart
+@@ -63,9 +63,9 @@
+   test(
+     'Thirty-one real-name models have distinct silhouettes and a starter RX7',
+     () {
+-      expect(cars.length, 56);
++      expect(cars.length, 81);
+       expect(cars.take(4).map((c) => c.id), ['rx7', 'evo9', 'r34', '350z']);
+-      expect(cars.map((c) => c.body).toSet().length, 56);
++      expect(cars.map((c) => c.body).toSet().length, 81);
+       expect(
+         cars
+             .map(
+@@ -74,7 +74,7 @@
+             )
+             .toSet()
+             .length,
+-        56,
++        81,
+       );
+       expect(cars.where((c) => c.cost == 0).map((c) => c.id), ['rx7']);
+       expect(GpuResources.objects.length, cars.length * 3 + 21);
+@@ -86,7 +86,7 @@
+   test(
+     'Every room has at least four circuits and matching tire surface grip',
+     () {
+-      expect(tracks.length, 51);
++      expect(tracks.length, 76);
+       final rooms = tracks.map((t) => t.room).toSet();
+       expect(rooms, {
+         'QUARTO',
+--- a/test/expansion_v06_test.dart
++++ b/test/expansion_v06_test.dart
+@@ -268,7 +268,7 @@
+     'Podium stars improve once per circuit, time trial does not award wins or stars',
+     () async {
+       final store = GameStore();
+-      expect(tracks.where(store.trackUnlocked).length, 5);
++      expect(tracks.where(store.trackUnlocked).length, 8);
+       store.record(tracks.first, result(3), RaceMode.quick);
+       expect(store.stars, 1);
+       store.record(tracks.first, result(2), RaceMode.quick);
+--- a/test/flow_test.dart
++++ b/test/flow_test.dart
+@@ -112,7 +112,15 @@
+       expect(find.text('ESCOLHA A CORRIDA'), findsOneWidget);
+       await screenshot(tester, '02_circuitos');
+       await tap(tester, 'GARAGEM');
+-      await tester.ensureVisible(find.text('TOYOTA SUPRA A80'));
++      await tester.scrollUntilVisible(
++        find.text('TOYOTA SUPRA A80'),
++        240,
++        scrollable: find.descendant(
++          of: find.byKey(const ValueKey('garage-car-list')),
++          matching: find.byType(Scrollable),
++        ),
++        maxScrolls: 100,
++      );
+       await tester.pump();
+       await tap(tester, 'TOYOTA SUPRA A80');
+       await screenshot(tester, '03_garagem');
+@@ -156,11 +164,11 @@
+           find.byWidgetPredicate((w) => w is HoldControl && w.label == name);
+       final left = await tester.startGesture(
+         tester.getCenter(control('ESQUERDA')),
+-        pointer: 1,
++        pointer: 10001,
+       );
+       final boost = await tester.startGesture(
+         tester.getCenter(control('TURBO')),
+-        pointer: 2,
++        pointer: 10002,
+       );
+       await tester.pump(const Duration(milliseconds: 30));
+       expect(race.steering, -1);
+@@ -206,15 +214,15 @@
+           find.byWidgetPredicate((w) => w is HoldControl && w.label == name);
+       final gas = await tester.startGesture(
+         tester.getCenter(control('ACELERAR')),
+-        pointer: 11,
++        pointer: 10011,
+       );
+       final left = await tester.startGesture(
+         tester.getCenter(control('ESQUERDA')),
+-        pointer: 12,
++        pointer: 10012,
+       );
+       final turbo = await tester.startGesture(
+         tester.getCenter(control('TURBO')),
+-        pointer: 13,
++        pointer: 10013,
+       );
+       await tester.pump(const Duration(milliseconds: 50));
+       expect(race.accelerating, isTrue);
+@@ -270,15 +278,15 @@
+           find.byWidgetPredicate((w) => w is HoldControl && w.label == name);
+       final gas = await tester.startGesture(
+         tester.getCenter(control('ACELERAR')),
+-        pointer: 31,
++        pointer: 10031,
+       );
+       final wheel = await tester.startGesture(
+         tester.getCenter(control('ESQUERDA')),
+-        pointer: 32,
++        pointer: 10032,
+       );
+       final turbo = await tester.startGesture(
+         tester.getCenter(control('TURBO')),
+-        pointer: 33,
++        pointer: 10033,
+       );
+       for (var i = 0; i < 12; i++) {
+         race.tell('HUD $i');
+@@ -322,11 +330,11 @@
+           find.byWidgetPredicate((w) => w is HoldControl && w.label == name);
+       final gas = await tester.startGesture(
+         tester.getCenter(control('ACELERAR')),
+-        pointer: 41,
++        pointer: 10041,
+       );
+       final left = await tester.startGesture(
+         tester.getCenter(control('ESQUERDA')),
+-        pointer: 42,
++        pointer: 10042,
+       );
+       await tester.pump(const Duration(milliseconds: 20));
+       await tester.tap(find.byIcon(Icons.pause_rounded));
+@@ -338,11 +346,11 @@
+       await tap(tester, 'CONTINUAR');
+       final gas2 = await tester.startGesture(
+         tester.getCenter(control('ACELERAR')),
+-        pointer: 43,
++        pointer: 10043,
+       );
+       final right = await tester.startGesture(
+         tester.getCenter(control('DIREITA')),
+-        pointer: 44,
++        pointer: 10044,
+       );
+       await tester.pump(const Duration(milliseconds: 20));
+       expect(race.accelerating, isTrue);
+--- a/test/free_drive_test.dart
++++ b/test/free_drive_test.dart
+@@ -132,7 +132,9 @@
+         expect(floorLength / t.length, greaterThan(.3));
+         expect(
+           t.widthAt(t.frames.firstWhere((f) => t.isFloor(f.s)).s),
+-          t.outdoor ? equals(t.width) : greaterThan(t.width * 2),
++          t.outdoor || brazilLoopStars.containsKey(t.id)
++              ? equals(t.width)
++              : greaterThan(t.width * 2),
+         );
+         expect(
+           t.outdoor
+--- a/test/world_expansion_test.dart
++++ b/test/world_expansion_test.dart
+@@ -6,16 +6,16 @@
+ import 'package:carwece/game/gpu_frame.dart';
+ 
+ void main() {
+-  final tracks = createTracks(), added = tracks.skip(26).toList();
++  final tracks = createTracks(), added = tracks.skip(26).take(25).toList();
+   final arenas = createBattleArenas().skip(6).toList();
+   test(
+     'Append-only catalogues add exactly 25 cars, 25 circuits and 5 arenas',
+     () {
+-      expect(cars.length, 56);
+-      expect(tracks.length, 51);
++      expect(cars.length, 81);
++      expect(tracks.length, 76);
+       expect(arenas.length, 5);
+       expect(cars.map((c) => c.id).toSet().length, cars.length);
+-      expect(cars.map((c) => c.body), List.generate(56, (i) => i));
++      expect(cars.map((c) => c.body), List.generate(cars.length, (i) => i));
+       expect(tracks.map((t) => t.id).toSet().length, tracks.length);
+       for (final room in expansionBiomes.keys) {
+         expect(added.where((t) => t.room == room).length, 5);
+@@ -29,7 +29,7 @@
+     '25 new sculpted cars have distinct finite chassis and independent wheels',
+     () {
+       final hashes = <int>{};
+-      for (final c in cars.skip(31)) {
++      for (final c in cars.skip(31).take(25)) {
+         final body = buildCarMesh(c).buffer, wheel = buildWheelMesh(c).buffer;
+         expect(body.length % 36, 0, reason: c.id);
+         expect(body.every((n) => n.isFinite), isTrue, reason: c.id);
+@@ -175,7 +175,7 @@
+   test(
+     'Every new car starts in racing and combat with finite physical and GPU state',
+     () {
+-      for (final c in cars.skip(31)) {
++      for (final c in cars.skip(31).take(25)) {
+         final race = RaceEngine(
+           track: added.first,
+           car: c,
+--- a/lib/game/world_track_obstacle_mesh.dart
++++ b/lib/game/world_track_obstacle_mesh.dart
+@@ -1,62 +1,4 @@
+ part of 'gpu_mesh.dart';
+-
+-/// A narrow orange toy ribbon replaces the unmarked terrain corridor only on
+-/// the 25 new races. It is flush with the existing physical floor, not a new
+-/// raised surface; floorGrip and all wheel contacts remain biome-specific.
+-void buildExpansionFloorRibbon(
+-  Mesh3 m,
+-  TrackSpec track,
+-  TrackFrame a,
+-  TrackFrame b,
+-  int index,
+-) {
+-  final w = track.width / 2;
+-  m.quad(
+-    a.point(-w),
+-    b.point(-w),
+-    b.point(w),
+-    a.point(w),
+-    index ~/ 24 % 2 == 0 ? 0xffef681b : 0xffeb5d16,
+-    Material3.track,
+-    na: a.up,
+-    nb: b.up,
+-    nc: b.up,
+-    nd: a.up,
+-    repeatU: (b.p - a.p).length,
+-    repeatV: 1,
+-  );
+-  for (final side in [-1.0, 1.0]) {
+-    m.quad(
+-      a.point(side * w, .018),
+-      b.point(side * w, .018),
+-      b.point(side * (w - 1.1), .018),
+-      a.point(side * (w - 1.1), .018),
+-      0xffffc46a,
+-      Material3.decal,
+-    );
+-    if (index % 24 < 3) {
+-      m.quad(
+-        a.point(side * (w - 1.4), .022),
+-        b.point(side * (w - 1.4), .022),
+-        b.point(side * (w - 2.5), .022),
+-        a.point(side * (w - 2.5), .022),
+-        track.accent,
+-        Material3.decal,
+-      );
+-    }
+-  }
+-  if (index % 24 == 0) {
+-    m.box(
+-      a.point(0, .012),
+-      V3(track.width - 2.4, .024, .12),
+-      0xffa94715,
+-      Material3.plastic,
+-      r: a.right,
+-      u: a.up,
+-      f: a.forward,
+-    );
+-  }
+-}
+ 
+ final _expansionObstaclePrototypes = <String, Mesh3>{};
+ 
+--- a/lib/game/world_track_obstacles.dart
++++ b/lib/game/world_track_obstacles.dart
+@@ -46,7 +46,11 @@
+ /// safety rules intentionally exclude road props, so obstacles are a separate
+ /// collection. Nothing is added to old circuits or to the battle arenas.
+ void populateExpansionObstacles(TrackSpec t, int trackIndex) {
+-  if (!expansionCircuitStars.containsKey(t.id) || t.openArena) return;
++  if ((!expansionCircuitStars.containsKey(t.id) &&
++          !brazilLoopStars.containsKey(t.id)) ||
++      !t.outdoor ||
++      t.openArena)
++    return;
+   t.obstacles.removeWhere((o) => o.visible); // replace generic storage boxes
+   final kinds = expansionObstacleKinds[t.room]!;
+   final variant = trackIndex % 5;
+--- a/test/themed_track_obstacles_test.dart
++++ b/test/themed_track_obstacles_test.dart
+@@ -7,7 +7,7 @@
+ 
+ void main() {
+   final tracks = createTracks();
+-  final added = tracks.skip(26).toList();
++  final added = tracks.skip(26).take(25).toList();
+   test('Only the 25 new races use fixed legacy ribbon width', () {
+     expect(added.length, 25);
+     for (final t in added) {
+@@ -160,7 +160,7 @@
+     },
+   );
+   test('Obstacle placement and theme order are deterministic', () {
+-    final again = createTracks().skip(26).toList();
++    final again = createTracks().skip(26).take(25).toList();
+     for (var i = 0; i < added.length; i++) {
+       final a = added[i].themedObstacles, b = again[i].themedObstacles;
+       expect(b.length, a.length);
+--- /dev/null
++++ b/lib/game/brazil_content.dart
+@@ -0,0 +1,902 @@
++part of 'content.dart';
++
++/// Brazilian-market collection. Values below are fictional arcade balance,
++/// never a claim about real vehicle performance or factory dimensions.
++const brazilCarDesigns = <CarDesign>[
++  CarDesign(
++    3.180,
++    1.480,
++    1.240,
++    2.350,
++    0.550,
++    -0.650,
++    1.540,
++    -2.120,
++    1.972,
++    -1.876,
++    spokes: 4,
++    wheelRadius: .59,
++    rimColor: 0xffbdc5c6,
++  ), // VOLKSWAGEN FUSCA 1600
++  CarDesign(
++    3.200,
++    1.490,
++    1.370,
++    2.240,
++    0.480,
++    -1.300,
++    1.430,
++    -2.180,
++    1.984,
++    -1.888,
++    hatch: true,
++    spokes: 5,
++    wheelRadius: .59,
++    rimColor: 0xffbdc5c6,
++  ), // VOLKSWAGEN BRASÍLIA
++  CarDesign(
++    3.120,
++    1.510,
++    1.340,
++    2.130,
++    0.480,
++    -1.300,
++    1.430,
++    -2.180,
++    1.934,
++    -1.841,
++    hatch: true,
++    spokes: 6,
++    wheelRadius: .59,
++    rimColor: 0xffbdc5c6,
++  ), // VOLKSWAGEN GOL GTI
++  CarDesign(
++    3.550,
++    1.500,
++    1.370,
++    2.200,
++    0.480,
++    -1.300,
++    1.430,
++    -2.180,
++    2.201,
++    -2.094,
++    hatch: true,
++    spokes: 7,
++    wheelRadius: .59,
++    rimColor: 0xffbdc5c6,
++  ), // VOLKSWAGEN PARATI GLS
++  CarDesign(
++    3.420,
++    1.510,
++    1.350,
++    2.160,
++    0.480,
++    -0.050,
++    1.430,
++    -0.500,
++    2.120,
++    -2.018,
++    spokes: 8,
++    wheelRadius: .59,
++    rimColor: 0xffbdc5c6,
++  ), // VOLKSWAGEN SAVEIRO SUMMER
++  CarDesign(
++    3.760,
++    1.560,
++    1.430,
++    2.190,
++    0.620,
++    -0.850,
++    1.430,
++    -1.830,
++    2.331,
++    -2.218,
++    sedan: true,
++    spokes: 4,
++    wheelRadius: .59,
++    rimColor: 0xffbdc5c6,
++  ), // VOLKSWAGEN SANTANA 2000
++  CarDesign(
++    3.460,
++    1.560,
++    1.200,
++    1.840,
++    0.480,
++    -0.850,
++    1.430,
++    -1.830,
++    2.145,
++    -2.041,
++    spokes: 5,
++    wheelRadius: .59,
++    rimColor: 0xffbdc5c6,
++  ), // VOLKSWAGEN SP2
++  CarDesign(
++    3.920,
++    1.660,
++    1.460,
++    2.120,
++    0.480,
++    -0.850,
++    1.430,
++    -1.830,
++    2.430,
++    -2.313,
++    spokes: 6,
++    wheelRadius: .59,
++    rimColor: 0xffbdc5c6,
++  ), // CHEVROLET OPALA SS
++  CarDesign(
++    3.310,
++    1.470,
++    1.380,
++    2.170,
++    0.620,
++    -0.850,
++    1.430,
++    -1.830,
++    2.052,
++    -1.953,
++    sedan: true,
++    spokes: 7,
++    wheelRadius: .59,
++    rimColor: 0xffbdc5c6,
++  ), // CHEVROLET CHEVETTE SL
++  CarDesign(
++    3.520,
++    1.560,
++    1.360,
++    2.100,
++    0.480,
++    -1.300,
++    1.430,
++    -2.180,
++    2.182,
++    -2.077,
++    hatch: true,
++    spokes: 8,
++    wheelRadius: .59,
++    rimColor: 0xffbdc5c6,
++  ), // CHEVROLET MONZA S/R
++  CarDesign(
++    3.370,
++    1.550,
++    1.320,
++    2.020,
++    0.480,
++    -1.300,
++    1.430,
++    -2.180,
++    2.089,
++    -1.988,
++    hatch: true,
++    spokes: 4,
++    wheelRadius: .59,
++    rimColor: 0xffbdc5c6,
++  ), // CHEVROLET KADETT GSI
++  CarDesign(
++    3.980,
++    1.670,
++    1.440,
++    2.150,
++    0.620,
++    -0.850,
++    1.430,
++    -1.830,
++    2.468,
++    -2.348,
++    sedan: true,
++    spokes: 5,
++    wheelRadius: .59,
++    rimColor: 0xffbdc5c6,
++  ), // CHEVROLET OMEGA CD 4.1
++  CarDesign(
++    2.870,
++    1.400,
++    1.330,
++    2.220,
++    0.480,
++    -1.300,
++    1.430,
++    -2.180,
++    1.779,
++    -1.693,
++    hatch: true,
++    spokes: 6,
++    wheelRadius: .59,
++    rimColor: 0xffbdc5c6,
++  ), // FIAT 147
++  CarDesign(
++    2.980,
++    1.430,
++    1.380,
++    2.260,
++    0.480,
++    -1.300,
++    1.430,
++    -2.180,
++    1.848,
++    -1.758,
++    hatch: true,
++    spokes: 7,
++    wheelRadius: .59,
++    rimColor: 0xffbdc5c6,
++  ), // FIAT UNO TURBO
++  CarDesign(
++    3.100,
++    1.490,
++    1.320,
++    2.120,
++    0.480,
++    -1.300,
++    1.430,
++    -2.180,
++    1.922,
++    -1.829,
++    hatch: true,
++    spokes: 8,
++    wheelRadius: .59,
++    rimColor: 0xffbdc5c6,
++  ), // FIAT PALIO 1.6
++  CarDesign(
++    3.770,
++    1.580,
++    1.390,
++    2.060,
++    0.620,
++    -0.850,
++    1.430,
++    -1.830,
++    2.337,
++    -2.224,
++    sedan: true,
++    spokes: 4,
++    wheelRadius: .59,
++    rimColor: 0xffbdc5c6,
++  ), // FIAT TEMPRA TURBO
++  CarDesign(
++    3.850,
++    1.590,
++    1.370,
++    2.080,
++    0.620,
++    -0.850,
++    1.430,
++    -1.830,
++    2.387,
++    -2.272,
++    sedan: true,
++    spokes: 5,
++    wheelRadius: .59,
++    rimColor: 0xffbdc5c6,
++  ), // FIAT MAREA TURBO
++  CarDesign(
++    3.650,
++    1.510,
++    1.420,
++    2.190,
++    0.480,
++    -0.850,
++    1.430,
++    -1.830,
++    2.263,
++    -2.153,
++    spokes: 6,
++    wheelRadius: .59,
++    rimColor: 0xffbdc5c6,
++  ), // FORD CORCEL II
++  CarDesign(
++    3.710,
++    1.540,
++    1.450,
++    2.250,
++    0.620,
++    -0.850,
++    1.430,
++    -1.830,
++    2.300,
++    -2.189,
++    sedan: true,
++    spokes: 7,
++    wheelRadius: .59,
++    rimColor: 0xffbdc5c6,
++  ), // FORD DEL REY GHIA
++  CarDesign(
++    3.290,
++    1.530,
++    1.340,
++    2.080,
++    0.480,
++    -1.300,
++    1.430,
++    -2.180,
++    2.040,
++    -1.941,
++    hatch: true,
++    spokes: 8,
++    wheelRadius: .59,
++    rimColor: 0xffbdc5c6,
++  ), // FORD ESCORT XR3
++  CarDesign(
++    3.870,
++    1.680,
++    1.400,
++    2.010,
++    0.480,
++    -0.850,
++    1.430,
++    -1.830,
++    2.399,
++    -2.283,
++    spokes: 4,
++    wheelRadius: .59,
++    rimColor: 0xffbdc5c6,
++  ), // FORD MAVERICK GT
++  CarDesign(
++    3.100,
++    1.530,
++    1.150,
++    1.750,
++    0.480,
++    -0.850,
++    1.430,
++    -1.830,
++    1.922,
++    -1.829,
++    spokes: 5,
++    wheelRadius: .59,
++    rimColor: 0xffbdc5c6,
++  ), // PUMA GTE
++  CarDesign(
++    3.740,
++    1.670,
++    1.280,
++    1.880,
++    0.480,
++    -0.850,
++    1.430,
++    -1.830,
++    2.319,
++    -2.207,
++    spokes: 6,
++    wheelRadius: .59,
++    rimColor: 0xffbdc5c6,
++  ), // PUMA GTB S2
++  CarDesign(
++    2.890,
++    1.520,
++    1.400,
++    2.430,
++    0.480,
++    -0.850,
++    1.430,
++    -1.830,
++    1.792,
++    -1.705,
++    hatch: true,
++    spokes: 7,
++    wheelRadius: .66,
++    rimColor: 0xffbdc5c6,
++  ), // GURGEL X-12
++  CarDesign(
++    3.530,
++    1.640,
++    1.170,
++    1.790,
++    0.480,
++    -0.850,
++    1.430,
++    -1.830,
++    2.189,
++    -2.083,
++    spokes: 8,
++    wheelRadius: .59,
++    rimColor: 0xffbdc5c6,
++  ), // MIURA X8
++];
++
++const brazilCars = <CarSpec>[
++  CarSpec(
++    'br_fusca',
++    'VOLKSWAGEN FUSCA 1600',
++    'BRASIL • CLÁSSICO',
++    'Miniatura nacional: teto arredondado, para-lamas salientes e faróis circulares. Desempenho arcade.',
++    0xffe4c785,
++    0xff26333b,
++    78,
++    34,
++    1.18,
++    650,
++    56,
++    drive: DriveType.rear,
++    requiredStars: 0,
++    tier: 'NACIONAIS',
++  ),
++  CarSpec(
++    'br_brasilia',
++    'VOLKSWAGEN BRASÍLIA',
++    'BRASIL • CLÁSSICO',
++    'Miniatura nacional: traseira curta, vidro amplo e detalhes próprios. Desempenho arcade.',
++    0xffe5a33d,
++    0xff26333b,
++    80,
++    34,
++    1.15,
++    1030,
++    57,
++    drive: DriveType.rear,
++    requiredStars: 0,
++    tier: 'NACIONAIS',
++  ),
++  CarSpec(
++    'br_gol_gti',
++    'VOLKSWAGEN GOL GTI',
++    'BRASIL • HATCH',
++    'Miniatura nacional: traseira curta, vidro amplo e detalhes próprios. Desempenho arcade.',
++    0xff2767ce,
++    0xff26333b,
++    88,
++    39,
++    1.23,
++    1410,
++    58,
++    drive: DriveType.front,
++    requiredStars: 0,
++    tier: 'NACIONAIS',
++  ),
++  CarSpec(
++    'br_parati',
++    'VOLKSWAGEN PARATI GLS',
++    'BRASIL • PERUA',
++    'Miniatura nacional: teto longo e compartimento traseiro de perua. Desempenho arcade.',
++    0xffc2cbd1,
++    0xff26333b,
++    85,
++    36,
++    1.18,
++    1790,
++    59,
++    drive: DriveType.front,
++    requiredStars: 6,
++    tier: 'NACIONAIS',
++  ),
++  CarSpec(
++    'br_saveiro',
++    'VOLKSWAGEN SAVEIRO SUMMER',
++    'BRASIL • PICAPE',
++    'Miniatura nacional: cabine curta e caçamba aberta. Desempenho arcade.',
++    0xff35aab1,
++    0xff26333b,
++    84,
++    35,
++    1.17,
++    2170,
++    60,
++    drive: DriveType.front,
++    requiredStars: 8,
++    tier: 'NACIONAIS',
++  ),
++  CarSpec(
++    'br_santana',
++    'VOLKSWAGEN SANTANA 2000',
++    'BRASIL • SEDÃ',
++    'Miniatura nacional: cabine de quatro portas e porta-malas separado. Desempenho arcade.',
++    0xff52616e,
++    0xff26333b,
++    87,
++    37,
++    1.10,
++    2550,
++    61,
++    drive: DriveType.front,
++    requiredStars: 10,
++    tier: 'NACIONAIS',
++  ),
++  CarSpec(
++    'br_sp2',
++    'VOLKSWAGEN SP2',
++    'BRASIL • ESPORTIVO',
++    'Miniatura nacional: perfil de cupê e conjunto de iluminação próprio. Desempenho arcade.',
++    0xffefb83b,
++    0xff26333b,
++    89,
++    35,
++    1.14,
++    2930,
++    62,
++    drive: DriveType.rear,
++    requiredStars: 12,
++    tier: 'NACIONAIS',
++  ),
++  CarSpec(
++    'br_opala',
++    'CHEVROLET OPALA SS',
++    'BRASIL • CLÁSSICO',
++    'Miniatura nacional: perfil de cupê e conjunto de iluminação próprio. Desempenho arcade.',
++    0xfff29a30,
++    0xff26333b,
++    94,
++    40,
++    1.01,
++    3310,
++    63,
++    drive: DriveType.rear,
++    requiredStars: 14,
++    tier: 'NACIONAIS',
++  ),
++  CarSpec(
++    'br_chevette',
++    'CHEVROLET CHEVETTE SL',
++    'BRASIL • CLÁSSICO',
++    'Miniatura nacional: cabine de quatro portas e porta-malas separado. Desempenho arcade.',
++    0xffb98757,
++    0xff26333b,
++    81,
++    34,
++    1.22,
++    3690,
++    64,
++    drive: DriveType.rear,
++    requiredStars: 16,
++    tier: 'NACIONAIS',
++  ),
++  CarSpec(
++    'br_monza',
++    'CHEVROLET MONZA S/R',
++    'BRASIL • HATCH',
++    'Miniatura nacional: traseira curta, vidro amplo e detalhes próprios. Desempenho arcade.',
++    0xffbf2935,
++    0xff26333b,
++    89,
++    38,
++    1.18,
++    4070,
++    65,
++    drive: DriveType.front,
++    requiredStars: 18,
++    tier: 'NACIONAIS',
++  ),
++  CarSpec(
++    'br_kadett',
++    'CHEVROLET KADETT GSI',
++    'BRASIL • HATCH',
++    'Miniatura nacional: traseira curta, vidro amplo e detalhes próprios. Desempenho arcade.',
++    0xffe6e9e2,
++    0xff26333b,
++    91,
++    40,
++    1.23,
++    4450,
++    66,
++    drive: DriveType.front,
++    requiredStars: 20,
++    tier: 'NACIONAIS',
++  ),
++  CarSpec(
++    'br_omega',
++    'CHEVROLET OMEGA CD 4.1',
++    'BRASIL • SEDÃ',
++    'Miniatura nacional: cabine de quatro portas e porta-malas separado. Desempenho arcade.',
++    0xff303b48,
++    0xff26333b,
++    97,
++    41,
++    1.10,
++    4830,
++    67,
++    drive: DriveType.rear,
++    requiredStars: 22,
++    tier: 'NACIONAIS',
++  ),
++  CarSpec(
++    'br_fiat147',
++    'FIAT 147',
++    'BRASIL • HATCH',
++    'Miniatura nacional: traseira curta, vidro amplo e detalhes próprios. Desempenho arcade.',
++    0xffe7e3ca,
++    0xff26333b,
++    77,
++    34,
++    1.29,
++    5210,
++    68,
++    drive: DriveType.front,
++    requiredStars: 24,
++    tier: 'NACIONAIS',
++  ),
++  CarSpec(
++    'br_uno',
++    'FIAT UNO TURBO',
++    'BRASIL • HATCH',
++    'Miniatura nacional: traseira curta, vidro amplo e detalhes próprios. Desempenho arcade.',
++    0xffda3435,
++    0xff26333b,
++    90,
++    42,
++    1.25,
++    5590,
++    69,
++    drive: DriveType.front,
++    requiredStars: 26,
++    tier: 'NACIONAIS',
++  ),
++  CarSpec(
++    'br_palio',
++    'FIAT PALIO 1.6',
++    'BRASIL • HATCH',
++    'Miniatura nacional: traseira curta, vidro amplo e detalhes próprios. Desempenho arcade.',
++    0xff3a78ae,
++    0xff26333b,
++    86,
++    38,
++    1.24,
++    5970,
++    70,
++    drive: DriveType.front,
++    requiredStars: 28,
++    tier: 'NACIONAIS',
++  ),
++  CarSpec(
++    'br_tempra',
++    'FIAT TEMPRA TURBO',
++    'BRASIL • SEDÃ',
++    'Miniatura nacional: cabine de quatro portas e porta-malas separado. Desempenho arcade.',
++    0xff732c3a,
++    0xff26333b,
++    95,
++    41,
++    1.10,
++    6350,
++    71,
++    drive: DriveType.front,
++    requiredStars: 30,
++    tier: 'NACIONAIS',
++  ),
++  CarSpec(
++    'br_marea',
++    'FIAT MAREA TURBO',
++    'BRASIL • SEDÃ',
++    'Miniatura nacional: cabine de quatro portas e porta-malas separado. Desempenho arcade.',
++    0xffc7cbce,
++    0xff26333b,
++    99,
++    43,
++    1.08,
++    6730,
++    72,
++    drive: DriveType.front,
++    requiredStars: 32,
++    tier: 'NACIONAIS',
++  ),
++  CarSpec(
++    'br_corcel',
++    'FORD CORCEL II',
++    'BRASIL • CLÁSSICO',
++    'Miniatura nacional: perfil de cupê e conjunto de iluminação próprio. Desempenho arcade.',
++    0xffb1bb85,
++    0xff26333b,
++    82,
++    35,
++    1.17,
++    7110,
++    73,
++    drive: DriveType.front,
++    requiredStars: 34,
++    tier: 'NACIONAIS',
++  ),
++  CarSpec(
++    'br_delrey',
++    'FORD DEL REY GHIA',
++    'BRASIL • SEDÃ',
++    'Miniatura nacional: cabine de quatro portas e porta-malas separado. Desempenho arcade.',
++    0xffa39379,
++    0xff26333b,
++    83,
++    36,
++    1.15,
++    7490,
++    74,
++    drive: DriveType.front,
++    requiredStars: 36,
++    tier: 'NACIONAIS',
++  ),
++  CarSpec(
++    'br_escort',
++    'FORD ESCORT XR3',
++    'BRASIL • ESPORTIVO',
++    'Miniatura nacional: traseira curta, vidro amplo e detalhes próprios. Desempenho arcade.',
++    0xffd6d6cc,
++    0xff26333b,
++    90,
++    39,
++    1.24,
++    7870,
++    75,
++    drive: DriveType.front,
++    requiredStars: 38,
++    tier: 'NACIONAIS',
++  ),
++  CarSpec(
++    'br_maverick',
++    'FORD MAVERICK GT',
++    'BRASIL • CLÁSSICO',
++    'Miniatura nacional: perfil de cupê e conjunto de iluminação próprio. Desempenho arcade.',
++    0xff4e9e4d,
++    0xff26333b,
++    96,
++    40,
++    1.00,
++    8250,
++    76,
++    drive: DriveType.rear,
++    requiredStars: 40,
++    tier: 'NACIONAIS',
++  ),
++  CarSpec(
++    'br_puma_gte',
++    'PUMA GTE',
++    'BRASIL • EXÓTICO',
++    'Miniatura nacional: perfil de cupê e conjunto de iluminação próprio. Desempenho arcade.',
++    0xffeac542,
++    0xff26333b,
++    92,
++    37,
++    1.26,
++    8630,
++    77,
++    drive: DriveType.rear,
++    requiredStars: 42,
++    tier: 'NACIONAIS',
++  ),
++  CarSpec(
++    'br_puma_gtb',
++    'PUMA GTB S2',
++    'BRASIL • EXÓTICO',
++    'Miniatura nacional: perfil de cupê e conjunto de iluminação próprio. Desempenho arcade.',
++    0xffad3843,
++    0xff26333b,
++    98,
++    41,
++    1.13,
++    9010,
++    78,
++    drive: DriveType.rear,
++    requiredStars: 44,
++    tier: 'NACIONAIS',
++  ),
++  CarSpec(
++    'br_gurgel',
++    'GURGEL X-12',
++    'BRASIL • UTILITÁRIO',
++    'Miniatura nacional: carroceria alta, faróis redondos e estepe traseiro. Desempenho arcade.',
++    0xffb7ab60,
++    0xff26333b,
++    76,
++    36,
++    1.30,
++    9390,
++    79,
++    drive: DriveType.rear,
++    requiredStars: 45,
++    tier: 'NACIONAIS',
++  ),
++  CarSpec(
++    'br_miura',
++    'MIURA X8',
++    'BRASIL • EXÓTICO',
++    'Miniatura nacional: perfil de cupê e conjunto de iluminação próprio. Desempenho arcade.',
++    0xffe3e7dc,
++    0xff26333b,
++    94,
++    38,
++    1.21,
++    9770,
++    80,
++    drive: DriveType.front,
++    requiredStars: 45,
++    tier: 'NACIONAIS',
++  ),
++];
++
++const carPerformanceClasses = ['S', 'A', 'B', 'C', 'D'];
++const carModelCategories = [
++  'EXÓTICO',
++  'CORRIDA',
++  'ESPORTIVO',
++  'CLÁSSICO',
++  'HATCH',
++  'SEDÃ',
++  'PERUA',
++  'PICAPE',
++  'UTILITÁRIO',
++];
++
++const _brazilCategories = <String, String>{
++  'br_fusca': 'CLÁSSICO',
++  'br_brasilia': 'CLÁSSICO',
++  'br_gol_gti': 'HATCH',
++  'br_parati': 'PERUA',
++  'br_saveiro': 'PICAPE',
++  'br_santana': 'SEDÃ',
++  'br_sp2': 'ESPORTIVO',
++  'br_opala': 'CLÁSSICO',
++  'br_chevette': 'CLÁSSICO',
++  'br_monza': 'HATCH',
++  'br_kadett': 'HATCH',
++  'br_omega': 'SEDÃ',
++  'br_fiat147': 'HATCH',
++  'br_uno': 'HATCH',
++  'br_palio': 'HATCH',
++  'br_tempra': 'SEDÃ',
++  'br_marea': 'SEDÃ',
++  'br_corcel': 'CLÁSSICO',
++  'br_delrey': 'SEDÃ',
++  'br_escort': 'ESPORTIVO',
++  'br_maverick': 'CLÁSSICO',
++  'br_puma_gte': 'EXÓTICO',
++  'br_puma_gtb': 'EXÓTICO',
++  'br_gurgel': 'UTILITÁRIO',
++  'br_miura': 'EXÓTICO',
++};
++
++/// Filters are independent; they never reorder the persisted master catalogue.
++extension CarCollectionGrouping on CarSpec {
++  double get performanceIndex =>
++      speed + acceleration * .35 + (handling - 1) * 12;
++  String get performanceClass => switch (performanceIndex) {
++    >= 120 => 'S',
++    >= 112 => 'A',
++    >= 104 => 'B',
++    >= 96 => 'C',
++    _ => 'D',
++  };
++  String get modelCategory =>
++      _brazilCategories[id] ??
++      switch (id) {
++        'huracan' ||
++        'f40' ||
++        'r8' ||
++        'amggtr' ||
++        'c7z06' ||
++        'viper_gts' ||
++        'fordgt' ||
++        '720s' ||
++        'zonda' ||
++        'bmw_m1' ||
++        'countach' ||
++        'testarossa' ||
++        'chiron' => 'EXÓTICO',
++        'evo9' ||
++        '22b' ||
++        'gt3rs' ||
++        'celica_gt4' ||
++        'wrx_sti04' ||
++        'evo6' ||
++        'quattro' ||
++        '205_t16' ||
++        'r5_turbo' ||
++        'delta' ||
++        'stratos' => 'CORRIDA',
++        'ek9' ||
++        'gryaris' ||
++        'civic_fl5' ||
++        'golf_gti' ||
++        'mini_cooper' => 'HATCH',
++        '240z' || 'ae86' || 'm3e30' || 'alpine_a110' => 'CLÁSSICO',
++        _ => 'ESPORTIVO',
++      };
++}
++
++List<int> filterCarCollection({
++  String performanceClass = 'TODAS',
++  String category = 'TODOS',
++  bool brazilOnly = false,
++}) => [
++  for (var i = 0; i < cars.length; i++)
++    if ((performanceClass == 'TODAS' ||
++            cars[i].performanceClass == performanceClass) &&
++        (category == 'TODOS' || cars[i].modelCategory == category) &&
++        (!brazilOnly || cars[i].id.startsWith('br_')))
++      i,
++];
+--- /dev/null
++++ b/lib/game/loop_expansion_brazil.dart
+@@ -0,0 +1,554 @@
++part of 'content.dart';
++
++/// Twenty-five additional race circuits, every one with a full vertical loop.
++/// The first 51 circuit indices are intentionally left untouched.
++const brazilLoopStars = <String, int>{
++  'forest_loop_canopy': 0,
++  'forest_loop_roots': 6,
++  'forest_loop_timber': 12,
++  'preh_loop_bones': 1,
++  'preh_loop_nest': 8,
++  'preh_loop_lava': 16,
++  'desert_loop_oasis': 2,
++  'desert_loop_sand': 10,
++  'desert_loop_canyon': 18,
++  'snow_loop_crystal': 3,
++  'snow_loop_blizzard': 12,
++  'snow_loop_pines': 22,
++  'coast_loop_surf': 0,
++  'coast_loop_pier': 8,
++  'coast_loop_shell': 16,
++  'bedroom_loop_boxes': 0,
++  'bedroom_loop_shelf': 10,
++  'garage_loop_wrench': 3,
++  'garage_loop_motor': 14,
++  'arcade_loop_neon': 12,
++  'arcade_loop_pinball': 24,
++  'bath_loop_drain': 5,
++  'bath_loop_foam': 16,
++  'kitchen_loop_spoon': 8,
++  'living_loop_cushion': 11,
++};
++
++const _brazilLoopSpecs = <(String, String, String)>[
++  ('forest_loop_canopy', 'ESPIRAL DAS COPAS', 'FLORESTA'),
++  ('forest_loop_roots', 'LOOP DAS RAÍZES', 'FLORESTA'),
++  ('forest_loop_timber', 'ANEL DA SERRARIA', 'FLORESTA'),
++  ('preh_loop_bones', 'ANEL DOS FÓSSEIS', 'PRÉ-HISTÓRIA'),
++  ('preh_loop_nest', 'ESPIRAL DO NINHO', 'PRÉ-HISTÓRIA'),
++  ('preh_loop_lava', 'LOOP DA CALDEIRA', 'PRÉ-HISTÓRIA'),
++  ('desert_loop_oasis', 'ÓRBITA DO OÁSIS', 'DESERTO'),
++  ('desert_loop_sand', 'LOOP DAS AREIAS', 'DESERTO'),
++  ('desert_loop_canyon', 'ANEL DO CÂNION', 'DESERTO'),
++  ('snow_loop_crystal', 'ANEL DE CRISTAL', 'NEVE'),
++  ('snow_loop_blizzard', 'LOOP DA NEVASCA', 'NEVE'),
++  ('snow_loop_pines', 'ESPIRAL DOS PINHEIROS', 'NEVE'),
++  ('coast_loop_surf', 'LOOP DO SURFE', 'LITORAL'),
++  ('coast_loop_pier', 'ÓRBITA DO PÍER', 'LITORAL'),
++  ('coast_loop_shell', 'ANEL DAS CONCHAS', 'LITORAL'),
++  ('bedroom_loop_boxes', 'CAIXAS EM ÓRBITA', 'QUARTO'),
++  ('bedroom_loop_shelf', 'ESPIRAL DA ESTANTE', 'QUARTO'),
++  ('garage_loop_wrench', 'ANEL DA CHAVE INGLESA', 'GARAGEM'),
++  ('garage_loop_motor', 'LOOP DO MOTOR', 'GARAGEM'),
++  ('arcade_loop_neon', 'ANEL DE NEON', 'ARCADE'),
++  ('arcade_loop_pinball', 'ESPIRAL DO FLIPERAMA', 'ARCADE'),
++  ('bath_loop_drain', 'LOOP DO RALO', 'BANHEIRO'),
++  ('bath_loop_foam', 'ANEL DE ESPUMA', 'BANHEIRO'),
++  ('kitchen_loop_spoon', 'LOOP DA COLHER', 'COZINHA'),
++  ('living_loop_cushion', 'ÓRBITA DAS ALMOFADAS', 'SALA'),
++];
++
++const _brazilLoopRoutes = <List<(double, double)>>[
++  [
++    (-500.0, 210.0),
++    (-320.0, 480.0),
++    (-60.0, 530.0),
++    (150.0, 370.0),
++    (90.0, 160.0),
++    (320.0, 110.0),
++    (510.0, 350.0),
++    (650.0, 200.0),
++    (650.0, -80.0),
++    (440.0, -220.0),
++    (390.0, -450.0),
++    (140.0, -600.0),
++    (-130.0, -650.0),
++    (-370.0, -710.0),
++  ],
++  [
++    (-480.0, 100.0),
++    (-520.0, 370.0),
++    (-270.0, 550.0),
++    (-30.0, 420.0),
++    (-110.0, 210.0),
++    (140.0, 170.0),
++    (330.0, 450.0),
++    (570.0, 500.0),
++    (650.0, 230.0),
++    (510.0, -10.0),
++    (550.0, -290.0),
++    (330.0, -520.0),
++    (60.0, -590.0),
++    (-210.0, -550.0),
++    (-400.0, -700.0),
++  ],
++  [
++    (-520.0, 210.0),
++    (-310.0, 510.0),
++    (-30.0, 580.0),
++    (220.0, 540.0),
++    (180.0, 310.0),
++    (-30.0, 230.0),
++    (30.0, 20.0),
++    (300.0, 70.0),
++    (510.0, 310.0),
++    (650.0, 120.0),
++    (610.0, -170.0),
++    (410.0, -280.0),
++    (370.0, -520.0),
++    (100.0, -650.0),
++    (-230.0, -650.0),
++    (-410.0, -710.0),
++  ],
++  [
++    (-490.0, 120.0),
++    (-340.0, 350.0),
++    (-430.0, 540.0),
++    (-120.0, 580.0),
++    (130.0, 430.0),
++    (70.0, 190.0),
++    (310.0, 200.0),
++    (490.0, 480.0),
++    (660.0, 270.0),
++    (590.0, 30.0),
++    (650.0, -230.0),
++    (390.0, -370.0),
++    (180.0, -560.0),
++    (-80.0, -600.0),
++    (-390.0, -700.0),
++  ],
++  [
++    (-520.0, 220.0),
++    (-330.0, 480.0),
++    (-80.0, 500.0),
++    (80.0, 310.0),
++    (-20.0, 140.0),
++    (150.0, -10.0),
++    (350.0, 110.0),
++    (390.0, 420.0),
++    (590.0, 470.0),
++    (670.0, 170.0),
++    (600.0, -100.0),
++    (470.0, -320.0),
++    (220.0, -350.0),
++    (50.0, -620.0),
++    (-220.0, -650.0),
++    (-410.0, -710.0),
++  ],
++  [
++    (-510.0, 170.0),
++    (-400.0, 440.0),
++    (-170.0, 570.0),
++    (90.0, 460.0),
++    (270.0, 580.0),
++    (510.0, 470.0),
++    (440.0, 260.0),
++    (200.0, 170.0),
++    (260.0, -30.0),
++    (520.0, -50.0),
++    (660.0, -270.0),
++    (450.0, -480.0),
++    (170.0, -550.0),
++    (-90.0, -650.0),
++    (-390.0, -710.0),
++  ],
++  [
++    (-470.0, 120.0),
++    (-560.0, 380.0),
++    (-310.0, 570.0),
++    (-40.0, 510.0),
++    (180.0, 300.0),
++    (70.0, 100.0),
++    (270.0, -30.0),
++    (510.0, 190.0),
++    (650.0, 100.0),
++    (650.0, -170.0),
++    (430.0, -350.0),
++    (150.0, -310.0),
++    (30.0, -540.0),
++    (-220.0, -640.0),
++    (-410.0, -710.0),
++  ],
++  [
++    (-520.0, 180.0),
++    (-350.0, 460.0),
++    (-110.0, 570.0),
++    (150.0, 550.0),
++    (350.0, 360.0),
++    (230.0, 140.0),
++    (30.0, 90.0),
++    (130.0, -120.0),
++    (400.0, -50.0),
++    (610.0, 200.0),
++    (660.0, -80.0),
++    (540.0, -350.0),
++    (330.0, -540.0),
++    (60.0, -600.0),
++    (-250.0, -640.0),
++    (-410.0, -710.0),
++  ],
++  [
++    (-500.0, 150.0),
++    (-510.0, 450.0),
++    (-260.0, 570.0),
++    (-70.0, 380.0),
++    (120.0, 390.0),
++    (340.0, 570.0),
++    (580.0, 450.0),
++    (480.0, 220.0),
++    (240.0, 190.0),
++    (210.0, -30.0),
++    (490.0, -130.0),
++    (650.0, -350.0),
++    (420.0, -550.0),
++    (100.0, -590.0),
++    (-180.0, -620.0),
++    (-400.0, -710.0),
++  ],
++  [
++    (-510.0, 200.0),
++    (-360.0, 490.0),
++    (-100.0, 520.0),
++    (90.0, 300.0),
++    (20.0, 80.0),
++    (260.0, 40.0),
++    (420.0, 320.0),
++    (620.0, 370.0),
++    (650.0, 100.0),
++    (510.0, -90.0),
++    (570.0, -320.0),
++    (330.0, -520.0),
++    (70.0, -600.0),
++    (-180.0, -540.0),
++    (-390.0, -710.0),
++  ],
++  [
++    (-480.0, 140.0),
++    (-500.0, 410.0),
++    (-230.0, 570.0),
++    (30.0, 500.0),
++    (260.0, 320.0),
++    (450.0, 550.0),
++    (650.0, 370.0),
++    (520.0, 160.0),
++    (260.0, 90.0),
++    (320.0, -110.0),
++    (580.0, -230.0),
++    (430.0, -480.0),
++    (140.0, -570.0),
++    (-110.0, -640.0),
++    (-390.0, -710.0),
++  ],
++  [
++    (-520.0, 220.0),
++    (-310.0, 520.0),
++    (-60.0, 550.0),
++    (90.0, 350.0),
++    (-30.0, 170.0),
++    (100.0, -40.0),
++    (320.0, 40.0),
++    (370.0, 300.0),
++    (610.0, 440.0),
++    (670.0, 160.0),
++    (590.0, -130.0),
++    (390.0, -280.0),
++    (330.0, -510.0),
++    (60.0, -620.0),
++    (-220.0, -650.0),
++    (-410.0, -710.0),
++  ],
++  [
++    (-480.0, 130.0),
++    (-510.0, 440.0),
++    (-270.0, 550.0),
++    (-50.0, 340.0),
++    (190.0, 270.0),
++    (310.0, 510.0),
++    (550.0, 490.0),
++    (650.0, 230.0),
++    (490.0, 40.0),
++    (350.0, -180.0),
++    (520.0, -370.0),
++    (270.0, -530.0),
++    (0.0, -590.0),
++    (-220.0, -630.0),
++    (-400.0, -710.0),
++  ],
++  [
++    (-500.0, 180.0),
++    (-320.0, 470.0),
++    (-80.0, 590.0),
++    (200.0, 550.0),
++    (160.0, 320.0),
++    (330.0, 190.0),
++    (560.0, 330.0),
++    (650.0, 90.0),
++    (500.0, -130.0),
++    (590.0, -360.0),
++    (350.0, -520.0),
++    (60.0, -590.0),
++    (-200.0, -560.0),
++    (-400.0, -710.0),
++  ],
++  [
++    (-520.0, 160.0),
++    (-410.0, 430.0),
++    (-140.0, 570.0),
++    (70.0, 410.0),
++    (-20.0, 190.0),
++    (220.0, 120.0),
++    (400.0, 400.0),
++    (640.0, 460.0),
++    (670.0, 200.0),
++    (540.0, -30.0),
++    (400.0, -250.0),
++    (510.0, -460.0),
++    (230.0, -570.0),
++    (-40.0, -650.0),
++    (-270.0, -620.0),
++    (-420.0, -710.0),
++  ],
++  [
++    (-500.0, 170.0),
++    (-420.0, 470.0),
++    (-160.0, 550.0),
++    (80.0, 450.0),
++    (300.0, 570.0),
++    (540.0, 400.0),
++    (410.0, 210.0),
++    (190.0, 130.0),
++    (300.0, -70.0),
++    (580.0, -80.0),
++    (650.0, -320.0),
++    (390.0, -530.0),
++    (120.0, -570.0),
++    (-140.0, -630.0),
++    (-410.0, -710.0),
++  ],
++  [
++    (-510.0, 190.0),
++    (-300.0, 490.0),
++    (-40.0, 550.0),
++    (180.0, 340.0),
++    (90.0, 110.0),
++    (280.0, -40.0),
++    (440.0, 220.0),
++    (660.0, 300.0),
++    (650.0, 50.0),
++    (540.0, -200.0),
++    (370.0, -330.0),
++    (410.0, -540.0),
++    (150.0, -630.0),
++    (-110.0, -620.0),
++    (-370.0, -700.0),
++  ],
++  [
++    (-480.0, 120.0),
++    (-530.0, 390.0),
++    (-320.0, 550.0),
++    (-80.0, 430.0),
++    (150.0, 520.0),
++    (390.0, 480.0),
++    (570.0, 290.0),
++    (400.0, 90.0),
++    (160.0, 50.0),
++    (280.0, -160.0),
++    (530.0, -200.0),
++    (610.0, -430.0),
++    (360.0, -580.0),
++    (80.0, -600.0),
++    (-200.0, -630.0),
++    (-400.0, -710.0),
++  ],
++  [
++    (-520.0, 210.0),
++    (-330.0, 520.0),
++    (-80.0, 580.0),
++    (170.0, 490.0),
++    (100.0, 270.0),
++    (330.0, 180.0),
++    (510.0, 420.0),
++    (650.0, 230.0),
++    (550.0, -10.0),
++    (610.0, -260.0),
++    (420.0, -430.0),
++    (190.0, -390.0),
++    (30.0, -600.0),
++    (-210.0, -640.0),
++    (-410.0, -710.0),
++  ],
++  [
++    (-490.0, 140.0),
++    (-440.0, 420.0),
++    (-210.0, 580.0),
++    (40.0, 520.0),
++    (250.0, 320.0),
++    (150.0, 100.0),
++    (370.0, 10.0),
++    (550.0, 240.0),
++    (670.0, 80.0),
++    (550.0, -170.0),
++    (590.0, -420.0),
++    (310.0, -540.0),
++    (20.0, -590.0),
++    (-220.0, -630.0),
++    (-410.0, -710.0),
++  ],
++  [
++    (-520.0, 200.0),
++    (-350.0, 470.0),
++    (-100.0, 560.0),
++    (120.0, 400.0),
++    (30.0, 190.0),
++    (240.0, 80.0),
++    (450.0, 300.0),
++    (610.0, 500.0),
++    (680.0, 230.0),
++    (560.0, -40.0),
++    (380.0, -180.0),
++    (470.0, -410.0),
++    (200.0, -570.0),
++    (-40.0, -630.0),
++    (-300.0, -650.0),
++    (-430.0, -710.0),
++  ],
++  [
++    (-480.0, 110.0),
++    (-540.0, 400.0),
++    (-280.0, 570.0),
++    (-20.0, 450.0),
++    (190.0, 540.0),
++    (420.0, 390.0),
++    (330.0, 150.0),
++    (130.0, 70.0),
++    (320.0, -100.0),
++    (570.0, 30.0),
++    (650.0, -190.0),
++    (470.0, -460.0),
++    (200.0, -550.0),
++    (-70.0, -600.0),
++    (-300.0, -640.0),
++    (-430.0, -710.0),
++  ],
++  [
++    (-510.0, 200.0),
++    (-390.0, 470.0),
++    (-150.0, 570.0),
++    (90.0, 490.0),
++    (280.0, 280.0),
++    (440.0, 510.0),
++    (660.0, 350.0),
++    (530.0, 110.0),
++    (320.0, -30.0),
++    (460.0, -230.0),
++    (610.0, -430.0),
++    (350.0, -570.0),
++    (60.0, -610.0),
++    (-200.0, -600.0),
++    (-410.0, -710.0),
++  ],
++  [
++    (-490.0, 130.0),
++    (-530.0, 410.0),
++    (-270.0, 550.0),
++    (-50.0, 350.0),
++    (180.0, 230.0),
++    (300.0, 490.0),
++    (540.0, 550.0),
++    (660.0, 300.0),
++    (550.0, 70.0),
++    (380.0, -100.0),
++    (540.0, -310.0),
++    (300.0, -470.0),
++    (50.0, -590.0),
++    (-210.0, -650.0),
++    (-410.0, -710.0),
++  ],
++  [
++    (-520.0, 220.0),
++    (-330.0, 510.0),
++    (-70.0, 540.0),
++    (110.0, 330.0),
++    (20.0, 120.0),
++    (240.0, -20.0),
++    (400.0, 220.0),
++    (620.0, 390.0),
++    (670.0, 130.0),
++    (570.0, -130.0),
++    (390.0, -330.0),
++    (450.0, -540.0),
++    (150.0, -620.0),
++    (-100.0, -650.0),
++    (-380.0, -710.0),
++  ],
++];
++
++List<TrackSpec> createBrazilLoopTracks() {
++  final result = <TrackSpec>[];
++  const oldPalettes = <String, (int, int, int)>{
++    'QUARTO': (0xffffa34a, 0xff89684d, 0xff485b75),
++    'GARAGEM': (0xff48d6b9, 0xff6d737b, 0xff364357),
++    'ARCADE': (0xffe071d4, 0xff262945, 0xff1d2844),
++    'BANHEIRO': (0xff90eee9, 0xffc8ded8, 0xff83a7b6),
++    'COZINHA': (0xffffcf69, 0xffd7c8a5, 0xff9db3bd),
++    'SALA': (0xffe4ab76, 0xff957357, 0xff788ca1),
++  };
++  for (var i = 0; i < _brazilLoopSpecs.length; i++) {
++    final spec = _brazilLoopSpecs[i], room = spec.$3;
++    final route = _LoopCircuit()
++      ..p(-650, -710, 6)
++      ..p(-650, -520, 6)
++      ..loop(-650, -310, const V3(0, 0, 1), radius: 58 + i % 4 * 2.0)
++      ..p(-566, -150, 6)
++      ..p(-550, -10, 3);
++    for (final p in _brazilLoopRoutes[i]) route.p(p.$1, p.$2);
++    route.p(-530, -730, 6);
++    // Alternate axis, handedness and loop sightline. Polygon layouts remain
++    // different; these are not copies of the previous expansion circuits.
++    final angle = (i % 4) * math.pi / 2 + [0.0, .18, -.18, .30][i ~/ 8];
++    final mirror = i % 8 >= 4 ? -1.0 : 1.0;
++    V3 orient(V3 p) => V3(
++      (p.x * mirror * math.cos(angle) - p.z * math.sin(angle)) * .94,
++      p.y,
++      (p.x * mirror * math.sin(angle) + p.z * math.cos(angle)) * .94,
++    );
++    final biome = expansionBiomes[room];
++    final palette = biome == null
++        ? oldPalettes[room]!
++        : (biome.accent, biome.floor, biome.horizon);
++    final t = TrackSpec(
++      spec.$1,
++      spec.$2,
++      'Loop vertical completo, curvas no piso do cenário e atalho com portão.',
++      room,
++      palette.$1,
++      palette.$2,
++      palette.$3,
++      route.points.map(orient).toList(),
++      width: 46,
++      loopSections: [
++        for (final s in route.sections)
++          LoopSection(s.first, s.last, orient(s.right).unit * mirror),
++      ],
++    );
++    if (t.outdoor) {
++      populateExpansionObstacles(t, i);
++    } else {
++      // The vertical loop is the stunt here. Remove the generic floor ramp,
++      // whose automatic midpoint can launch a car into a shortcut's closed gate.
++      t.ramps.clear();
++    }
++    result.add(t);
++  }
++  return result;
++}
+--- /dev/null
++++ b/lib/game/car_details_brazil.dart
+@@ -0,0 +1,341 @@
++part of 'gpu_mesh.dart';
++
++/// Original stylized miniature details for the Brazilian-market collection.
++/// Factory logos and externally sourced meshes/textures are not used.
++void buildBrazilCarDetails(Mesh3 m, CarSpec car) {
++  final d = car.design, l = d.halfLength, w = d.halfWidth, c = car.color;
++  const dark = 0xff18262d, chrome = 0xffc4ced0, white = 0xfff1eed6;
++  void box(V3 p, V3 size, int color, [int material = Material3.paint]) =>
++      m.roundedBox(p, size, .018, color, material);
++  void lamp(double x, double y, bool rear, double radius, int color) =>
++      m.cylinder(
++        V3(x, y, rear ? -l - .045 : l + .045),
++        const V3(0, 0, 1),
++        .05,
++        radius,
++        radius,
++        color,
++        Material3.glow,
++        segments: 20,
++      );
++  void grille(double width, double height, {bool chromeBars = false}) {
++    box(V3(0, .91, l + .032), V3(width, height, .04), dark, Material3.rubber);
++    for (var j = 0; j < 4; j++) {
++      box(
++        V3(0, .91 + (j - 1.5) * height / 4, l + .058),
++        V3(width * .95, .018, .012),
++        chromeBars ? chrome : 0xff53616a,
++        Material3.metal,
++      );
++    }
++  }
++
++  void lamps({bool round = false, bool twin = false, double height = .21}) {
++    for (final side in [-1.0, 1.0]) {
++      if (round) {
++        lamp(side * w * .65, 1.05, false, .19, white);
++        if (twin) lamp(side * w * .36, 1.05, false, .17, white);
++      } else {
++        box(
++          V3(side * w * .66, 1.06, l + .04),
++          V3(w * .51, height, .05),
++          white,
++          Material3.glow,
++        );
++      }
++      box(
++        V3(side * w * .75, .82, l + .045),
++        const V3(.22, .085, .055),
++        0xffffb343,
++        Material3.glow,
++      );
++      box(
++        V3(side * w * .67, 1.02, -l - .045),
++        V3(w * .48, .20, .05),
++        0xffd33135,
++        Material3.glow,
++      );
++      box(
++        V3(side * w * .67, 1.09, -l - .073),
++        V3(w * .45, .045, .015),
++        0xffec9e40,
++        Material3.glow,
++      );
++    }
++  }
++
++  // Bumpers and plate recess: each silhouette is independent of car paint.
++  for (final side in [-1.0, 1.0]) {
++    box(
++      V3(0, .62, side * (l + .06)),
++      V3(w * 1.82, .12, .19),
++      [
++            'br_fusca',
++            'br_brasilia',
++            'br_opala',
++            'br_chevette',
++            'br_corcel',
++            'br_delrey',
++            'br_sp2',
++          ].contains(car.id)
++          ? chrome
++          : dark,
++      Material3.metal,
++    );
++    box(
++      V3(0, .86, side * (l + .061)),
++      const V3(.56, .17, .035),
++      0xffd7dfd6,
++      Material3.paint,
++    );
++  }
++  switch (car.id) {
++    case 'br_fusca':
++      // Four rounded fenders and compound curved cabin, not a sedan repaint.
++      for (final side in [-1.0, 1.0]) {
++        for (final z in [d.frontAxle, d.rearAxle]) {
++          _worldEllipsoid(
++            m,
++            V3(side * w * .80, 1.02, z),
++            const V3(.43, .40, .97),
++            c,
++            segments: 14,
++          );
++        }
++        m.cylinder(
++          V3(side * w * .76, 1.29, l - .21),
++          const V3(0, .22, 1).unit,
++          .10,
++          .25,
++          .25,
++          chrome,
++          Material3.metal,
++          segments: 20,
++        );
++        m.cylinder(
++          V3(side * w * .76, 1.29, l - .15),
++          const V3(0, .22, 1).unit,
++          .09,
++          .21,
++          .21,
++          white,
++          Material3.glow,
++          segments: 20,
++        );
++        box(
++          V3(side * (w + .02), .56, -.05),
++          const V3(.24, .10, 2.45),
++          dark,
++          Material3.rubber,
++        );
++        lamp(side * w * .73, .92, true, .15, 0xffdd342d);
++        box(
++          V3(side * w * .70, 1.58, l - .77),
++          const V3(.20, .09, .26),
++          0xffedb549,
++          Material3.glow,
++        );
++      }
++      for (var j = 0; j < 7; j++) {
++        box(
++          V3(0, d.belt + .01, -l + .30 + j * .11),
++          const V3(.82, .02, .035),
++          dark,
++        );
++      }
++      box(
++        V3(0, d.belt + .015, 2.18),
++        const V3(.035, .035, 1.38),
++        chrome,
++        Material3.metal,
++      );
++    case 'br_gurgel':
++      grille(1.50, .35);
++      lamps(round: true);
++      for (final side in [-1.0, 1.0]) {
++        box(V3(side * w * .82, 1.75, -.85), const V3(.08, 1.12, .10), dark);
++        box(
++          V3(side * w * .91, .67, .1),
++          const V3(.28, .18, 2.40),
++          dark,
++          Material3.rubber,
++        );
++      }
++      m.cylinder(
++        V3(0, 1.17, -l - .33),
++        const V3(0, 0, 1),
++        .41,
++        .68,
++        .68,
++        dark,
++        Material3.rubber,
++        segments: 24,
++      );
++      m.cylinder(
++        V3(0, 1.17, -l - .55),
++        const V3(0, 0, 1),
++        .04,
++        .38,
++        .38,
++        chrome,
++        Material3.metal,
++        segments: 18,
++      );
++    case 'br_saveiro':
++      grille(1.55, .23);
++      lamps();
++      // Visible recessed bed, side lips and transverse ribs.
++      box(
++        V3(0, d.belt + .018, -1.75),
++        V3(w * 1.52, .05, 2.02),
++        dark,
++        Material3.rubber,
++      );
++      for (final side in [-1.0, 1.0])
++        box(
++          V3(side * w * .88, d.belt + .13, -1.75),
++          const V3(.14, .24, 2.08),
++          c,
++        );
++      for (var j = 0; j < 7; j++)
++        box(
++          V3(0, d.belt + .052, -2.61 + j * .27),
++          V3(w * 1.43, .035, .035),
++          0xff708084,
++          Material3.metal,
++        );
++      box(V3(0, 1.08, -l - .08), V3(w * 1.6, .12, .03), c);
++    case 'br_sp2':
++      grille(1.0, .15);
++      lamps(round: true, twin: true);
++      for (final side in [-1.0, 1.0])
++        box(V3(side * (w + .02), .70, 0), const V3(.04, .12, 4.8), 0xffd53e30);
++    case 'br_puma_gte':
++      lamps(round: true);
++      grille(1.40, .16);
++      for (final side in [-1.0, 1.0])
++        box(
++          V3(side * w * .63, d.belt + .13, l - .48),
++          const V3(.50, .20, .59),
++          c,
++        );
++    case 'br_puma_gtb':
++      grille(1.48, .23);
++      lamps(round: true, twin: true);
++      for (var j = 0; j < 5; j++)
++        box(
++          V3(0, d.belt + .04, l - .58 - j * .14),
++          const V3(1.13, .025, .06),
++          dark,
++        );
++      box(
++        V3(0, 1.02, -l - .07),
++        V3(w * 1.74, .11, .05),
++        0xffcc3033,
++        Material3.glow,
++      );
++    case 'br_miura':
++      grille(1.25, .17);
++      lamps(height: .11);
++      for (final side in [-1.0, 1.0]) {
++        box(
++          V3(side * w * .58, d.belt + .18, l - .52),
++          const V3(.59, .28, .55),
++          c,
++        );
++        box(
++          V3(side * w * .58, d.belt + .19, l - .23),
++          const V3(.45, .14, .04),
++          white,
++          Material3.glow,
++        );
++        box(V3(side * (w + .015), 1.0, -.9), const V3(.04, .25, .64), dark);
++      }
++    case 'br_opala' || 'br_maverick':
++      grille(1.65, .29, chromeBars: true);
++      lamps(round: true, twin: car.id == 'br_opala');
++      for (final side in [-1.0, 1.0]) {
++        box(
++          V3(side * .47, d.belt + .035, l - 1.00),
++          const V3(.35, .05, 1.70),
++          dark,
++        );
++        box(V3(side * (w + .025), .77, -.20), const V3(.04, .17, 3.90), dark);
++      }
++    case 'br_brasilia':
++      grille(1.15, .13);
++      lamps(round: true, twin: true);
++      for (var j = 0; j < 5; j++)
++        box(
++          V3(0, d.belt + .025, -l + .28 + j * .11),
++          const V3(1.64, .025, .035),
++          dark,
++        );
++    case 'br_chevette':
++      grille(1.53, .24, chromeBars: true);
++      lamps(round: true);
++    case 'br_fiat147':
++      grille(1.49, .26);
++      lamps(height: .25);
++    case 'br_uno':
++      grille(1.40, .24);
++      lamps(height: .27);
++      box(V3(0, .48, l + .07), const V3(1.81, .13, .13), c);
++      box(V3(0, d.belt + .15, -l + .22), V3(w * 1.72, .11, .38), dark);
++    case 'br_gol_gti' || 'br_kadett' || 'br_escort':
++      grille(1.48, .19);
++      lamps(height: car.id == 'br_escort' ? .19 : .24);
++      box(V3(0, d.belt + .18, -l + .23), V3(w * 1.70, .10, .35), dark);
++      for (final side in [-1.0, 1.0]) {
++        box(
++          V3(side * w * .58, .59, l + .07),
++          const V3(.37, .15, .06),
++          white,
++          Material3.glow,
++        );
++        box(
++          V3(side * (w + .02), .64, .05),
++          const V3(.05, .08, 3.7),
++          0xffbd2e32,
++        );
++      }
++    case 'br_palio':
++      grille(.95, .15);
++      lamps(height: .24);
++      for (final side in [-1.0, 1.0])
++        box(
++          V3(side * w * .69, 1.16, -l - .04),
++          const V3(.22, .46, .07),
++          0xffd92d38,
++          Material3.glow,
++        );
++    case 'br_parati':
++      grille(1.51, .23);
++      lamps();
++      for (final side in [-1.0, 1.0])
++        box(
++          V3(side * w * .56, d.roof + .16, -.66),
++          const V3(.06, .07, 2.08),
++          dark,
++          Material3.rubber,
++        );
++    default:
++      grille(
++        car.id == 'br_omega' ? 1.19 : 1.51,
++        .22,
++        chromeBars: ['br_santana', 'br_delrey', 'br_corcel'].contains(car.id),
++      );
++      lamps(height: ['br_marea', 'br_tempra'].contains(car.id) ? .18 : .23);
++      if (car.id == 'br_monza')
++        box(V3(0, d.belt + .16, -l + .24), V3(w * 1.72, .10, .36), c);
++      if (['br_tempra', 'br_marea', 'br_omega'].contains(car.id)) {
++        for (final side in [-1.0, 1.0])
++          box(
++            V3(side * w * .58, .56, l + .06),
++            const V3(.32, .12, .05),
++            white,
++            Material3.glow,
++          );
++      }
++  }
++}
+--- /dev/null
++++ b/lib/game/brazil_indoor_mesh.dart
+@@ -0,0 +1,51 @@
++part of 'gpu_mesh.dart';
++
++/// Additional room layouts use the existing safe RoomProp catalogue instead of
++/// forcing the old fixed bed/tub/cabinets through a newly authored circuit.
++void buildBrazilIndoorWorld(Mesh3 m, TrackSpec track) {
++  final material = track.tiled
++      ? Material3.tile
++      : ['QUARTO', 'SALA'].contains(track.room)
++      ? Material3.wood
++      : track.room == 'GARAGEM'
++      ? Material3.concrete
++      : Material3.wall;
++  m.box(const V3(0, -1, 0), const V3(1800, 2, 1800), track.floor, material);
++  for (final side in [-1.0, 1.0]) {
++    m.box(
++      V3(side * 880, 110, 0),
++      const V3(5, 220, 1760),
++      track.wall,
++      Material3.wall,
++    );
++    m.box(
++      V3(0, 110, side * 880),
++      const V3(1760, 220, 5),
++      track.wall,
++      Material3.wall,
++    );
++    m.box(
++      V3(side * 876, 4, 0),
++      const V3(3, 8, 1750),
++      0xffe1d0ae,
++      Material3.wood,
++    );
++    m.box(
++      V3(0, 4, side * 876),
++      const V3(1750, 8, 3),
++      0xffe1d0ae,
++      Material3.wood,
++    );
++  }
++  buildRoomProps(m, track);
++  buildCourseObjects(m, track);
++  for (final o in track.scenery) {
++    m.roundedBox(
++      o.center,
++      o.size,
++      1,
++      o.color,
++      track.tiled ? Material3.plastic : Material3.wood,
++    );
++  }
++}
+--- /dev/null
++++ b/test/brazil_expansion_test.dart
+@@ -0,0 +1,187 @@
++import 'dart:math' as math;
++import 'package:flutter_test/flutter_test.dart';
++import 'package:carwece/game/content.dart';
++import 'package:carwece/game/engine.dart';
++import 'package:carwece/game/gpu_mesh.dart';
++import 'package:carwece/game/gpu_frame.dart';
++
++void main() {
++  final tracks = createTracks(), added = tracks.skip(51).toList();
++  test(
++    'Append exactly 25 national cars and 25 loop circuits without replacing old IDs',
++    () {
++      expect(cars.length, 81);
++      expect(tracks.length, 76);
++      expect(brazilCars.length, 25);
++      expect(brazilCarDesigns.length, 25);
++      expect(cars.skip(56).map((c) => c.id), brazilCars.map((c) => c.id));
++      expect(cars[56].id, 'br_fusca');
++      expect(cars[55].id, 'chiron');
++      expect(tracks[50].id, 'coast_tideloop');
++      expect(cars.map((c) => c.id).toSet().length, 81);
++      expect(cars.map((c) => c.body), List.generate(81, (i) => i));
++      expect(tracks.map((t) => t.id).toSet().length, 76);
++      expect(createBattleArenas().length, 11);
++    },
++  );
++  test(
++    'Every added circuit contains a true complete vertical loop and upright return',
++    () {
++      expect(added.length, 25);
++      expect(added.where((t) => t.outdoor).length, 15);
++      expect(added.where((t) => !t.outdoor).length, 10);
++      expect(
++        added.map((t) => t.room).toSet(),
++        tracks.take(51).map((t) => t.room).toSet(),
++      );
++      for (final t in added) {
++        expect(t.loops.length, 1, reason: t.id);
++        expect(t.length, greaterThan(3500));
++        expect(t.shortcuts.length, 1, reason: t.id);
++        expect(t.width, 46);
++        expect(t.requiredStars, brazilLoopStars[t.id]);
++        final l = t.loops.single;
++        var inverted = false;
++        for (var s = l.start; s < l.end; s += 4) {
++          if (t.at(s).up.y < -.95) inverted = true;
++        }
++        expect(inverted, isTrue, reason: t.id);
++        expect((t.at(l.start).p - t.at(l.end).p).length, greaterThan(76));
++        for (final f in t.frames) {
++          expect(t.widthAt(f.s), 46);
++          expect(f.p.x.abs() + 23, lessThan(850));
++          expect(f.p.z.abs() + 23, lessThan(850));
++          if (t.loopAt(f.s, before: 5, after: 5) == null)
++            expect(f.up.y, greaterThan(.98));
++        }
++        if (t.outdoor) {
++          expect(t.themedObstacles.length, 12, reason: t.id);
++          expect(
++            t.themedObstacles.map((o) => o.prop.kind).toSet(),
++            containsAll(expansionObstacleKinds[t.room]!.toSet()),
++          );
++        }
++      }
++    },
++  );
++  test(
++    'National cars have unique chassis, finite normals and separate wheel meshes',
++    () {
++      final hashes = <int>{};
++      for (final c in brazilCars) {
++        final data = buildCarMesh(c).buffer, wheels = buildWheelMesh(c).buffer;
++        expect(data.length % 36, 0);
++        expect(data.length, greaterThan(10000));
++        expect(data.every((v) => v.isFinite), isTrue, reason: c.id);
++        expect(wheels.every((v) => v.isFinite), isTrue);
++        hashes.add(Object.hashAll(data));
++        for (var i = 0; i < data.length; i += 12) {
++          final n = math.sqrt(
++            data[i + 3] * data[i + 3] +
++                data[i + 4] * data[i + 4] +
++                data[i + 5] * data[i + 5],
++          );
++          expect(n, closeTo(1, .002), reason: c.id);
++        }
++      }
++      expect(hashes.length, 25);
++    },
++  );
++  test(
++    'Every car has one independent performance class and model category',
++    () {
++      final classes = <String>{}, categories = <String>{};
++      for (final c in cars) {
++        expect(carPerformanceClasses, contains(c.performanceClass));
++        expect(carModelCategories, contains(c.modelCategory));
++        classes.add(c.performanceClass);
++        categories.add(c.modelCategory);
++      }
++      expect(classes, carPerformanceClasses.toSet());
++      expect(categories, carModelCategories.toSet());
++      expect(cars[56].modelCategory, 'CLÁSSICO');
++      expect(
++        cars.firstWhere((c) => c.id == 'br_saveiro').modelCategory,
++        'PICAPE',
++      );
++      expect(
++        cars.firstWhere((c) => c.id == 'br_parati').modelCategory,
++        'PERUA',
++      );
++    },
++  );
++  test(
++    'Combined filters never remap master indices or mutate the catalogue',
++    () {
++      final before = cars.map((c) => c.id).toList();
++      expect(filterCarCollection().length, 81);
++      expect(filterCarCollection(brazilOnly: true).length, 25);
++      for (final cls in carPerformanceClasses) {
++        for (final cat in carModelCategories) {
++          final indices = filterCarCollection(
++            performanceClass: cls,
++            category: cat,
++            brazilOnly: true,
++          );
++          for (final i in indices) {
++            expect(cars[i].performanceClass, cls);
++            expect(cars[i].modelCategory, cat);
++            expect(i, greaterThanOrEqualTo(56));
++          }
++        }
++      }
++      expect(
++        filterCarCollection(performanceClass: 'S', category: 'PICAPE'),
++        isEmpty,
++      );
++      expect(cars.map((c) => c.id), before);
++    },
++  );
++  test(
++    'The national roster starts in both race and battle using valid dynamic mesh IDs',
++    () {
++      final arena = createBattleArenas().first;
++      for (final c in brazilCars) {
++        final race = RaceEngine(
++          track: added.first,
++          car: c,
++          mode: RaceMode.timeTrial,
++        )..countdown = 0;
++        race.accelerating = true;
++        for (var i = 0; i < 30; i++) race.update(1 / 120);
++        expect(race.player.speed, greaterThan(0));
++        expect(raceGpuFrame(race).every((x) => x.isFinite), isTrue);
++        final battle = BattleEngine(arena: arena, car: c, freeRoam: true)
++          ..countdown = 0;
++        battle.accelerating = true;
++        for (var i = 0; i < 15; i++) battle.update(1 / 120);
++        expect(raceGpuFrame(battle).every((x) => x.isFinite), isTrue);
++      }
++      expect(GpuMeshId.pickup, 81);
++      expect(GpuMeshId.wheel, greaterThan(81));
++      expect(BattleMesh.first, cars.length * 3 + 21);
++    },
++  );
++  test(
++    'Outdoor terrain is never painted with the removed orange floor ribbon',
++    () {
++      for (final room in expansionBiomes.keys) {
++        final t = tracks.firstWhere((t) => t.room == room);
++        final m = buildWorldMesh(t).buffer;
++        // At the normal terrain height there must be no orange track triangles.
++        for (var i = 0; i < m.length; i += 36) {
++          if (m[i + 11] != Material3.track) continue;
++          final flat =
++              (m[i + 1] - .16).abs() < .002 &&
++              (m[i + 13] - .16).abs() < .002 &&
++              (m[i + 25] - .16).abs() < .002;
++          expect(
++            flat,
++            isFalse,
++            reason: '${t.id}: orange floor overlay returned',
++          );
++        }
++      }
++    },
++  );
++}
+--- /dev/null
++++ b/test/garage_filters_test.dart
+@@ -0,0 +1,133 @@
++import 'dart:io';
++import 'dart:ui' as ui;
++import 'package:flutter/material.dart';
++import 'package:flutter/rendering.dart';
++import 'package:flutter/services.dart';
++import 'package:flutter_test/flutter_test.dart';
++import 'package:carwece/main.dart';
++import 'package:carwece/platform.dart';
++import 'package:carwece/music.dart';
++
++void main() {
++  TestWidgetsFlutterBinding.ensureInitialized();
++  final messenger =
++      TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger;
++  setUp(() {
++    messenger.setMockMethodCallHandler(
++      GameStore.channel,
++      (c) async => c.method == 'save' ? true : null,
++    );
++    messenger.setMockMethodCallHandler(
++      SoundtrackController.channel,
++      (c) async => null,
++    );
++  });
++  tearDown(() {
++    messenger.setMockMethodCallHandler(GameStore.channel, null);
++    messenger.setMockMethodCallHandler(SoundtrackController.channel, null);
++  });
++  setUpAll(() async {
++    for (final p in [
++      ['RushDisplay', 'Display.ttf'],
++      ['RushBody', 'Body.ttf'],
++    ]) {
++      await (FontLoader(
++        p[0],
++      )..addFont(rootBundle.load('assets/fonts/${p[1]}'))).load();
++    }
++    await (FontLoader(
++      'MaterialIcons',
++    )..addFont(rootBundle.load('fonts/MaterialIcons-Regular.otf'))).load();
++  });
++  for (final size in [const Size(1280, 720), const Size(800, 360)]) {
++    testWidgets(
++      'Garage combines filters, buys Fusca and preserves master index at $size',
++      (tester) async {
++        tester.view.physicalSize = size;
++        tester.view.devicePixelRatio = 1;
++        addTearDown(tester.view.resetPhysicalSize);
++        addTearDown(tester.view.resetDevicePixelRatio);
++        final store = GameStore()..coins = 1000;
++        final boundary = GlobalKey();
++        await tester.pumpWidget(
++          RepaintBoundary(
++            key: boundary,
++            child: CarWeceApp(store: store, showIntro: false),
++          ),
++        );
++        await tester.pump(const Duration(milliseconds: 30));
++        await tester.tap(find.text('GARAGEM').last);
++        await tester.pump(const Duration(milliseconds: 100));
++        expect(find.text('81 / 81 CARROS'), findsOneWidget);
++        Future<void> choose(String key, String option) async {
++          await tester.tap(find.byKey(ValueKey(key)));
++          await tester.pump(const Duration(milliseconds: 250));
++          await tester.scrollUntilVisible(
++            find.text(option),
++            100,
++            scrollable: find.byType(Scrollable).last,
++            maxScrolls: 30,
++          );
++          await Scrollable.ensureVisible(
++            tester.element(find.text(option).last),
++            alignment: .5,
++          );
++          await tester.pump(const Duration(milliseconds: 250));
++          await tester.tap(find.text(option).last);
++          await tester.pump(const Duration(milliseconds: 250));
++        }
++
++        await choose('garage-class-filter', 'CLASSE S');
++        await tester.tap(find.byKey(const ValueKey('garage-brazil-filter')));
++        await tester.pump(const Duration(milliseconds: 80));
++        expect(find.text('NENHUM CARRO NESTA COMBINAÇÃO'), findsOneWidget);
++        expect(store.selectedCar, 0);
++        await choose('garage-category-filter', 'PICAPE');
++        expect(find.text('0 / 81 CARROS'), findsOneWidget);
++        await tester.tap(find.byTooltip('Limpar filtros'));
++        await tester.pump(const Duration(milliseconds: 80));
++        expect(find.text('81 / 81 CARROS'), findsOneWidget);
++        await tester.tap(find.byKey(const ValueKey('garage-brazil-filter')));
++        await tester.pump(const Duration(milliseconds: 80));
++        expect(find.text('25 / 81 CARROS'), findsOneWidget);
++        await choose('garage-class-filter', 'CLASSE D');
++        await choose('garage-category-filter', 'CLÁSSICO');
++        await tester.scrollUntilVisible(
++          find.text('VOLKSWAGEN FUSCA 1600'),
++          120,
++          scrollable: find.descendant(
++            of: find.byKey(const ValueKey('garage-car-list')),
++            matching: find.byType(Scrollable),
++          ),
++        );
++        await tester.tap(find.text('VOLKSWAGEN FUSCA 1600').first);
++        await tester.pump(const Duration(milliseconds: 100));
++        expect(find.text('COMPRAR • 650'), findsOneWidget);
++        await tester.tap(find.text('COMPRAR • 650'));
++        await tester.pump(const Duration(milliseconds: 100));
++        expect(store.selectedCar, 56);
++        expect(store.coins, 350);
++        expect(store.ownedCars, contains('br_fusca'));
++        expect(find.text('SELECIONADO'), findsOneWidget);
++        expect(tester.takeException(), isNull);
++        if (const bool.fromEnvironment('CAPTURE_BR')) {
++          await tester.runAsync(() async {
++            final image =
++                await (boundary.currentContext!.findRenderObject()
++                        as RenderRepaintBoundary)
++                    .toImage();
++            final data = await image.toByteData(format: ui.ImageByteFormat.png);
++            final file = File(
++              'previews/brasil_loops/garagem_${size.width.toInt()}.png',
++            )..parent.createSync(recursive: true);
++            await file.writeAsBytes(data!.buffer.asUint8List());
++            image.dispose();
++          });
++        }
++        await tester.pumpWidget(const SizedBox.shrink());
++        store.dispose();
++      },
++      variant: TargetPlatformVariant.only(TargetPlatform.linux),
++    );
++  }
++}
+--- /dev/null
++++ b/tools/brazil_drive_qa.dart
+@@ -0,0 +1,48 @@
++import 'dart:convert';
++import 'dart:io';
++import '../lib/game/content.dart';
++import '../lib/game/engine.dart';
++
++void main(List<String> args) {
++  final tracks = createTracks(), newTracks = tracks.skip(51).toList();
++  final results = <Map<String, Object>>[];
++  void lap(TrackSpec t, CarSpec c, String kind) {
++    final e = RaceEngine(track: t, car: c, mode: RaceMode.timeTrial, laps: 1)
++      ..countdown = 0;
++    for (var i = 0; i < 180 * 120 && !e.finished; i++) {
++      final control = e.aiControls(e.player);
++      e.steering = control.$1;
++      e.accelerating = control.$2;
++      e.brake = control.$3;
++      e.update(1 / 120);
++      if (!e.player.position!.length.isFinite)
++        throw StateError('Nonfinite state');
++    }
++    final record = <String, Object>{
++      'kind': kind,
++      'track': t.id,
++      'car': c.id,
++      'finished': e.finished,
++      'seconds': e.time,
++      'distance': e.player.distance,
++      'routeS': e.player.routeS,
++      'checkpoint': e.player.nextCheckpoint,
++      'recoveries': e.player.aiRecoveries,
++    };
++    results.add(record);
++    stdout.writeln(jsonEncode(record));
++  }
++
++  for (final t in newTracks) {
++    if (args.isNotEmpty && !args.contains(t.id)) continue;
++    lap(t, cars.first, 'new_track');
++    lap(t, brazilCars[newTracks.indexOf(t)], 'national_on_new_loop');
++  }
++  if (args.isEmpty) {
++    for (final c in brazilCars) lap(tracks.first, c, 'national_on_legacy_loop');
++  }
++  final out = File('verification/brasil_loops/voltas_simuladas.json')
++    ..parent.createSync(recursive: true);
++  out.writeAsStringSync(const JsonEncoder.withIndent('  ').convert(results));
++  if (results.any((r) => r['finished'] != true)) exitCode = 1;
++}
+--- /dev/null
++++ b/tools/brazil_preservation_qa.dart
+@@ -0,0 +1,82 @@
++import 'dart:convert';
++import 'dart:io';
++import 'package:crypto/crypto.dart';
++import '../lib/game/content.dart';
++import '../lib/game/gpu_mesh.dart';
++import 'track_revision_qa.dart' as tracks;
++
++void main(List<String> args) {
++  String hash(List<int> bytes) => sha256.convert(bytes).toString();
++  final oldTracks = createTracks().take(51).toList();
++  final result = <String, Object>{
++    'tracks': [for (final t in oldTracks) tracks.signature(t)],
++    'arenas': [for (final a in createBattleArenas()) tracks.signature(a.track)],
++    'cars': [
++      for (final c in cars.take(56))
++        {
++          'id': c.id,
++          'name': c.name,
++          'tag': c.tag,
++          'description': c.description,
++          'spec': [
++            c.color,
++            c.accent,
++            c.speed,
++            c.acceleration,
++            c.handling,
++            c.cost,
++            c.body,
++            c.drive.name,
++            c.requiredStars,
++            c.tier,
++          ],
++          'design': [
++            c.design.halfLength,
++            c.design.halfWidth,
++            c.design.belt,
++            c.design.roof,
++            c.design.roofFront,
++            c.design.roofRear,
++            c.design.glassFront,
++            c.design.glassRear,
++            c.design.frontAxle,
++            c.design.rearAxle,
++            c.design.wheelRadius,
++            c.design.spokes,
++            c.design.rimColor,
++            c.design.sedan,
++            c.design.hatch,
++          ],
++          'body': hash(buildCarMesh(c).buffer.buffer.asUint8List()),
++          'wheel': hash(buildWheelMesh(c).buffer.buffer.asUint8List()),
++        },
++    ],
++  };
++  final out = File(args.first)..parent.createSync(recursive: true);
++  out.writeAsStringSync(const JsonEncoder.withIndent('  ').convert(result));
++  if (args.length > 1) {
++    final baseline = jsonDecode(File(args[1]).readAsStringSync());
++    final nowTracks = result['tracks'] as List,
++        beforeTracks = baseline['tracks'] as List;
++    for (var i = 0; i < 51; i++) {
++      if (nowTracks[i]['content'] != beforeTracks[i]['content'])
++        throw StateError('Old track physics changed: ${oldTracks[i].id}');
++      if (i < 26 && nowTracks[i]['mesh'] != beforeTracks[i]['mesh'])
++        throw StateError('Original track mesh changed: ${oldTracks[i].id}');
++    }
++    if (jsonEncode(result['arenas']) != jsonEncode(baseline['arenas']))
++      throw StateError('Arena changed');
++    if (jsonEncode(result['cars']) != jsonEncode(baseline['cars']))
++      throw StateError('Previous car changed');
++    stdout.writeln(
++      'PASS: all 51 previous physical routes, all 11 arenas, all 56 previous cars preserved.',
++    );
++    stdout.writeln(
++      'PASS: original 26 room meshes preserved; only the requested outdoor floor overlay was removed.',
++    );
++  } else {
++    stdout.writeln(
++      'Recorded baseline: 51 tracks, 11 arenas, 56 cars with chassis and wheel hashes.',
++    );
++  }
++}
+--- /dev/null
++++ b/tools/export_brazil_expansion.dart
+@@ -0,0 +1,126 @@
++import 'dart:convert';
++import 'dart:io';
++import 'dart:typed_data';
++import '../lib/game/content.dart';
++import '../lib/game/engine.dart';
++import '../lib/game/gpu_frame.dart';
++import '../lib/game/math3d.dart';
++
++/// Export actual production meshes, not generated concept illustrations.
++void main() {
++  final root = Directory('build/brasil_visual_qa')..createSync(recursive: true);
++  final proof = Directory('verification/brasil_loops')
++    ..createSync(recursive: true);
++  final frames = <Map<String, Object>>[];
++  void binary(String name, Float32List data) =>
++      File('${root.path}/$name.bin').writeAsBytesSync(
++        data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes),
++      );
++  binary('showroom', GpuResources.showroom);
++  final meshes = GpuResources.objectsFor({0, ...brazilCars.map((c) => c.body)});
++  for (var i = 0; i < meshes.length; i++) binary('object_$i', meshes[i]);
++  for (final name in ['scene.vert', 'scene.frag', 'depth.vert', 'depth.frag'])
++    File('assets/shaders/$name').copySync('${root.path}/$name');
++  for (final car in brazilCars) {
++    frames.add({
++      'name': car.id,
++      'world': 'showroom',
++      'showroom': true,
++      'night': false,
++      'frame': garageGpuFrame(car, -.69).toList(),
++    });
++    if (['br_fusca', 'br_saveiro', 'br_gurgel'].contains(car.id))
++      frames.add({
++        'name': '${car.id}_traseira',
++        'world': 'showroom',
++        'showroom': true,
++        'night': false,
++        'frame': garageGpuFrame(car, 2.45).toList(),
++      });
++  }
++  final tracks = createTracks(), added = tracks.skip(51).toList();
++  void shot(String name, RaceEngine e, V3 eye, V3 focus) {
++    final frame = raceGpuFrame(e);
++    frame.setRange(0, 3, [eye.x, eye.y, eye.z]);
++    frame.setRange(3, 6, [focus.x, focus.y, focus.z]);
++    frame.setRange(6, 9, [0.0, 1.0, 0.0]);
++    frame.setRange(10, 13, [focus.x, focus.y, focus.z]);
++    frames.add({
++      'name': name,
++      'world': e.track.id,
++      'showroom': false,
++      'night': e.track.night,
++      'frame': frame.toList(),
++    });
++  }
++
++  for (final room in tracks.map((t) => t.room).toSet()) {
++    final t = added.firstWhere((t) => t.room == room);
++    binary(t.id, GpuResources.world(t));
++    final loop = t.loops.single, f = t.at(loop.start), end = t.at(loop.end);
++    final center = (f.p + end.p) * .5 + const V3(0, 58, 0);
++    final race = RaceEngine(
++      track: t,
++      car: brazilCars.first,
++      mode: RaceMode.timeTrial,
++    )..countdown = 0;
++    race.placeDriver(race.player, loop.start - 35, 0);
++    shot(
++      'loop_${t.id}',
++      race,
++      center + f.right * 170 - f.forward * 140 + const V3(0, 45, 0),
++      center,
++    );
++  }
++  for (final room in expansionBiomes.keys) {
++    final t = tracks.skip(26).take(25).firstWhere((t) => t.room == room);
++    binary(t.id, GpuResources.world(t));
++    final race = RaceEngine(
++      track: t,
++      car: brazilCars.first,
++      mode: RaceMode.timeTrial,
++    )..countdown = 0;
++    final f = t.themedObstacles.first.frame;
++    race.placeDriver(race.player, f.s - 25, 0);
++    shot(
++      'piso_${t.id}',
++      race,
++      f.p - f.forward * 70 + const V3(0, 48, 0),
++      f.p + f.forward * 25,
++    );
++  }
++  File('${root.path}/frames.json').writeAsStringSync(jsonEncode(frames));
++  File('${proof.path}/catalogo.json').writeAsStringSync(
++    const JsonEncoder.withIndent('  ').convert({
++      'carros': [
++        for (final c in brazilCars)
++          {
++            'id': c.id,
++            'nome': c.name,
++            'indice': c.body,
++            'classe': c.performanceClass,
++            'categoria': c.modelCategory,
++            'moedas': c.cost,
++            'estrelas': c.requiredStars,
++          },
++      ],
++      'pistas': [
++        for (final t in added)
++          {
++            'id': t.id,
++            'nome': t.name,
++            'ambiente': t.room,
++            'loops': t.loops.length,
++            'largura': t.width,
++            'comprimento': t.length,
++            'estrelas': t.requiredStars,
++            'atalhos': t.shortcuts.length,
++            'obstaculos_tematicos': t.themedObstacles.length,
++          },
++      ],
++    }),
++  );
++  stdout.writeln(
++    'Exported ${frames.length} production views: 28 cars, 11 loops and 5 natural floors.',
++  );
++}
+--- /dev/null
++++ b/tools/BrazilGraphicsBudgetProbe.kt
+@@ -0,0 +1,31 @@
++package com.hirumisu.carwece
++
++/** Standalone JVM check of the production Flutter/Android payload validator.
++ * This verifies contract bounds; it is not an APK build or an EGL test. */
++fun main() {
++    val triangle = FloatArray(36)
++    val inventory = List(324) { triangle }
++    val shaders = List(4) { "void main() {}" }
++    fun frame(index: Int = 323): FloatArray = FloatArray(32).also {
++        it[14] = 1f; it[15] = index.toFloat()
++        for (j in listOf(16, 21, 26, 31)) it[j] = 1f
++    }
++    fun rejects(name: String, run: () -> Unit) {
++        var rejected = false
++        try { run() } catch (e: IllegalArgumentException) { rejected = true }
++        check(rejected) { "Invalid payload accepted: $name" }
++        println("PASS reject: $name")
++    }
++    check(GraphicsContract.MAX_MESHES == 512)
++    GraphicsContract.validateCreate(triangle, inventory, shaders, frame())
++    println("PASS accept: 324 mesh slots, including mesh index 323")
++    rejects("513 mesh slots") { GraphicsContract.validateCreate(triangle, List(513) { triangle }, shaders, frame()) }
++    rejects("mesh index 324 outside 324 slots") { GraphicsContract.validateCreate(triangle, inventory, shaders, frame(324)) }
++    rejects("truncated triangle") { GraphicsContract.validateCreate(FloatArray(35), inventory, shaders, frame()) }
++    rejects("nonfinite transform") { GraphicsContract.validateCreate(triangle, inventory, shaders, frame().also { it[16] = Float.NaN }) }
++    rejects("129 instances") {
++        val f = FloatArray(15 + 129 * 17); f[14] = 129f
++        GraphicsContract.validateCreate(triangle, inventory, shaders, f)
++    }
++    println("All 6 native budget checks passed; instance budget remains 128.")
++}

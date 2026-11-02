@@ -63,9 +63,9 @@ void main() {
   test(
     'Thirty-one real-name models have distinct silhouettes and a starter RX7',
     () {
-      expect(cars.length, 56);
+      expect(cars.length, 81);
       expect(cars.take(4).map((c) => c.id), ['rx7', 'evo9', 'r34', '350z']);
-      expect(cars.map((c) => c.body).toSet().length, 56);
+      expect(cars.map((c) => c.body).toSet().length, 81);
       expect(
         cars
             .map(
@@ -74,7 +74,7 @@ void main() {
             )
             .toSet()
             .length,
-        56,
+        81,
       );
       expect(cars.where((c) => c.cost == 0).map((c) => c.id), ['rx7']);
       expect(GpuResources.objects.length, cars.length * 3 + 21);
@@ -86,7 +86,7 @@ void main() {
   test(
     'Every room has at least four circuits and matching tire surface grip',
     () {
-      expect(tracks.length, 51);
+      expect(tracks.length, 76);
       final rooms = tracks.map((t) => t.room).toSet();
       expect(rooms, {
         'QUARTO',

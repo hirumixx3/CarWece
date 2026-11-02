@@ -1,0 +1,7 @@
+PASS accept: 324 mesh slots, including mesh index 323
+PASS reject: 513 mesh slots
+PASS reject: mesh index 324 outside 324 slots
+PASS reject: truncated triangle
+PASS reject: nonfinite transform
+PASS reject: 129 instances
+All 6 native budget checks passed; instance budget remains 128.

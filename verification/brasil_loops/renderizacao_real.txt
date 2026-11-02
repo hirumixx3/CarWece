@@ -1,0 +1,47 @@
+GLES: OpenGL ES 3.2 Mesa 25.2.8-0ubuntu0.24.04.4 renderer: llvmpipe (LLVM 20.1.2, 256 bits)
+Triangle counts: {'prehistoric_valley': 130864, 'arcade_loop_neon': 280710, 'forest_loop_canopy': 66492, 'coast_bay': 55811, 'snow_pines': 52790, 'desert_oasis': 72846, 'preh_loop_bones': 134151, 'desert_loop_oasis': 75271, 'living_loop_cushion': 117100, 'kitchen_loop_spoon': 87295, 'bedroom_loop_boxes': 288004, 'snow_loop_crystal': 60087, 'coast_loop_surf': 62865, 'garage_loop_wrench': 150578, 'forest_canopy': 64568, 'bath_loop_drain': 155344, 'showroom': 940} car: [9742, 1, 1, 1]
+Rendered br_fusca
+Rendered br_fusca_traseira
+Rendered br_brasilia
+Rendered br_gol_gti
+Rendered br_parati
+Rendered br_saveiro
+Rendered br_saveiro_traseira
+Rendered br_santana
+Rendered br_sp2
+Rendered br_opala
+Rendered br_chevette
+Rendered br_monza
+Rendered br_kadett
+Rendered br_omega
+Rendered br_fiat147
+Rendered br_uno
+Rendered br_palio
+Rendered br_tempra
+Rendered br_marea
+Rendered br_corcel
+Rendered br_delrey
+Rendered br_escort
+Rendered br_maverick
+Rendered br_puma_gte
+Rendered br_puma_gtb
+Rendered br_gurgel
+Rendered br_gurgel_traseira
+Rendered br_miura
+Rendered loop_bedroom_loop_boxes
+Rendered loop_garage_loop_wrench
+Rendered loop_arcade_loop_neon
+Rendered loop_bath_loop_drain
+Rendered loop_kitchen_loop_spoon
+Rendered loop_living_loop_cushion
+Rendered loop_forest_loop_canopy
+Rendered loop_preh_loop_bones
+Rendered loop_desert_loop_oasis
+Rendered loop_snow_loop_crystal
+Rendered loop_coast_loop_surf
+Rendered piso_forest_canopy
+Rendered piso_prehistoric_valley
+Rendered piso_desert_oasis
+Rendered piso_snow_pines
+Rendered piso_coast_bay
+Both shader programs compiled; all frames rendered without GLES errors.

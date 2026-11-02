@@ -1,0 +1,188 @@
+CARWECE — BRASIL E LOOPS | REVISÃO 1.2.0+3
+
+ENTREGA
+Projeto-fonte completo e integrado sobre a revisão entregue anteriormente.
+Não é um APK/AAB pronto. Nenhum recurso de geração de mídia por IA foi usado.
+As prévias são renderizações do código do jogo e capturas da interface.
+
+RESUMO
++25 pistas novas, cada uma com um loop vertical completo: total de 76 pistas.
++25 miniaturas de carros nacionais, incluindo o Fusca: total de 81 carros.
+11 arenas de batalha mantidas, sem alterações nesta revisão.
+Novas pistas distribuídas entre os 11 ambientes presentes no jogo.
+15 pistas novas nos biomas de floresta, pré-história, deserto, neve e litoral;
+10 pistas novas no quarto, garagem, arcade, banheiro, cozinha e sala.
+As pistas adicionais entram nos modos de corrida existentes; não se tratam
+ de 25 novas arenas de batalha. Todas têm atalho com portão e exigências
+próprias de estrelas. Os IDs/índices anteriores foram preservados.
+
+PISO CORRIGIDO
+Retirada a faixa laranja desenhada no chão dos cinco biomas. Agora esses
+setores usam o mesmo chão de todo o cenário: floresta, pré-história, areia,
+neve e litoral. A correção vale para as 25 pistas da expansão anterior e
+para as pistas adicionais nesses ambientes. A aderência por bioma foi mantida.
+Trechos elevados, pontes, rampas e loops de brinquedo continuam laranja:
+essas estruturas são pistas físicas e não uma pintura sobre o terreno.
+As correções também foram aplicadas ao renderizador Flutter de compatibilidade.
+As 25 pistas anteriores mantêm seus 300 obstáculos temáticos e colisões.
+As 15 novas pistas externas também recebem 12 obstáculos temáticos cada.
+As 25 pistas adicionais usam largura-base de 46 unidades, inclusive no chão.
+As 10 novas rotas internas têm decoração posicionada com a verificação de
+corredores do jogo, em vez de mobília fixa sobre a trajetória. Nelas o salto
+principal é o loop: as rampas de chão geradas automaticamente foram retiradas
+para impedir lançamentos contra o portão do atalho. As rotas antigas não
+foram modificadas por esse ajuste.
+
+GARAGEM ORGANIZADA
+Filtros independentes e combináveis:
+- Classes S, A, B, C e D.
+- Categorias de modelo: exótico, corrida, esportivo, clássico, hatch, sedã,
+  perua, picape e utilitário.
+- Filtro exclusivo para brasileiros.
+- Contador de resultados, separadores por classe/categoria e limpeza de filtros.
+A lista visível é agrupada sem reorganizar o catálogo mestre persistido.
+A compra/seleção mantém o índice original do carro e a gravação por ID.
+O painel de detalhes pode rolar; o botão de compra permanece acessível.
+Os menus suspensos têm altura limitada para funcionar em telas menores.
+
+CRITÉRIO DE CLASSE
+Classificação própria do jogo, não uma categoria oficial de automobilismo.
+Índice = velocidade + 0,35 × aceleração + 12 × (direção - 1).
+S: índice >=120; A: >=112; B: >=104; C: >=96; D: abaixo de 96.
+As categorias "corrida" e "exótico" são grupos da coleção do jogo, não uma
+certificação histórica/fabril de cada modelo.
+Os novos valores de desempenho, dimensões e preços são balanceamento arcade,
+não dados técnicos reais dos automóveis. "Nacionais" reúne miniaturas de
+modelos de origem ou produção brasileira, inclusive marcas multinacionais.
+As carrocerias são interpretações estilizadas originais, sem logos ou malhas
+externas copiados de fabricantes. Não são reproduções licenciadas exatas.
+
+COMPATIBILIDADE GRÁFICA E ONLINE
+Atualizado o limite de inventário no contrato gráfico Android de 256 para
+512 posições: o novo catálogo em batalha precisa de 324 posições (81 carros
+× carroceria/dano/rodas + 21 efeitos + 60 modelos de batalha). O orçamento
+simultâneo de instâncias continua em 128. A geometria de carros não ativos
+continua substituída por posições mínimas, preservando o carregamento seletivo.
+Os testes Kotlin de inventário também foram atualizados aos novos índices.
+Identificador de conteúdo online: carwece-brasil-loops-2.0.
+Todos os participantes de uma partida devem usar esta mesma revisão.
+
+VALIDAÇÃO FINAL DESTA ENTREGA
+Flutter 3.35.7 / Dart 3.9.2.
+flutter analyze --no-pub: nenhum problema encontrado.
+flutter test --no-pub --concurrency=1: 245 testes aprovados, nenhum ignorado.
+A suíte inclui três voltas completas em todos os 76 circuitos, aderência,
+colisões, recuperação, entrada/saída de loops, atalhos, UI, compras e save.
+75 voltas adicionais concluídas: cada pista nova com RX-7; cada carro novo
+em uma das novas pistas; cada carro novo no loop do circuito antigo inicial.
+Modelos dos 25 carros: malhas únicas, normais válidas e rodas separadas.
+Filtros, combinações vazias, limpeza e compra do Fusca testados em 1280×720
+ e 800×360, mantendo o índice 56 (posição 57 da coleção).
+6 verificações Kotlin/JVM do contrato gráfico Android aprovadas: aceitação
+ de 324 posições e rejeição de inventários/índices/triângulos/transformações
+ inválidos e de 129 instâncias. Não se trata de teste de um APK instalado.
+44 vistas reais renderizadas em Mesa/OpenGL ES com os shaders de produção:
+28 vistas dos carros (25 dianteiras + 3 traseiras), 11 vistas de loops e
+5 vistas dos pisos restaurados. Nenhum erro GLES reportado.
+Geometrias distintas: menor diferença média entre circuitos de 88,765 unidades
+no verificador de 64 amostras; limiar exigido pelo projeto: acima de 75.
+Comparação de assinaturas SHA-256 e dados com a versão anterior confirmou:
+- Todos os 56 carros anteriores idênticos, incluindo carrocerias e rodas.
+- Todas as 51 rotas físicas anteriores idênticas.
+- Todas as 11 arenas idênticas em conteúdo e malha.
+- As malhas dos 26 circuitos internos originais idênticas.
+- Somente o piso laranja solicitado foi retirado das 25 malhas externas antigas.
+Moedas, compras, nomes, ordem de catálogo e IDs antigos não foram remapeados.
+Durante a implementação foram detectadas interferências da mobília fixa,
+lançamentos contra atalhos, o limite gráfico antigo e expectativas de testes
+incompatíveis com o catálogo ampliado. Todos foram corrigidos e os testes
+finais repetidos. Não foram desativados testes para obter aprovação.
+
+LIMITAÇÕES
+Não foi realizado build Gradle/APK/AAB completo, assinatura, instalação em
+celular físico nem partida online entre aparelhos. Não há medição real de
+FPS, memória, temperatura ou autonomia em dispositivos nesta execução.
+As classes não mudam as especificações dos carros antigos.
+A reprodução exata de 100% de todos os caminhos do jogo não é garantida.
+Os testes automatizados e de renderização não substituem validação no aparelho.
+As prévias da garagem capturadas em Linux usam a visualização de compatibilidade;
+as vistas individuais dos carros mostram suas malhas 3D de produção.
+
+COMO EXECUTAR
+Abra a pasta CarWece_Brasil_Loops com Flutter 3.35.7.
+flutter pub get
+flutter analyze
+flutter test --concurrency=1
+flutter run
+Para APK de teste, com Android SDK/JDK configurados: flutter build apk --debug
+Os segredos de assinatura continuam sob a configuração original do proprietário.
+Para publicação, use um build-number superior ao último publicado; +3 é
+apenas o identificador desta revisão-fonte, não uma garantia de monotonicidade
+em relação a versões já enviadas à loja.
+
+ARQUIVOS NOVOS PRINCIPAIS
+lib/game/brazil_content.dart: carros, proporções, classes e categorias.
+lib/game/loop_expansion_brazil.dart: 25 traçados e loops adicionais.
+lib/game/car_details_brazil.dart: detalhes próprios das 25 carrocerias.
+lib/game/brazil_indoor_mesh.dart: decoração física/visual das novas rotas internas.
+test/brazil_expansion_test.dart e test/garage_filters_test.dart: novos testes.
+tools/brazil_drive_qa.dart, brazil_preservation_qa.dart e export_brazil_expansion.dart.
+tools/BrazilGraphicsBudgetProbe.kt: verificação JVM isolada do contrato gráfico.
+verification/brasil_loops/: logs e catálogo desta entrega.
+previews/brasil_loops/: imagens reais e painéis desta entrega.
+Os documentos, logs e painéis anteriores em outras pastas são históricos;
+este documento substitui a indicação anterior de piso laranja nos biomas.
+
+OS 25 CARROS ADICIONADOS
+01. VOLKSWAGEN FUSCA 1600 — CLASSE D — CLÁSSICO
+02. VOLKSWAGEN BRASÍLIA — CLASSE D — CLÁSSICO
+03. VOLKSWAGEN GOL GTI — CLASSE B — HATCH
+04. VOLKSWAGEN PARATI GLS — CLASSE C — PERUA
+05. VOLKSWAGEN SAVEIRO SUMMER — CLASSE C — PICAPE
+06. VOLKSWAGEN SANTANA 2000 — CLASSE C — SEDÃ
+07. VOLKSWAGEN SP2 — CLASSE C — ESPORTIVO
+08. CHEVROLET OPALA SS — CLASSE B — CLÁSSICO
+09. CHEVROLET CHEVETTE SL — CLASSE D — CLÁSSICO
+10. CHEVROLET MONZA S/R — CLASSE B — HATCH
+11. CHEVROLET KADETT GSI — CLASSE B — HATCH
+12. CHEVROLET OMEGA CD 4.1 — CLASSE A — SEDÃ
+13. FIAT 147 — CLASSE D — HATCH
+14. FIAT UNO TURBO — CLASSE B — HATCH
+15. FIAT PALIO 1.6 — CLASSE C — HATCH
+16. FIAT TEMPRA TURBO — CLASSE B — SEDÃ
+17. FIAT MAREA TURBO — CLASSE A — SEDÃ
+18. FORD CORCEL II — CLASSE C — CLÁSSICO
+19. FORD DEL REY GHIA — CLASSE C — SEDÃ
+20. FORD ESCORT XR3 — CLASSE B — ESPORTIVO
+21. FORD MAVERICK GT — CLASSE B — CLÁSSICO
+22. PUMA GTE — CLASSE B — EXÓTICO
+23. PUMA GTB S2 — CLASSE A — EXÓTICO
+24. GURGEL X-12 — CLASSE D — UTILITÁRIO
+25. MIURA X8 — CLASSE B — EXÓTICO
+
+AS 25 PISTAS ADICIONADAS
+01. ESPIRAL DAS COPAS — FLORESTA — 1 LOOP
+02. LOOP DAS RAÍZES — FLORESTA — 1 LOOP
+03. ANEL DA SERRARIA — FLORESTA — 1 LOOP
+04. ANEL DOS FÓSSEIS — PRÉ-HISTÓRIA — 1 LOOP
+05. ESPIRAL DO NINHO — PRÉ-HISTÓRIA — 1 LOOP
+06. LOOP DA CALDEIRA — PRÉ-HISTÓRIA — 1 LOOP
+07. ÓRBITA DO OÁSIS — DESERTO — 1 LOOP
+08. LOOP DAS AREIAS — DESERTO — 1 LOOP
+09. ANEL DO CÂNION — DESERTO — 1 LOOP
+10. ANEL DE CRISTAL — NEVE — 1 LOOP
+11. LOOP DA NEVASCA — NEVE — 1 LOOP
+12. ESPIRAL DOS PINHEIROS — NEVE — 1 LOOP
+13. LOOP DO SURFE — LITORAL — 1 LOOP
+14. ÓRBITA DO PÍER — LITORAL — 1 LOOP
+15. ANEL DAS CONCHAS — LITORAL — 1 LOOP
+16. CAIXAS EM ÓRBITA — QUARTO — 1 LOOP
+17. ESPIRAL DA ESTANTE — QUARTO — 1 LOOP
+18. ANEL DA CHAVE INGLESA — GARAGEM — 1 LOOP
+19. LOOP DO MOTOR — GARAGEM — 1 LOOP
+20. ANEL DE NEON — ARCADE — 1 LOOP
+21. ESPIRAL DO FLIPERAMA — ARCADE — 1 LOOP
+22. LOOP DO RALO — BANHEIRO — 1 LOOP
+23. ANEL DE ESPUMA — BANHEIRO — 1 LOOP
+24. LOOP DA COLHER — COZINHA — 1 LOOP
+25. ÓRBITA DAS ALMOFADAS — SALA — 1 LOOP

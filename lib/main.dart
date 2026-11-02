@@ -16,7 +16,7 @@ import 'ui/online_screen.dart';
 
 const carWeceVersion = String.fromEnvironment(
   'CARWECE_VERSION_NAME',
-  defaultValue: '1.1.0',
+  defaultValue: '1.2.0',
 );
 
 Future<void> main() async {
@@ -90,6 +90,32 @@ class _RushShellState extends State<RushShell>
   String page = 'home', returnPage = 'home';
   int trackIndex = 0, garageIndex = 0, round = 0;
   String selectedRoom = 'TODOS';
+  String garageClass = 'TODAS', garageCategory = 'TODOS';
+  bool garageBrazilOnly = false;
+  List<int> get visibleGarageCars =>
+      filterCarCollection(
+        performanceClass: garageClass,
+        category: garageCategory,
+        brazilOnly: garageBrazilOnly,
+      )..sort((a, b) {
+        final ca = cars[a], cb = cars[b];
+        final byClass = carPerformanceClasses
+            .indexOf(ca.performanceClass)
+            .compareTo(carPerformanceClasses.indexOf(cb.performanceClass));
+        if (byClass != 0) return byClass;
+        final byCategory = ca.modelCategory.compareTo(cb.modelCategory);
+        return byCategory != 0 ? byCategory : ca.name.compareTo(cb.name);
+      });
+  void changeGarageFilter(VoidCallback update) {
+    store.tap();
+    setState(() {
+      update();
+      final visible = visibleGarageCars;
+      if (visible.isNotEmpty && !visible.contains(garageIndex))
+        garageIndex = visible.first;
+    });
+  }
+
   List<int> cupRoute = [0, 1, 2];
   List<int> get visibleTracks => [
     for (var i = 0; i < tracks.length; i++)
@@ -174,7 +200,12 @@ class _RushShellState extends State<RushShell>
     }
     setState(() {
       page = target;
-      if (target == 'garage') garageIndex = store.selectedCar;
+      if (target == 'garage') {
+        garageIndex = store.selectedCar;
+        final visible = visibleGarageCars;
+        if (visible.isNotEmpty && !visible.contains(garageIndex))
+          garageIndex = visible.first;
+      }
     });
   }
 
@@ -785,6 +816,7 @@ class _RushShellState extends State<RushShell>
   }
 
   Widget garage() {
+    final visible = visibleGarageCars;
     final car = cars[garageIndex],
         owned = store.ownedCars.contains(car.id),
         chosen = garageIndex == store.selectedCar;
@@ -796,173 +828,287 @@ class _RushShellState extends State<RushShell>
           () => go(returnPage == 'select' ? 'select' : 'home'),
           trailing: coinRushBadge(),
         ),
-        Expanded(
+        SizedBox(
+          height: 44,
           child: Row(
             children: [
-              SizedBox(
-                width: 210,
-                child: ListView(
+              Text('CLASSE', style: body(10, color: muted)),
+              const SizedBox(width: 8),
+              DropdownButton<String>(
+                key: const ValueKey('garage-class-filter'),
+                value: garageClass,
+                menuMaxHeight: 240,
+                dropdownColor: panel,
+                style: body(11),
+                underline: const SizedBox.shrink(),
+                items: [
+                  for (final value in ['TODAS', ...carPerformanceClasses])
+                    DropdownMenuItem(
+                      value: value,
+                      child: Text(value == 'TODAS' ? 'TODAS' : 'CLASSE $value'),
+                    ),
+                ],
+                onChanged: (value) {
+                  if (value != null)
+                    changeGarageFilter(() => garageClass = value);
+                },
+              ),
+              const SizedBox(width: 20),
+              Text('MODELO', style: body(10, color: muted)),
+              const SizedBox(width: 8),
+              DropdownButton<String>(
+                key: const ValueKey('garage-category-filter'),
+                value: garageCategory,
+                menuMaxHeight: 240,
+                dropdownColor: panel,
+                style: body(11),
+                underline: const SizedBox.shrink(),
+                items: [
+                  for (final value in ['TODOS', ...carModelCategories])
+                    DropdownMenuItem(value: value, child: Text(value)),
+                ],
+                onChanged: (value) {
+                  if (value != null)
+                    changeGarageFilter(() => garageCategory = value);
+                },
+              ),
+              const SizedBox(width: 14),
+              FilterChip(
+                key: const ValueKey('garage-brazil-filter'),
+                label: Text('BRASILEIROS', style: body(10)),
+                selected: garageBrazilOnly,
+                onSelected: (value) =>
+                    changeGarageFilter(() => garageBrazilOnly = value),
+              ),
+              const Spacer(),
+              Text(
+                '${visible.length} / ${cars.length} CARROS',
+                style: body(10, color: muted),
+              ),
+              const SizedBox(width: 8),
+              IconButton(
+                tooltip: 'Limpar filtros',
+                icon: const Icon(Icons.filter_alt_off_outlined, size: 19),
+                onPressed: () => changeGarageFilter(() {
+                  garageClass = 'TODAS';
+                  garageCategory = 'TODOS';
+                  garageBrazilOnly = false;
+                }),
+              ),
+            ],
+          ),
+        ),
+        Expanded(
+          child: visible.isEmpty
+              ? Center(
+                  child: Text(
+                    'NENHUM CARRO NESTA COMBINAÇÃO',
+                    style: display(24),
+                  ),
+                )
+              : Row(
                   children: [
-                    for (var i = 0; i < cars.length; i++) ...[
-                      SizedBox(
-                        height: 88,
-                        child: Material(
-                          color: garageIndex == i
-                              ? const Color(0xff2b3b56)
-                              : panel,
-                          borderRadius: BorderRadius.circular(9),
-                          child: InkWell(
-                            borderRadius: BorderRadius.circular(9),
-                            onTap: () {
-                              store.tap();
-                              setState(() => garageIndex = i);
-                            },
-                            child: Padding(
-                              padding: const EdgeInsets.all(14),
-                              child: Row(
-                                children: [
-                                  Container(
-                                    width: 6,
-                                    height: 34,
-                                    decoration: BoxDecoration(
-                                      color: Color(cars[i].color),
-                                      borderRadius: BorderRadius.circular(2),
-                                    ),
-                                  ),
-                                  const SizedBox(width: 10),
-                                  Expanded(
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
+                    SizedBox(
+                      width: 210,
+                      child: ListView(
+                        key: const ValueKey('garage-car-list'),
+                        children: [
+                          for (final i in visible) ...[
+                            if (i == visible.first ||
+                                cars[visible[visible.indexOf(i) - 1]]
+                                        .performanceClass !=
+                                    cars[i].performanceClass ||
+                                cars[visible[visible.indexOf(i) - 1]]
+                                        .modelCategory !=
+                                    cars[i].modelCategory)
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(3, 12, 0, 8),
+                                child: Text(
+                                  'CLASSE ${cars[i].performanceClass} • ${cars[i].modelCategory}',
+                                  style: body(10, color: cyan),
+                                ),
+                              ),
+                            SizedBox(
+                              height: 96,
+                              child: Material(
+                                color: garageIndex == i
+                                    ? const Color(0xff2b3b56)
+                                    : panel,
+                                borderRadius: BorderRadius.circular(9),
+                                child: InkWell(
+                                  borderRadius: BorderRadius.circular(9),
+                                  onTap: () {
+                                    store.tap();
+                                    setState(() => garageIndex = i);
+                                  },
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(14),
+                                    child: Row(
                                       children: [
-                                        Text(
-                                          cars[i].name,
-                                          maxLines: 2,
-                                          overflow: TextOverflow.ellipsis,
-                                          style: display(20),
+                                        Container(
+                                          width: 6,
+                                          height: 34,
+                                          decoration: BoxDecoration(
+                                            color: Color(cars[i].color),
+                                            borderRadius: BorderRadius.circular(
+                                              2,
+                                            ),
+                                          ),
                                         ),
-                                        const SizedBox(height: 4),
-                                        Text(
-                                          store.ownedCars.contains(cars[i].id)
-                                              ? 'NA SUA COLEÇÃO'
-                                              : '${cars[i].cost} MOEDAS',
-                                          style: body(9, color: muted),
+                                        const SizedBox(width: 10),
+                                        Expanded(
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Text(
+                                                cars[i].name,
+                                                maxLines: 2,
+                                                overflow: TextOverflow.ellipsis,
+                                                style: display(20),
+                                              ),
+                                              const SizedBox(height: 4),
+                                              Text(
+                                                store.ownedCars.contains(
+                                                      cars[i].id,
+                                                    )
+                                                    ? 'NA SUA COLEÇÃO'
+                                                    : '${cars[i].cost} MOEDAS',
+                                                style: body(9, color: muted),
+                                              ),
+                                            ],
+                                          ),
                                         ),
+                                        if (i == store.selectedCar)
+                                          const Icon(
+                                            Icons.check_circle,
+                                            size: 16,
+                                            color: cyan,
+                                          ),
                                       ],
                                     ),
                                   ),
-                                  if (i == store.selectedCar)
-                                    const Icon(
-                                      Icons.check_circle,
-                                      size: 16,
-                                      color: cyan,
+                                ),
+                              ),
+                            ),
+                            if (i != cars.length - 1) const SizedBox(height: 9),
+                          ],
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      child: Column(
+                        children: [
+                          Expanded(
+                            child: GpuGarageView(
+                              car: car,
+                              angle: -.7 + math.sin(phase * .3) * .24,
+                            ),
+                          ),
+                          RushBadge(car.tag, color: Color(car.color)),
+                          const SizedBox(height: 16),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      width: 250,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            child: SingleChildScrollView(
+                              key: const ValueKey('garage-car-details'),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    '${(garageIndex + 1).toString().padLeft(2, '0')} / COLEÇÃO • CLASSE ${car.performanceClass}',
+                                    style: body(10, color: muted, spacing: 1.7),
+                                  ),
+                                  const SizedBox(height: 10),
+                                  Text(car.name, style: display(38)),
+                                  const SizedBox(height: 12),
+                                  Text(
+                                    '${car.modelCategory} • ${car.description}',
+                                    style: body(13, color: muted),
+                                  ),
+                                  const SizedBox(height: 14),
+                                  StatBar(
+                                    'VELOCIDADE',
+                                    car.speed / 105,
+                                    color: Color(car.color),
+                                  ),
+                                  StatBar(
+                                    'ACELERAÇÃO',
+                                    car.acceleration / 43,
+                                    color: Color(car.color),
+                                  ),
+                                  StatBar(
+                                    'DIREÇÃO',
+                                    car.handling / 1.45,
+                                    color: Color(car.color),
+                                  ),
+                                  const SizedBox(height: 8),
+                                  Text(
+                                    owned
+                                        ? '${car.tier} • NA SUA COLEÇÃO'
+                                        : store.carRequirement(car),
+                                    maxLines: 2,
+                                    style: body(
+                                      11,
+                                      color: store.carEligible(car)
+                                          ? cyan
+                                          : orange,
                                     ),
+                                  ),
                                 ],
                               ),
                             ),
                           ),
-                        ),
-                      ),
-                      if (i != cars.length - 1) const SizedBox(height: 9),
-                    ],
-                  ],
-                ),
-              ),
-              Expanded(
-                child: Column(
-                  children: [
-                    Expanded(
-                      child: GpuGarageView(
-                        car: car,
-                        angle: -.7 + math.sin(phase * .3) * .24,
-                      ),
-                    ),
-                    RushBadge(car.tag, color: Color(car.color)),
-                    const SizedBox(height: 16),
-                  ],
-                ),
-              ),
-              SizedBox(
-                width: 250,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      '0${garageIndex + 1} / COLEÇÃO',
-                      style: body(10, color: muted, spacing: 1.7),
-                    ),
-                    const SizedBox(height: 10),
-                    Text(car.name, style: display(38)),
-                    const SizedBox(height: 12),
-                    Text(car.description, style: body(14, color: muted)),
-                    const SizedBox(height: 27),
-                    StatBar(
-                      'VELOCIDADE',
-                      car.speed / 105,
-                      color: Color(car.color),
-                    ),
-                    StatBar(
-                      'ACELERAÇÃO',
-                      car.acceleration / 43,
-                      color: Color(car.color),
-                    ),
-                    StatBar(
-                      'DIREÇÃO',
-                      car.handling / 1.45,
-                      color: Color(car.color),
-                    ),
-                    const SizedBox(height: 8),
-                    Text(
-                      owned
-                          ? '${car.tier} • NA SUA COLEÇÃO'
-                          : store.carRequirement(car),
-                      maxLines: 2,
-                      style: body(
-                        11,
-                        color: store.carEligible(car) ? cyan : orange,
-                      ),
-                    ),
-                    const SizedBox(height: 20),
-                    SizedBox(
-                      width: double.infinity,
-                      child: RushButton(
-                        chosen
-                            ? 'SELECIONADO'
-                            : owned
-                            ? 'SELECIONAR'
-                            : store.carEligible(car)
-                            ? 'COMPRAR • ${car.cost}'
-                            : 'REQUER ${car.requiredStars} ★',
-                        primary: !chosen,
-                        compact: true,
-                        icon: owned ? Icons.check : Icons.lock_open,
-                        onTap: chosen || (!owned && !store.carEligible(car))
-                            ? null
-                            : () {
-                                if (!store.buyCar(car)) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                      content: Text(
-                                        'Ganhe moedas completando corridas.',
-                                      ),
-                                    ),
-                                  );
-                                  return;
-                                }
-                                store.selectedCar = garageIndex;
-                                store.changed();
-                                store.tap();
-                              },
+                          const SizedBox(height: 20),
+                          SizedBox(
+                            width: double.infinity,
+                            child: RushButton(
+                              chosen
+                                  ? 'SELECIONADO'
+                                  : owned
+                                  ? 'SELECIONAR'
+                                  : store.carEligible(car)
+                                  ? 'COMPRAR • ${car.cost}'
+                                  : 'REQUER ${car.requiredStars} ★',
+                              primary: !chosen,
+                              compact: true,
+                              icon: owned ? Icons.check : Icons.lock_open,
+                              onTap:
+                                  chosen || (!owned && !store.carEligible(car))
+                                  ? null
+                                  : () {
+                                      if (!store.buyCar(car)) {
+                                        ScaffoldMessenger.of(
+                                          context,
+                                        ).showSnackBar(
+                                          const SnackBar(
+                                            content: Text(
+                                              'Ganhe moedas completando corridas.',
+                                            ),
+                                          ),
+                                        );
+                                        return;
+                                      }
+                                      store.selectedCar = garageIndex;
+                                      store.changed();
+                                      store.tap();
+                                    },
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ],
                 ),
-              ),
-            ],
-          ),
         ),
         const SizedBox(height: 8),
         Text(

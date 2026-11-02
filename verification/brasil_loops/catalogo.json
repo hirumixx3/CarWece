@@ -1,0 +1,506 @@
+{
+  "carros": [
+    {
+      "id": "br_fusca",
+      "nome": "VOLKSWAGEN FUSCA 1600",
+      "indice": 56,
+      "classe": "D",
+      "categoria": "CLÁSSICO",
+      "moedas": 650,
+      "estrelas": 0
+    },
+    {
+      "id": "br_brasilia",
+      "nome": "VOLKSWAGEN BRASÍLIA",
+      "indice": 57,
+      "classe": "D",
+      "categoria": "CLÁSSICO",
+      "moedas": 1030,
+      "estrelas": 0
+    },
+    {
+      "id": "br_gol_gti",
+      "nome": "VOLKSWAGEN GOL GTI",
+      "indice": 58,
+      "classe": "B",
+      "categoria": "HATCH",
+      "moedas": 1410,
+      "estrelas": 0
+    },
+    {
+      "id": "br_parati",
+      "nome": "VOLKSWAGEN PARATI GLS",
+      "indice": 59,
+      "classe": "C",
+      "categoria": "PERUA",
+      "moedas": 1790,
+      "estrelas": 6
+    },
+    {
+      "id": "br_saveiro",
+      "nome": "VOLKSWAGEN SAVEIRO SUMMER",
+      "indice": 60,
+      "classe": "C",
+      "categoria": "PICAPE",
+      "moedas": 2170,
+      "estrelas": 8
+    },
+    {
+      "id": "br_santana",
+      "nome": "VOLKSWAGEN SANTANA 2000",
+      "indice": 61,
+      "classe": "C",
+      "categoria": "SEDÃ",
+      "moedas": 2550,
+      "estrelas": 10
+    },
+    {
+      "id": "br_sp2",
+      "nome": "VOLKSWAGEN SP2",
+      "indice": 62,
+      "classe": "C",
+      "categoria": "ESPORTIVO",
+      "moedas": 2930,
+      "estrelas": 12
+    },
+    {
+      "id": "br_opala",
+      "nome": "CHEVROLET OPALA SS",
+      "indice": 63,
+      "classe": "B",
+      "categoria": "CLÁSSICO",
+      "moedas": 3310,
+      "estrelas": 14
+    },
+    {
+      "id": "br_chevette",
+      "nome": "CHEVROLET CHEVETTE SL",
+      "indice": 64,
+      "classe": "D",
+      "categoria": "CLÁSSICO",
+      "moedas": 3690,
+      "estrelas": 16
+    },
+    {
+      "id": "br_monza",
+      "nome": "CHEVROLET MONZA S/R",
+      "indice": 65,
+      "classe": "B",
+      "categoria": "HATCH",
+      "moedas": 4070,
+      "estrelas": 18
+    },
+    {
+      "id": "br_kadett",
+      "nome": "CHEVROLET KADETT GSI",
+      "indice": 66,
+      "classe": "B",
+      "categoria": "HATCH",
+      "moedas": 4450,
+      "estrelas": 20
+    },
+    {
+      "id": "br_omega",
+      "nome": "CHEVROLET OMEGA CD 4.1",
+      "indice": 67,
+      "classe": "A",
+      "categoria": "SEDÃ",
+      "moedas": 4830,
+      "estrelas": 22
+    },
+    {
+      "id": "br_fiat147",
+      "nome": "FIAT 147",
+      "indice": 68,
+      "classe": "D",
+      "categoria": "HATCH",
+      "moedas": 5210,
+      "estrelas": 24
+    },
+    {
+      "id": "br_uno",
+      "nome": "FIAT UNO TURBO",
+      "indice": 69,
+      "classe": "B",
+      "categoria": "HATCH",
+      "moedas": 5590,
+      "estrelas": 26
+    },
+    {
+      "id": "br_palio",
+      "nome": "FIAT PALIO 1.6",
+      "indice": 70,
+      "classe": "C",
+      "categoria": "HATCH",
+      "moedas": 5970,
+      "estrelas": 28
+    },
+    {
+      "id": "br_tempra",
+      "nome": "FIAT TEMPRA TURBO",
+      "indice": 71,
+      "classe": "B",
+      "categoria": "SEDÃ",
+      "moedas": 6350,
+      "estrelas": 30
+    },
+    {
+      "id": "br_marea",
+      "nome": "FIAT MAREA TURBO",
+      "indice": 72,
+      "classe": "A",
+      "categoria": "SEDÃ",
+      "moedas": 6730,
+      "estrelas": 32
+    },
+    {
+      "id": "br_corcel",
+      "nome": "FORD CORCEL II",
+      "indice": 73,
+      "classe": "C",
+      "categoria": "CLÁSSICO",
+      "moedas": 7110,
+      "estrelas": 34
+    },
+    {
+      "id": "br_delrey",
+      "nome": "FORD DEL REY GHIA",
+      "indice": 74,
+      "classe": "C",
+      "categoria": "SEDÃ",
+      "moedas": 7490,
+      "estrelas": 36
+    },
+    {
+      "id": "br_escort",
+      "nome": "FORD ESCORT XR3",
+      "indice": 75,
+      "classe": "B",
+      "categoria": "ESPORTIVO",
+      "moedas": 7870,
+      "estrelas": 38
+    },
+    {
+      "id": "br_maverick",
+      "nome": "FORD MAVERICK GT",
+      "indice": 76,
+      "classe": "B",
+      "categoria": "CLÁSSICO",
+      "moedas": 8250,
+      "estrelas": 40
+    },
+    {
+      "id": "br_puma_gte",
+      "nome": "PUMA GTE",
+      "indice": 77,
+      "classe": "B",
+      "categoria": "EXÓTICO",
+      "moedas": 8630,
+      "estrelas": 42
+    },
+    {
+      "id": "br_puma_gtb",
+      "nome": "PUMA GTB S2",
+      "indice": 78,
+      "classe": "A",
+      "categoria": "EXÓTICO",
+      "moedas": 9010,
+      "estrelas": 44
+    },
+    {
+      "id": "br_gurgel",
+      "nome": "GURGEL X-12",
+      "indice": 79,
+      "classe": "D",
+      "categoria": "UTILITÁRIO",
+      "moedas": 9390,
+      "estrelas": 45
+    },
+    {
+      "id": "br_miura",
+      "nome": "MIURA X8",
+      "indice": 80,
+      "classe": "B",
+      "categoria": "EXÓTICO",
+      "moedas": 9770,
+      "estrelas": 45
+    }
+  ],
+  "pistas": [
+    {
+      "id": "forest_loop_canopy",
+      "nome": "ESPIRAL DAS COPAS",
+      "ambiente": "FLORESTA",
+      "loops": 1,
+      "largura": 46.0,
+      "comprimento": 4333.19437483636,
+      "estrelas": 0,
+      "atalhos": 1,
+      "obstaculos_tematicos": 12
+    },
+    {
+      "id": "forest_loop_roots",
+      "nome": "LOOP DAS RAÍZES",
+      "ambiente": "FLORESTA",
+      "loops": 1,
+      "largura": 46.0,
+      "comprimento": 4572.757126114857,
+      "estrelas": 6,
+      "atalhos": 1,
+      "obstaculos_tematicos": 12
+    },
+    {
+      "id": "forest_loop_timber",
+      "nome": "ANEL DA SERRARIA",
+      "ambiente": "FLORESTA",
+      "loops": 1,
+      "largura": 46.0,
+      "comprimento": 4787.249837240126,
+      "estrelas": 12,
+      "atalhos": 1,
+      "obstaculos_tematicos": 12
+    },
+    {
+      "id": "preh_loop_bones",
+      "nome": "ANEL DOS FÓSSEIS",
+      "ambiente": "PRÉ-HISTÓRIA",
+      "loops": 1,
+      "largura": 46.0,
+      "comprimento": 4565.296189637468,
+      "estrelas": 1,
+      "atalhos": 1,
+      "obstaculos_tematicos": 12
+    },
+    {
+      "id": "preh_loop_nest",
+      "nome": "ESPIRAL DO NINHO",
+      "ambiente": "PRÉ-HISTÓRIA",
+      "loops": 1,
+      "largura": 46.0,
+      "comprimento": 4707.634492224216,
+      "estrelas": 8,
+      "atalhos": 1,
+      "obstaculos_tematicos": 12
+    },
+    {
+      "id": "preh_loop_lava",
+      "nome": "LOOP DA CALDEIRA",
+      "ambiente": "PRÉ-HISTÓRIA",
+      "loops": 1,
+      "largura": 46.0,
+      "comprimento": 4554.445896459816,
+      "estrelas": 16,
+      "atalhos": 1,
+      "obstaculos_tematicos": 12
+    },
+    {
+      "id": "desert_loop_oasis",
+      "nome": "ÓRBITA DO OÁSIS",
+      "ambiente": "DESERTO",
+      "loops": 1,
+      "largura": 46.0,
+      "comprimento": 4443.991248599602,
+      "estrelas": 2,
+      "atalhos": 1,
+      "obstaculos_tematicos": 12
+    },
+    {
+      "id": "desert_loop_sand",
+      "nome": "LOOP DAS AREIAS",
+      "ambiente": "DESERTO",
+      "loops": 1,
+      "largura": 46.0,
+      "comprimento": 4839.808769320548,
+      "estrelas": 10,
+      "atalhos": 1,
+      "obstaculos_tematicos": 12
+    },
+    {
+      "id": "desert_loop_canyon",
+      "nome": "ANEL DO CÂNION",
+      "ambiente": "DESERTO",
+      "loops": 1,
+      "largura": 46.0,
+      "comprimento": 4735.851404841848,
+      "estrelas": 18,
+      "atalhos": 1,
+      "obstaculos_tematicos": 12
+    },
+    {
+      "id": "snow_loop_crystal",
+      "nome": "ANEL DE CRISTAL",
+      "ambiente": "NEVE",
+      "loops": 1,
+      "largura": 46.0,
+      "comprimento": 4561.823151516114,
+      "estrelas": 3,
+      "atalhos": 1,
+      "obstaculos_tematicos": 12
+    },
+    {
+      "id": "snow_loop_blizzard",
+      "nome": "LOOP DA NEVASCA",
+      "ambiente": "NEVE",
+      "loops": 1,
+      "largura": 46.0,
+      "comprimento": 4592.792622334659,
+      "estrelas": 12,
+      "atalhos": 1,
+      "obstaculos_tematicos": 12
+    },
+    {
+      "id": "snow_loop_pines",
+      "nome": "ESPIRAL DOS PINHEIROS",
+      "ambiente": "NEVE",
+      "loops": 1,
+      "largura": 46.0,
+      "comprimento": 4805.156488384562,
+      "estrelas": 22,
+      "atalhos": 1,
+      "obstaculos_tematicos": 12
+    },
+    {
+      "id": "coast_loop_surf",
+      "nome": "LOOP DO SURFE",
+      "ambiente": "LITORAL",
+      "loops": 1,
+      "largura": 46.0,
+      "comprimento": 4437.892910253554,
+      "estrelas": 0,
+      "atalhos": 1,
+      "obstaculos_tematicos": 12
+    },
+    {
+      "id": "coast_loop_pier",
+      "nome": "ÓRBITA DO PÍER",
+      "ambiente": "LITORAL",
+      "loops": 1,
+      "largura": 46.0,
+      "comprimento": 4332.0514262854,
+      "estrelas": 8,
+      "atalhos": 1,
+      "obstaculos_tematicos": 12
+    },
+    {
+      "id": "coast_loop_shell",
+      "nome": "ANEL DAS CONCHAS",
+      "ambiente": "LITORAL",
+      "loops": 1,
+      "largura": 46.0,
+      "comprimento": 4660.6567830705135,
+      "estrelas": 16,
+      "atalhos": 1,
+      "obstaculos_tematicos": 12
+    },
+    {
+      "id": "bedroom_loop_boxes",
+      "nome": "CAIXAS EM ÓRBITA",
+      "ambiente": "QUARTO",
+      "loops": 1,
+      "largura": 46.0,
+      "comprimento": 4598.475781989784,
+      "estrelas": 0,
+      "atalhos": 1,
+      "obstaculos_tematicos": 0
+    },
+    {
+      "id": "bedroom_loop_shelf",
+      "nome": "ESPIRAL DA ESTANTE",
+      "ambiente": "QUARTO",
+      "loops": 1,
+      "largura": 46.0,
+      "comprimento": 4540.173496816926,
+      "estrelas": 10,
+      "atalhos": 1,
+      "obstaculos_tematicos": 0
+    },
+    {
+      "id": "garage_loop_wrench",
+      "nome": "ANEL DA CHAVE INGLESA",
+      "ambiente": "GARAGEM",
+      "loops": 1,
+      "largura": 46.0,
+      "comprimento": 4627.262438997521,
+      "estrelas": 3,
+      "atalhos": 1,
+      "obstaculos_tematicos": 0
+    },
+    {
+      "id": "garage_loop_motor",
+      "nome": "LOOP DO MOTOR",
+      "ambiente": "GARAGEM",
+      "loops": 1,
+      "largura": 46.0,
+      "comprimento": 4437.016375510346,
+      "estrelas": 14,
+      "atalhos": 1,
+      "obstaculos_tematicos": 0
+    },
+    {
+      "id": "arcade_loop_neon",
+      "nome": "ANEL DE NEON",
+      "ambiente": "ARCADE",
+      "loops": 1,
+      "largura": 46.0,
+      "comprimento": 4475.306780070225,
+      "estrelas": 12,
+      "atalhos": 1,
+      "obstaculos_tematicos": 0
+    },
+    {
+      "id": "arcade_loop_pinball",
+      "nome": "ESPIRAL DO FLIPERAMA",
+      "ambiente": "ARCADE",
+      "loops": 1,
+      "largura": 46.0,
+      "comprimento": 4629.362031037645,
+      "estrelas": 24,
+      "atalhos": 1,
+      "obstaculos_tematicos": 0
+    },
+    {
+      "id": "bath_loop_drain",
+      "nome": "LOOP DO RALO",
+      "ambiente": "BANHEIRO",
+      "loops": 1,
+      "largura": 46.0,
+      "comprimento": 4559.61594935441,
+      "estrelas": 5,
+      "atalhos": 1,
+      "obstaculos_tematicos": 0
+    },
+    {
+      "id": "bath_loop_foam",
+      "nome": "ANEL DE ESPUMA",
+      "ambiente": "BANHEIRO",
+      "loops": 1,
+      "largura": 46.0,
+      "comprimento": 4547.620123025576,
+      "estrelas": 16,
+      "atalhos": 1,
+      "obstaculos_tematicos": 0
+    },
+    {
+      "id": "kitchen_loop_spoon",
+      "nome": "LOOP DA COLHER",
+      "ambiente": "COZINHA",
+      "loops": 1,
+      "largura": 46.0,
+      "comprimento": 4518.770066822344,
+      "estrelas": 8,
+      "atalhos": 1,
+      "obstaculos_tematicos": 0
+    },
+    {
+      "id": "living_loop_cushion",
+      "nome": "ÓRBITA DAS ALMOFADAS",
+      "ambiente": "SALA",
+      "loops": 1,
+      "largura": 46.0,
+      "comprimento": 4634.267283065575,
+      "estrelas": 11,
+      "atalhos": 1,
+      "obstaculos_tematicos": 0
+    }
+  ]
+}

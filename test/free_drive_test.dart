@@ -132,7 +132,9 @@ void main() {
         expect(floorLength / t.length, greaterThan(.3));
         expect(
           t.widthAt(t.frames.firstWhere((f) => t.isFloor(f.s)).s),
-          t.outdoor ? equals(t.width) : greaterThan(t.width * 2),
+          t.outdoor || brazilLoopStars.containsKey(t.id)
+              ? equals(t.width)
+              : greaterThan(t.width * 2),
         );
         expect(
           t.outdoor
