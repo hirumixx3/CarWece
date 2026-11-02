@@ -1,5 +1,63 @@
 part of 'gpu_mesh.dart';
 
+/// A narrow orange toy ribbon replaces the unmarked terrain corridor only on
+/// the 25 new races. It is flush with the existing physical floor, not a new
+/// raised surface; floorGrip and all wheel contacts remain biome-specific.
+void buildExpansionFloorRibbon(
+  Mesh3 m,
+  TrackSpec track,
+  TrackFrame a,
+  TrackFrame b,
+  int index,
+) {
+  final w = track.width / 2;
+  m.quad(
+    a.point(-w),
+    b.point(-w),
+    b.point(w),
+    a.point(w),
+    index ~/ 24 % 2 == 0 ? 0xffef681b : 0xffeb5d16,
+    Material3.track,
+    na: a.up,
+    nb: b.up,
+    nc: b.up,
+    nd: a.up,
+    repeatU: (b.p - a.p).length,
+    repeatV: 1,
+  );
+  for (final side in [-1.0, 1.0]) {
+    m.quad(
+      a.point(side * w, .018),
+      b.point(side * w, .018),
+      b.point(side * (w - 1.1), .018),
+      a.point(side * (w - 1.1), .018),
+      0xffffc46a,
+      Material3.decal,
+    );
+    if (index % 24 < 3) {
+      m.quad(
+        a.point(side * (w - 1.4), .022),
+        b.point(side * (w - 1.4), .022),
+        b.point(side * (w - 2.5), .022),
+        a.point(side * (w - 2.5), .022),
+        track.accent,
+        Material3.decal,
+      );
+    }
+  }
+  if (index % 24 == 0) {
+    m.box(
+      a.point(0, .012),
+      V3(track.width - 2.4, .024, .12),
+      0xffa94715,
+      Material3.plastic,
+      r: a.right,
+      u: a.up,
+      f: a.forward,
+    );
+  }
+}
+
 final _expansionObstaclePrototypes = <String, Mesh3>{};
 
 /// Reuse the authored diorama toys at racing-obstacle scale. Fit the actual
