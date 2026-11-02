@@ -328,9 +328,6 @@ Mesh3 buildWorldMesh(TrackSpec track) {
   for (var i = 0; i < fs.length; i++) {
     final a = fs[i], b = fs[(i + 1) % fs.length];
     if (track.isFloor((a.s + (i + 1 == fs.length ? track.length : b.s)) * .5)) {
-      if (track.outdoor && !track.openArena) {
-        buildExpansionFloorRibbon(m, track, a, b, i);
-      }
       if (!track.openArena && i % 24 == 0) {
         final p = a.point(0, .025);
         m.triangle(
