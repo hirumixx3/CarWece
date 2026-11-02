@@ -71,7 +71,29 @@ flutter {
 dependencies {
     testImplementation("junit:junit:4.13.2")
 }
+val exportGraphicsWire by tasks.registering(Exec::class) {
+    group = "verification"
+    description = "Export real Dart graphics packets before Kotlin contract tests"
+    workingDir = rootProject.file("..")
+    val localProperties = Properties().apply {
+        rootProject.file("local.properties").inputStream().use { load(it) }
+    }
+    val flutterSdk = requireNotNull(localProperties.getProperty("flutter.sdk"))
+    val executable = if (System.getProperty("os.name").startsWith("Windows")) "flutter.bat" else "flutter"
+    commandLine("$flutterSdk/bin/$executable", "test", "--no-pub", "--concurrency=1",
+        "--dart-define=EXPORT_GRAPHICS_WIRE=true",
+        "test/graphics_channel_test.dart", "test/battle_graphics_channel_test.dart")
+    inputs.files(rootProject.fileTree("../lib") { include("**/*.dart") },
+        rootProject.fileTree("../assets/shaders"),
+        rootProject.file("../test/graphics_channel_test.dart"),
+        rootProject.file("../test/battle_graphics_channel_test.dart"),
+        rootProject.file("../pubspec.lock"))
+    outputs.files(rootProject.file("../build/graphics_bridge/create.bin"),
+        rootProject.file("../build/graphics_bridge/battle.bin"))
+}
+
 tasks.withType<Test>().configureEach {
+    dependsOn(exportGraphicsWire)
     systemProperty("carwece.graphicsWire", rootProject.file("../build/graphics_bridge/create.bin").absolutePath)
     systemProperty("carwece.battleWire", rootProject.file("../build/graphics_bridge/battle.bin").absolutePath)
 }

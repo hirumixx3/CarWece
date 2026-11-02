@@ -13,8 +13,8 @@ import subprocess
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--version-name', default='1.0.0')
-    parser.add_argument('--first-code', type=int, default=1)
+    parser.add_argument('--version-name', default='1.2.0')
+    parser.add_argument('--first-code', type=int, default=7)
     parser.add_argument('--count', type=int, default=6)
     parser.add_argument('--output', type=Path, default=Path('dist'))
     args = parser.parse_args()

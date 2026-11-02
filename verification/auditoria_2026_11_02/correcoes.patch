@@ -1,0 +1,575 @@
+--- a/.github/workflows/playstore-aab.yml
++++ b/.github/workflows/playstore-aab.yml
+@@ -6,12 +6,12 @@
+       version_name:
+         description: Versão exibida
+         required: true
+-        default: '1.0.0'
++        default: '1.2.0'
+         type: string
+       first_version_code:
+         description: Primeiro versionCode (use 7 ou maior após publicar os códigos 1 a 6)
+         required: true
+-        default: '1'
++        default: '7'
+         type: string
+       bundle_count:
+         description: Quantidade de AABs (1 a 6)
+@@ -44,6 +44,10 @@
+           flutter-version: '3.35.7'
+           channel: stable
+           cache: true
++      - name: Configurar Android SDK
++        uses: android-actions/setup-android@v4
++        with:
++          packages: 'platform-tools'
+       - name: Preparar SDK Android
+         shell: bash
+         run: |
+@@ -58,7 +62,8 @@
+         run: |
+           flutter pub get
+           flutter analyze
+-          flutter test
++          flutter test --concurrency=1
++          (cd android && ./gradlew testDebugUnitTest --no-daemon)
+       - name: Gerar bundles
+         env:
+           VERSION_NAME: ${{ inputs.version_name }}
+--- a/.github/workflows/signed-apk.yml
++++ b/.github/workflows/signed-apk.yml
+@@ -6,7 +6,7 @@
+       version_name:
+         description: Versão exibida
+         required: true
+-        default: '1.0.0'
++        default: '1.2.0'
+         type: string
+       version_code:
+         description: Código de versão (maior que o último já publicado)
+@@ -106,6 +106,12 @@
+       - name: Baixar dependências Flutter
+         run: flutter pub get
+ 
++      - name: Verificar código e regressões antes do release
++        run: |
++          flutter analyze
++          flutter test --concurrency=1
++          (cd android && ./gradlew testDebugUnitTest --no-daemon)
++
+       - name: Compilar APK release
+         shell: bash
+         run: |
+--- a/README.md
++++ b/README.md
+@@ -1,13 +1,16 @@
+-> Revisão: menu aleatório. Veja `GUIA_APK_MUSICAS.md`. Este ZIP contém código-fonte;
+-> não contém APK. Foram executados 32 testes isolados do controlador de música.
+-> O build Flutter/Android e o workflow GitHub ainda precisam ser executados.
++> Auditoria e correções de 02/11/2026. Este ZIP contém código-fonte, não APK.
++> Leia `RELATORIO_AUDITORIA_CARWECE.txt` para arquitetura, alterações, testes e limites.
++> Validação local: 253 testes Flutter e 65 Kotlin aprovados; APK debug compilado;
++> 75 voltas simuladas concluídas e integração LAN/TLS local com seis jogadores.
++> Workflows GitHub e publicação assinada ainda dependem dos seus Secrets e execução.
+ 
+-# CarWece 1.0.0 — Play Store / GitHub Actions
++# CarWece 1.2.0 — Play Store / GitHub Actions
+ 
+ Base completa: CarWece 0.14.4, por hirumisu.
+ Crédito adicional: Marcos Nascimento (Sage Corp.).
+ 
+-Esta edição usa Android API 36, versão 1.0.0 e uma chave de assinatura própria.
++Esta edição usa Android API 36, versão 1.2.0 (build local 3) e uma chave de assinatura própria.
++Os workflows sugerem versionCode 7 ou superior; escolha um código maior que o último já publicado.
+ O botão online em destaque, os checkpoints corrigidos e as funções da 0.14.4
+ foram preservados. As mídias, ícones e o transporte online não foram alterados.
+ 
+@@ -21,3 +24,11 @@
+ 
+ Ferramentas fixadas: Flutter 3.35.7, Dart 3.9.2, Java 17, AGP 8.9.1,
+ Gradle 8.12, compileSdk/targetSdk 36, minSdk 24 e NDK 27.0.12077973.
++
++Validação reproduzível: `flutter pub get`, `flutter analyze`,
++`flutter test --concurrency=1` e, na pasta `android`, `./gradlew testDebugUnitTest`.
++Os testes Kotlin geram automaticamente seus pacotes gráficos reais usando Flutter.
++Para compilar para teste: `flutter build apk --debug`.
++Para release assinado, siga o guia de Secrets; nunca substitua sua chave de publicação.
++Documentos e resultados de versões antigas foram mantidos como histórico; as evidências
++novas estão exclusivamente em `verification/auditoria_2026_11_02/`.
+--- a/android/app/build.gradle.kts
++++ b/android/app/build.gradle.kts
+@@ -71,7 +71,29 @@
+ dependencies {
+     testImplementation("junit:junit:4.13.2")
+ }
++val exportGraphicsWire by tasks.registering(Exec::class) {
++    group = "verification"
++    description = "Export real Dart graphics packets before Kotlin contract tests"
++    workingDir = rootProject.file("..")
++    val localProperties = Properties().apply {
++        rootProject.file("local.properties").inputStream().use { load(it) }
++    }
++    val flutterSdk = requireNotNull(localProperties.getProperty("flutter.sdk"))
++    val executable = if (System.getProperty("os.name").startsWith("Windows")) "flutter.bat" else "flutter"
++    commandLine("$flutterSdk/bin/$executable", "test", "--no-pub", "--concurrency=1",
++        "--dart-define=EXPORT_GRAPHICS_WIRE=true",
++        "test/graphics_channel_test.dart", "test/battle_graphics_channel_test.dart")
++    inputs.files(rootProject.fileTree("../lib") { include("**/*.dart") },
++        rootProject.fileTree("../assets/shaders"),
++        rootProject.file("../test/graphics_channel_test.dart"),
++        rootProject.file("../test/battle_graphics_channel_test.dart"),
++        rootProject.file("../pubspec.lock"))
++    outputs.files(rootProject.file("../build/graphics_bridge/create.bin"),
++        rootProject.file("../build/graphics_bridge/battle.bin"))
++}
++
+ tasks.withType<Test>().configureEach {
++    dependsOn(exportGraphicsWire)
+     systemProperty("carwece.graphicsWire", rootProject.file("../build/graphics_bridge/create.bin").absolutePath)
+     systemProperty("carwece.battleWire", rootProject.file("../build/graphics_bridge/battle.bin").absolutePath)
+ }
+--- a/android/gradle.properties
++++ b/android/gradle.properties
+@@ -1,6 +1,7 @@
+ org.gradle.jvmargs=-Xmx3G -XX:MaxMetaspaceSize=1G -XX:ReservedCodeCacheSize=512m -XX:+HeapDumpOnOutOfMemoryError
+ android.useAndroidX=true
+-android.enableJetifier=true
++# All dependencies use AndroidX; rewriting Flutter engine jars wastes heap.
++android.enableJetifier=false
+ 
+ org.gradle.workers.max=2
+ kotlin.daemon.jvmargs=-Xmx1G
+--- a/lib/online/host/auth.dart
++++ b/lib/online/host/auth.dart
+@@ -89,30 +89,51 @@
+   final Map<String, Map<String, dynamic>> sessions = {};
+   final Set<String> _pendingNames = {};
+   int _hashing = 0;
++  bool _preserveBackup = false;
+   Future<void> _writes = Future.value();
+   AuthStore(this.directory);
+   Future<void> load() async {
+     await directory.create(recursive: true);
+     final file = File('${directory.path}/accounts.json');
+-    if (!await file.exists()) return;
+-    Map<String, dynamic> m;
++    final backup = File('${file.path}.bak');
++    if (!await file.exists() && !await backup.exists()) return;
+     try {
+-      m = jsonDecode(await file.readAsString());
++      _restore(jsonDecode(await file.readAsString()));
++      _preserveBackup = false;
+     } catch (_) {
+-      m = jsonDecode(await File('${file.path}.bak').readAsString());
+-    }
+-    for (final a in m['accounts']) {
+-      final x = Account.read(Map<String, dynamic>.from(a));
+-      accounts[x.name.toLowerCase()] = x;
+-    }
+-    sessions.addAll(
+-      Map<String, Map<String, dynamic>>.from(
+-        (m['sessions'] as Map).map(
+-          (k, v) => MapEntry(k, Map<String, dynamic>.from(v)),
+-        ),
+-      ),
+-    );
++      // Includes missing files and schema/type failures, not just invalid JSON.
++      _restore(jsonDecode(await backup.readAsString()));
++      _preserveBackup = true;
++    }
+     _prune();
++  }
++
++  void _restore(dynamic m) {
++    if (m is! Map || m['accounts'] is! List || m['sessions'] is! Map) {
++      throw const FormatException('Banco de contas inválido.');
++    }
++    final restoredAccounts = <String, Account>{};
++    for (final raw in m['accounts']) {
++      final account = Account.read(Map<String, dynamic>.from(raw));
++      restoredAccounts[account.name.toLowerCase()] = account;
++    }
++    final restoredSessions = <String, Map<String, dynamic>>{};
++    (m['sessions'] as Map).forEach((key, raw) {
++      final session = Map<String, dynamic>.from(raw);
++      if (key is! String ||
++          session['expires'] is! int ||
++          session['user'] is! String) {
++        throw const FormatException('Sessão inválida.');
++      }
++      restoredSessions[key] = session;
++    });
++    // Commit only after the entire snapshot has validated.
++    accounts
++      ..clear()
++      ..addAll(restoredAccounts);
++    sessions
++      ..clear()
++      ..addAll(restoredSessions);
+   }
+ 
+   void _prune() {
+@@ -130,8 +151,11 @@
+       final file = File('${directory.path}/accounts.json'),
+           tmp = File('${directory.path}/accounts.json.tmp');
+       await tmp.writeAsString(json, flush: true);
+-      if (await file.exists()) await file.copy('${file.path}.bak');
++      if (!_preserveBackup && await file.exists()) {
++        await file.copy('${file.path}.bak');
++      }
+       await tmp.rename(file.path);
++      _preserveBackup = false;
+     });
+     _writes = operation;
+     return operation;
+--- a/lib/platform.dart
++++ b/lib/platform.dart
+@@ -49,7 +49,7 @@
+         ['auto', 'low', 'medium', 'high'].contains(data['quality']))
+       quality = data['quality'];
+     double number(String key, double fallback, double min, double max) =>
+-        data[key] is num
++        data[key] is num && (data[key] as num).isFinite
+         ? (data[key] as num).toDouble().clamp(min, max)
+         : fallback;
+     music = number('music', .35, 0, 1);
+@@ -65,10 +65,19 @@
+   static const channel = MethodChannel('com.hirumisu.carwece/native');
+   final settings = GameSettings();
+   SoundtrackController? _soundtrack;
++  Future<void>? _loadFuture;
++  bool _disposed = false;
++
++  @override
++  void notifyListeners() {
++    if (!_disposed) super.notifyListeners();
++  }
++
+   String _audioScene = 'menu';
+   SoundtrackController get soundtrack => _soundtrack ??= SoundtrackController();
+   @override
+   void dispose() {
++    _disposed = true;
+     _soundtrack?.dispose();
+     super.dispose();
+   }
+@@ -92,27 +101,40 @@
+       ? '${car.tier} • ${car.cost} MOEDAS'
+       : '${car.tier} • REQUER ${car.requiredStars} ★ (VOCÊ TEM $stars)';
+ 
+-  Future<void> load() async {
++  Future<void> load() => _loadFuture ??= _load();
++
++  // Optional sections are recovered independently: one malformed value must
++  // never discard valid purchases, times or the selected car.
++  static Map<String, dynamic> _map(Object? value) => value is Map
++      ? {
++          for (final entry in value.entries)
++            if (entry.key is String) entry.key as String: entry.value,
++        }
++      : {};
++  static int _count(Object? value) => value is num && value.isFinite
++      ? value.toInt().clamp(0, 0x7fffffffffffffff)
++      : 0;
++
++  Future<void> _load() async {
+     try {
+       final raw = await channel.invokeMethod<String>('load');
+       if (raw != null && raw.isNotEmpty) {
+         final data = jsonDecode(raw) as Map<String, dynamic>;
+-        settings.restore(Map<String, dynamic>.from(data['settings'] ?? {}));
+-        coins = (data['coins'] as num?)?.toInt() ?? 0;
+-        races = (data['races'] as num?)?.toInt() ?? 0;
+-        wins = (data['wins'] as num?)?.toInt() ?? 0;
+-        final battleData = data['battle'] as Map? ?? {};
+-        battles = (battleData['played'] as num?)?.toInt() ?? 0;
+-        battleWins = (battleData['wins'] as num?)?.toInt() ?? 0;
+-        eliminations = (battleData['kills'] as num?)?.toInt() ?? 0;
+-        (battleData['records'] as Map? ?? {}).forEach((k, v) {
+-          if (v is num) battleRecords['$k'] = v.toInt();
++        settings.restore(_map(data['settings']));
++        coins = _count(data['coins']);
++        races = _count(data['races']);
++        wins = _count(data['wins']);
++        final battleData = _map(data['battle']);
++        battles = _count(battleData['played']);
++        battleWins = _count(battleData['wins']);
++        eliminations = _count(battleData['kills']);
++        _map(battleData['records']).forEach((k, v) {
++          if (v is num && v.isFinite && v >= 0) battleRecords[k] = _count(v);
+         });
+-        selectedCar = ((data['car'] as num?)?.toInt() ?? 0).clamp(
+-          0,
+-          cars.length - 1,
+-        );
+-        ownedCars.addAll(List<String>.from(data['owned'] ?? []));
++        selectedCar = _count(data['car']).clamp(0, cars.length - 1);
++        if (data['owned'] is List) {
++          ownedCars.addAll((data['owned'] as List).whereType<String>());
++        }
+         // Previous versions gave four starters. Preserve every existing grant.
+         if (data['progressionVersion'] != 2) {
+           ownedCars.addAll(['rx7', 'evo9', 'r34', '350z']);
+@@ -130,11 +152,11 @@
+           final index = cars.indexWhere((c) => c.id == data['carId']);
+           if (index >= 0) selectedCar = index;
+         }
+-        (data['records'] as Map? ?? {}).forEach((k, v) {
+-          if (v is num) records['$k'] = v.toDouble();
++        _map(data['records']).forEach((k, v) {
++          if (v is num && v.isFinite && v > 0) records[k] = v.toDouble();
+         });
+-        (data['medals'] as Map? ?? {}).forEach((k, v) {
+-          if (v is num) medals['$k'] = v.toInt();
++        _map(data['medals']).forEach((k, v) {
++          if (v is num && v.isFinite) medals[k] = v.toInt().clamp(0, 3);
+         });
+         if (!ownedCars.contains(cars[selectedCar].id)) selectedCar = 0;
+       }
+@@ -148,6 +170,10 @@
+   }
+ 
+   Future<void> save() {
++    // Android can pause while its asynchronous initial read is still pending.
++    // Wait before capturing the payload, otherwise defaults overwrite progress.
++    final loading = _loadFuture;
++    if (loading != null && !ready) return loading.then((_) => save());
+     final payload = jsonEncode({
+       'version': 1,
+       'progressionVersion': 2,
+@@ -237,7 +263,9 @@
+     String? scene,
+     bool enterMenu = false,
+   }) async {
+-    final nextScene = enterMenu ? 'menu' : (scene ?? (racing ? 'race' : 'menu'));
++    final nextScene = enterMenu
++        ? 'menu'
++        : (scene ?? (racing ? 'race' : 'menu'));
+     _audioScene = nextScene;
+     try {
+       _soundtrack ??= SoundtrackController();
+--- a/test/graphics_channel_test.dart
++++ b/test/graphics_channel_test.dart
+@@ -26,7 +26,12 @@
+         'width': 1280,
+         'height': 720,
+         'world': GpuResources.world(race.track),
+-        'objects': GpuResources.objects,
++        // Match the production upload: stable slots, full geometry only for
++        // the cars actually present. Exporting all 81 cars consumed 282 MB
++        // on the wire and exhausted the native unit-test JVM heap.
++        'objects': GpuResources.objectsFor({
++          for (final driver in race.drivers) driver.car.body,
++        }),
+         'shaders': shaders,
+         'frame': raceGpuFrame(race),
+         'showroom': false,
+--- a/tools/build_play_bundles.py
++++ b/tools/build_play_bundles.py
+@@ -13,8 +13,8 @@
+ 
+ def main():
+     parser = argparse.ArgumentParser(description=__doc__)
+-    parser.add_argument('--version-name', default='1.0.0')
+-    parser.add_argument('--first-code', type=int, default=1)
++    parser.add_argument('--version-name', default='1.2.0')
++    parser.add_argument('--first-code', type=int, default=7)
+     parser.add_argument('--count', type=int, default=6)
+     parser.add_argument('--output', type=Path, default=Path('dist'))
+     args = parser.parse_args()
+--- a/tools/verify_apk.py
++++ b/tools/verify_apk.py
+@@ -24,8 +24,14 @@
+     parser.add_argument('apk', type=Path)
+     parser.add_argument('--sdk', type=Path, default=os.environ.get('ANDROID_HOME'))
+     parser.add_argument('--java', default='java')
+-    parser.add_argument('--version-name', default='1.0.0')
+-    parser.add_argument('--version-code', type=int, default=1)
++    # Default to the actual source version; release overrides stay explicit.
++    source_root = Path(__file__).resolve().parent.parent
++    version = re.search(r'^version:\s*([^\s+]+)\+(\d+)\s*$',
++                        (source_root / 'pubspec.yaml').read_text(), re.M)
++    if version is None:
++        parser.error('Versão inválida no pubspec.yaml.')
++    parser.add_argument('--version-name', default=version.group(1))
++    parser.add_argument('--version-code', type=int, default=int(version.group(2)))
+     args = parser.parse_args()
+     if args.sdk is None:
+         parser.error('--sdk or ANDROID_HOME is required')
+--- /dev/null
++++ b/test/save_recovery_test.dart
+@@ -0,0 +1,115 @@
++import 'dart:async';
++import 'dart:convert';
++import 'package:carwece/game/content.dart';
++import 'package:carwece/platform.dart';
++import 'package:flutter_test/flutter_test.dart';
++
++void main() {
++  TestWidgetsFlutterBinding.ensureInitialized();
++  const channel = GameStore.channel;
++  final messenger =
++      TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger;
++  tearDown(() => messenger.setMockMethodCallHandler(channel, null));
++
++  test(
++    'Malformed optional fields do not discard valid garage and records',
++    () async {
++      messenger.setMockMethodCallHandler(
++        channel,
++        (call) async => call.method == 'load'
++            ? jsonEncode({
++                'progressionVersion': 2,
++                'coins': 'broken',
++                'races': -12,
++                'wins': [],
++                'car': {},
++                'settings': [],
++                'battle': 'broken',
++                'owned': ['rx7', 'ek9', 45, null],
++                'carId': 'ek9',
++                'records': {'valid': 60, 'negative': -1, 'text': 'oops'},
++                'medals': {'bedroom': 99, 'garage': -3, 'bad': []},
++              })
++            : null,
++      );
++      final store = GameStore();
++      await store.load();
++      expect(store.ownedCars, contains('ek9'));
++      expect(cars[store.selectedCar].id, 'ek9');
++      expect(store.records, {'valid': 60.0});
++      expect(store.medals['bedroom'], 3);
++      expect(store.medals['garage'], 0);
++      expect(store.coins, 0);
++      expect(store.races, 0);
++      expect(store.wins, 0);
++      expect(store.saveError, isNull);
++      store.dispose();
++    },
++  );
++
++  test('Non-finite settings fall back instead of becoming maximum values', () {
++    final settings = GameSettings()
++      ..restore({
++        'music': double.nan,
++        'effects': double.infinity,
++        'sensitivity': double.negativeInfinity,
++        'camera': double.nan,
++      });
++    expect(settings.music, .35);
++    expect(settings.effects, .7);
++    expect(settings.sensitivity, 1);
++    expect(settings.cameraDistance, 1);
++  });
++
++  test(
++    'Lifecycle save waits for pending load and never writes empty progress',
++    () async {
++      final pending = Completer<String>();
++      final writes = <Map<String, dynamic>>[];
++      messenger.setMockMethodCallHandler(channel, (call) async {
++        if (call.method == 'load') return pending.future;
++        if (call.method == 'save')
++          writes.add(jsonDecode(call.arguments as String));
++        return null;
++      });
++      final store = GameStore();
++      final loading = store.load();
++      final saving = store.save();
++      await Future<void>.delayed(Duration.zero);
++      expect(writes, isEmpty);
++      pending.complete(jsonEncode({'progressionVersion': 2, 'coins': 999}));
++      await loading;
++      await saving;
++      expect(writes.single['coins'], 999);
++      store.dispose();
++    },
++  );
++
++  test('Concurrent load calls share one platform request', () async {
++    var loads = 0;
++    messenger.setMockMethodCallHandler(channel, (call) async {
++      if (call.method == 'load') {
++        loads++;
++        return '{}';
++      }
++      return null;
++    });
++    final store = GameStore();
++    await Future.wait([store.load(), store.load()]);
++    expect(loads, 1);
++    store.dispose();
++  });
++
++  test(
++    'Pending load can finish after store disposal without notifying',
++    () async {
++      final pending = Completer<String>();
++      messenger.setMockMethodCallHandler(channel, (_) => pending.future);
++      final store = GameStore();
++      final loading = store.load();
++      store.dispose();
++      pending.complete('{}');
++      await expectLater(loading, completes);
++    },
++  );
++}
+--- /dev/null
++++ b/test/auth_recovery_test.dart
+@@ -0,0 +1,56 @@
++import 'dart:convert';
++import 'dart:io';
++import 'package:carwece/online/host/auth.dart';
++import 'package:flutter_test/flutter_test.dart';
++
++void main() {
++  late Directory directory;
++  setUp(
++    () async =>
++        directory = await Directory.systemTemp.createTemp('carwece-auth-'),
++  );
++  tearDown(() async => directory.delete(recursive: true));
++
++  Map<String, dynamic> snapshot() => {
++    'accounts': [Account('Piloto', 'salt', 'hash').toJson()],
++    'sessions': <String, dynamic>{},
++  };
++
++  test('Recover valid backup when accounts.json is absent', () async {
++    await File(
++      '${directory.path}/accounts.json.bak',
++    ).writeAsString(jsonEncode(snapshot()));
++    final auth = AuthStore(directory);
++    await auth.load();
++    expect(auth.accounts.keys, contains('piloto'));
++  });
++
++  test(
++    'Recover backup when primary is valid JSON but has invalid structure',
++    () async {
++      await File(
++        '${directory.path}/accounts.json',
++      ).writeAsString('{"accounts":null}');
++      await File(
++        '${directory.path}/accounts.json.bak',
++      ).writeAsString(jsonEncode(snapshot()));
++      final auth = AuthStore(directory);
++      await auth.load();
++      expect(auth.accounts.keys, contains('piloto'));
++    },
++  );
++
++  test(
++    'Saving recovery must not replace good backup with broken primary',
++    () async {
++      await File('${directory.path}/accounts.json').writeAsString('broken');
++      final backup = File('${directory.path}/accounts.json.bak');
++      final valid = jsonEncode(snapshot());
++      await backup.writeAsString(valid);
++      final auth = AuthStore(directory);
++      await auth.load();
++      await auth.save();
++      expect(jsonDecode(await backup.readAsString())['accounts'], isNotEmpty);
++    },
++  );
++}

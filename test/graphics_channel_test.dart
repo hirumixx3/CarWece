@@ -26,7 +26,12 @@ void main() {
         'width': 1280,
         'height': 720,
         'world': GpuResources.world(race.track),
-        'objects': GpuResources.objects,
+        // Match the production upload: stable slots, full geometry only for
+        // the cars actually present. Exporting all 81 cars consumed 282 MB
+        // on the wire and exhausted the native unit-test JVM heap.
+        'objects': GpuResources.objectsFor({
+          for (final driver in race.drivers) driver.car.body,
+        }),
         'shaders': shaders,
         'frame': raceGpuFrame(race),
         'showroom': false,

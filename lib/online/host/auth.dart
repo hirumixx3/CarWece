@@ -89,30 +89,51 @@ class AuthStore {
   final Map<String, Map<String, dynamic>> sessions = {};
   final Set<String> _pendingNames = {};
   int _hashing = 0;
+  bool _preserveBackup = false;
   Future<void> _writes = Future.value();
   AuthStore(this.directory);
   Future<void> load() async {
     await directory.create(recursive: true);
     final file = File('${directory.path}/accounts.json');
-    if (!await file.exists()) return;
-    Map<String, dynamic> m;
+    final backup = File('${file.path}.bak');
+    if (!await file.exists() && !await backup.exists()) return;
     try {
-      m = jsonDecode(await file.readAsString());
+      _restore(jsonDecode(await file.readAsString()));
+      _preserveBackup = false;
     } catch (_) {
-      m = jsonDecode(await File('${file.path}.bak').readAsString());
+      // Includes missing files and schema/type failures, not just invalid JSON.
+      _restore(jsonDecode(await backup.readAsString()));
+      _preserveBackup = true;
     }
-    for (final a in m['accounts']) {
-      final x = Account.read(Map<String, dynamic>.from(a));
-      accounts[x.name.toLowerCase()] = x;
-    }
-    sessions.addAll(
-      Map<String, Map<String, dynamic>>.from(
-        (m['sessions'] as Map).map(
-          (k, v) => MapEntry(k, Map<String, dynamic>.from(v)),
-        ),
-      ),
-    );
     _prune();
+  }
+
+  void _restore(dynamic m) {
+    if (m is! Map || m['accounts'] is! List || m['sessions'] is! Map) {
+      throw const FormatException('Banco de contas inválido.');
+    }
+    final restoredAccounts = <String, Account>{};
+    for (final raw in m['accounts']) {
+      final account = Account.read(Map<String, dynamic>.from(raw));
+      restoredAccounts[account.name.toLowerCase()] = account;
+    }
+    final restoredSessions = <String, Map<String, dynamic>>{};
+    (m['sessions'] as Map).forEach((key, raw) {
+      final session = Map<String, dynamic>.from(raw);
+      if (key is! String ||
+          session['expires'] is! int ||
+          session['user'] is! String) {
+        throw const FormatException('Sessão inválida.');
+      }
+      restoredSessions[key] = session;
+    });
+    // Commit only after the entire snapshot has validated.
+    accounts
+      ..clear()
+      ..addAll(restoredAccounts);
+    sessions
+      ..clear()
+      ..addAll(restoredSessions);
   }
 
   void _prune() {
@@ -130,8 +151,11 @@ class AuthStore {
       final file = File('${directory.path}/accounts.json'),
           tmp = File('${directory.path}/accounts.json.tmp');
       await tmp.writeAsString(json, flush: true);
-      if (await file.exists()) await file.copy('${file.path}.bak');
+      if (!_preserveBackup && await file.exists()) {
+        await file.copy('${file.path}.bak');
+      }
       await tmp.rename(file.path);
+      _preserveBackup = false;
     });
     _writes = operation;
     return operation;

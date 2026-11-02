@@ -1,0 +1,60 @@
+{
+  "modified": [
+    {
+      "file": ".github/workflows/playstore-aab.yml",
+      "before_sha256": "aa6dea58ceb8911f1532f1ddd11fb22df64ffd00eb5374e1eb2049497a94507e",
+      "after_sha256": "04900185ab349050835bc205707895f43e79253fe724ad0eb27a91677158825f"
+    },
+    {
+      "file": ".github/workflows/signed-apk.yml",
+      "before_sha256": "fa7bd6f64ecd1af862f390d01ab4931fdc42eb1df4da1e122f6fd6d2688898f0",
+      "after_sha256": "96993446422183d45000c38d2b5867b6d396e1c4f6bad2ca78f5ab7de193d857"
+    },
+    {
+      "file": "README.md",
+      "before_sha256": "185b2a819a4216cc2e9686140404a60d6bc5d0bd36bc02f32c6a94d370ac92bb",
+      "after_sha256": "4fdc81789c9461dfc02af40bcad8402b4147c46d30a7679c758faad8cfd75b68"
+    },
+    {
+      "file": "android/app/build.gradle.kts",
+      "before_sha256": "d3d47c6883313bf517109190af20167ad1d2976d4397bff7f7d338c67a2a4e8a",
+      "after_sha256": "7520ea2bc0658325367646c8614bbd389249f9b6fed8a823b648385bd7dd63f2"
+    },
+    {
+      "file": "android/gradle.properties",
+      "before_sha256": "732a327ae7621c2f0d3ba65eedb713299e8ac0c81491f149da1dc206979429fd",
+      "after_sha256": "ece594e8920afcc129e796ca195e262cea0de59ac82dd4465c3a600828371fb3"
+    },
+    {
+      "file": "lib/online/host/auth.dart",
+      "before_sha256": "78de330871ba44dfb4ec15f45fa51861c92d30e00fa90dbe5598486c3ad760f5",
+      "after_sha256": "3cca1ea9895a35c79664ca8ac849989b88d6b4642f3d035c03e94ea8a7fd4967"
+    },
+    {
+      "file": "lib/platform.dart",
+      "before_sha256": "581a1fb42db811cba02d8ae2630b9270b8c1c1e2a81d7c38e821ac86e4d81903",
+      "after_sha256": "fa5eaac4c04c7a8bd2fb973aebee9926d449e57fe5a01162a8764f9077d2e778"
+    },
+    {
+      "file": "test/graphics_channel_test.dart",
+      "before_sha256": "9c9b6c59475784126b00b6327ec6f8a630b86f7bd325f00667363c3f1b61992d",
+      "after_sha256": "f3e7b45aef6152846341e86e9e264a6a17a6097086eb9661b264436b496ef2da"
+    },
+    {
+      "file": "tools/build_play_bundles.py",
+      "before_sha256": "40a225d0fc2ca4e3f55a5fc20beeddd8e407ac5daad58b31ccede9eb82875ca9",
+      "after_sha256": "a86e5fb3a5926eb35ac88b2bf9b9495f1991ceabb05a62eb60f5cef237fe4a32"
+    },
+    {
+      "file": "tools/verify_apk.py",
+      "before_sha256": "ac8a6513fd986e393d1ca9a9461ee8815832ff677a881d9bb5cdb615f532763c",
+      "after_sha256": "5b6dc9378ffa8028322811462ba83fdd628528f07f62ab0310f640cdd82aeda1"
+    }
+  ],
+  "added": [
+    "test/save_recovery_test.dart",
+    "test/auth_recovery_test.dart",
+    "RELATORIO_AUDITORIA_CARWECE.txt"
+  ],
+  "note": "Evidence files are additional. Original verification history preserved."
+}

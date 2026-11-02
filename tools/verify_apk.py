@@ -24,8 +24,14 @@ def main():
     parser.add_argument('apk', type=Path)
     parser.add_argument('--sdk', type=Path, default=os.environ.get('ANDROID_HOME'))
     parser.add_argument('--java', default='java')
-    parser.add_argument('--version-name', default='1.0.0')
-    parser.add_argument('--version-code', type=int, default=1)
+    # Default to the actual source version; release overrides stay explicit.
+    source_root = Path(__file__).resolve().parent.parent
+    version = re.search(r'^version:\s*([^\s+]+)\+(\d+)\s*$',
+                        (source_root / 'pubspec.yaml').read_text(), re.M)
+    if version is None:
+        parser.error('Versão inválida no pubspec.yaml.')
+    parser.add_argument('--version-name', default=version.group(1))
+    parser.add_argument('--version-code', type=int, default=int(version.group(2)))
     args = parser.parse_args()
     if args.sdk is None:
         parser.error('--sdk or ANDROID_HOME is required')

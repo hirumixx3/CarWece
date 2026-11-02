@@ -1,0 +1,72 @@
+{
+  "original_entries": 1233,
+  "duplicate_zip_paths": [],
+  "case_collisions": [],
+  "missing_relative_dart_references": [],
+  "conflict_markers": [],
+  "python_syntax_errors": [],
+  "shell_syntax_errors": [],
+  "xml_errors": [],
+  "yaml_errors": [],
+  "asset_changes": [],
+  "source_counts": {
+    "lib": {
+      ".dart": 56
+    },
+    "test": {
+      ".dart": 38
+    },
+    "tools": {
+      ".dart": 32,
+      ".py": 17,
+      ".sh": 2,
+      ".kt": 2
+    },
+    "android/app/src": {
+      ".xml": 9,
+      ".java": 1,
+      ".png": 20,
+      ".kt": 18
+    }
+  },
+  "assets_checked": 35,
+  "assets_sha256": {
+    "assets/fonts/Body.ttf": "f8906f762cb73dca441da034bc363b2d8e2e68bc10d5c05e58717646c20cc4b4",
+    "assets/fonts/Display.ttf": "331783dae9ec0c398f4d32c9fd5a56d4c602caa0c1628c2b9cbfe93f48eb68c9",
+    "assets/fonts/OFL-Body.txt": "186d750eb496a4c17a76385f82be6aea2ac1cf2de074a811d63786cf374ea73f",
+    "assets/fonts/OFL-Display.txt": "186d750eb496a4c17a76385f82be6aea2ac1cf2de074a811d63786cf374ea73f",
+    "assets/music/battle_01.m4a": "6429ef887fc95d43c1438df18bde56af42efcb10aee1c7f9d3a2ab3ea2c9917f",
+    "assets/music/battle_02.m4a": "fe58d3042a203b13b78947b8d05ea832f1feaff2be2069ff321da406f48609a6",
+    "assets/music/battle_03.m4a": "eb4761c777a8a5a74ad159d9380694d26895cc172f3e5ee5c2842820e20c1a94",
+    "assets/music/battle_04.m4a": "59fd0a66dc1f7f69540f6463e182de49f479baa6e4b5c0186e4a53ff6f22c22c",
+    "assets/music/battle_05.m4a": "ecf92f972581b15b4fce4996f1d04b4d15016afba1cb64e359f1c6af40471791",
+    "assets/music/catalog.json": "691aeeddd2b6acd2fe64ab73d60d58087e7cfbda9ec830b2127ce937fd809bb8",
+    "assets/music/menu_01.m4a": "c6b50f09bd7a35bd82cd24b9cffbc7ad47ce875801476e7ee3a117746b09a4e8",
+    "assets/music/menu_02.m4a": "af1527e70a4bb22a409c98d75fe97dcac1b8ec3deb74d422b25978cf77caf276",
+    "assets/music/menu_03.m4a": "222fd911ad69c2804c177abf7f36789720571bd86767a71a3b8e1b72cb0f4aef",
+    "assets/music/menu_04.m4a": "5d8c6b92b847845a57223603d0c48825a70305a692c22f09abfe7a06a4a8d1e6",
+    "assets/music/menu_05.m4a": "6fea32ff52b054003994bf666e2e446e144e8c708feb2d31319dd134aa942485",
+    "assets/music/race_01.m4a": "67e84f4ece59bc113184683da4f1ac14a16e2f9befac74273e8349a0f7c0537a",
+    "assets/music/race_02.m4a": "314c47371df2ab34d254ea0edc60b964ac63e67007020872d2eae698e21f0a97",
+    "assets/music/race_03.m4a": "603adc33fa4101040e598de25c3961b7305152bbd68782adea778979339a65cc",
+    "assets/music/race_04.m4a": "d3d4a07e8341083cc0af62fc9dcce5b9c6f7c93283f37ae937c4cfbe37262084",
+    "assets/music/race_05.m4a": "530fc75d5219cc78aa9128217e4e381b9b80e12db2f38da52157b27464cb7bf5",
+    "assets/music/race_06.m4a": "0f00921a66e5adc2014a4ddddc4a4ac08b839f2d6c1859e2df43fff2cf43c695",
+    "assets/music/race_07.m4a": "e086fb0ca11fb2c6d8299e2a2537895e4591cc0f76033d46a076a5d42d115150",
+    "assets/music/race_08.m4a": "a0e1144e114f93e0f4bad7ada0306d943704a57ff6604a3df948091da22224ad",
+    "assets/music/race_09.m4a": "1774a2a634573d13433e09c5de07c9c61785fc5ce6a3af3bf1c1e36fa7fec206",
+    "assets/music/race_10.m4a": "a1a7cc9806b99cfcd3e61a3e953bffcd55e8756c87e1eb27e9c52fe579f4a0ad",
+    "assets/music/race_11.m4a": "28c37a89548cb96f5afc2869e39ec4af76636e81217e2716823f00ad2f7b90de",
+    "assets/music/race_12.m4a": "df056681e7ca68d8eec47b10fcbf0210ee833c43210d9647f6898e00537c5586",
+    "assets/music/race_13.m4a": "b02c7fb3945fe03a54934778b5a65b270a1d6f4a3ca26bf2de12634cc6abdc95",
+    "assets/music/race_14.m4a": "a18b1de2a77227451d490a8a325243f8a2901fff70438306b1b09176e9cb5f3e",
+    "assets/music/race_15.m4a": "2c5398fd7f734b8edb88463912e242adc612e5795df4292bbe24ea5bd8cd5b00",
+    "assets/shaders/depth.frag": "70f1eeae50ebd8f6ecc22d65ace46128e6b3b445976c619fd0fafc3d57638a7a",
+    "assets/shaders/depth.vert": "2b981aec6fc37f4d89a5c56456370c17cf9b61c47ff7187bc40f08cf1a4161ac",
+    "assets/shaders/scene.frag": "95b06d5973e8a25b00e2afdbf8d80840a30fb255ec741c5e25d0ca431cc74168",
+    "assets/shaders/scene.vert": "ab6bc77e856422a6428d8797bff0bd3c12670c3af4a06b58fbbd4991cf7660cf",
+    "assets/video/carwece_intro.mp4": "4e5395f7cbe6db3e29f1081c1bdc56a6c40adaf077c8a70fb9f795528fdcf204"
+  },
+  "missing_declared_assets": [],
+  "checks_passed": true
+}

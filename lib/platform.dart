@@ -49,7 +49,7 @@ class GameSettings {
         ['auto', 'low', 'medium', 'high'].contains(data['quality']))
       quality = data['quality'];
     double number(String key, double fallback, double min, double max) =>
-        data[key] is num
+        data[key] is num && (data[key] as num).isFinite
         ? (data[key] as num).toDouble().clamp(min, max)
         : fallback;
     music = number('music', .35, 0, 1);
@@ -65,10 +65,19 @@ class GameStore extends ChangeNotifier {
   static const channel = MethodChannel('com.hirumisu.carwece/native');
   final settings = GameSettings();
   SoundtrackController? _soundtrack;
+  Future<void>? _loadFuture;
+  bool _disposed = false;
+
+  @override
+  void notifyListeners() {
+    if (!_disposed) super.notifyListeners();
+  }
+
   String _audioScene = 'menu';
   SoundtrackController get soundtrack => _soundtrack ??= SoundtrackController();
   @override
   void dispose() {
+    _disposed = true;
     _soundtrack?.dispose();
     super.dispose();
   }
@@ -92,27 +101,40 @@ class GameStore extends ChangeNotifier {
       ? '${car.tier} • ${car.cost} MOEDAS'
       : '${car.tier} • REQUER ${car.requiredStars} ★ (VOCÊ TEM $stars)';
 
-  Future<void> load() async {
+  Future<void> load() => _loadFuture ??= _load();
+
+  // Optional sections are recovered independently: one malformed value must
+  // never discard valid purchases, times or the selected car.
+  static Map<String, dynamic> _map(Object? value) => value is Map
+      ? {
+          for (final entry in value.entries)
+            if (entry.key is String) entry.key as String: entry.value,
+        }
+      : {};
+  static int _count(Object? value) => value is num && value.isFinite
+      ? value.toInt().clamp(0, 0x7fffffffffffffff)
+      : 0;
+
+  Future<void> _load() async {
     try {
       final raw = await channel.invokeMethod<String>('load');
       if (raw != null && raw.isNotEmpty) {
         final data = jsonDecode(raw) as Map<String, dynamic>;
-        settings.restore(Map<String, dynamic>.from(data['settings'] ?? {}));
-        coins = (data['coins'] as num?)?.toInt() ?? 0;
-        races = (data['races'] as num?)?.toInt() ?? 0;
-        wins = (data['wins'] as num?)?.toInt() ?? 0;
-        final battleData = data['battle'] as Map? ?? {};
-        battles = (battleData['played'] as num?)?.toInt() ?? 0;
-        battleWins = (battleData['wins'] as num?)?.toInt() ?? 0;
-        eliminations = (battleData['kills'] as num?)?.toInt() ?? 0;
-        (battleData['records'] as Map? ?? {}).forEach((k, v) {
-          if (v is num) battleRecords['$k'] = v.toInt();
+        settings.restore(_map(data['settings']));
+        coins = _count(data['coins']);
+        races = _count(data['races']);
+        wins = _count(data['wins']);
+        final battleData = _map(data['battle']);
+        battles = _count(battleData['played']);
+        battleWins = _count(battleData['wins']);
+        eliminations = _count(battleData['kills']);
+        _map(battleData['records']).forEach((k, v) {
+          if (v is num && v.isFinite && v >= 0) battleRecords[k] = _count(v);
         });
-        selectedCar = ((data['car'] as num?)?.toInt() ?? 0).clamp(
-          0,
-          cars.length - 1,
-        );
-        ownedCars.addAll(List<String>.from(data['owned'] ?? []));
+        selectedCar = _count(data['car']).clamp(0, cars.length - 1);
+        if (data['owned'] is List) {
+          ownedCars.addAll((data['owned'] as List).whereType<String>());
+        }
         // Previous versions gave four starters. Preserve every existing grant.
         if (data['progressionVersion'] != 2) {
           ownedCars.addAll(['rx7', 'evo9', 'r34', '350z']);
@@ -130,11 +152,11 @@ class GameStore extends ChangeNotifier {
           final index = cars.indexWhere((c) => c.id == data['carId']);
           if (index >= 0) selectedCar = index;
         }
-        (data['records'] as Map? ?? {}).forEach((k, v) {
-          if (v is num) records['$k'] = v.toDouble();
+        _map(data['records']).forEach((k, v) {
+          if (v is num && v.isFinite && v > 0) records[k] = v.toDouble();
         });
-        (data['medals'] as Map? ?? {}).forEach((k, v) {
-          if (v is num) medals['$k'] = v.toInt();
+        _map(data['medals']).forEach((k, v) {
+          if (v is num && v.isFinite) medals[k] = v.toInt().clamp(0, 3);
         });
         if (!ownedCars.contains(cars[selectedCar].id)) selectedCar = 0;
       }
@@ -148,6 +170,10 @@ class GameStore extends ChangeNotifier {
   }
 
   Future<void> save() {
+    // Android can pause while its asynchronous initial read is still pending.
+    // Wait before capturing the payload, otherwise defaults overwrite progress.
+    final loading = _loadFuture;
+    if (loading != null && !ready) return loading.then((_) => save());
     final payload = jsonEncode({
       'version': 1,
       'progressionVersion': 2,
@@ -237,7 +263,9 @@ class GameStore extends ChangeNotifier {
     String? scene,
     bool enterMenu = false,
   }) async {
-    final nextScene = enterMenu ? 'menu' : (scene ?? (racing ? 'race' : 'menu'));
+    final nextScene = enterMenu
+        ? 'menu'
+        : (scene ?? (racing ? 'race' : 'menu'));
     _audioScene = nextScene;
     try {
       _soundtrack ??= SoundtrackController();

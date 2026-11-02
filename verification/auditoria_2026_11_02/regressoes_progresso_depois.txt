@@ -1,0 +1,26 @@
+Resolving dependencies...
+Downloading packages...
+! asn1lib 1.6.7 from path third_party/asn1lib (overridden)
+  characters 1.4.0 (1.4.1 available)
+  clock 1.1.2 (1.1.3 available)
+! convert 3.1.2 from path third_party/convert (overridden)
+  crypto 3.0.6 (3.0.8 available)
+! dartssh2 4.1.0 from path third_party/dartssh2 (overridden)
+  matcher 0.12.17 (0.12.20 available)
+  material_color_utilities 0.11.1 (0.13.1 available)
+  meta 1.16.0 (1.19.0 available)
+! pinenacl 0.6.0 from path third_party/pinenacl (overridden)
+! pointycastle 4.0.0 from path third_party/pointycastle (overridden)
+  stack_trace 1.12.1 (1.12.2 available)
+  test_api 0.7.6 (0.7.15 available)
+  vector_math 2.2.0 (2.4.4 available)
+Got dependencies!
+9 packages have newer versions incompatible with dependency constraints.
+Try `flutter pub outdated` for more information.
+00:00 +0: loading /home/user/carwece/work/CarWece_Brasil_Loops/test/save_recovery_test.dart
+00:00 +0: Malformed optional fields do not discard valid garage and records
+00:00 +1: Non-finite settings fall back instead of becoming maximum values
+00:00 +2: Lifecycle save waits for pending load and never writes empty progress
+00:00 +3: Concurrent load calls share one platform request
+00:00 +4: Pending load can finish after store disposal without notifying
+00:00 +5: All tests passed!

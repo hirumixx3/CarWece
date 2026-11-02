@@ -1,0 +1,332 @@
+Resolving dependencies...
+Downloading packages...
+! asn1lib 1.6.7 from path third_party/asn1lib (overridden)
+  characters 1.4.0 (1.4.1 available)
+  clock 1.1.2 (1.1.3 available)
+! convert 3.1.2 from path third_party/convert (overridden)
+  crypto 3.0.6 (3.0.8 available)
+! dartssh2 4.1.0 from path third_party/dartssh2 (overridden)
+  matcher 0.12.17 (0.12.20 available)
+  material_color_utilities 0.11.1 (0.13.1 available)
+  meta 1.16.0 (1.19.0 available)
+! pinenacl 0.6.0 from path third_party/pinenacl (overridden)
+! pointycastle 4.0.0 from path third_party/pointycastle (overridden)
+  stack_trace 1.12.1 (1.12.2 available)
+  test_api 0.7.6 (0.7.15 available)
+  vector_math 2.2.0 (2.4.4 available)
+Got dependencies!
+9 packages have newer versions incompatible with dependency constraints.
+Try `flutter pub outdated` for more information.
+00:00 +0: loading /home/user/carwece/work/CarWece_Brasil_Loops/test/expansion_v07_test.dart
+00:00 +0: /home/user/carwece/work/CarWece_Brasil_Loops/test/expansion_v07_test.dart: (setUpAll)
+00:00 +0: /home/user/carwece/work/CarWece_Brasil_Loops/test/expansion_v07_test.dart: Faster rivals leave a common line and physically overtake a slower leader
+00:00 +1: /home/user/carwece/work/CarWece_Brasil_Loops/test/expansion_v07_test.dart: Object boundary stops sustained outward steering with a matching rotated collider
+00:00 +2: /home/user/carwece/work/CarWece_Brasil_Loops/test/expansion_v07_test.dart: Missile destroys an actual blocking gate; ice and ramming leave it solid
+00:00 +3: /home/user/carwece/work/CarWece_Brasil_Loops/test/expansion_v07_test.dart: All alternate routes validate their portals and rejoin the right main checkpoint
+00:04 +4: /home/user/carwece/work/CarWece_Brasil_Loops/test/expansion_v07_test.dart: Entering each closed shortcut, shooting inside and rejoining counts without returning to its entrance
+00:08 +5: /home/user/carwece/work/CarWece_Brasil_Loops/test/expansion_v07_test.dart: Jumping directly to an open shortcut exit never awards the skipped checkpoints
+00:08 +6: /home/user/carwece/work/CarWece_Brasil_Loops/test/expansion_v07_test.dart: Full power shuffle bag covers every type and avoids immediate repeats across refills
+00:08 +7: /home/user/carwece/work/CarWece_Brasil_Loops/test/expansion_v07_test.dart: Three rocket charges fire separately and supercharge requires the full power bar
+00:08 +8: /home/user/carwece/work/CarWece_Brasil_Loops/test/expansion_v07_test.dart: EMP clears nearby ordnance and blocks weapons temporarily
+00:08 +9: /home/user/carwece/work/CarWece_Brasil_Loops/test/expansion_v07_test.dart: Ice shot freezes its target, renders a shell and thaws without clearing held controls
+00:08 +10: /home/user/carwece/work/CarWece_Brasil_Loops/test/expansion_v07_test.dart: Tesla has a visible beam and temporary motor failure; shield intercepts it
+00:08 +11: /home/user/carwece/work/CarWece_Brasil_Loops/test/expansion_v07_test.dart: Armed mines detonate visibly, and smoke only blinds cars inside its cloud
+00:08 +12: /home/user/carwece/work/CarWece_Brasil_Loops/test/expansion_v07_test.dart: Trackside props and barriers add detail without blocking alternate routes
+00:08 +13: /home/user/carwece/work/CarWece_Brasil_Loops/test/expansion_v07_test.dart: Power charging HUD keeps the pedal and steering independent at Size(1280.0, 720.0) (variant: TargetPlatform.linux)
+00:09 +14: /home/user/carwece/work/CarWece_Brasil_Loops/test/expansion_v07_test.dart: Power charging HUD keeps the pedal and steering independent at Size(800.0, 360.0) (variant: TargetPlatform.linux)
+00:09 +15: /home/user/carwece/work/CarWece_Brasil_Loops/test/expansion_v07_test.dart: (tearDownAll)
+00:09 +15: loading /home/user/carwece/work/CarWece_Brasil_Loops/test/graphics_backend_test.dart
+00:10 +15: /home/user/carwece/work/CarWece_Brasil_Loops/test/graphics_backend_test.dart: Android keeps the expanded inventory while uploading just the visible car (variant: TargetPlatform.android)
+00:11 +16: /home/user/carwece/work/CarWece_Brasil_Loops/test/graphics_backend_test.dart: Native initialization failure never swaps to the old renderer; retry restores GPU (variant: TargetPlatform.android)
+00:11 +17: /home/user/carwece/work/CarWece_Brasil_Loops/test/graphics_backend_test.dart: A later GPU failure releases the previous texture before retrying (variant: TargetPlatform.android)
+00:11 +18: /home/user/carwece/work/CarWece_Brasil_Loops/test/graphics_backend_test.dart: Changing garage cars reloads their own meshes and releases the old texture (variant: TargetPlatform.android)
+00:12 +19: loading /home/user/carwece/work/CarWece_Brasil_Loops/test/graphics_channel_test.dart
+00:12 +19: /home/user/carwece/work/CarWece_Brasil_Loops/test/graphics_channel_test.dart: Android graphics payload round-trips all car bodies, effects, damage and animated wheels
+00:15 +20: loading /home/user/carwece/work/CarWece_Brasil_Loops/test/gpu_mesh_test.dart
+00:17 +20: /home/user/carwece/work/CarWece_Brasil_Loops/test/gpu_mesh_test.dart: All uploaded meshes have finite complete triangles and valid materials
+00:54 +21: /home/user/carwece/work/CarWece_Brasil_Loops/test/gpu_mesh_test.dart: Car winding agrees with normals, preventing inverted lighting
+00:58 +22: /home/user/carwece/work/CarWece_Brasil_Loops/test/gpu_mesh_test.dart: Camera and model packets remain finite throughout the vertical loop
+00:58 +23: /home/user/carwece/work/CarWece_Brasil_Loops/test/gpu_mesh_test.dart: GLES instance packets include shield, missiles, oil and turbo effects
+00:58 +24: loading /home/user/carwece/work/CarWece_Brasil_Loops/test/smoke_regression_test.dart
+00:58 +24: /home/user/carwece/work/CarWece_Brasil_Loops/test/smoke_regression_test.dart: (setUpAll)
+00:58 +24: /home/user/carwece/work/CarWece_Brasil_Loops/test/smoke_regression_test.dart: Smoke clears on the first physics step outside and can be entered again
+00:59 +25: /home/user/carwece/work/CarWece_Brasil_Loops/test/smoke_regression_test.dart: A stopped car clears as the cloud expires; removed clouds cannot leave a timer
+00:59 +26: /home/user/carwece/work/CarWece_Brasil_Loops/test/smoke_regression_test.dart: Own smoke is ignored; overlapping enemy clouds do not stack opacity
+00:59 +27: /home/user/carwece/work/CarWece_Brasil_Loops/test/smoke_regression_test.dart: Visibility volume matches the rendered smoke sphere and softens at its edge
+00:59 +28: /home/user/carwece/work/CarWece_Brasil_Loops/test/smoke_regression_test.dart: Enemy smoke does not break the Android HUD at Size(1280.0, 720.0) (variant: TargetPlatform.android)
+01:00 +29: /home/user/carwece/work/CarWece_Brasil_Loops/test/smoke_regression_test.dart: Enemy smoke does not break the Android HUD at Size(800.0, 360.0) (variant: TargetPlatform.android)
+01:01 +30: /home/user/carwece/work/CarWece_Brasil_Loops/test/smoke_regression_test.dart: (tearDownAll)
+01:01 +30: loading /home/user/carwece/work/CarWece_Brasil_Loops/test/podium_rewards_test.dart
+01:01 +30: /home/user/carwece/work/CarWece_Brasil_Loops/test/podium_rewards_test.dart: Every race difficulty pays exactly the podium, without hit bonuses
+01:02 +31: /home/user/carwece/work/CarWece_Brasil_Loops/test/podium_rewards_test.dart: Battle podium payouts match results and are recorded only once
+01:02 +32: /home/user/carwece/work/CarWece_Brasil_Loops/test/podium_rewards_test.dart: Battle settings persist independently and tiers change real weapon damage
+01:02 +33: loading /home/user/carwece/work/CarWece_Brasil_Loops/test/save_recovery_test.dart
+01:03 +33: /home/user/carwece/work/CarWece_Brasil_Loops/test/save_recovery_test.dart: Malformed optional fields do not discard valid garage and records
+01:03 +34: /home/user/carwece/work/CarWece_Brasil_Loops/test/save_recovery_test.dart: Non-finite settings fall back instead of becoming maximum values
+01:03 +35: /home/user/carwece/work/CarWece_Brasil_Loops/test/save_recovery_test.dart: Lifecycle save waits for pending load and never writes empty progress
+01:03 +36: /home/user/carwece/work/CarWece_Brasil_Loops/test/save_recovery_test.dart: Concurrent load calls share one platform request
+01:03 +37: /home/user/carwece/work/CarWece_Brasil_Loops/test/save_recovery_test.dart: Pending load can finish after store disposal without notifying
+01:03 +38: loading /home/user/carwece/work/CarWece_Brasil_Loops/test/road_solid_regression_test.dart
+01:04 +38: /home/user/carwece/work/CarWece_Brasil_Loops/test/road_solid_regression_test.dart: An airborne car hits the vertical loop ribbon from its upper face
+01:05 +39: /home/user/carwece/work/CarWece_Brasil_Loops/test/road_solid_regression_test.dart: A fast fall lands on the upper deck instead of tunnelling through it
+01:05 +40: /home/user/carwece/work/CarWece_Brasil_Loops/test/road_solid_regression_test.dart: A falling upside-down body cannot pass through a lower deck
+01:05 +41: /home/user/carwece/work/CarWece_Brasil_Loops/test/road_solid_regression_test.dart: A descending deck blocks a ground car roof, without snapping it onto the road
+01:05 +42: loading /home/user/carwece/work/CarWece_Brasil_Loops/test/online_ui_test.dart
+01:06 +42: /home/user/carwece/work/CarWece_Brasil_Loops/test/online_ui_test.dart: (setUpAll)
+01:06 +42: /home/user/carwece/work/CarWece_Brasil_Loops/test/online_ui_test.dart: online login and map selection fit Size(1280.0, 720.0) and preserve offline progress
+01:09 +43: /home/user/carwece/work/CarWece_Brasil_Loops/test/online_ui_test.dart: online login and map selection fit Size(800.0, 360.0) and preserve offline progress
+01:10 +44: /home/user/carwece/work/CarWece_Brasil_Loops/test/online_ui_test.dart: home opens online and credits include Marcos Nascimento Sage Corp
+01:11 +45: /home/user/carwece/work/CarWece_Brasil_Loops/test/online_ui_test.dart: (tearDownAll)
+01:11 +45: loading /home/user/carwece/work/CarWece_Brasil_Loops/test/regression_v03_test.dart
+01:12 +45: /home/user/carwece/work/CarWece_Brasil_Loops/test/regression_v03_test.dart: Manual is the default, including migration of old automatic settings
+01:12 +46: /home/user/carwece/work/CarWece_Brasil_Loops/test/regression_v03_test.dart: Throttle, coasting and brakes change momentum; steering has inertia
+01:12 +47: /home/user/carwece/work/CarWece_Brasil_Loops/test/regression_v03_test.dart: Rear collision exchanges momentum and never allows an overtake through a car
+01:12 +48: /home/user/carwece/work/CarWece_Brasil_Loops/test/regression_v03_test.dart: Side contact next to a barrier separates the whole pack
+01:12 +49: /home/user/carwece/work/CarWece_Brasil_Loops/test/regression_v03_test.dart: Collisions also detect a lapped car across the course seam
+01:12 +50: /home/user/carwece/work/CarWece_Brasil_Loops/test/regression_v03_test.dart: Cars can jump over a rival without an invisible collision
+01:12 +51: /home/user/carwece/work/CarWece_Brasil_Loops/test/regression_v03_test.dart: All road ribbons are wider than six car bodies and do not fold inside corners
+01:13 +52: /home/user/carwece/work/CarWece_Brasil_Loops/test/regression_v03_test.dart: Loop entry and exit have separate lanes and clear vertical and lateral space
+01:13 +53: /home/user/carwece/work/CarWece_Brasil_Loops/test/regression_v03_test.dart: Photo finish in the same physics step uses crossing times, not update order
+01:13 +54: /home/user/carwece/work/CarWece_Brasil_Loops/test/regression_v03_test.dart: Every finishing place agrees with the immutable results and rewards
+01:13 +55: /home/user/carwece/work/CarWece_Brasil_Loops/test/regression_v03_test.dart: Being pushed backwards over a lap gate cannot record a second lap
+01:13 +56: /home/user/carwece/work/CarWece_Brasil_Loops/test/regression_v03_test.dart: Missile is visible in flight, then triggers damage, spin, sparks and smoke
+01:13 +57: /home/user/carwece/work/CarWece_Brasil_Loops/test/regression_v03_test.dart: A missile in another lane cannot hit by distance alone
+01:13 +58: /home/user/carwece/work/CarWece_Brasil_Loops/test/regression_v03_test.dart: Oil causes a visible spin and a shield blocks physical weapon damage
+01:13 +59: /home/user/carwece/work/CarWece_Brasil_Loops/test/regression_v03_test.dart: All circuits are finishable using steering, throttle and brakes
+02:44 +60: /home/user/carwece/work/CarWece_Brasil_Loops/test/regression_v03_test.dart: Failing a loop releases the car into a visible fall without teleporting
+02:44 +61: loading /home/user/carwece/work/CarWece_Brasil_Loops/test/intro_test.dart
+02:45 +61: /home/user/carwece/work/CarWece_Brasil_Loops/test/intro_test.dart: (setUpAll)
+02:45 +61: /home/user/carwece/work/CarWece_Brasil_Loops/test/intro_test.dart: Production launch waits beyond video duration and enters menu only on decoder completion
+02:47 +62: /home/user/carwece/work/CarWece_Brasil_Loops/test/intro_test.dart: Background pauses and resumes intro without reopening or skipping it
+02:47 +63: /home/user/carwece/work/CarWece_Brasil_Loops/test/intro_test.dart: A decoding error offers retry and does not advance to the menu
+02:47 +64: /home/user/carwece/work/CarWece_Brasil_Loops/test/intro_test.dart: Widescreen phones preserve the complete 16:9 video without cropping
+02:47 +65: /home/user/carwece/work/CarWece_Brasil_Loops/test/intro_test.dart: Completion is terminal even if an older platform response arrives later
+02:47 +66: /home/user/carwece/work/CarWece_Brasil_Loops/test/intro_test.dart: (tearDownAll)
+02:47 +66: loading /home/user/carwece/work/CarWece_Brasil_Loops/test/relay_regression_test.dart
+02:48 +66: /home/user/carwece/work/CarWece_Brasil_Loops/test/relay_regression_test.dart: transient EOF retries up to three times without announcing a lost room
+02:48 +67: /home/user/carwece/work/CarWece_Brasil_Loops/test/relay_regression_test.dart: persistent EOF preserves startup error instead of generic onClosed
+02:48 +68: /home/user/carwece/work/CarWece_Brasil_Loops/test/relay_regression_test.dart: authentication requirement fails immediately, with its actual reason
+02:48 +69: /home/user/carwece/work/CarWece_Brasil_Loops/test/relay_regression_test.dart: relay rejection is bounded and does not render arbitrary remote text
+02:48 +70: /home/user/carwece/work/CarWece_Brasil_Loops/test/relay_regression_test.dart: silent relay times out, releases attempts, and never announces a room
+02:48 +71: /home/user/carwece/work/CarWece_Brasil_Loops/test/relay_regression_test.dart: cancelling a silent startup stops retries and completes promptly
+02:48 +72: /home/user/carwece/work/CarWece_Brasil_Loops/test/relay_regression_test.dart: fragmented frames and heartbeats coexist; established EOF reports once
+02:48 +73: /home/user/carwece/work/CarWece_Brasil_Loops/test/relay_regression_test.dart: invalid public port and oversized frames are refused without retry loops
+02:48 +74: /home/user/carwece/work/CarWece_Brasil_Loops/test/relay_regression_test.dart: internet invitations remain compatible; LAN invites preserve only private IPv4
+02:48 +75: loading /home/user/carwece/work/CarWece_Brasil_Loops/test/flow_test.dart
+02:49 +75: /home/user/carwece/work/CarWece_Brasil_Loops/test/flow_test.dart: (setUpAll)
+02:49 +75: /home/user/carwece/work/CarWece_Brasil_Loops/test/flow_test.dart: Menu, garage purchase, settings, multi-touch driving, pause and finish (variant: TargetPlatform.linux)
+02:53 +76: /home/user/carwece/work/CarWece_Brasil_Loops/test/flow_test.dart: Manual pedal supports three simultaneous touches and losing shows the actual winner (variant: TargetPlatform.linux)
+02:54 +77: /home/user/carwece/work/CarWece_Brasil_Loops/test/flow_test.dart: Held controls survive countdown, messages and sliding between arrows (variant: TargetPlatform.linux)
+02:55 +78: /home/user/carwece/work/CarWece_Brasil_Loops/test/flow_test.dart: Pause clears old pointers and keyboard direction survives touch release (variant: TargetPlatform.linux)
+02:56 +79: /home/user/carwece/work/CarWece_Brasil_Loops/test/flow_test.dart: Championship runs through all three circuits and awards points (variant: TargetPlatform.linux)
+02:57 +80: /home/user/carwece/work/CarWece_Brasil_Loops/test/flow_test.dart: Menus remain usable on a small landscape screen (variant: TargetPlatform.linux)
+02:58 +81: /home/user/carwece/work/CarWece_Brasil_Loops/test/flow_test.dart: Settings, purchased cars, coins and records survive save and reload
+02:58 +82: /home/user/carwece/work/CarWece_Brasil_Loops/test/flow_test.dart: Menu animation resumes immediately after backgrounding (variant: TargetPlatform.linux)
+02:59 +83: /home/user/carwece/work/CarWece_Brasil_Loops/test/flow_test.dart: (tearDownAll)
+02:59 +83: loading /home/user/carwece/work/CarWece_Brasil_Loops/test/stationary_regression_test.dart
+03:00 +83: /home/user/carwece/work/CarWece_Brasil_Loops/test/stationary_regression_test.dart: All 26 starting grids remain stationary when steering; throttle launches normally
+03:03 +84: /home/user/carwece/work/CarWece_Brasil_Loops/test/stationary_regression_test.dart: Stopped cars on offset curved plastic surfaces do not creep to a rail
+03:08 +85: /home/user/carwece/work/CarWece_Brasil_Loops/test/stationary_regression_test.dart: Steering parked beside a rail moves only the front wheels, then can drive away
+03:08 +86: loading /home/user/carwece/work/CarWece_Brasil_Loops/test/expansion_v06_test.dart
+03:10 +86: /home/user/carwece/work/CarWece_Brasil_Loops/test/expansion_v06_test.dart: (setUpAll)
+03:10 +86: /home/user/carwece/work/CarWece_Brasil_Loops/test/expansion_v06_test.dart: Stopped inverted car loses support, falls and lands without progress or teleport
+03:10 +87: /home/user/carwece/work/CarWece_Brasil_Loops/test/expansion_v06_test.dart: Fast loop tires retain positive support while slow ones detach
+03:10 +88: /home/user/carwece/work/CarWece_Brasil_Loops/test/expansion_v06_test.dart: No traction or steering changes ballistic momentum during a fall
+03:10 +89: /home/user/carwece/work/CarWece_Brasil_Loops/test/expansion_v06_test.dart: A descending rocket detonates at ground contact and submits fire and shock ring
+03:10 +90: /home/user/carwece/work/CarWece_Brasil_Loops/test/expansion_v06_test.dart: An untargeted rocket has gravity and explodes instead of vanishing
+03:10 +91: /home/user/carwece/work/CarWece_Brasil_Loops/test/expansion_v06_test.dart: Swept rocket collision hits an elevated road and a solid household object
+03:10 +92: /home/user/carwece/work/CarWece_Brasil_Loops/test/expansion_v06_test.dart: A missile hit animates damage and explosion even when shield absorbs damage
+03:10 +93: /home/user/carwece/work/CarWece_Brasil_Loops/test/expansion_v06_test.dart: Each layout has its own shape and figure-eight crossings have clearance
+03:10 +94: /home/user/carwece/work/CarWece_Brasil_Loops/test/expansion_v06_test.dart: New solid room props share bounds and leave every route corridor clear
+03:11 +95: /home/user/carwece/work/CarWece_Brasil_Loops/test/expansion_v06_test.dart: Podium stars improve once per circuit, time trial does not award wins or stars
+03:11 +96: /home/user/carwece/work/CarWece_Brasil_Loops/test/expansion_v06_test.dart: Career cannot deadlock: each unlock threshold is reachable before next track
+03:11 +97: /home/user/carwece/work/CarWece_Brasil_Loops/test/expansion_v06_test.dart: Purchases require earned eligibility and money; owned models are never charged again
+03:11 +98: /home/user/carwece/work/CarWece_Brasil_Loops/test/expansion_v06_test.dart: New saves retain only earned cars, legacy saves retain all old free cars
+03:11 +99: /home/user/carwece/work/CarWece_Brasil_Loops/test/expansion_v06_test.dart: Production shader has no fog operation and both clear scene pipelines compile in QA
+03:11 +100: /home/user/carwece/work/CarWece_Brasil_Loops/test/expansion_v06_test.dart: Locked circuit is previewable but cannot launch at Size(1280.0, 720.0) (variant: TargetPlatform.linux)
+03:13 +101: /home/user/carwece/work/CarWece_Brasil_Loops/test/expansion_v06_test.dart: Locked circuit is previewable but cannot launch at Size(800.0, 360.0) (variant: TargetPlatform.linux)
+03:14 +102: /home/user/carwece/work/CarWece_Brasil_Loops/test/expansion_v06_test.dart: (tearDownAll)
+03:14 +102: loading /home/user/carwece/work/CarWece_Brasil_Loops/test/themed_track_obstacles_test.dart
+03:16 +102: /home/user/carwece/work/CarWece_Brasil_Loops/test/themed_track_obstacles_test.dart: Only the 25 new races use fixed legacy ribbon width
+03:16 +103: /home/user/carwece/work/CarWece_Brasil_Loops/test/themed_track_obstacles_test.dart: Each new circuit has 12 solid theme-specific toys instead of generic boxes
+03:16 +104: /home/user/carwece/work/CarWece_Brasil_Loops/test/themed_track_obstacles_test.dart: Obstacle footprints stay in-lane and do not block shortcut corridors
+03:16 +105: /home/user/carwece/work/CarWece_Brasil_Loops/test/themed_track_obstacles_test.dart: Every toy mesh is finite and fits its actual physical proxy
+03:17 +106: /home/user/carwece/work/CarWece_Brasil_Loops/test/themed_track_obstacles_test.dart: The existing race solver physically ejects a car from every new obstacle
+03:17 +107: /home/user/carwece/work/CarWece_Brasil_Loops/test/themed_track_obstacles_test.dart: Obstacle placement and theme order are deterministic
+03:18 +108: loading /home/user/carwece/work/CarWece_Brasil_Loops/test/auth_recovery_test.dart
+03:18 +108: /home/user/carwece/work/CarWece_Brasil_Loops/test/auth_recovery_test.dart: Recover valid backup when accounts.json is absent
+03:18 +109: /home/user/carwece/work/CarWece_Brasil_Loops/test/auth_recovery_test.dart: Recover backup when primary is valid JSON but has invalid structure
+03:18 +110: /home/user/carwece/work/CarWece_Brasil_Loops/test/auth_recovery_test.dart: Saving recovery must not replace good backup with broken primary
+03:18 +111: loading /home/user/carwece/work/CarWece_Brasil_Loops/test/checkpoint_shortcut_regression_test.dart
+03:20 +111: /home/user/carwece/work/CarWece_Brasil_Loops/test/checkpoint_shortcut_regression_test.dart: A car starting on a checkpoint plane advances when it drives forward
+03:20 +112: /home/user/carwece/work/CarWece_Brasil_Loops/test/checkpoint_shortcut_regression_test.dart: A shortcut accepts an already credited overlapping main checkpoint
+03:20 +113: /home/user/carwece/work/CarWece_Brasil_Loops/test/checkpoint_shortcut_regression_test.dart: A legal jump inside the shortcut does not lose its checkpoint sequence
+03:20 +114: /home/user/carwece/work/CarWece_Brasil_Loops/test/checkpoint_shortcut_regression_test.dart: A missed entry plane does not invalidate a correctly driven shortcut
+03:20 +115: /home/user/carwece/work/CarWece_Brasil_Loops/test/checkpoint_shortcut_regression_test.dart: Crossing a checkpoint backwards does not grant progress
+03:20 +116: /home/user/carwece/work/CarWece_Brasil_Loops/test/checkpoint_shortcut_regression_test.dart: Every shortcut rejoins and completes the current lap without an extra lap
+03:36 +117: loading /home/user/carwece/work/CarWece_Brasil_Loops/test/music_test.dart
+03:36 +117: /home/user/carwece/work/CarWece_Brasil_Loops/test/music_test.dart: (setUpAll)
+03:36 +117: /home/user/carwece/work/CarWece_Brasil_Loops/test/music_test.dart: Twenty-five new tracks and platform catalogs agree across three scenes
+03:36 +118: /home/user/carwece/work/CarWece_Brasil_Loops/test/music_test.dart: Existing saves default to shuffle and music preferences retain HUD and progress
+03:36 +119: /home/user/carwece/work/CarWece_Brasil_Loops/test/music_test.dart: Controller accepts native automatic track changes and ignores unknown track requests
+03:36 +120: /home/user/carwece/work/CarWece_Brasil_Loops/test/music_test.dart: Audio transport distinguishes a paused race from the menu and keeps volume independent
+03:36 +121: /home/user/carwece/work/CarWece_Brasil_Loops/test/music_test.dart: Menu entry is explicit and is not repeated by normal audio ticks
+03:36 +122: /home/user/carwece/work/CarWece_Brasil_Loops/test/music_test.dart: Button effects keep the current race or battle playlist
+03:36 +123: /home/user/carwece/work/CarWece_Brasil_Loops/test/music_test.dart: Shuffle control preserves the active battle scene
+03:36 +124: /home/user/carwece/work/CarWece_Brasil_Loops/test/music_test.dart: Pause music selection, skip, volume and close keep physics paused at Size(1280.0, 720.0) (variant: TargetPlatform.android)
+03:42 +125: /home/user/carwece/work/CarWece_Brasil_Loops/test/music_test.dart: Pause music selection, skip, volume and close keep physics paused at Size(800.0, 360.0) (variant: TargetPlatform.android)
+03:44 +126: /home/user/carwece/work/CarWece_Brasil_Loops/test/music_test.dart: (tearDownAll)
+03:44 +126: loading /home/user/carwece/work/CarWece_Brasil_Loops/test/battle_test.dart
+03:45 +126: /home/user/carwece/work/CarWece_Brasil_Loops/test/battle_test.dart: Six open arenas are separate from all 26 race circuits and have nine independent loops
+03:46 +127: /home/user/carwece/work/CarWece_Brasil_Loops/test/battle_test.dart: All 44 adaptations have unique functional identities and positive cooldowns
+03:46 +128: /home/user/carwece/work/CarWece_Brasil_Loops/test/battle_test.dart: Both arena modes start every car unarmed with no automatic fallback
+03:46 +129: /home/user/carwece/work/CarWece_Brasil_Loops/test/battle_test.dart: Every power including the machine gun is obtained from a map pickup and runs out
+03:46 +130: /home/user/carwece/work/CarWece_Brasil_Loops/test/battle_test.dart: Only remaining collected ammo is selected when a weapon is exhausted
+03:46 +131: /home/user/carwece/work/CarWece_Brasil_Loops/test/battle_test.dart: Map loot cycles through all 44 powers with a finite three-weapon inventory
+03:46 +132: /home/user/carwece/work/CarWece_Brasil_Loops/test/battle_test.dart: Unarmed bots seek map supplies and receive ammo only on collecting them
+03:46 +133: /home/user/carwece/work/CarWece_Brasil_Loops/test/battle_test.dart: Player stays still without accelerator and can leave the road freely without checkpoints
+03:46 +134: /home/user/carwece/work/CarWece_Brasil_Loops/test/battle_test.dart: Health is individual, shields block damage, repair restores health and removes statuses
+03:46 +135: /home/user/carwece/work/CarWece_Brasil_Loops/test/battle_test.dart: Swept bullets hit a car before tunnelling and solid cover blocks ordinary shots and lasers
+03:46 +136: /home/user/carwece/work/CarWece_Brasil_Loops/test/battle_test.dart: Rocket, guided missile, disks, salvo and kinetic projectiles all cause visible damage
+03:46 +137: /home/user/carwece/work/CarWece_Brasil_Loops/test/battle_test.dart: Mortars use real ballistic gravity and freezing bombs apply temporary ice
+03:46 +138: /home/user/carwece/work/CarWece_Brasil_Loops/test/battle_test.dart: Magnetic mine attaches then detonates; guided fire is disrupted by jammer or decoy
+03:46 +139: /home/user/carwece/work/CarWece_Brasil_Loops/test/battle_test.dart: All three trap forms arm, consume ammo, detonate or attract and cannot remain forever
+03:46 +140: /home/user/carwece/work/CarWece_Brasil_Loops/test/battle_test.dart: Sonic pulse, ground bass, grid, electrical attacks and orbital swarm have distinct effects
+03:47 +141: /home/user/carwece/work/CarWece_Brasil_Loops/test/battle_test.dart: Toxic smoke affects health and visibility only inside its living volume
+03:47 +142: /home/user/carwece/work/CarWece_Brasil_Loops/test/battle_test.dart: Upgrade doubles standard damage, wheel blades hurt contacts and shield/boost buffs expire
+03:47 +143: /home/user/carwece/work/CarWece_Brasil_Loops/test/battle_test.dart: Both high energy lasers deal damage immediately and generate beam geometry
+03:47 +144: /home/user/carwece/work/CarWece_Brasil_Loops/test/battle_test.dart: Kills are counted once, destroyed cars stop fighting and victory does not use race laps
+03:47 +145: /home/user/carwece/work/CarWece_Brasil_Loops/test/battle_test.dart: Free exploration has passive rebuilding targets, no time limit or reward; pause freezes combat
+03:47 +146: /home/user/carwece/work/CarWece_Brasil_Loops/test/battle_test.dart: Every arena loop releases an inverted stationary car and battle frames fit native budgets
+03:55 +147: /home/user/carwece/work/CarWece_Brasil_Loops/test/battle_test.dart: Navigation finds safe detours through cover and world projectiles use oriented collision bounds
+03:55 +148: loading /home/user/carwece/work/CarWece_Brasil_Loops/test/online_simulation_test.dart
+03:57 +148: /home/user/carwece/work/CarWece_Brasil_Loops/test/online_simulation_test.dart: six online drivers require their own gas and steering, with no AI
+03:57 +149: /home/user/carwece/work/CarWece_Brasil_Loops/test/online_simulation_test.dart: race inventories, missile owner and turbo are independent for every peer
+03:57 +150: /home/user/carwece/work/CarWece_Brasil_Loops/test/online_simulation_test.dart: battle snapshot preserves all 44 weapons, finite ammo and the selected local driver
+03:57 +151: /home/user/carwece/work/CarWece_Brasil_Loops/test/online_simulation_test.dart: race snapshots preserve smoke, explosions, projectiles, wheels and gates
+03:57 +152: /home/user/carwece/work/CarWece_Brasil_Loops/test/online_simulation_test.dart: online finish waits for the room, and client actions cannot create local damage
+03:57 +153: /home/user/carwece/work/CarWece_Brasil_Loops/test/online_simulation_test.dart: public accounts require HTTPS; cleartext is restricted to private LAN addresses
+03:57 +154: /home/user/carwece/work/CarWece_Brasil_Loops/test/online_simulation_test.dart: online slipstream, track pads and enhanced shields work for non-hosts
+03:58 +155: loading /home/user/carwece/work/CarWece_Brasil_Loops/test/hud_editor_test.dart
+03:59 +155: /home/user/carwece/work/CarWece_Brasil_Loops/test/hud_editor_test.dart: (setUpAll)
+03:59 +155: /home/user/carwece/work/CarWece_Brasil_Loops/test/hud_editor_test.dart: HUD customization survives settings serialization and older saves use the defaults
+03:59 +156: /home/user/carwece/work/CarWece_Brasil_Loops/test/hud_editor_test.dart: Invalid saved coordinates cannot lose HUD elements beyond the screen
+03:59 +157: /home/user/carwece/work/CarWece_Brasil_Loops/test/hud_editor_test.dart: Move/resize/save HUD and keep multi-touch and sliding controls at Size(1280.0, 720.0) (variant: TargetPlatform.android)
+04:01 +158: /home/user/carwece/work/CarWece_Brasil_Loops/test/hud_editor_test.dart: Move/resize/save HUD and keep multi-touch and sliding controls at Size(800.0, 360.0) (variant: TargetPlatform.android)
+04:02 +159: /home/user/carwece/work/CarWece_Brasil_Loops/test/hud_editor_test.dart: Reset is a draft until saved and cancelling preserves the previous layout (variant: TargetPlatform.android)
+04:03 +160: /home/user/carwece/work/CarWece_Brasil_Loops/test/hud_editor_test.dart: Failed HUD save keeps the editor open and preserves the stored layout (variant: TargetPlatform.android)
+04:04 +161: /home/user/carwece/work/CarWece_Brasil_Loops/test/hud_editor_test.dart: (tearDownAll)
+04:04 +161: loading /home/user/carwece/work/CarWece_Brasil_Loops/test/surface_contacts_test.dart
+04:05 +161: /home/user/carwece/work/CarWece_Brasil_Loops/test/surface_contacts_test.dart: Outside road rail blocks side -1.0 without pulling car onto deck
+04:05 +162: /home/user/carwece/work/CarWece_Brasil_Loops/test/surface_contacts_test.dart: Outside road rail blocks side 1.0 without pulling car onto deck
+04:05 +163: /home/user/carwece/work/CarWece_Brasil_Loops/test/surface_contacts_test.dart: Inside rail retains a car without letting it cross to the exterior
+04:05 +164: /home/user/carwece/work/CarWece_Brasil_Loops/test/surface_contacts_test.dart: Driving under an elevated bridge never snaps up to the deck
+04:05 +165: /home/user/carwece/work/CarWece_Brasil_Loops/test/surface_contacts_test.dart: A car can land from above and hits the underside from below
+04:05 +166: /home/user/carwece/work/CarWece_Brasil_Loops/test/surface_contacts_test.dart: Ramp sides and back are solid and never grant top contact from outside
+04:05 +167: /home/user/carwece/work/CarWece_Brasil_Loops/test/surface_contacts_test.dart: Ramp entrance climbs continuously, launches at the lip and permits a top landing
+04:05 +168: loading /home/user/carwece/work/CarWece_Brasil_Loops/test/brazil_expansion_test.dart
+04:06 +168: /home/user/carwece/work/CarWece_Brasil_Loops/test/brazil_expansion_test.dart: Append exactly 25 national cars and 25 loop circuits without replacing old IDs
+04:07 +169: /home/user/carwece/work/CarWece_Brasil_Loops/test/brazil_expansion_test.dart: Every added circuit contains a true complete vertical loop and upright return
+04:07 +170: /home/user/carwece/work/CarWece_Brasil_Loops/test/brazil_expansion_test.dart: National cars have unique chassis, finite normals and separate wheel meshes
+04:09 +171: /home/user/carwece/work/CarWece_Brasil_Loops/test/brazil_expansion_test.dart: Every car has one independent performance class and model category
+04:09 +172: /home/user/carwece/work/CarWece_Brasil_Loops/test/brazil_expansion_test.dart: Combined filters never remap master indices or mutate the catalogue
+04:09 +173: /home/user/carwece/work/CarWece_Brasil_Loops/test/brazil_expansion_test.dart: The national roster starts in both race and battle using valid dynamic mesh IDs
+04:09 +174: /home/user/carwece/work/CarWece_Brasil_Loops/test/brazil_expansion_test.dart: Outdoor terrain is never painted with the removed orange floor ribbon
+04:12 +175: loading /home/user/carwece/work/CarWece_Brasil_Loops/test/performance_regression_test.dart
+04:12 +175: /home/user/carwece/work/CarWece_Brasil_Loops/test/performance_regression_test.dart: Cached projection matches the original in all circuits, loops and arena heights
+04:14 +176: /home/user/carwece/work/CarWece_Brasil_Loops/test/performance_regression_test.dart: Worker preparation returns identical world and car bytes without remapping slots
+04:16 +177: /home/user/carwece/work/CarWece_Brasil_Loops/test/performance_regression_test.dart: Automatic quality migrates old graphics settings and preserves explicit new choices
+04:16 +178: loading /home/user/carwece/work/CarWece_Brasil_Loops/test/expansion_v05_test.dart
+04:18 +178: /home/user/carwece/work/CarWece_Brasil_Loops/test/expansion_v05_test.dart: (setUpAll)
+04:18 +178: /home/user/carwece/work/CarWece_Brasil_Loops/test/expansion_v05_test.dart: Thirty-one real-name models have distinct silhouettes and a starter RX7
+04:26 +179: /home/user/carwece/work/CarWece_Brasil_Loops/test/expansion_v05_test.dart: Every room has at least four circuits and matching tire surface grip
+04:26 +180: /home/user/carwece/work/CarWece_Brasil_Loops/test/expansion_v05_test.dart: Steering rack animates at rest without moving the car or rear wheels
+04:26 +181: /home/user/carwece/work/CarWece_Brasil_Loops/test/expansion_v05_test.dart: Tire roll comes from signed traveled speed and stops at rest
+04:26 +182: /home/user/carwece/work/CarWece_Brasil_Loops/test/expansion_v05_test.dart: Separate wheel transforms retain axle center, spin and front steer
+04:26 +183: /home/user/carwece/work/CarWece_Brasil_Loops/test/expansion_v05_test.dart: Drift requires its own button and releases rear grip without braking gas
+04:26 +184: /home/user/carwece/work/CarWece_Brasil_Loops/test/expansion_v05_test.dart: Wheel meshes have correct normals and readable material diversity
+04:27 +185: /home/user/carwece/work/CarWece_Brasil_Loops/test/expansion_v05_test.dart: Legacy car purchases and selected index migrate without losing currency
+04:27 +186: /home/user/carwece/work/CarWece_Brasil_Loops/test/expansion_v05_test.dart: Room filters and slide-to-drift controls fit Size(1280.0, 720.0) (variant: TargetPlatform.linux)
+04:29 +187: /home/user/carwece/work/CarWece_Brasil_Loops/test/expansion_v05_test.dart: Room filters and slide-to-drift controls fit Size(800.0, 360.0) (variant: TargetPlatform.linux)
+04:30 +188: /home/user/carwece/work/CarWece_Brasil_Loops/test/expansion_v05_test.dart: (tearDownAll)
+04:30 +188: loading /home/user/carwece/work/CarWece_Brasil_Loops/test/free_drive_test.dart
+04:31 +188: /home/user/carwece/work/CarWece_Brasil_Loops/test/free_drive_test.dart: Neutral steering preserves the world heading instead of following a curve
+04:31 +189: /home/user/carwece/work/CarWece_Brasil_Loops/test/free_drive_test.dart: Left and right turn the body and its actual world trajectory in opposite directions
+04:31 +190: /home/user/carwece/work/CarWece_Brasil_Loops/test/free_drive_test.dart: Floor driving stays free outside the circuit corridor and never recenters the car
+04:31 +191: /home/user/carwece/work/CarWece_Brasil_Loops/test/free_drive_test.dart: Holding the accelerator alone cannot complete a lap
+04:33 +192: /home/user/carwece/work/CarWece_Brasil_Loops/test/free_drive_test.dart: Crossing the finish line after skipping gates never awards a lap
+04:33 +193: /home/user/carwece/work/CarWece_Brasil_Loops/test/free_drive_test.dart: Solid room props stop the front bumper and produce an impact
+04:33 +194: /home/user/carwece/work/CarWece_Brasil_Loops/test/free_drive_test.dart: All road edges stay above the floor and no roll leaks past the loop
+04:33 +195: /home/user/carwece/work/CarWece_Brasil_Loops/test/free_drive_test.dart: Braking at low speed engages reverse so the player can leave a wall
+04:33 +196: /home/user/carwece/work/CarWece_Brasil_Loops/test/free_drive_test.dart: Recovery returns to the last validated gate without completing skipped sectors
+04:33 +197: /home/user/carwece/work/CarWece_Brasil_Loops/test/free_drive_test.dart: A turn requires braking at speed: the bicycle model has a finite turning radius
+04:33 +198: /home/user/carwece/work/CarWece_Brasil_Loops/test/free_drive_test.dart: The ramp raises the body, launches it and lands it back on the real floor
+04:33 +199: /home/user/carwece/work/CarWece_Brasil_Loops/test/free_drive_test.dart: Cars waiting behind the start cannot appear one lap ahead when the race begins
+04:33 +200: /home/user/carwece/work/CarWece_Brasil_Loops/test/free_drive_test.dart: The chase camera follows the actual body heading on free floor
+04:33 +201: /home/user/carwece/work/CarWece_Brasil_Loops/test/free_drive_test.dart: Longer layouts keep independent records while preserving old saved times
+04:33 +202: loading /home/user/carwece/work/CarWece_Brasil_Loops/test/loading_start_test.dart
+04:33 +202: /home/user/carwece/work/CarWece_Brasil_Loops/test/loading_start_test.dart: The entire countdown waits for the first native 3D frame (variant: TargetPlatform.android)
+04:38 +203: loading /home/user/carwece/work/CarWece_Brasil_Loops/test/weapon_visuals_test.dart
+04:38 +203: /home/user/carwece/work/CarWece_Brasil_Loops/test/weapon_visuals_test.dart: Every collectible has a distinct finite metal attachment within the native budget
+04:38 +204: /home/user/carwece/work/CarWece_Brasil_Loops/test/weapon_visuals_test.dart: Only collected weapons are mounted and every selected item uses its own model
+04:39 +205: /home/user/carwece/work/CarWece_Brasil_Loops/test/weapon_visuals_test.dart: Turret follows a moving target between shots and the muzzle matches projectile direction
+04:39 +206: /home/user/carwece/work/CarWece_Brasil_Loops/test/weapon_visuals_test.dart: Manual target behind the car rotates the mount while the chassis stays manual
+04:39 +207: loading /home/user/carwece/work/CarWece_Brasil_Loops/test/battle_target_test.dart
+04:39 +207: /home/user/carwece/work/CarWece_Brasil_Loops/test/battle_target_test.dart: Mira alterna entre rivais válidos e não seleciona morto, bloqueado ou distante
+04:39 +208: /home/user/carwece/work/CarWece_Brasil_Loops/test/battle_target_test.dart: A mira verde acompanha o alvo que a arma usa, sem alterar munição
+04:39 +209: loading /home/user/carwece/work/CarWece_Brasil_Loops/test/engine_test.dart
+04:41 +209: /home/user/carwece/work/CarWece_Brasil_Loops/test/engine_test.dart: All twelve circuits have finite, continuous, orthonormal frames
+04:41 +210: /home/user/carwece/work/CarWece_Brasil_Loops/test/engine_test.dart: Countdown holds cars, then automatic acceleration moves the player
+04:41 +211: /home/user/carwece/work/CarWece_Brasil_Loops/test/engine_test.dart: Physics gives the same result at 30, 60 and 120 FPS
+04:44 +212: /home/user/carwece/work/CarWece_Brasil_Loops/test/engine_test.dart: Pausing freezes the clock and clears held controls
+04:44 +213: /home/user/carwece/work/CarWece_Brasil_Loops/test/engine_test.dart: Manual acceleration, braking, walls, nitro and drift affect driving
+04:44 +214: /home/user/carwece/work/CarWece_Brasil_Loops/test/engine_test.dart: Items are collected once per pickup per lap
+04:44 +215: /home/user/carwece/work/CarWece_Brasil_Loops/test/engine_test.dart: All four items have functional effects and consume inventory
+04:44 +216: /home/user/carwece/work/CarWece_Brasil_Loops/test/engine_test.dart: Time trial excludes bots and weapons
+04:44 +217: /home/user/carwece/work/CarWece_Brasil_Loops/test/engine_test.dart: Finishing records exactly three laps and a finite reward
+04:45 +218: /home/user/carwece/work/CarWece_Brasil_Loops/test/engine_test.dart: A bot that finished earlier still ranks ahead at the finish line
+04:45 +219: /home/user/carwece/work/CarWece_Brasil_Loops/test/engine_test.dart: Visible boost pads provide an actual velocity impulse
+04:45 +220: /home/user/carwece/work/CarWece_Brasil_Loops/test/engine_test.dart: Settings restore clamps invalid input; records and car purchases persist in the store model
+04:45 +221: /home/user/carwece/work/CarWece_Brasil_Loops/test/engine_test.dart: Hitch cap prevents a paused app from fast-forwarding physics
+04:45 +222: /home/user/carwece/work/CarWece_Brasil_Loops/test/engine_test.dart: Time formatting and vector rotation preserve useful invariants
+04:45 +223: loading /home/user/carwece/work/CarWece_Brasil_Loops/test/world_expansion_test.dart
+04:47 +223: /home/user/carwece/work/CarWece_Brasil_Loops/test/world_expansion_test.dart: Append-only catalogues add exactly 25 cars, 25 circuits and 5 arenas
+04:47 +224: /home/user/carwece/work/CarWece_Brasil_Loops/test/world_expansion_test.dart: 25 new sculpted cars have distinct finite chassis and independent wheels
+04:57 +225: /home/user/carwece/work/CarWece_Brasil_Loops/test/world_expansion_test.dart: All new tracks have genuine clear shorter branches with ordered checkpoints
+04:57 +226: /home/user/carwece/work/CarWece_Brasil_Loops/test/world_expansion_test.dart: Prehistoric racing and battle contain all three physical toy species
+04:59 +227: /home/user/carwece/work/CarWece_Brasil_Loops/test/world_expansion_test.dart: New battle floors have clear safe spawns, pickups, routes and independent loops
+04:59 +228: /home/user/carwece/work/CarWece_Brasil_Loops/test/world_expansion_test.dart: Every new biome produces finite world data within the existing vertex layout
+05:00 +229: /home/user/carwece/work/CarWece_Brasil_Loops/test/world_expansion_test.dart: Every new car starts in racing and combat with finite physical and GPU state
+05:01 +230: /home/user/carwece/work/CarWece_Brasil_Loops/test/world_expansion_test.dart: Grip is biome-specific without changing existing room surfaces
+05:01 +231: loading /home/user/carwece/work/CarWece_Brasil_Loops/test/battle_ui_test.dart
+05:01 +231: /home/user/carwece/work/CarWece_Brasil_Loops/test/battle_ui_test.dart: (setUpAll)
+05:01 +231: /home/user/carwece/work/CarWece_Brasil_Loops/test/battle_ui_test.dart: Battle rewards and history persist separately from race medals and records
+05:02 +232: /home/user/carwece/work/CarWece_Brasil_Loops/test/battle_ui_test.dart: Battle difficulty can be chosen before launch at Size(1280.0, 720.0) (variant: TargetPlatform.android)
+05:04 +233: /home/user/carwece/work/CarWece_Brasil_Loops/test/battle_ui_test.dart: Battle difficulty can be chosen before launch at Size(800.0, 360.0) (variant: TargetPlatform.android)
+05:06 +234: /home/user/carwece/work/CarWece_Brasil_Loops/test/battle_ui_test.dart: Home to arenas, free exploration, multitouch firing, arsenal and HUD remain usable at Size(1280.0, 720.0) (variant: TargetPlatform.android)
+05:10 +235: /home/user/carwece/work/CarWece_Brasil_Loops/test/battle_ui_test.dart: Home to arenas, free exploration, multitouch firing, arsenal and HUD remain usable at Size(800.0, 360.0) (variant: TargetPlatform.android)
+05:13 +236: /home/user/carwece/work/CarWece_Brasil_Loops/test/battle_ui_test.dart: (tearDownAll)
+05:13 +236: loading /home/user/carwece/work/CarWece_Brasil_Loops/test/garage_filters_test.dart
+05:13 +236: /home/user/carwece/work/CarWece_Brasil_Loops/test/garage_filters_test.dart: (setUpAll)
+05:13 +236: /home/user/carwece/work/CarWece_Brasil_Loops/test/garage_filters_test.dart: Garage combines filters, buys Fusca and preserves master index at Size(1280.0, 720.0) (variant: TargetPlatform.linux)
+05:17 +237: /home/user/carwece/work/CarWece_Brasil_Loops/test/garage_filters_test.dart: Garage combines filters, buys Fusca and preserves master index at Size(800.0, 360.0) (variant: TargetPlatform.linux)
+05:18 +238: /home/user/carwece/work/CarWece_Brasil_Loops/test/garage_filters_test.dart: (tearDownAll)
+05:18 +238: loading /home/user/carwece/work/CarWece_Brasil_Loops/test/battle_graphics_channel_test.dart
+05:19 +238: /home/user/carwece/work/CarWece_Brasil_Loops/test/battle_graphics_channel_test.dart: Battle GPU uploads all 44 weapon models, life bars and active projectile (variant: TargetPlatform.android)
+05:21 +239: loading /home/user/carwece/work/CarWece_Brasil_Loops/test/difficulty_v08_test.dart
+05:22 +239: /home/user/carwece/work/CarWece_Brasil_Loops/test/difficulty_v08_test.dart: Normal and hard select a competitive car class and keep the player unchanged
+05:22 +240: /home/user/carwece/work/CarWece_Brasil_Loops/test/difficulty_v08_test.dart: Rival turbo uses finite energy and actual motion, with no boost on easy
+05:22 +241: /home/user/carwece/work/CarWece_Brasil_Loops/test/difficulty_v08_test.dart: Difficulty never reduces the player acceleration, steering or wheel dynamics
+05:22 +242: loading /home/user/carwece/work/CarWece_Brasil_Loops/test/expansion_v09_test.dart
+05:24 +242: /home/user/carwece/work/CarWece_Brasil_Loops/test/expansion_v09_test.dart: Eight new circuits have twelve independent full loops and no residual roll
+05:24 +243: /home/user/carwece/work/CarWece_Brasil_Loops/test/expansion_v09_test.dart: Reset in a second loop returns before that loop without skipping gates
+05:24 +244: /home/user/carwece/work/CarWece_Brasil_Loops/test/expansion_v09_test.dart: Grenades are visible ballistic objects, bounce and explode on their fuse
+05:24 +245: /home/user/carwece/work/CarWece_Brasil_Loops/test/expansion_v09_test.dart: Grenade splash hits nearby rivals and a shield absorbs the same hit
+05:24 +246: /home/user/carwece/work/CarWece_Brasil_Loops/test/expansion_v09_test.dart: Shockwave pushes nearby rivals, respects shields and does not hit distant cars
+05:24 +247: /home/user/carwece/work/CarWece_Brasil_Loops/test/expansion_v09_test.dart: Spikes puncture locally and repair removes damage and temporary faults
+05:24 +248: /home/user/carwece/work/CarWece_Brasil_Loops/test/expansion_v09_test.dart: Punctured tires lose grip while shields and height avoid spike damage
+05:24 +249: /home/user/carwece/work/CarWece_Brasil_Loops/test/expansion_v09_test.dart: Current race and garage upload only their models with stable mesh indices
+05:33 +250: /home/user/carwece/work/CarWece_Brasil_Loops/test/expansion_v09_test.dart: Quick race and first championship stage always start last; solo starts alone
+05:33 +251: /home/user/carwece/work/CarWece_Brasil_Loops/test/expansion_v09_test.dart: Championship stages use the complete previous finish order, not cup points
+05:33 +252: /home/user/carwece/work/CarWece_Brasil_Loops/test/expansion_v09_test.dart: Expanded normal roster recovers from oscillation and completes chicanes
+05:37 +253: All tests passed!

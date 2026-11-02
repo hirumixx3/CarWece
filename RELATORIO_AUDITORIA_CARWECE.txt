@@ -1,0 +1,202 @@
+CARWECE — RELATÓRIO DE AUDITORIA E CORREÇÕES
+Data: 02/11/2026
+Base recebida: CarWece_Brasil_25_Carros_25_Pistas_Loops.zip
+Versão do código: 1.2.0+3. Pacote Android: com.hirumisu.carwece.
+
+1. ESCOPO E CONCLUSÃO
+
+O arquivo recebido contém 1.233 entradas. O núcleo tem 56 arquivos Dart e
+aproximadamente 29,8 mil linhas Dart. A revisão combinou inspeção de arquitetura,
+análise estática, auditoria de referências/arquivos, testes Flutter, compilação
+Android real, testes Kotlin e simulações adicionais. Dependências vendorizadas
+foram preservadas; não foram reescritas nem promovidas automaticamente de versão.
+
+Foram corrigidos defeitos reproduzidos e lacunas de preparação de testes/build.
+Não é tecnicamente correto afirmar entendimento perfeito ou ausência de TODOS
+os bugs: hardware, redes reais e cenários não exercitados continuam sujeitos a QA.
+Esta entrega é uma revisão validada, não uma certificação de 100% de cobertura.
+
+2. COMO O JOGO FUNCIONA
+
+Fluxo principal:
+  main.dart inicializa Flutter, orientação horizontal e interface imersiva.
+  CarWeceApp apresenta a introdução; RushShell coordena menu, garagem, seleção
+  de pistas, configurações, corrida rápida, campeonato, contrarrelógio e online.
+  platform.dart mantém configurações, moedas, garagem, medalhas, recordes,
+  progressão e a comunicação nativa de persistência/áudio.
+
+Conteúdo:
+  game/content.dart é a biblioteca raiz dos carros, pistas e arenas. Os arquivos
+  circuits, loop_circuits, race_course, world_expansion, brazil_content e
+  loop_expansion_brazil são partes da mesma biblioteca, não cópias concorrentes.
+  O catálogo contém 81 carros, 76 pistas e 11 arenas. As expansões acrescentam
+  conteúdo sem deslocar os índices antigos. IDs e índices são usados também
+  pelos salvamentos, pelos pacotes gráficos e pelas partidas online.
+
+Simulação:
+  game/engine.dart integra a física a 120 Hz, com acumulador de tempo, controles,
+  pilotos/bots, colisões, checkpoints, voltas e classificação.
+  surface_contacts.dart trata contato com pista, rampas e superfícies elevadas.
+  combat.dart implementa projéteis, minas, óleo, fumaça e outros itens de corrida.
+  battle_engine.dart/battle_content.dart implementam arenas, vida, armas, alvo,
+  eliminações, colocação e recompensas de batalha. O modo livre não paga prêmio.
+  A progressão usa medalhas/estrelas e moedas; recompensas de pódio são
+  1.000/500/250 moedas para primeiro/segundo/terceiro.
+
+Renderização:
+  gpu_mesh.dart e suas partes constroem malhas; gpu_frame.dart monta instâncias,
+  transformações e câmera. gpu_view.dart envia dados por MethodChannel.
+  MainActivity.kt e RushGLRenderer.kt fazem a ponte com OpenGL ES 3 no Android.
+  GraphicsContract.kt valida tamanhos, índices e valores finitos antes do EGL.
+  O contrato atual aceita até 512 malhas e 128 instâncias por quadro.
+  Há também renderização de compatibilidade em Dart para plataformas não Android.
+  Falhas de inicialização 3D no Android exibem erro com opção de tentar novamente.
+
+Áudio e introdução:
+  music.dart controla o estado apresentado pela interface. MusicDirector.kt e
+  RushMusic.kt coordenam seleção, pausa, embaralhamento, foco e MediaPlayer.
+  RushSynth.kt gera efeitos; RushIntro.kt/IntroDirector.kt coordenam o vídeo.
+  Existem 25 músicas: 5 de menu, 15 de corrida e 5 de batalha.
+
+Online:
+  online/client.dart gerencia login, convites, WebSocket, comandos e interpolação.
+  host/server.dart executa a simulação autoritativa; o cliente envia controles,
+  não posições confiáveis. network_simulation.dart aplica os mesmos controles
+  na simulação a 120 Hz. As salas suportam de 2 a 6 jogadores.
+  phone_host.dart hospeda a sessão em um isolate. bore_tunnel.dart e
+  pinggy_tunnel.dart oferecem transportes de retransmissão. Convites fixam a
+  identidade TLS; convidados e contas persistentes têm fluxos separados.
+  host/auth.dart usa PBKDF2-HMAC-SHA256 para contas e grava snapshots serializados.
+  protocol.dart exige correspondência de protocolo e versão de conteúdo.
+
+3. CORREÇÕES APLICADAS E EVIDÊNCIA
+
+A) lib/platform.dart — persistência e ciclo de vida
+  • Um campo de tipo incorreto antes interrompia o restante da restauração e
+    impedia recuperar garagem e recordes válidos. As seções opcionais agora
+    são recuperadas separadamente; listas/mapas e números são verificados.
+  • Contadores negativos são limitados a zero; medalhas são limitadas a 0..3;
+    recordes inválidos, não finitos e não positivos não são aceitos.
+  • NaN/infinito nas configurações agora usam o valor padrão, em vez de virar
+    o máximo/mínimo do controle ou outro valor inadequado.
+  • Salvar durante a leitura inicial antes capturava valores vazios. Agora a
+    gravação aguarda a carga antes de gerar o payload.
+  • Chamadas simultâneas de load compartilham uma única operação.
+  • Conclusões assíncronas após dispose não notificam um ChangeNotifier morto.
+  Cinco novos testes reproduziram falhas na base e passaram após as correções.
+
+B) lib/online/host/auth.dart — recuperação de contas
+  • O backup era ignorado quando accounts.json não existia.
+  • JSON sintaticamente válido, mas com estrutura inválida, não acionava backup.
+  • Salvar após recuperar podia copiar o arquivo principal quebrado sobre o
+    backup válido. A primeira gravação recuperada agora preserva esse backup.
+  • A restauração valida um snapshot inteiro em mapas temporários antes de
+    substituir o estado ativo; evita recuperação parcial seguida de exceção.
+  Três novos testes reproduziram os problemas na base e passaram após corrigir.
+
+C) Android/testes — integração real Dart/Kotlin
+  • android.enableJetifier foi desativado: as dependências atuais usam AndroidX.
+    A transformação desnecessária dos grandes jars do Flutter provocou falta
+    de heap no build de validação; o build final passou sem essa transformação.
+  • test/graphics_channel_test.dart agora exporta as malhas dos carros ativos
+    com todos os slots/índices estáveis, como a produção, em vez de materializar
+    os 81 carros completos. O pacote real caiu de cerca de 282 MiB para 41 MiB.
+    O pacote anterior esgotava o heap padrão dos testes Kotlin.
+  • android/app/build.gradle.kts agora gera automaticamente os dois pacotes
+    gráficos exigidos pelos testes Kotlin. A execução isolada antes falhava
+    por ausência de fixtures; a tarefa é incremental e executa Flutter em série.
+  • Mantidos os testes de tipos, índices, geometria, materiais e transformações:
+    não foram desabilitadas asserções para obter aprovação.
+
+D) Versão, CI e verificação
+  • Padrões dos workflows APK/AAB e do construtor de bundles alinhados a 1.2.0.
+  • Primeiro código sugerido de AAB ajustado de 1 para 7, como já orientava o
+    próprio workflow. O valor real deve superar o último publicado na sua conta.
+    Não há acesso à sua Play Console para determinar esse último código.
+  • Workflow de APK passou a exigir análise, testes Flutter e Kotlin antes do
+    release; o de AAB também executa os testes Kotlin e prepara explicitamente SDK.
+  • As suítes Flutter de CI foram serializadas para reduzir picos de memória.
+  • verify_apk.py lê os padrões de versão diretamente do pubspec.yaml, evitando
+    recusar um APK correto por esperar os valores antigos 1.0.0/1.
+  • README atualizado para diferenciar estado atual, evidência e guias históricos.
+
+4. RESULTADOS FINAIS
+
+  Flutter 3.35.7 / Dart 3.9.2: mesmas versões fixadas no projeto.
+  Análise estática: sem problemas detectados.
+  Base antes das mudanças: 245 testes Flutter aprovados.
+  Após as mudanças: 253 testes Flutter aprovados, nenhum falhou.
+  Kotlin/JUnit: 65 testes aprovados, nenhum falhou.
+  Android: assembleDebug aprovado com JDK 17; APK de depuração real gerado.
+  APK: assinatura de debug v2 verificada; zipalign -P 16 aprovado.
+  Músicas no APK: 25/25 com hashes e categorias corretos e sem compressão ZIP.
+  Simulação adicional: 75/75 voltas concluídas — 25 novas pistas com RX7,
+    25 combinações de carros nacionais nas novas pistas e os 25 carros nacionais
+    na pista original. Não é teste exaustivo das 81 x 76 combinações.
+  Integração local: seis jogadores, corrida e batalha, WebSocket e TLS fixado;
+    certificado/convite incorretos rejeitados, sétimo jogador rejeitado,
+    mira sincronizada e encerramento de host propagado aos clientes.
+
+5. ARQUIVOS, CONFLITOS E PRESERVAÇÃO
+
+A auditoria de estrutura não encontrou entradas duplicadas no ZIP original,
+colisões de caminhos por maiúsculas/minúsculas, marcadores de merge no código,
+referências Dart relativas ausentes ou assets declarados inexistentes.
+Python, shell, XML e YAML inspecionados passaram nas verificações de sintaxe.
+Todos os 35 arquivos de assets foram preservados byte a byte por SHA-256.
+Catálogos, pistas, modelos, shaders, fontes, vídeo e músicas não foram redesenhados.
+
+Os numerosos NOVIDADES, CORRECOES, diffs e verificações antigos são históricos,
+não módulos automaticamente carregados pelo jogo. Foram mantidos para não
+apagar evidências/contexto. Não devem ser reaplicados sobre esta revisão.
+A lista exata de alterações e um patch estão na pasta da auditoria.
+O ZIP final exclui SDKs, caches, build, local.properties, fixtures com chave TLS
+temporária e APKs. O certificado público de publicação original foi preservado.
+Nenhuma chave privada de publicação foi criada, trocada ou incluída na entrega.
+
+6. COMO REPRODUZIR
+
+Na raiz, com Flutter 3.35.7 e Android SDK configurados:
+  flutter pub get
+  flutter analyze
+  flutter test --concurrency=1
+  cd android
+  ./gradlew testDebugUnitTest
+  cd ..
+  flutter build apk --debug
+
+A tarefa Gradle gera suas fixtures reais automaticamente. A primeira execução
+precisa de rede para baixar SDKs/dependências não disponíveis localmente.
+No ambiente de validação (cerca de 2 GiB RAM) o Gradle precisou de um worker e
+heap menor; os limites gerais do projeto não foram reduzidos para todas as máquinas.
+Se necessário, use parâmetros de memória/workers na sua invocação local e
+kotlin.compiler.execution.strategy=in-process para evitar um segundo daemon.
+
+Para APK/AAB de produção, configure sua chave e os quatro Secrets descritos no
+guia existente. Use sempre a mesma identidade de assinatura da publicação anterior.
+Releases dos workflows usam os valores informados no formulário, não o build 3
+padrão do pubspec. Não foi publicado nada no GitHub ou na Play Store.
+
+7. LIMITAÇÕES E PRÓXIMA VALIDAÇÃO
+
+O APK foi compilado, mas não instalado/dirigido em um celular ou emulador Android.
+Não foram validados dois celulares no Wi-Fi real, descoberta da interface Wi-Fi,
+SNI/DNS e relays públicos reais, redes móveis, suspensão de longo prazo ou GPUs
+específicas de fabricantes. O teste LAN usou TCP/TLS/WebSocket reais em loopback
+com endereço privado injetado: isso não é teste de dois aparelhos físicos.
+Não foi executado workflow remoto GitHub, release com chave de produção, AAB
+assinado ou processo de publicação/atualização da Play Store.
+O alinhamento ZIP de debug não certifica sozinho todos os requisitos de release
+para páginas de memória de 16 KiB; os verificadores de release permanecem no CI.
+Dependências fixadas têm versões mais novas disponíveis. Não foram atualizadas
+sem necessidade porque isso exige uma rodada separada de compatibilidade.
+Avisos de depreciação no toolchain/nas APIs Android não impedem o build atual;
+Gradle 9 não foi adotado ou validado nesta revisão.
+
+Antes de publicar, valide em um celular: preservar progresso de instalação anterior,
+comprar/selecionar carro, pausar/retomar, música/intro, corrida com loop, campeonato,
+batalha, criar/entrar em sala e encerrar o host. Depois execute o release assinado.
+
+EVIDÊNCIAS
+verification/auditoria_2026_11_02/ contém logs antes/depois, inventário, hashes,
+resumo JUnit, 75 resultados de simulação, teste de rede local e patch das mudanças.

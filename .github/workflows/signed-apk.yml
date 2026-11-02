@@ -6,7 +6,7 @@ on:
       version_name:
         description: Versão exibida
         required: true
-        default: '1.0.0'
+        default: '1.2.0'
         type: string
       version_code:
         description: Código de versão (maior que o último já publicado)
@@ -105,6 +105,12 @@ jobs:
 
       - name: Baixar dependências Flutter
         run: flutter pub get
+
+      - name: Verificar código e regressões antes do release
+        run: |
+          flutter analyze
+          flutter test --concurrency=1
+          (cd android && ./gradlew testDebugUnitTest --no-daemon)
 
       - name: Compilar APK release
         shell: bash

@@ -6,12 +6,12 @@ on:
       version_name:
         description: Versão exibida
         required: true
-        default: '1.0.0'
+        default: '1.2.0'
         type: string
       first_version_code:
         description: Primeiro versionCode (use 7 ou maior após publicar os códigos 1 a 6)
         required: true
-        default: '1'
+        default: '7'
         type: string
       bundle_count:
         description: Quantidade de AABs (1 a 6)
@@ -44,6 +44,10 @@ jobs:
           flutter-version: '3.35.7'
           channel: stable
           cache: true
+      - name: Configurar Android SDK
+        uses: android-actions/setup-android@v4
+        with:
+          packages: 'platform-tools'
       - name: Preparar SDK Android
         shell: bash
         run: |
@@ -58,7 +62,8 @@ jobs:
         run: |
           flutter pub get
           flutter analyze
-          flutter test
+          flutter test --concurrency=1
+          (cd android && ./gradlew testDebugUnitTest --no-daemon)
       - name: Gerar bundles
         env:
           VERSION_NAME: ${{ inputs.version_name }}
