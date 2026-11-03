@@ -1,0 +1,48 @@
+00:00 +0: loading /home/user/CarWece_shortcut_fix/test/shortcut_gate_exit_test.dart
+00:00 +0: /home/user/CarWece_shortcut_fix/test/shortcut_gate_exit_test.dart: Every existing shortcut arms at the physical gate without the old entrance portal
+00:00 +1: /home/user/CarWece_shortcut_fix/test/shortcut_gate_exit_test.dart: Every existing shortcut finishes exactly when the end is crossed, without intermediate portals
+00:00 +2: /home/user/CarWece_shortcut_fix/test/shortcut_gate_exit_test.dart: Passing only the last few metres before the exit does not complete early
+00:00 +3: /home/user/CarWece_shortcut_fix/test/shortcut_gate_exit_test.dart: The merge accepts a wide legitimate line beyond the narrow branch width
+00:00 +4: /home/user/CarWece_shortcut_fix/test/shortcut_gate_exit_test.dart: A jump over an old intermediate portal cannot leave the branch unfinished
+00:00 +5: /home/user/CarWece_shortcut_fix/test/shortcut_gate_exit_test.dart: Crossing the exit without a proven gate cannot credit skipped checkpoints
+00:00 +6: /home/user/CarWece_shortcut_fix/test/shortcut_gate_exit_test.dart: Crossing the gate backwards does not arm the branch
+00:00 +7: /home/user/CarWece_shortcut_fix/test/shortcut_gate_exit_test.dart: Returning backwards through the gate revokes the attempt
+00:00 +8: /home/user/CarWece_shortcut_fix/test/shortcut_gate_exit_test.dart: A gate in an unrelated sector cannot skip the earlier main checkpoints
+00:00 +9: /home/user/CarWece_shortcut_fix/test/shortcut_gate_exit_test.dart: Leaving the branch corridor invalidates gate proof before rejoining
+00:00 +10: /home/user/CarWece_shortcut_fix/test/shortcut_gate_exit_test.dart: The physical closed gate still blocks an ordinary grounded car
+00:00 +11: /home/user/CarWece_shortcut_fix/test/shortcut_gate_exit_test.dart: Completing a shortcut advances standings immediately, not only the marker
+00:00 +12: /home/user/CarWece_shortcut_fix/test/shortcut_gate_exit_test.dart: The host validates every online driver and snapshots retain gate proof and completion
+00:00 +13: loading /home/user/CarWece_shortcut_fix/test/checkpoint_shortcut_regression_test.dart
+00:01 +13: /home/user/CarWece_shortcut_fix/test/checkpoint_shortcut_regression_test.dart: A car starting on a checkpoint plane advances when it drives forward
+00:01 +14: /home/user/CarWece_shortcut_fix/test/checkpoint_shortcut_regression_test.dart: A shortcut accepts an already credited overlapping main checkpoint
+00:01 +15: /home/user/CarWece_shortcut_fix/test/checkpoint_shortcut_regression_test.dart: A legal jump inside the shortcut does not lose its checkpoint sequence
+00:02 +16: /home/user/CarWece_shortcut_fix/test/checkpoint_shortcut_regression_test.dart: A missed entry plane does not invalidate a correctly driven shortcut
+00:02 +17: /home/user/CarWece_shortcut_fix/test/checkpoint_shortcut_regression_test.dart: Crossing a checkpoint backwards does not grant progress
+00:02 +18: /home/user/CarWece_shortcut_fix/test/checkpoint_shortcut_regression_test.dart: Every shortcut rejoins and completes the current lap without an extra lap
+00:15 +19: loading /home/user/CarWece_shortcut_fix/test/expansion_v07_test.dart
+00:17 +19: /home/user/CarWece_shortcut_fix/test/expansion_v07_test.dart: (setUpAll)
+00:17 +19: /home/user/CarWece_shortcut_fix/test/expansion_v07_test.dart: Faster rivals leave a common line and physically overtake a slower leader
+00:17 +20: /home/user/CarWece_shortcut_fix/test/expansion_v07_test.dart: Object boundary stops sustained outward steering with a matching rotated collider
+00:17 +21: /home/user/CarWece_shortcut_fix/test/expansion_v07_test.dart: Missile destroys an actual blocking gate; ice and ramming leave it solid
+00:17 +22: /home/user/CarWece_shortcut_fix/test/expansion_v07_test.dart: All alternate routes validate their portals and rejoin the right main checkpoint
+00:21 +23: /home/user/CarWece_shortcut_fix/test/expansion_v07_test.dart: Entering each closed shortcut, shooting inside and rejoining counts without returning to its entrance
+00:24 +24: /home/user/CarWece_shortcut_fix/test/expansion_v07_test.dart: Jumping directly to an open shortcut exit never awards the skipped checkpoints
+00:24 +25: /home/user/CarWece_shortcut_fix/test/expansion_v07_test.dart: Full power shuffle bag covers every type and avoids immediate repeats across refills
+00:24 +26: /home/user/CarWece_shortcut_fix/test/expansion_v07_test.dart: Three rocket charges fire separately and supercharge requires the full power bar
+00:24 +27: /home/user/CarWece_shortcut_fix/test/expansion_v07_test.dart: EMP clears nearby ordnance and blocks weapons temporarily
+00:24 +28: /home/user/CarWece_shortcut_fix/test/expansion_v07_test.dart: Ice shot freezes its target, renders a shell and thaws without clearing held controls
+00:24 +29: /home/user/CarWece_shortcut_fix/test/expansion_v07_test.dart: Tesla has a visible beam and temporary motor failure; shield intercepts it
+00:24 +30: /home/user/CarWece_shortcut_fix/test/expansion_v07_test.dart: Armed mines detonate visibly, and smoke only blinds cars inside its cloud
+00:24 +31: /home/user/CarWece_shortcut_fix/test/expansion_v07_test.dart: Trackside props and barriers add detail without blocking alternate routes
+00:24 +32: /home/user/CarWece_shortcut_fix/test/expansion_v07_test.dart: Power charging HUD keeps the pedal and steering independent at Size(1280.0, 720.0) (variant: TargetPlatform.linux)
+00:25 +33: /home/user/CarWece_shortcut_fix/test/expansion_v07_test.dart: Power charging HUD keeps the pedal and steering independent at Size(800.0, 360.0) (variant: TargetPlatform.linux)
+00:25 +34: /home/user/CarWece_shortcut_fix/test/expansion_v07_test.dart: (tearDownAll)
+00:25 +34: loading /home/user/CarWece_shortcut_fix/test/online_simulation_test.dart
+00:28 +34: /home/user/CarWece_shortcut_fix/test/online_simulation_test.dart: six online drivers require their own gas and steering, with no AI
+00:28 +35: /home/user/CarWece_shortcut_fix/test/online_simulation_test.dart: race inventories, missile owner and turbo are independent for every peer
+00:28 +36: /home/user/CarWece_shortcut_fix/test/online_simulation_test.dart: battle snapshot preserves all 44 weapons, finite ammo and the selected local driver
+00:28 +37: /home/user/CarWece_shortcut_fix/test/online_simulation_test.dart: race snapshots preserve smoke, explosions, projectiles, wheels and gates
+00:28 +38: /home/user/CarWece_shortcut_fix/test/online_simulation_test.dart: online finish waits for the room, and client actions cannot create local damage
+00:28 +39: /home/user/CarWece_shortcut_fix/test/online_simulation_test.dart: public accounts require HTTPS; cleartext is restricted to private LAN addresses
+00:28 +40: /home/user/CarWece_shortcut_fix/test/online_simulation_test.dart: online slipstream, track pads and enhanced shields work for non-hosts
+00:28 +41: All tests passed!

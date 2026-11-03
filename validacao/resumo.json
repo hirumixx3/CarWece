@@ -1,0 +1,21 @@
+{
+  "repositorio": "hirumixx3/CarWece",
+  "branch": "main",
+  "commit_base": "182a2d2d1198c62ed2fc1c3f5417ecb57388d360",
+  "publicado_no_github": false,
+  "arquivos_producao": [
+    "lib/game/engine.dart",
+    "lib/game/race_course.dart",
+    "lib/online/protocol.dart"
+  ],
+  "testes_novos": 13,
+  "testes_aprovados": 269,
+  "regressao_direcionada": 41,
+  "patch_verificado_em_base_limpa": true,
+  "sha256_arquivos": {
+    "lib/game/engine.dart": "93be9fdec33118b1b46534e7a7f3eede724860195cafb921cb5c39559186b8f8",
+    "lib/game/race_course.dart": "8ba97f8a55e50112360a653adccb6cf3ff133b953696470c68463a44959f866d",
+    "lib/online/protocol.dart": "07dd78109cf6c7cb1c07451cfc889b323114a5eb7b736f615989380bff72d400",
+    "test/shortcut_gate_exit_test.dart": "adaf17c206c1999874b4f37dc4a29ba5975c85aed72b8f2c7efa83b58296f1a4"
+  }
+}

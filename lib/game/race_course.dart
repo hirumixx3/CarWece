@@ -71,6 +71,9 @@ class ShortcutSpec {
   }
 
   TrackFrame get gate => at(length * .50);
+
+  /// Physical end of the branch, aligned with the main-road merge checkpoint.
+  TrackFrame get exit => frames.last;
   TrackFrame get entrance => at(length * .22);
   TrackFrame portal(int index) =>
       at(length * ([.22, .47, .74, 1.0][index.clamp(0, 3)]));

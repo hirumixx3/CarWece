@@ -278,9 +278,12 @@ class RaceEngine {
   int get position => standings.indexOf(player) + 1;
   double get speedKmh => player.speed.abs() * 3.2;
   bool get shortcut => player.activeShortcut != null;
-  TrackFrame navigationFrame(Driver d) =>
-      d.activeShortcut?.portal(d.shortcutStage) ??
-      track.checkpoint(d.nextCheckpoint);
+  TrackFrame navigationFrame(Driver d) {
+    final path = d.activeShortcut;
+    if (path == null) return track.checkpoint(d.nextCheckpoint);
+    return d.shortcutStage < 2 ? path.gate : path.exit;
+  }
+
   bool get nitroActive =>
       boosting &&
       (accelerating || autoAccelerate) &&
@@ -1280,71 +1283,124 @@ class RaceEngine {
   }
 
   bool _shortcutProgress(Driver d, V3 before) {
-    if (d.activeShortcut == null) {
-      for (final path in track.shortcuts) {
-        if ((networked || d == player || brokenGates.contains(path.id)) &&
-            d.nextCheckpoint >= path.entryCheckpoint &&
-            d.nextCheckpoint <= path.exitCheckpoint &&
-            _portalCrossing(
-                  before,
-                  d.position!,
-                  path.entrance,
-                  path.width / 2 + Driver.halfWidth + 3,
-                  halfHeight: 24,
-                  minHeight: -3,
-                ) !=
-                null) {
-          d.activeShortcut = path;
-          d.shortcutStage = 1;
-          d.plannedShortcut = path;
-          if (d == player)
-            tell(
-              brokenGates.contains(path.id)
-                  ? 'ATALHO ABERTO'
-                  : 'ATALHO • DESTRUA O PORTÃO-ALVO',
-            );
-          break;
-        }
+    final after = d.position!;
+    bool eligible(ShortcutSpec path) =>
+        d.started &&
+        d.nextCheckpoint >= path.entryCheckpoint &&
+        d.nextCheckpoint <= path.exitCheckpoint;
+    double? crossing(TrackFrame frame, double halfWidth) => _portalCrossing(
+      before,
+      after,
+      frame,
+      halfWidth,
+      halfHeight: 24,
+      minHeight: -3,
+    );
+    void approach(ShortcutSpec path) {
+      d.activeShortcut = path;
+      d.plannedShortcut = path;
+      d.shortcutStage = 1; // navigation only: no branch checkpoint credit yet
+      if (d == player) {
+        tell(
+          brokenGates.contains(path.id)
+              ? 'ATALHO ABERTO'
+              : 'ATALHO • DESTRUA O PORTÃO-ALVO',
+        );
       }
     }
-    final path = d.activeShortcut;
-    if (path == null) return false;
-    final p = path.project(d.position!);
-    if (p.squaredDistance > math.pow(path.width + 12, 2)) {
+
+    void cancel() {
       d.activeShortcut = null;
       d.plannedShortcut = null;
-      return false;
+      d.shortcutStage = 1;
     }
-    // Once the entrance is proven, validate forward travel through the branch
-    // corridor. A jump or a wide line must not leave an invisible portal behind
-    // the car forever. The closed panel still blocks the second half.
-    final forward = (d.position! - before).dot(p.frame.forward) > .000001;
-    final inCorridor =
-        p.lateral.abs() <= path.width / 2 + Driver.halfWidth + 3 &&
-        p.height >= -3 &&
-        p.height <= 24;
-    while (forward && inCorridor && d.shortcutStage < 4) {
-      if (d.shortcutStage >= 2 && !brokenGates.contains(path.id)) break;
-      // Branch and main road overlap at the merge. Rejoining within the last
-      // car length counts even if the car never intersects the exact end plane.
-      final threshold = d.shortcutStage == 3
-          ? path.length - math.min(8.0, Driver.halfLength * 2 + 1)
-          : path.portal(d.shortcutStage).s;
-      if (p.frame.s < threshold) break;
-      d.shortcutStage++;
-      if (d.shortcutStage >= 4) {
-        d.nextCheckpoint =
-            (path.exitCheckpoint + 1) % TrackSpec.checkpointCount;
-        d.activeShortcut = null;
-        d.plannedShortcut = null;
-        if (d == player) {
-          nitro = math.min(100, nitro + 12);
-          tell('ATALHO CONCLUÍDO!');
-          events.add('shortcut');
-        }
-        return false;
+
+    // The physical gate plane, not a hidden earlier portal, is the proof that
+    // this branch was entered. It works even if the entrance portal was missed.
+    // Closed panels are still handled by the existing solid collision solver.
+    for (final path in track.shortcuts) {
+      if (!eligible(path)) continue;
+      if (crossing(path.gate, path.width / 2 + Driver.halfWidth + 3) != null) {
+        d.activeShortcut = path;
+        d.plannedShortcut = path;
+        d.shortcutStage = 2; // gate crossed; only the exit remains
+        if (d == player) tell('ATALHO VALIDADO • SIGA ATÉ A SAÍDA');
+        break;
+      }
+      if (d.activeShortcut == null &&
+          (networked || d == player || brokenGates.contains(path.id)) &&
+          crossing(path.entrance, path.width / 2 + Driver.halfWidth + 3) !=
+              null) {
+        approach(path);
       }
     }
+
+    final path = d.activeShortcut;
+    if (path == null) return false;
+    if (d.shortcutStage < 2 && !eligible(path)) {
+      cancel();
+      return false;
+    }
+
+    // Reversing back through the gate revokes this attempt. A later forward
+    // crossing can arm a fresh attempt, but the main road cannot finish this one.
+    if (d.shortcutStage >= 2 &&
+        _portalCrossing(
+              after,
+              before,
+              path.gate,
+              path.width / 2 + Driver.halfWidth + 3,
+              halfHeight: 24,
+              minHeight: -3,
+            ) !=
+            null) {
+      cancel();
+      return false;
+    }
+
+    // Test the swept exit intersection BEFORE projecting/cancelling the branch.
+    // At the merge a wide line or a fast step can already be outside the narrow
+    // branch's final bounds, while still physically crossing the correct exit.
+    final exitHalfWidth =
+        math.max(path.width, track.widthAt(path.exitS)) / 2 +
+        Driver.halfWidth +
+        3;
+    if (d.shortcutStage >= 2 && crossing(path.exit, exitHalfWidth) != null) {
+      d.nextCheckpoint = (path.exitCheckpoint + 1) % TrackSpec.checkpointCount;
+      d.activeShortcut = null;
+      d.plannedShortcut = null;
+      d.shortcutStage = 4;
+      final main = track.project(after);
+      d.routeS = main.frame.s;
+      d.lane = main.lateral / (track.width / 2);
+      final upper = d.nextCheckpoint == 0
+          ? track.length
+          : track.checkpoint(d.nextCheckpoint).s;
+      d.distance =
+          d.completedLaps * track.length +
+          main.frame.s.clamp(path.exitS, upper);
+      if (d == player) {
+        nitro = math.min(100, nitro + 12);
+        tell('ATALHO CONCLUÍDO!');
+        events.add('shortcut');
+      }
+      // Do not immediately reprocess the same swept motion as a main portal.
+      return true;
+    }
+
+    final p = path.project(after);
+    final atMerge = p.frame.s >= path.length - math.min(64, path.length * .20);
+    final corridor = d.shortcutStage >= 2 && atMerge
+        ? math.max(path.width + 12, exitHalfWidth)
+        : path.width + 12;
+    if (p.squaredDistance > corridor * corridor) {
+      cancel();
+      return false;
+    }
+    if (d.shortcutStage < 2) return false;
+
+    // While armed, map real branch travel into the equivalent main-road arc so
+    // standings remain correct. No intermediate invisible portal can get stuck.
     d.routeS =
         path.entryS + (path.exitS - path.entryS) * (p.frame.s / path.length);
     d.lane = p.lateral / (path.width / 2);
