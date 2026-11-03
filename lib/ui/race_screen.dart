@@ -145,9 +145,20 @@ class _RaceScreenState extends State<RaceScreen>
     previous = null;
     if (value) {
       ticker.stop();
-      unawaited(store.audio(scene: widget.hudEditorOnly ? 'menu' : (battle != null ? 'battle' : 'race')));
+      unawaited(
+        store.audio(
+          scene: widget.hudEditorOnly
+              ? 'menu'
+              : (battle != null ? 'battle' : 'race'),
+        ),
+      );
     } else if (!ticker.isActive) {
-      unawaited(store.audio(scene: battle != null ? 'battle' : 'race', racing: race.countdown <= 0));
+      unawaited(
+        store.audio(
+          scene: battle != null ? 'battle' : 'race',
+          racing: race.countdown <= 0,
+        ),
+      );
       ticker.start();
     }
     if (mounted) setState(() {});
@@ -290,6 +301,11 @@ class _RaceScreenState extends State<RaceScreen>
                 onFps: (value) => gpuFps = value,
                 onReady: () {
                   gpuReady = true;
+                  previous = null;
+                  frame.value++;
+                },
+                onUnavailable: () {
+                  gpuReady = false;
                   previous = null;
                   frame.value++;
                 },
@@ -1254,7 +1270,7 @@ class _RaceScreenState extends State<RaceScreen>
             ),
           ),
         ),
-      if (race.countdown > 0 && !editingHud)
+      if (gpuReady && race.countdown > 0 && !editingHud)
         Positioned.fill(
           child: IgnorePointer(
             child: Center(

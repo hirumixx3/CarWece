@@ -22,6 +22,7 @@ void main() {
         await (FontLoader(family)..addFont(rootBundle.load(path))).load();
       }
       final began = Completer<void>(), ready = Completer<int>();
+      var failFrame = false;
       const channel = MethodChannel('com.hirumisu.carwece/graphics');
       final messenger =
           TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger;
@@ -30,6 +31,7 @@ void main() {
           if (!began.isCompleted) began.complete();
           return ready.future;
         }
+        if (call.method == 'frame' && failFrame) return 'Memória de teste';
         return null;
       });
       messenger.setMockMethodCallHandler(GameStore.channel, (_) async => null);
@@ -59,6 +61,7 @@ void main() {
       await tester.pump(const Duration(seconds: 10));
       expect(race.countdown, 3.2);
       expect(race.time, 0);
+      expect(find.text('PREPARE-SE PARA ACELERAR'), findsNothing);
       ready.complete(901);
       await tester.pump();
       await tester.pump(const Duration(milliseconds: 20));
@@ -69,6 +72,17 @@ void main() {
       race.countdown = 0;
       await tester.pump(const Duration(milliseconds: 50));
       expect(race.time, greaterThan(0));
+      failFrame = true;
+      await tester.runAsync(
+        () => Future<void>.delayed(const Duration(milliseconds: 25)),
+      );
+      await tester.pump(const Duration(milliseconds: 50));
+      await tester.pump();
+      expect(find.text('NÃO FOI POSSÍVEL INICIAR O 3D'), findsOneWidget);
+      final stoppedAt = race.time;
+      await tester.pump(const Duration(seconds: 5));
+      expect(race.time, stoppedAt);
+      expect(find.text('PREPARE-SE PARA ACELERAR'), findsNothing);
       await tester.pumpWidget(const SizedBox());
       store.dispose();
     },

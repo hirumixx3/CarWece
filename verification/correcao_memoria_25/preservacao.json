@@ -1,0 +1,43 @@
+{
+  "changesFromUserZip": [
+    {
+      "path": "android/app/src/main/kotlin/com/hirumisu/carwece/RenderGeometry.kt",
+      "status": "modified",
+      "oldSha256": "aa872c5039d922cd5a4bd493c1ada49d53f0c3703b51e4dffb02704f9bca8738",
+      "sha256": "a9e65ded591f1f50497fe7f8ce1be4e2bd6676b2582cf9d5187c81b6febb850e"
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/hirumisu/carwece/RushGLRenderer.kt",
+      "status": "modified",
+      "oldSha256": "12fc57426edd1cc936f7ff1066fca96d9b73ae142e891e974f572550dbd3dd02",
+      "sha256": "6cb16537d4a03cd0a7fb4c3376d756f9c2bbd0193aa3425fc7bd8752cc4df8f9"
+    },
+    {
+      "path": "lib/game/gpu_frame.dart",
+      "status": "modified",
+      "oldSha256": "f6e674879f9d14a4b9d0cb27372c29220c09435077031aab9385f1bd154f1e5d",
+      "sha256": "d636a626a1faa051e64b3bfd5aff7b6a4727902e877f8b2fff11e87f50b35895"
+    },
+    {
+      "path": "lib/ui/gpu_view.dart",
+      "status": "modified",
+      "oldSha256": "f7b854888d5e7770308a99744fe2fa36d6a8d0b214348ae868bd51954247cf1f",
+      "sha256": "4832979eef462a988a5b2aa3f99f769be35a506d875aec03377a550a5e8530d3"
+    },
+    {
+      "path": "lib/ui/race_screen.dart",
+      "status": "modified",
+      "oldSha256": "af778fbf47971c8f42d17e8664d0a4bc361e2ae8b5cd6ae6053ca3ea78ede8ea",
+      "sha256": "0367c6acd21109d2e3b364142e87387e5dca1a8e64ad1f339242a064f0b60df1"
+    },
+    {
+      "path": "test/loading_start_test.dart",
+      "status": "modified",
+      "oldSha256": "1c48e4cea31167d95023ccd1400e169455a0273881835f89bd3d21ff821537c9",
+      "sha256": "70dbeea7519fb7b4aaa97b1f8fd13e743744ac66ebb32a4afda9af30e81b2684"
+    }
+  ],
+  "unchangedAssetFiles": 35,
+  "unchangedLibraryFiles": 53,
+  "catalogueAndPhysicsPreserved": true
+}

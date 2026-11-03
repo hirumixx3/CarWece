@@ -1,0 +1,164 @@
+CARWECE — CORREÇÃO DE MEMÓRIA NAS 25 PISTAS NOVAS
+Data UTC: 03/11/2026
+Entrega: projeto-fonte corrigido; NÃO é APK ou AAB.
+
+RESULTADO PRINCIPAL
+25/25 pistas passaram no processamento nativo de geometria com heap JVM
+limitado a 128 MiB. A implementação anterior falhou em 4/25 nesse cenário.
+As 25 também passaram com o inventário sintético dos seis carros mais pesados,
+com heap de 128 MiB e novamente com 96 MiB. Isso não mede o consumo total do
+aplicativo Android e não garante funcionamento em qualquer celular.
+
+DIAGNÓSTICO
+A imagem recebida mostra falha de alocação e limite de heap próximo de 128 MiB.
+O fluxo antigo mantinha o cenário original, copiava o cenário inteiro na
+partição espacial e criava outros arrays grandes ao indexar todos os vértices.
+A reprodução controlada da Espiral da Estante falhou em RenderGeometry.index,
+na criação do array de vértices. A malha dessa pista possui 35.264.448 bytes.
+A reprodução é compatível com o erro da foto; não há logcat do aparelho para
+confirmar a pilha exata daquela ocorrência.
+
+Falharam no cenário-base JVM 128 MiB, antes da correção:
+- CAIXAS EM ÓRBITA (bedroom_loop_boxes): 41,472,576 bytes de cenário.
+- ESPIRAL DA ESTANTE (bedroom_loop_shelf): 35,264,448 bytes de cenário.
+- ANEL DE NEON (arcade_loop_neon): 40,422,240 bytes de cenário.
+- ESPIRAL DO FLIPERAMA (arcade_loop_pinball): 35,539,920 bytes de cenário.
+
+CORREÇÕES APLICADAS
+1. RenderGeometry.forEachChunk emite blocos espaciais de no máximo 4.096
+   triângulos, inclusive quando uma única célula concentra muita geometria.
+   O maior array temporário de geometria por bloco é de 589.824 bytes.
+   Esse valor NÃO é a memória total do jogo nem a soma dos temporários.
+2. RushGLRenderer indexa/compacta/envia um bloco por vez e mantém os blocos
+   em VBOs/IBOs próprios; o descarte por frustum usa os limites reais de cada
+   bloco. Todas as posições, normais, UVs, materiais e triângulos são mantidos.
+3. Reutilização dos buffers diretos de upload, com limite exato do conteúdo
+   válido; limpeza de recursos se um upload falhar e cancelamento ao sair.
+4. Cache Dart de cenários limitado por bytes: uma entrada de até 16 MiB.
+   Cenários maiores não ficam retidos nesse cache depois de preparados.
+5. Proteção contra carregamentos simultâneos por repetição do botão de retry;
+   depois de falha em um quadro, o envio de quadros é interrompido.
+6. A corrida congela quando o 3D fica indisponível e volta a receber onReady
+   após recuperação. A contagem regressiva não cobre mais a tela de erro.
+
+PRESERVAÇÃO
+35 arquivos de assets preservados byte a byte.
+53 arquivos de biblioteca não foram modificados. Catálogos, IDs das 76 pistas,
+81 carros, 11 arenas, regras de física, checkpoints, loops e geração das malhas
+permaneceram nos mesmos arquivos originais, sem mudanças. Não removi detalhes,
+carros, obstáculos, trilhas de áudio, vídeo nem pistas para reduzir memória.
+Veja preservacao.json e alteracoes.diff para o escopo exato das mudanças.
+Não houve aumento artificial do limite de heap nem uso de largeHeap.
+
+ARQUITETURA REVISADA
+- lib/main.dart: inicialização, introdução, menus, seleção e fluxo de corrida.
+- lib/platform.dart: GameStore, configurações e persistência por canal nativo.
+- content.dart e partes: CarSpec, TrackSpec, catálogo e geometria das rotas.
+  loop_expansion_brazil.dart adiciona as 25 pistas no final do catálogo.
+- engine.dart e partes: simulação, IA, aderência, contatos, checkpoints,
+  atalhos, combate e finalização. A expansão não usa outro motor de física.
+- gpu_mesh.dart e partes: malhas procedurais de pistas, ambientes e carros.
+- gpu_frame.dart: preparação em isolate, slots estáveis e pacotes de instâncias.
+- ui/gpu_view.dart: shaders, MethodChannel, textura, retry e estado do 3D.
+- MainActivity.kt: ponte nativa; RushGLRenderer.kt: EGL/GLES, upload e desenho.
+- online/: cliente/protocolo, host e túneis; music.dart/native: áudio; ambos
+  foram mantidos, com regressões existentes exercitadas na suíte Flutter/JVM.
+A revisão concentrou-se na falha de memória relatada e nas rotas afetadas.
+Não é correto afirmar compreensão/verificação de 100% de todos os caminhos
+possíveis de execução apenas com estes testes automatizados.
+
+TESTES EXECUTADOS E EVIDÊNCIAS
+- flutter analyze: sem problemas.
+- 249 casos na execução Flutter principal final, mais 3 casos gráficos e
+  3 casos novos de ciclo de vida executados separadamente: 255 casos finais
+  distintos aprovados. O teste de carregamento está nos dois logs, mas NÃO foi
+  contado duas vezes.
+- O caso pesado que verifica todas as malhas do catálogo passou na execução
+  inicial de referência; não está contabilizado como caso final. A primeira
+  tentativa de rodar a suíte inteira ficou incompleta após os testes gráficos;
+  por isso a execução final foi dividida. Não se declara aquela tentativa uma
+  suíte integral aprovada.
+- 58 testes JUnit de geometria, memória, qualidade, identidade, música e intro:
+  aprovados. Seis são regressões novas do carregamento por blocos.
+- Backend Android modificado compilado contra Android API 36 e embedding
+  Flutter 3.35.7, em compilação Kotlin isolada. Não é build completo por Gradle.
+- 25 malhas reais geradas; formato completo e números finitos verificados.
+- 25 cargas no código nativo de produção com heap 128 MiB; 25 cargas com pior
+  inventário 128 MiB; 25 cargas com pior inventário 96 MiB: todas aprovadas.
+  Cada carga valida reconstrução bit a bit dos atributos após indexação e
+  assinatura por triângulo antes/depois da partição. Os testes JUnit também
+  comparam a sequência exata da nova partição contra a de referência.
+- 75 voltas simuladas a 120 passos/s: 2 por pista nova (RX-7 e um brasileiro),
+  mais 25 brasileiros na pista antiga de referência; todas concluídas.
+- 50 imagens em Mesa EGL/GLES com shaders reais e buffers compactados pelo
+  código Kotlin corrigido: largada e entrada do loop em cada pista, sem erro
+  GLES e sem quadro uniforme. Não são capturas de celular.
+  Esse passe desenha todos os blocos para verificar saída gráfica; os testes
+  Kotlin/JUnit verificam limites/culling. Não é benchmark de FPS de Android.
+
+LIMITES — O QUE AINDA PRECISA DE ANDROID REAL
+Não foi executado APK/AAB em aparelho ou emulador Android. Não há medição de
+RSS/PSS, GPU/driver móvel, logcat, temperatura, FPS sustentado ou perdas reais
+ de contexto EGL. Os testes Flutter Android usam o canal nativo simulado.
+Java -Xmx128m limita o heap JVM do ensaio, não todos os heaps e buffers que o
+Android contabiliza. O valor máximo de um bloco não deve ser interpretado como
+redução percentual garantida da RAM total.
+Por isso, esta entrega corrige a causa reproduzida e passa nos cenários
+registrados, mas NÃO promete funcionamento perfeito em todo dispositivo.
+
+VALIDAÇÃO RECOMENDADA NO APARELHO QUE FALHOU
+Compilar o projeto completo e instalar uma build de teste preservando saves.
+Começar por Espiral da Estante, Caixas em Órbita, Anel de Neon e Espiral do
+Fliperama. Entrar/sair repetidamente, trocar de carro e de qualidade, alternar
+app em primeiro/segundo plano, completar três voltas e repetir com as 25 pistas.
+Verificar Android Studio Profiler/adb logcat para OOM, erros GLES e uso de RAM.
+Não é necessário apagar o progresso. Assets e IDs persistidos foram mantidos.
+Os workflows APK/AAB existentes foram preservados; a chave de assinatura não
+foi adicionada nem substituída. Esta entrega não contém novo binário assinado.
+
+COMO REEXECUTAR NO AMBIENTE DE DESENVOLVIMENTO
+Flutter 3.35.7 / Dart 3.9.2, Android SDK 36, Kotlin/JVM 2.1.0 e Java 21 no ensaio.
+1. flutter pub get
+2. flutter analyze
+3. flutter test --concurrency=1
+4. dart run tools/memory_tracks_qa.dart
+5. Compilar RenderGeometry.kt, GraphicsContract.kt e tools/MemoryTracksProbe.kt
+   com kotlinc -include-runtime e executar o JAR com:
+   java -Xmx128m -XX:MaxDirectMemorySize=32m -jar <probe.jar>
+        build/memory_tracks_qa build/memory_tracks_fixed
+6. dart run tools/brazil_drive_qa.dart
+7. python3 tools/prepare_memory_gles.py build/memory_tracks_qa build/memory_tracks_fixed
+8. python3 tools/render_gles_qa.py build/memory_tracks_fixed <pasta_de_capturas>
+9. dart run tools/memory_roster_stress.dart e repetir a sonda usando
+   build/memory_roster_stress como entrada, com -Xmx128m e -Xmx96m.
+MemoryBaselineProbe.kt conserva o algoritmo antigo para reproduzir a falha;
+é apenas ferramenta de QA e não é chamado pelo jogo.
+As saídas enormes em build/ e SDKs locais não entram no ZIP de entrega.
+
+RESULTADOS POR PISTA
+Os dados detalhados estão em resultado_por_pista.csv, pistas.json e nos logs.
+01. ESPIRAL DAS COPAS | antes128=PASS | depois128=PASS | pior96=PASS | voltas=2/2 | imagens=2
+02. LOOP DAS RAÍZES | antes128=PASS | depois128=PASS | pior96=PASS | voltas=2/2 | imagens=2
+03. ANEL DA SERRARIA | antes128=PASS | depois128=PASS | pior96=PASS | voltas=2/2 | imagens=2
+04. ANEL DOS FÓSSEIS | antes128=PASS | depois128=PASS | pior96=PASS | voltas=2/2 | imagens=2
+05. ESPIRAL DO NINHO | antes128=PASS | depois128=PASS | pior96=PASS | voltas=2/2 | imagens=2
+06. LOOP DA CALDEIRA | antes128=PASS | depois128=PASS | pior96=PASS | voltas=2/2 | imagens=2
+07. ÓRBITA DO OÁSIS | antes128=PASS | depois128=PASS | pior96=PASS | voltas=2/2 | imagens=2
+08. LOOP DAS AREIAS | antes128=PASS | depois128=PASS | pior96=PASS | voltas=2/2 | imagens=2
+09. ANEL DO CÂNION | antes128=PASS | depois128=PASS | pior96=PASS | voltas=2/2 | imagens=2
+10. ANEL DE CRISTAL | antes128=PASS | depois128=PASS | pior96=PASS | voltas=2/2 | imagens=2
+11. LOOP DA NEVASCA | antes128=PASS | depois128=PASS | pior96=PASS | voltas=2/2 | imagens=2
+12. ESPIRAL DOS PINHEIROS | antes128=PASS | depois128=PASS | pior96=PASS | voltas=2/2 | imagens=2
+13. LOOP DO SURFE | antes128=PASS | depois128=PASS | pior96=PASS | voltas=2/2 | imagens=2
+14. ÓRBITA DO PÍER | antes128=PASS | depois128=PASS | pior96=PASS | voltas=2/2 | imagens=2
+15. ANEL DAS CONCHAS | antes128=PASS | depois128=PASS | pior96=PASS | voltas=2/2 | imagens=2
+16. CAIXAS EM ÓRBITA | antes128=OOM | depois128=PASS | pior96=PASS | voltas=2/2 | imagens=2
+17. ESPIRAL DA ESTANTE | antes128=OOM | depois128=PASS | pior96=PASS | voltas=2/2 | imagens=2
+18. ANEL DA CHAVE INGLESA | antes128=PASS | depois128=PASS | pior96=PASS | voltas=2/2 | imagens=2
+19. LOOP DO MOTOR | antes128=PASS | depois128=PASS | pior96=PASS | voltas=2/2 | imagens=2
+20. ANEL DE NEON | antes128=OOM | depois128=PASS | pior96=PASS | voltas=2/2 | imagens=2
+21. ESPIRAL DO FLIPERAMA | antes128=OOM | depois128=PASS | pior96=PASS | voltas=2/2 | imagens=2
+22. LOOP DO RALO | antes128=PASS | depois128=PASS | pior96=PASS | voltas=2/2 | imagens=2
+23. ANEL DE ESPUMA | antes128=PASS | depois128=PASS | pior96=PASS | voltas=2/2 | imagens=2
+24. LOOP DA COLHER | antes128=PASS | depois128=PASS | pior96=PASS | voltas=2/2 | imagens=2
+25. ÓRBITA DAS ALMOFADAS | antes128=PASS | depois128=PASS | pior96=PASS | voltas=2/2 | imagens=2

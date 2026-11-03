@@ -1,0 +1,428 @@
+--- a/android/app/src/main/kotlin/com/hirumisu/carwece/RenderGeometry.kt
++++ b/android/app/src/main/kotlin/com/hirumisu/carwece/RenderGeometry.kt
+@@ -28,8 +28,11 @@
+         var values=IntArray(32); var size=0
+         fun add(i: Int) { if(size==values.size)values=values.copyOf(size*2); values[size++]=i }
+     }
+-    fun partition(data: FloatArray, cell: Float = 160f): Chunks {
+-        require(data.isNotEmpty() && data.size%36==0 && cell>0)
++    // Bound temporary allocations even when one room/cell contains most of a mesh.
++    const val MAX_CHUNK_TRIANGLES = 4096
++
++    private fun cells(data: FloatArray, cell: Float): LinkedHashMap<Long,TriangleList> {
++        require(data.isNotEmpty() && data.size%36==0 && cell.isFinite() && cell>0)
+         val cells=LinkedHashMap<Long,TriangleList>()
+         for(i in data.indices step 36) {
+             val x=floor((data[i]+data[i+12]+data[i+24])/3/cell).toInt()
+@@ -37,6 +40,34 @@
+             val key=(x.toLong() shl 32) xor (z.toLong() and 0xffffffffL)
+             cells.getOrPut(key){TriangleList()}.add(i)
+         }
++        return cells
++    }
++
++    /** Upload one bounded spatial block at a time. No full-world packed/unique copy.
++     * Every original triangle is delivered once, with bit-exact attributes/winding.
++     * Consumer must upload synchronously, not retain the temporary blocks. */
++    fun forEachChunk(data: FloatArray, cell: Float = 160f,
++                     maxTriangles: Int = MAX_CHUNK_TRIANGLES,
++                     consume: (FloatArray) -> Unit) {
++        require(maxTriangles in 1..MAX_CHUNK_TRIANGLES)
++        for (list in cells(data,cell).values) {
++            var start=0
++            while(start<list.size) {
++                val count=minOf(maxTriangles,list.size-start)
++                val block=FloatArray(count*36)
++                for(j in 0 until count) {
++                    val from=list.values[start+j]
++                    data.copyInto(block,j*36,from,from+36)
++                }
++                consume(block)
++                start+=count
++            }
++        }
++    }
++
++    // Reference/export API; Android runtime uses forEachChunk instead.
++    fun partition(data: FloatArray, cell: Float = 160f): Chunks {
++        val cells=cells(data,cell)
+         val packed=FloatArray(data.size); val ranges=ArrayList<Range>(cells.size)
+         var cursor=0
+         for(list in cells.values) {
+@@ -78,9 +109,12 @@
+ 
+     /** 32-byte mobile vertex: float position/UV, signed-normalized normal,
+      * normalized RGB8 and integer material. Bounds/physics use original floats. */
+-    fun compact(data: FloatArray): ByteBuffer {
++    fun compact(data: FloatArray, reuse: ByteBuffer? = null): ByteBuffer {
+         require(data.size%12==0)
+-        val bytes=ByteBuffer.allocateDirect(data.size/12*32).order(ByteOrder.nativeOrder())
++        val length=data.size/12*32
++        val bytes=(reuse?.takeIf { it.isDirect && it.capacity()>=length }
++            ?: ByteBuffer.allocateDirect(length)).order(ByteOrder.nativeOrder())
++        bytes.clear(); bytes.limit(length)
+         for(i in data.indices step 12) {
+             bytes.putFloat(data[i]); bytes.putFloat(data[i+1]); bytes.putFloat(data[i+2])
+             for(k in 3..5)bytes.putShort((data[i+k].coerceIn(-1f,1f)*32767).roundToInt().toShort())
+--- a/android/app/src/main/kotlin/com/hirumisu/carwece/RushGLRenderer.kt
++++ b/android/app/src/main/kotlin/com/hirumisu/carwece/RushGLRenderer.kt
+@@ -64,8 +64,9 @@
+     private data class Mesh(val buffer: Int, val elements: Int, val vao: Int,
+         val count: Int, val bounds: RenderGeometry.Bounds,
+         val transparent: Boolean, val castsShadow: Boolean)
+-    private var world: Mesh? = null
+-    private var worldRanges: List<RenderGeometry.Range> = emptyList()
++    private val world = mutableListOf<Mesh>()
++    private var vertexScratch: ByteBuffer? = null
++    private var indexScratch: ByteBuffer? = null
+     private val objects = mutableListOf<Mesh>()
+     private val cameraFrustum=RenderGeometry.Frustum()
+     private val shadowFrustum=RenderGeometry.Frustum()
+@@ -133,10 +134,16 @@
+         val packed=RenderGeometry.index(data)
+         val handle = IntArray(2); GL.glGenBuffers(2, handle, 0)
+         val vaos=IntArray(1); GL.glGenVertexArrays(1,vaos,0); GL.glBindVertexArray(vaos[0])
+-        val buffer = RenderGeometry.compact(packed.vertices)
++        try {
++        val buffer = RenderGeometry.compact(packed.vertices,vertexScratch)
++        vertexScratch=buffer
+         GL.glBindBuffer(GL.GL_ARRAY_BUFFER, handle[0])
+-        GL.glBufferData(GL.GL_ARRAY_BUFFER, buffer.capacity(), buffer, GL.GL_STATIC_DRAW)
+-        val indices=ByteBuffer.allocateDirect(packed.indices.size*4).order(ByteOrder.nativeOrder()).asIntBuffer()
++        GL.glBufferData(GL.GL_ARRAY_BUFFER, buffer.remaining(), buffer, GL.GL_STATIC_DRAW)
++        val indexBytes=packed.indices.size*4
++        val scratch=(indexScratch?.takeIf { it.capacity()>=indexBytes }
++            ?: ByteBuffer.allocateDirect(indexBytes)).order(ByteOrder.nativeOrder())
++        indexScratch=scratch; scratch.clear(); scratch.limit(indexBytes)
++        val indices=scratch.asIntBuffer()
+         indices.put(packed.indices).position(0)
+         GL.glBindBuffer(GL.GL_ELEMENT_ARRAY_BUFFER,handle[1])
+         GL.glBufferData(GL.GL_ELEMENT_ARRAY_BUFFER,packed.indices.size*4,indices,GL.GL_STATIC_DRAW)
+@@ -149,6 +156,11 @@
+         GL.glBindVertexArray(0)
+         return Mesh(handle[0],handle[1],vaos[0],packed.indices.size,RenderGeometry.Bounds.of(data),
+             GraphicsContract.isTransparentMesh(data), GraphicsContract.castsShadowMesh(data))
++        } catch (error: Throwable) {
++            GL.glBindVertexArray(0)
++            GL.glDeleteBuffers(2,handle,0); GL.glDeleteVertexArrays(1,vaos,0)
++            throw error
++        }
+     }
+     private fun initShadow() {
+         val ids = IntArray(1); GL.glGenTextures(1, ids, 0); shadowTexture = ids[0]
+@@ -181,10 +193,11 @@
+         GL.glDrawElements(GL.GL_TRIANGLES,mesh.count,GL.GL_UNSIGNED_INT,0)
+     }
+     private fun drawWorld(program: Int, frustum: RenderGeometry.Frustum) {
+-        val mesh=world ?: return
+-        matrix(program,"uModel",identity); GL.glBindVertexArray(mesh.vao)
+-        for(range in worldRanges)if(frustum.visible(range.bounds))
+-            GL.glDrawElements(GL.GL_TRIANGLES,range.count,GL.GL_UNSIGNED_INT,range.first*4)
++        matrix(program,"uModel",identity)
++        for(mesh in world)if(frustum.visible(mesh.bounds)) {
++            GL.glBindVertexArray(mesh.vao)
++            GL.glDrawElements(GL.GL_TRIANGLES,mesh.count,GL.GL_UNSIGNED_INT,0)
++        }
+     }
+     private fun initSceneTarget() {
+         if(!automatic)return
+@@ -280,9 +293,17 @@
+ 
+     private fun initGeometry() {
+         // Keep temporary unpacked/indexed arrays off the long-lived render loop's stack.
+-        val chunks=RenderGeometry.partition(pendingWorld!!)
+-        worldRanges=chunks.ranges; world=upload(chunks.vertices); pendingWorld=null
+-        pendingObjects!!.forEach { objects.add(upload(it)) }; pendingObjects=null
++        RenderGeometry.forEachChunk(pendingWorld!!) { block ->
++            if(!running)throw InterruptedException()
++            world.add(upload(block))
++        }
++        pendingWorld=null
++        pendingObjects!!.forEach {
++            if(!running)throw InterruptedException()
++            objects.add(upload(it))
++        }
++        pendingObjects=null
++        vertexScratch=null; indexScratch=null
+     }
+ 
+     private fun runRenderer() {
+@@ -327,7 +348,8 @@
+         } finally {
+             try {
+                 pendingWorld=null; pendingObjects=null
+-                val meshes=listOfNotNull(world)+objects
++                vertexScratch=null; indexScratch=null
++                val meshes=world+objects
+                 val all=meshes.flatMap { listOf(it.buffer,it.elements) }.toIntArray()
+                 if(all.isNotEmpty())GL.glDeleteBuffers(all.size,all,0)
+                 val vaos=meshes.map { it.vao }.toIntArray()
+--- a/lib/game/gpu_frame.dart
++++ b/lib/game/gpu_frame.dart
+@@ -58,13 +58,19 @@
+     );
+     final worldData = cached ?? result.$1;
+     if (track != null && cached == null) {
+-      if (_worlds.length >= 2) _worlds.remove(_worlds.keys.first);
+-      _worlds[track.id] = worldData;
++      _cacheWorld(track.id, worldData);
+     }
+     return (worldData, result.$2);
+   }
+ 
++  // Cache by bytes, not number of tracks: two detailed rooms alone exceed 60 MB.
++  static const worldCacheBudgetBytes = 16 * 1024 * 1024;
+   static final Map<String, Float32List> _worlds = {};
++  static void _cacheWorld(String id, Float32List data) {
++    _worlds.clear();
++    if (data.lengthInBytes <= worldCacheBudgetBytes) _worlds[id] = data;
++  }
++
+   static Float32List world(TrackSpec track) {
+     final existing = _worlds.remove(track.id);
+     if (existing != null) {
+@@ -72,8 +78,7 @@
+       return existing;
+     }
+     final data = buildWorldMesh(track).buffer;
+-    if (_worlds.length >= 2) _worlds.remove(_worlds.keys.first);
+-    _worlds[track.id] = data;
++    _cacheWorld(track.id, data);
+     return data;
+   }
+ 
+--- a/lib/ui/gpu_view.dart
++++ b/lib/ui/gpu_view.dart
+@@ -16,6 +16,7 @@
+   final double cameraDistance;
+   final ValueChanged<double>? onFps;
+   final VoidCallback? onReady;
++  final VoidCallback? onUnavailable;
+   const GpuRaceView({
+     super.key,
+     required this.race,
+@@ -25,6 +26,7 @@
+     required this.cameraDistance,
+     this.onFps,
+     this.onReady,
++    this.onUnavailable,
+   });
+   @override
+   Widget build(BuildContext context) => GpuSurface(
+@@ -41,6 +43,7 @@
+     quality: quality,
+     onFps: onFps,
+     onReady: onReady,
++    onUnavailable: onUnavailable,
+     night: race.track.night,
+     fallback: Builder(
+       builder: (_) => CustomPaint(
+@@ -87,6 +90,7 @@
+ class GpuSurface extends StatefulWidget {
+   final ValueChanged<double>? onFps;
+   final VoidCallback? onReady;
++  final VoidCallback? onUnavailable;
+   final Future<(Float32List, List<Float32List>)> Function()? prepare;
+   final List<Float32List>? extraObjects;
+   final Set<int>? bodies;
+@@ -103,6 +107,7 @@
+     required this.fallback,
+     this.onFps,
+     this.onReady,
++    this.onUnavailable,
+     this.prepare,
+     this.repaint,
+     this.bodies,
+@@ -120,6 +125,7 @@
+   static List<String>? _shaders;
+   int? textureId;
+   bool started = false, sending = false, compatibility = false;
++  bool creating = false, retrying = false;
+   final _frameClock = Stopwatch()..start();
+   int _lastFrameUs = -1000000;
+   int _lastFpsUs = 0;
+@@ -148,6 +154,8 @@
+   }
+ 
+   Future<void> create() async {
++    if (creating || !mounted) return;
++    creating = true;
+     final render = context.findRenderObject();
+     final size = render is RenderBox && render.hasSize
+         ? render.size
+@@ -198,17 +206,21 @@
+       widget.onReady?.call();
+       sendFrame();
+     } catch (e) {
+-      if (mounted)
++      if (mounted) {
+         setState(() {
+           compatibility = true;
+           error = '${e.runtimeType}: ${e is PlatformException ? e.message : e}';
+         });
++        widget.onUnavailable?.call();
++      }
++    } finally {
++      creating = false;
+     }
+   }
+ 
+   void sendFrame() {
+     final id = textureId;
+-    if (id == null || sending || !mounted) return;
++    if (id == null || sending || !mounted || error != null) return;
+     final now = _frameClock.elapsedMicroseconds;
+     if (now - _lastFrameUs < 16000) return;
+     _lastFrameUs = now;
+@@ -216,18 +228,22 @@
+     channel
+         .invokeMethod<String>('frame', {'id': id, 'data': widget.frame()})
+         .then((message) {
+-          if (message != null && mounted)
++          if (message != null && mounted) {
+             setState(() {
+               error = message;
+               compatibility = true;
+             });
++            widget.onUnavailable?.call();
++          }
+         })
+         .catchError((Object e) {
+-          if (mounted)
++          if (mounted) {
+             setState(() {
+               error = '$e';
+               compatibility = true;
+             });
++            widget.onUnavailable?.call();
++          }
+         })
+         .whenComplete(() => sending = false);
+     if (widget.onFps != null && now - _lastFpsUs >= 1000000) {
+@@ -255,18 +271,24 @@
+   }
+ 
+   Future<void> retry() async {
+-    final previousId = textureId;
+-    setState(() {
+-      textureId = null;
+-      compatibility = false;
+-      error = null;
+-    });
+-    if (previousId != null) {
+-      try {
+-        await channel.invokeMethod('dispose', {'id': previousId});
+-      } catch (_) {}
+-    }
+-    if (mounted) await create();
++    if (creating || retrying || !mounted) return;
++    retrying = true;
++    try {
++      final previousId = textureId;
++      setState(() {
++        textureId = null;
++        compatibility = false;
++        error = null;
++      });
++      if (previousId != null) {
++        try {
++          await channel.invokeMethod('dispose', {'id': previousId});
++        } catch (_) {}
++      }
++      if (mounted) await create();
++    } finally {
++      retrying = false;
++    }
+   }
+ 
+   @override
+--- a/lib/ui/race_screen.dart
++++ b/lib/ui/race_screen.dart
+@@ -145,9 +145,20 @@
+     previous = null;
+     if (value) {
+       ticker.stop();
+-      unawaited(store.audio(scene: widget.hudEditorOnly ? 'menu' : (battle != null ? 'battle' : 'race')));
++      unawaited(
++        store.audio(
++          scene: widget.hudEditorOnly
++              ? 'menu'
++              : (battle != null ? 'battle' : 'race'),
++        ),
++      );
+     } else if (!ticker.isActive) {
+-      unawaited(store.audio(scene: battle != null ? 'battle' : 'race', racing: race.countdown <= 0));
++      unawaited(
++        store.audio(
++          scene: battle != null ? 'battle' : 'race',
++          racing: race.countdown <= 0,
++        ),
++      );
+       ticker.start();
+     }
+     if (mounted) setState(() {});
+@@ -290,6 +301,11 @@
+                 onFps: (value) => gpuFps = value,
+                 onReady: () {
+                   gpuReady = true;
++                  previous = null;
++                  frame.value++;
++                },
++                onUnavailable: () {
++                  gpuReady = false;
+                   previous = null;
+                   frame.value++;
+                 },
+@@ -1254,7 +1270,7 @@
+             ),
+           ),
+         ),
+-      if (race.countdown > 0 && !editingHud)
++      if (gpuReady && race.countdown > 0 && !editingHud)
+         Positioned.fill(
+           child: IgnorePointer(
+             child: Center(
+--- a/test/loading_start_test.dart
++++ b/test/loading_start_test.dart
+@@ -22,6 +22,7 @@
+         await (FontLoader(family)..addFont(rootBundle.load(path))).load();
+       }
+       final began = Completer<void>(), ready = Completer<int>();
++      var failFrame = false;
+       const channel = MethodChannel('com.hirumisu.carwece/graphics');
+       final messenger =
+           TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger;
+@@ -30,6 +31,7 @@
+           if (!began.isCompleted) began.complete();
+           return ready.future;
+         }
++        if (call.method == 'frame' && failFrame) return 'Memória de teste';
+         return null;
+       });
+       messenger.setMockMethodCallHandler(GameStore.channel, (_) async => null);
+@@ -59,6 +61,7 @@
+       await tester.pump(const Duration(seconds: 10));
+       expect(race.countdown, 3.2);
+       expect(race.time, 0);
++      expect(find.text('PREPARE-SE PARA ACELERAR'), findsNothing);
+       ready.complete(901);
+       await tester.pump();
+       await tester.pump(const Duration(milliseconds: 20));
+@@ -69,6 +72,17 @@
+       race.countdown = 0;
+       await tester.pump(const Duration(milliseconds: 50));
+       expect(race.time, greaterThan(0));
++      failFrame = true;
++      await tester.runAsync(
++        () => Future<void>.delayed(const Duration(milliseconds: 25)),
++      );
++      await tester.pump(const Duration(milliseconds: 50));
++      await tester.pump();
++      expect(find.text('NÃO FOI POSSÍVEL INICIAR O 3D'), findsOneWidget);
++      final stoppedAt = race.time;
++      await tester.pump(const Duration(seconds: 5));
++      expect(race.time, stoppedAt);
++      expect(find.text('PREPARE-SE PARA ACELERAR'), findsNothing);
+       await tester.pumpWidget(const SizedBox());
+       store.dispose();
+     },

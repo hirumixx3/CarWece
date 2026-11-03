@@ -64,8 +64,9 @@ internal class RushGLRenderer(
     private data class Mesh(val buffer: Int, val elements: Int, val vao: Int,
         val count: Int, val bounds: RenderGeometry.Bounds,
         val transparent: Boolean, val castsShadow: Boolean)
-    private var world: Mesh? = null
-    private var worldRanges: List<RenderGeometry.Range> = emptyList()
+    private val world = mutableListOf<Mesh>()
+    private var vertexScratch: ByteBuffer? = null
+    private var indexScratch: ByteBuffer? = null
     private val objects = mutableListOf<Mesh>()
     private val cameraFrustum=RenderGeometry.Frustum()
     private val shadowFrustum=RenderGeometry.Frustum()
@@ -133,10 +134,16 @@ internal class RushGLRenderer(
         val packed=RenderGeometry.index(data)
         val handle = IntArray(2); GL.glGenBuffers(2, handle, 0)
         val vaos=IntArray(1); GL.glGenVertexArrays(1,vaos,0); GL.glBindVertexArray(vaos[0])
-        val buffer = RenderGeometry.compact(packed.vertices)
+        try {
+        val buffer = RenderGeometry.compact(packed.vertices,vertexScratch)
+        vertexScratch=buffer
         GL.glBindBuffer(GL.GL_ARRAY_BUFFER, handle[0])
-        GL.glBufferData(GL.GL_ARRAY_BUFFER, buffer.capacity(), buffer, GL.GL_STATIC_DRAW)
-        val indices=ByteBuffer.allocateDirect(packed.indices.size*4).order(ByteOrder.nativeOrder()).asIntBuffer()
+        GL.glBufferData(GL.GL_ARRAY_BUFFER, buffer.remaining(), buffer, GL.GL_STATIC_DRAW)
+        val indexBytes=packed.indices.size*4
+        val scratch=(indexScratch?.takeIf { it.capacity()>=indexBytes }
+            ?: ByteBuffer.allocateDirect(indexBytes)).order(ByteOrder.nativeOrder())
+        indexScratch=scratch; scratch.clear(); scratch.limit(indexBytes)
+        val indices=scratch.asIntBuffer()
         indices.put(packed.indices).position(0)
         GL.glBindBuffer(GL.GL_ELEMENT_ARRAY_BUFFER,handle[1])
         GL.glBufferData(GL.GL_ELEMENT_ARRAY_BUFFER,packed.indices.size*4,indices,GL.GL_STATIC_DRAW)
@@ -149,6 +156,11 @@ internal class RushGLRenderer(
         GL.glBindVertexArray(0)
         return Mesh(handle[0],handle[1],vaos[0],packed.indices.size,RenderGeometry.Bounds.of(data),
             GraphicsContract.isTransparentMesh(data), GraphicsContract.castsShadowMesh(data))
+        } catch (error: Throwable) {
+            GL.glBindVertexArray(0)
+            GL.glDeleteBuffers(2,handle,0); GL.glDeleteVertexArrays(1,vaos,0)
+            throw error
+        }
     }
     private fun initShadow() {
         val ids = IntArray(1); GL.glGenTextures(1, ids, 0); shadowTexture = ids[0]
@@ -181,10 +193,11 @@ internal class RushGLRenderer(
         GL.glDrawElements(GL.GL_TRIANGLES,mesh.count,GL.GL_UNSIGNED_INT,0)
     }
     private fun drawWorld(program: Int, frustum: RenderGeometry.Frustum) {
-        val mesh=world ?: return
-        matrix(program,"uModel",identity); GL.glBindVertexArray(mesh.vao)
-        for(range in worldRanges)if(frustum.visible(range.bounds))
-            GL.glDrawElements(GL.GL_TRIANGLES,range.count,GL.GL_UNSIGNED_INT,range.first*4)
+        matrix(program,"uModel",identity)
+        for(mesh in world)if(frustum.visible(mesh.bounds)) {
+            GL.glBindVertexArray(mesh.vao)
+            GL.glDrawElements(GL.GL_TRIANGLES,mesh.count,GL.GL_UNSIGNED_INT,0)
+        }
     }
     private fun initSceneTarget() {
         if(!automatic)return
@@ -280,9 +293,17 @@ internal class RushGLRenderer(
 
     private fun initGeometry() {
         // Keep temporary unpacked/indexed arrays off the long-lived render loop's stack.
-        val chunks=RenderGeometry.partition(pendingWorld!!)
-        worldRanges=chunks.ranges; world=upload(chunks.vertices); pendingWorld=null
-        pendingObjects!!.forEach { objects.add(upload(it)) }; pendingObjects=null
+        RenderGeometry.forEachChunk(pendingWorld!!) { block ->
+            if(!running)throw InterruptedException()
+            world.add(upload(block))
+        }
+        pendingWorld=null
+        pendingObjects!!.forEach {
+            if(!running)throw InterruptedException()
+            objects.add(upload(it))
+        }
+        pendingObjects=null
+        vertexScratch=null; indexScratch=null
     }
 
     private fun runRenderer() {
@@ -327,7 +348,8 @@ internal class RushGLRenderer(
         } finally {
             try {
                 pendingWorld=null; pendingObjects=null
-                val meshes=listOfNotNull(world)+objects
+                vertexScratch=null; indexScratch=null
+                val meshes=world+objects
                 val all=meshes.flatMap { listOf(it.buffer,it.elements) }.toIntArray()
                 if(all.isNotEmpty())GL.glDeleteBuffers(all.size,all,0)
                 val vaos=meshes.map { it.vao }.toIntArray()

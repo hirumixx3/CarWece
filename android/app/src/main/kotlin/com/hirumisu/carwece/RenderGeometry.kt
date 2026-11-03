@@ -28,8 +28,11 @@ internal object RenderGeometry {
         var values=IntArray(32); var size=0
         fun add(i: Int) { if(size==values.size)values=values.copyOf(size*2); values[size++]=i }
     }
-    fun partition(data: FloatArray, cell: Float = 160f): Chunks {
-        require(data.isNotEmpty() && data.size%36==0 && cell>0)
+    // Bound temporary allocations even when one room/cell contains most of a mesh.
+    const val MAX_CHUNK_TRIANGLES = 4096
+
+    private fun cells(data: FloatArray, cell: Float): LinkedHashMap<Long,TriangleList> {
+        require(data.isNotEmpty() && data.size%36==0 && cell.isFinite() && cell>0)
         val cells=LinkedHashMap<Long,TriangleList>()
         for(i in data.indices step 36) {
             val x=floor((data[i]+data[i+12]+data[i+24])/3/cell).toInt()
@@ -37,6 +40,34 @@ internal object RenderGeometry {
             val key=(x.toLong() shl 32) xor (z.toLong() and 0xffffffffL)
             cells.getOrPut(key){TriangleList()}.add(i)
         }
+        return cells
+    }
+
+    /** Upload one bounded spatial block at a time. No full-world packed/unique copy.
+     * Every original triangle is delivered once, with bit-exact attributes/winding.
+     * Consumer must upload synchronously, not retain the temporary blocks. */
+    fun forEachChunk(data: FloatArray, cell: Float = 160f,
+                     maxTriangles: Int = MAX_CHUNK_TRIANGLES,
+                     consume: (FloatArray) -> Unit) {
+        require(maxTriangles in 1..MAX_CHUNK_TRIANGLES)
+        for (list in cells(data,cell).values) {
+            var start=0
+            while(start<list.size) {
+                val count=minOf(maxTriangles,list.size-start)
+                val block=FloatArray(count*36)
+                for(j in 0 until count) {
+                    val from=list.values[start+j]
+                    data.copyInto(block,j*36,from,from+36)
+                }
+                consume(block)
+                start+=count
+            }
+        }
+    }
+
+    // Reference/export API; Android runtime uses forEachChunk instead.
+    fun partition(data: FloatArray, cell: Float = 160f): Chunks {
+        val cells=cells(data,cell)
         val packed=FloatArray(data.size); val ranges=ArrayList<Range>(cells.size)
         var cursor=0
         for(list in cells.values) {
@@ -78,9 +109,12 @@ internal object RenderGeometry {
 
     /** 32-byte mobile vertex: float position/UV, signed-normalized normal,
      * normalized RGB8 and integer material. Bounds/physics use original floats. */
-    fun compact(data: FloatArray): ByteBuffer {
+    fun compact(data: FloatArray, reuse: ByteBuffer? = null): ByteBuffer {
         require(data.size%12==0)
-        val bytes=ByteBuffer.allocateDirect(data.size/12*32).order(ByteOrder.nativeOrder())
+        val length=data.size/12*32
+        val bytes=(reuse?.takeIf { it.isDirect && it.capacity()>=length }
+            ?: ByteBuffer.allocateDirect(length)).order(ByteOrder.nativeOrder())
+        bytes.clear(); bytes.limit(length)
         for(i in data.indices step 12) {
             bytes.putFloat(data[i]); bytes.putFloat(data[i+1]); bytes.putFloat(data[i+2])
             for(k in 3..5)bytes.putShort((data[i+k].coerceIn(-1f,1f)*32767).roundToInt().toShort())

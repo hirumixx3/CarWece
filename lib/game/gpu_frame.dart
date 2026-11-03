@@ -58,13 +58,19 @@ class GpuResources {
     );
     final worldData = cached ?? result.$1;
     if (track != null && cached == null) {
-      if (_worlds.length >= 2) _worlds.remove(_worlds.keys.first);
-      _worlds[track.id] = worldData;
+      _cacheWorld(track.id, worldData);
     }
     return (worldData, result.$2);
   }
 
+  // Cache by bytes, not number of tracks: two detailed rooms alone exceed 60 MB.
+  static const worldCacheBudgetBytes = 16 * 1024 * 1024;
   static final Map<String, Float32List> _worlds = {};
+  static void _cacheWorld(String id, Float32List data) {
+    _worlds.clear();
+    if (data.lengthInBytes <= worldCacheBudgetBytes) _worlds[id] = data;
+  }
+
   static Float32List world(TrackSpec track) {
     final existing = _worlds.remove(track.id);
     if (existing != null) {
@@ -72,8 +78,7 @@ class GpuResources {
       return existing;
     }
     final data = buildWorldMesh(track).buffer;
-    if (_worlds.length >= 2) _worlds.remove(_worlds.keys.first);
-    _worlds[track.id] = data;
+    _cacheWorld(track.id, data);
     return data;
   }
 

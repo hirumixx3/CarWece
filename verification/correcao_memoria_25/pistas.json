@@ -1,0 +1,252 @@
+[
+  {
+    "id": "forest_loop_canopy",
+    "name": "ESPIRAL DAS COPAS",
+    "room": "FLORESTA",
+    "triangles": 66492,
+    "worldBytes": 9574848,
+    "activeObjectsBytes": 20396304,
+    "loops": 1,
+    "checkpoints": 32
+  },
+  {
+    "id": "forest_loop_roots",
+    "name": "LOOP DAS RAÍZES",
+    "room": "FLORESTA",
+    "triangles": 71731,
+    "worldBytes": 10329264,
+    "activeObjectsBytes": 20396304,
+    "loops": 1,
+    "checkpoints": 32
+  },
+  {
+    "id": "forest_loop_timber",
+    "name": "ANEL DA SERRARIA",
+    "room": "FLORESTA",
+    "triangles": 70024,
+    "worldBytes": 10083456,
+    "activeObjectsBytes": 20396304,
+    "loops": 1,
+    "checkpoints": 32
+  },
+  {
+    "id": "preh_loop_bones",
+    "name": "ANEL DOS FÓSSEIS",
+    "room": "PRÉ-HISTÓRIA",
+    "triangles": 134151,
+    "worldBytes": 19317744,
+    "activeObjectsBytes": 20396304,
+    "loops": 1,
+    "checkpoints": 32
+  },
+  {
+    "id": "preh_loop_nest",
+    "name": "ESPIRAL DO NINHO",
+    "room": "PRÉ-HISTÓRIA",
+    "triangles": 135218,
+    "worldBytes": 19471392,
+    "activeObjectsBytes": 20396304,
+    "loops": 1,
+    "checkpoints": 32
+  },
+  {
+    "id": "preh_loop_lava",
+    "name": "LOOP DA CALDEIRA",
+    "room": "PRÉ-HISTÓRIA",
+    "triangles": 128535,
+    "worldBytes": 18509040,
+    "activeObjectsBytes": 20396304,
+    "loops": 1,
+    "checkpoints": 32
+  },
+  {
+    "id": "desert_loop_oasis",
+    "name": "ÓRBITA DO OÁSIS",
+    "room": "DESERTO",
+    "triangles": 75271,
+    "worldBytes": 10839024,
+    "activeObjectsBytes": 20396304,
+    "loops": 1,
+    "checkpoints": 32
+  },
+  {
+    "id": "desert_loop_sand",
+    "name": "LOOP DAS AREIAS",
+    "room": "DESERTO",
+    "triangles": 77558,
+    "worldBytes": 11168352,
+    "activeObjectsBytes": 20396304,
+    "loops": 1,
+    "checkpoints": 32
+  },
+  {
+    "id": "desert_loop_canyon",
+    "name": "ANEL DO CÂNION",
+    "room": "DESERTO",
+    "triangles": 76836,
+    "worldBytes": 11064384,
+    "activeObjectsBytes": 20396304,
+    "loops": 1,
+    "checkpoints": 32
+  },
+  {
+    "id": "snow_loop_crystal",
+    "name": "ANEL DE CRISTAL",
+    "room": "NEVE",
+    "triangles": 60087,
+    "worldBytes": 8652528,
+    "activeObjectsBytes": 20396304,
+    "loops": 1,
+    "checkpoints": 32
+  },
+  {
+    "id": "snow_loop_blizzard",
+    "name": "LOOP DA NEVASCA",
+    "room": "NEVE",
+    "triangles": 60101,
+    "worldBytes": 8654544,
+    "activeObjectsBytes": 20396304,
+    "loops": 1,
+    "checkpoints": 32
+  },
+  {
+    "id": "snow_loop_pines",
+    "name": "ESPIRAL DOS PINHEIROS",
+    "room": "NEVE",
+    "triangles": 60552,
+    "worldBytes": 8719488,
+    "activeObjectsBytes": 20396304,
+    "loops": 1,
+    "checkpoints": 32
+  },
+  {
+    "id": "coast_loop_surf",
+    "name": "LOOP DO SURFE",
+    "room": "LITORAL",
+    "triangles": 62865,
+    "worldBytes": 9052560,
+    "activeObjectsBytes": 20396304,
+    "loops": 1,
+    "checkpoints": 32
+  },
+  {
+    "id": "coast_loop_pier",
+    "name": "ÓRBITA DO PÍER",
+    "room": "LITORAL",
+    "triangles": 61560,
+    "worldBytes": 8864640,
+    "activeObjectsBytes": 20396304,
+    "loops": 1,
+    "checkpoints": 32
+  },
+  {
+    "id": "coast_loop_shell",
+    "name": "ANEL DAS CONCHAS",
+    "room": "LITORAL",
+    "triangles": 63852,
+    "worldBytes": 9194688,
+    "activeObjectsBytes": 20396304,
+    "loops": 1,
+    "checkpoints": 32
+  },
+  {
+    "id": "bedroom_loop_boxes",
+    "name": "CAIXAS EM ÓRBITA",
+    "room": "QUARTO",
+    "triangles": 288004,
+    "worldBytes": 41472576,
+    "activeObjectsBytes": 20396304,
+    "loops": 1,
+    "checkpoints": 32
+  },
+  {
+    "id": "bedroom_loop_shelf",
+    "name": "ESPIRAL DA ESTANTE",
+    "room": "QUARTO",
+    "triangles": 244892,
+    "worldBytes": 35264448,
+    "activeObjectsBytes": 20396304,
+    "loops": 1,
+    "checkpoints": 32
+  },
+  {
+    "id": "garage_loop_wrench",
+    "name": "ANEL DA CHAVE INGLESA",
+    "room": "GARAGEM",
+    "triangles": 150578,
+    "worldBytes": 21683232,
+    "activeObjectsBytes": 20396304,
+    "loops": 1,
+    "checkpoints": 32
+  },
+  {
+    "id": "garage_loop_motor",
+    "name": "LOOP DO MOTOR",
+    "room": "GARAGEM",
+    "triangles": 142141,
+    "worldBytes": 20468304,
+    "activeObjectsBytes": 20396304,
+    "loops": 1,
+    "checkpoints": 32
+  },
+  {
+    "id": "arcade_loop_neon",
+    "name": "ANEL DE NEON",
+    "room": "ARCADE",
+    "triangles": 280710,
+    "worldBytes": 40422240,
+    "activeObjectsBytes": 20396304,
+    "loops": 1,
+    "checkpoints": 32
+  },
+  {
+    "id": "arcade_loop_pinball",
+    "name": "ESPIRAL DO FLIPERAMA",
+    "room": "ARCADE",
+    "triangles": 246805,
+    "worldBytes": 35539920,
+    "activeObjectsBytes": 20396304,
+    "loops": 1,
+    "checkpoints": 32
+  },
+  {
+    "id": "bath_loop_drain",
+    "name": "LOOP DO RALO",
+    "room": "BANHEIRO",
+    "triangles": 155344,
+    "worldBytes": 22369536,
+    "activeObjectsBytes": 20396304,
+    "loops": 1,
+    "checkpoints": 32
+  },
+  {
+    "id": "bath_loop_foam",
+    "name": "ANEL DE ESPUMA",
+    "room": "BANHEIRO",
+    "triangles": 143557,
+    "worldBytes": 20672208,
+    "activeObjectsBytes": 20396304,
+    "loops": 1,
+    "checkpoints": 32
+  },
+  {
+    "id": "kitchen_loop_spoon",
+    "name": "LOOP DA COLHER",
+    "room": "COZINHA",
+    "triangles": 87295,
+    "worldBytes": 12570480,
+    "activeObjectsBytes": 20396304,
+    "loops": 1,
+    "checkpoints": 32
+  },
+  {
+    "id": "living_loop_cushion",
+    "name": "ÓRBITA DAS ALMOFADAS",
+    "room": "SALA",
+    "triangles": 117100,
+    "worldBytes": 16862400,
+    "activeObjectsBytes": 20396304,
+    "loops": 1,
+    "checkpoints": 32
+  }
+]

@@ -1,0 +1,26 @@
+{
+  "dateUTC": "2026-11-03",
+  "scope": "Desktop Linux automated validation, not Android device certification",
+  "newTracks": 25,
+  "baseline128MiBOomTracks": [
+    "bedroom_loop_boxes",
+    "bedroom_loop_shelf",
+    "arcade_loop_neon",
+    "arcade_loop_pinball"
+  ],
+  "fixed128MiBPass": 25,
+  "worstSixCars128MiBPass": 25,
+  "worstSixCars96MiBPass": 25,
+  "simulatedLaps": 75,
+  "finishedLaps": 75,
+  "mesaGlesFrames": 50,
+  "nativeJUnitTests": 58,
+  "finalFlutterMainCases": 249,
+  "additionalFinalFlutterCases": 6,
+  "uniqueFinalFlutterCases": 255,
+  "fullMeshCatalogueCase": "Passed in baseline; not rerun as part of final suite. Production mesh-generation sources preserved byte-for-byte.",
+  "androidBackendCompilation": "RushGLRenderer, RenderGeometry, GraphicsContract, RenderBudget compiled against Android 36 and Flutter 3.35.7 embedding",
+  "apkBuilt": false,
+  "androidDeviceTested": false,
+  "assetsPreserved": 35
+}

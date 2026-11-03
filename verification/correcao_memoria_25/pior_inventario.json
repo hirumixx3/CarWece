@@ -1,0 +1,30 @@
+{
+  "scope": "Synthetic worst six-car geometry inventory, not a gameplay opponent selection",
+  "cars": [
+    {
+      "id": "gt3rs",
+      "body": 10
+    },
+    {
+      "id": "chiron",
+      "body": 55
+    },
+    {
+      "id": "br_fusca",
+      "body": 56
+    },
+    {
+      "id": "m4_g82",
+      "body": 44
+    },
+    {
+      "id": "testarossa",
+      "body": 54
+    },
+    {
+      "id": "m3e30",
+      "body": 23
+    }
+  ],
+  "objectsBytes": 26392464
+}

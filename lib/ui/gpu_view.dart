@@ -16,6 +16,7 @@ class GpuRaceView extends StatelessWidget {
   final double cameraDistance;
   final ValueChanged<double>? onFps;
   final VoidCallback? onReady;
+  final VoidCallback? onUnavailable;
   const GpuRaceView({
     super.key,
     required this.race,
@@ -25,6 +26,7 @@ class GpuRaceView extends StatelessWidget {
     required this.cameraDistance,
     this.onFps,
     this.onReady,
+    this.onUnavailable,
   });
   @override
   Widget build(BuildContext context) => GpuSurface(
@@ -41,6 +43,7 @@ class GpuRaceView extends StatelessWidget {
     quality: quality,
     onFps: onFps,
     onReady: onReady,
+    onUnavailable: onUnavailable,
     night: race.track.night,
     fallback: Builder(
       builder: (_) => CustomPaint(
@@ -87,6 +90,7 @@ class GpuGarageView extends StatelessWidget {
 class GpuSurface extends StatefulWidget {
   final ValueChanged<double>? onFps;
   final VoidCallback? onReady;
+  final VoidCallback? onUnavailable;
   final Future<(Float32List, List<Float32List>)> Function()? prepare;
   final List<Float32List>? extraObjects;
   final Set<int>? bodies;
@@ -103,6 +107,7 @@ class GpuSurface extends StatefulWidget {
     required this.fallback,
     this.onFps,
     this.onReady,
+    this.onUnavailable,
     this.prepare,
     this.repaint,
     this.bodies,
@@ -120,6 +125,7 @@ class _GpuSurfaceState extends State<GpuSurface> {
   static List<String>? _shaders;
   int? textureId;
   bool started = false, sending = false, compatibility = false;
+  bool creating = false, retrying = false;
   final _frameClock = Stopwatch()..start();
   int _lastFrameUs = -1000000;
   int _lastFpsUs = 0;
@@ -148,6 +154,8 @@ class _GpuSurfaceState extends State<GpuSurface> {
   }
 
   Future<void> create() async {
+    if (creating || !mounted) return;
+    creating = true;
     final render = context.findRenderObject();
     final size = render is RenderBox && render.hasSize
         ? render.size
@@ -198,17 +206,21 @@ class _GpuSurfaceState extends State<GpuSurface> {
       widget.onReady?.call();
       sendFrame();
     } catch (e) {
-      if (mounted)
+      if (mounted) {
         setState(() {
           compatibility = true;
           error = '${e.runtimeType}: ${e is PlatformException ? e.message : e}';
         });
+        widget.onUnavailable?.call();
+      }
+    } finally {
+      creating = false;
     }
   }
 
   void sendFrame() {
     final id = textureId;
-    if (id == null || sending || !mounted) return;
+    if (id == null || sending || !mounted || error != null) return;
     final now = _frameClock.elapsedMicroseconds;
     if (now - _lastFrameUs < 16000) return;
     _lastFrameUs = now;
@@ -216,18 +228,22 @@ class _GpuSurfaceState extends State<GpuSurface> {
     channel
         .invokeMethod<String>('frame', {'id': id, 'data': widget.frame()})
         .then((message) {
-          if (message != null && mounted)
+          if (message != null && mounted) {
             setState(() {
               error = message;
               compatibility = true;
             });
+            widget.onUnavailable?.call();
+          }
         })
         .catchError((Object e) {
-          if (mounted)
+          if (mounted) {
             setState(() {
               error = '$e';
               compatibility = true;
             });
+            widget.onUnavailable?.call();
+          }
         })
         .whenComplete(() => sending = false);
     if (widget.onFps != null && now - _lastFpsUs >= 1000000) {
@@ -255,18 +271,24 @@ class _GpuSurfaceState extends State<GpuSurface> {
   }
 
   Future<void> retry() async {
-    final previousId = textureId;
-    setState(() {
-      textureId = null;
-      compatibility = false;
-      error = null;
-    });
-    if (previousId != null) {
-      try {
-        await channel.invokeMethod('dispose', {'id': previousId});
-      } catch (_) {}
+    if (creating || retrying || !mounted) return;
+    retrying = true;
+    try {
+      final previousId = textureId;
+      setState(() {
+        textureId = null;
+        compatibility = false;
+        error = null;
+      });
+      if (previousId != null) {
+        try {
+          await channel.invokeMethod('dispose', {'id': previousId});
+        } catch (_) {}
+      }
+      if (mounted) await create();
+    } finally {
+      retrying = false;
     }
-    if (mounted) await create();
   }
 
   @override
