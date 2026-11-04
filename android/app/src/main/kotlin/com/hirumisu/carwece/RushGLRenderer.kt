@@ -64,7 +64,7 @@ internal class RushGLRenderer(
     // with a ceiling below full scale: holding a steady frame matters
     // more on them than the last increment of sharpness.
     private val dynamicResolution = automatic || weakGpu
-    private val budget = RenderBudget()
+    private val budget = if (weakGpu) RenderBudget(climbSamples = 180, climbBelowMs = 19.0) else RenderBudget()
     private val shadowSize = if (weakGpu) {
         if (quality == "high") 1024 else if (quality == "low") 512 else if (automatic) 768 else 1024
     } else if (quality == "high") 2048 else if (quality == "low") 512 else if(automatic)768 else 1024
@@ -267,13 +267,16 @@ internal class RushGLRenderer(
         val lx = -.52f; val ly = .76f; val lz = -.39f
         val cx = data[10]; val cy = data[11]; val cz = data[12]
         Matrix.setLookAtM(lightView, 0, cx+lx*230,cy+ly*230,cz+lz*230,cx,cy,cz,0f,1f,0f)
-        val span = if (showroom) 9f else 105f
+        // A tighter shadow camera on weak GPUs: fewer chunks in the
+        // depth pass, and the same map covers less ground, so shadows
+        // actually get sharper while costing less.
+        val span = if (showroom) 9f else if (weakGpu) 85f else 105f
         Matrix.orthoM(lightProjection, 0, -span,span,-span,span,1f,650f)
         Matrix.multiplyMM(lightVP, 0, lightProjection, 0, lightView, 0)
         shadowFrustum.set(lightVP)
         GL.glEnable(GL.GL_DEPTH_TEST); GL.glDepthFunc(GL.GL_LEQUAL)
         GL.glDisable(GL.GL_CULL_FACE); GL.glDisable(GL.GL_BLEND); GL.glDepthMask(true)
-        val updateShadow = !weakGpu || budget.level >= 2 || (frameIndex++ % 2L == 0L)
+        val updateShadow = !weakGpu || (frameIndex++ % 2L == 0L)
         if (updateShadow) {
         GL.glBindFramebuffer(GL.GL_FRAMEBUFFER, shadowFbo)
         GL.glViewport(0,0,shadowSize,shadowSize); GL.glClear(GL.GL_DEPTH_BUFFER_BIT)
@@ -287,7 +290,18 @@ internal class RushGLRenderer(
         }
         GL.glDisable(GL.GL_POLYGON_OFFSET_FILL)
         }
-        val renderScale = budget.scale
+        // On weak GPUs the resolution has a floor per quality level: it
+        // is the most visible quality there is, so the budget sheds
+        // shadow work first and touches resolution last (and never
+        // below the floor). Without this, a borderline device dropped
+        // to 55% scale and stayed there, looking like "no resolution".
+        val scaleFloor = if (weakGpu) when (quality) {
+            "high" -> .80f
+            "medium" -> .75f
+            "auto" -> .70f
+            else -> .60f
+        } else 0f
+        val renderScale = max(budget.scale, scaleFloor)
         val rw=if(dynamicResolution)(width*renderScale).toInt() else width
         val rh=if(dynamicResolution)(height*renderScale).toInt() else height
         GL.glBindFramebuffer(GL.GL_FRAMEBUFFER,if(sceneMsaaFbo!=0)sceneMsaaFbo else sceneFbo); GL.glViewport(0,0,rw,rh)
@@ -312,6 +326,7 @@ internal class RushGLRenderer(
             else -> if (budget.level == 0) 0f else 1f
         }
         scalar(sceneProgram,"uShadowQuality",shadowQuality)
+        scalar(sceneProgram,"uPerfMode",if(weakGpu)1f else 0f)
         GL.glActiveTexture(GL.GL_TEXTURE0); GL.glBindTexture(GL.GL_TEXTURE_2D,shadowTexture)
         GL.glUniform1i(uniform(sceneProgram,"uDepth"),0)
         drawWorld(sceneProgram,cameraFrustum)

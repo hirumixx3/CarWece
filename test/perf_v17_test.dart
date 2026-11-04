@@ -75,6 +75,13 @@ void main() {
     expect(renderer, contains('dynamicResolution -> null'));
     expect(renderer, contains('sceneMsaaFbo'));
     expect(renderer, contains('RenderbufferStorageMultisample'));
+    // Resolution floor on weak GPUs: shadows degrade before resolution.
+    expect(renderer, contains('scaleFloor'));
+    expect(renderer, contains('"high" -> .80f'));
+    final budget = File('$base/RenderBudget.kt').readAsStringSync();
+    expect(budget, contains('climbSamples'));
+    expect(renderer, contains('85f')); // tighter shadow camera on weak GPUs
+    expect(renderer, contains('uPerfMode'));
     final view = File('lib/ui/gpu_view.dart').readAsStringSync();
     expect(view, contains("'profile'"));
     expect(view, contains('renderWidth'));
@@ -86,7 +93,7 @@ void main() {
       final frag = await File('assets/shaders/scene.frag').readAsString();
       expect(frag, contains('fragDist>110.0'));
       expect(frag, contains('fragDist>60.0'));
-      expect(frag, contains('if(rough<.85)'));
+      expect(frag, contains('ggxLimit')); // GGX gate (0.85, 0.70 in perf mode)
       expect(frag, contains('0.1031')); // sin-free hash
       expect(frag, isNot(contains('float fog=')));
       expect(frag, isNot(contains('color=mix(color,uSky')));

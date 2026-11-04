@@ -2,7 +2,10 @@ package com.hirumisu.carwece
 
 /** Sustained presentation cost, not a promise of device FPS. Hysteresis keeps
  * temporary stalls and resume/loading from repeatedly resizing the scene. */
-internal class RenderBudget {
+internal class RenderBudget(
+    private val climbSamples: Int = 480,
+    private val climbBelowMs: Double = 17.8
+) {
     private val scales=floatArrayOf(.55f,.70f,.85f,1f)
     var level=2; private set
     val scale: Float get()=scales[level]
@@ -15,9 +18,9 @@ internal class RenderBudget {
         samples++
         if(samples<45)return false
         slow=if(average>23.5)slow+1 else 0
-        fast=if(average<17.8)fast+1 else 0
+        fast=if(average<climbBelowMs)fast+1 else 0
         if(slow>=24 && level>0) { level--; reset(); return true }
-        if(fast>=480 && level<scales.lastIndex) { level++; reset(); return true }
+        if(fast>=climbSamples && level<scales.lastIndex) { level++; reset(); return true }
         return false
     }
 }

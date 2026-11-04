@@ -185,9 +185,11 @@ class _GpuSurfaceState extends State<GpuSurface> {
         : widget.quality == 'low'
         ? 960
         : 1280;
+    // Weak hardware keeps the full HIGH width: the renderer's dynamic
+    // scale floor protects the frame rate instead of a narrower buffer.
     final renderWidth =
-        lowEnd && !widget.showroom && widget.quality == 'high' && width > 1280
-        ? 1280
+        lowEnd && !widget.showroom && widget.quality == 'high' && width > 1440
+        ? 1440
         : width;
     final height = (renderWidth * size.height / size.width).round().clamp(
       180,
