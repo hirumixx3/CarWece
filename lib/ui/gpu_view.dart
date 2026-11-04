@@ -167,9 +167,12 @@ class _GpuSurfaceState extends State<GpuSurface> {
     if (refreshRate > 65) {
       _minFrameUs = (1000000 / refreshRate).round() - 400;
     }
-    // Entry-level hardware (Galaxy A05s class) gets its own ceilings: a
-    // stable 60 fps target and a narrower render buffer. Chasing the
-    // panel's 90 Hz on an Adreno 610 produced uneven frame pacing.
+    // Entry-level hardware (Galaxy A05s class) is detected here for the
+    // render-width ceiling below. Frame submission follows the panel on
+    // every device: an in-between cap quantizes badly (a 16 ms gate on
+    // a 90 Hz panel lets a frame through only every other tick, which
+    // pins the game at 45 fps), and the native renderer draws only the
+    // latest frame, so the GPU sets its own pace.
     var lowEnd = false;
     try {
       final profile = await channel.invokeMethod<Map<dynamic, dynamic>>(
@@ -177,7 +180,6 @@ class _GpuSurfaceState extends State<GpuSurface> {
       );
       lowEnd = profile?['lowEnd'] == true;
     } catch (_) {}
-    if (lowEnd && _minFrameUs < 16000) _minFrameUs = 16000;
     final width = widget.showroom
         ? 960
         : widget.quality == 'high'

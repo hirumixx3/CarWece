@@ -682,8 +682,9 @@ Float32List raceGpuFrame(RaceEngine race, {double cameraDistance = 1}) {
       instances.add(GpuInstance(GpuMeshId.damage + d.car.body, pose));
     }
     if (d.repairGlow > 0) {
+      final base = race.driverFrame(d);
       for (var i = 0; i < 4; i++) {
-        final a = i * math.pi / 2 + race.time * 1.7, base = race.driverFrame(d);
+        final a = i * math.pi / 2 + race.time * 1.7;
         final point =
             base.point(math.cos(a) * 3, 1.8 + (1.4 - d.repairGlow) * 2) +
             base.forward * math.sin(a) * 3;

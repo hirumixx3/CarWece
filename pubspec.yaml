@@ -1,7 +1,7 @@
 name: carwece
 description: CarWece, corrida arcade de miniaturas em pistas de brinquedo, por hirumisu.
 publish_to: none
-version: 1.7.3+12
+version: 1.7.4+13
 environment:
   sdk: '>=3.8.0 <4.0.0'
 dependencies:

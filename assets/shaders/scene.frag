@@ -30,7 +30,6 @@ float noise(vec2 p) {
 }
 vec3 filmic(vec3 x) { return clamp((x*(2.51*x+0.03))/(x*(2.43*x+0.59)+0.14),0.0,1.0); }
 uniform float uShadowQuality;
-uniform float uPerfMode;
 float visibility(vec3 n) {
   vec3 p=vShadow.xyz/vShadow.w*0.5+0.5;
   if(p.z>1.0||p.z<0.0||any(lessThan(p.xy,vec2(0)))||any(greaterThan(p.xy,vec2(1))))return 1.0;
@@ -42,11 +41,6 @@ float visibility(vec3 n) {
   float q=uShadowQuality;
   if(fragDist>110.0)q=0.0;
   else if(fragDist>60.0 && q>2.0)q=2.0;
-  // Weak GPUs tighten the same LOD sooner; near shadows stay filtered.
-  if(uPerfMode>0.5) {
-    if(fragDist>85.0)q=0.0;
-    else if(fragDist>45.0 && q>2.0)q=2.0;
-  }
   float occluded;
   if(q<.5) {
     occluded=p.z-bias<=texture(uDepth,p.xy).r?0.0:1.0;
@@ -196,8 +190,7 @@ void main() {
   // Surfaces rougher than .85 have no readable GGX lobe; skipping the
   // distribution/geometry math there saves real ALU on most world pixels.
   vec3 color=base*(ambient+uSunColor*ndl*vis*1.18)*(1.0-metal*.38);
-  float ggxLimit=uPerfMode>0.5 ? 0.70 : 0.85;
-  if(rough<ggxLimit) {
+  if(rough<.85) {
     float alphaR=max(.035,rough*rough), a2=alphaR*alphaR;
     float ndh=max(dot(n,halfDir),0.0), vdh=max(dot(viewDir,halfDir),0.0);
     float denominator=ndh*ndh*(a2-1.0)+1.0;

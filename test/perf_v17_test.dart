@@ -67,7 +67,7 @@ void main() {
     expect(activity, contains('weakGpu'));
     final renderer = File('$base/RushGLRenderer.kt').readAsStringSync();
     expect(renderer, contains('dynamicResolution'));
-    expect(renderer, contains('frameIndex')); // half-rate shadow updates
+    expect(renderer, isNot(contains('frameIndex'))); // shadows full-rate
     // The v1.7.1 flicker: an MSAA default framebuffer rejects the final
     // blit from the single-sample scene target. The default framebuffer
     // must stay single-sample under dynamic resolution and MSAA must
@@ -80,11 +80,16 @@ void main() {
     expect(renderer, contains('"high" -> .80f'));
     final budget = File('$base/RenderBudget.kt').readAsStringSync();
     expect(budget, contains('climbSamples'));
-    expect(renderer, contains('85f')); // tighter shadow camera on weak GPUs
-    expect(renderer, contains('uPerfMode'));
+    // No weak-only visual cuts remain: same shadow span and shader path
+    // on every device (the v1.7.4 pacing fix carries the frame rate).
+    expect(renderer, contains('span = if (showroom) 9f else 105f'));
+    expect(renderer, isNot(contains('uPerfMode')));
     final view = File('lib/ui/gpu_view.dart').readAsStringSync();
     expect(view, contains("'profile'"));
     expect(view, contains('renderWidth'));
+    // The v1.7.1 60 fps submission floor quantized to 45 fps on the
+    // 90 Hz panel and caused the stutter; it must not come back.
+    expect(view, isNot(contains('lowEnd && _minFrameUs')));
   });
 
   test(
@@ -93,7 +98,7 @@ void main() {
       final frag = await File('assets/shaders/scene.frag').readAsString();
       expect(frag, contains('fragDist>110.0'));
       expect(frag, contains('fragDist>60.0'));
-      expect(frag, contains('ggxLimit')); // GGX gate (0.85, 0.70 in perf mode)
+      expect(frag, contains('if(rough<.85)'));
       expect(frag, contains('0.1031')); // sin-free hash
       expect(frag, isNot(contains('float fog=')));
       expect(frag, isNot(contains('color=mix(color,uSky')));
