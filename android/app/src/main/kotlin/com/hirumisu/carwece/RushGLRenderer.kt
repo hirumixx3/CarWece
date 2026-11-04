@@ -192,9 +192,9 @@ internal class RushGLRenderer(
         GL.glBindVertexArray(mesh.vao)
         GL.glDrawElements(GL.GL_TRIANGLES,mesh.count,GL.GL_UNSIGNED_INT,0)
     }
-    private fun drawWorld(program: Int, frustum: RenderGeometry.Frustum) {
+    private fun drawWorld(program: Int, frustum: RenderGeometry.Frustum, forShadow: Boolean = false) {
         matrix(program,"uModel",identity)
-        for(mesh in world)if(frustum.visible(mesh.bounds)) {
+        for(mesh in world)if((!forShadow || mesh.castsShadow) && frustum.visible(mesh.bounds)) {
             GL.glBindVertexArray(mesh.vao)
             GL.glDrawElements(GL.GL_TRIANGLES,mesh.count,GL.GL_UNSIGNED_INT,0)
         }
@@ -242,7 +242,7 @@ internal class RushGLRenderer(
         GL.glViewport(0,0,shadowSize,shadowSize); GL.glClear(GL.GL_DEPTH_BUFFER_BIT)
         GL.glEnable(GL.GL_POLYGON_OFFSET_FILL); GL.glPolygonOffset(1.3f,2.0f)
         GL.glUseProgram(depthProgram); matrix(depthProgram,"uLightVP",lightVP)
-        drawWorld(depthProgram,shadowFrustum)
+        drawWorld(depthProgram,shadowFrustum,true)
         for (i in 0 until count) {
             val offset=15+i*17; val mesh=data[offset].toInt()
             if (mesh in objects.indices && !objects[mesh].transparent && objects[mesh].castsShadow &&
@@ -273,7 +273,14 @@ internal class RushGLRenderer(
         drawWorld(sceneProgram,cameraFrustum)
         for (pass in 0..1) {
             if (pass == 1) { GL.glEnable(GL.GL_BLEND); GL.glBlendFunc(GL.GL_SRC_ALPHA,GL.GL_ONE_MINUS_SRC_ALPHA); GL.glDepthMask(false) }
-            for (i in 0 until count) {
+            // Transparent effects must blend far-to-near; in packet order a
+            // near smoke puff could be overwritten by a farther shield.
+            val order = if (pass == 0) (0 until count).toList() else (0 until count).sortedByDescending { i ->
+                val offset=15+i*17
+                val dx=data[offset+13]-data[0]; val dy=data[offset+14]-data[1]; val dz=data[offset+15]-data[2]
+                dx*dx+dy*dy+dz*dz
+            }
+            for (i in order) {
                 val offset=15+i*17; val mesh=data[offset].toInt()
                 if (mesh !in objects.indices) continue
                 if (objects[mesh].transparent != (pass == 1)) continue
