@@ -57,6 +57,16 @@ void main() {
     expect(packet.length, 15 + 128 * 17);
   });
 
+  test('Race loop caps simulation catch-up (anti-spiral)', () {
+    final screen = File('lib/ui/race_screen.dart').readAsStringSync();
+    expect(screen, contains('final stepDt = dt > 1 / 30 ? 1 / 30 : dt;'));
+    expect(screen, contains('race.update(stepDt);'));
+    // The engine itself keeps full catch-up semantics: online lockstep
+    // and the test suite drive it directly.
+    final engine = File('lib/game/engine.dart').readAsStringSync();
+    expect(engine, contains('_accumulator += dt.clamp(0, .1);'));
+  });
+
   test('Weak-GPU profile (Galaxy A05s class) is wired end to end', () {
     final base = 'android/app/src/main/kotlin/com/hirumisu/carwece';
     final profile = File('$base/HardwareProfile.kt').readAsStringSync();

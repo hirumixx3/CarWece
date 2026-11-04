@@ -99,16 +99,23 @@ class _RaceScreenState extends State<RaceScreen>
         : (elapsed - previous!).inMicroseconds / 1000000;
     previous = elapsed;
     if (dt > 0) fps = fps * .95 + (1 / dt).clamp(0, 120) * .05;
-    race.update(dt);
+    // Anti-spiral: the engine catches up at a fixed 120 Hz, so one slow
+    // frame used to demand up to 12 steps and make the next frame slower
+    // still, compounding until the game sat near 10 fps on entry-level
+    // CPUs. Cap the catch-up at 4 steps (1/30 s): at 30 fps or better
+    // nothing changes; below that, the game sheds a little time instead
+    // of compounding the debt.
+    final stepDt = dt > 1 / 30 ? 1 / 30 : dt;
+    race.update(stepDt);
     frame.value++;
     // Input listeners stay live at display cadence. Rebuild labels, map and
     // decoration at 30 Hz instead of rebuilding the entire HUD at 60/120 Hz.
-    hudClock += dt;
+    hudClock += stepDt;
     if (hudClock >= 1 / 30) {
       hudClock %= 1 / 30;
       hudFrame.value++;
     }
-    audioClock += dt;
+    audioClock += stepDt;
     String? event;
     if (race.events.isNotEmpty) {
       event = race.events.last;
