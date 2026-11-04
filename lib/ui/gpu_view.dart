@@ -167,6 +167,17 @@ class _GpuSurfaceState extends State<GpuSurface> {
     if (refreshRate > 65) {
       _minFrameUs = (1000000 / refreshRate).round() - 400;
     }
+    // Entry-level hardware (Galaxy A05s class) gets its own ceilings: a
+    // stable 60 fps target and a narrower render buffer. Chasing the
+    // panel's 90 Hz on an Adreno 610 produced uneven frame pacing.
+    var lowEnd = false;
+    try {
+      final profile = await channel.invokeMethod<Map<dynamic, dynamic>>(
+        'profile',
+      );
+      lowEnd = profile?['lowEnd'] == true;
+    } catch (_) {}
+    if (lowEnd && _minFrameUs < 16000) _minFrameUs = 16000;
     final width = widget.showroom
         ? 960
         : widget.quality == 'high'
@@ -174,7 +185,13 @@ class _GpuSurfaceState extends State<GpuSurface> {
         : widget.quality == 'low'
         ? 960
         : 1280;
-    final height = (width * size.height / size.width).round().clamp(180, 1200);
+    final renderWidth = lowEnd && !widget.showroom && width > 1152
+        ? 1152
+        : width;
+    final height = (renderWidth * size.height / size.width).round().clamp(
+      180,
+      1200,
+    );
     try {
       final shaders = _shaders ??= await Future.wait(
         [
@@ -187,7 +204,7 @@ class _GpuSurfaceState extends State<GpuSurface> {
       final prepared = await widget.prepare?.call();
       if (!mounted) return;
       final id = await channel.invokeMethod<int>('create', {
-        'width': width,
+        'width': renderWidth,
         'height': height,
         'world': prepared?.$1 ?? widget.world(),
         'objects':

@@ -28,6 +28,7 @@ internal class RushGLRenderer(
     private val showroom: Boolean,
     private val night: Boolean,
     private val quality: String,
+    private val weakGpu: Boolean = false,
     private val onReady: (String?) -> Unit
 ) {
     val id: Long get() = entry.id()
@@ -59,8 +60,15 @@ internal class RushGLRenderer(
     private var shadowFbo = 0
     private var shadowTexture = 0
     private val automatic = quality == "auto"
+    // Weak GPUs render every mode through the dynamic-resolution target,
+    // with a ceiling below full scale: holding a steady frame matters
+    // more on them than the last increment of sharpness.
+    private val dynamicResolution = automatic || weakGpu
     private val budget = RenderBudget()
-    private val shadowSize = if (quality == "high") 2048 else if (quality == "low") 512 else if(automatic)768 else 1024
+    private val shadowSize = if (weakGpu) {
+        if (quality == "high") 1024 else if (quality == "low") 512 else if (automatic) 640 else 768
+    } else if (quality == "high") 2048 else if (quality == "low") 512 else if(automatic)768 else 1024
+    private var frameIndex = 0L
     private data class Mesh(val buffer: Int, val elements: Int, val vao: Int,
         val count: Int, val bounds: RenderGeometry.Bounds,
         val transparent: Boolean, val castsShadow: Boolean)
@@ -103,7 +111,12 @@ internal class RushGLRenderer(
             if (!EGL14.eglChooseConfig(display, attrs, 0, configs, 0, 1, count, 0) || count[0] == 0) return null
             return configs[0]
         }
-        val selected = (if (quality == "high") config(4) else if (quality == "medium") config(2) else null) ?: config(0)
+        val selected = (when {
+            weakGpu -> if (quality == "high") config(2) else null
+            quality == "high" -> config(4)
+            quality == "medium" -> config(2)
+            else -> null
+        }) ?: config(0)
         check(selected != null) { "OpenGL ES 3.0 não disponível" }
         context = EGL14.eglCreateContext(display, selected, EGL14.EGL_NO_CONTEXT,
             intArrayOf(EGL14.EGL_CONTEXT_CLIENT_VERSION, 3, EGL14.EGL_NONE), 0)
@@ -200,7 +213,7 @@ internal class RushGLRenderer(
         }
     }
     private fun initSceneTarget() {
-        if(!automatic)return
+        if(!dynamicResolution)return
         val ids=IntArray(1)
         GL.glGenTextures(1,ids,0); sceneColor=ids[0]; GL.glBindTexture(GL.GL_TEXTURE_2D,sceneColor)
         GL.glTexImage2D(GL.GL_TEXTURE_2D,0,GL.GL_RGBA8,width,height,0,GL.GL_RGBA,GL.GL_UNSIGNED_BYTE,null)
@@ -238,6 +251,8 @@ internal class RushGLRenderer(
         shadowFrustum.set(lightVP)
         GL.glEnable(GL.GL_DEPTH_TEST); GL.glDepthFunc(GL.GL_LEQUAL)
         GL.glDisable(GL.GL_CULL_FACE); GL.glDisable(GL.GL_BLEND); GL.glDepthMask(true)
+        val updateShadow = !weakGpu || (frameIndex++ % 2L == 0L)
+        if (updateShadow) {
         GL.glBindFramebuffer(GL.GL_FRAMEBUFFER, shadowFbo)
         GL.glViewport(0,0,shadowSize,shadowSize); GL.glClear(GL.GL_DEPTH_BUFFER_BIT)
         GL.glEnable(GL.GL_POLYGON_OFFSET_FILL); GL.glPolygonOffset(1.3f,2.0f)
@@ -249,8 +264,10 @@ internal class RushGLRenderer(
                 shadowFrustum.visible(objects[mesh].bounds,data,offset+1)) draw(objects[mesh],depthProgram,data,offset+1)
         }
         GL.glDisable(GL.GL_POLYGON_OFFSET_FILL)
-        val rw=if(automatic)(width*budget.scale).toInt() else width
-        val rh=if(automatic)(height*budget.scale).toInt() else height
+        }
+        val renderScale = if (weakGpu) min(budget.scale, .85f) else budget.scale
+        val rw=if(dynamicResolution)(width*renderScale).toInt() else width
+        val rh=if(dynamicResolution)(height*renderScale).toInt() else height
         GL.glBindFramebuffer(GL.GL_FRAMEBUFFER,sceneFbo); GL.glViewport(0,0,rw,rh)
         GL.glEnable(GL.GL_SCISSOR_TEST); GL.glScissor(0,0,rw,rh)
         if (showroom) GL.glClearColor(.046f,.078f,.125f,1f)
@@ -269,7 +286,7 @@ internal class RushGLRenderer(
         scalar(sceneProgram,"uShadowTexel",1f/shadowSize)
         val shadowQuality = when {
             quality == "low" -> 0f
-            quality == "high" -> (3 - max(0, 2 - budget.level)).toFloat()
+            quality == "high" -> ((if (weakGpu) 2 else 3) - max(0, 2 - budget.level)).toFloat()
             else -> if (budget.level == 0) 0f else 1f
         }
         scalar(sceneProgram,"uShadowQuality",shadowQuality)
@@ -294,7 +311,7 @@ internal class RushGLRenderer(
             }
         }
         GL.glDepthMask(true); GL.glDisable(GL.GL_BLEND)
-        if(automatic) {
+        if(dynamicResolution) {
             GL.glBindFramebuffer(GL.GL_READ_FRAMEBUFFER,sceneFbo)
             GL.glBindFramebuffer(GL.GL_DRAW_FRAMEBUFFER,0)
             GL.glBlitFramebuffer(0,0,rw,rh,0,0,width,height,GL.GL_COLOR_BUFFER_BIT,GL.GL_LINEAR)

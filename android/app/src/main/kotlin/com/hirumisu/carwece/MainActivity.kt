@@ -14,6 +14,18 @@ class MainActivity : FlutterActivity() {
     private var introPending = true
     private var foreground = false
     private val graphics = mutableMapOf<Long, RushGLRenderer>()
+    private fun hardwareProfile(): Map<String, Any?> {
+        val model = android.os.Build.MODEL ?: ""
+        val soc = if (android.os.Build.VERSION.SDK_INT >= 31) android.os.Build.SOC_MODEL ?: "" else ""
+        var totalMemMb = -1L
+        try {
+            val info = android.app.ActivityManager.MemoryInfo()
+            (getSystemService(android.app.ActivityManager::class.java))?.getMemoryInfo(info)
+            if (info.totalMem > 0) totalMemMb = info.totalMem / (1024 * 1024)
+        } catch (_: Exception) { }
+        return mapOf("model" to model, "soc" to soc, "totalMemMb" to totalMemMb,
+            "lowEnd" to HardwareProfile.isLowEnd(model, soc, totalMemMb))
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
@@ -82,6 +94,7 @@ class MainActivity : FlutterActivity() {
             .setMethodCallHandler { call, result ->
                 val args = call.arguments as? Map<*, *> ?: emptyMap<Any, Any>()
                 when (call.method) {
+                    "profile" -> result.success(hardwareProfile())
                     "create" -> {
                         try {
                             val world = args["world"] as FloatArray
@@ -94,7 +107,8 @@ class MainActivity : FlutterActivity() {
                             entry.surfaceTexture().setDefaultBufferSize(width,height)
                             val id = entry.id()
                             val renderer = RushGLRenderer(entry,width,height,world,meshes,shaders,initial,
-                                args["showroom"] == true,args["night"] == true,args["quality"] as? String ?: "medium") { error ->
+                                args["showroom"] == true,args["night"] == true,args["quality"] as? String ?: "medium",
+                                weakGpu = hardwareProfile()["lowEnd"] == true) { error ->
                                 if(error==null)result.success(id)
                                 else { graphics.remove(id); result.error("graphics_unavailable",error,null) }
                             }

@@ -57,6 +57,22 @@ void main() {
     expect(packet.length, 15 + 128 * 17);
   });
 
+  test('Weak-GPU profile (Galaxy A05s class) is wired end to end', () {
+    final base = 'android/app/src/main/kotlin/com/hirumisu/carwece';
+    final profile = File('$base/HardwareProfile.kt').readAsStringSync();
+    expect(profile, contains('SM-A057')); // Galaxy A05s variants
+    expect(profile, contains('SM6225')); // Snapdragon 680 / Adreno 610
+    final activity = File('$base/MainActivity.kt').readAsStringSync();
+    expect(activity, contains('"profile"'));
+    expect(activity, contains('weakGpu'));
+    final renderer = File('$base/RushGLRenderer.kt').readAsStringSync();
+    expect(renderer, contains('dynamicResolution'));
+    expect(renderer, contains('frameIndex')); // half-rate shadow updates
+    final view = File('lib/ui/gpu_view.dart').readAsStringSync();
+    expect(view, contains("'profile'"));
+    expect(view, contains('1152')); // render width ceiling
+  });
+
   test(
     'Shader carries the distance shadow LOD and rough-surface GGX gate',
     () async {
@@ -70,3 +86,5 @@ void main() {
     },
   );
 }
+
+void weakGpuProfileTests() {}
