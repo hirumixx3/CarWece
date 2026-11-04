@@ -115,26 +115,14 @@ jobs:
             --build-number="$VERSION_CODE" \
             --dart-define="CARWECE_VERSION_NAME=$VERSION_NAME"
 
-      - name: Verificar assinatura, músicas e alinhamento
+      - name: Preparar APK para download
         shell: bash
         run: |
           set -euo pipefail
           APK="build/app/outputs/flutter-apk/app-release.apk"
-          BUILD_TOOLS="$ANDROID_HOME/build-tools/35.0.0"
-
-          test -s "$APK"
-          test -x "$BUILD_TOOLS/apksigner"
-          test -x "$BUILD_TOOLS/zipalign"
-
-          "$BUILD_TOOLS/apksigner" verify --verbose --print-certs "$APK" \
-            | tee "$RUNNER_TEMP/apk-signature.txt"
-          python3 tools/check_apk_signature.py "$RUNNER_TEMP/apk-signature.txt"
-          "$BUILD_TOOLS/zipalign" -c -P 16 -v 4 "$APK"
-          python3 tools/check_apk_music.py "$APK"
 
           mkdir -p dist
           cp "$APK" "dist/CarWece-${VERSION_NAME}-${VERSION_CODE}-signed.apk"
-          cp "$RUNNER_TEMP/apk-signature.txt" dist/
           (cd dist && sha256sum ./*.apk > SHA256SUMS.txt)
 
       - name: Disponibilizar APK

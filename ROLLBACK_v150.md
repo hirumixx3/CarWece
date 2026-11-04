@@ -15,8 +15,9 @@ essa base:
      build.
 2. **Poder Propulsor removido das corridas** (o mesmo corte da antiga
    v1.6.0): enum, nome, cargas, ativação, pool dos bots e ícone saíram;
-   restam 16 itens. A arma de batalha PROPULSORES é outro sistema e
-   ficou. `onlineContent` novo: `carwece-brasil-3.2-sem-propulsor`.
+   restam 16 itens. `onlineContent` novo:
+   `carwece-brasil-3.2-sem-propulsor`. A arma PROPULSORES do modo
+   batalha é outro item e ficou, como estava na 1.5.0.
 
 Validação local: analyze limpo, suíte completa 279/279 verde.
 pubspec segue **1.5.0+7**.

@@ -2,7 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:carwece/game/content.dart';
 import 'package:carwece/game/engine.dart';
 
-// v1.4 race powers: Salva Tripla, Dreno de Energia, Propulsor and Fantasma
+// v1.4 race powers: Salva Tripla, Dreno de Energia and Fantasma
 // are original additions appended to ItemType (indices 13-16), so saved
 // games, network item indices and the pickup bag keep their meaning.
 void main() {
@@ -25,7 +25,7 @@ void main() {
       seen.add(e.rollItem());
     }
     expect(seen, ItemType.values.toSet());
-    expect(ItemType.values.length, 17);
+    expect(ItemType.values.length, 16);
   });
 
   test('Salva Tripla fires a fan of three rockets with two charges', () {
@@ -70,17 +70,6 @@ void main() {
     e.useItem();
     expect(bot.electricTime, 0);
     expect(e.nitro, 10);
-  });
-
-  test('Propulsor launches the car with an impulse and keeps a charge', () {
-    final e = race();
-    e.placeDriver(e.player, 100, 0);
-    e.giveItem(ItemType.propulsor);
-    e.useItem();
-    expect(e.player.airborne, isTrue);
-    expect(e.player.velocity.length, greaterThan(15));
-    expect(e.item, ItemType.propulsor);
-    expect(e.itemCharges, 1);
   });
 
   test('Fantasma makes the driver intangible until the timer ends', () {

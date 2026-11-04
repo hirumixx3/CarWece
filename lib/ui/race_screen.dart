@@ -1163,7 +1163,6 @@ class _RaceScreenState extends State<RaceScreen>
                             ItemType.spikes => Icons.warning_amber_rounded,
                             ItemType.salvo => Icons.burst_mode_rounded,
                             ItemType.dreno => Icons.swap_horiz_rounded,
-                            ItemType.propulsor => Icons.flight_takeoff_rounded,
                             ItemType.fantasma => Icons.visibility_off_rounded,
                             null => Icons.inventory_2_outlined,
                           },
