@@ -1760,6 +1760,10 @@ enum ItemType {
   shockwave,
   repair,
   spikes,
+  salvo,
+  dreno,
+  propulsor,
+  fantasma,
 }
 
 String itemName(ItemType item) => switch (item) {
@@ -1776,6 +1780,10 @@ String itemName(ItemType item) => switch (item) {
   ItemType.shockwave => 'IMPACTO',
   ItemType.repair => 'REPARO',
   ItemType.spikes => 'ESPINHOS',
+  ItemType.salvo => 'SALVA TRIPLA',
+  ItemType.dreno => 'DRENO DE ENERGIA',
+  ItemType.propulsor => 'PROPULSOR',
+  ItemType.fantasma => 'FANTASMA',
 };
 
 class TrackFrame {

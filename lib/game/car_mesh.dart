@@ -847,6 +847,7 @@ Mesh3 buildCarMesh(CarSpec car) {
         _buildExpansionDetails(m, car);
       }
   }
+  _buildUniversalCarDetails(m, car);
   if (car.body >= 31) {
     final rounded = m.buffer;
     V3 value(int at) => V3(rounded[at], rounded[at + 1], rounded[at + 2]);
@@ -865,6 +866,53 @@ Mesh3 buildCarMesh(CarSpec car) {
     }
   }
   return m;
+}
+
+/// Detailing shared by every roster car, sized from its own design so the
+/// whole catalogue gains mirrors, skirts, aero lips and exhausts without
+/// touching each authored detail builder. All parts stay inside the design
+/// silhouette (plus a few centimetres) so physics proxies remain honest.
+void _buildUniversalCarDetails(Mesh3 m, CarSpec car) {
+  final d = car.design, l = d.halfLength, w = d.halfWidth;
+  const dark = 0xff141a20, chrome = 0xffc9d2d8;
+  void part(V3 p, V3 size, int color, [int material = Material3.rubber]) =>
+      m.roundedBox(p, size, .02, color, material);
+  for (final side in [-1.0, 1.0]) {
+    // Mirror on a short stalk at the base of the glasshouse.
+    part(
+      V3(side * (w + .07), d.belt + .34, d.glassFront - .28),
+      const V3(.17, .11, .24),
+      dark,
+      Material3.plastic,
+    );
+    // Rocker skirt between the axles.
+    part(
+      V3(side * (w - .03), .36, (d.frontAxle + d.rearAxle) / 2),
+      V3(.09, .17, (d.frontAxle - d.rearAxle) * .82),
+      dark,
+    );
+    // Twin exhaust tips under the rear valance.
+    m.cylinder(
+      V3(side * w * .48, .4, -l - .05),
+      const V3(0, 0, 1),
+      .22,
+      .085,
+      .095,
+      chrome,
+      Material3.metal,
+      segments: 12,
+    );
+    // Door handle hint.
+    part(
+      V3(side * (w + .012), d.belt + .02, -.35),
+      const V3(.025, .045, .3),
+      dark,
+      Material3.plastic,
+    );
+  }
+  // Front splitter and rear diffuser lips.
+  part(V3(0, .27, l - .18), V3(w * 1.66, .08, .52), dark);
+  part(V3(0, .3, -l + .14), V3(w * 1.58, .1, .42), dark);
 }
 
 /// Rear-engine 911 greenhouse: compound curved profile and wraparound glass.

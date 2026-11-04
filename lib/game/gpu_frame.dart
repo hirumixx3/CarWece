@@ -100,7 +100,7 @@ class GpuResources {
     _shield().buffer,
     _flame().buffer,
     _trail().buffer,
-    _sphere(0xffffaa21, 16).buffer,
+    _explosion().buffer,
     _sphere(0xff526079, 12).buffer,
     _sparks().buffer,
   ];
@@ -363,6 +363,54 @@ class GpuResources {
         p(a, 1),
         0xffffbd67,
         Material3.glow,
+      );
+    }
+    return m;
+  }
+
+  /// Layered blast: a jittered outer fireball, a bright core and six small
+  /// satellite blobs, so one instanced mesh reads as a real explosion
+  /// instead of a smooth ball.
+  static Mesh3 _explosion() {
+    final m = Mesh3();
+    void blob(V3 center, double radius, int color, int seed) {
+      V3 p(double a, double b) {
+        final jitter =
+            1 + .16 * math.sin(a * 3 + seed * 1.7) * math.cos(b * 4 + seed);
+        return center +
+            V3(
+                  math.cos(a) * math.sin(b),
+                  math.cos(b),
+                  math.sin(a) * math.sin(b),
+                ) *
+                (radius * jitter);
+      }
+
+      for (var a = 0; a < 12; a++) {
+        for (var b = 0; b < 6; b++) {
+          final a0 = a / 12 * math.pi * 2, a1 = (a + 1) / 12 * math.pi * 2;
+          final b0 = b / 6 * math.pi, b1 = (b + 1) / 6 * math.pi;
+          m.quad(
+            p(a0, b0),
+            p(a0, b1),
+            p(a1, b1),
+            p(a1, b0),
+            color,
+            Material3.glow,
+          );
+        }
+      }
+    }
+
+    blob(V3.zero, 1, 0xffff8a1e, 1);
+    blob(V3.zero, .58, 0xffffe9a8, 5);
+    for (var i = 0; i < 6; i++) {
+      final a = i * 1.13 + .4;
+      blob(
+        V3(math.cos(a) * .95, .25 + (i % 3) * .3, math.sin(a) * .95),
+        .34,
+        i.isEven ? 0xffffa63d : 0xffff7a1a,
+        i + 2,
       );
     }
     return m;
@@ -881,9 +929,31 @@ Float32List raceGpuFrame(RaceEngine race, {double cameraDistance = 1}) {
           ),
         );
       case ImpactKind.explosion:
+        if (t >= .25 && t < 1) {
+          // Lingering smoke column after the flash.
+          instances.add(
+            GpuInstance(
+              GpuMeshId.smoke,
+              poseMatrix(
+                f,
+                x,
+                lift: .8 + (t - .25) * 4,
+                scale: 1.4 + (t - .25) * 3.4,
+              ),
+            ),
+          );
+        }
+        if (t < .18) {
+          instances.add(
+            GpuInstance(
+              GpuMeshId.debris,
+              poseMatrix(f, x, lift: .3 + t * 5, scale: 1.2),
+            ),
+          );
+        }
         if (t < .6) {
           final size = .5 + math.sin(t / .6 * math.pi) * 3.0;
-          for (var i = 0; i < 4; i++) {
+          for (var i = 0; i < 5; i++) {
             final a = i * 2.4;
             final blob = TrackFrame(
               f.p +

@@ -44,6 +44,8 @@ class SpikeStrip {
 extension CombatRules on RaceEngine {
   int initialCharges(ItemType type, bool enhanced) => switch (type) {
     ItemType.missile || ItemType.ice => 3,
+    ItemType.salvo => enhanced ? 3 : 2,
+    ItemType.propulsor => 2,
     ItemType.grenade => enhanced ? 3 : 2,
     ItemType.spikes => enhanced ? 2 : 1,
     ItemType.mine || ItemType.nitro => enhanced ? 3 : 1,
@@ -116,6 +118,7 @@ extension CombatRules on RaceEngine {
                   d != owner &&
                   d.finishTime == null &&
                   d.position != null &&
+                  d.ghostTime <= 0 &&
                   (d.position! - owner.position!).length < range &&
                   (d.position! - owner.position!).dot(owner.forward!) > 3,
             )
@@ -205,7 +208,9 @@ extension CombatRules on RaceEngine {
           (m) => (m.position - owner.position!).length < radius,
         );
         for (final d in drivers)
-          if (d != owner && (d.position! - owner.position!).length < radius) {
+          if (d != owner &&
+              d.ghostTime <= 0 &&
+              (d.position! - owner.position!).length < radius) {
             d.weaponLock = enhanced ? 4 : 2.5;
             if (d == player && enhanced) {
               item = null;
@@ -268,7 +273,7 @@ extension CombatRules on RaceEngine {
         final radius = enhanced ? 58.0 : 38.0;
         _effect(owner, ImpactKind.force);
         for (final d in drivers) {
-          if (d == owner || d.finishTime != null) continue;
+          if (d == owner || d.finishTime != null || d.ghostTime > 0) continue;
           final delta = d.position! - owner.position!;
           if (delta.length > radius || delta.dot(owner.normal!).abs() > 10)
             continue;
@@ -315,6 +320,99 @@ extension CombatRules on RaceEngine {
           ),
         );
         if (human) tell('ESPINHOS • FAIXA SOLTA NA PISTA');
+      case ItemType.salvo:
+        // Three rockets in a fan (five and homing when enhanced), reusing
+        // the missile flight model and gate-breaking aim of the single shot.
+        var baseAim = owner.forward!;
+        for (final path in track.shortcuts) {
+          if (brokenGates.contains(path.id)) continue;
+          final to = path.gate.p + const V3(0, 4, 0) - owner.position!;
+          if (to.length < 95 &&
+              to.dot(owner.forward!) > 8 &&
+              to.unit.dot(owner.forward!) > .94) {
+            baseAim = to.unit;
+            break;
+          }
+        }
+        final right = owner.normal!.cross(baseAim).unit;
+        final angles = enhanced
+            ? const [-0.17, -0.085, 0.0, 0.085, 0.17]
+            : const [-0.11, 0.0, 0.11];
+        for (var k = 0; k < angles.length; k++) {
+          final aim = (baseAim + right * angles[k]).unit;
+          projectiles.add(
+            Projectile(
+                owner.distance + 6,
+                owner.lane,
+                owner: owner,
+                target: enhanced && k == 2 ? _targetOf(owner, 190) : null,
+                speed: math.max(125, owner.speed + 60),
+                kind: ItemType.missile,
+                enhanced: enhanced,
+              )
+              ..position =
+                  owner.position! + owner.forward! * 6 + owner.normal! * 1.6
+              ..direction = aim,
+          );
+        }
+        if (human) {
+          tell(
+            enhanced
+                ? 'SUPER SALVA • CINCO FOGUETES!'
+                : 'SALVA TRIPLA • TRÊS FOGUETES!',
+          );
+        }
+      case ItemType.dreno:
+        // Steal momentum from the nearest rival ahead: they sputter, the
+        // owner surges. Shields block it through the normal damage path.
+        final target = _targetOf(owner, enhanced ? 140 : 95);
+        if (target == null) {
+          if (human) tell('DRENO • NENHUM ALVO À FRENTE');
+        } else if (target.shield > 0) {
+          _damage(target, ImpactKind.electric, source: owner);
+          if (human) tell('DRENO • BLOQUEADO PELO ESCUDO');
+        } else {
+          target.electricTime = math.max(
+            target.electricTime,
+            enhanced ? 1.8 : 1.1,
+          );
+          target.velocity *= enhanced ? .45 : .6;
+          _effect(target, ImpactKind.electric);
+          if (human) {
+            nitro = math.min(100, nitro + (enhanced ? 55 : 35));
+            hitCount++;
+            tell('DRENO • ENERGIA ROUBADA!');
+          } else {
+            owner.velocity += owner.forward! * (enhanced ? 16 : 11);
+          }
+          if (target == player) tell('DRENO • SUA ENERGIA FOI ROUBADA!');
+        }
+      case ItemType.propulsor:
+        // A hop over trouble plus a forward surge, on the normal jump model.
+        owner.velocity +=
+            owner.normal! * (enhanced ? 31 : 24) + owner.forward! * 9;
+        owner.jumpVelocity = math.max(owner.jumpVelocity, enhanced ? 8 : 6);
+        owner.airborne = true;
+        if (human) {
+          nitro = math.min(100, nitro + 20);
+          tell(
+            enhanced
+                ? 'SUPER PROPULSOR • SALTO ALTO!'
+                : 'PROPULSOR • SALTO COM IMPULSO!',
+          );
+        }
+      case ItemType.fantasma:
+        // Intangible for a few seconds: rivals, projectiles, mines, oil and
+        // strips all pass through; the driver cannot be hit or blocked.
+        owner.ghostTime = enhanced ? 6.5 : 4.5;
+        _effect(owner, ImpactKind.pulse);
+        if (human) {
+          tell(
+            enhanced
+                ? 'SUPER FANTASMA • INTANGÍVEL POR 6,5 S'
+                : 'FANTASMA • INTANGÍVEL POR 4,5 S',
+          );
+        }
     }
   }
 
@@ -399,6 +497,7 @@ extension CombatRules on RaceEngine {
       if (m.arm > 0) continue;
       for (final d in drivers) {
         if (d.finishTime != null ||
+            d.ghostTime > 0 ||
             d.jump > 3 ||
             d.airborne ||
             (d == m.owner && m.life > 12))
@@ -422,6 +521,7 @@ extension CombatRules on RaceEngine {
       if (strip.arm > 0) continue;
       for (final d in drivers) {
         if (d.finishTime != null ||
+            d.ghostTime > 0 ||
             d.airborne ||
             d.jump > .6 ||
             (d == strip.owner && strip.life > 10.6))

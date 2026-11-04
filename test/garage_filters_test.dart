@@ -58,7 +58,7 @@ void main() {
         await tester.pump(const Duration(milliseconds: 30));
         await tester.tap(find.text('GARAGEM').last);
         await tester.pump(const Duration(milliseconds: 100));
-        expect(find.text('81 / 81 CARROS'), findsOneWidget);
+        expect(find.text('106 / 106 CARROS'), findsOneWidget);
         Future<void> choose(String key, String option) async {
           await tester.tap(find.byKey(ValueKey(key)));
           await tester.pump(const Duration(milliseconds: 250));
@@ -83,13 +83,13 @@ void main() {
         expect(find.text('NENHUM CARRO NESTA COMBINAÇÃO'), findsOneWidget);
         expect(store.selectedCar, 0);
         await choose('garage-category-filter', 'PICAPE');
-        expect(find.text('0 / 81 CARROS'), findsOneWidget);
+        expect(find.text('0 / 106 CARROS'), findsOneWidget);
         await tester.tap(find.byTooltip('Limpar filtros'));
         await tester.pump(const Duration(milliseconds: 80));
-        expect(find.text('81 / 81 CARROS'), findsOneWidget);
+        expect(find.text('106 / 106 CARROS'), findsOneWidget);
         await tester.tap(find.byKey(const ValueKey('garage-brazil-filter')));
         await tester.pump(const Duration(milliseconds: 80));
-        expect(find.text('25 / 81 CARROS'), findsOneWidget);
+        expect(find.text('50 / 106 CARROS'), findsOneWidget);
         await choose('garage-class-filter', 'CLASSE D');
         await choose('garage-category-filter', 'CLÁSSICO');
         await tester.scrollUntilVisible(
@@ -100,6 +100,8 @@ void main() {
             matching: find.byType(Scrollable),
           ),
         );
+        await tester.ensureVisible(find.text('VOLKSWAGEN FUSCA 1600'));
+        await tester.pump(const Duration(milliseconds: 100));
         await tester.tap(find.text('VOLKSWAGEN FUSCA 1600').first);
         await tester.pump(const Duration(milliseconds: 100));
         expect(find.text('COMPRAR • 650'), findsOneWidget);

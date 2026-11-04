@@ -102,6 +102,31 @@ void _buildExpansionObstaclePrototype(Mesh3 m, String kind) {
           Material3.wood,
         );
       }
+      // Shelf mushrooms and a green sprout sell the scale of the stump.
+      for (var i = 0; i < 3; i++) {
+        final a = i * 2.2 + .6;
+        _worldEllipsoid(
+          m,
+          V3(math.cos(a) * 15.5, -2 + i * 3.0, math.sin(a) * 15.5),
+          const V3(3.4, 1.1, 3.4),
+          0xffe8734a,
+          segments: 8,
+        );
+      }
+      branch(
+        const V3(3, 12.6, 2),
+        const V3(4.5, 19, 3),
+        .8,
+        0xff5d8a4a,
+        Material3.plastic,
+      );
+      _worldEllipsoid(
+        m,
+        const V3(4.5, 19.6, 3),
+        const V3(3.2, 1.6, 3.2),
+        0xff6fa855,
+        segments: 8,
+      );
     case 'fossil':
       _worldEllipsoid(
         m,
@@ -128,6 +153,16 @@ void _buildExpansionObstaclePrototype(Mesh3 m, String kind) {
         0xffe8d6aa,
         segments: 10,
       );
+      // Tail vertebrae trailing away from the ribcage.
+      for (var i = 0; i < 4; i++) {
+        _worldEllipsoid(
+          m,
+          V3(-19 - i * 4.5, 1.5 - i * .5, i.isEven ? 1.5 : -1.5),
+          V3(3.4 - i * .5, 2.4 - i * .3, 3.4 - i * .5),
+          0xffe8d6aa,
+          segments: 8,
+        );
+      }
     case 'dune':
       _worldEllipsoid(
         m,
@@ -143,6 +178,26 @@ void _buildExpansionObstaclePrototype(Mesh3 m, String kind) {
         0xffe2b86e,
         segments: 10,
       );
+      // Wind-scattered stones and a dry shrub on the crest.
+      for (var i = 0; i < 4; i++) {
+        _worldEllipsoid(
+          m,
+          V3(-14 + i * 8.0, -1 + (i % 2), 8 - i * 4.0),
+          const V3(2.2, 1.4, 2),
+          0xff8a6f4d,
+          segments: 7,
+        );
+      }
+      for (var i = 0; i < 4; i++) {
+        final a = i * 1.7 + .5;
+        branch(
+          const V3(9, 6, -6),
+          V3(9 + math.cos(a) * 6, 13 + (i % 2) * 2.0, -6 + math.sin(a) * 6),
+          .7,
+          0xff7a6a42,
+          Material3.wood,
+        );
+      }
     case 'snowball':
       _worldEllipsoid(
         m,
@@ -150,6 +205,20 @@ void _buildExpansionObstaclePrototype(Mesh3 m, String kind) {
         const V3(18, 17, 18),
         0xffecf7ff,
         segments: 12,
+      );
+      _worldEllipsoid(
+        m,
+        const V3(13, -8, 9),
+        const V3(8, 7, 8),
+        0xfff4fbff,
+        segments: 10,
+      );
+      _worldEllipsoid(
+        m,
+        const V3(-12, -10, -8),
+        const V3(6, 5, 6),
+        0xffe2f1fa,
+        segments: 10,
       );
       _worldEllipsoid(
         m,
@@ -176,6 +245,16 @@ void _buildExpansionObstaclePrototype(Mesh3 m, String kind) {
         );
         branch(V3(x, 1, z), V3(x + 7, 8, z + 3), 1.7, 0xffefaf81);
       }
+      // Flat fan corals between the branches.
+      for (var i = 0; i < 3; i++) {
+        _worldEllipsoid(
+          m,
+          V3((i - 1) * 8.0, 2 + i * 2.0, i.isEven ? 7.0 : -7.0),
+          const V3(5.5, 7, 1.2),
+          0xfff2a65a,
+          segments: 9,
+        );
+      }
     case 'driftwood':
       m.cylinder(
         V3.zero,
@@ -201,6 +280,16 @@ void _buildExpansionObstaclePrototype(Mesh3 m, String kind) {
         0xffc8b38b,
         Material3.wood,
       );
+      // Broken twig stubs along the trunk.
+      for (var i = 0; i < 3; i++) {
+        branch(
+          V3(-14 + i * 13.0, 3, 4),
+          V3(-16 + i * 13.0, 8, 9),
+          1.4,
+          0xffc8b38b,
+          Material3.wood,
+        );
+      }
     default:
       buildExpansionPropMesh(
         m,

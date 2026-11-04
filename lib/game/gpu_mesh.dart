@@ -414,6 +414,24 @@ Mesh3 buildWorldMesh(TrackSpec track) {
         );
       }
     }
+    // Corner-warning chevrons on the outside of genuinely sharp turns.
+    if (!track.openArena && i % 6 == 0) {
+      final turn = a.forward.cross(b.forward).y;
+      if (a.forward.dot(b.forward) < .9985 && turn.abs() > .01) {
+        final side = turn > 0 ? -1.0 : 1.0;
+        for (var k = 0; k < 3; k++) {
+          final cx = side * (w * .8 - k * 1.1), cz = -2.0 + k * 2.0;
+          final base = a.point(cx, .032) + a.forward * cz;
+          m.triangle(
+            base + a.forward * 1.6,
+            base - a.forward * 1.2 - a.right * (side * 1.1),
+            base - a.forward * 1.2 + a.right * (side * 1.1),
+            0xffff5340,
+            Material3.decal,
+          );
+        }
+      }
+    }
     if (track.isShortcut(a.s, .8))
       m.quad(
         a.point(w * .55, .035),

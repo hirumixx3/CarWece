@@ -77,6 +77,12 @@ void buildBrazilCarDetails(Mesh3 m, CarSpec car) {
             'br_corcel',
             'br_delrey',
             'br_sp2',
+            'br_kombi',
+            'br_karmann',
+            'br_chambord',
+            'br_fissore',
+            'br_fnm',
+            'br_aero',
           ].contains(car.id)
           ? chrome
           : dark,
@@ -319,6 +325,106 @@ void buildBrazilCarDetails(Mesh3 m, CarSpec car) {
           dark,
           Material3.rubber,
         );
+    case 'br_kombi':
+      // Tall van: full-height window band, sliding-door seam, round lamps.
+      lamps(round: true);
+      grille(.8, .14, chromeBars: true);
+      for (final side in [-1.0, 1.0]) {
+        box(
+          V3(side * (w + .02), d.roof - .42, -.2),
+          V3(.04, .62, l * 1.45),
+          dark,
+          Material3.glass,
+        );
+        box(
+          V3(side * (w + .03), 1.32, .42),
+          const V3(.02, 1.5, .03),
+          dark,
+          Material3.rubber,
+        );
+      }
+    case 'br_troller':
+      // Raised 4x4: rear spare wheel, roll bars and roof lamps.
+      lamps(height: .2);
+      grille(1.2, .26);
+      m.cylinder(
+        V3(0, 1.62, -l - .18),
+        const V3(0, 0, 1),
+        .34,
+        .62,
+        .62,
+        dark,
+        Material3.rubber,
+        segments: 20,
+      );
+      for (final side in [-1.0, 1.0]) {
+        box(
+          V3(side * w * .8, d.roof + .1, .3),
+          const V3(.07, .2, 1.9),
+          dark,
+          Material3.metal,
+        );
+        box(
+          V3(side * w * .55, d.roof + .3, 1.15),
+          const V3(.2, .12, .06),
+          white,
+          Material3.glow,
+        );
+      }
+    case 'br_emis':
+      // Open buggy: roll hoop, exposed rear deck and round lamps.
+      lamps(round: true);
+      for (final side in [-1.0, 1.0])
+        box(
+          V3(side * w * .62, d.roof + .28, -.55),
+          const V3(.08, .62, .08),
+          dark,
+          Material3.metal,
+        );
+      box(
+        V3(0, d.roof + .6, -.55),
+        V3(w * 1.24, .08, .08),
+        dark,
+        Material3.metal,
+      );
+      box(V3(0, .98, -l - .02), V3(w * 1.5, .3, .06), dark, Material3.rubber);
+    case 'br_karmann' || 'br_interlagos' || 'br_chambord':
+      lamps(round: true, twin: car.id != 'br_interlagos');
+      grille(1.05, .18, chromeBars: true);
+    case 'br_hofstetter':
+      // Low wedge: slim intake, flush lamps and rear louvres.
+      lamps(height: .15);
+      box(V3(0, .68, l + .03), V3(w * 1.5, .12, .04), dark, Material3.rubber);
+      for (var i = 0; i < 5; i++) {
+        box(
+          V3(0, 1.34 + i * .07, -1.15 + i * .16),
+          V3(w * 1.15, .03, .07),
+          dark,
+          Material3.rubber,
+        );
+      }
+    case 'br_caravan' || 'br_variant':
+      grille(1.45, .22, chromeBars: car.id == 'br_caravan');
+      lamps();
+      for (final side in [-1.0, 1.0])
+        box(
+          V3(side * w * .56, d.roof + .15, -.6),
+          const V3(.06, .07, 2.1),
+          dark,
+          Material3.rubber,
+        );
+    case 'br_uirapuru' || 'br_santa_matilde' || 'br_miura_saga' || 'br_adamo':
+      lamps(round: car.id == 'br_uirapuru', height: .19);
+      grille(1.1, .16);
+      box(
+        V3(0, d.belt + .34, -l + .3),
+        V3(w * 1.55, .07, .34),
+        dark,
+        Material3.rubber,
+      );
+    case 'br_br800' || 'br_supermini':
+      lamps(round: true);
+      grille(.7, .12);
     default:
       grille(
         car.id == 'br_omega' ? 1.19 : 1.51,

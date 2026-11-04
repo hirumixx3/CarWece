@@ -8,18 +8,18 @@ import 'package:carwece/game/gpu_frame.dart';
 void main() {
   final tracks = createTracks(), added = tracks.skip(51).toList();
   test(
-    'Append exactly 25 national cars and 25 loop circuits without replacing old IDs',
+    'Append exactly 50 national cars and 25 loop circuits without replacing old IDs',
     () {
-      expect(cars.length, 81);
+      expect(cars.length, 106);
       expect(tracks.length, 76);
-      expect(brazilCars.length, 25);
-      expect(brazilCarDesigns.length, 25);
+      expect(brazilCars.length, 50);
+      expect(brazilCarDesigns.length, 50);
       expect(cars.skip(56).map((c) => c.id), brazilCars.map((c) => c.id));
       expect(cars[56].id, 'br_fusca');
       expect(cars[55].id, 'chiron');
       expect(tracks[50].id, 'coast_tideloop');
-      expect(cars.map((c) => c.id).toSet().length, 81);
-      expect(cars.map((c) => c.body), List.generate(81, (i) => i));
+      expect(cars.map((c) => c.id).toSet().length, 106);
+      expect(cars.map((c) => c.body), List.generate(106, (i) => i));
       expect(tracks.map((t) => t.id).toSet().length, 76);
       expect(createBattleArenas().length, 11);
     },
@@ -84,7 +84,7 @@ void main() {
           expect(n, closeTo(1, .002), reason: c.id);
         }
       }
-      expect(hashes.length, 25);
+      expect(hashes.length, 50);
     },
   );
   test(
@@ -114,8 +114,8 @@ void main() {
     'Combined filters never remap master indices or mutate the catalogue',
     () {
       final before = cars.map((c) => c.id).toList();
-      expect(filterCarCollection().length, 81);
-      expect(filterCarCollection(brazilOnly: true).length, 25);
+      expect(filterCarCollection().length, 106);
+      expect(filterCarCollection(brazilOnly: true).length, 50);
       for (final cls in carPerformanceClasses) {
         for (final cat in carModelCategories) {
           final indices = filterCarCollection(
@@ -157,8 +157,8 @@ void main() {
         for (var i = 0; i < 15; i++) battle.update(1 / 120);
         expect(raceGpuFrame(battle).every((x) => x.isFinite), isTrue);
       }
-      expect(GpuMeshId.pickup, 81);
-      expect(GpuMeshId.wheel, greaterThan(81));
+      expect(GpuMeshId.pickup, cars.length);
+      expect(GpuMeshId.wheel, greaterThan(cars.length));
       expect(BattleMesh.first, cars.length * 3 + 21);
     },
   );

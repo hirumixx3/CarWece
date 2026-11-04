@@ -11,7 +11,7 @@ void main() {
   test(
     'Append-only catalogues add exactly 25 cars, 25 circuits and 5 arenas',
     () {
-      expect(cars.length, 81);
+      expect(cars.length, 106);
       expect(tracks.length, 76);
       expect(arenas.length, 5);
       expect(cars.map((c) => c.id).toSet().length, cars.length);

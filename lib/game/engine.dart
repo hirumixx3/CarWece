@@ -37,7 +37,7 @@ class Driver {
   V3 velocity = V3.zero;
   double angularSpeed = 0, syncedDistance = double.nan, syncedLane = double.nan;
   double routeS = 0, reverseTime = 0, stuckTime = 0;
-  double punctureTime = 0, repairGlow = 0;
+  double punctureTime = 0, repairGlow = 0, ghostTime = 0;
   double freezeTime = 0,
       electricTime = 0,
       weaponLock = 0,
@@ -472,6 +472,7 @@ class RaceEngine {
       if (d.finishTime != null) continue;
       d.stun = math.max(0, d.stun - dt);
       d.shield = math.max(0, d.shield - dt);
+      d.ghostTime = math.max(0, d.ghostTime - dt);
       d.hitFlash = math.max(0, d.hitFlash - dt);
       d.damage = math.max(0, d.damage - dt * .28);
       d.spinTime = math.max(0, d.spinTime - dt);
@@ -1216,6 +1217,7 @@ class RaceEngine {
   }
 
   void _collide(Driver a, Driver b, bool report) {
+    if (a.ghostTime > 0 || b.ghostTime > 0) return; // ghosts pass through
     final pa = a.position! + a.normal! * a.jump,
         pb = b.position! + b.normal! * b.jump,
         delta = pb - pa;
@@ -1335,11 +1337,69 @@ class RaceEngine {
       }
     }
 
+    // Entering the branch anywhere along its corridor also arms the attempt:
+    // a jump, a shove or a wide merge can put the car inside the branch
+    // without ever crossing the entrance or gate planes. Moving forward
+    // inside the corridor past the gate point is the same traversal proof as
+    // crossing the gate plane, and presence before it arms navigation like
+    // the entrance does. The merge zones at both ends are excluded: there
+    // the branch and the main road overlap, so presence alone proves nothing.
+    if (d.activeShortcut == null) {
+      for (final path in track.shortcuts) {
+        if (!eligible(path)) continue;
+        final proj = path.project(after);
+        final s = proj.frame.s;
+        if (s < path.length * .08 || s > path.length - 20) continue;
+        if ((after - before).dot(proj.frame.forward) <= 0) continue;
+        // Near both merges the branch overlaps the main road: a car still
+        // on the main road must never arm the branch from presence alone,
+        // or navigation would drag it into a branch it never entered.
+        final main = track.project(after);
+        if (main.lateral.abs() <= track.widthAt(main.frame.s) / 2 + 3) {
+          continue;
+        }
+        final pastGate = s >= path.length * .5;
+        final half = path.width / 2 + Driver.halfWidth + (pastGate ? 0 : 3);
+        if (proj.squaredDistance > half * half) continue;
+        if (!pastGate &&
+            !(networked || d == player || brokenGates.contains(path.id))) {
+          continue;
+        }
+        d.activeShortcut = path;
+        d.plannedShortcut = path;
+        d.shortcutStage = pastGate ? 2 : 1;
+        if (d == player) {
+          tell(
+            pastGate
+                ? 'ATALHO VALIDADO • SIGA ATÉ A SAÍDA'
+                : brokenGates.contains(path.id)
+                ? 'ATALHO ABERTO'
+                : 'ATALHO • DESTRUA O PORTÃO-ALVO',
+          );
+        }
+        break;
+      }
+    }
+
     final path = d.activeShortcut;
     if (path == null) return false;
     if (d.shortcutStage < 2 && !eligible(path)) {
       cancel();
       return false;
+    }
+
+    // A lateral or airborne pass can carry the car past the gate point
+    // without a clean plane crossing; reaching the gate point inside the
+    // corridor, moving forward, is the same traversal proof.
+    if (d.shortcutStage < 2) {
+      final proj = path.project(after);
+      final half = path.width / 2 + Driver.halfWidth + 3;
+      if (proj.frame.s >= path.length * .5 &&
+          proj.squaredDistance <= half * half &&
+          (after - before).dot(proj.frame.forward) > 0) {
+        d.shortcutStage = 2;
+        if (d == player) tell('ATALHO VALIDADO • SIGA ATÉ A SAÍDA');
+      }
     }
 
     // Reversing back through the gate revokes this attempt. A later forward
@@ -1365,7 +1425,7 @@ class RaceEngine {
         math.max(path.width, track.widthAt(path.exitS)) / 2 +
         Driver.halfWidth +
         3;
-    if (d.shortcutStage >= 2 && crossing(path.exit, exitHalfWidth) != null) {
+    void complete() {
       d.nextCheckpoint = (path.exitCheckpoint + 1) % TrackSpec.checkpointCount;
       d.activeShortcut = null;
       d.plannedShortcut = null;
@@ -1384,6 +1444,21 @@ class RaceEngine {
         tell('ATALHO CONCLUÍDO!');
         events.add('shortcut');
       }
+    }
+
+    // True when the car is back on the main road at or just past the exit
+    // merge: it physically rejoined, even if the exact exit plane was never
+    // crossed (wide line, airborne pass or a shove through the merge).
+    bool mergedPastExit() {
+      final main = track.project(after);
+      final ahead = wrap(main.frame.s - path.exitS, track.length);
+      final sector = track.length / TrackSpec.checkpointCount;
+      return ahead <= sector &&
+          main.lateral.abs() <= track.widthAt(main.frame.s) / 2 + 3;
+    }
+
+    if (d.shortcutStage >= 2 && crossing(path.exit, exitHalfWidth) != null) {
+      complete();
       // Do not immediately reprocess the same swept motion as a main portal.
       return true;
     }
@@ -1393,7 +1468,19 @@ class RaceEngine {
     final corridor = d.shortcutStage >= 2 && atMerge
         ? math.max(path.width + 12, exitHalfWidth)
         : path.width + 12;
+    if (d.shortcutStage >= 2 && atMerge && mergedPastExit()) {
+      complete();
+      return true;
+    }
     if (p.squaredDistance > corridor * corridor) {
+      // Leaving the corridor after the gate with the merge already passed
+      // completes the branch. Leaving it earlier just abandons the attempt:
+      // the remaining main-road checkpoints are still ahead, so no lap is
+      // lost either way.
+      if (d.shortcutStage >= 2 && mergedPastExit()) {
+        complete();
+        return true;
+      }
       cancel();
       return false;
     }
@@ -1470,6 +1557,7 @@ class RaceEngine {
     bool spawnEffect = true,
     String? weapon,
   }) {
+    if (d.ghostTime > 0) return; // intangible: nothing negative connects
     if (d.shield > 0) {
       d.shield = math.max(0, d.shield - 2);
       if (networked &&
@@ -1549,8 +1637,10 @@ class RaceEngine {
           if (front != null) ...[
             ItemType.missile,
             ItemType.ice,
+            ItemType.salvo,
             if ((front.position! - d.position!).length < 110) ItemType.grenade,
             if ((front.position! - d.position!).length < 60) ItemType.tesla,
+            if ((front.position! - d.position!).length < 90) ItemType.dreno,
           ],
           if (rear) ...[
             ItemType.mine,
@@ -1558,7 +1648,8 @@ class RaceEngine {
             ItemType.smoke,
             ItemType.spikes,
           ],
-          if (front == null && !rear) ItemType.nitro,
+          if (front == null && !rear) ...[ItemType.nitro, ItemType.propulsor],
+          if (rear || d.damage > .5) ItemType.fantasma,
         ]..remove(botLastPower[d]);
         if (options.isEmpty) options.add(ItemType.shield);
         final kind = options[random.nextInt(options.length)];
@@ -1606,7 +1697,7 @@ class RaceEngine {
       var hitT = terrain?.$1 ?? double.infinity;
       Driver? victim;
       for (final d in drivers) {
-        if (d == p.owner || d.finishTime != null) continue;
+        if (d == p.owner || d.finishTime != null || d.ghostTime > 0) continue;
         final center = d.position! + d.normal! * (1.2 + d.jump);
         final t = _sphereHit(before, next, center, 3.0);
         if (t != null && t < hitT) {
@@ -1653,6 +1744,7 @@ class RaceEngine {
         if (d == patch.owner ||
             d.finishTime != null ||
             d.stun > 0 ||
+            d.ghostTime > 0 ||
             d.jump > .5)
           continue;
         if ((d.position! - patch.position!).length < 4.8) {
@@ -1815,6 +1907,26 @@ class RaceEngine {
           projected.frame.s,
         ),
     );
+    // Layered aftermath: spark burst, debris and two lingering smoke puffs
+    // ride the same effect so explosions read with weight, not one flash.
+    for (final kind in [ImpactKind.sparks, ImpactKind.debris]) {
+      effects.add(
+        ImpactEffect(projected.frame.s, 0, kind)
+          ..pose = TrackFrame(
+            point,
+            normal.cross(forward).unit,
+            normal,
+            forward,
+            projected.frame.s,
+          ),
+      );
+    }
+    for (var i = 0; i < 2; i++) {
+      clouds.add(
+        SmokeCloud(point + normal * (1.5 + i * 1.2), p.owner ?? player)
+          ..life = 2.6,
+      );
+    }
     for (final d in drivers) {
       final delta = d.position! + d.normal! * (1 + d.jump) - point;
       if (d.finishTime != null ||
@@ -1822,7 +1934,7 @@ class RaceEngine {
               delta.length >
                   (p.kind == ItemType.grenade ? (p.enhanced ? 16 : 11) : 7)))
         continue;
-      final protected = d.shield > 0;
+      final protected = d.shield > 0 || d.ghostTime > 0;
       _damage(
         d,
         ImpactKind.explosion,
