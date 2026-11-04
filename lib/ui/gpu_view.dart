@@ -128,6 +128,9 @@ class _GpuSurfaceState extends State<GpuSurface> {
   bool creating = false, retrying = false;
   final _frameClock = Stopwatch()..start();
   int _lastFrameUs = -1000000;
+  // Minimum interval between GPU frames, matched to the display: the old
+  // fixed 16 ms throttle capped 90/120 Hz phones at ~60 fps.
+  int _minFrameUs = 16000;
   int _lastFpsUs = 0;
   String? error;
   @override
@@ -160,10 +163,14 @@ class _GpuSurfaceState extends State<GpuSurface> {
     final size = render is RenderBox && render.hasSize
         ? render.size
         : MediaQuery.sizeOf(context);
+    final refreshRate = View.of(context).display.refreshRate;
+    if (refreshRate > 65) {
+      _minFrameUs = (1000000 / refreshRate).round() - 400;
+    }
     final width = widget.showroom
         ? 960
         : widget.quality == 'high'
-        ? 1600
+        ? 1440
         : widget.quality == 'low'
         ? 960
         : 1280;
@@ -222,7 +229,7 @@ class _GpuSurfaceState extends State<GpuSurface> {
     final id = textureId;
     if (id == null || sending || !mounted || error != null) return;
     final now = _frameClock.elapsedMicroseconds;
-    if (now - _lastFrameUs < 16000) return;
+    if (now - _lastFrameUs < _minFrameUs) return;
     _lastFrameUs = now;
     sending = true;
     channel

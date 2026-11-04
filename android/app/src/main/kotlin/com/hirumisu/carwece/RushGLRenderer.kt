@@ -267,7 +267,12 @@ internal class RushGLRenderer(
         }
         scalar(sceneProgram,"uTime",data[9]); scalar(sceneProgram,"uNight",if(night)1f else 0f)
         scalar(sceneProgram,"uShadowTexel",1f/shadowSize)
-        scalar(sceneProgram,"uShadowQuality",if(quality=="low" || (automatic && budget.level==0))0f else if(quality=="high")3f else 1f)
+        val shadowQuality = when {
+            quality == "low" -> 0f
+            quality == "high" -> (3 - max(0, 2 - budget.level)).toFloat()
+            else -> if (budget.level == 0) 0f else 1f
+        }
+        scalar(sceneProgram,"uShadowQuality",shadowQuality)
         GL.glActiveTexture(GL.GL_TEXTURE0); GL.glBindTexture(GL.GL_TEXTURE_2D,shadowTexture)
         GL.glUniform1i(uniform(sceneProgram,"uDepth"),0)
         drawWorld(sceneProgram,cameraFrustum)
@@ -335,11 +340,9 @@ internal class RushGLRenderer(
                 if(fpsAt==0L)fpsAt=began
                 render(frame); lastVersion=next
                 val ended=System.nanoTime()
-                if(automatic) {
-                    val cost=(ended-began)/1_000_000.0
-                    val cadence=if(lastPresentationStart==0L)cost else (began-lastPresentationStart)/1_000_000.0
-                    budget.sample(max(cost,cadence))
-                }
+                val cost=(ended-began)/1_000_000.0
+                val cadence=if(lastPresentationStart==0L)cost else (began-lastPresentationStart)/1_000_000.0
+                budget.sample(max(cost,cadence))
                 lastPresentationStart=began
                 presented++
                 if(ended-fpsAt>=1_000_000_000L) {

@@ -18,7 +18,12 @@ uniform float uNight;
 uniform float uShadowTexel;
 uniform sampler2D uDepth;
 out vec4 fragColor;
-float hash21(vec2 p) { return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453); }
+float hash21(vec2 p) {
+  // Sin-free hash: the classic sin hash is slow and bands on mobile GPUs.
+  vec3 p3=fract(vec3(p.xyx)*0.1031);
+  p3+=dot(p3,p3.yzx+33.33);
+  return fract((p3.x+p3.y)*p3.z);
+}
 float noise(vec2 p) {
   vec2 i=floor(p),f=fract(p);f=f*f*(3.0-2.0*f);
   return mix(mix(hash21(i),hash21(i+vec2(1,0)),f.x),mix(hash21(i+vec2(0,1)),hash21(i+vec2(1,1)),f.x),f.y);
@@ -29,17 +34,24 @@ float visibility(vec3 n) {
   vec3 p=vShadow.xyz/vShadow.w*0.5+0.5;
   if(p.z>1.0||p.z<0.0||any(lessThan(p.xy,vec2(0)))||any(greaterThan(p.xy,vec2(1))))return 1.0;
   float bias=max(0.00018,0.00065*(1.0-max(dot(n,uLight),0.0)));
+  // Shadow LOD: past ~60 m the PCF kernel is subpixel, and past ~110 m a
+  // single tap is indistinguishable from 25. Most of the screen is far
+  // scenery, so this is where the high quality mode spent its frame.
+  float fragDist=length(vPosition-uCamera);
+  float q=uShadowQuality;
+  if(fragDist>110.0)q=0.0;
+  else if(fragDist>60.0 && q>2.0)q=2.0;
   float occluded;
-  if(uShadowQuality<.5) {
+  if(q<.5) {
     occluded=p.z-bias<=texture(uDepth,p.xy).r?0.0:1.0;
-  } else if(uShadowQuality<1.5) {
+  } else if(q<1.5) {
     float sum=0.0;
     for(int i=0;i<4;i++) {
       vec2 offset=vec2((i==0||i==2)?-.5:.5,i<2?-.5:.5)*uShadowTexel;
       sum+=p.z-bias<=texture(uDepth,p.xy+offset).r?0.0:1.0;
     }
     occluded=sum*.25;
-  } else if(uShadowQuality<2.5) {
+  } else if(q<2.5) {
     float sum=0.0;
     for(int x=-1;x<=1;x++)for(int y=-1;y<=1;y++) {
       float depth=texture(uDepth,p.xy+vec2(float(x),float(y))*uShadowTexel).r;
@@ -58,7 +70,8 @@ float visibility(vec3 n) {
   // Fade shadows out at the edge of the light frustum instead of cutting
   // them off in a hard square where the shadow camera ends.
   float edge=smoothstep(0.0,0.045,min(min(p.x,1.0-p.x),min(p.y,1.0-p.y)));
-  return mix(1.0,result,edge);
+  float faded=mix(1.0,result,edge);
+  return mix(faded,1.0,smoothstep(150.0,260.0,fragDist)*0.85);
 }
 void main() {
   // Status billboards retain their UI colors and receive no scene lighting.
@@ -174,15 +187,19 @@ void main() {
   vec3 fillDir=normalize(vec3(-uLight.x,0.28,-uLight.z));
   ambient+=uSky*max(dot(n,fillDir),0.0)*0.38;
   // Energy-conserving GGX direct specular with a diffuse room bounce.
+  // Surfaces rougher than .85 have no readable GGX lobe; skipping the
+  // distribution/geometry math there saves real ALU on most world pixels.
   vec3 color=base*(ambient+uSunColor*ndl*vis*1.18)*(1.0-metal*.38);
-  float alphaR=max(.035,rough*rough), a2=alphaR*alphaR;
-  float ndh=max(dot(n,halfDir),0.0), vdh=max(dot(viewDir,halfDir),0.0);
-  float denominator=ndh*ndh*(a2-1.0)+1.0;
-  float distribution=a2/(3.141593*denominator*denominator);
-  float k=(rough+1.0)*(rough+1.0)/8.0;
-  float geometry=ndv/(ndv*(1.0-k)+k)*ndl/(ndl*(1.0-k)+k);
-  vec3 schlick=f0+(1.0-f0)*pow(1.0-vdh,5.0);
-  color+=schlick*distribution*geometry/max(.01,4.0*ndv*ndl)*uSunColor*ndl*vis*.36;
+  if(rough<.85) {
+    float alphaR=max(.035,rough*rough), a2=alphaR*alphaR;
+    float ndh=max(dot(n,halfDir),0.0), vdh=max(dot(viewDir,halfDir),0.0);
+    float denominator=ndh*ndh*(a2-1.0)+1.0;
+    float distribution=a2/(3.141593*denominator*denominator);
+    float k=(rough+1.0)*(rough+1.0)/8.0;
+    float geometry=ndv/(ndv*(1.0-k)+k)*ndl/(ndl*(1.0-k)+k);
+    vec3 schlick=f0+(1.0-f0)*pow(1.0-vdh,5.0);
+    color+=schlick*distribution*geometry/max(.01,4.0*ndv*ndl)*uSunColor*ndl*vis*.36;
+  }
   color+=fresnel*env*(1.0-rough)*1.12;
   if(vMaterial==0 || vMaterial==14 || vMaterial==13) {
     float coat=pow(max(dot(n,halfDir),0.0),210.0);
