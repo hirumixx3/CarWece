@@ -68,9 +68,16 @@ void main() {
     final renderer = File('$base/RushGLRenderer.kt').readAsStringSync();
     expect(renderer, contains('dynamicResolution'));
     expect(renderer, contains('frameIndex')); // half-rate shadow updates
+    // The v1.7.1 flicker: an MSAA default framebuffer rejects the final
+    // blit from the single-sample scene target. The default framebuffer
+    // must stay single-sample under dynamic resolution and MSAA must
+    // live inside the scene target instead.
+    expect(renderer, contains('dynamicResolution -> null'));
+    expect(renderer, contains('sceneMsaaFbo'));
+    expect(renderer, contains('RenderbufferStorageMultisample'));
     final view = File('lib/ui/gpu_view.dart').readAsStringSync();
     expect(view, contains("'profile'"));
-    expect(view, contains('1152')); // render width ceiling
+    expect(view, contains('renderWidth'));
   });
 
   test(

@@ -66,7 +66,7 @@ internal class RushGLRenderer(
     private val dynamicResolution = automatic || weakGpu
     private val budget = RenderBudget()
     private val shadowSize = if (weakGpu) {
-        if (quality == "high") 1024 else if (quality == "low") 512 else if (automatic) 640 else 768
+        if (quality == "high") 1024 else if (quality == "low") 512 else if (automatic) 768 else 1024
     } else if (quality == "high") 2048 else if (quality == "low") 512 else if(automatic)768 else 1024
     private var frameIndex = 0L
     private data class Mesh(val buffer: Int, val elements: Int, val vao: Int,
@@ -80,6 +80,7 @@ internal class RushGLRenderer(
     private val shadowFrustum=RenderGeometry.Frustum()
     private val uniforms=HashMap<Int,HashMap<String,Int>>()
     private var sceneFbo=0; private var sceneColor=0; private var sceneDepth=0
+    private var sceneMsaaFbo=0; private var sceneMsaaColor=0; private var sceneMsaaDepth=0
     private var ready = false
     @Volatile var presentedFps=0.0
         private set
@@ -112,7 +113,11 @@ internal class RushGLRenderer(
             return configs[0]
         }
         val selected = (when {
-            weakGpu -> if (quality == "high") config(2) else null
+            // With dynamic resolution the scene renders into an offscreen
+            // target and is blitted to the screen, so the default
+            // framebuffer must stay single-sample; MSAA lives inside the
+            // scene target instead (see initSceneTarget).
+            dynamicResolution -> null
             quality == "high" -> config(4)
             quality == "medium" -> config(2)
             else -> null
@@ -226,6 +231,23 @@ internal class RushGLRenderer(
         GL.glFramebufferTexture2D(GL.GL_FRAMEBUFFER,GL.GL_COLOR_ATTACHMENT0,GL.GL_TEXTURE_2D,sceneColor,0)
         GL.glFramebufferRenderbuffer(GL.GL_FRAMEBUFFER,GL.GL_DEPTH_ATTACHMENT,GL.GL_RENDERBUFFER,sceneDepth)
         check(GL.glCheckFramebufferStatus(GL.GL_FRAMEBUFFER)==GL.GL_FRAMEBUFFER_COMPLETE){"Alvo gráfico indisponível"}
+        // Multisampled scene target for weak GPUs: the scene renders here
+        // and resolves into the texture target above, which is what the
+        // final screen blit reads. Edge quality returns without touching
+        // the default framebuffer's sample count.
+        val samples = if (!weakGpu) 0 else if (quality == "high") 4 else if (quality == "medium") 2 else 0
+        if (samples > 0) {
+            GL.glGenRenderbuffers(1,ids,0); sceneMsaaColor=ids[0]
+            GL.glBindRenderbuffer(GL.GL_RENDERBUFFER,sceneMsaaColor)
+            GL.glRenderbufferStorageMultisample(GL.GL_RENDERBUFFER,samples,GL.GL_RGBA8,width,height)
+            GL.glGenRenderbuffers(1,ids,0); sceneMsaaDepth=ids[0]
+            GL.glBindRenderbuffer(GL.GL_RENDERBUFFER,sceneMsaaDepth)
+            GL.glRenderbufferStorageMultisample(GL.GL_RENDERBUFFER,samples,GL.GL_DEPTH_COMPONENT24,width,height)
+            GL.glGenFramebuffers(1,ids,0); sceneMsaaFbo=ids[0]; GL.glBindFramebuffer(GL.GL_FRAMEBUFFER,sceneMsaaFbo)
+            GL.glFramebufferRenderbuffer(GL.GL_FRAMEBUFFER,GL.GL_COLOR_ATTACHMENT0,GL.GL_RENDERBUFFER,sceneMsaaColor)
+            GL.glFramebufferRenderbuffer(GL.GL_FRAMEBUFFER,GL.GL_DEPTH_ATTACHMENT,GL.GL_RENDERBUFFER,sceneMsaaDepth)
+            check(GL.glCheckFramebufferStatus(GL.GL_FRAMEBUFFER)==GL.GL_FRAMEBUFFER_COMPLETE){"Alvo gráfico MSAA indisponível"}
+        }
         GL.glBindFramebuffer(GL.GL_FRAMEBUFFER,0)
     }
 
@@ -251,7 +273,7 @@ internal class RushGLRenderer(
         shadowFrustum.set(lightVP)
         GL.glEnable(GL.GL_DEPTH_TEST); GL.glDepthFunc(GL.GL_LEQUAL)
         GL.glDisable(GL.GL_CULL_FACE); GL.glDisable(GL.GL_BLEND); GL.glDepthMask(true)
-        val updateShadow = !weakGpu || (frameIndex++ % 2L == 0L)
+        val updateShadow = !weakGpu || budget.level >= 2 || (frameIndex++ % 2L == 0L)
         if (updateShadow) {
         GL.glBindFramebuffer(GL.GL_FRAMEBUFFER, shadowFbo)
         GL.glViewport(0,0,shadowSize,shadowSize); GL.glClear(GL.GL_DEPTH_BUFFER_BIT)
@@ -265,10 +287,10 @@ internal class RushGLRenderer(
         }
         GL.glDisable(GL.GL_POLYGON_OFFSET_FILL)
         }
-        val renderScale = if (weakGpu) min(budget.scale, .85f) else budget.scale
+        val renderScale = budget.scale
         val rw=if(dynamicResolution)(width*renderScale).toInt() else width
         val rh=if(dynamicResolution)(height*renderScale).toInt() else height
-        GL.glBindFramebuffer(GL.GL_FRAMEBUFFER,sceneFbo); GL.glViewport(0,0,rw,rh)
+        GL.glBindFramebuffer(GL.GL_FRAMEBUFFER,if(sceneMsaaFbo!=0)sceneMsaaFbo else sceneFbo); GL.glViewport(0,0,rw,rh)
         GL.glEnable(GL.GL_SCISSOR_TEST); GL.glScissor(0,0,rw,rh)
         if (showroom) GL.glClearColor(.046f,.078f,.125f,1f)
         else if (night) GL.glClearColor(.10f,.15f,.26f,1f)
@@ -286,7 +308,7 @@ internal class RushGLRenderer(
         scalar(sceneProgram,"uShadowTexel",1f/shadowSize)
         val shadowQuality = when {
             quality == "low" -> 0f
-            quality == "high" -> ((if (weakGpu) 2 else 3) - max(0, 2 - budget.level)).toFloat()
+            quality == "high" -> (3 - max(0, 2 - budget.level)).toFloat()
             else -> if (budget.level == 0) 0f else 1f
         }
         scalar(sceneProgram,"uShadowQuality",shadowQuality)
@@ -311,6 +333,11 @@ internal class RushGLRenderer(
             }
         }
         GL.glDepthMask(true); GL.glDisable(GL.GL_BLEND)
+        if(sceneMsaaFbo!=0) {
+            GL.glBindFramebuffer(GL.GL_READ_FRAMEBUFFER,sceneMsaaFbo)
+            GL.glBindFramebuffer(GL.GL_DRAW_FRAMEBUFFER,sceneFbo)
+            GL.glBlitFramebuffer(0,0,rw,rh,0,0,rw,rh,GL.GL_COLOR_BUFFER_BIT,GL.GL_NEAREST)
+        }
         if(dynamicResolution) {
             GL.glBindFramebuffer(GL.GL_READ_FRAMEBUFFER,sceneFbo)
             GL.glBindFramebuffer(GL.GL_DRAW_FRAMEBUFFER,0)
@@ -384,6 +411,9 @@ internal class RushGLRenderer(
                 if(sceneFbo!=0)GL.glDeleteFramebuffers(1,intArrayOf(sceneFbo),0)
                 if(sceneColor!=0)GL.glDeleteTextures(1,intArrayOf(sceneColor),0)
                 if(sceneDepth!=0)GL.glDeleteRenderbuffers(1,intArrayOf(sceneDepth),0)
+                if(sceneMsaaFbo!=0)GL.glDeleteFramebuffers(1,intArrayOf(sceneMsaaFbo),0)
+                if(sceneMsaaColor!=0)GL.glDeleteRenderbuffers(1,intArrayOf(sceneMsaaColor),0)
+                if(sceneMsaaDepth!=0)GL.glDeleteRenderbuffers(1,intArrayOf(sceneMsaaDepth),0)
                 if(sceneProgram!=0)GL.glDeleteProgram(sceneProgram)
                 if(depthProgram!=0)GL.glDeleteProgram(depthProgram)
                 if(shadowFbo!=0)GL.glDeleteFramebuffers(1,intArrayOf(shadowFbo),0)

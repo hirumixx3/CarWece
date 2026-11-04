@@ -185,8 +185,9 @@ class _GpuSurfaceState extends State<GpuSurface> {
         : widget.quality == 'low'
         ? 960
         : 1280;
-    final renderWidth = lowEnd && !widget.showroom && width > 1152
-        ? 1152
+    final renderWidth =
+        lowEnd && !widget.showroom && widget.quality == 'high' && width > 1280
+        ? 1280
         : width;
     final height = (renderWidth * size.height / size.width).round().clamp(
       180,
