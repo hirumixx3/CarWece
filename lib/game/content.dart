@@ -11,6 +11,8 @@ part 'world_expansion.dart';
 part 'world_track_obstacles.dart';
 part 'brazil_content.dart';
 part 'loop_expansion_brazil.dart';
+part 'brazil_content_2.dart';
+part 'loop_expansion_blue.dart';
 
 enum DriveType { rear, all, front }
 
@@ -853,6 +855,7 @@ const carDesigns = <CarDesign>[
     rimColor: 0xffaeb9c2,
   ), // BUGATTI CHIRON
   ...brazilCarDesigns,
+  ...brazil2CarDesigns,
 ];
 
 const cars = <CarSpec>[
@@ -1742,6 +1745,7 @@ const cars = <CarSpec>[
     tier: 'MUNDO REAL',
   ),
   ...brazilCars,
+  ...brazil2Cars,
 ];
 
 enum RaceMode { quick, championship, timeTrial }
@@ -1831,6 +1835,9 @@ class TrackProjection {
 
 class TrackSpec {
   final bool openArena;
+  // Toy-blue plastic ribbon (bright blue surface, orange rails) instead of
+  // the standard asphalt, for the multi-loop playset circuits.
+  final bool blueTrack;
   final String id, name, subtitle, room;
   final int accent, floor, wall;
   final double width;
@@ -1907,6 +1914,7 @@ class TrackSpec {
     this.loopControls,
     this.loopSections = const [],
     this.openArena = false,
+    this.blueTrack = false,
   }) {
     _build();
   }
@@ -2482,5 +2490,6 @@ List<TrackSpec> createTracks() {
     ...createLoopTracks(),
     ...createExpansionTracks(),
     ...createBrazilLoopTracks(),
+    ...createBlueLoopTracks(),
   ];
 }

@@ -355,7 +355,7 @@ Mesh3 buildWorldMesh(TrackSpec track) {
       b.point(-w),
       b.point(w),
       a.point(w),
-      0xff3f444b,
+      track.blueTrack ? 0xff1a63e0 : 0xff3f444b,
       Material3.track,
       na: a.up,
       nb: b.up,
@@ -369,7 +369,7 @@ Mesh3 buildWorldMesh(TrackSpec track) {
       b.point(w, -.45),
       b.point(-w, -.45),
       a.point(-w, -.45),
-      0xff26292e,
+      track.blueTrack ? 0xff0b2a63 : 0xff26292e,
       Material3.plastic,
     );
     for (final side in [-1.0, 1.0]) {
@@ -388,7 +388,9 @@ Mesh3 buildWorldMesh(TrackSpec track) {
           b.point(p.$1, p.$2),
           b.point(q.$1, q.$2),
           a.point(q.$1, q.$2),
-          j == 2 ? 0xffe0a458 : 0xffc85a1e,
+          track.blueTrack
+              ? (j == 2 ? 0xff8fd8ff : 0xff2f7fe0)
+              : (j == 2 ? 0xffe0a458 : 0xffc85a1e),
           Material3.track,
         );
       }
@@ -398,7 +400,7 @@ Mesh3 buildWorldMesh(TrackSpec track) {
           b.point(side * w * .97, .025),
           b.point(side * w * .86, .025),
           a.point(side * w * .86, .025),
-          0xfff3ead2,
+          track.blueTrack ? 0xffffff : 0xfff3ead2,
           Material3.decal,
         );
     }
@@ -409,7 +411,7 @@ Mesh3 buildWorldMesh(TrackSpec track) {
           b.point(w * lane - .055, .03),
           b.point(w * lane + .055, .03),
           a.point(w * lane + .055, .03),
-          0xfff7e8c8,
+          track.blueTrack ? 0xffffff : 0xfff7e8c8,
           Material3.decal,
         );
       }
@@ -426,7 +428,7 @@ Mesh3 buildWorldMesh(TrackSpec track) {
             base + a.forward * 1.6,
             base - a.forward * 1.2 - a.right * (side * 1.1),
             base - a.forward * 1.2 + a.right * (side * 1.1),
-            0xffff5340,
+            track.blueTrack ? 0xffd9ecff : 0xffff5340,
             Material3.decal,
           );
         }
@@ -490,7 +492,7 @@ Mesh3 buildWorldMesh(TrackSpec track) {
       m.box(
         a.point(0, -.48),
         V3(track.width + .6, .19, .4),
-        0xffd55313,
+        track.blueTrack ? 0xff0d3f9e : 0xffd55313,
         Material3.plastic,
         r: a.right,
         u: a.up,
@@ -501,7 +503,7 @@ Mesh3 buildWorldMesh(TrackSpec track) {
       m.box(
         a.point(0, .015),
         V3(track.width - .8, .025, .11),
-        0xffb64613,
+        track.blueTrack ? 0xff0a2f78 : 0xffb64613,
         Material3.plastic,
         r: a.right,
         u: a.up,
@@ -540,7 +542,7 @@ Mesh3 buildWorldMesh(TrackSpec track) {
       f.point(w) - f.forward * l,
       f.point(w, h) + f.forward * l,
       f.point(-w, h) + f.forward * l,
-      0xffff922b,
+      track.blueTrack ? 0xff1a63e0 : 0xffff922b,
       Material3.track,
     );
     m.triangle(

@@ -3,7 +3,9 @@ part of 'gpu_mesh.dart';
 /// Additional room layouts use the existing safe RoomProp catalogue instead of
 /// forcing the old fixed bed/tub/cabinets through a newly authored circuit.
 void buildBrazilIndoorWorld(Mesh3 m, TrackSpec track) {
-  final material = track.tiled
+  final material = track.blueTrack
+      ? Material3.plastic
+      : track.tiled
       ? Material3.tile
       : ['QUARTO', 'SALA'].contains(track.room)
       ? Material3.wood

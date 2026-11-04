@@ -43,7 +43,7 @@ void main() {
   test(
     'Every existing shortcut arms at the physical gate without the old entrance portal',
     () {
-      expect(tracks.length, 76);
+      expect(tracks.length, 126);
       for (final t in shortcutTracks) {
         final e = race(t), path = t.shortcuts.single;
         arm(e);

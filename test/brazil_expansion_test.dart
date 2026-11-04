@@ -6,21 +6,30 @@ import 'package:carwece/game/gpu_mesh.dart';
 import 'package:carwece/game/gpu_frame.dart';
 
 void main() {
-  final tracks = createTracks(), added = tracks.skip(51).toList();
+  final tracks = createTracks(), added = tracks.skip(51).take(25).toList();
+  final blueAdded = tracks.skip(76).toList();
   test(
     'Append exactly 50 national cars and 25 loop circuits without replacing old IDs',
     () {
-      expect(cars.length, 106);
-      expect(tracks.length, 76);
+      expect(cars.length, 156);
+      expect(tracks.length, 126);
       expect(brazilCars.length, 50);
       expect(brazilCarDesigns.length, 50);
-      expect(cars.skip(56).map((c) => c.id), brazilCars.map((c) => c.id));
+      expect(brazil2Cars.length, 50);
+      expect(brazil2CarDesigns.length, 50);
+      expect(
+        cars.skip(56).take(50).map((c) => c.id),
+        brazilCars.map((c) => c.id),
+      );
+      expect(cars.skip(106).map((c) => c.id), brazil2Cars.map((c) => c.id));
       expect(cars[56].id, 'br_fusca');
+      expect(cars[106].id, 'br_gol_gts');
       expect(cars[55].id, 'chiron');
       expect(tracks[50].id, 'coast_tideloop');
-      expect(cars.map((c) => c.id).toSet().length, 106);
-      expect(cars.map((c) => c.body), List.generate(106, (i) => i));
-      expect(tracks.map((t) => t.id).toSet().length, 76);
+      expect(tracks[76].id, 'blue_canopy');
+      expect(cars.map((c) => c.id).toSet().length, 156);
+      expect(cars.map((c) => c.body), List.generate(156, (i) => i));
+      expect(tracks.map((t) => t.id).toSet().length, 126);
       expect(createBattleArenas().length, 11);
     },
   );
@@ -64,6 +73,39 @@ void main() {
       }
     },
   );
+  test('Blue playset circuits carry two or three true vertical loops each', () {
+    expect(blueAdded.length, 50);
+    var totalLoops = 0;
+    for (final t in blueAdded) {
+      expect(t.blueTrack, isTrue, reason: t.id);
+      expect(t.loops.length, anyOf(2, 3), reason: t.id);
+      totalLoops += t.loops.length;
+      expect(t.length, greaterThan(3500), reason: t.id);
+      expect(t.width, 46);
+      expect(t.requiredStars, brazilLoopStars[t.id], reason: t.id);
+      for (final l in t.loops) {
+        var inverted = false;
+        for (var s = l.start; s < l.end; s += 4) {
+          if (t.at(s).up.y < -.95) inverted = true;
+        }
+        expect(inverted, isTrue, reason: t.id);
+        expect(
+          (t.at(l.start).p - t.at(l.end).p).length,
+          greaterThan(76),
+          reason: t.id,
+        );
+      }
+      for (final f in t.frames) {
+        expect(t.widthAt(f.s), 46, reason: t.id);
+        expect(f.p.x.abs() + 23, lessThan(850), reason: t.id);
+        expect(f.p.z.abs() + 23, lessThan(850), reason: t.id);
+        if (t.loopAt(f.s, before: 5, after: 5) == null)
+          expect(f.up.y, greaterThan(.98), reason: t.id);
+      }
+      if (t.outdoor) expect(t.themedObstacles, isNotEmpty, reason: t.id);
+    }
+    expect(totalLoops, 125);
+  });
   test(
     'National cars have unique chassis, finite normals and separate wheel meshes',
     () {
@@ -114,8 +156,8 @@ void main() {
     'Combined filters never remap master indices or mutate the catalogue',
     () {
       final before = cars.map((c) => c.id).toList();
-      expect(filterCarCollection().length, 106);
-      expect(filterCarCollection(brazilOnly: true).length, 50);
+      expect(filterCarCollection().length, 156);
+      expect(filterCarCollection(brazilOnly: true).length, 100);
       for (final cls in carPerformanceClasses) {
         for (final cat in carModelCategories) {
           final indices = filterCarCollection(

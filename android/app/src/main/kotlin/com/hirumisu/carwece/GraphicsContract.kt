@@ -4,7 +4,7 @@ package com.hirumisu.carwece
 internal object GraphicsContract {
     // cars × (body, damage, wheels) + 21 effects + 60 battle meshes.
     // Only active car slots contain full geometry; unused slots stay tiny.
-    const val MAX_MESHES = 512
+    const val MAX_MESHES = 1024
     const val MAX_INSTANCES = 128
 
     fun validateCreate(world: FloatArray, meshes: List<FloatArray>, shaders: List<String>, frame: FloatArray) {
