@@ -9,6 +9,8 @@ uniform mat4 uModel;
 uniform mat4 uVP;
 uniform mat4 uLightVP;
 out vec3 vPosition;
+out vec3 vLocalPosition;
+out vec3 vLocalNormal;
 out vec3 vNormal;
 out vec3 vColor;
 out vec2 vUv;
@@ -17,7 +19,11 @@ out vec4 vShadow;
 void main() {
   vec4 world=uModel*vec4(aPosition,1.0);
   vPosition=world.xyz;
-  vNormal=normalize(mat3(uModel)*aNormal);
+  vLocalPosition=aPosition;
+  vLocalNormal=aNormal;
+  // Inverse-transpose keeps normals correct under the non-uniform scales
+  // used by beams, smoke and explosion instances; mat3(uModel) skewed them.
+  vNormal=normalize(transpose(inverse(mat3(uModel)))*aNormal);
   vColor=aColor;vUv=aUv;vMaterial=int(aMaterial+0.5);
   vShadow=uLightVP*world;
   gl_Position=uVP*world;

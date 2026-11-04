@@ -1762,7 +1762,6 @@ enum ItemType {
   spikes,
   salvo,
   dreno,
-  propulsor,
   fantasma,
 }
 
@@ -1782,7 +1781,6 @@ String itemName(ItemType item) => switch (item) {
   ItemType.spikes => 'ESPINHOS',
   ItemType.salvo => 'SALVA TRIPLA',
   ItemType.dreno => 'DRENO DE ENERGIA',
-  ItemType.propulsor => 'PROPULSOR',
   ItemType.fantasma => 'FANTASMA',
 };
 

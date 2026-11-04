@@ -1648,7 +1648,7 @@ class RaceEngine {
             ItemType.smoke,
             ItemType.spikes,
           ],
-          if (front == null && !rear) ...[ItemType.nitro, ItemType.propulsor],
+          if (front == null && !rear) ...[ItemType.nitro],
           if (rear || d.damage > .5) ItemType.fantasma,
         ]..remove(botLastPower[d]);
         if (options.isEmpty) options.add(ItemType.shield);

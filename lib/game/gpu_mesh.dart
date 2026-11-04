@@ -364,6 +364,27 @@ Mesh3 buildWorldMesh(TrackSpec track) {
       repeatU: (b.p - a.p).length,
       repeatV: 1,
     );
+    if (!track.openArena) {
+      // Rubbered-in racing line and continuous edge lines: the circuit
+      // reads as a used race track instead of a fresh plastic ribbon.
+      m.quad(
+        a.point(-w * .34, .021),
+        b.point(-w * .34, .021),
+        b.point(w * .34, .021),
+        a.point(w * .34, .021),
+        0xff34383e,
+        Material3.decal,
+      );
+      for (final side in [-1.0, 1.0])
+        m.quad(
+          a.point(side * w * .9, .022),
+          b.point(side * w * .9, .022),
+          b.point(side * w * .985, .022),
+          a.point(side * w * .985, .022),
+          0xfff3ead2,
+          Material3.decal,
+        );
+    }
     m.quad(
       a.point(w, -.45),
       b.point(w, -.45),
@@ -438,7 +459,7 @@ Mesh3 buildWorldMesh(TrackSpec track) {
         b.point(w * .55, .035),
         b.point(w * .95, .035),
         a.point(w * .95, .035),
-        0xff9bd837,
+        0xff86b04c,
         Material3.decal,
       );
     if (track.isBoost(a.s, 0)) {
@@ -1229,6 +1250,33 @@ Mesh3 buildShowroom() {
       V3(math.cos(a) * 5.7, .22, math.sin(a) * 5.7),
       0xffffa642,
       Material3.glow,
+    );
+  }
+  // Studio turntable finish: brushed steel inlay rings and radial seams.
+  for (final ring in [(4.72, 4.9), (3.18, 3.3)]) {
+    for (var i = 0; i < 72; i++) {
+      final a = i / 72 * math.pi * 2, b = (i + 1) / 72 * math.pi * 2;
+      m.quad(
+        V3(math.cos(a) * ring.$1, .2, math.sin(a) * ring.$1),
+        V3(math.cos(b) * ring.$1, .2, math.sin(b) * ring.$1),
+        V3(math.cos(b) * ring.$2, .2, math.sin(b) * ring.$2),
+        V3(math.cos(a) * ring.$2, .2, math.sin(a) * ring.$2),
+        0xff8fa3b8,
+        Material3.metal,
+      );
+    }
+  }
+  for (var i = 0; i < 24; i++) {
+    final a = i / 24 * math.pi * 2;
+    final dir = V3(math.cos(a), 0, math.sin(a)),
+        side = V3(-math.sin(a), 0, math.cos(a));
+    m.quad(
+      dir * .8 + side * .018 + const V3(0, .2, 0),
+      dir * 5.55 + side * .018 + const V3(0, .2, 0),
+      dir * 5.55 - side * .018 + const V3(0, .2, 0),
+      dir * .8 - side * .018 + const V3(0, .2, 0),
+      0xff10161f,
+      Material3.decal,
     );
   }
   return m;

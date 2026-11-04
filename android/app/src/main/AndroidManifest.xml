@@ -1,5 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <uses-feature android:glEsVersion="0x00030000" android:required="true" />
+    <!-- Vulkan is preferred, never required: devices without it keep the
+         compatible OpenGL ES path instead of being locked out. -->
+    <uses-feature android:name="android.hardware.vulkan.version" android:version="0x00401000" android:required="false" />
+    <uses-feature android:name="android.hardware.vulkan.level" android:version="1" android:required="false" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
@@ -42,7 +46,8 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
-        <meta-data android:name="io.flutter.embedding.android.EnableImpeller" android:value="false" />
+        <meta-data android:name="io.flutter.embedding.android.EnableImpeller" android:value="true" />
+        <meta-data android:name="io.flutter.embedding.android.ImpellerBackend" android:value="vulkan" />
     </application>
     <!-- Required to query activities that can process text, see:
          https://developer.android.com/training/package-visibility and

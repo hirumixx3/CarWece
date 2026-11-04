@@ -1294,7 +1294,7 @@ class _RushShellState extends State<RushShell>
                           (v) => s.quality = v,
                         ),
                         note:
-                            'AUTO ajusta a resolução durante a corrida para priorizar a fluidez. Os modelos e a física são preservados.',
+                            'AUTO ajusta a resolução durante a corrida para priorizar a fluidez. No Android compatível, a apresentação usa Vulkan (Impeller). Os modelos e a física são preservados.',
                       ),
                       tile(
                         'Distância da câmera',
