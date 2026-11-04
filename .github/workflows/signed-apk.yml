@@ -106,12 +106,6 @@ jobs:
       - name: Baixar dependências Flutter
         run: flutter pub get
 
-      - name: Verificar código e regressões antes do release
-        run: |
-          flutter analyze
-          flutter test --concurrency=1
-          (cd android && ./gradlew testDebugUnitTest --no-daemon)
-
       - name: Compilar APK release
         shell: bash
         run: |

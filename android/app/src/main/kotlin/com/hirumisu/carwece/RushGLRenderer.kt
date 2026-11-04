@@ -229,7 +229,7 @@ internal class RushGLRenderer(
         Matrix.setLookAtM(view, 0, data[0],data[1],data[2],data[3],data[4],data[5],data[6],data[7],data[8])
         Matrix.multiplyMM(vp, 0, projection, 0, view, 0)
         cameraFrustum.set(vp)
-        val lx = -.455f; val ly = .827f; val lz = -.331f
+        val lx = -.52f; val ly = .76f; val lz = -.39f
         val cx = data[10]; val cy = data[11]; val cz = data[12]
         Matrix.setLookAtM(lightView, 0, cx+lx*230,cy+ly*230,cz+lz*230,cx,cy,cz,0f,1f,0f)
         val span = if (showroom) 9f else 105f
@@ -255,7 +255,7 @@ internal class RushGLRenderer(
         GL.glEnable(GL.GL_SCISSOR_TEST); GL.glScissor(0,0,rw,rh)
         if (showroom) GL.glClearColor(.046f,.078f,.125f,1f)
         else if (night) GL.glClearColor(.10f,.15f,.26f,1f)
-        else GL.glClearColor(.43f,.55f,.64f,1f)
+        else GL.glClearColor(.40f,.53f,.63f,1f)
         GL.glClear(GL.GL_COLOR_BUFFER_BIT or GL.GL_DEPTH_BUFFER_BIT)
         GL.glDisable(GL.GL_SCISSOR_TEST)
         GL.glUseProgram(sceneProgram); matrix(sceneProgram,"uVP",vp); matrix(sceneProgram,"uLightVP",lightVP)
@@ -263,7 +263,7 @@ internal class RushGLRenderer(
         if (night) {
             vec3(sceneProgram,"uSunColor",.62f,.76f,1.10f); vec3(sceneProgram,"uSky",.17f,.26f,.47f)
         } else {
-            vec3(sceneProgram,"uSunColor",1.08f,.98f,.84f); vec3(sceneProgram,"uSky",.49f,.65f,.77f)
+            vec3(sceneProgram,"uSunColor",1.14f,1.01f,.87f); vec3(sceneProgram,"uSky",.46f,.62f,.76f)
         }
         scalar(sceneProgram,"uTime",data[9]); scalar(sceneProgram,"uNight",if(night)1f else 0f)
         scalar(sceneProgram,"uShadowTexel",1f/shadowSize)

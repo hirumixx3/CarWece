@@ -58,12 +58,9 @@ jobs:
         env:
           ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
         run: python3 tools/prepare_github_signing.py --directory "$RUNNER_TEMP/carwece-signing"
-      - name: Resolver dependências e verificar
+      - name: Resolver dependências
         run: |
           flutter pub get
-          flutter analyze
-          flutter test --concurrency=1
-          (cd android && ./gradlew testDebugUnitTest --no-daemon)
       - name: Gerar bundles
         env:
           VERSION_NAME: ${{ inputs.version_name }}

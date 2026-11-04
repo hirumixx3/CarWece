@@ -20,20 +20,33 @@ class GraphicsContractTest {
             (args["objects"] as List<*>).map { it as FloatArray },
             args["shaders"] as List<String>, args["frame"] as FloatArray)
     }
+    // Mesh indices derive from the roster exactly like Dart's GpuMeshId:
+    // bodies, then pickup..damage, a damage block, wheels, then 12 effects.
+    // objects.size == 3 * cars + 21, so the roster size is recoverable from
+    // the payload itself and these tests survive roster growth.
+    private fun rosterSize(objectCount: Int): Int {
+        require((objectCount - 21) % 3 == 0) { "Unexpected object count: $objectCount" }
+        return (objectCount - 21) / 3
+    }
     @Test fun acceptsActualFlutterPayloadWithAllCarAndWheelModels() {
         val args = request()
-        assertEquals(264, (args["objects"] as List<*>).size)
+        val count = (args["objects"] as List<*>).size
+        val n = rosterSize(count)
+        assertEquals(3 * n + 21, count)
         validate(args)
         val frame = args["frame"] as FloatArray
-        assertTrue((0 until frame[14].toInt()).any { frame[15 + it * 17].toInt() == 251 })
+        val lastWheel = 3 * n + 8
+        assertTrue((0 until frame[14].toInt()).any { frame[15 + it * 17].toInt() == lastWheel })
     }
     @Test fun wheelMaterialsAreOpaqueAndShieldSmokeAndIceUseBlending() {
         val meshes = request()["objects"] as List<*>
-        for (i in 171..251) assertFalse(GraphicsContract.isTransparentMesh(meshes[i] as FloatArray))
-        assertTrue(GraphicsContract.isTransparentMesh(meshes[84] as FloatArray))
-        assertTrue(GraphicsContract.isTransparentMesh(meshes[88] as FloatArray))
-        assertTrue(GraphicsContract.isTransparentMesh(meshes[257] as FloatArray))
-        assertFalse(GraphicsContract.isTransparentMesh(meshes[170] as FloatArray))
+        val n = rosterSize(meshes.size)
+        val wheel = 2 * n + 9
+        for (i in wheel..wheel + n - 1) assertFalse(GraphicsContract.isTransparentMesh(meshes[i] as FloatArray))
+        assertTrue(GraphicsContract.isTransparentMesh(meshes[n + 3] as FloatArray)) // shield
+        assertTrue(GraphicsContract.isTransparentMesh(meshes[n + 7] as FloatArray)) // smoke
+        assertTrue(GraphicsContract.isTransparentMesh(meshes[3 * n + 14] as FloatArray)) // frost
+        assertFalse(GraphicsContract.isTransparentMesh(meshes[wheel - 1] as FloatArray))
     }
     @Test fun acceptsAdditionalEffectsWithinBudget() {
         val args = request().toMutableMap()

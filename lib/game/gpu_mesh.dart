@@ -334,7 +334,7 @@ Mesh3 buildWorldMesh(TrackSpec track) {
           p + a.forward * 4,
           p - a.forward * 2 - a.right * 1.8,
           p - a.forward * 2 + a.right * 1.8,
-          0xff5ee2d0,
+          0xff4fc9b8,
           Material3.decal,
         );
       }
@@ -355,7 +355,7 @@ Mesh3 buildWorldMesh(TrackSpec track) {
       b.point(-w),
       b.point(w),
       a.point(w),
-      0xffef5813,
+      0xff3f444b,
       Material3.track,
       na: a.up,
       nb: b.up,
@@ -369,7 +369,7 @@ Mesh3 buildWorldMesh(TrackSpec track) {
       b.point(w, -.45),
       b.point(-w, -.45),
       a.point(-w, -.45),
-      0xffb84912,
+      0xff26292e,
       Material3.plastic,
     );
     for (final side in [-1.0, 1.0]) {
@@ -388,7 +388,7 @@ Mesh3 buildWorldMesh(TrackSpec track) {
           b.point(p.$1, p.$2),
           b.point(q.$1, q.$2),
           a.point(q.$1, q.$2),
-          j == 2 ? 0xffffc05d : 0xffff912d,
+          j == 2 ? 0xffe0a458 : 0xffc85a1e,
           Material3.track,
         );
       }
@@ -398,7 +398,7 @@ Mesh3 buildWorldMesh(TrackSpec track) {
           b.point(side * w * .97, .025),
           b.point(side * w * .86, .025),
           a.point(side * w * .86, .025),
-          0xffffdfa1,
+          0xfff3ead2,
           Material3.decal,
         );
     }
@@ -409,7 +409,7 @@ Mesh3 buildWorldMesh(TrackSpec track) {
           b.point(w * lane - .055, .03),
           b.point(w * lane + .055, .03),
           a.point(w * lane + .055, .03),
-          0xffffbb64,
+          0xfff7e8c8,
           Material3.decal,
         );
       }

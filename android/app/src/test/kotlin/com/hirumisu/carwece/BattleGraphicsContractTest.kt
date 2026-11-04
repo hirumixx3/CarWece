@@ -19,24 +19,34 @@ class BattleGraphicsContractTest {
             (a["objects"] as List<*>).map { it as FloatArray },
             a["shaders"] as List<String>,a["frame"] as FloatArray)
     }
+    // Battle meshes are appended after the race inventory (3 * cars + 21),
+    // so their base index follows the roster size in the payload itself.
+    private fun battleBase(objectCount: Int): Int {
+        require((objectCount - 60 - 21) % 3 == 0) { "Unexpected object count: $objectCount" }
+        return objectCount - 60
+    }
     @Test fun acceptsActualBattleWorldAndAllFortyFourWeaponAttachments() {
-        val a=request();assertEquals(324,(a["objects"] as List<*>).size);validate(a)
+        val a=request();val count=(a["objects"] as List<*>).size
+        assertEquals(battleBase(count) + 60, count);validate(a)
     }
     @Test fun healthBarsTurretsAndProjectilesAreInTheActualFrame() {
         val a=request();val f=a["frame"] as FloatArray
+        val base=battleBase((a["objects"] as List<*>).size)
         val indices=(0 until f[14].toInt()).map { f[15+it*17].toInt() }
-        assertTrue(indices.contains(271));assertTrue(indices.contains(273));assertTrue(indices.contains(296))
-        assertTrue(indices.contains(265));assertTrue(f[14]<=GraphicsContract.MAX_INSTANCES)
+        assertTrue(indices.contains(base+7));assertTrue(indices.contains(base+9));assertTrue(indices.contains(base+32))
+        assertTrue(indices.contains(base+1));assertTrue(f[14]<=GraphicsContract.MAX_INSTANCES)
     }
     @Test fun healthAndMetalAreOpaqueWhileGasUsesTransparentMaterial() {
         val m=request()["objects"] as List<*>
-        for(i in listOf(264,265,266,267,268,271,272,273,274,275,278))
-            assertFalse(GraphicsContract.isTransparentMesh(m[i] as FloatArray))
-        assertTrue(GraphicsContract.isTransparentMesh(m[277] as FloatArray))
+        val base=battleBase(m.size)
+        for(i in listOf(0,1,2,3,4,7,8,9,10,11,14))
+            assertFalse(GraphicsContract.isTransparentMesh(m[base+i] as FloatArray))
+        assertTrue(GraphicsContract.isTransparentMesh(m[base+13] as FloatArray))
     }
     @Test fun everyAdditionalVertexAndTransformHasFiniteValues() {
         val a=request();val meshes=a["objects"] as List<*>
-        for(i in 264..322) {
+        val base=battleBase(meshes.size)
+        for(i in base..base+58) {
             val m=meshes[i] as FloatArray;assertTrue(m.isNotEmpty());assertEquals(0,m.size%36)
             assertTrue(m.all { it.isFinite() })
         }
@@ -48,7 +58,8 @@ class BattleGraphicsContractTest {
     }
     @Test fun healthBillboardsNeverCastFloatingRectangularShadows() {
         val meshes=request()["objects"] as List<*>
-        for(i in 271..273)assertFalse(GraphicsContract.castsShadowMesh(meshes[i] as FloatArray))
-        assertTrue(GraphicsContract.castsShadowMesh(meshes[278] as FloatArray))
+        val base=battleBase(meshes.size)
+        for(i in base+7..base+9)assertFalse(GraphicsContract.castsShadowMesh(meshes[i] as FloatArray))
+        assertTrue(GraphicsContract.castsShadowMesh(meshes[base+14] as FloatArray))
     }
 }

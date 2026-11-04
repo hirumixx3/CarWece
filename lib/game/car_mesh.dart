@@ -865,6 +865,21 @@ Mesh3 buildCarMesh(CarSpec car) {
       }
     }
   }
+  // Realism stance pass: slightly wider and lower above the beltline, so
+  // the catalogue reads as scale sports cars instead of tall toy blocks.
+  // Physics uses fixed driver dimensions and never reads this mesh, so
+  // handling is untouched; normals are re-normalized after the scale.
+  for (var i = 0; i < m.data.length; i += 12) {
+    final y = m.data[i + 1];
+    m.data[i] *= 1.035;
+    if (y > .55) m.data[i + 1] = y - (y - .55) * .09;
+    var nx = m.data[i + 3] / 1.035, ny = m.data[i + 4], nz = m.data[i + 5];
+    if (y > .55) ny /= .91;
+    final il = 1 / math.sqrt(nx * nx + ny * ny + nz * nz);
+    m.data[i + 3] = nx * il;
+    m.data[i + 4] = ny * il;
+    m.data[i + 5] = nz * il;
+  }
   return m;
 }
 

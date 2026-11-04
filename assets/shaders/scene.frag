@@ -80,7 +80,8 @@ void main() {
   float footprint=max(length(dFdx(plane)),length(dFdy(plane)));
   float detail=1.0-smoothstep(.12,1.4,footprint);
   if(vMaterial==0) {
-    rough=0.17;metal=0.36;
+    // Automotive paint: dielectric base with a tight clearcoat response.
+    rough=0.12;metal=0.22;
     base*=0.987+0.013*noise(vPosition.xz*70.0);
   }
   if(vMaterial==1) { rough=0.91;base*=0.70+0.30*noise(vPosition.xz*29.0); }
@@ -108,14 +109,15 @@ void main() {
   }
   if(vMaterial==6) { base*=0.94+noise(plane*2.0)*0.06;rough=0.92; }
   if(vMaterial==7) {
+    // Tarmac: matte, patchy and worn instead of glossy plastic.
     float wear=noise(vPosition.xz*.18+vPosition.y*.2);
     float micro=noise(plane*15.0)*detail;
-    rough=.25+wear*.13;
-    base*=.965+wear*.05+micro*.009;
+    rough=.52+wear*.28;
+    base*=.88+wear*.16+micro*.012;
   }
   if(vMaterial==8)rough=0.43;
   if(vMaterial==9) { emissive=1.8;rough=0.27; }
-  if(vMaterial==10){rough=.32+noise(plane*.4)*.15;base*=.96+noise(plane*2.5)*.055;}
+  if(vMaterial==10){rough=.44+noise(plane*.4)*.18;base*=.96+noise(plane*2.5)*.055;}
   if(vMaterial==13) {
     vec2 uv=fract(plane/32.0), tile=floor(plane/32.0);
     float grout=smoothstep(.0,.018,uv.x)*smoothstep(.0,.018,uv.y)*
@@ -148,6 +150,10 @@ void main() {
   vec3 ambient=mix(vec3(0.19,0.22,0.27),vec3(0.16,0.19,0.31),uNight);
   ambient*=mix(.72,1.08,n.y*.5+.5);
   ambient+=vec3(.035,.025,.014)*(1.0-abs(n.y));
+  // Soft bounce fill from the opposite azimuth, so shadow sides keep
+  // readable form like a photographed scene instead of going flat.
+  vec3 fillDir=normalize(vec3(-uLight.x,0.28,-uLight.z));
+  ambient+=uSky*max(dot(n,fillDir),0.0)*0.38;
   // Energy-conserving GGX direct specular with a diffuse room bounce.
   vec3 color=base*(ambient+uSunColor*ndl*vis*1.18)*(1.0-metal*.38);
   float alphaR=max(.035,rough*rough), a2=alphaR*alphaR;
@@ -166,8 +172,15 @@ void main() {
   color+=base*emissive;
   // Reflective dark blue windscreens retain a readable highlight even in shade.
   if(vMaterial==2)color=mix(base*.16,env*.40,clamp(fresnel+vec3(.07),0.0,1.0))+uSunColor*spec*.24;
-  // Clear indoor air: no distance fog, haze or depth-of-field blur.
+  // Photographic grade: gentle desaturation, an S-curve for contrast and
+  // a cool-shadow / warm-highlight split tone over the whole scene, so the
+  // miniature world reads as photographed instead of toy-rendered.
+  float luma=dot(color,vec3(0.2126,0.7152,0.0722));
+  color=mix(vec3(luma),color,0.86);
+  vec3 curved=color*color*(3.0-2.0*color);
+  color=mix(color,curved,0.20);
+  color*=mix(vec3(0.96,1.0,1.06),vec3(1.05,1.0,0.93),clamp(luma*1.4,0.0,1.0));
   // Mild warm film response, with gamma conversion for the sRGB window surface.
-  color=pow(filmic(color*1.23),vec3(1.0/2.2));
+  color=pow(filmic(color*1.28),vec3(1.0/2.2));
   fragColor=vec4(color,1.0);
 }
