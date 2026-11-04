@@ -128,9 +128,6 @@ class _GpuSurfaceState extends State<GpuSurface> {
   bool creating = false, retrying = false;
   final _frameClock = Stopwatch()..start();
   int _lastFrameUs = -1000000;
-  // Minimum interval between GPU frames, matched to the display: the old
-  // fixed 16 ms throttle capped 90/120 Hz phones at ~60 fps.
-  int _minFrameUs = 16000;
   int _lastFpsUs = 0;
   String? error;
   @override
@@ -163,40 +160,14 @@ class _GpuSurfaceState extends State<GpuSurface> {
     final size = render is RenderBox && render.hasSize
         ? render.size
         : MediaQuery.sizeOf(context);
-    final refreshRate = View.of(context).display.refreshRate;
-    if (refreshRate > 65) {
-      _minFrameUs = (1000000 / refreshRate).round() - 400;
-    }
-    // Entry-level hardware (Galaxy A05s class) is detected here for the
-    // render-width ceiling below. Frame submission follows the panel on
-    // every device: an in-between cap quantizes badly (a 16 ms gate on
-    // a 90 Hz panel lets a frame through only every other tick, which
-    // pins the game at 45 fps), and the native renderer draws only the
-    // latest frame, so the GPU sets its own pace.
-    var lowEnd = false;
-    try {
-      final profile = await channel.invokeMethod<Map<dynamic, dynamic>>(
-        'profile',
-      );
-      lowEnd = profile?['lowEnd'] == true;
-    } catch (_) {}
     final width = widget.showroom
         ? 960
         : widget.quality == 'high'
-        ? 1440
+        ? 1600
         : widget.quality == 'low'
         ? 960
         : 1280;
-    // Weak hardware keeps the full HIGH width: the renderer's dynamic
-    // scale floor protects the frame rate instead of a narrower buffer.
-    final renderWidth =
-        lowEnd && !widget.showroom && widget.quality == 'high' && width > 1440
-        ? 1440
-        : width;
-    final height = (renderWidth * size.height / size.width).round().clamp(
-      180,
-      1200,
-    );
+    final height = (width * size.height / size.width).round().clamp(180, 1200);
     try {
       final shaders = _shaders ??= await Future.wait(
         [
@@ -209,7 +180,7 @@ class _GpuSurfaceState extends State<GpuSurface> {
       final prepared = await widget.prepare?.call();
       if (!mounted) return;
       final id = await channel.invokeMethod<int>('create', {
-        'width': renderWidth,
+        'width': width,
         'height': height,
         'world': prepared?.$1 ?? widget.world(),
         'objects':
@@ -251,7 +222,7 @@ class _GpuSurfaceState extends State<GpuSurface> {
     final id = textureId;
     if (id == null || sending || !mounted || error != null) return;
     final now = _frameClock.elapsedMicroseconds;
-    if (now - _lastFrameUs < _minFrameUs) return;
+    if (now - _lastFrameUs < 16000) return;
     _lastFrameUs = now;
     sending = true;
     channel

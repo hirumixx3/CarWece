@@ -609,34 +609,27 @@ Float32List framePacket(
   double time,
   List<GpuInstance> instances, {
   bool boost = false,
-}) {
-  // Filled directly into the packet buffer: the previous version built a
-  // growable list of ~2200 doubles and copied it every frame, feeding the
-  // garbage collector during races.
-  final count = math.min(128, instances.length);
-  final data = Float32List(15 + count * 17);
-  data[0] = eye.x;
-  data[1] = eye.y;
-  data[2] = eye.z;
-  data[3] = target.x;
-  data[4] = target.y;
-  data[5] = target.z;
-  data[6] = up.x;
-  data[7] = up.y;
-  data[8] = up.z;
-  data[9] = time;
-  data[10] = focus.x;
-  data[11] = focus.y;
-  data[12] = focus.z;
-  data[13] = boost ? 1 : 0;
-  data[14] = count.toDouble();
-  for (var i = 0; i < count; i++) {
-    final offset = 15 + i * 17;
-    data[offset] = instances[i].mesh.toDouble();
-    data.setRange(offset + 1, offset + 17, instances[i].model);
-  }
-  return data;
-}
+}) => Float32List.fromList([
+  eye.x,
+  eye.y,
+  eye.z,
+  target.x,
+  target.y,
+  target.z,
+  up.x,
+  up.y,
+  up.z,
+  time,
+  focus.x,
+  focus.y,
+  focus.z,
+  boost ? 1 : 0,
+  math.min(128, instances.length).toDouble(),
+  for (final instance in instances.take(128)) ...[
+    instance.mesh.toDouble(),
+    ...instance.model,
+  ],
+]);
 
 Float32List raceGpuFrame(RaceEngine race, {double cameraDistance = 1}) {
   final f = race.driverFrame(race.player), width = race.track.width / 2;
@@ -682,9 +675,8 @@ Float32List raceGpuFrame(RaceEngine race, {double cameraDistance = 1}) {
       instances.add(GpuInstance(GpuMeshId.damage + d.car.body, pose));
     }
     if (d.repairGlow > 0) {
-      final base = race.driverFrame(d);
       for (var i = 0; i < 4; i++) {
-        final a = i * math.pi / 2 + race.time * 1.7;
+        final a = i * math.pi / 2 + race.time * 1.7, base = race.driverFrame(d);
         final point =
             base.point(math.cos(a) * 3, 1.8 + (1.4 - d.repairGlow) * 2) +
             base.forward * math.sin(a) * 3;

@@ -2,8 +2,6 @@
 precision highp float;
 precision highp sampler2D;
 in vec3 vPosition;
-in vec3 vLocalPosition;
-in vec3 vLocalNormal;
 in vec3 vNormal;
 in vec3 vColor;
 in vec2 vUv;
@@ -18,12 +16,7 @@ uniform float uNight;
 uniform float uShadowTexel;
 uniform sampler2D uDepth;
 out vec4 fragColor;
-float hash21(vec2 p) {
-  // Sin-free hash: the classic sin hash is slow and bands on mobile GPUs.
-  vec3 p3=fract(vec3(p.xyx)*0.1031);
-  p3+=dot(p3,p3.yzx+33.33);
-  return fract((p3.x+p3.y)*p3.z);
-}
+float hash21(vec2 p) { return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453); }
 float noise(vec2 p) {
   vec2 i=floor(p),f=fract(p);f=f*f*(3.0-2.0*f);
   return mix(mix(hash21(i),hash21(i+vec2(1,0)),f.x),mix(hash21(i+vec2(0,1)),hash21(i+vec2(1,1)),f.x),f.y);
@@ -34,44 +27,23 @@ float visibility(vec3 n) {
   vec3 p=vShadow.xyz/vShadow.w*0.5+0.5;
   if(p.z>1.0||p.z<0.0||any(lessThan(p.xy,vec2(0)))||any(greaterThan(p.xy,vec2(1))))return 1.0;
   float bias=max(0.00018,0.00065*(1.0-max(dot(n,uLight),0.0)));
-  // Shadow LOD: past ~60 m the PCF kernel is subpixel, and past ~110 m a
-  // single tap is indistinguishable from 25. Most of the screen is far
-  // scenery, so this is where the high quality mode spent its frame.
-  float fragDist=length(vPosition-uCamera);
-  float q=uShadowQuality;
-  if(fragDist>110.0)q=0.0;
-  else if(fragDist>60.0 && q>2.0)q=2.0;
-  float occluded;
-  if(q<.5) {
-    occluded=p.z-bias<=texture(uDepth,p.xy).r?0.0:1.0;
-  } else if(q<1.5) {
+  if(uShadowQuality<.5) {
+    return p.z-bias<=texture(uDepth,p.xy).r?1.0:.25;
+  }
+  if(uShadowQuality<1.5) {
     float sum=0.0;
     for(int i=0;i<4;i++) {
       vec2 offset=vec2((i==0||i==2)?-.5:.5,i<2?-.5:.5)*uShadowTexel;
-      sum+=p.z-bias<=texture(uDepth,p.xy+offset).r?0.0:1.0;
+      sum+=p.z-bias<=texture(uDepth,p.xy+offset).r?1.0:0.0;
     }
-    occluded=sum*.25;
-  } else if(q<2.5) {
-    float sum=0.0;
-    for(int x=-1;x<=1;x++)for(int y=-1;y<=1;y++) {
-      float depth=texture(uDepth,p.xy+vec2(float(x),float(y))*uShadowTexel).r;
-      sum+=p.z-bias<=depth?0.0:1.0;
-    }
-    occluded=sum/9.0;
-  } else {
-    float sum=0.0;
-    for(int x=-2;x<=2;x++)for(int y=-2;y<=2;y++) {
-      float depth=texture(uDepth,p.xy+vec2(float(x),float(y))*uShadowTexel*1.5).r;
-      sum+=p.z-bias<=depth?0.0:1.0;
-    }
-    occluded=sum/25.0;
+    return .25+.75*sum*.25;
   }
-  float result=1.0-0.75*occluded;
-  // Fade shadows out at the edge of the light frustum instead of cutting
-  // them off in a hard square where the shadow camera ends.
-  float edge=smoothstep(0.0,0.045,min(min(p.x,1.0-p.x),min(p.y,1.0-p.y)));
-  float faded=mix(1.0,result,edge);
-  return mix(faded,1.0,smoothstep(150.0,260.0,fragDist)*0.85);
+  float result=0.0;
+  for(int x=-1;x<=1;x++)for(int y=-1;y<=1;y++) {
+    float depth=texture(uDepth,p.xy+vec2(float(x),float(y))*uShadowTexel).r;
+    result+=(p.z-bias<=depth?1.0:0.0);
+  }
+  return 0.25+0.75*result/9.0;
 }
 void main() {
   // Status billboards retain their UI colors and receive no scene lighting.
@@ -101,25 +73,21 @@ void main() {
       float heat=clamp(n.y*.25+flame*.85,0.0,1.0);
       color=mix(vec3(3.5,.17,.008),vec3(5.5,3.6,.55),heat);
     }
-    fragColor=vec4(pow(filmic(color*1.28),vec3(1.0/2.2)),alpha);return;
+    fragColor=vec4(pow(filmic(color*1.23),vec3(1.0/2.2)),alpha);return;
   }
   float rough=0.58,metal=0.0,emissive=0.0;
   vec2 plane=abs(n.y)>.65?vPosition.xz:(abs(n.x)>.65?vPosition.zy:vPosition.xy);
-  // Object-space plane for moving parts: world-space noise crawled across
-  // paint, tires and attachments as they moved through the scene.
-  vec2 localPlane=abs(vLocalNormal.y)>.65?vLocalPosition.xz:
-    (abs(vLocalNormal.x)>.65?vLocalPosition.zy:vLocalPosition.xy);
   float footprint=max(length(dFdx(plane)),length(dFdy(plane)));
   float detail=1.0-smoothstep(.12,1.4,footprint);
   if(vMaterial==0) {
     // Automotive paint: dielectric base with a tight clearcoat response.
     rough=0.12;metal=0.22;
-    base*=0.987+0.013*noise(localPlane*70.0);
+    base*=0.987+0.013*noise(vPosition.xz*70.0);
   }
-  if(vMaterial==1) { rough=0.91;base*=0.70+0.30*noise(localPlane*29.0); }
+  if(vMaterial==1) { rough=0.91;base*=0.70+0.30*noise(vPosition.xz*29.0); }
   if(vMaterial==2) { rough=0.10;metal=0.75; }
   if(vMaterial==3) {
-    float brush=noise(vec2(localPlane.x*3.0,localPlane.y*.065));
+    float brush=noise(vec2(plane.x*3.0,plane.y*.065));
     rough=.21+brush*.15;metal=.86;
     base*=.91+brush*.12;
   }
@@ -149,7 +117,7 @@ void main() {
   }
   if(vMaterial==8)rough=0.43;
   if(vMaterial==9) { emissive=1.8;rough=0.27; }
-  if(vMaterial==10){rough=.44+noise(localPlane*.4)*.18;base*=.96+noise(localPlane*2.5)*.055;}
+  if(vMaterial==10){rough=.44+noise(plane*.4)*.18;base*=.96+noise(plane*2.5)*.055;}
   if(vMaterial==13) {
     vec2 uv=fract(plane/32.0), tile=floor(plane/32.0);
     float grout=smoothstep(.0,.018,uv.x)*smoothstep(.0,.018,uv.y)*
@@ -187,19 +155,15 @@ void main() {
   vec3 fillDir=normalize(vec3(-uLight.x,0.28,-uLight.z));
   ambient+=uSky*max(dot(n,fillDir),0.0)*0.38;
   // Energy-conserving GGX direct specular with a diffuse room bounce.
-  // Surfaces rougher than .85 have no readable GGX lobe; skipping the
-  // distribution/geometry math there saves real ALU on most world pixels.
   vec3 color=base*(ambient+uSunColor*ndl*vis*1.18)*(1.0-metal*.38);
-  if(rough<.85) {
-    float alphaR=max(.035,rough*rough), a2=alphaR*alphaR;
-    float ndh=max(dot(n,halfDir),0.0), vdh=max(dot(viewDir,halfDir),0.0);
-    float denominator=ndh*ndh*(a2-1.0)+1.0;
-    float distribution=a2/(3.141593*denominator*denominator);
-    float k=(rough+1.0)*(rough+1.0)/8.0;
-    float geometry=ndv/(ndv*(1.0-k)+k)*ndl/(ndl*(1.0-k)+k);
-    vec3 schlick=f0+(1.0-f0)*pow(1.0-vdh,5.0);
-    color+=schlick*distribution*geometry/max(.01,4.0*ndv*ndl)*uSunColor*ndl*vis*.36;
-  }
+  float alphaR=max(.035,rough*rough), a2=alphaR*alphaR;
+  float ndh=max(dot(n,halfDir),0.0), vdh=max(dot(viewDir,halfDir),0.0);
+  float denominator=ndh*ndh*(a2-1.0)+1.0;
+  float distribution=a2/(3.141593*denominator*denominator);
+  float k=(rough+1.0)*(rough+1.0)/8.0;
+  float geometry=ndv/(ndv*(1.0-k)+k)*ndl/(ndl*(1.0-k)+k);
+  vec3 schlick=f0+(1.0-f0)*pow(1.0-vdh,5.0);
+  color+=schlick*distribution*geometry/max(.01,4.0*ndv*ndl)*uSunColor*ndl*vis*.36;
   color+=fresnel*env*(1.0-rough)*1.12;
   if(vMaterial==0 || vMaterial==14 || vMaterial==13) {
     float coat=pow(max(dot(n,halfDir),0.0),210.0);
@@ -207,16 +171,16 @@ void main() {
   }
   color+=base*emissive;
   // Reflective dark blue windscreens retain a readable highlight even in shade.
-  if(vMaterial==2)color=(mix(base*.16,env*.40,clamp(fresnel+vec3(.07),0.0,1.0))+uSunColor*spec*.24)*(.38+.62*vis);
+  if(vMaterial==2)color=mix(base*.16,env*.40,clamp(fresnel+vec3(.07),0.0,1.0))+uSunColor*spec*.24;
+  // Photographic grade: gentle desaturation, an S-curve for contrast and
+  // a cool-shadow / warm-highlight split tone over the whole scene, so the
+  // miniature world reads as photographed instead of toy-rendered.
+  float luma=dot(color,vec3(0.2126,0.7152,0.0722));
+  color=mix(vec3(luma),color,0.86);
+  vec3 curved=color*color*(3.0-2.0*color);
+  color=mix(color,curved,0.20);
+  color*=mix(vec3(0.96,1.0,1.06),vec3(1.05,1.0,0.93),clamp(luma*1.4,0.0,1.0));
   // Mild warm film response, with gamma conversion for the sRGB window surface.
-  vec3 display=pow(filmic(color*1.28),vec3(1.0/2.2));
-  // Photographic grade in display space, where every channel is in 0..1:
-  // the same S-curve in HDR turned negative past ~2.37 and punched black
-  // and magenta holes into the brightest clearcoat highlights.
-  float luma=dot(display,vec3(0.2126,0.7152,0.0722));
-  display=mix(vec3(luma),display,0.88);
-  vec3 curved=display*display*(3.0-2.0*display);
-  display=mix(display,curved,0.16);
-  display*=mix(vec3(0.96,1.0,1.06),vec3(1.05,1.0,0.93),clamp(luma*1.4,0.0,1.0));
-  fragColor=vec4(display,1.0);
+  color=pow(filmic(color*1.28),vec3(1.0/2.2));
+  fragColor=vec4(color,1.0);
 }

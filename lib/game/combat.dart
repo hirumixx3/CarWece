@@ -45,6 +45,7 @@ extension CombatRules on RaceEngine {
   int initialCharges(ItemType type, bool enhanced) => switch (type) {
     ItemType.missile || ItemType.ice => 3,
     ItemType.salvo => enhanced ? 3 : 2,
+    ItemType.propulsor => 2,
     ItemType.grenade => enhanced ? 3 : 2,
     ItemType.spikes => enhanced ? 2 : 1,
     ItemType.mine || ItemType.nitro => enhanced ? 3 : 1,
@@ -385,6 +386,20 @@ extension CombatRules on RaceEngine {
             owner.velocity += owner.forward! * (enhanced ? 16 : 11);
           }
           if (target == player) tell('DRENO • SUA ENERGIA FOI ROUBADA!');
+        }
+      case ItemType.propulsor:
+        // A hop over trouble plus a forward surge, on the normal jump model.
+        owner.velocity +=
+            owner.normal! * (enhanced ? 31 : 24) + owner.forward! * 9;
+        owner.jumpVelocity = math.max(owner.jumpVelocity, enhanced ? 8 : 6);
+        owner.airborne = true;
+        if (human) {
+          nitro = math.min(100, nitro + 20);
+          tell(
+            enhanced
+                ? 'SUPER PROPULSOR • SALTO ALTO!'
+                : 'PROPULSOR • SALTO COM IMPULSO!',
+          );
         }
       case ItemType.fantasma:
         // Intangible for a few seconds: rivals, projectiles, mines, oil and
