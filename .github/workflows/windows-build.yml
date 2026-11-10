@@ -19,7 +19,10 @@ permissions:
 
 jobs:
   windows:
-    runs-on: windows-latest
+    # windows-2022 traz o Visual Studio 2022, que o Flutter 3.35.7 reconhece.
+    # O windows-latest atual só tem o VS 2026: o Flutter 3.35.7 não o detecta,
+    # cai pro gerador "Visual Studio 16 2019" e o CMake falha sem achar o VS.
+    runs-on: windows-2022
     timeout-minutes: 60
     env:
       VERSION_NAME: ${{ inputs.version_name }}
