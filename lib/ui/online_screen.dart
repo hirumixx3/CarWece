@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import '../desktop/host_identity.dart';
+import '../desktop/platform_kind.dart';
 import '../game/content.dart';
 import '../online/client.dart';
 import '../platform.dart';
@@ -43,6 +45,7 @@ class _OnlineScreenState extends State<OnlineScreen> {
           tracks: widget.tracks,
           arenas: widget.arenas,
           createHostIdentity: () async {
+            if (isWindowsDesktop) return DesktopHost.identity();
             const channel = MethodChannel('com.hirumisu.carwece/host');
             final identity = await channel.invokeMapMethod<String, String>(
               'identity',
@@ -52,6 +55,7 @@ class _OnlineScreenState extends State<OnlineScreen> {
             return identity;
           },
           hostService: (active) async {
+            if (isWindowsDesktop) return DesktopHost.service(active);
             await const MethodChannel(
               'com.hirumisu.carwece/host',
             ).invokeMethod<void>(active ? 'start' : 'stop');

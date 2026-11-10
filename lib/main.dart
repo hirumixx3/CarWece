@@ -3,7 +3,10 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
+import 'package:media_kit/media_kit.dart';
 import 'game/content.dart';
+import 'desktop/intro_screen_desktop.dart';
+import 'desktop/platform_kind.dart';
 import 'game/engine.dart';
 import 'game/renderer.dart';
 import 'platform.dart';
@@ -21,6 +24,7 @@ const carWeceVersion = String.fromEnvironment(
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  if (isWindowsDesktop) MediaKit.ensureInitialized();
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.landscapeLeft,
     DeviceOrientation.landscapeRight,
@@ -71,6 +75,8 @@ class _LaunchFlowState extends State<_LaunchFlow> {
   @override
   Widget build(BuildContext context) => completed
       ? RushShell(store: widget.store)
+      : isWindowsDesktop
+      ? DesktopIntroScreen(onCompleted: () => setState(() => completed = true))
       : IntroScreen(onCompleted: () => setState(() => completed = true));
 }
 

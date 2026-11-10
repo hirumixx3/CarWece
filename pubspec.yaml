@@ -7,6 +7,9 @@ environment:
 dependencies:
   dartssh2: 4.1.0
   crypto: 3.0.6
+  media_kit: ^1.2.1
+  media_kit_video: ^1.3.1
+  media_kit_libs_windows_video: ^1.0.11
   flutter:
     sdk: flutter
 dev_dependencies:
@@ -18,6 +21,7 @@ flutter:
     - assets/shaders/
     - assets/video/carwece_intro.mp4
     - assets/music/
+    - assets/sfx/
   fonts:
     - family: RushDisplay
       fonts:

@@ -4,6 +4,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'game/content.dart';
 import 'game/engine.dart';
+import 'desktop/audio_engine.dart';
+import 'desktop/platform_kind.dart';
+import 'desktop/save_store.dart';
 import 'hud_layout.dart';
 import 'music.dart';
 
@@ -117,7 +120,9 @@ class GameStore extends ChangeNotifier {
 
   Future<void> _load() async {
     try {
-      final raw = await channel.invokeMethod<String>('load');
+      final raw = isWindowsDesktop
+          ? await DesktopSaveStore.instance.read()
+          : await channel.invokeMethod<String>('load');
       if (raw != null && raw.isNotEmpty) {
         final data = jsonDecode(raw) as Map<String, dynamic>;
         settings.restore(_map(data['settings']));
@@ -195,7 +200,15 @@ class GameStore extends ChangeNotifier {
     });
     _saveQueue = _saveQueue.then((_) async {
       try {
-        await channel.invokeMethod('save', payload);
+        if (isWindowsDesktop) {
+          if (!await DesktopSaveStore.instance.write(payload)) {
+            saveError = 'Não foi possível salvar. Tente novamente.';
+            notifyListeners();
+            return;
+          }
+        } else {
+          await channel.invokeMethod('save', payload);
+        }
         saveError = null;
       } on MissingPluginException {
         /* Test platform. */
@@ -269,7 +282,7 @@ class GameStore extends ChangeNotifier {
     _audioScene = nextScene;
     try {
       _soundtrack ??= SoundtrackController();
-      await channel.invokeMethod('audio', {
+      final args = <String, dynamic>{
         'music': settings.music,
         'scene': nextScene,
         if (enterMenu) 'enterMenu': true,
@@ -279,7 +292,12 @@ class GameStore extends ChangeNotifier {
         'racing': racing,
         'turbo': turbo,
         if (event != null) 'event': event,
-      });
+      };
+      if (isWindowsDesktop) {
+        DesktopAudio.instance.updateAudio(args);
+        return;
+      }
+      await channel.invokeMethod('audio', args);
     } on MissingPluginException {
       /* Not available in widget tests. */
     } catch (_) {

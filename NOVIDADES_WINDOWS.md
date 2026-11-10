@@ -1,0 +1,40 @@
+# CarWece no Windows — versão desktop completa
+
+O CarWece agora roda no Windows com tudo que a versão Android tem:
+
+- **Save em arquivo**: o progresso é gravado em
+  `Documentos\CarWece\save.json` (mesmo formato e mesmo limite do save
+  do Android — dá pra copiar o arquivo entre máquinas).
+- **Intro em vídeo**: a abertura `carwece_intro.mp4` toca no Windows via
+  media_kit, com os mesmos estados da versão Android (carregando,
+  pausada, erro com tentar de novo) e a música só começa depois dela.
+- **Música completa**: diretor de trilhas portado 1:1 do Android
+  (playlists de menu/corrida/batalha, shuffle com bolsa que não repete,
+  modo sequencial, pular faixa, seleção manual, recuperação de erro).
+- **Efeitos e motor**: os sons sintetizados do Android foram renderizados
+  nas mesmas fórmulas em `assets/sfx/`; o ronco do motor é um loop cuja
+  velocidade de reprodução acompanha a velocidade do carro e o turbo.
+- **Online completo**: entrar em sala funciona como no Android; hospedar
+  também — a identidade TLS da sala (certificado autoassinado RSA-2048
+  com pin) agora é gerada em Dart, e os túneis Pinggy/Bore já eram Dart.
+- **Render**: no Windows vale o renderizador de compatibilidade (Canvas),
+  o mesmo fallback que o jogo usa fora do Android. Controles de teclado
+  (setas/WASD, Q/E/C/X, Esc) já existiam e funcionam.
+
+Nada do Android mudou: todo o código novo fica atrás da chave
+`isWindowsDesktop` (`lib/desktop/`), e a suíte segue verde (290 testes).
+
+## Como gerar o executável
+
+1. Suba o código pro GitHub (commit + push, como sempre).
+2. No GitHub: **Actions → "CarWece - Windows" → Run workflow**
+   (versão 1.6.1, código 12).
+3. Ao terminar, baixe o artifact **CarWece-Windows**: dentro vem
+   `CarWece-Windows-1.6.1-12.zip` com o `CarWece.exe` e as DLLs.
+4. Extraia a pasta inteira e abra o `CarWece.exe` (precisa das DLLs do
+   lado — não mova o .exe sozinho). Na primeira abertura o Windows pode
+   mostrar o SmartScreen por o executável não ser assinado: **Mais
+   informações → Executar assim mesmo**.
+
+Build local neste ambiente não é possível (compilar pra Windows exige um
+Windows com Visual Studio) — por isso o build é pelo GitHub Actions.

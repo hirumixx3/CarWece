@@ -2,6 +2,9 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
+import 'desktop/audio_engine.dart';
+import 'desktop/platform_kind.dart';
+
 class Song {
   final String id, title, artist;
   final int durationMs;
@@ -53,9 +56,15 @@ class SoundtrackController extends ChangeNotifier {
   Song? get current => songById(trackId);
   bool get playing => status == 'playing';
   SoundtrackController() {
-    channel.setMethodCallHandler((call) async {
-      if (call.method == 'state') _apply(call.arguments);
-    });
+    if (isWindowsDesktop) {
+      // The desktop director pushes state through this listener, taking
+      // the place of the Android music channel's `state` calls.
+      DesktopAudio.instance.bindSoundtrack(_apply);
+    } else {
+      channel.setMethodCallHandler((call) async {
+        if (call.method == 'state') _apply(call.arguments);
+      });
+    }
     unawaited(refresh());
   }
   void _apply(dynamic raw) {
@@ -98,6 +107,10 @@ class SoundtrackController extends ChangeNotifier {
     Map<String, dynamic> extra = const {},
   ]) async {
     try {
+      if (isWindowsDesktop) {
+        _apply(DesktopAudio.instance.musicCommand(action, extra));
+        return;
+      }
       final state = await channel.invokeMethod<dynamic>(action, extra);
       _apply(state);
     } on MissingPluginException {
@@ -124,7 +137,11 @@ class SoundtrackController extends ChangeNotifier {
   @override
   void dispose() {
     _disposed = true;
-    channel.setMethodCallHandler(null);
+    if (isWindowsDesktop) {
+      DesktopAudio.instance.unbindSoundtrack();
+    } else {
+      channel.setMethodCallHandler(null);
+    }
     super.dispose();
   }
 }
