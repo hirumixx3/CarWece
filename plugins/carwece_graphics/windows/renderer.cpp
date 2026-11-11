@@ -419,9 +419,11 @@ bool Renderer::CreateTargets(std::string* error) {
   staging.SampleDesc.Count = 1;
   staging.Usage = D3D11_USAGE_STAGING;
   staging.CPUAccessFlags = D3D11_CPU_ACCESS_READ;
-  if (FAILED(device_->CreateTexture2D(&staging, nullptr, &staging_))) {
-    *error = "Alvo gráfico indisponível";
-    return false;
+  for (auto& slot : staging_) {
+    if (FAILED(device_->CreateTexture2D(&staging, nullptr, &slot))) {
+      *error = "Alvo gráfico indisponível";
+      return false;
+    }
   }
   D3D11_RASTERIZER_DESC raster{};
   raster.FillMode = D3D11_FILL_SOLID;
@@ -697,9 +699,20 @@ const std::string* Renderer::Render(const std::vector<float>& data) {
 }
 
 void Renderer::Readback() {
-  context_->CopyResource(staging_.Get(), color_tex_.Get());
+  // Copy the fresh frame into the ring, then read the slot copied two
+  // frames ago. Mapping the texture that was just copied blocks until
+  // the GPU finishes the entire frame; doing that on the platform
+  // thread froze the game and starved keyboard and mouse input, which
+  // the Windows embedder also delivers on that thread.
+  const int write = staging_cursor_;
+  context_->CopyResource(staging_[write].Get(), color_tex_.Get());
+  staging_cursor_ = (staging_cursor_ + 1) % 3;
+  frames_rendered_++;
+  if (frames_rendered_ < 3) return;
+  const int read = staging_cursor_;
   D3D11_MAPPED_SUBRESOURCE mapped;
-  if (FAILED(context_->Map(staging_.Get(), 0, D3D11_MAP_READ, 0, &mapped))) {
+  if (FAILED(context_->Map(staging_[read].Get(), 0, D3D11_MAP_READ, 0,
+                           &mapped))) {
     error_ = "Falha ao apresentar quadro Direct3D";
     return;
   }
@@ -710,7 +723,7 @@ void Renderer::Readback() {
   for (int y = 0; y < height_; y++) {
     std::memcpy(dst + y * row, src + y * mapped.RowPitch, row);
   }
-  context_->Unmap(staging_.Get(), 0);
+  context_->Unmap(staging_[read].Get(), 0);
   latest_pixels_ = back;
 }
 

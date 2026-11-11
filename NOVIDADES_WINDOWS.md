@@ -69,3 +69,19 @@ Windows com Visual Studio) — por isso o build é pelo GitHub Actions.
   turbo, X = item/atirar, C = supercarga (corrida) e trocar mira
   (batalha), Q = trocar arma, E = arsenal, R = repor carro, Esc = pausar.
 - A dica no início da corrida mostra as teclas atuais configuradas.
+
+## Desempenho e entrada: leitura de pixels sem travar o jogo
+
+- Causa do travamento geral (e do teclado/mouse "mortos"): a leitura dos
+  pixels do Direct3D mapeava a textura **recém-copiada** a cada quadro —
+  essa chamada bloqueia até a GPU terminar o quadro inteiro, na thread
+  principal do Windows, que é a mesma que entrega teclado e mouse ao
+  jogo. Cada quadro custava a latência inteira da GPU e a entrada ficava
+  enfileirada atrás dele.
+- Correção: anel de 3 texturas de leitura — copia o quadro novo numa
+  ponta e lê a textura de **dois quadros atrás**, que a GPU já terminou
+  há muito tempo. Nada de espera por quadro; a imagem atrasa 2 quadros
+  (~33 ms) e o fluxo destrava.
+- Teclado da corrida ganhou um segundo caminho: além do handler global,
+  a tela da corrida agora segura o foco do teclado (KeyboardListener),
+  que é o caminho padrão de jogos desktop no Flutter.

@@ -47,6 +47,7 @@ class _RaceScreenState extends State<RaceScreen>
   bool gpuReady = false;
   bool sentResult = false, musicSheetOpen = false;
   final Set<String> held = {};
+  final FocusNode keysFocus = FocusNode();
   int controlsEpoch = 0;
   bool editingHud = false, savingHud = false, toolsCollapsed = false;
   HudLayout? draftHud;
@@ -78,6 +79,7 @@ class _RaceScreenState extends State<RaceScreen>
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
     HardwareKeyboard.instance.removeHandler(keyEvent);
+    keysFocus.dispose();
     ticker.dispose();
     frame.dispose();
     hudFrame.dispose();
@@ -160,6 +162,7 @@ class _RaceScreenState extends State<RaceScreen>
         ),
       );
     } else if (!ticker.isActive) {
+      if (isWindowsDesktop) keysFocus.requestFocus();
       unawaited(
         store.audio(
           scene: battle != null ? 'battle' : 'race',
@@ -312,7 +315,11 @@ class _RaceScreenState extends State<RaceScreen>
         }
       }
     },
-    child: Scaffold(
+    child: KeyboardListener(
+      focusNode: keysFocus,
+      autofocus: isWindowsDesktop,
+      onKeyEvent: (event) => keyEvent(event),
+      child: Scaffold(
       body: Stack(
         children: [
           Positioned.fill(
@@ -476,6 +483,7 @@ class _RaceScreenState extends State<RaceScreen>
             ),
         ],
       ),
+    ),
     ),
   );
 

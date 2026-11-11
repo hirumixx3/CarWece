@@ -79,7 +79,12 @@ class Renderer {
   Microsoft::WRL::ComPtr<ID3D11Texture2D> shadow_tex_;
   Microsoft::WRL::ComPtr<ID3D11DepthStencilView> shadow_dsv_;
   Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> shadow_srv_;
-  Microsoft::WRL::ComPtr<ID3D11Texture2D> staging_;
+  // Ring of readback targets: the frame handler copies into one slot and
+  // maps the slot written two frames earlier, so Map never waits for the
+  // frame that was just rendered.
+  Microsoft::WRL::ComPtr<ID3D11Texture2D> staging_[3];
+  int staging_cursor_ = 0;
+  int frames_rendered_ = 0;
   Microsoft::WRL::ComPtr<ID3D11RasterizerState> raster_main_;
   Microsoft::WRL::ComPtr<ID3D11RasterizerState> raster_shadow_;
   Microsoft::WRL::ComPtr<ID3D11DepthStencilState> depth_write_;
