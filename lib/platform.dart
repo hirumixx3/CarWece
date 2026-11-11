@@ -18,6 +18,28 @@ class GameSettings {
   double music = .35, effects = .7, sensitivity = 1, cameraDistance = 1;
   bool musicShuffle = true;
   HudLayout hud = HudLayout();
+
+  /// Windows keyboard bindings (action id -> key). Every driving command
+  /// lives on a key on Windows, where the touch buttons are hidden; the
+  /// player can rebind each action in the settings screen.
+  static const Map<String, LogicalKeyboardKey> defaultKeys = {
+    'gas': LogicalKeyboardKey.arrowUp,
+    'brake': LogicalKeyboardKey.arrowDown,
+    'left': LogicalKeyboardKey.arrowLeft,
+    'right': LogicalKeyboardKey.arrowRight,
+    'drift': LogicalKeyboardKey.shiftLeft,
+    'boost': LogicalKeyboardKey.space,
+    'item': LogicalKeyboardKey.keyX,
+    'super': LogicalKeyboardKey.keyC,
+    'weapon': LogicalKeyboardKey.keyQ,
+    'target': LogicalKeyboardKey.keyC,
+    'arsenal': LogicalKeyboardKey.keyE,
+    'reset': LogicalKeyboardKey.keyR,
+    'pause': LogicalKeyboardKey.escape,
+  };
+  Map<String, LogicalKeyboardKey> keyBindings = {...defaultKeys};
+  LogicalKeyboardKey keyFor(String action) =>
+      keyBindings[action] ?? defaultKeys[action] ?? LogicalKeyboardKey.escape;
   Map<String, dynamic> toJson() => {
     'auto': autoAccelerate,
     'controlsVersion': 3,
@@ -35,6 +57,7 @@ class GameSettings {
     'sensitivity': sensitivity,
     'camera': cameraDistance,
     'hud': hud.toJson(),
+    'keys': {for (final e in keyBindings.entries) e.key: e.value.keyId},
   };
   void restore(Map<String, dynamic> data) {
     if (data['onlineEndpoint'] is String)
@@ -61,6 +84,15 @@ class GameSettings {
     sensitivity = number('sensitivity', 1, .5, 1.6);
     cameraDistance = number('camera', 1, .8, 1.4);
     hud = HudLayout.restore(data['hud']);
+    final savedKeys = data['keys'];
+    if (savedKeys is Map) {
+      savedKeys.forEach((action, id) {
+        if (action is String && id is num && defaultKeys.containsKey(action)) {
+          final key = LogicalKeyboardKey.findKeyByKeyId(id.toInt());
+          if (key != null) keyBindings[action] = key;
+        }
+      });
+    }
   }
 }
 

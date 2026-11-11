@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:media_kit/media_kit.dart';
 import 'game/content.dart';
 import 'desktop/intro_screen_desktop.dart';
+import 'desktop/key_bindings.dart';
 import 'desktop/platform_kind.dart';
 import 'game/engine.dart';
 import 'game/renderer.dart';
@@ -1263,6 +1264,37 @@ class _RushShellState extends State<RushShell>
                         'Mova cada botão, mapa e indicador. Ajuste os tamanhos e salve seu layout.',
                         style: body(10, color: muted),
                       ),
+                      if (isWindowsDesktop) ...[
+                        const SizedBox(height: 22),
+                        Text(
+                          'CONTROLES DO TECLADO',
+                          style: display(26, color: orange),
+                        ),
+                        const SizedBox(height: 6),
+                        Text(
+                          'No Windows os botões de toque não aparecem na corrida: cada comando fica numa tecla. Para trocar, toque em TROCAR e pressione a tecla nova.',
+                          style: body(10, color: muted),
+                        ),
+                        const SizedBox(height: 12),
+                        for (final action in keyActionOrder)
+                          KeyBindingRow(
+                            settings: s,
+                            action: action,
+                            onChanged: () => store.changed(),
+                          ),
+                        const SizedBox(height: 4),
+                        RushButton(
+                          'RESTAURAR TECLAS PADRÃO',
+                          compact: true,
+                          icon: Icons.restart_alt_rounded,
+                          onTap: () {
+                            s.keyBindings = {
+                              ...GameSettings.defaultKeys,
+                            };
+                            store.changed();
+                          },
+                        ),
+                      ],
                     ],
                   ),
                 ),

@@ -51,3 +51,21 @@ Nada do Android mudou: todo o código novo fica atrás da chave
 
 Build local neste ambiente não é possível (compilar pra Windows exige um
 Windows com Visual Studio) — por isso o build é pelo GitHub Actions.
+
+## Controles no Windows: teclado total e teclas configuráveis
+
+- A corrida **não pausa mais sozinha** no Windows: eventos transitórios de
+  janela ("inactive") não congelam mais a corrida nem matam os controles
+  (a mesma causa raiz já corrigida na intro).
+- Os **botões de toque somem** da corrida/batalha no Windows (direção,
+  acelerar, freio, drift, turbo, item, arma, mira, pausa e repor carro) e o
+  mouse não dirige mais o carro por retângulos invisíveis: cada comando
+  fica numa tecla.
+- **Opções → CONTROLES DO TECLADO** (seção só do Windows): cada comando
+  pode ser remapeado — tocar em TROCAR e pressionar a tecla nova. Botão
+  RESTAURAR TECLAS PADRÃO volta ao layout original. As escolhas são salvas
+  junto das outras configurações.
+- Padrões: setas = direção/acelerar/freio, Shift esq = drift, Espaço =
+  turbo, X = item/atirar, C = supercarga (corrida) e trocar mira
+  (batalha), Q = trocar arma, E = arsenal, R = repor carro, Esc = pausar.
+- A dica no início da corrida mostra as teclas atuais configuradas.

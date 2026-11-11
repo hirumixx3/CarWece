@@ -8,6 +8,8 @@ import '../game/content.dart';
 import '../game/engine.dart';
 import '../game/renderer.dart';
 import '../platform.dart';
+import '../desktop/key_bindings.dart';
+import '../desktop/platform_kind.dart';
 import '../hud_layout.dart';
 import 'widgets.dart';
 import 'gpu_view.dart';
@@ -85,6 +87,11 @@ class _RaceScreenState extends State<RaceScreen>
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
+    // Windows reports transient non-resumed states while the window starts
+    // and around focus changes; pausing on them left the race frozen with
+    // dead controls until the player clicked back. Only Android pauses
+    // from lifecycle events.
+    if (isWindowsDesktop) return;
     if (state != AppLifecycleState.resumed && !race.paused && !race.finished)
       pause(true);
   }
@@ -207,8 +214,9 @@ class _RaceScreenState extends State<RaceScreen>
 
   bool keyEvent(KeyEvent event) {
     if (musicSheetOpen) return false;
-    final key = event.logicalKey;
-    if (key == LogicalKeyboardKey.escape && event is KeyDownEvent) {
+    final settings = store.settings;
+    bool bound(String action) => event.logicalKey == settings.keyFor(action);
+    if (bound('pause') && event is KeyDownEvent) {
       if (editingHud) {
         finishHudEdit(false);
       } else {
@@ -218,41 +226,58 @@ class _RaceScreenState extends State<RaceScreen>
     }
     if (race.paused) return false;
     if (battle != null) {
-      if (key == LogicalKeyboardKey.keyX || key == LogicalKeyboardKey.keyF) {
-        input('item', event is! KeyUpEvent, source: 'key${key.keyId}');
+      if (bound('item')) {
+        input('item', event is! KeyUpEvent, source: 'key');
         if (event is KeyDownEvent) battle!.useItem();
         return true;
       }
       if (event is KeyDownEvent) {
-        if (key == LogicalKeyboardKey.keyQ) {
+        if (bound('weapon')) {
           battle!.cycleWeapon();
           return true;
         }
-        if (key == LogicalKeyboardKey.keyC) {
+        if (bound('target')) {
           battle!.cycleTarget();
           return true;
         }
-        if (key == LogicalKeyboardKey.keyE) {
+        if (bound('arsenal')) {
           unawaited(showArsenal());
           return true;
         }
       }
+    } else {
+      if (bound('item') && event is KeyDownEvent) {
+        race.useItem();
+        return true;
+      }
+      if (bound('super') && event is KeyDownEvent) {
+        race.superchargeItem();
+        return true;
+      }
     }
-    final name = switch (key) {
-      LogicalKeyboardKey.arrowLeft || LogicalKeyboardKey.keyA => 'left',
-      LogicalKeyboardKey.arrowRight || LogicalKeyboardKey.keyD => 'right',
-      LogicalKeyboardKey.arrowUp || LogicalKeyboardKey.keyW => 'gas',
-      LogicalKeyboardKey.arrowDown || LogicalKeyboardKey.keyS => 'brake',
-      LogicalKeyboardKey.shiftLeft || LogicalKeyboardKey.shiftRight => 'drift',
-      LogicalKeyboardKey.space => 'boost',
-      _ => '',
-    };
-    if (key == LogicalKeyboardKey.keyX && event is KeyDownEvent) {
-      race.useItem();
+    if (bound('reset') && event is KeyDownEvent) {
+      held.clear();
+      touchActions.clear();
+      controlsEpoch++;
+      race.resetPlayer();
+      frame.value++;
       return true;
     }
+    final name = bound('left')
+        ? 'left'
+        : bound('right')
+        ? 'right'
+        : bound('gas')
+        ? 'gas'
+        : bound('brake')
+        ? 'brake'
+        : bound('drift')
+        ? 'drift'
+        : bound('boost')
+        ? 'boost'
+        : '';
     if (name.isEmpty) return false;
-    input(name, event is! KeyUpEvent, source: 'key${key.keyId}');
+    input(name, event is! KeyUpEvent, source: 'key${event.logicalKey.keyId}');
     return true;
   }
 
@@ -550,6 +575,10 @@ class _RaceScreenState extends State<RaceScreen>
     bool start = false,
     bool end = false,
   }) {
+    // On Windows the touch buttons are hidden and every command is on the
+    // keyboard; mouse clicks must not drive the car through invisible
+    // button rects.
+    if (isWindowsDesktop && !editingHud) return;
     if (editingHud || race.paused || race.finished) return;
     final old = touchActions[event.pointer];
     if (end) {
@@ -863,8 +892,9 @@ class _RaceScreenState extends State<RaceScreen>
           ),
         ),
       ),
-      slot(
-        'pause',
+      if (!isWindowsDesktop || editingHud)
+        slot(
+          'pause',
         Semantics(
           label: 'Pausar corrida',
           button: true,
@@ -980,14 +1010,15 @@ class _RaceScreenState extends State<RaceScreen>
                       ),
                     ],
                   ),
-                  TextButton.icon(
-                    onPressed: () {
-                      held.clear();
-                      touchActions.clear();
-                      controlsEpoch++;
-                      race.resetPlayer();
-                      setState(() {});
-                    },
+                  if (!isWindowsDesktop)
+                    TextButton.icon(
+                      onPressed: () {
+                        held.clear();
+                        touchActions.clear();
+                        controlsEpoch++;
+                        race.resetPlayer();
+                        setState(() {});
+                      },
                     icon: Icon(Icons.replay_rounded, size: 17 * s),
                     label: Text(
                       'REPOR CARRO',
@@ -997,35 +1028,41 @@ class _RaceScreenState extends State<RaceScreen>
                 ],
               ),
       ),
-      slot(
-        'left',
-        control('left', 'ESQUERDA', Icons.arrow_back_rounded, cream),
-      ),
-      slot(
-        'right',
-        control('right', 'DIREITA', Icons.arrow_forward_rounded, cream),
-      ),
-      slot(
-        'brake',
-        control(
+      if (!isWindowsDesktop || editingHud)
+        slot(
+          'left',
+          control('left', 'ESQUERDA', Icons.arrow_back_rounded, cream),
+        ),
+      if (!isWindowsDesktop || editingHud)
+        slot(
+          'right',
+          control('right', 'DIREITA', Icons.arrow_forward_rounded, cream),
+        ),
+      if (!isWindowsDesktop || editingHud)
+        slot(
           'brake',
-          'FREIO',
-          Icons.blur_circular_rounded,
-          const Color(0xffe6a17d),
+          control(
+            'brake',
+            'FREIO',
+            Icons.blur_circular_rounded,
+            const Color(0xffe6a17d),
+          ),
         ),
-      ),
-      slot(
-        'gas',
-        control(
+      if (!isWindowsDesktop || editingHud)
+        slot(
           'gas',
-          'ACELERAR',
-          Icons.keyboard_double_arrow_up_rounded,
-          const Color(0xffa3e983),
+          control(
+            'gas',
+            'ACELERAR',
+            Icons.keyboard_double_arrow_up_rounded,
+            const Color(0xffa3e983),
+          ),
         ),
-      ),
-      slot('drift', control('drift', 'DRIFT', Icons.gesture_rounded, orange)),
-      slot('boost', control('boost', 'TURBO', Icons.bolt_rounded, cyan)),
-      if (battle != null || editingHud)
+      if (!isWindowsDesktop || editingHud)
+        slot('drift', control('drift', 'DRIFT', Icons.gesture_rounded, orange)),
+      if (!isWindowsDesktop || editingHud)
+        slot('boost', control('boost', 'TURBO', Icons.bolt_rounded, cyan)),
+      if ((battle != null || editingHud) && (!isWindowsDesktop || editingHud))
         slot(
           'target',
           Semantics(
@@ -1065,9 +1102,10 @@ class _RaceScreenState extends State<RaceScreen>
             ),
           ),
         ),
-      if (battle != null ||
-          editingHud ||
-          (race.item != null && !race.itemEnhanced))
+      if ((battle != null ||
+              editingHud ||
+              (race.item != null && !race.itemEnhanced)) &&
+          (!isWindowsDesktop || editingHud))
         slot(
           'super',
           GestureDetector(
@@ -1087,9 +1125,10 @@ class _RaceScreenState extends State<RaceScreen>
             ),
           ),
         ),
-      slot(
-        'item',
-        battle != null
+      if (!isWindowsDesktop || editingHud)
+        slot(
+          'item',
+          battle != null
             ? IgnorePointer(
                 child: Container(
                   key: const ValueKey('battle-fire'),
@@ -1303,7 +1342,11 @@ class _RaceScreenState extends State<RaceScreen>
           child: IgnorePointer(
             child: Center(
               child: Text(
-                battle != null
+                isWindowsDesktop
+                    ? battle != null
+                          ? '${prettyKeyLabel(store.settings.keyFor('item'))} ATIRAR • ${prettyKeyLabel(store.settings.keyFor('weapon'))} TROCAR ARMA • ${prettyKeyLabel(store.settings.keyFor('target'))} TROCAR MIRA'
+                          : '${prettyKeyLabel(store.settings.keyFor('gas'))} ACELERA • ${prettyKeyLabel(store.settings.keyFor('left'))}/${prettyKeyLabel(store.settings.keyFor('right'))} VIRA • ${prettyKeyLabel(store.settings.keyFor('drift'))} DRIFT • ${prettyKeyLabel(store.settings.keyFor('boost'))} TURBO'
+                    : battle != null
                     ? 'SEGURE ATIRAR • TROCAR MIRA ALTERNA O ALVO • MIRA VERDE NO CARRO'
                     : race.autoAccelerate
                     ? '←  VIRE  →     •     ACELERAÇÃO AUTOMÁTICA ATIVA'
