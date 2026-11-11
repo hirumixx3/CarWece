@@ -39,6 +39,10 @@ class Renderer {
   const std::string* Render(const std::vector<float>& frame);
 
   double PresentedFps() const { return presented_fps_; }
+  // "HARDWARE | <adapter> | FL 11.0" ou "WARP | ..." — vazio até Init.
+  std::string DeviceInfo() const { return device_info_; }
+  // Tempo do último Render (desenho + readback), em ms, na thread de plataforma.
+  double LastRenderMs() const { return last_render_ms_; }
   int width() const { return width_; }
   int height() const { return height_; }
   const uint8_t* LatestPixels();
@@ -95,6 +99,8 @@ class Renderer {
   std::vector<uint8_t> pixels_[2];
   int latest_pixels_ = 0;
   std::string error_;
+  std::string device_info_;
+  double last_render_ms_ = 0.0;
   double presented_fps_ = 0.0;
   int64_t fps_window_start_ = 0;
   int presented_ = 0;

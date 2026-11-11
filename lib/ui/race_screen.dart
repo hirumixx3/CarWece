@@ -44,6 +44,7 @@ class _RaceScreenState extends State<RaceScreen>
   Duration? previous;
   double audioClock = 0, fps = 60;
   double? gpuFps;
+  String? gpuDeviceInfo;
   bool gpuReady = false;
   bool sentResult = false, musicSheetOpen = false;
   final Set<String> held = {};
@@ -331,6 +332,7 @@ class _RaceScreenState extends State<RaceScreen>
                 cameraDistance: store.settings.cameraDistance,
                 repaint: frame,
                 onFps: (value) => gpuFps = value,
+                onDeviceInfo: (value) => gpuDeviceInfo = value,
                 onReady: () {
                   gpuReady = true;
                   previous = null;
@@ -1295,7 +1297,7 @@ class _RaceScreenState extends State<RaceScreen>
           child: Text(
             gpuFps == null
                 ? '${fps.round()} FPS UI'
-                : '${gpuFps!.round()} FPS 3D',
+                : '${gpuFps!.round()} FPS 3D${gpuDeviceInfo == null ? '' : ' • $gpuDeviceInfo'}',
             style: body(10 * s, color: cyan),
           ),
         ),

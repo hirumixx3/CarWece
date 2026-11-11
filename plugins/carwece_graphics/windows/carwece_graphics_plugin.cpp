@@ -4,6 +4,7 @@
 #include <flutter/texture_registrar.h>
 #include <flutter_windows.h>
 
+#include <cstdio>
 #include <stdexcept>
 #include <utility>
 
@@ -151,6 +152,21 @@ void CarWeceGraphicsPlugin::HandleMethodCall(
         result->Success(EncodableValue());
       } else {
         result->Success(EncodableValue(it->second->PresentedFps()));
+      }
+      return;
+    }
+    if (call.method_name() == "info") {
+      const EncodableMap& args = Args(call);
+      const int64_t id = GetInt(Field(args, "id"));
+      auto it = renderers_.find(id);
+      if (it == renderers_.end()) {
+        result->Success(EncodableValue());
+      } else {
+        char render_ms[32];
+        std::snprintf(render_ms, sizeof(render_ms), "%.1fms",
+                      it->second->LastRenderMs());
+        result->Success(EncodableValue(it->second->DeviceInfo() +
+                                       " | render " + render_ms));
       }
       return;
     }

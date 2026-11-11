@@ -1,6 +1,7 @@
 #include "renderer.h"
 
 #include <d3dcompiler.h>
+#include <dxgi.h>
 #include <windows.h>
 
 #include <algorithm>
@@ -175,6 +176,17 @@ int64_t NowNs() {
       .count();
 }
 
+std::string NarrowWide(const wchar_t* value) {
+  if (value == nullptr) return "desconhecido";
+  const int size = WideCharToMultiByte(CP_UTF8, 0, value, -1, nullptr, 0,
+                                       nullptr, nullptr);
+  if (size <= 1) return "desconhecido";
+  std::string out(static_cast<size_t>(size - 1), '\0');
+  WideCharToMultiByte(CP_UTF8, 0, value, -1, out.data(), size, nullptr,
+                      nullptr);
+  return out;
+}
+
 }  // namespace
 
 bool Renderer::Init(int width, int height, const std::vector<float>& world,
@@ -254,23 +266,42 @@ bool Renderer::CreateDeviceResources(std::string* error) {
   static ComPtr<ID3D11Device> shared_device;
   static ComPtr<ID3D11DeviceContext> shared_context;
   static std::string shared_error;
+  static std::string shared_device_info;
   static bool attempted = false;
   if (!attempted) {
     attempted = true;
     // Shader model 5.0 requires feature level 11_0; WARP provides it even
     // without a suitable GPU, so there is no lower-level fallback path.
+    // O tipo de driver é registrado: se o notebook cair no WARP
+    // (renderização por software), cada quadro custa dezenas de ms e
+    // nenhum anel de readback resolve — o diagnóstico precisa mostrar isso.
     const D3D_FEATURE_LEVEL levels[] = {D3D_FEATURE_LEVEL_11_0};
     D3D_FEATURE_LEVEL chosen;
+    const char* driver = "HARDWARE";
     HRESULT hr = D3D11CreateDevice(nullptr, D3D_DRIVER_TYPE_HARDWARE, nullptr,
                                    0, levels, 1, D3D11_SDK_VERSION,
                                    &shared_device, &chosen, &shared_context);
     if (FAILED(hr)) {
+      driver = "WARP";
       hr = D3D11CreateDevice(nullptr, D3D_DRIVER_TYPE_WARP, nullptr, 0, levels,
                              1, D3D11_SDK_VERSION, &shared_device, &chosen,
                              &shared_context);
     }
     if (FAILED(hr)) {
       shared_error = "Direct3D 11 não disponível";
+    } else {
+      std::string adapter_name = "desconhecido";
+      ComPtr<IDXGIDevice> dxgi_device;
+      ComPtr<IDXGIAdapter> adapter;
+      if (SUCCEEDED(shared_device.As(&dxgi_device)) &&
+          SUCCEEDED(dxgi_device->GetAdapter(&adapter))) {
+        DXGI_ADAPTER_DESC desc{};
+        if (SUCCEEDED(adapter->GetDesc(&desc))) {
+          adapter_name = NarrowWide(desc.Description);
+        }
+      }
+      shared_device_info = std::string(driver) + " | " + adapter_name +
+                           " | FL 11.0";
     }
   }
   if (!shared_device) {
@@ -279,6 +310,7 @@ bool Renderer::CreateDeviceResources(std::string* error) {
   }
   device_ = shared_device;
   context_ = shared_context;
+  device_info_ = shared_device_info;
   return true;
 }
 
@@ -557,6 +589,9 @@ const std::string* Renderer::Render(const std::vector<float>& data) {
   const int count = std::clamp(static_cast<int>(data[14]), 0, kMaxInstances);
   if (data.size() != static_cast<size_t>(15 + count * 17)) return nullptr;
   const float* frame = data.data();
+  // Medido aqui porque o custo que importa é o da thread de plataforma:
+  // desenho + readback. É ele que decide se teclado/mouse têm folga.
+  const int64_t render_start_ns = NowNs();
 
   float projection[16], view[16], vp[16], vp_d3d[16];
   MatPerspective(showroom_ ? 40.0f : 50.0f,
@@ -685,6 +720,8 @@ const std::string* Renderer::Render(const std::vector<float>& data) {
 
   Readback();
   if (!error_.empty()) return &error_;
+  last_render_ms_ =
+      static_cast<double>(NowNs() - render_start_ns) / 1000000.0;
   presented_++;
   const int64_t now = NowNs();
   if (fps_window_start_ == 0) fps_window_start_ = now;

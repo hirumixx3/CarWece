@@ -16,6 +16,7 @@ class GpuRaceView extends StatelessWidget {
   final String quality;
   final double cameraDistance;
   final ValueChanged<double>? onFps;
+  final ValueChanged<String>? onDeviceInfo;
   final VoidCallback? onReady;
   final VoidCallback? onUnavailable;
   const GpuRaceView({
@@ -26,6 +27,7 @@ class GpuRaceView extends StatelessWidget {
     required this.quality,
     required this.cameraDistance,
     this.onFps,
+    this.onDeviceInfo,
     this.onReady,
     this.onUnavailable,
   });
@@ -43,6 +45,7 @@ class GpuRaceView extends StatelessWidget {
     repaint: repaint,
     quality: quality,
     onFps: onFps,
+    onDeviceInfo: onDeviceInfo,
     onReady: onReady,
     onUnavailable: onUnavailable,
     night: race.track.night,
@@ -91,6 +94,7 @@ class GpuGarageView extends StatelessWidget {
 
 class GpuSurface extends StatefulWidget {
   final ValueChanged<double>? onFps;
+  final ValueChanged<String>? onDeviceInfo;
   final VoidCallback? onReady;
   final VoidCallback? onUnavailable;
   final Future<(Float32List, List<Float32List>)> Function()? prepare;
@@ -117,6 +121,7 @@ class GpuSurface extends StatefulWidget {
     this.quality = 'medium',
     this.showroom = false,
     this.night = false,
+    this.onDeviceInfo,
   });
   @override
   State<GpuSurface> createState() => _GpuSurfaceState();
@@ -130,6 +135,8 @@ class _GpuSurfaceState extends State<GpuSurface> {
   bool creating = false, retrying = false;
   final _frameClock = Stopwatch()..start();
   int _lastFrameUs = -1000000;
+  int _lastFrameDoneUs = -1000000;
+  bool _infoSent = false;
   int _lastFpsUs = 0;
   String? error;
   @override
@@ -207,6 +214,18 @@ class _GpuSurfaceState extends State<GpuSurface> {
       }
       if (id == null) throw StateError('Superfície gráfica não criada');
       setState(() => textureId = id);
+      if (widget.onDeviceInfo != null && !_infoSent) {
+        _infoSent = true;
+        unawaited(
+          channel
+              .invokeMethod<String>('info', {'id': id})
+              .then((value) {
+                if (mounted && value != null && value.isNotEmpty)
+                  widget.onDeviceInfo?.call(value);
+              })
+              .catchError((Object _) {}),
+        );
+      }
       widget.onReady?.call();
       sendFrame();
     } catch (e) {
@@ -227,6 +246,15 @@ class _GpuSurfaceState extends State<GpuSurface> {
     if (id == null || sending || !mounted || error != null) return;
     final now = _frameClock.elapsedMicroseconds;
     if (now - _lastFrameUs < 16000) return;
+    // No Windows o Render roda síncrono na thread de plataforma — a mesma
+    // que entrega teclado e mouse. O limite acima media desde o INÍCIO do
+    // quadro anterior, então, com o quadro lento, o próximo Render começava
+    // no instante em que o anterior terminava e a thread nunca ficava livre
+    // pra bombear a entrada: era isso que matava teclado e cliques, e o
+    // anel de 3 texturas não tocava nisso, porque ele só adiava o Map.
+    // Agora há uma folga garantida depois que cada quadro TERMINA — só no
+    // Windows; no Android o comportamento não muda.
+    if (isWindowsDesktop && now - _lastFrameDoneUs < 8000) return;
     _lastFrameUs = now;
     sending = true;
     channel
@@ -249,7 +277,10 @@ class _GpuSurfaceState extends State<GpuSurface> {
             widget.onUnavailable?.call();
           }
         })
-        .whenComplete(() => sending = false);
+        .whenComplete(() {
+          sending = false;
+          _lastFrameDoneUs = _frameClock.elapsedMicroseconds;
+        });
     if (widget.onFps != null && now - _lastFpsUs >= 1000000) {
       _lastFpsUs = now;
       unawaited(

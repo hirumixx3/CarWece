@@ -85,3 +85,20 @@ Windows com Visual Studio) — por isso o build é pelo GitHub Actions.
 - Teclado da corrida ganhou um segundo caminho: além do handler global,
   a tela da corrida agora segura o foco do teclado (KeyboardListener),
   que é o caminho padrão de jogos desktop no Flutter.
+
+## Entrada viva + diagnóstico da placa (11/11/2026)
+- **Por que o anel de 3 texturas não resolveu:** ele só adiava o `Map` da
+  leitura de pixels. O `Render` inteiro roda síncrono na thread de
+  plataforma do Windows — a mesma que entrega teclado e mouse — e o limite
+  de 16 ms media desde o INÍCIO do quadro anterior: com o quadro lento, o
+  próximo Render começava no instante em que o anterior terminava e a
+  thread nunca ficava livre pra bombear a entrada.
+- **Correção:** depois que cada quadro TERMINA, o jogo espera 8 ms antes
+  de pedir o próximo (só no Windows; no Android nada muda). Teclado e
+  cliques passam a ter uma janela garantida a cada quadro, mesmo com o
+  quadro lento. Resolução, qualidade e sombras não mudam.
+- **Diagnóstico na tela:** com "Mostrar FPS" ligado nas Opções, a linha do
+  FPS agora mostra também o driver (`HARDWARE` ou `WARP`), o nome da placa
+  e o tempo de cada quadro (`render XXms`). Se aparecer `WARP`, o notebook
+  está renderizando por software — aí o próximo passo é outro (driver ou
+  nível de recurso), não mais ajuste de leitura de pixels.
