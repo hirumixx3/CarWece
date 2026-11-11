@@ -1,4 +1,5 @@
 import 'dart:math' as math;
+import 'dart:typed_data';
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'content.dart';
@@ -187,6 +188,146 @@ class Scene3 {
       part(-1.1, 1.3, -2.4, .14, .6, .2, accent);
       part(1.1, 1.3, -2.4, .14, .6, .2, accent);
       part(0, 1.9, -2.4, 3.5, .18, .8, accent);
+    }
+    if (turbo) {
+      for (final x in [-.85, .85]) {
+        final a = local(x - .35, .5, -3), b = local(x + .35, .5, -3);
+        faces.add(
+          Face3([a, b, local(x, .7, -6.5)], const Color(0xff34dbff), true),
+        );
+        faces.add(
+          Face3([a, b, local(x, 1.25, -5)], const Color(0xffffe4a6), true),
+        );
+      }
+    }
+    if (shield) {
+      for (var i = 0; i < 12; i++) {
+        final a = i / 12 * math.pi * 2, b = (i + 1) / 12 * math.pi * 2;
+        final p1 = local(math.cos(a) * 2.1, .1, math.sin(a) * 3.9);
+        final p2 = local(math.cos(b) * 2.1, .1, math.sin(b) * 3.9);
+        quad(p1, p2, p2 + u * 2.8, p1 + u * 2.8, const Color(0x4237e6ff), true);
+      }
+    }
+  }
+
+  static final Map<String, List<Face3>> _meshCarCache = {};
+
+  /// The detailed GL car (body + 4 wheels) converted to Canvas faces, in
+  /// ground space: wheels touch y=0 and the body floats [lift] above its
+  /// mesh origin, exactly as the GL frame composes it. With [cell] > 0,
+  /// vertices are clustered (position + color + material keyed) to cut
+  /// the triangle count while keeping part boundaries crisp.
+  static List<Face3> meshCarFaces(
+    CarSpec spec, {
+    double cell = 0,
+    double lift = .33,
+  }) {
+    final key = '${spec.body}|$cell|$lift';
+    final cached = _meshCarCache[key];
+    if (cached != null) return cached;
+    final faces = <Face3>[];
+    void addMesh(Float32List data, V3 offset) {
+      final reps = <String, V3>{};
+      V3 vertex(int base) {
+        final p = V3(
+          data[base] + offset.x,
+          data[base + 1] + offset.y,
+          data[base + 2] + offset.z,
+        );
+        if (cell <= 0) return p;
+        final repKey =
+            '${(p.x / cell).round()},${(p.y / cell).round()},${(p.z / cell).round()}'
+            '|${(data[base + 6] * 255).round()},${(data[base + 7] * 255).round()},${(data[base + 8] * 255).round()}'
+            '|${data[base + 11]}';
+        return reps.putIfAbsent(repKey, () => p);
+      }
+
+      for (var i = 0; i + 35 < data.length; i += 36) {
+        final a = vertex(i), b = vertex(i + 12), c = vertex(i + 24);
+        if (cell > 0) {
+          if (a == b || b == c || a == c) continue;
+          if ((b - a).cross(c - a).length < 1e-9) continue;
+        }
+        final color = Color.fromARGB(
+          255,
+          ((data[i + 6] + data[i + 18] + data[i + 30]) / 3 * 255)
+              .round()
+              .clamp(0, 255),
+          ((data[i + 7] + data[i + 19] + data[i + 31]) / 3 * 255)
+              .round()
+              .clamp(0, 255),
+          ((data[i + 8] + data[i + 20] + data[i + 32]) / 3 * 255)
+              .round()
+              .clamp(0, 255),
+        );
+        faces.add(
+          Face3([a, b, c], color, data[i + 11] == Material3.glow.toDouble()),
+        );
+      }
+    }
+
+    addMesh(buildCarMesh(spec).buffer, V3(0, lift, 0));
+    final wheel = buildWheelMesh(spec).buffer;
+    final design = spec.design;
+    for (var w = 0; w < 4; w++) {
+      final side = w.isEven ? -1.0 : 1.0;
+      addMesh(
+        wheel,
+        V3(
+          side * design.wheelTrack,
+          design.wheelRadius,
+          w < 2 ? design.rearAxle : design.frontAxle,
+        ),
+      );
+    }
+    return _meshCarCache[key] = faces;
+  }
+
+  /// The detailed car for the Canvas fallback (desktop): the real GL mesh
+  /// instead of the generic silhouette from [car], with the same shadow,
+  /// turbo flames and shield bubble drawn around it.
+  void carDetailed(
+    CarSpec spec,
+    TrackFrame frame,
+    double lane, {
+    double jump = 0,
+    bool turbo = false,
+    bool shield = false,
+    double yaw = 0,
+    double roll = 0,
+    double pitch = 0,
+    bool hitFlash = false,
+    double cell = 0,
+    double lift = .12,
+  }) {
+    var r = frame.right.rotate(frame.up, yaw);
+    var f = frame.forward.rotate(frame.up, yaw);
+    var u = frame.up.rotate(r, pitch);
+    f = f.rotate(r, pitch);
+    r = r.rotate(f, roll);
+    u = u.rotate(f, roll);
+    final pos = frame.point(lane, jump);
+    V3 local(double x, double y, double z) => pos + r * x + u * y + f * z;
+    final shadow = frame.point(lane, .07);
+    quad(
+      shadow - r * 1.75 - f * 3,
+      shadow + r * 1.75 - f * 3,
+      shadow + r * 1.75 + f * 3,
+      shadow - r * 1.75 + f * 3,
+      const Color(0x65000000),
+      true,
+    );
+    const flash = Color(0xffffdb91);
+    for (final face in meshCarFaces(spec, cell: cell, lift: lift)) {
+      faces.add(
+        Face3(
+          [
+            for (final v in face.vertices) local(v.x, v.y, v.z),
+          ],
+          hitFlash ? Color.lerp(face.color, flash, .55)! : face.color,
+          face.glow,
+        ),
+      );
     }
     if (turbo) {
       for (final x in [-.85, .85]) {
@@ -623,11 +764,17 @@ class RacePainter extends CustomPainter {
   final TrackScene scene;
   final String quality;
   final double cameraDistance;
+
+  /// Desktop only: draw the player's car with the detailed GL mesh
+  /// (clustered) instead of the generic silhouette. Bots keep the
+  /// generic model — eight detailed cars would sink the Canvas painter.
+  final bool detailedCar;
   RacePainter(
     this.race,
     this.scene, {
     this.quality = 'medium',
     this.cameraDistance = 1,
+    this.detailedCar = false,
     Listenable? repaint,
   }) : super(repaint: repaint);
 
@@ -656,17 +803,33 @@ class RacePainter extends CustomPainter {
       frame.up,
     );
     final dynamic = Scene3();
-    dynamic.car(
-      race.car,
-      frame,
-      0,
-      yaw: player.spinAngle,
-      roll: -player.lateralSpeed * .008,
-      pitch: -player.jumpVelocity * .009,
-      hitFlash: player.hitFlash > 0 && (race.time * 24).floor().isEven,
-      turbo: race.nitroActive,
-      shield: player.shield > 0,
-    );
+    if (detailedCar) {
+      dynamic.carDetailed(
+        race.car,
+        frame,
+        0,
+        yaw: player.spinAngle,
+        roll: -player.lateralSpeed * .008,
+        pitch: -player.jumpVelocity * .009,
+        hitFlash: player.hitFlash > 0 && (race.time * 24).floor().isEven,
+        turbo: race.nitroActive,
+        shield: player.shield > 0,
+        cell: .18,
+        lift: .12,
+      );
+    } else {
+      dynamic.car(
+        race.car,
+        frame,
+        0,
+        yaw: player.spinAngle,
+        roll: -player.lateralSpeed * .008,
+        pitch: -player.jumpVelocity * .009,
+        hitFlash: player.hitFlash > 0 && (race.time * 24).floor().isEven,
+        turbo: race.nitroActive,
+        shield: player.shield > 0,
+      );
+    }
     for (final bot in race.bots) {
       if (bot.finishTime != null) continue;
       dynamic.car(
@@ -824,7 +987,11 @@ class RacePainter extends CustomPainter {
 class GaragePainter extends CustomPainter {
   final CarSpec car;
   final double angle;
-  GaragePainter(this.car, this.angle, {Listenable? repaint})
+
+  /// Desktop only: draw the real GL mesh (body + wheels) instead of the
+  /// generic silhouette.
+  final bool detailed;
+  GaragePainter(this.car, this.angle, {this.detailed = false, Listenable? repaint})
     : super(repaint: repaint);
   @override
   void paint(Canvas canvas, Size size) {
@@ -843,11 +1010,12 @@ class GaragePainter extends CustomPainter {
         true,
       );
     }
-    scene.car(
-      car,
-      const TrackFrame(V3.zero, V3(1, 0, 0), V3(0, 1, 0), V3(0, 0, 1), 0),
-      0,
-    );
+    const frame = TrackFrame(V3.zero, V3(1, 0, 0), V3(0, 1, 0), V3(0, 0, 1), 0);
+    if (detailed) {
+      scene.carDetailed(car, frame, 0, lift: .33);
+    } else {
+      scene.car(car, frame, 0);
+    }
     final camera = Camera3.lookAt(
       V3(math.sin(angle) * 12, 6.5, math.cos(angle) * 12),
       const V3(0, .8, 0),
@@ -866,7 +1034,7 @@ class GaragePainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant GaragePainter old) =>
-      old.angle != angle || old.car != car;
+      old.angle != angle || old.car != car || old.detailed != detailed;
 }
 
 class TrackMapPainter extends CustomPainter {

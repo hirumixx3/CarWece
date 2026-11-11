@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import '../desktop/platform_kind.dart';
 import '../game/content.dart';
 import '../game/engine.dart';
 import '../game/gpu_frame.dart';
@@ -52,6 +53,7 @@ class GpuRaceView extends StatelessWidget {
           fallbackScene(),
           quality: quality,
           cameraDistance: cameraDistance,
+          detailedCar: isWindowsDesktop,
           repaint: repaint,
         ),
       ),
@@ -80,7 +82,7 @@ class GpuGarageView extends StatelessWidget {
       showroom: true,
       quality: 'medium',
       fallback: CustomPaint(
-        painter: GaragePainter(car, angle),
+        painter: GaragePainter(car, angle, detailed: isWindowsDesktop),
         child: const SizedBox.expand(),
       ),
     ),

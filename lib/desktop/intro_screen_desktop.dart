@@ -68,6 +68,17 @@ class _DesktopIntroScreenState extends State<DesktopIntroScreen>
         if (completed) _complete();
       }),
     );
+    _subscriptions.add(
+      _player.stream.position.listen((position) {
+        // Insurance: some mpv builds report the final position a beat
+        // before (or instead of) the completed flag.
+        final duration = _player.state.duration;
+        if (duration > Duration.zero &&
+            position >= duration - const Duration(milliseconds: 60)) {
+          _complete();
+        }
+      }),
+    );
     unawaited(_open());
   }
 
@@ -81,7 +92,12 @@ class _DesktopIntroScreenState extends State<DesktopIntroScreen>
   }
 
   void _complete() {
-    if (_delivered || !_foreground) return;
+    // Deliver as soon as the video ends. An earlier version also required
+    // the window to be "foreground" (copied from the Android screen), but
+    // on desktop a stray lifecycle event at the final second dropped the
+    // delivery and left the app frozen on the last frame until the next
+    // focus change.
+    if (_delivered) return;
     _delivered = true;
     DesktopAudio.instance.endIntro();
     WidgetsBinding.instance.addPostFrameCallback((_) {
