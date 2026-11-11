@@ -103,14 +103,15 @@ void CarWeceGraphicsPlugin::HandleMethodCall(
         return;
       }
       Renderer* raw = renderer.get();
-      auto texture = std::make_unique<flutter::PixelBufferTexture>(
-          [raw](size_t, size_t) -> const FlutterDesktopPixelBuffer* {
-            static FlutterDesktopPixelBuffer pixel_buffer{};
-            pixel_buffer.buffer = raw->LatestPixels();
-            pixel_buffer.width = static_cast<size_t>(raw->width());
-            pixel_buffer.height = static_cast<size_t>(raw->height());
-            return &pixel_buffer;
-          });
+      auto texture = std::make_unique<flutter::TextureVariant>(
+          flutter::PixelBufferTexture(
+              [raw](size_t, size_t) -> const FlutterDesktopPixelBuffer* {
+                static FlutterDesktopPixelBuffer pixel_buffer{};
+                pixel_buffer.buffer = raw->LatestPixels();
+                pixel_buffer.width = static_cast<size_t>(raw->width());
+                pixel_buffer.height = static_cast<size_t>(raw->height());
+                return &pixel_buffer;
+              }));
       const int64_t id =
           registrar_->texture_registrar()->RegisterTexture(texture.release());
       raw->on_frame_available = [this, id]() {
