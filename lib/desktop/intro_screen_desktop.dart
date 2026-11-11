@@ -24,6 +24,7 @@ class _DesktopIntroScreenState extends State<DesktopIntroScreen>
   late final Player _player;
   late final VideoController _video;
   final List<StreamSubscription<dynamic>> _subscriptions = [];
+  Timer? _watchdog;
   String _status = 'loading';
   double _width = 1280, _height = 720;
   bool _foreground = true, _delivered = false;
@@ -79,6 +80,18 @@ class _DesktopIntroScreenState extends State<DesktopIntroScreen>
         }
       }),
     );
+    // Watchdog: poll the player state directly, so completion can never
+    // depend on a single stream event surviving the trip.
+    _watchdog = Timer.periodic(const Duration(milliseconds: 250), (_) {
+      if (_delivered) return;
+      final state = _player.state;
+      if (state.completed ||
+          (state.duration > Duration.zero &&
+              state.position >=
+                  state.duration - const Duration(milliseconds: 120))) {
+        _complete();
+      }
+    });
     unawaited(_open());
   }
 
@@ -99,6 +112,7 @@ class _DesktopIntroScreenState extends State<DesktopIntroScreen>
     // focus change.
     if (_delivered) return;
     _delivered = true;
+    _watchdog?.cancel();
     DesktopAudio.instance.endIntro();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (mounted) widget.onCompleted();
@@ -115,17 +129,17 @@ class _DesktopIntroScreenState extends State<DesktopIntroScreen>
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     _foreground = state == AppLifecycleState.resumed;
-    if (_foreground) {
-      _resume();
-    } else if (!_delivered) {
-      unawaited(_player.pause());
-      if (_status == 'playing') setState(() => _status = 'paused');
-    }
+    // Desktop only delivers the intro: transient inactive states are
+    // normal while a Windows window starts up, and pausing on them left
+    // the video frozen on its last frame until the user clicked back.
+    // The intro is never paused from lifecycle events here.
+    if (_foreground) _resume();
   }
 
   @override
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
+    _watchdog?.cancel();
     for (final subscription in _subscriptions) {
       unawaited(subscription.cancel());
     }

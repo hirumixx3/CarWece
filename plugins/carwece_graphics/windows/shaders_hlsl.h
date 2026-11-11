@@ -146,7 +146,7 @@ float4 PSMain(VSOut input, bool front : SV_IsFrontFace) : SV_TARGET {
   float2 localPlane = abs(input.lnormal.y) > .65
                           ? input.lpos.xz
                           : (abs(input.lnormal.x) > .65 ? input.lpos.zy : input.lpos.xy);
-  float footprint = max(length(dFdx(plane)), length(dFdy(plane)));
+  float footprint = max(length(ddx(plane)), length(ddy(plane)));
   float detail = 1.0 - smoothstep(.12, 1.4, footprint);
   if (vMaterial == 0) {
     rough = 0.12;
@@ -180,7 +180,7 @@ float4 PSMain(VSOut input, bool front : SV_IsFrontFace) : SV_TARGET {
     n = normalize(n + float3(grain * 0.23, 0, grain * 0.06));
   }
   if (vMaterial == 5) {
-    float filtering = 1.0 - smoothstep(.04, .14, max(length(dFdx(vPosition)), length(dFdy(vPosition))));
+    float filtering = 1.0 - smoothstep(.04, .14, max(length(ddx(vPosition)), length(ddy(vPosition))));
     float weave = sin(vPosition.x * 25.0) * sin(vPosition.z * 25.0) * filtering;
     base *= 0.83 + 0.15 * noise(vPosition.xz * 3.1) + weave * 0.025;
     rough = 0.93;
