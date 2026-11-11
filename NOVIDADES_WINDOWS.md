@@ -17,9 +17,22 @@ O CarWece agora roda no Windows com tudo que a versão Android tem:
 - **Online completo**: entrar em sala funciona como no Android; hospedar
   também — a identidade TLS da sala (certificado autoassinado RSA-2048
   com pin) agora é gerada em Dart, e os túneis Pinggy/Bore já eram Dart.
-- **Render**: no Windows vale o renderizador de compatibilidade (Canvas),
-  o mesmo fallback que o jogo usa fora do Android. Controles de teclado
-  (setas/WASD, Q/E/C/X, Esc) já existiam e funcionam.
+- **Render 3D de verdade (Direct3D 11)**: plugin nativo próprio em
+  `plugins/carwece_graphics/`, falando o mesmo canal
+  `com.hirumisu.carwece/graphics` e os mesmos pacotes de quadros do
+  renderizador Android — cenário completo, materiais, sombras PCF e
+  transparências ordenadas, com os shaders portados de GLSL pra HLSL.
+  Se o D3D11 falhar por qualquer motivo, o jogo cai sozinho pro
+  renderizador de compatibilidade (Canvas). Divergências conscientes
+  desta primeira versão: sem MSAA e sem a resolução adaptativa do
+  Android (no desktop renderiza sempre na resolução alvo).
+- **Carros detalhados também no Canvas**: enquanto o 3D nativo não
+  sobe (ou se ele falhar), garagem/menu usam o modelo real dos carros
+  e, na corrida, o carro do jogador — nada do genérico de caixas.
+- **Intro**: corrigida a trava que segurava o jogo no último frame do
+  vídeo até a janela mudar de foco.
+- Controles de teclado (setas/WASD, Q/E/C/X, Esc) já existiam e
+  funcionam.
 
 Nada do Android mudou: todo o código novo fica atrás da chave
 `isWindowsDesktop` (`lib/desktop/`), e a suíte segue verde (290 testes).

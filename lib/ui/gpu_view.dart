@@ -143,7 +143,9 @@ class _GpuSurfaceState extends State<GpuSurface> {
     super.didChangeDependencies();
     if (started) return;
     started = true;
-    if (kIsWeb || defaultTargetPlatform != TargetPlatform.android) {
+    if (kIsWeb ||
+        (defaultTargetPlatform != TargetPlatform.android &&
+            defaultTargetPlatform != TargetPlatform.windows)) {
       compatibility = true;
       WidgetsBinding.instance.addPostFrameCallback((_) {
         if (mounted) widget.onReady?.call();
