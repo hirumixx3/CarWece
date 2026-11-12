@@ -25,6 +25,7 @@ class _DesktopIntroScreenState extends State<DesktopIntroScreen>
   late final VideoController _video;
   final List<StreamSubscription<dynamic>> _subscriptions = [];
   Timer? _watchdog;
+  Timer? _deadline;
   String _status = 'loading';
   double _width = 1280, _height = 720;
   bool _foreground = true, _delivered = false;
@@ -92,6 +93,10 @@ class _DesktopIntroScreenState extends State<DesktopIntroScreen>
         _complete();
       }
     });
+    // Hard deadline by wall clock: the bundled video is ~10 s, so if
+    // every player signal has failed by 15 s, deliver anyway. The menu
+    // must never depend on a native event arriving.
+    _deadline = Timer(const Duration(seconds: 15), _complete);
     unawaited(_open());
   }
 
@@ -105,18 +110,18 @@ class _DesktopIntroScreenState extends State<DesktopIntroScreen>
   }
 
   void _complete() {
-    // Deliver as soon as the video ends. An earlier version also required
-    // the window to be "foreground" (copied from the Android screen), but
-    // on desktop a stray lifecycle event at the final second dropped the
-    // delivery and left the app frozen on the last frame until the next
-    // focus change.
+    // Deliver as soon as the video ends — DIRECTLY. An earlier version
+    // deferred this to a post-frame callback, but when the video ends
+    // the screen is static and nothing schedules new frames on desktop:
+    // the callback sat pending forever and the app stayed on the last
+    // frame until a minimize/restore forced a frame through. Calling
+    // the parent straight from here (timer/stream, UI isolate) is safe.
     if (_delivered) return;
     _delivered = true;
     _watchdog?.cancel();
+    _deadline?.cancel();
     DesktopAudio.instance.endIntro();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (mounted) widget.onCompleted();
-    });
+    widget.onCompleted();
   }
 
   void _resume() {
@@ -140,6 +145,7 @@ class _DesktopIntroScreenState extends State<DesktopIntroScreen>
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
     _watchdog?.cancel();
+    _deadline?.cancel();
     for (final subscription in _subscriptions) {
       unawaited(subscription.cancel());
     }

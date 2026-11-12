@@ -122,3 +122,25 @@ Windows com Visual Studio) — por isso o build é pelo GitHub Actions.
   e o jogo cai pro Canvas como antes.
 - O buffer de pixels da textura agora é um por superfície (antes era um
   `static` compartilhado entre garagem e corrida).
+
+## Intro que não soltava + placas antigas + orçamento de render do Android
+
+- **Intro travada no último frame**: a conclusão era entregue por um
+  callback pós-quadro — mas com o vídeo parado no frame final, nada
+  agenda quadros novos na área de trabalho, e o callback nunca rodava.
+  Minimizar/restaurar forçava um quadro, por isso "destrava" na mão.
+  Agora a entrega é direta, e há um prazo final de 15 s por relógio
+  (o vídeo tem ~10 s): o menu abre sem depender de evento nenhum.
+- **Placas antigas caíam no modo software (WARP)**: o plugin exigia
+  feature level 11_0. GPUs integradas antigas (Intel HD pré-2012)
+  chegam só ao 10_1 — e o jogo inteiro passava a ser desenhado pela
+  CPU. Agora o dispositivo aceita 11_0 → 10_1 → 10_0, com os shaders
+  compilados no alvo correspondente (eles só usam recursos da era
+  SM4, então o desenho é o mesmo). WARP virou último recurso de
+  verdade, e a linha de diagnóstico mostra o nível em uso.
+- **RenderBudget do Android portado**: no modo AUTO o Android mede o
+  custo de cada quadro e ajusta a escala interna de desenho
+  (0,55–1,0, começando em 0,85) para segurar a fluidez — isso nunca
+  tinha sido portado, o Windows desenhava sempre no tamanho cheio.
+  Agora é o mesmo algoritmo, com os mesmos limiares; modelos, sombras
+  e conteúdo não mudam, e os modos manuais de qualidade seguem fixos.

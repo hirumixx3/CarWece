@@ -23,6 +23,7 @@ using Microsoft::WRL::ComPtr;
 std::mutex g_context_mutex;
 
 constexpr int kMaxInstances = 128;
+constexpr float kBudgetScales[4] = {.55f, .70f, .85f, 1.0f};
 constexpr uint32_t kStride = 48;  // 12 floats per vertex, as on the wire.
 
 // ---------------------------------------------------------------------------
@@ -199,6 +200,17 @@ bool Renderer::Init(int width, int height, const std::vector<float>& world,
                     std::string* error) {
   width_ = std::clamp(width, 320, 1920);
   height_ = std::clamp(height, 180, 1200);
+  base_width_ = width_;
+  base_height_ = height_;
+  automatic_ = quality == "auto";
+  if (automatic_) {
+    // The Android RenderBudget starts at level 2 (scale .85) and earns
+    // its way up to full size only while frames stay fast.
+    width_ = std::max(
+        320, static_cast<int>(std::lround(base_width_ * kBudgetScales[budget_level_])));
+    height_ = std::max(
+        180, static_cast<int>(std::lround(base_height_ * kBudgetScales[budget_level_])));
+  }
   showroom_ = showroom;
   night_ = night;
   quality_ = quality;
@@ -262,7 +274,11 @@ bool Renderer::Init(int width, int height, const std::vector<float>& world,
     if (!Upload(data.data(), data.size(), &mesh, error)) return false;
     objects_.push_back(std::move(mesh));
   }
-  for (auto& buffer : pixels_) buffer.assign(width_ * height_ * 4, 0);
+  // Pixel buffers are allocated once at the BASE size and never
+  // reallocated: budget resizes only change the active width_/height_
+  // and the GPU targets, so the pointer handed to Flutter stays valid
+  // (and big enough) for the renderer's whole life.
+  for (auto& buffer : pixels_) buffer.assign(base_width_ * base_height_ * 4, 0);
   return true;
 }
 
@@ -271,29 +287,39 @@ bool Renderer::CreateDeviceResources(std::string* error) {
   static ComPtr<ID3D11DeviceContext> shared_context;
   static std::string shared_error;
   static std::string shared_device_info;
+  static D3D_FEATURE_LEVEL shared_level = D3D_FEATURE_LEVEL_11_0;
   static bool attempted = false;
   if (!attempted) {
     attempted = true;
-    // Shader model 5.0 requires feature level 11_0; WARP provides it even
-    // without a suitable GPU, so there is no lower-level fallback path.
-    // O tipo de driver é registrado: se o notebook cair no WARP
-    // (renderização por software), cada quadro custa dezenas de ms e
-    // nenhum anel de readback resolve — o diagnóstico precisa mostrar isso.
-    const D3D_FEATURE_LEVEL levels[] = {D3D_FEATURE_LEVEL_11_0};
-    D3D_FEATURE_LEVEL chosen;
+    // Ask for the best the GPU has: 11_0, then 10_1, then 10_0. Older
+    // integrated GPUs (pre-2012 Intel HD) top out at 10_1 — demanding
+    // 11_0 there used to throw the whole game into WARP, where every
+    // triangle is drawn by the CPU and no scheduling fix can help. The
+    // shaders only use SM4-era features, so 10_x renders the same game.
+    // WARP (software) remains the last resort and is named in the info
+    // string, never silent.
+    const D3D_FEATURE_LEVEL levels[] = {D3D_FEATURE_LEVEL_11_0,
+                                        D3D_FEATURE_LEVEL_10_1,
+                                        D3D_FEATURE_LEVEL_10_0};
+    D3D_FEATURE_LEVEL chosen = D3D_FEATURE_LEVEL_11_0;
     const char* driver = "HARDWARE";
     HRESULT hr = D3D11CreateDevice(nullptr, D3D_DRIVER_TYPE_HARDWARE, nullptr,
-                                   0, levels, 1, D3D11_SDK_VERSION,
+                                   0, levels, 3, D3D11_SDK_VERSION,
                                    &shared_device, &chosen, &shared_context);
     if (FAILED(hr)) {
       driver = "WARP";
       hr = D3D11CreateDevice(nullptr, D3D_DRIVER_TYPE_WARP, nullptr, 0, levels,
-                             1, D3D11_SDK_VERSION, &shared_device, &chosen,
+                             3, D3D11_SDK_VERSION, &shared_device, &chosen,
                              &shared_context);
     }
     if (FAILED(hr)) {
       shared_error = "Direct3D 11 não disponível";
     } else {
+      shared_level = chosen;
+      const char* level_name = chosen >= D3D_FEATURE_LEVEL_11_0 ? "FL 11.0"
+                               : chosen >= D3D_FEATURE_LEVEL_10_1
+                                   ? "FL 10.1"
+                                   : "FL 10.0";
       std::string adapter_name = "desconhecido";
       ComPtr<IDXGIDevice> dxgi_device;
       ComPtr<IDXGIAdapter> adapter;
@@ -304,8 +330,8 @@ bool Renderer::CreateDeviceResources(std::string* error) {
           adapter_name = NarrowWide(desc.Description);
         }
       }
-      shared_device_info = std::string(driver) + " | " + adapter_name +
-                           " | FL 11.0";
+      shared_device_info =
+          std::string(driver) + " | " + adapter_name + " | " + level_name;
     }
   }
   if (!shared_device) {
@@ -315,6 +341,7 @@ bool Renderer::CreateDeviceResources(std::string* error) {
   device_ = shared_device;
   context_ = shared_context;
   device_info_ = shared_device_info;
+  feature_level_ = shared_level;
   return true;
 }
 
@@ -337,11 +364,15 @@ bool Renderer::CreateShaders(std::string* error) {
     }
     return true;
   };
+  const char* vs_target =
+      feature_level_ >= D3D_FEATURE_LEVEL_11_0 ? "vs_5_0" : "vs_4_0";
+  const char* ps_target =
+      feature_level_ >= D3D_FEATURE_LEVEL_11_0 ? "ps_5_0" : "ps_4_0";
   ComPtr<ID3DBlob> scene_vs, scene_ps, depth_vs, depth_ps;
-  if (!compile(kSceneShader, "VSMain", "vs_5_0", &scene_vs)) return false;
-  if (!compile(kSceneShader, "PSMain", "ps_5_0", &scene_ps)) return false;
-  if (!compile(kDepthShader, "VSMain", "vs_5_0", &depth_vs)) return false;
-  if (!compile(kDepthShader, "PSMain", "ps_5_0", &depth_ps)) return false;
+  if (!compile(kSceneShader, "VSMain", vs_target, &scene_vs)) return false;
+  if (!compile(kSceneShader, "PSMain", ps_target, &scene_ps)) return false;
+  if (!compile(kDepthShader, "VSMain", vs_target, &depth_vs)) return false;
+  if (!compile(kDepthShader, "PSMain", ps_target, &depth_ps)) return false;
   if (FAILED(device_->CreateVertexShader(scene_vs->GetBufferPointer(),
                                          scene_vs->GetBufferSize(), nullptr,
                                          &scene_vs_)) ||
@@ -392,7 +423,12 @@ bool Renderer::CreateShaders(std::string* error) {
   return true;
 }
 
-bool Renderer::CreateTargets(std::string* error) {
+bool Renderer::CreateSizeTargets(std::string* error) {
+  ComPtr<ID3D11Texture2D> color;
+  ComPtr<ID3D11RenderTargetView> rtv;
+  ComPtr<ID3D11Texture2D> depth;
+  ComPtr<ID3D11DepthStencilView> dsv;
+  ComPtr<ID3D11Texture2D> staging[3];
   D3D11_TEXTURE2D_DESC tex{};
   tex.Width = width_;
   tex.Height = height_;
@@ -402,20 +438,45 @@ bool Renderer::CreateTargets(std::string* error) {
   tex.SampleDesc.Count = 1;
   tex.Usage = D3D11_USAGE_DEFAULT;
   tex.BindFlags = D3D11_BIND_RENDER_TARGET;
-  if (FAILED(device_->CreateTexture2D(&tex, nullptr, &color_tex_)) ||
-      FAILED(device_->CreateRenderTargetView(color_tex_.Get(), nullptr,
-                                             &color_rtv_))) {
+  if (FAILED(device_->CreateTexture2D(&tex, nullptr, &color)) ||
+      FAILED(device_->CreateRenderTargetView(color.Get(), nullptr, &rtv))) {
     *error = "Alvo gráfico indisponível";
     return false;
   }
   tex.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
   tex.BindFlags = D3D11_BIND_DEPTH_STENCIL;
-  if (FAILED(device_->CreateTexture2D(&tex, nullptr, &depth_tex_)) ||
-      FAILED(device_->CreateDepthStencilView(depth_tex_.Get(), nullptr,
-                                             &depth_dsv_))) {
+  if (FAILED(device_->CreateTexture2D(&tex, nullptr, &depth)) ||
+      FAILED(device_->CreateDepthStencilView(depth.Get(), nullptr, &dsv))) {
     *error = "Alvo gráfico indisponível";
     return false;
   }
+  D3D11_TEXTURE2D_DESC staging_desc{};
+  staging_desc.Width = width_;
+  staging_desc.Height = height_;
+  staging_desc.MipLevels = 1;
+  staging_desc.ArraySize = 1;
+  staging_desc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
+  staging_desc.SampleDesc.Count = 1;
+  staging_desc.Usage = D3D11_USAGE_STAGING;
+  staging_desc.CPUAccessFlags = D3D11_CPU_ACCESS_READ;
+  for (auto& slot : staging) {
+    if (FAILED(device_->CreateTexture2D(&staging_desc, nullptr, &slot))) {
+      *error = "Alvo gráfico indisponível";
+      return false;
+    }
+  }
+  color_tex_ = color;
+  color_rtv_ = rtv;
+  depth_tex_ = depth;
+  depth_dsv_ = dsv;
+  for (int i = 0; i < 3; i++) staging_[i] = staging[i];
+  staging_cursor_ = 0;
+  frames_rendered_ = 0;
+  return true;
+}
+
+bool Renderer::CreateTargets(std::string* error) {
+  if (!CreateSizeTargets(error)) return false;
   D3D11_TEXTURE2D_DESC shadow{};
   shadow.Width = shadow_size_;
   shadow.Height = shadow_size_;
@@ -445,21 +506,6 @@ bool Renderer::CreateTargets(std::string* error) {
                                                &shadow_srv_))) {
     *error = "Mapa de sombras indisponível";
     return false;
-  }
-  D3D11_TEXTURE2D_DESC staging{};
-  staging.Width = width_;
-  staging.Height = height_;
-  staging.MipLevels = 1;
-  staging.ArraySize = 1;
-  staging.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
-  staging.SampleDesc.Count = 1;
-  staging.Usage = D3D11_USAGE_STAGING;
-  staging.CPUAccessFlags = D3D11_CPU_ACCESS_READ;
-  for (auto& slot : staging_) {
-    if (FAILED(device_->CreateTexture2D(&staging, nullptr, &slot))) {
-      *error = "Alvo gráfico indisponível";
-      return false;
-    }
   }
   D3D11_RASTERIZER_DESC raster{};
   raster.FillMode = D3D11_FILL_SOLID;
@@ -559,7 +605,9 @@ void Renderer::SetFrameConstants(const float vp[16], const float light_vp[16],
   f[48] = frame[9];
   f[49] = night_ ? 1.0f : 0.0f;
   f[50] = 1.0f / static_cast<float>(shadow_size_);
-  f[51] = shadow_quality_;
+  // Same rule as the Kotlin renderer: at the lowest budget level the
+  // shadow filter drops to the cheap path.
+  f[51] = (automatic_ && budget_level_ == 0) ? 0.0f : shadow_quality_;
   context_->Unmap(frame_cb_.Get(), 0);
 }
 
@@ -737,7 +785,63 @@ const std::string* Renderer::Render(const std::vector<float>& data) {
     fps_window_start_ = now;
   }
   if (on_frame_available) on_frame_available();
+  // The Android RenderBudget, fed with max(cost, cadence) exactly like
+  // the Kotlin renderer: when it changes level, the targets are
+  // recreated at the new scale. Resizing AFTER the frame was presented
+  // keeps the pixel buffer's dimensions honest for the frame shown.
+  if (automatic_) {
+    const double cost = last_render_ms_.load();
+    const double cadence =
+        last_render_start_ns_ == 0
+            ? cost
+            : static_cast<double>(render_start_ns - last_render_start_ns_) /
+                  1000000.0;
+    if (BudgetSample(cost, cadence)) ResizeTargets();
+  }
+  last_render_start_ns_ = render_start_ns;
   return nullptr;
+}
+
+bool Renderer::BudgetSample(double cost_ms, double cadence_ms) {
+  const double ms = std::max(cost_ms, cadence_ms);
+  if (!std::isfinite(ms) || ms <= 0 || ms > 250) return false;
+  budget_average_ = budget_average_ * .92 + ms * .08;
+  budget_samples_++;
+  if (budget_samples_ < 45) return false;
+  budget_slow_ = budget_average_ > 23.5 ? budget_slow_ + 1 : 0;
+  budget_fast_ = budget_average_ < 17.8 ? budget_fast_ + 1 : 0;
+  if (budget_slow_ >= 24 && budget_level_ > 0) {
+    budget_level_--;
+    BudgetReset();
+    return true;
+  }
+  if (budget_fast_ >= 480 && budget_level_ < 3) {
+    budget_level_++;
+    BudgetReset();
+    return true;
+  }
+  return false;
+}
+
+bool Renderer::ResizeTargets() {
+  const float scale = kBudgetScales[budget_level_];
+  const int w = std::clamp(
+      static_cast<int>(std::lround(base_width_ * scale)), 320, 1920);
+  const int h = std::clamp(
+      static_cast<int>(std::lround(base_height_ * scale)), 180, 1200);
+  if (w == width_ && h == height_) return true;
+  const int old_w = width_, old_h = height_;
+  width_ = w;
+  height_ = h;
+  std::string error;
+  if (!CreateSizeTargets(&error)) {
+    // CreateSizeTargets swaps only on success, so the old targets are
+    // still in place — just restore the dimensions and keep rendering.
+    width_ = old_w;
+    height_ = old_h;
+    return false;
+  }
+  return true;
 }
 
 void Renderer::Readback() {

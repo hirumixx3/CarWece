@@ -74,14 +74,36 @@ class Renderer {
   bool CreateDeviceResources(std::string* error);
   bool CreateShaders(std::string* error);
   bool CreateTargets(std::string* error);
+  // Color/depth/readback targets at the CURRENT width_/height_ (the base
+  // size scaled by the render budget). Created into temporaries and only
+  // swapped in on success, so a failed resize keeps the old targets.
+  bool CreateSizeTargets(std::string* error);
   bool Upload(const float* data, size_t floats, Mesh* mesh, std::string* error);
   void SetFrameConstants(const float vp[16], const float light_vp[16],
                          const float* frame);
   void SetModelConstants(const float* model);
   void DrawMesh(const Mesh& mesh, const float* model);
   void Readback();
+  // The Android RenderBudget, ported 1:1 (same scales and thresholds):
+  // feeds each frame's cost and returns true when the level changed and
+  // the targets must be recreated at the new scale.
+  bool BudgetSample(double cost_ms, double cadence_ms);
+  void BudgetReset() {
+    budget_average_ = 16.0;
+    budget_samples_ = 0;
+    budget_slow_ = 0;
+    budget_fast_ = 0;
+  }
+  bool ResizeTargets();
 
   int width_ = 0, height_ = 0;
+  int base_width_ = 0, base_height_ = 0;
+  D3D_FEATURE_LEVEL feature_level_ = D3D_FEATURE_LEVEL_11_0;
+  bool automatic_ = false;
+  int budget_level_ = 2;
+  double budget_average_ = 16.0;
+  int budget_samples_ = 0, budget_slow_ = 0, budget_fast_ = 0;
+  int64_t last_render_start_ns_ = 0;
   bool showroom_ = false, night_ = false;
   std::string quality_ = "medium";
   int shadow_size_ = 1024;
