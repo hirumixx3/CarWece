@@ -18,6 +18,10 @@ namespace {
 
 using Microsoft::WRL::ComPtr;
 
+// All renderers share one immediate context, which is not thread-safe:
+// renders from different render threads are serialized through this lock.
+std::mutex g_context_mutex;
+
 constexpr int kMaxInstances = 128;
 constexpr uint32_t kStride = 48;  // 12 floats per vertex, as on the wire.
 
@@ -581,6 +585,7 @@ void Renderer::DrawMesh(const Mesh& mesh, const float* model) {
 }
 
 const std::string* Renderer::Render(const std::vector<float>& data) {
+  std::lock_guard<std::mutex> context_lock(g_context_mutex);
   if (!error_.empty()) return &error_;
   if (data.size() < 15) return nullptr;
   for (const float v : data) {
@@ -764,6 +769,76 @@ void Renderer::Readback() {
   latest_pixels_ = back;
 }
 
-const uint8_t* Renderer::LatestPixels() { return pixels_[latest_pixels_].data(); }
+const uint8_t* Renderer::LatestPixels() {
+  return pixels_[latest_pixels_.load()].data();
+}
+
+Renderer::~Renderer() { StopThread(); }
+
+void Renderer::StartThread() {
+  if (thread_.joinable()) return;
+  {
+    std::lock_guard<std::mutex> lock(mutex_);
+    stop_ = false;
+    has_pending_ = false;
+    first_done_ = false;
+    async_error_.clear();
+  }
+  thread_ = std::thread(&Renderer::ThreadMain, this);
+}
+
+void Renderer::StopThread() {
+  if (!thread_.joinable()) return;
+  {
+    std::lock_guard<std::mutex> lock(mutex_);
+    stop_ = true;
+  }
+  cv_.notify_all();
+  thread_.join();
+}
+
+void Renderer::PostFrame(const std::vector<float>& frame) {
+  {
+    std::lock_guard<std::mutex> lock(mutex_);
+    pending_ = frame;
+    has_pending_ = true;
+  }
+  cv_.notify_one();
+}
+
+bool Renderer::WaitFirstFrame(int timeout_ms) {
+  std::unique_lock<std::mutex> lock(mutex_);
+  cv_.wait_for(lock, std::chrono::milliseconds(timeout_ms),
+               [&] { return first_done_ || stop_; });
+  return first_done_ && async_error_.empty();
+}
+
+const std::string* Renderer::TakeAsyncError() {
+  std::lock_guard<std::mutex> lock(mutex_);
+  if (async_error_.empty()) return nullptr;
+  reported_error_ = async_error_;
+  async_error_.clear();
+  return &reported_error_;
+}
+
+void Renderer::ThreadMain() {
+  std::unique_lock<std::mutex> lock(mutex_);
+  while (!stop_) {
+    if (!has_pending_) {
+      cv_.wait(lock);
+      continue;
+    }
+    std::vector<float> data = std::move(pending_);
+    has_pending_ = false;
+    lock.unlock();
+    const std::string* failure = Render(data);
+    lock.lock();
+    if (failure != nullptr) async_error_ = *failure;
+    if (!first_done_) {
+      first_done_ = true;
+      cv_.notify_all();
+    }
+  }
+}
 
 }  // namespace carwece_graphics

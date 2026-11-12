@@ -50,6 +50,14 @@ const std::vector<float>& GetFloats(const EncodableValue& value) {
 
 }  // namespace
 
+// One pixel buffer per texture: the Flutter callback fills it from the
+// bound renderer. (A single shared static buffer let surfaces overwrite
+// each other's dimensions and pixel pointer.)
+struct CarWeceGraphicsPlugin::TextureBinding {
+  Renderer* renderer = nullptr;
+  FlutterDesktopPixelBuffer buffer{};
+};
+
 // static
 void CarWeceGraphicsPlugin::RegisterWithRegistrar(
     flutter::PluginRegistrarWindows* registrar) {
@@ -69,6 +77,7 @@ CarWeceGraphicsPlugin::CarWeceGraphicsPlugin(
     : registrar_(registrar) {}
 
 CarWeceGraphicsPlugin::~CarWeceGraphicsPlugin() {
+  for (auto& [id, renderer] : renderers_) renderer->StopThread();
   for (auto& [id, renderer] : renderers_) {
     registrar_->texture_registrar()->UnregisterTexture(id);
   }
@@ -104,14 +113,17 @@ void CarWeceGraphicsPlugin::HandleMethodCall(
         return;
       }
       Renderer* raw = renderer.get();
+      auto binding = std::make_unique<TextureBinding>();
+      binding->renderer = raw;
+      TextureBinding* binding_raw = binding.get();
       auto texture = std::make_unique<flutter::TextureVariant>(
           flutter::PixelBufferTexture(
-              [raw](size_t, size_t) -> const FlutterDesktopPixelBuffer* {
-                static FlutterDesktopPixelBuffer pixel_buffer{};
-                pixel_buffer.buffer = raw->LatestPixels();
-                pixel_buffer.width = static_cast<size_t>(raw->width());
-                pixel_buffer.height = static_cast<size_t>(raw->height());
-                return &pixel_buffer;
+              [binding_raw](size_t, size_t) -> const FlutterDesktopPixelBuffer* {
+                Renderer* r = binding_raw->renderer;
+                binding_raw->buffer.buffer = r->LatestPixels();
+                binding_raw->buffer.width = static_cast<size_t>(r->width());
+                binding_raw->buffer.height = static_cast<size_t>(r->height());
+                return &binding_raw->buffer;
               }));
       const int64_t id =
           registrar_->texture_registrar()->RegisterTexture(texture.release());
@@ -119,10 +131,21 @@ void CarWeceGraphicsPlugin::HandleMethodCall(
         registrar_->texture_registrar()->MarkTextureFrameAvailable(id);
       };
       renderers_[id] = std::move(renderer);
-      if (const std::string* failure = raw->Render(initial)) {
-        renderers_.erase(id);
+      bindings_[id] = std::move(binding);
+      // The first frame also renders on the render thread; create only
+      // waits for it (a one-time loading cost), so a shader or device
+      // failure still reaches Dart as a create error.
+      raw->StartThread();
+      raw->PostFrame(initial);
+      if (!raw->WaitFirstFrame(5000)) {
+        const std::string* failure = raw->TakeAsyncError();
+        const std::string message =
+            failure != nullptr ? *failure : "Tempo esgotado no primeiro quadro 3D";
+        raw->StopThread();
         registrar_->texture_registrar()->UnregisterTexture(id);
-        result->Error("graphics_unavailable", *failure);
+        bindings_.erase(id);
+        renderers_.erase(id);
+        result->Error("graphics_unavailable", message);
         return;
       }
       result->Success(EncodableValue(id));
@@ -137,7 +160,12 @@ void CarWeceGraphicsPlugin::HandleMethodCall(
         return;
       }
       const std::vector<float>& data = GetFloats(Field(args, "data"));
-      if (const std::string* failure = it->second->Render(data)) {
+      // Rendering happens on the renderer's own thread; this handler only
+      // hands over the newest packet and returns at once, so the platform
+      // thread stays free for input and UI. A fatal render error is
+      // reported on the next call, which makes Dart fall back as before.
+      it->second->PostFrame(data);
+      if (const std::string* failure = it->second->TakeAsyncError()) {
         result->Success(EncodableValue(*failure));
       } else {
         result->Success(EncodableValue());
@@ -175,7 +203,9 @@ void CarWeceGraphicsPlugin::HandleMethodCall(
       const int64_t id = GetInt(Field(args, "id"));
       auto it = renderers_.find(id);
       if (it != renderers_.end()) {
+        it->second->StopThread();
         registrar_->texture_registrar()->UnregisterTexture(id);
+        bindings_.erase(id);
         renderers_.erase(it);
       }
       result->Success(EncodableValue());

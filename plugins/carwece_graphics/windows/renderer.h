@@ -3,9 +3,13 @@
 #include <d3d11.h>
 #include <wrl/client.h>
 
+#include <atomic>
+#include <condition_variable>
 #include <cstdint>
 #include <functional>
+#include <mutex>
 #include <string>
+#include <thread>
 #include <vector>
 
 namespace carwece_graphics {
@@ -30,24 +34,43 @@ class Renderer {
  public:
   std::function<void()> on_frame_available;
 
+  ~Renderer();
+
   bool Init(int width, int height, const std::vector<float>& world,
             const std::vector<std::vector<float>>& objects, bool showroom,
             bool night, const std::string& quality, std::string* error);
 
   // Renders one frame packet (15 + count*17 floats). Returns nullptr on
   // success, or a pointer to a persistent error string (fatal only).
+  // Runs on the render thread (see below); external callers use PostFrame.
   const std::string* Render(const std::vector<float>& frame);
 
-  double PresentedFps() const { return presented_fps_; }
+  // Dedicated render thread: the Android renderer draws on its own GL
+  // thread, and so does this one. Rendering synchronously on the Windows
+  // platform thread — the thread that also delivers keyboard and mouse
+  // input — starved the whole game whenever a frame was expensive.
+  // PostFrame only stores the newest packet and returns immediately;
+  // stale packets are dropped, never queued.
+  void StartThread();
+  void StopThread();
+  void PostFrame(const std::vector<float>& frame);
+  // Waits for the first posted frame to finish rendering (create path).
+  bool WaitFirstFrame(int timeout_ms);
+  // Returns the last fatal render error reported by the render thread,
+  // exactly once, or nullptr. The pointer stays valid until the next call.
+  const std::string* TakeAsyncError();
+
+  double PresentedFps() const { return presented_fps_.load(); }
   // "HARDWARE | <adapter> | FL 11.0" ou "WARP | ..." — vazio até Init.
   std::string DeviceInfo() const { return device_info_; }
-  // Tempo do último Render (desenho + readback), em ms, na thread de plataforma.
-  double LastRenderMs() const { return last_render_ms_; }
+  // Tempo do último Render (desenho + readback), em ms, na thread de desenho.
+  double LastRenderMs() const { return last_render_ms_.load(); }
   int width() const { return width_; }
   int height() const { return height_; }
   const uint8_t* LatestPixels();
 
  private:
+  void ThreadMain();
   bool CreateDeviceResources(std::string* error);
   bool CreateShaders(std::string* error);
   bool CreateTargets(std::string* error);
@@ -97,13 +120,23 @@ class Renderer {
   Microsoft::WRL::ComPtr<ID3D11SamplerState> shadow_sampler_;
 
   std::vector<uint8_t> pixels_[2];
-  int latest_pixels_ = 0;
+  std::atomic<int> latest_pixels_{0};
   std::string error_;
   std::string device_info_;
-  double last_render_ms_ = 0.0;
-  double presented_fps_ = 0.0;
+  std::atomic<double> last_render_ms_{0.0};
+  std::atomic<double> presented_fps_{0.0};
   int64_t fps_window_start_ = 0;
   int presented_ = 0;
+
+  std::thread thread_;
+  std::mutex mutex_;
+  std::condition_variable cv_;
+  std::vector<float> pending_;
+  bool has_pending_ = false;
+  bool stop_ = false;
+  bool first_done_ = false;
+  std::string async_error_;
+  std::string reported_error_;
 };
 
 }  // namespace carwece_graphics

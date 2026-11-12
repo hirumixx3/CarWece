@@ -27,8 +27,11 @@ class CarWeceGraphicsPlugin : public flutter::Plugin {
       const flutter::MethodCall<flutter::EncodableValue>& call,
       std::unique_ptr<flutter::MethodResult<flutter::EncodableValue>> result);
 
+  struct TextureBinding;
+
   flutter::PluginRegistrarWindows* registrar_;
   std::map<int64_t, std::unique_ptr<Renderer>> renderers_;
+  std::map<int64_t, std::unique_ptr<TextureBinding>> bindings_;
 };
 
 }  // namespace carwece_graphics

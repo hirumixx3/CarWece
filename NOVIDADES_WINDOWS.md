@@ -102,3 +102,23 @@ Windows com Visual Studio) — por isso o build é pelo GitHub Actions.
   e o tempo de cada quadro (`render XXms`). Se aparecer `WARP`, o notebook
   está renderizando por software — aí o próximo passo é outro (driver ou
   nível de recurso), não mais ajuste de leitura de pixels.
+
+## Desenho fora da thread de entrada (thread de renderização própria)
+
+- Lição das correções anteriores: anel de leitura e folga entre quadros
+  tratavam sintomas. O defeito era arquitetural — no Android o
+  renderizador desenha numa **thread própria de GL**; no Windows ele
+  desenhava **síncrono na thread de plataforma**, a mesma que entrega
+  teclado, mouse e a interface. Qualquer quadro caro (ou o modo WARP,
+  por software) congelava a entrada junto.
+- Agora cada superfície tem sua **thread de renderização**: o canal só
+  guarda o pacote mais novo e volta na hora (pacotes velhos são
+  descartados, nunca enfileirados); a thread desenha no ritmo dela e
+  avisa o Flutter quando o quadro fica pronto. A thread de plataforma
+  nunca mais espera desenho.
+- O contexto D3D é compartilhado, então os desenhos de superfícies
+  diferentes são serializados por uma trava — sem corrida no contexto.
+- Erros fatais de desenho são reportados na chamada seguinte do canal,
+  e o jogo cai pro Canvas como antes.
+- O buffer de pixels da textura agora é um por superfície (antes era um
+  `static` compartilhado entre garagem e corrida).
